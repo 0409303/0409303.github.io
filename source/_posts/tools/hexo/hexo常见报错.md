@@ -36,3 +36,10 @@ hint: See "git help submodule" for more information.
 
 [git仓库包含子仓库时，add报错的解决办法](https://cloud.tencent.com/developer/article/1583762)
 
+
+
+
+
+## 参考资料
+
+[hexo部署成功仍未更新或无法打开的情况](https://blog.csdn.net/tappat/article/details/103299038)

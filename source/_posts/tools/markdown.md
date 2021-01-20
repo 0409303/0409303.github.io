@@ -1,6 +1,6 @@
 ---
     title: markdown语法
-    categories: 工具
+    categories: tools
 ---
 
 ## 参考资料

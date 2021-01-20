@@ -1,8 +1,14 @@
 ---
     title: hexo插件
-    categories: 工具
+    categories: tools
+    tags: hexo
+    creator: cjq
+    create_time: 2021/01/06
+
 ---
+
 #### 数据公式
+
 1. [hexo-math](https://github.com/hexojs/hexo-math) KaTeX语法
 2. [hexo-filter-mathjax](https://github.com/next-theme/hexo-filter-mathjax) LaTeX语法
 
