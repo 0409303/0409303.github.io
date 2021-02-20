@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="selectById1234567891011121314151617181920212223242526@Select(&amp;#123;        &quot;select&quot;,        &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_sta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis用法总结">
+<meta property="og:url" content="http://example.com/2021/01/28/java/mybatis/%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="selectById1234567891011121314151617181920212223242526@Select(&amp;#123;        &quot;select&quot;,        &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_sta">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-01-28T08:22:54.988Z">
+<meta property="article:modified_time" content="2021-02-20T09:06:58.199Z">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="大数据，数据仓库，机器学习，flink，spark">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/01/28/java/mybatis/%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>mybatis用法总结 | 生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/28/java/mybatis/%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mybatis用法总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-28 16:22:54" itemprop="dateCreated datePublished" datetime="2021-01-28T16:22:54+08:00">2021-01-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-20 17:06:58" itemprop="dateModified" datetime="2021-02-20T17:06:58+08:00">2021-02-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="selectById"><a href="#selectById" class="headerlink" title="selectById"></a>selectById</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&#123;</span></span><br><span class="line"><span class="meta">        &quot;select&quot;,</span></span><br><span class="line"><span class="meta">        &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_start_time, build_end_time, import_start_time, import_end_time, front_end, create_time&quot;,</span></span><br><span class="line"><span class="meta">        &quot;from dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">        &quot;where id = #&#123;id,jdbcType=INTEGER&#125;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;id&quot;, property=&quot;id&quot;, jdbcType=JdbcType.INTEGER, id=true),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;source_type&quot;, property=&quot;sourceType&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;source_id&quot;, property=&quot;sourceId&quot;, jdbcType=JdbcType.BIGINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;name&quot;, property=&quot;name&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;creator&quot;, property=&quot;creator&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;user_type&quot;, property=&quot;userType&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;count&quot;, property=&quot;count&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;create_mode&quot;, property=&quot;createMode&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;status&quot;, property=&quot;status&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;detail_status&quot;, property=&quot;detailStatus&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;build_start_time&quot;, property=&quot;buildStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;build_end_time&quot;, property=&quot;buildEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;import_start_time&quot;, property=&quot;importStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;import_end_time&quot;, property=&quot;importEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;front_end&quot;, property=&quot;frontEnd&quot;, jdbcType=JdbcType.LONGVARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;create_time&quot;, property=&quot;createTime&quot;, jdbcType=JdbcType.TIMESTAMP)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">GroupingMsgPo <span class="title">selectById</span><span class="params">(Integer id)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="selectByCondition"><a href="#selectByCondition" class="headerlink" title="selectByCondition"></a>selectByCondition</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;select&quot;,</span></span><br><span class="line"><span class="meta">            &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;build_start_time, build_end_time, import_start_time, import_end_time, front_end, create_time&quot;,</span></span><br><span class="line"><span class="meta">            &quot;from dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">            &quot;where status != &#x27;0&#x27; and create_time between #&#123;startDate&#125; and #&#123;endDate&#125;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;id != null&#x27;&gt; and id=#&#123;id&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;name != null&#x27;&gt; and name like concat(&#x27;%&#x27;, #&#123;name&#125;, &#x27;%&#x27;) &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;creator != null&#x27;&gt; and creator like concat(&#x27;%&#x27;, #&#123;creator&#125;, &#x27;%&#x27;) &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;userType != null and userType.size &gt; 0&#x27; &gt;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;and user_type in &quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;foreach collection=&#x27;userType&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; open=&#x27;(&#x27; close=&#x27;)&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">                    &quot;$&#123;item&#125;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createMode != null and createMode.size &gt; 0&#x27; &gt;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;and create_mode in&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;foreach collection=&#x27;createMode&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; open=&#x27;(&#x27; close=&#x27;)&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">                    &quot;#&#123;item&#125;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;order by id desc&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;offset != null and pageSize != null&#x27;&gt; limit $&#123;offset&#125;, $&#123;pageSize&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;id&quot;, property=&quot;id&quot;, jdbcType=JdbcType.INTEGER, id=true),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;source_type&quot;, property=&quot;sourceType&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;source_id&quot;, property=&quot;sourceId&quot;, jdbcType=JdbcType.BIGINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;name&quot;, property=&quot;name&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;creator&quot;, property=&quot;creator&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;user_type&quot;, property=&quot;userType&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;count&quot;, property=&quot;count&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;create_mode&quot;, property=&quot;createMode&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;status&quot;, property=&quot;status&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;detail_status&quot;, property=&quot;detailStatus&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;build_start_time&quot;, property=&quot;buildStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;build_end_time&quot;, property=&quot;buildEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;import_start_time&quot;, property=&quot;importStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;import_end_time&quot;, property=&quot;importEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;front_end&quot;, property=&quot;frontEnd&quot;, jdbcType=JdbcType.LONGVARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;create_time&quot;, property=&quot;createTime&quot;, jdbcType=JdbcType.TIMESTAMP)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">List&lt;GroupingMsgPo&gt; <span class="title">selectByCondition</span><span class="params">(UserGroupingMetaBo userGroupingMetaBo)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>分页查询的两个参数，分别是偏移量和size。偏移量需要通过页数和size计算出来。</p>
+<h3 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&#123;</span></span><br><span class="line"><span class="meta">        &quot;insert into dim_wm_grouping_status (source_type, source_id, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;name, creator, user_type, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;count, create_mode, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_start_time, build_end_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;import_start_time, import_end_time, front_end, create_time)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;values (#&#123;sourceType,jdbcType=SMALLINT&#125;, #&#123;sourceId,jdbcType=BIGINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;name,jdbcType=VARCHAR&#125;, #&#123;creator,jdbcType=VARCHAR&#125;, #&#123;userType,jdbcType=INTEGER&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;count,jdbcType=INTEGER&#125;, #&#123;createMode,jdbcType=SMALLINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;status,jdbcType=VARCHAR&#125;, #&#123;detailStatus,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;buildStartTime,jdbcType=TIMESTAMP&#125;, #&#123;buildEndTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;importStartTime,jdbcType=TIMESTAMP&#125;, #&#123;importEndTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;frontEnd,jdbcType=LONGVARCHAR&#125;, #&#123;createTime,jdbcType=TIMESTAMP&#125;)&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@SelectKey(statement=&quot;SELECT LAST_INSERT_ID()&quot;, keyProperty=&quot;id&quot;, before=false, resultType=Integer.class)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(GroupingMsgPo record)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="batchInsert"><a href="#batchInsert" class="headerlink" title="batchInsert"></a>batchInsert</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;insert into dim_wm_grouping_status (source_type, source_id, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;name, creator, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;user_type, count, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;create_mode, status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;detail_status, build_start_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_end_time, import_start_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;import_end_time, front_end, create_time)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;values&quot;,</span></span><br><span class="line"><span class="meta">        &quot;&lt;foreach collection=&#x27;list&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot; (#&#123;item.sourceType,jdbcType=SMALLINT&#125;, #&#123;item.sourceId,jdbcType=BIGINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.name,jdbcType=VARCHAR&#125;, #&#123;item.creator,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.userType,jdbcType=INTEGER&#125;, #&#123;item.count,jdbcType=INTEGER&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.createMode,jdbcType=SMALLINT&#125;, #&#123;item.status,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.detailStatus,jdbcType=VARCHAR&#125;, #&#123;item.buildStartTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.buildEndTime,jdbcType=TIMESTAMP&#125;, #&#123;item.importStartTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.importEndTime,jdbcType=TIMESTAMP&#125;, #&#123;item.frontEnd,jdbcType=LONGVARCHAR&#125;,&quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.createTime,jdbcType=TIMESTAMP&#125;)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Options(useGeneratedKeys=true,keyProperty=&quot;id&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">batchInsert</span><span class="params">(<span class="meta">@Param(&quot;list&quot;)</span> List&lt;GroupingMsgPo&gt; list)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Update(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;update dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">        &quot;set id = #&#123;id,jdbcType=INTEGER&#125;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;sourceType != null&#x27;&gt; ,source_type = #&#123;sourceType,jdbcType=SMALLINT&#125;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;sourceId != null&#x27;&gt; ,source_id = #&#123;sourceId,jdbcType=BIGINT&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;name != null&#x27;&gt; ,name = #&#123;name,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;creator != null&#x27;&gt; ,creator = #&#123;creator,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;userType != null&#x27;&gt; ,user_type = #&#123;userType,jdbcType=INTEGER&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;count != null&#x27;&gt; ,count = #&#123;count,jdbcType=INTEGER&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createMode != null&#x27;&gt; ,create_mode = #&#123;createMode,jdbcType=SMALLINT&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;status != null&#x27;&gt; ,status = #&#123;status,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;detailStatus != null&#x27;&gt; ,detail_status = #&#123;detailStatus,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;buildStartTime != null&#x27;&gt; ,build_start_time = #&#123;buildStartTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;buildEndTime != null&#x27;&gt; ,build_end_time = #&#123;buildEndTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;importStartTime != null&#x27;&gt; ,import_start_time = #&#123;importStartTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;importEndTime != null&#x27;&gt; ,import_end_time = #&#123;importEndTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;frontEnd != null&#x27;&gt; ,front_end = #&#123;frontEnd,jdbcType=LONGVARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createTime != null&#x27;&gt; ,create_time = #&#123;createTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;where id = #&#123;id,jdbcType=INTEGER&#125;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateById</span><span class="params">(GroupingMsgPo record)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="用法对比"><a href="#用法对比" class="headerlink" title="用法对比"></a>用法对比</h2><h4 id="jdbcType-”DATE”-和-jdbcType-”TIMESTAMP”-两种类型的区别"><a href="#jdbcType-”DATE”-和-jdbcType-”TIMESTAMP”-两种类型的区别" class="headerlink" title="jdbcType=”DATE” 和 jdbcType=”TIMESTAMP” 两种类型的区别"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010526028/article/details/74315775">jdbcType=”DATE” 和 jdbcType=”TIMESTAMP” 两种类型的区别</a></h4><ol>
+<li>DATE只有年月日，没有时分秒</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/27/flink/flink%E6%95%B0%E6%8D%AE%E6%BA%90/" rel="prev" title="flink数据源">
+      <i class="fa fa-chevron-left"></i> flink数据源
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/28/java/mybatis/%E4%B8%8Espring%E6%95%B4%E5%90%88%E8%AF%A6%E8%A7%A3/" rel="next" title="mybatis与spring整合详解">
+      mybatis与spring整合详解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#selectById"><span class="nav-number">1.</span> <span class="nav-text">selectById</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#selectByCondition"><span class="nav-number">2.</span> <span class="nav-text">selectByCondition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#insert"><span class="nav-number">3.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#batchInsert"><span class="nav-number">4.</span> <span class="nav-text">batchInsert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update"><span class="nav-number">5.</span> <span class="nav-text">update</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number"></span> <span class="nav-text">用法对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jdbcType-%E2%80%9DDATE%E2%80%9D-%E5%92%8C-jdbcType-%E2%80%9DTIMESTAMP%E2%80%9D-%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">0.1.</span> <span class="nav-text">jdbcType&#x3D;”DATE” 和 jdbcType&#x3D;”TIMESTAMP” 两种类型的区别</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

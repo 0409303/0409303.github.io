@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="为了以后好好偷懒，现在必须加倍努力">
+<meta property="og:type" content="website">
+<meta property="og:title" content="生而为人">
+<meta property="og:url" content="http://example.com/page/8/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="为了以后好好偷懒，现在必须加倍努力">
+<meta property="og:locale">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="大数据，数据仓库，机器学习，flink，spark">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/page/8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/career/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/career/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">职业规划</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-06 00:45:25" itemprop="dateCreated datePublished" datetime="2021-01-06T00:45:25+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-01 18:28:08" itemprop="dateModified" datetime="2021-02-01T18:28:08+08:00">2021-02-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%81%8C%E4%B8%9A/" itemprop="url" rel="index"><span itemprop="name">职业</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="程序员与架构师之间的差距很大吗？"><a href="#程序员与架构师之间的差距很大吗？" class="headerlink" title="程序员与架构师之间的差距很大吗？"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c6f8fd266bb6">程序员与架构师之间的差距很大吗？</a></h5><h5 id="中年IT男的转型思考：做个越老越吃香的事业吧！"><a href="#中年IT男的转型思考：做个越老越吃香的事业吧！" class="headerlink" title="中年IT男的转型思考：做个越老越吃香的事业吧！"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3aba78b9105e">中年IT男的转型思考：做个越老越吃香的事业吧！</a></h5>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">特殊语法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-06 00:43:35" itemprop="dateCreated datePublished" datetime="2021-01-06T00:43:35+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-20 14:17:57" itemprop="dateModified" datetime="2021-01-20T14:17:57+08:00">2021-01-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="MYSQL中的COLLATE是什么？"><a href="#MYSQL中的COLLATE是什么？" class="headerlink" title="MYSQL中的COLLATE是什么？"></a><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1366841">MYSQL中的COLLATE是什么？</a></h5><p>指定排序规则</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/tools/maven/maven%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/tools/maven/maven%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">maven命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-06 00:38:01" itemprop="dateCreated datePublished" datetime="2021-01-06T00:38:01+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-10 14:40:31" itemprop="dateModified" datetime="2021-02-10T14:40:31+08:00">2021-02-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="查看依赖jar包"><a href="#查看依赖jar包" class="headerlink" title="查看依赖jar包"></a>查看依赖jar包</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn dependency:tree -Dverbose</span><br><span class="line"></span><br><span class="line">mvn dependency:tree -Dverbose -Dincludes=org.apache.logging.log4j:log4j-api </span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean -U package -pl analysis-tool -am -P dev -Dmaven.source.skip=true -Dmaven.test.skip=true</span><br></pre></td></tr></table></figure>
+
+<p>要注意的是-P 对大小写敏感</p>
+<h4 id="重新生成iml文件"><a href="#重新生成iml文件" class="headerlink" title="重新生成iml文件"></a>重新生成iml文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn idea:module</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-e 详细错误描述</span><br><span class="line">-X</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="问题汇总"><a href="#问题汇总" class="headerlink" title="问题汇总"></a>问题汇总</h2><h4 id="the-output-path-is-not-specified-for-module-‘xxx’"><a href="#the-output-path-is-not-specified-for-module-‘xxx’" class="headerlink" title="the output path is not specified for module ‘xxx’"></a>the output path is not specified for module ‘xxx’</h4><p>Specify the output path in the Project Structure dalog</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/debug/%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/java/debug/%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">技巧</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-06 00:34:56" itemprop="dateCreated datePublished" datetime="2021-01-06T00:34:56+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-20 14:09:29" itemprop="dateModified" datetime="2021-01-20T14:09:29+08:00">2021-01-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-debug/" itemprop="url" rel="index"><span itemprop="name">java-debug</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/slankka/p/13590451.html">SpringBoot启动后直接退出Process finished with exit code 1</a></p>
+<p>一般是有错误，但输出并不是console，可以修改log的输出，也可以用try catch查看异常</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/spring/%E6%B3%A8%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/java/spring/%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">spring注解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-06 00:27:17" itemprop="dateCreated datePublished" datetime="2021-01-06T00:27:17+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-20 17:12:53" itemprop="dateModified" datetime="2021-02-20T17:12:53+08:00">2021-02-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-spring/" itemprop="url" rel="index"><span itemprop="name">java-spring</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="自动化配置的问题"><a href="#自动化配置的问题" class="headerlink" title="自动化配置的问题"></a>自动化配置的问题</h2><h5 id="需要排除的配置"><a href="#需要排除的配置" class="headerlink" title="需要排除的配置"></a>需要排除的配置</h5><p>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/javastack/p/12016212.html">Spring Boot 排除自动配置的 4 种方法，关键时刻很有用！</a>]</p>
+<ol>
+<li>@SpringBootApplication</li>
+<li>@EnableAutoConfiguration</li>
+<li>@SpringCloudApplication</li>
+<li>spring.autoconfigure.exclude</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dyc87112/article/details/73739535">Spring Boot自动化配置的利弊及解决之道</a></p>
+<h6 id="排除的类总结"><a href="#排除的类总结" class="headerlink" title="排除的类总结"></a>排除的类总结</h6><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/SpringBootApplication">@SpringBootApplication</a>(exclude = DruidDataSourceAutoConfigure.class)</li>
+<li></li>
+</ol>
+<h2 id="注解用法"><a href="#注解用法" class="headerlink" title="注解用法"></a>注解用法</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sqlgao22/article/details/100095433">@RequestBody和@RequestParam注解使用</a></p>
+<h3 id="Async"><a href="#Async" class="headerlink" title="@Async"></a>@Async</h3><ol>
+<li>可以指定线程池</li>
+</ol>
+<h4 id="不生效原因："><a href="#不生效原因：" class="headerlink" title="不生效原因："></a>不生效原因：</h4><ol>
+<li>需要保证调用函数与注解修饰的函数在不同类中，因为不会走代理类。<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37760377/article/details/103627676">详解</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/YoungLee16/article/details/88398045">详解2</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/mybatis/%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/java/mybatis/%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">mybatis技巧</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-06 00:11:03" itemprop="dateCreated datePublished" datetime="2021-01-06T00:11:03+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-10 11:16:02" itemprop="dateModified" datetime="2021-02-10T11:16:02+08:00">2021-02-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="Mybatis中判断集合的-size-不为空"><a href="#Mybatis中判断集合的-size-不为空" class="headerlink" title="Mybatis中判断集合的 size 不为空"></a>Mybatis中判断集合的 size 不为空</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;null != staffCodeList and staffCodeList.size &gt; 0&quot;</span>&gt;</span></span><br><span class="line">and gui.USER_CODE not in</span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;staffCodeList&quot;</span> <span class="attr">item</span>=<span class="string">&quot;staffCode&quot;</span> <span class="attr">open</span>=<span class="string">&quot;(&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span>  <span class="attr">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span></span><br><span class="line">    #&#123;staffCode&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="判断参数为空"><a href="#判断参数为空" class="headerlink" title="判断参数为空"></a>判断参数为空</h5><p>1.判断Double类型：<if test="probability != null">probability = #{probability},</if>，在实体类中probability字段是Double类型；</p>
+<p>2.判断Integer类型：<if test="faceValue != null">face_value = #{faceValue}, </if>，在实体类中faceValue字段是Integer类型；</p>
+<p>3.判断String类型：<if test="couponName != null and couponName != ''">coupon_name = #{couponName}, </if>，在实体类中couponName是String类型；</p>
+<p>4.判断Date类型：<if test="beginTime != null">begin_time = #{beginTime}, </if>，在实体类中beginTime字段是Date类型；</p>
+<p>因为String类型是符合的，但是如果是Integer类型的话，如果变量的值是0,即 faceValue = 0, mybatis在进行 faceValue != ‘’ 的时候会认为 faceValue 的值是空字符串, 即 faceValue == ‘’ 为true；</p>
+<p>同理，Double，Date也是如此。所以如果是Integer类型，Double类型，Date类型只需要判断 != null 即可。如果String类型需要判断不等于0，则需要写name != ‘0’.toString()，否则会报错。</p>
+<h5 id="mybatis-中-foreach-collection的三种用法"><a href="#mybatis-中-foreach-collection的三种用法" class="headerlink" title="mybatis 中 foreach collection的三种用法"></a>mybatis 中 foreach collection的三种用法</h5><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30684743/article/details/96912611?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control">mybatis 中 foreach collection的三种用法</a></p>
+<h5 id="Mybatis使用IN语句查询"><a href="#Mybatis使用IN语句查询" class="headerlink" title="Mybatis使用IN语句查询"></a>Mybatis使用IN语句查询</h5><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011781521/article/details/79669180">Mybatis使用IN语句查询</a></p>
+<h3 id="返回数据"><a href="#返回数据" class="headerlink" title="返回数据"></a>返回数据</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tygtyg/p/10448515.html">mybatis插入数据后返回对象id</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ws563573095/p/10301809.html">mybatis插入返回id或对象</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/spring/%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/java/spring/%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">spring数据源配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-06 00:08:21" itemprop="dateCreated datePublished" datetime="2021-01-06T00:08:21+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-10 14:33:44" itemprop="dateModified" datetime="2021-02-10T14:33:44+08:00">2021-02-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-spring/" itemprop="url" rel="index"><span itemprop="name">java-spring</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="http://www.demodashi.com/demo/14622.html">基于springboot的多数据源配置</a></p>
+<p>使用<code>dynamic-datasource-spring-boot-starter</code>，并用@DS指定数据源</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/superyu1992/article/details/80336928">SpringBoot 配合 druid作为数据库连接池 时需要注意的一点</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/w57685321/article/details/106823660">使用dynamic-datasource-spring-boot-starter做多数据源及源码分析</a></p>
+<p>需要配置master作为默认数据源，否则会报，<code>请检查primary默认数据库设置</code>。</p>
+<p><a target="_blank" rel="noopener" href="https://my.oschina.net/TyTracy/blog/1926571">Spring多数据源、动态数据源源码解析</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/mybatis/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/java/mybatis/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-06 00:06:31" itemprop="dateCreated datePublished" datetime="2021-01-06T00:06:31+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-20 14:09:48" itemprop="dateModified" datetime="2021-01-20T14:09:48+08:00">2021-01-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://baomidou.com/guide/">官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#Parameters">官方文档二</a></p>
+<p><a target="_blank" rel="noopener" href="https://baomidou.com/guide/dynamic-datasource.html">多数据源</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/mybatis/mybatis%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/java/mybatis/mybatis%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">mybatis常用注解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-06 00:03:17" itemprop="dateCreated datePublished" datetime="2021-01-06T00:03:17+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-20 17:28:38" itemprop="dateModified" datetime="2021-02-20T17:28:38+08:00">2021-02-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/625212960">mybatis注解</a></p>
+<p><img src="/2021/01/06/java/mybatis/mybatis%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/../../picture/java-mybatis/spring%E4%B8%ADmybatis%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB.png"></p>
+<h3 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h3><p>   mybatis 最初配置信息是基于 XML ,映射语句(SQL)也是定义在 XML 中的。而到了 MyBatis 3提供了新的基于注解的配置。mybatis提供的注解有很多，大致可以分为以下几类： </p>
+<ul>
+<li><p><strong>增删改查：</strong>@Insert、@Update、@Delete、@Select、@MapKey、@Options、@SelelctKey、@Param、@InsertProvider、@UpdateProvider、@DeleteProvider、@SelectProvider </p>
+</li>
+<li><p><strong>结果集映射：</strong>@Results、@Result、@ResultMap、@ResultType、@ConstructorArgs、@Arg、@One、@Many、@TypeDiscriminator、@Case </p>
+</li>
+<li><p><strong>缓存：</strong>@CacheNamespace、@Property、@CacheNamespaceRef、@Flush </p>
+<p> 绝大部分注解，在xml映射文件中都有元素与之对应，但是不是所有。此外在mybatis-spring中提供了@Mapper注解和@MapperScan注解，用于和spring进行整合。 </p>
+</li>
+</ul>
+<h3 id="2-增删改查相关注解"><a href="#2-增删改查相关注解" class="headerlink" title="2 增删改查相关注解"></a>2 增删改查相关注解</h3><table>
+<thead>
+<tr>
+<th><strong>注解</strong></th>
+<th><strong>使用对象</strong></th>
+<th><strong>相对应的 XML</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Insert @Update @Delete @Select</td>
+<td>方法</td>
+<td><insert> <update> <delete> <select></select></delete></update></insert></td>
+<td>这四个注解分别代表将会被执行的 SQL 语句。它们用字符串数组（或单个字符串）作为参数。如果传递的是字符串数组，字符串之间先会被填充一个空格再连接成单个完整的字符串。这有效避免了以 Java 代码构建 SQL 语句时的“丢失空格”的问题。然而，你也可以提前手动连接好字符串。属性有：value，填入的值是用来组成单个 SQL 语句的字符串数组。</td>
+</tr>
+<tr>
+<td>@Options</td>
+<td>方法</td>
+<td>映射语句的属性</td>
+<td>这个注解提供访问大范围的交换和配置选项的入口，它们通常在映射语句上作为属性出现。Options 注解提供了通俗易懂的方式来访问它们，而不是让每条语句注解变复杂。属性有：useCache=true, flushCache=FlushCachePolicy.DEFAULT, resultSetType=FORWARD_ONLY, statementType=PREPARED, fetchSize=-1, timeout=-1, useGeneratedKeys=false, keyProperty=”id”, keyColumn=””, resultSets=””。值得一提的是， Java 注解无法指定 null 值。因此，一旦你使用了 Options 注解，你的语句就会被上述属性的默认值所影响。要注意避免默认值带来的预期以外的行为。     注意： keyColumn 属性只在某些数据库中有效（如 Oracle、PostgreSQL等）。请在插入语句一节查看更多关于 keyColumn 和 keyProperty 两者的有效值详情。</td>
+</tr>
+<tr>
+<td>@MapKey</td>
+<td>方法</td>
+<td></td>
+<td>这是一个用在返回值为 Map 的方法上的注解。它能够将存放对象的 List 转化为 key 值为对象的某一属性的 Map。属性有： value，填入的是对象的属性名，作为 Map 的 key 值。</td>
+</tr>
+<tr>
+<td>@SelectKey</td>
+<td>方法</td>
+<td><selectKey></selectKey></td>
+<td>这个注解的功能与 <selectKey> 标签完全一致，用在已经被 @Insert 或 @InsertProvider 或 @Update 或 @UpdateProvider 注解了的方法上。若在未被上述四个注解的方法上作 @SelectKey 注解则视为无效。如果你指定了 @SelectKey 注解，那么 MyBatis 就会忽略掉由 @Options 注解所设置的生成主键或设置（configuration）属性。属性有：statement 填入将会被执行的 SQL 字符串数组，keyProperty 填入将会被更新的参数对象的属性的值，before 填入 true 或 false 以指明 SQL 语句应被在插入语句的之前还是之后执行。resultType 填入 keyProperty 的 Java 类型和用 Statement、 PreparedStatement 和 CallableStatement 中的 STATEMENT、 PREPARED 或 CALLABLE 中任一值填入 statementType。默认值是 PREPARED。</selectKey></td>
+</tr>
+<tr>
+<td>@Param</td>
+<td>参数</td>
+<td>N/A</td>
+<td>如果你的映射方法的形参有多个，这个注解使用在映射方法的参数上就能为它们取自定义名字。若不给出自定义名字，多参数（不包括 RowBounds 参数）则先以 “param” 作前缀，再加上它们的参数位置作为参数别名。例如 #{param1}, #{param2}，这个是默认值。如果注解是 @Param(“person”)，那么参数就会被命名为 #{person}。</td>
+</tr>
+<tr>
+<td>@InsertProvider @UpdateProvider @DeleteProvider @SelectProvider</td>
+<td>方法</td>
+<td><insert> <update> <delete> <select></select></delete></update></insert></td>
+<td>允许构建动态 SQL。这些备选的 SQL 注解允许你指定类名和返回在运行时执行的 SQL 语句的方法。（自从MyBatis 3.4.6开始，你可以用 CharSequence 代替 String 来返回类型返回值了。）当执行映射语句的时候，MyBatis 会实例化类并执行方法，类和方法就是填入了注解的值。你可以把已经传递给映射方法了的对象作为参数，”Mapper interface type” 和 “Mapper method” 会经过 ProviderContext （仅在MyBatis 3.4.5及以上支持）作为参数值。（MyBatis 3.4及以上的版本，支持多参数传入）属性有： type, method。type 属性需填入类。method 需填入该类定义了的方法名。注意 接下来的小节将会讨论类，能帮助你更轻松地构建动态 SQL。</td>
+</tr>
+</tbody></table>
+<p>映射器接口示例，假设有以下UserMapper接口： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Insert(&quot;INSERT INTO user(id,name) VALUES (#&#123;id&#125;,#&#123;name&#125;)”)</span></span><br><span class="line">   <span class="meta">@Options(useGeneratedKeys = true, keyColumn = &quot;id&quot;, keyProperty = &quot;id&quot;)</span> </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(User user)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Update(&quot; UPDATE user SET name=#&#123;name&#125; WHERE id=#&#123;id&#125;&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(User user)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Delete(“ DELETE FROM user WHERE id=#&#123;id&#125;&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Select(&quot;SELECT id,name FROM user WHERE id= #&#123;id&#125;&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> User <span class="title">selectById</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Select(&quot;SELECT id,name FROM user&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">selectAll</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Select(&quot;SELECT id,name FROM user&quot;)</span></span><br><span class="line">   <span class="meta">@MapKey(&quot;id&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Map&lt;Integer,User&gt; <span class="title">selectMap</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Select(&#123; &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">      &quot;SELECT id,name &quot; + &quot;FROM user &quot; + &quot;WHERE id IN &quot;</span></span><br><span class="line"><span class="meta">            + &quot;&lt;foreach item=&#x27;id&#x27; index=&#x27;index&#x27; collection=‘array&#x27; open=&#x27;(&#x27; separator=&#x27;,&#x27; close=&#x27;)&#x27;&gt; &quot; </span></span><br><span class="line"><span class="meta">                 + &quot;#&#123;id&#125;&quot;</span></span><br><span class="line"><span class="meta">            + &quot;&lt;/foreach&gt; &quot;,</span></span><br><span class="line"><span class="meta">      &quot;&lt;/script&gt;&quot; &#125;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">selectByIds</span><span class="params">(<span class="keyword">int</span>... ids)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Select(&quot;SELECT id,name FROM user LIMIT #&#123;offset&#125;,#&#123;limit&#125;&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">selectPage</span><span class="params">(<span class="meta">@Param(&quot;offset&quot;)</span> <span class="keyword">int</span> offset, <span class="meta">@Param(&quot;limit&quot;)</span> <span class="keyword">int</span> limit)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>说明：</strong></p>
+<h4 id="2-1-Insert、-Update、-Delete、-Options、-SelectKey注解"><a href="#2-1-Insert、-Update、-Delete、-Options、-SelectKey注解" class="headerlink" title="2.1 @Insert、@Update、@Delete、@Options、@SelectKey注解"></a>2.1 @Insert、@Update、@Delete、@Options、@SelectKey注解</h4><p>   mybatis会根据接口方法上的@Insert、@Update、@Delete注解，分别去调用SqlSession的insert、update、delete方法。这个几个方法返回的都是一个int，表示影响的记录行数。 </p>
+<p>  特别的，在UserMapper接口的insert方法上，除了添加了@Insert注解，还添加了@Options注解。在上面的案例中，@Options注解用于获取自动生成主键，并设置到User实体中。此外，@SelectKey注解也可以用于获取自动生成的主键，使用方式如下： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&quot;INSERT INTO user(id,name) VALUES (#&#123;id&#125;,#&#123;name&#125;)&quot;)</span></span><br><span class="line"><span class="meta">@SelectKey(statement = &quot;SELECT LAST_INSERT_ID()&quot;, keyProperty = &quot;id&quot;, before = false, resultType = Integer.class)</span> </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(User user)</span></span>; </span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-Select注解"><a href="#2-2-Select注解" class="headerlink" title="2.2 @Select注解"></a>2.2 @Select注解</h4><p>   在上面的案例中，UserMapper的selectById、selectAll、selectMap、selectByIds、selectPage方法都添加了@Select注解。mybatis会根据方法的返回值类型User、List<User>、Map&lt;Integer,User&gt;判断是调用SqlSession的selectOne、selectList还是selectMap方法。 </User></p>
+<h4 id="2-3-MapKey注解"><a href="#2-3-MapKey注解" class="headerlink" title="2.3 @MapKey注解"></a>2.3 @MapKey注解</h4><p>特别的，对于返回值是Map的情况，UserMapper的selectMap方法上额外添加了一个@MapKey(“id”)注解，表示将User实例的id属性当做Map的key。 </p>
+<h4 id="2-4-动态sql与标签"><a href="#2-4-动态sql与标签" class="headerlink" title="2.4  动态sql与标签"></a>2.4  动态sql与<script>标签</h4><p>  在UserMapper的selectByIds方法中，可以看到@Select注解里填写的SQL前后分别添加了<script>、</script>，这是因为SQL中使用了动态sql标签<foreach>。不管是@Insert、@Update、@Delete、@Select注解，只要SQL里使用了mybatis的动态sql标签(包括：if、choose …when …otherwise、trim 、where、 set、foreach、bind)等，都建议在sql前后分别加上<script>、</script>，否则可能会出现一些参数找不到的情况。 <p></p>
+<h4 id="2-5-Param注解"><a href="#2-5-Param注解" class="headerlink" title="2.5 @Param注解"></a>2.5 @Param注解</h4><p>   @Param注解用于给方法参数起一个名字。以下是笔者总结的使用原则：</p>
+<ul>
+<li><p>在方法只接受一个参数的情况下，可以不使用@Param。</p>
+</li>
+<li><p>在方法接受多个参数的情况下，建议一定要使用@Param注解给参数命名。</p>
+<p> 例如上述案例的selectPage方法接受2个参数，所以其两个参数都使用了@Param注解。@Param注解看起来配置最简单，实际上理解确实最复杂，下面进行详细的介绍。</p>
+<p> 前面已经提到，当映射器接口定义的方法被调用时，mybatis内部根据方法上注解：@Insert、@Update、@Delete、@Select来选择调用SqlSession的insert、update、delete、selectXXX方法。以下是SqlSession接口的相关方法定义(部分省略)：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SqlSession</span> <span class="keyword">extends</span> <span class="title">Closeable</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  &lt;T&gt; <span class="function">T <span class="title">selectOne</span><span class="params">(String statement)</span></span>;</span><br><span class="line">  &lt;T&gt; <span class="function">T <span class="title">selectOne</span><span class="params">(String statement, Object parameter)</span></span>;</span><br><span class="line">  &lt;E&gt; <span class="function">List&lt;E&gt; <span class="title">selectList</span><span class="params">(String statement)</span></span>;</span><br><span class="line">  &lt;E&gt; <span class="function">List&lt;E&gt; <span class="title">selectList</span><span class="params">(String statement, Object parameter)</span></span>;</span><br><span class="line">  &lt;K, V&gt; <span class="function">Map&lt;K, V&gt; <span class="title">selectMap</span><span class="params">(String statement, String mapKey)</span></span>;</span><br><span class="line">  &lt;K, V&gt; <span class="function">Map&lt;K, V&gt; <span class="title">selectMap</span><span class="params">(String statement, Object parameter, String mapKey)</span></span>;</span><br><span class="line">  ...</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(String statement)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(String statement, Object parameter)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(String statement)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(String statement, Object parameter)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(String statement)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(String statement, Object parameter)</span></span>;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>   可以看到部分方法接受一个Object类型的parameter参数，另外一些方法则没有此参数。mybatis在执行前，除了会根据方法上注解：@Insert、@Update、@Delete、@Select来选择调用SqlSession的insert、update、delete、selectXXX方法；还会提前对传入映射器接口方法中的参数进行一些处理，然后再调用SqlSession的相应方法。逻辑如下： </p>
+<p>   1、如果映射器接口方法不接受参数，mybatis在执行时会调用相应无parameter参数的方法重载形式。例如，如UserMapper接口的selectAll方法，其不接受参数，返回值类型为List，因此调用SqlSession不接受paramter参数的selectList方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;E&gt; <span class="function">List&lt;E&gt; <span class="title">selectList</span><span class="params">(String statement)</span></span>; </span><br></pre></td></tr></table></figure>
+
+<p>   2、如果映射器方法只有一个参数，并且这个参数没有使用@Param注解，则直接用这个参数来调用SqlSession相应接受Object类型parameter方法参数的重载形式。例如，如UserMapper接口的selectByIds方法，其接受1个int[]数组类型参数作为查询条件，返回值类型为List<User>，因此调用SqlSession接受paramter参数的selectList方法：</User></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;E&gt; <span class="function">List&lt;E&gt; <span class="title">selectList</span><span class="params">(String statement, Object parameter)</span></span>; </span><br></pre></td></tr></table></figure>
+
+<p>   3、如果映射器方法只接受一个参数，但是使用了@Param注解，也会先封装到Map中；活着映射器方法总是接受多个参数，不管有没有使用@Param注解指定参数，总是会先封装到一个Map中。之后，调用SqlSession的相应方法把这个Map当做parameter参数传入。</p>
+<p>   例如：UserMapper接口的selectPage方法， 通过@Param(“offset”)和@Param(“limit”)为2个int参数指定了名字。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&quot;SELECT id,name FROM user LIMIT #&#123;offset&#125;,#&#123;limit&#125;&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">selectPage</span><span class="params">(<span class="meta">@Param(&quot;offset&quot;)</span> <span class="keyword">int</span> offset, <span class="meta">@Param(&quot;limit&quot;)</span> <span class="keyword">int</span> limit)</span></span>; </span><br></pre></td></tr></table></figure>
+
+<p>假设我们传入0和10，那么参数封装后的Map结构如下： </p>
+<p> key     value </p>
+<p>-——————- </p>
+<p> offset    0     //1 </p>
+<p> limit    10    //2 </p>
+<p> param1    0     //3 </p>
+<p> param2    10    //4 </p>
+<p>关于Map中1、2两个key-value，比较好理解，是我们通过@Param注解指定的映射关系。而3、4两个key-value，实际上是参数位置(param1、param2…，下标从1开始)和参数值的映射关系，不管我们有没有使用@Param注解，存在多个参数的情况下，我们总是可以按照位置进行引用。 </p>
+<p>   因此，将UserMapper的selectPage方法定义改成以下形式也是正确的： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用了@Param注解的情况下，依然根据参数位置进行引用(param1，param2…，下标从1开始)</span></span><br><span class="line"><span class="meta">@Select(&quot;SELECT id,name FROM user LIMIT #&#123;param1&#125;,#&#123;param2&#125;&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">selectPage</span><span class="params">(<span class="meta">@Param(&quot;offset&quot;)</span> <span class="keyword">int</span> offset, <span class="meta">@Param(&quot;limit&quot;)</span> <span class="keyword">int</span> limit)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">//不使用@Param注解，直接根据参数位置进行引用</span></span><br><span class="line"><span class="meta">@Select(&quot;SELECT id,name FROM user LIMIT #&#123;param1&#125;,#&#123;param2&#125;&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">selectPage</span><span class="params">(<span class="keyword">int</span> offset, <span class="keyword">int</span> limit)</span></span>; </span><br></pre></td></tr></table></figure>
+
+<p>   显然，根据参数位置进行引用不太直观，因此建议在存在多个参数的情况，总是通过@Param注解显式的指定参数名。 </p>
+<h4 id="2-6-InsertProvider、-UpdateProvider、-DeleteProvider、-SelectProvider注解"><a href="#2-6-InsertProvider、-UpdateProvider、-DeleteProvider、-SelectProvider注解" class="headerlink" title="2.6  @InsertProvider、@UpdateProvider、@DeleteProvider、@SelectProvider注解"></a>2.6  @InsertProvider、@UpdateProvider、@DeleteProvider、@SelectProvider注解</h4><p>这几个注解主要用于动态sql构建。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserBuilderMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@SelectProvider(type = UserSqlBuilder.class, method = &quot;buildSelectByIdSql&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> User <span class="title">selectById</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> <span class="keyword">int</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@InsertProvider(type = UserSqlBuilder.class, method = &quot;buildInsertSql&quot;)</span></span><br><span class="line">   <span class="meta">@Options(useGeneratedKeys = true, keyColumn = &quot;id&quot;, keyProperty = &quot;id&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(User user)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@UpdateProvider(type = UserSqlBuilder.class, method = &quot;buildUpdateSql&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(User user)</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@DeleteProvider(type = UserSqlBuilder.class, method = &quot;buildDeleteSql&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> <span class="keyword">int</span> id)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//建议将sql builder以映射器接口内部类的形式进行定义</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">UserSqlBuilder</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">buildSelectByIdSql</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> <span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">new</span> SQL() &#123;</span><br><span class="line">            &#123;</span><br><span class="line">               SELECT(<span class="string">&quot;id, name&quot;</span>);</span><br><span class="line">               FROM(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">               WHERE(<span class="string">&quot;id=#&#123;id&#125;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;.toString();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">buildInsertSql</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">new</span> SQL() &#123;</span><br><span class="line">            &#123;</span><br><span class="line">               INSERT_INTO(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">               VALUES(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;#&#123;name&#125;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;.toString();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">buildUpdateSql</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">new</span> SQL() &#123;</span><br><span class="line">            &#123;</span><br><span class="line">               UPDATE(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">               SET(<span class="string">&quot;name=#&#123;name&#125;&quot;</span>);</span><br><span class="line">               WHERE(<span class="string">&quot;id=#&#123;id&#125;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;.toString();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">buildDeleteSql</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> <span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">new</span> SQL() &#123;</span><br><span class="line">            &#123;</span><br><span class="line">               DELETE_FROM(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">                    WHERE(<span class="string">&quot;id=#&#123;id&#125;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;.toString();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-结果集映射相关注解"><a href="#3-结果集映射相关注解" class="headerlink" title="3 结果集映射相关注解"></a>3 结果集映射相关注解</h3><table>
+<thead>
+<tr>
+<th><strong>注解</strong></th>
+<th><strong>使用对象</strong></th>
+<th><strong>相对应的 XML</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Results</td>
+<td>方法</td>
+<td><resultMap></resultMap></td>
+<td>结果映射的列表，包含了一个特别结果列如何被映射到属性或字段的详情。属性有：value, id。value 属性是 Result 注解的数组。这个 id 的属性是结果映射的名称。</td>
+</tr>
+<tr>
+<td>@Result</td>
+<td>方法</td>
+<td><result> <id></id></result></td>
+<td>在列和属性或字段之间的单独结果映射。属性有：id, column, javaType, jdbcType, typeHandler, one, many。id 属性是一个布尔值，来标识应该被用于比较（和在 XML 映射中的<id>相似）的属性。one 属性是单独的联系，和 <association> 相似，而 many 属性是对集合而言的，和<collection>相似。它们这样命名是为了避免名称冲突。</collection></association></id></td>
+</tr>
+<tr>
+<td>@ResultMap</td>
+<td>方法</td>
+<td>N/A</td>
+<td>这个注解给 @Select 或者 @SelectProvider 提供在 XML 映射中的 <resultMap> 的id。这使得注解的 select 可以复用那些定义在 XML 中的 ResultMap。如果同一 select 注解中还存在 @Results 或者 @ConstructorArgs，那么这两个注解将被此注解覆盖。</resultMap></td>
+</tr>
+<tr>
+<td>@ResultType</td>
+<td>方法</td>
+<td>N/A</td>
+<td>此注解在使用了结果处理器的情况下使用。在这种情况下，返回类型为 void，所以 Mybatis 必须有一种方式决定对象的类型，用于构造每行数据。如果有 XML 的结果映射，请使用 @ResultMap 注解。如果结果类型在 XML 的 <select> 节点中指定了，就不需要其他的注解了。其他情况下则使用此注解。比如，如果 @Select 注解在一个将使用结果处理器的方法上，那么返回类型必须是 void 并且这个注解（或者@ResultMap）必选。这个注解仅在方法返回类型是 void 的情况下生效。</select></td>
+</tr>
+<tr>
+<td>@ConstructorArgs</td>
+<td>方法</td>
+<td><constructor></constructor></td>
+<td>收集一组结果传递给一个结果对象的构造方法。属性有：value，它是形式参数数组。</td>
+</tr>
+<tr>
+<td>@Arg</td>
+<td>N/A</td>
+<td><arg> <idArg></idArg></arg></td>
+<td>单参数构造方法，是 ConstructorArgs 集合的一部分。属性有：id, column, javaType, jdbcType, typeHandler, select和 resultMap。id 属性是布尔值，来标识用于比较的属性，和<idArg> XML 元素相似。</idArg></td>
+</tr>
+<tr>
+<td>@One</td>
+<td>N/A</td>
+<td><association></association></td>
+<td>复杂类型的单独属性值映射。属性有：select，已映射语句（也就是映射器方法）的全限定名，它可以加载合适类型的实例。fetchType会覆盖全局的配置参数 lazyLoadingEnabled。<strong>注意</strong> 联合映射在注解 API中是不支持的。这是因为 Java 注解的限制,不允许循环引用。</td>
+</tr>
+<tr>
+<td>@Many</td>
+<td>N/A</td>
+<td><collection></collection></td>
+<td>映射到复杂类型的集合属性。属性有：select，已映射语句（也就是映射器方法）的全限定名，它可以加载合适类型的实例的集合，fetchType 会覆盖全局的配置参数 lazyLoadingEnabled。<strong>注意</strong> 联合映射在注解 API中是不支持的。这是因为 Java 注解的限制，不允许循环引用</td>
+</tr>
+<tr>
+<td>@TypeDiscriminator</td>
+<td>方法</td>
+<td><discriminator></discriminator></td>
+<td>一组实例值被用来决定结果映射的表现。属性有：column, javaType, jdbcType, typeHandler 和 cases。cases 属性是实例数组。</td>
+</tr>
+<tr>
+<td>@Case</td>
+<td>N/A</td>
+<td><case></case></td>
+<td>单独实例的值和它对应的映射。属性有：value, type, results。results 属性是结果数组，因此这个注解和实际的 ResultMap 很相似，由下面的 Results 注解指定。</td>
+</tr>
+</tbody></table>
+<h4 id="3-1-ConstructorArgs、-Arg注解"><a href="#3-1-ConstructorArgs、-Arg注解" class="headerlink" title="3.1 @ConstructorArgs、@Arg注解"></a>3.1 @ConstructorArgs、@Arg注解</h4><p>  如果实体类没有无参的构造方法，那么我们就必须通过@ConstructorArgs与@Arg注解来提供实体类的构造方法参数信息。例如上述UserMapper的selectById方法，其返回一个User对象。假设User对象只有以下构造方法： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(Integer id, String name)</span> </span>&#123; </span><br><span class="line"><span class="keyword">this</span>.id = id; </span><br><span class="line"><span class="keyword">this</span>.name = name; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>  那么需要在selectById方法上，添加@ConstructorArgs注解，提供构造方法信息，如下： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&quot;SELECT id,name FROM user where id= #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="meta">@ConstructorArgs(&#123;</span></span><br><span class="line"><span class="meta">@Arg(column = &quot;id&quot;,javaType = Integer.class,id = true), </span></span><br><span class="line"><span class="meta">@Arg(column = &quot;name&quot;,javaType = String.class)&#125;)</span> </span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">selectById</span><span class="params">(<span class="keyword">int</span> id)</span></span>; </span><br></pre></td></tr></table></figure>
+
+
+
+<p>  注意，通常情况下，我们都建议为实体类提供无参的构造方法的，这是最佳实践的总结，因此@ConstructorArgs注解和@Arg注解基本使用不到。 </p>
+<h4 id="3-2-Results、-Result注解"><a href="#3-2-Results、-Result注解" class="headerlink" title="3.2 @Results、@Result注解"></a>3.2 @Results、@Result注解</h4><p>如果实体字段的名称与数据库表字段名称不一致时，我们就需要显式的指定映射关系。这是通过@Results、@Result注解来指定的，例如为UserMapper的selectById指定映射关系： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&quot;SELECT id,name FROM user where id= #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="meta">@Results(id = &quot;userMap&quot;, value = &#123; </span></span><br><span class="line"><span class="meta">       @Result(property = &quot;id&quot;, column = &quot;id&quot;, javaType = Integer.class,jdbcType = JdbcType.INTEGER,id = true), </span></span><br><span class="line"><span class="meta">       @Result(property = &quot;name&quot;, column = &quot;name&quot;,javaType = String.class,jdbcType = JdbcType.VARCHAR)&#125;)</span> </span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">selectById</span><span class="params">(<span class="keyword">int</span> id)</span></span>; </span><br></pre></td></tr></table></figure>
+
+<p>其中： </p>
+<p>@Results注解：id属性用于给这个映射关系起一个名字(这里指定的为userMap)，其内部还包含了一个@Result[]来表示实体属性和数据库表字段的映射关系 </p>
+<p>@Result注解：property属性是java实体属性的名称，column表示对应的数据库字段的名称。javaType和JdbcType属性可以不指定。 </p>
+<h4 id="3-3-ResultMap注解"><a href="#3-3-ResultMap注解" class="headerlink" title="3.3 @ResultMap注解"></a>3.3 @ResultMap注解</h4><p>   上述selectById方法已经通过@Results注解指定了结果映射关系，通过@ConstructorArgs指定了构造方法(必要的情况下才使用)，那么在其他的查询方法中，我们不需要重复定义，可以通过@ResultMap来引用@Results的id属性值进行复用。如我们在UserMapper的selectAll方法进行复用： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&quot;SELECT id,name FROM user&quot;)</span></span><br><span class="line"><span class="meta">@ResultMap(&quot;userMap&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">selectAll</span><span class="params">()</span></span>; </span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-4-TypeDiscriminator、-Case注解"><a href="#3-4-TypeDiscriminator、-Case注解" class="headerlink" title="3.4 @TypeDiscriminator、@Case注解"></a>3.4 @TypeDiscriminator、@Case注解</h4><p>鉴别器注解基本没用，有空的时候再补充</p>
+<h4 id="3-5-Many、-One注解"><a href="#3-5-Many、-One注解" class="headerlink" title="3.5 @Many、@One注解"></a>3.5 @Many、@One注解</h4><p><strong>主要用于关联关系映射</strong></p>
+<p>假设有作者(author)和文章(article)两张数据库表，一个author可以有多个article，一个article只能属于一个author。相关表结构以及初始数据如下所示： </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--author表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`author`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`author`</span> (<span class="string">`id`</span>, <span class="string">`name`</span>) </span><br><span class="line"><span class="keyword">VALUES</span> </span><br><span class="line">    (<span class="number">1</span>, <span class="string">&#x27;tianshouzhi&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--article表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`article`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`title`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`content`</span> longtext <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`author_id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`article`</span> (<span class="string">`id`</span>, <span class="string">`title`</span>, <span class="string">`content`</span>, <span class="string">`author_id`</span>)</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">    (<span class="number">1</span>, <span class="string">&#x27;title1&#x27;</span>, <span class="string">&#x27;content1&#x27;</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="number">2</span>, <span class="string">&#x27;title2&#x27;</span>, <span class="string">&#x27;content2&#x27;</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>相应的Java实体类如下所示： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Article</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> String title;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> String content;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> Author author;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//...setters getters and toString...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Author</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> List&lt;Article&gt; articles;</span><br><span class="line">  </span><br><span class="line">   <span class="comment">//...setters getters and toString...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>映射器接口定义分别如下： </p>
+<p>ArticleMapper </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ArticleMapper</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1、根据文章id查询文章Article对象，同时通过One注解关联查询出作者Author信息</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT id,title,content,author_id FROM article where id= #&#123;articleId&#125;&quot;)</span></span><br><span class="line">    <span class="meta">@Results(id = &quot;articleWithAuthor&quot;, value = &#123;</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;id&quot;, column = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;title&quot;, column = &quot;title&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;content&quot;, column = &quot;content&quot;),</span></span><br><span class="line"><span class="meta">            //property属性：指定将关联查询的结果封装到Article对象的author属性上</span></span><br><span class="line"><span class="meta">            //column属性指定：指定在执行@One注解中定义的select语句时，把article表的author_id字段当做参数传入</span></span><br><span class="line"><span class="meta">            //one属性：通过@One注解定义关联查询的语句是AuthorMapper中的findAuthorByAuthorId方法</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;author&quot;,column = &quot;author_id”,</span></span><br><span class="line"><span class="meta">                    one = @One(select = &quot;com.tianshouzhi.mapper.AuthorMapper.findAuthorByAuthorId&quot;))&#125;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Article <span class="title">findArticleWithAuthorByArticleId</span><span class="params">(<span class="meta">@Param(&quot;articleId&quot;)</span> <span class="keyword">int</span> articleId)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2、根据作者(Author)的id查询其所有的文章(Article)</span></span><br><span class="line">   <span class="meta">@Select(&quot;SELECT id,title,content,author_id FROM article WHERE author_id=#&#123;authorId&#125;&quot;)</span></span><br><span class="line">   <span class="meta">@Results(id = &quot;articlesWithoutAuthor&quot;, value = &#123;</span></span><br><span class="line"><span class="meta">           @Result(property = &quot;id&quot;, column = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;title&quot;, column = &quot;title&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;content&quot;, column = &quot;content&quot;)&#125;)</span></span><br><span class="line">   <span class="function">List&lt;Article&gt; <span class="title">findArticlesByAuthorId</span><span class="params">(<span class="meta">@Param(&quot;authorId&quot;)</span> <span class="keyword">int</span> authorId)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>AuthorMapper </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AuthorMapper</span> </span>&#123;</span><br><span class="line">    <span class="comment">//根据作者id查询Author信息</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT id,name FROM author WHERE id=#&#123;authorId&#125;&quot;)</span></span><br><span class="line">    <span class="function">Author <span class="title">findAuthorByAuthorId</span><span class="params">(<span class="keyword">int</span> authorId)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//根据作者id查询Author信息，通过@Many注解关联查询出所有的文章信息</span></span><br><span class="line">    <span class="meta">@Select(&quot;SELECT id,name FROM author WHERE id=#&#123;authorId&#125;&quot;)</span></span><br><span class="line">    <span class="meta">@Results(id = &quot;authorWithArticles&quot;, value = &#123;</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;id&quot;, column = &quot;id&quot;),</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;name&quot;, column = &quot;name”),</span></span><br><span class="line"><span class="meta">           //property属性：指定将关联查询的结果封装到Author对象的articles属性上</span></span><br><span class="line"><span class="meta">            //column属性指定：指定在执行@Many注解中定义的select语句时，把author表的id字段当做参数传入</span></span><br><span class="line"><span class="meta">            //many属性：指定通过@Many注解定义关联查询的语句是ArticleMapper中的findArticlesByAuthorId方法</span></span><br><span class="line"><span class="meta">            @Result(property = &quot;articles&quot;,column = &quot;id”,</span></span><br><span class="line"><span class="meta">                    many = @Many(select = &quot;com.tianshouzhi.mapper.ArticleMapper.findArticlesByAuthorId&quot;))&#125;)</span></span><br><span class="line">    <span class="function">Author <span class="title">findAuthorWithArticlesByAuthorId</span><span class="params">(<span class="keyword">int</span> authorId)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>测试如下： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOneAndMany</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;===========通过@One注解查询出Article关联的Auhtor===========&quot;</span>);</span><br><span class="line">       Article article = articleMapper.findArticleWithAuthorByArticleId(<span class="number">1</span>);</span><br><span class="line">       System.out.println(article);</span><br><span class="line"></span><br><span class="line">       System.out.println(<span class="string">&quot;===========通过@Many注解查询出Auhtor关联的Article==========&quot;</span>);</span><br><span class="line">       Author author = authorMapper.findAuthorWithArticlesByAuthorId(<span class="number">1</span>);</span><br><span class="line">       System.out.println(author);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>控制台输出结果为： </p>
+<p>===========通过@One注解查询出Article关联的Auhtor===========</p>
+<p>Article{id=1, title=’title1’, content=’content1’, author=Author{id=1, name=’tianshouzhi’, articles=null}}</p>
+<p>===========通过@Many注解查询出Auhtor关联的Article==========</p>
+<p>Author{id=1, name=’tianshouzhi’, articles=[Article{id=1, title=’title1’, content=’content1’, author=null}, Article{id=2, title=’title2’, content=’content2’, author=null}]}</p>
+<h3 id="4-缓存相关注解"><a href="#4-缓存相关注解" class="headerlink" title="4 缓存相关注解"></a>4 缓存相关注解</h3><table>
+<thead>
+<tr>
+<th><strong>注解</strong></th>
+<th><strong>使用对象</strong></th>
+<th><strong>相对应的 XML</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@CacheNamespace</td>
+<td>类</td>
+<td><cache></cache></td>
+<td>为给定的命名空间（比如类）配置缓存。属性有：implemetation, eviction, flushInterval, size, readWrite, blocking 和properties。</td>
+</tr>
+<tr>
+<td>@Property</td>
+<td>N/A</td>
+<td><property></property></td>
+<td>指定参数值或占位值（placeholder）（能被 mybatis-config.xml内的配置属性覆盖）。属性有：name, value。（仅在MyBatis 3.4.2以上版本生效）</td>
+</tr>
+<tr>
+<td>@CacheNamespaceRef</td>
+<td>类</td>
+<td><cacheRef></cacheRef></td>
+<td>参照另外一个命名空间的缓存来使用。属性有：value, name。如果你使用了这个注解，你应设置 value 或者 name 属性的其中一个。value 属性用于指定 Java 类型而指定命名空间（命名空间名就是指定的 Java 类型的全限定名），name 属性（这个属性仅在MyBatis 3.4.2以上版本生效）直接指定了命名空间的名字。</td>
+</tr>
+<tr>
+<td>@Flush</td>
+<td>方法</td>
+<td>N/A</td>
+<td>如果使用了这个注解，定义在 Mapper 接口中的方法能够调用 SqlSession#flushStatements() 方法。（Mybatis 3.3及以上）</td>
+</tr>
+</tbody></table>
+</foreach></h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/05/doris/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/05/doris/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">官方文档目录摘要</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-05 23:58:33" itemprop="dateCreated datePublished" datetime="2021-01-05T23:58:33+08:00">2021-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-20 16:39:52" itemprop="dateModified" datetime="2021-02-20T16:39:52+08:00">2021-02-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-doris/wiki">git wiki地址</a></p>
+<h1 id="编译与部署"><a href="#编译与部署" class="headerlink" title="编译与部署"></a>编译与部署</h1><h2 id="安装与部署"><a href="#安装与部署" class="headerlink" title="安装与部署"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/installing/install-deploy.html">安装与部署</a></h2><h3 id="软硬件需求"><a href="#软硬件需求" class="headerlink" title="软硬件需求"></a>软硬件需求</h3><ul>
+<li>FE（前端）和BE（后端）存储数据的区别，以及所需机器配置</li>
+<li>FE与BE端口、网络需求</li>
+<li>ip绑定</li>
+</ul>
+<h3 id="集群部署"><a href="#集群部署" class="headerlink" title="集群部署"></a>集群部署</h3><ul>
+<li><p>手动部署</p>
+</li>
+<li><ul>
+<li>FE部署</li>
+<li>BE部署</li>
+<li>FS_Broker部署</li>
+</ul>
+</li>
+</ul>
+<h3 id="扩容缩容"><a href="#扩容缩容" class="headerlink" title="扩容缩容"></a>扩容缩容</h3><ul>
+<li><p>FE扩容和缩容</p>
+</li>
+<li><ul>
+<li>增加FE节点</li>
+<li>删除FE节点</li>
+</ul>
+</li>
+<li><p>BE扩容和缩容</p>
+</li>
+<li><ul>
+<li>增加BE节点</li>
+<li>删除BE节点</li>
+</ul>
+</li>
+<li><p>Broker扩容缩容</p>
+</li>
+</ul>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h1 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h1><h2 id="基础使用指南"><a href="#基础使用指南" class="headerlink" title="基础使用指南"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/basic-usage.html">基础使用指南</a></h2><h3 id="1-创建用户"><a href="#1-创建用户" class="headerlink" title="1.创建用户"></a>1.创建用户</h3><ul>
+<li>Root用户登陆与密码修改</li>
+<li>创建新用户</li>
+</ul>
+<h3 id="2-数据表的创建与数据导入"><a href="#2-数据表的创建与数据导入" class="headerlink" title="2.数据表的创建与数据导入"></a>2.数据表的创建与数据导入</h3><ul>
+<li><p>创建数据库</p>
+</li>
+<li><p>账户授权</p>
+</li>
+<li><p>建表</p>
+</li>
+<li><ul>
+<li>单分区</li>
+<li>复合分区</li>
+</ul>
+</li>
+<li><p>导入数据</p>
+</li>
+<li><ul>
+<li>流式导入</li>
+<li>Broker导入</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-数据的查询"><a href="#3-数据的查询" class="headerlink" title="3.数据的查询"></a>3.数据的查询</h3><ul>
+<li>简单查询</li>
+<li>Join查询</li>
+<li>子查询</li>
+</ul>
+<h2 id="高级使用指南"><a href="#高级使用指南" class="headerlink" title="高级使用指南"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/advance-usage.html">高级使用指南</a></h2><h3 id="1-表结构变更"><a href="#1-表结构变更" class="headerlink" title="1. 表结构变更"></a>1. 表结构变更</h3><h3 id="2-Rollup"><a href="#2-Rollup" class="headerlink" title="2. Rollup"></a>2. Rollup</h3><h3 id="3-数据表的查询"><a href="#3-数据表的查询" class="headerlink" title="3. 数据表的查询"></a>3. 数据表的查询</h3><ul>
+<li>内存限制</li>
+<li>查询超时</li>
+<li>Broadcast/Shuffle Join</li>
+<li>查询重试和高可用</li>
+</ul>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/best-practice.html">最佳实践</a></h2><h3 id="1-建表"><a href="#1-建表" class="headerlink" title="1. 建表"></a>1. 建表</h3><ul>
+<li><p>数据模型选择</p>
+</li>
+<li><ul>
+<li>AGGREGATE KEY</li>
+<li>UNIQUE KEY</li>
+<li>DUPLICATE KEY</li>
+</ul>
+</li>
+<li><p>大宽表与Star Schema</p>
+</li>
+<li><p>分区和分桶</p>
+</li>
+<li><ul>
+<li>Range分区(partition)</li>
+<li>HASH分桶(bucket)</li>
+</ul>
+</li>
+<li><p>稀疏索引和Bloom Filter</p>
+</li>
+<li><p>物化视图(rollup)</p>
+</li>
+<li><ul>
+<li>Base Table中数据聚合度不高</li>
+<li>Base Table中的前缀索引无法命中</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Schema-Change"><a href="#2-Schema-Change" class="headerlink" title="2. Schema Change"></a>2. Schema Change</h3><ul>
+<li>Sorted Schema Change</li>
+<li>Direct Schema Change: 无需重新排序，但需要对数据做一次转换。例如修改列的类型，在稀疏索引中加一列等</li>
+<li>Linked Schema Change: 无需转换数据，直接完成。例如加列操作</li>
+</ul>
+<h2 id="数据划分"><a href="#数据划分" class="headerlink" title="数据划分"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-partition.html">数据划分</a></h2><h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><ul>
+<li>Row &amp; Column</li>
+<li>Tablet &amp; Partition</li>
+</ul>
+<h3 id="2-数据划分"><a href="#2-数据划分" class="headerlink" title="2. 数据划分"></a>2. 数据划分</h3><ul>
+<li><p>列定义</p>
+</li>
+<li><ul>
+<li>列定义建议</li>
+</ul>
+</li>
+<li><p>分区与分桶</p>
+</li>
+</ul>
+<p>Doris支持两层的数据划分。第一层是Partition，仅支持Range的划分方式。第二层是Bucket（Tablet），仅支持Hash的划分方式。也可以仅使用一层分区</p>
+<ul>
+<li><ul>
+<li>Partition</li>
+<li>Bucket</li>
+<li>关于Partition和Bucket的数量和数据量的建议</li>
+<li>多列分区</li>
+</ul>
+</li>
+<li><p>PROPERTIES</p>
+</li>
+<li><ul>
+<li>replication_num</li>
+<li>storage_medium &amp; storage_cooldown_time</li>
+</ul>
+</li>
+<li><p>ENGINE</p>
+</li>
+</ul>
+<h3 id="3-常见问题"><a href="#3-常见问题" class="headerlink" title="3. 常见问题"></a>3. 常见问题</h3><ul>
+<li><p>建表操作常见问题</p>
+</li>
+<li><ul>
+<li>如果在较长的建表语句中出现语法错误，可能会出现语法错误提示不全的现象。这里罗列可能的语法错误供手动纠错：</li>
+<li>Failed to create partition [xxx] . Timeout</li>
+<li>建表命令长时间不返回结果。</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据模型、ROLLUP及前缀索引"><a href="#数据模型、ROLLUP及前缀索引" class="headerlink" title="数据模型、ROLLUP及前缀索引"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html">数据模型、ROLLUP及前缀索引</a></h2><p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-doris/wiki/Data-Model%2C-Rollup-%26-Prefix-Index">github wiki</a></p>
+<h3 id="1-基本概念-1"><a href="#1-基本概念-1" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><ul>
+<li><p>Row</p>
+</li>
+<li><p>Column</p>
+</li>
+<li><ul>
+<li>Key</li>
+<li>Value</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Aggregate模型"><a href="#2-Aggregate模型" class="headerlink" title="2. Aggregate模型"></a>2. Aggregate模型</h3><ul>
+<li>示例1: 导入数据聚合</li>
+<li>示例2: 保留明细数据</li>
+<li>示例3: 导入数据与已有数据聚合</li>
+</ul>
+<h3 id="3-Uniq模型"><a href="#3-Uniq模型" class="headerlink" title="3. Uniq模型"></a>3. Uniq模型</h3><h3 id="4-Duplicate模型-冗余模型"><a href="#4-Duplicate模型-冗余模型" class="headerlink" title="4. Duplicate模型(冗余模型)"></a>4. Duplicate模型(冗余模型)</h3><h3 id="5-ROLLUP"><a href="#5-ROLLUP" class="headerlink" title="5. ROLLUP"></a>5. ROLLUP</h3><ul>
+<li><p>基本概念</p>
+</li>
+<li><ul>
+<li><p>Aggregate和Uniq模型中的ROLLUP</p>
+</li>
+<li><ul>
+<li>示例1: 获得每个用户的总消费</li>
+<li>示例2: 获得不同城市，不同年龄段用户的总消费、最长和最短页面驻留时间</li>
+</ul>
+</li>
+<li><p>Duplicate模型中的ROLLUP</p>
+</li>
+</ul>
+</li>
+<li><p>前缀索引与ROLLUP</p>
+</li>
+<li><ul>
+<li>前缀索引</li>
+</ul>
+</li>
+</ul>
+<p>我们将一行数据的前 36 个字节 作为这行数据的前缀索引。当遇到 VARCHAR 类型时，前缀索引会直接截断。</p>
+<ul>
+<li><ul>
+<li>ROLLUP调整前缀索引</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html#rollup-%E7%9A%84%E5%87%A0%E7%82%B9%E8%AF%B4%E6%98%8E">ROLLUP的几点说明</a></p>
+</li>
+<li><ul>
+<li>根本作用是提高某些查询的查询效率（无论是通过聚合来减少数据量，还是修改列顺序以匹配前缀索引）。因此 ROLLUP 的含义已经超出了 “上卷” 的范围。这也是为什么我们在源代码中，将其命名为 Materized Index（物化索引）的原因。</li>
+<li>ROLLUP是附属于Base表的，可以看作是Base表的一种辅助数据结构。用户可以在 Base 表的基础上，创建或删除 ROLLUP，但是不能在查询中显式的指定查询某 ROLLUP。是否命中 ROLLUP 完全由 Doris 系统自动决定。</li>
+<li>ROLLUP 的数据是独立物理存储的。因此，创建的 ROLLUP 越多，占用的磁盘空间也就越大。同时对导入速度也会有影响（导入的ETL阶段会自动产生所有 ROLLUP 的数据），但是不会降低查询效率（只会更好）。</li>
+</ul>
+</li>
+<li><ul>
+<li>ROLLUP 的数据更新与 Base 表示完全同步的。用户无需关心这个问题。</li>
+<li>ROLLUP 中列的聚合方式，与 Base 表完全相同。在创建 ROLLUP 无需指定，也不能修改。</li>
+<li>查询能否命中 ROLLUP 的一个必要条件（非充分条件）是，查询所涉及的所有列（包括 select list 和 where 中的查询条件列等）都存在于该 ROLLUP 的列中。否则，查询只能命中 Base 表。</li>
+<li>某些类型的查询（如 count(*)）在任何条件下，都无法命中 ROLLUP。具体参见接下来的 聚合模型的局限性 一节。</li>
+<li>可以通过 EXPLAIN your_sql; 命令获得查询执行计划，在执行计划中，查看是否命中 ROLLUP。</li>
+<li>可以通过 DESC tbl_name ALL; 语句显示 Base 表和所有已创建完成的 ROLLUP。</li>
+<li><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/hit-the-rollup">查询如何命中ROLLUP</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="6-聚合模型的局限性"><a href="#6-聚合模型的局限性" class="headerlink" title="6. 聚合模型的局限性"></a>6. 聚合模型的局限性</h3><ul>
+<li>Aggregate 模型（包括 Uniq 模型）</li>
+</ul>
+<p>在聚合模型中，模型对外展现的，是最终聚合后的数据。也就是说，任何还未聚合的数据（比如说两个不同导入批次的数据），必须通过某种方式，以保证对外展示的一致性。</p>
+<ul>
+<li>Duplicate 模型</li>
+</ul>
+<p>Duplicate 模型没有聚合模型的这个局限性。因为该模型不涉及聚合语意，在做 count(*) 查询时，任意选择一列查询，即可得到语意正确的结果。</p>
+<h3 id="7-数据模型的选择建议"><a href="#7-数据模型的选择建议" class="headerlink" title="7. 数据模型的选择建议"></a>7. 数据模型的选择建议</h3><p>因为数据模型在建表时就已经确定，且无法修改。所以，选择一个合适的数据模型非常重要。</p>
+<ol>
+<li>Aggregate 模型可以通过预聚合，极大地降低聚合查询时所需扫描的数据量和查询的计算量，非常适合有固定模式的报表类查询场景。但是该模型对 count(*) 查询很不友好。同时因为固定了 Value 列上的聚合方式，在进行其他类型的聚合查询时，需要考虑语意正确性。</li>
+<li>Uniq 模型针对需要唯一主键约束的场景，可以保证主键唯一性约束。但是无法利用 ROLLUP 等预聚合带来的查询优势（因为本质是 REPLACE，没有 SUM 这种聚合方式）。</li>
+<li>Duplicate 适合任意维度的 Ad-hoc 查询。虽然同样无法利用预聚合的特性，但是不受聚合模型的约束，可以发挥列存模型的优势（只读取相关列，而不需要读取所有 Key 列）。</li>
+</ol>
+<h2 id="Rollup与查询"><a href="#Rollup与查询" class="headerlink" title="Rollup与查询"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/hit-the-rollup.html">Rollup与查询</a></h2><p>在 Doris 里 Rollup 作为一份聚合物化视图，其在查询中可以起到两个作用：</p>
+<ul>
+<li>索引</li>
+<li>聚合数据（仅用于聚合模型，即aggregate key）</li>
+</ul>
+<p>但是为了命中 Rollup 需要满足一定的条件，并且可以通过执行计划中 ScanNdoe 节点的 PreAggregation 的值来判断是否可以命中 Rollup，以及 Rollup 字段来判断命中的是哪一张 Rollup 表。</p>
+<h3 id="1-名词解释"><a href="#1-名词解释" class="headerlink" title="1. 名词解释"></a>1. 名词解释</h3><ul>
+<li>Base： 基表</li>
+<li>Rollup： 一般指基于 Base 表创建的 Rollup 表，但在一些场景包括 Base 以及 Rollup 表。</li>
+</ul>
+<h3 id="2-索引"><a href="#2-索引" class="headerlink" title="2. 索引"></a>2. 索引</h3><h3 id="3-聚合数据"><a href="#3-聚合数据" class="headerlink" title="3. 聚合数据"></a>3. 聚合数据</h3><h1 id="操作手册"><a href="#操作手册" class="headerlink" title="操作手册"></a>操作手册</h1><h2 id="数据导入"><a href="#数据导入" class="headerlink" title="数据导入"></a>数据导入</h2><h3 id="1-导入总览"><a href="#1-导入总览" class="headerlink" title="1. 导入总览"></a>1. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html">导入总览</a></h3><h4 id="1-1-基本概念"><a href="#1-1-基本概念" class="headerlink" title="1.1 基本概念"></a>1.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">基本概念</a></h4><ol>
+<li>Frontend（FE）：Doris 系统的元数据和调度节点。在导入流程中主要负责导入规划生成和导入任务的调度工作。</li>
+<li>Backend（BE）：Doris 系统的计算和存储节点。在导入流程中主要负责数据的 ETL 和存储。</li>
+<li>Broker：Broker 为一个独立的无状态进程。封装了文件系统接口，提供 Doris 读取远端存储系统中文件的能力。</li>
+<li>导入作业（Load job）：导入作业读取用户提交的源数据，转换或清洗后，将数据导入到 Doris 系统中。导入完成后，数据即可被用户查询到。</li>
+<li>Label：所有导入作业都有一个 Label。Label 在一个数据库内唯一，可由用户指定或系统自动生成，用于标识一个导入作业。相同的 Label 仅可用于一个成功的导入作业。</li>
+<li>MySQL 协议/HTTP 协议：Doris 提供两种访问协议接口。 MySQL 协议和 HTTP 协议。部分导入方式使用 MySQL 协议接口提交作业，部分导入方式使用 HTTP 协议接口提交作业。</li>
+</ol>
+<h4 id="1-2-导入方式"><a href="#1-2-导入方式" class="headerlink" title="1.2 导入方式"></a>1.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%AF%BC%E5%85%A5%E6%96%B9%E5%BC%8F">导入方式</a></h4><ol>
+<li>Broker load</li>
+<li>Stream load</li>
+<li>Insert</li>
+<li>Multi load</li>
+<li>Routine load</li>
+</ol>
+<h4 id="1-3-基本原理"><a href="#1-3-基本原理" class="headerlink" title="1.3 基本原理"></a>1.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">基本原理</a></h4><h5 id="1-3-1-导入执行流程"><a href="#1-3-1-导入执行流程" class="headerlink" title="1.3.1 导入执行流程"></a>1.3.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%AF%BC%E5%85%A5%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B">导入执行流程</a></h5><ol>
+<li>PENDING（非必须）</li>
+<li>ETL（非必须）</li>
+<li>LOADING</li>
+<li>FINISHED</li>
+<li>CANCELLED</li>
+</ol>
+<h5 id="1-3-2-Label和原子性"><a href="#1-3-2-Label和原子性" class="headerlink" title="1.3.2 Label和原子性"></a>1.3.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#label-%E5%92%8C-%E5%8E%9F%E5%AD%90%E6%80%A7">Label和原子性</a></h5><h4 id="1-4-同步和异步"><a href="#1-4-同步和异步" class="headerlink" title="1.4 同步和异步"></a>1.4 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5">同步和异步</a></h4><h5 id="1-4-1-同步"><a href="#1-4-1-同步" class="headerlink" title="1.4.1 同步"></a>1.4.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%90%8C%E6%AD%A5">同步</a></h5><h5 id="1-4-2-异步"><a href="#1-4-2-异步" class="headerlink" title="1.4.2 异步"></a>1.4.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%BC%82%E6%AD%A5">异步</a></h5><h5 id="1-4-3-注意事项"><a href="#1-4-3-注意事项" class="headerlink" title="1.4.3 注意事项"></a>1.4.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</a></h5><h4 id="1-5-内存限制"><a href="#1-5-内存限制" class="headerlink" title="1.5 内存限制"></a>1.5 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6">内存限制</a></h4><h4 id="1-6-最佳实践"><a href="#1-6-最佳实践" class="headerlink" title="1.6 最佳实践"></a>1.6 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></h4><h4 id="1-7-通用系统配置"><a href="#1-7-通用系统配置" class="headerlink" title="1.7 通用系统配置"></a>1.7 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E9%80%9A%E7%94%A8%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">通用系统配置</a></h4><h5 id="1-7-1-FE配置"><a href="#1-7-1-FE配置" class="headerlink" title="1.7.1 FE配置"></a>1.7.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#fe-%E9%85%8D%E7%BD%AE">FE配置</a></h5><h5 id="1-7-2-BE配置"><a href="#1-7-2-BE配置" class="headerlink" title="1.7.2 BE配置"></a>1.7.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#be-%E9%85%8D%E7%BD%AE">BE配置</a></h5><h5 id="1-7-3-列映射"><a href="#1-7-3-列映射" class="headerlink" title="1.7.3 列映射"></a>1.7.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%88%97%E6%98%A0%E5%B0%84">列映射</a></h5><h3 id="2-Broker-Load"><a href="#2-Broker-Load" class="headerlink" title="2.Broker Load"></a>2.<a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html">Broker Load</a></h3><p>一种异步导入方式</p>
+<h4 id="2-1-适用场景"><a href="#2-1-适用场景" class="headerlink" title="2.1 适用场景"></a>2.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF">适用场景</a></h4><h4 id="2-2-名词解释"><a href="#2-2-名词解释" class="headerlink" title="2.2 名词解释"></a>2.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A">名词解释</a></h4><h4 id="2-3-基本原理"><a href="#2-3-基本原理" class="headerlink" title="2.3 基本原理"></a>2.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">基本原理</a></h4><h4 id="2-4-基本操作"><a href="#2-4-基本操作" class="headerlink" title="2.4 基本操作"></a>2.4 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">基本操作</a></h4><h5 id="2-4-1-创建导入"><a href="#2-4-1-创建导入" class="headerlink" title="2.4.1 创建导入"></a>2.4.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%88%9B%E5%BB%BA%E5%AF%BC%E5%85%A5">创建导入</a></h5><h5 id="2-4-2-查看导入"><a href="#2-4-2-查看导入" class="headerlink" title="2.4.2 查看导入"></a>2.4.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E6%9F%A5%E7%9C%8B%E5%AF%BC%E5%85%A5">查看导入</a></h5><h5 id="2-4-3-取消导入"><a href="#2-4-3-取消导入" class="headerlink" title="2.4.3 取消导入"></a>2.4.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%8F%96%E6%B6%88%E5%AF%BC%E5%85%A5">取消导入</a></h5><h4 id="2-5-相关系统配置"><a href="#2-5-相关系统配置" class="headerlink" title="2.5 相关系统配置"></a>2.5 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E7%9B%B8%E5%85%B3%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">相关系统配置</a></h4><h5 id="2-5-1-FE-配置"><a href="#2-5-1-FE-配置" class="headerlink" title="2.5.1 FE 配置"></a>2.5.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#fe-%E9%85%8D%E7%BD%AE">FE 配置</a></h5><h4 id="2-6-最佳实践"><a href="#2-6-最佳实践" class="headerlink" title="2.6 最佳实践"></a>2.6 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></h4><h5 id="2-6-1-应用场景"><a href="#2-6-1-应用场景" class="headerlink" title="2.6.1 应用场景"></a>2.6.1 应用场景</h5><p>使用 Broker load 最适合的场景就是原始数据在文件系统（HDFS，BOS，AFS）中的场景。其次，由于 Broker load 是单次导入中唯一的一种异步导入的方式，所以如果用户在导入大文件中，需要使用异步接入，也可以考虑使用 Broker load。</p>
+<h5 id="2-6-2-数据量"><a href="#2-6-2-数据量" class="headerlink" title="2.6.2 数据量"></a>2.6.2 数据量</h5><p>这里仅讨论单个 BE 的情况，如果用户集群有多个 BE 则下面标题中的数据量应该乘以 BE 个数来计算。比如：如果用户有3个 BE，则 3G 以下（包含）则应该乘以 3，也就是 9G 以下（包含）。</p>
+<h5 id="2-6-3-性能分析"><a href="#2-6-3-性能分析" class="headerlink" title="2.6.3 性能分析"></a>2.6.3 性能分析</h5><h5 id="2-6-4-完整例子"><a href="#2-6-4-完整例子" class="headerlink" title="2.6.4 完整例子"></a>2.6.4 完整例子</h5><h4 id="2-7-常见问题"><a href="#2-7-常见问题" class="headerlink" title="2.7 常见问题"></a>2.7 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a></h4><h3 id="3-Stream-load"><a href="#3-Stream-load" class="headerlink" title="3. Stream load"></a>3. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/stream-load-manual.html#stream-load">Stream load</a></h3><p>Stream load 是一个同步的导入方式，用户通过发送 HTTP 协议发送请求将本地文件或数据流导入到 Doris 中。Stream load 同步执行导入并返回导入结果。用户可直接通过请求的返回体判断本次导入是否成功。</p>
+<p>Stream load 主要适用于导入本地文件，或通过程序导入数据流中的数据。</p>
+<h4 id="3-1-基本原理"><a href="#3-1-基本原理" class="headerlink" title="3.1 基本原理"></a>3.1 基本原理</h4><h4 id="3-2-基本操作"><a href="#3-2-基本操作" class="headerlink" title="3.2 基本操作"></a>3.2 基本操作</h4><h4 id="3-3-相关系统配置"><a href="#3-3-相关系统配置" class="headerlink" title="3.3 相关系统配置"></a>3.3 相关系统配置</h4><h4 id="3-4-最佳实践"><a href="#3-4-最佳实践" class="headerlink" title="3.4 最佳实践"></a>3.4 最佳实践</h4><h5 id="3-4-1-应用场景"><a href="#3-4-1-应用场景" class="headerlink" title="3.4.1 应用场景"></a>3.4.1 应用场景</h5><p>使用 Stream load 的最合适场景就是原始文件在内存中，或者在磁盘中。其次，由于 Stream load 是一种同步的导入方式，所以用户如果希望用同步方式获取导入结果，也可以使用这种导入。</p>
+<h5 id="3-4-2-数据量"><a href="#3-4-2-数据量" class="headerlink" title="3.4.2 数据量"></a>3.4.2 数据量</h5><h5 id="3-4-3-完整例子"><a href="#3-4-3-完整例子" class="headerlink" title="3.4.3 完整例子"></a>3.4.3 完整例子</h5><h4 id="3-5-常见问题"><a href="#3-5-常见问题" class="headerlink" title="3.5 常见问题"></a>3.5 常见问题</h4><h3 id="4-Routine-Load"><a href="#4-Routine-Load" class="headerlink" title="4. Routine Load"></a>4. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/routine-load-manual.html">Routine Load</a></h3><p>例行导入（Routine Load）功能为用户提供了一种自动从指定数据源进行数据导入的功能。</p>
+<p>本文档主要介绍该功能的实现原理、使用方式以及最佳实践。</p>
+<h3 id="5-insert-into"><a href="#5-insert-into" class="headerlink" title="5. insert into"></a>5. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/insert-into-manual.html"><u>insert into</u></a></h3><p>Insert Into 语句的使用方式和 MySQL 等数据库中 Insert Into 语句的使用方式类似。但在 Doris 中，所有的数据写入都是一个独立的导入作业。所以这里将 Insert Into 也作为一种导入方式介绍。</p>
+<p>主要的 Insert Into 命令包含以下两种；</p>
+<ul>
+<li>INSERT INTO tbl SELECT …</li>
+<li>INSERT INTO tbl (col1, col2, …) VALUES (1, 2, …), (1,3, …);</li>
+</ul>
+<p>其中第二种命令仅用于 Demo，不要使用在测试或生产环境中。</p>
+<h3 id="6-spark-Load"><a href="#6-spark-Load" class="headerlink" title="6. spark Load"></a>6. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/spark-load-manual.html"><u>spark Load</u></a></h3><p>Spark load 通过外部的 Spark 资源实现对导入数据的预处理，提高 Doris 大数据量的导入性能并且节省 Doris 集群的计算资源。主要用于初次迁移，大数据量导入 Doris 的场景。</p>
+<p>Spark load 是一种异步导入方式，用户需要通过 MySQL 协议创建 Spark 类型导入任务，并通过 <code>SHOW LOAD</code> 查看导入结果。</p>
+<h4 id="6-1-适用场景"><a href="#6-1-适用场景" class="headerlink" title="6.1 适用场景"></a>6.1 适用场景</h4><ul>
+<li>源数据在 Spark 可以访问的存储系统中，如 HDFS。</li>
+<li>数据量在 几十 GB 到 TB 级别。</li>
+</ul>
+<h3 id="7-delete"><a href="#7-delete" class="headerlink" title="7. delete"></a>7. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/delete-manual.html">delete</a></h3><p>Delete不同于其他导入方式，它是一个同步过程。和Insert into相似，所有的Delete操作在Doris中是一个独立的导入作业，一般Delete语句需要指定表和分区以及删除的条件来筛选要删除的数据，并将会同时删除base表和rollup表的数据。</p>
+<h2 id="表结构变更"><a href="#表结构变更" class="headerlink" title="表结构变更"></a>表结构变更</h2><h2 id="常用参考"><a href="#常用参考" class="headerlink" title="常用参考"></a>常用参考</h2><p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html#%E8%81%9A%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7">数据模型、ROLLUP 及前缀索引</a></p>
+<p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/sql-reference/sql-statements/Data%20Definition/ALTER%20TABLE.html#example">ALTER TABLE</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

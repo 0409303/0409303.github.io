@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="为了以后好好偷懒，现在必须加倍努力">
@@ -103,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -122,11 +123,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -149,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/20/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/20/java/base/%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/20/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">hexo常用命令</a>
+            <a href="/2021/02/20/java/base/%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">写法总结</a>
         </h2>
 
         <div class="post-meta">
@@ -174,7 +202,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-20 14:46:20 / Modified: 15:31:53" itemprop="dateCreated datePublished" datetime="2021-01-20T14:46:20+08:00">2021-01-20</time>
+              <time title="Created: 2021-02-20 17:20:05 / Modified: 17:22:29" itemprop="dateCreated datePublished" datetime="2021-02-20T17:20:05+08:00">2021-02-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -182,7 +210,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
                 </span>
             </span>
 
@@ -197,23 +225,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+          <h3 id="switch-case"><a href="#switch-case" class="headerlink" title="switch case"></a>switch case</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/juky_huang/article/details/5881682">Switch Case语句中多个值匹配一个代码块的写法</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (i)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:<span class="keyword">case</span> <span class="number">2</span>:<span class="keyword">case</span> <span class="number">3</span>:<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">      Console.WriteLine(<span class="string">&quot;ok!**********&quot;</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">      Console.WriteLine(<span class="string">&quot;wrong!*******&quot;</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      Console.WriteLine(<span class="string">&quot;default case!*********&quot;</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="服务器部署"><a href="#服务器部署" class="headerlink" title="服务器部署"></a>服务器部署</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo d -g</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="源码提交"><a href="#源码提交" class="headerlink" title="源码提交"></a>源码提交</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b blog-source</span><br><span class="line">git add -A</span><br><span class="line">git commit -m &quot;init blog&quot;</span><br><span class="line">git push origin blog-source</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/111639860">如何用 Github 搭建博客</a></p>
 
       
     </div>
@@ -233,7 +249,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/20/tools/hexo/hexo%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/20/java/debug/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -247,7 +263,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/20/tools/hexo/hexo%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/" class="post-title-link" itemprop="url">hexo常见报错</a>
+            <a href="/2021/02/20/java/debug/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/" class="post-title-link" itemprop="url">远程调试</a>
         </h2>
 
         <div class="post-meta">
@@ -258,7 +274,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-20 14:26:28 / Modified: 15:12:59" itemprop="dateCreated datePublished" datetime="2021-01-20T14:26:28+08:00">2021-01-20</time>
+              <time title="Created: 2021-02-20 17:07:43 / Modified: 17:08:36" itemprop="dateCreated datePublished" datetime="2021-02-20T17:07:43+08:00">2021-02-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,7 +282,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                  <a href="/categories/java-debug/" itemprop="url" rel="index"><span itemprop="name">java-debug</span></a>
                 </span>
             </span>
 
@@ -281,13 +297,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="bad-indentation-of-a-mapping-entry"><a href="#bad-indentation-of-a-mapping-entry" class="headerlink" title="bad indentation of a mapping entry"></a>bad indentation of a mapping entry</h3><ol>
-<li>title中缩进不正常，均要用tab缩进</li>
-</ol>
-<h3 id="warning-adding-embedded-git-repository-themes-next"><a href="#warning-adding-embedded-git-repository-themes-next" class="headerlink" title="warning: adding embedded git repository: themes/next"></a>warning: adding embedded git repository: themes/next</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">warning: adding embedded git repository: themes&#x2F;next</span><br><span class="line">hint: You&#39;ve added another git repository inside your current repository.</span><br><span class="line">hint: Clones of the outer repository will not contain the contents of</span><br><span class="line">hint: the embedded repository and will not know how to obtain it.</span><br><span class="line">hint: If you meant to add a submodule, use:</span><br><span class="line">hint:</span><br><span class="line">hint: 	git submodule add &lt;url&gt; themes&#x2F;next</span><br><span class="line">hint:</span><br><span class="line">hint: If you added this path by mistake, you can remove it from the</span><br><span class="line">hint: index with:</span><br><span class="line">hint:</span><br><span class="line">hint: 	git rm --cached themes&#x2F;next</span><br><span class="line">hint:</span><br><span class="line">hint: See &quot;git help submodule&quot; for more information.</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1583762">git仓库包含子仓库时，add报错的解决办法</a></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tappat/article/details/103299038">hexo部署成功仍未更新或无法打开的情况</a></p>
+          <p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/432424885">ST远程debug拒绝连接解决方案</a></p>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/213152503">如何远程debug服务的代码</a></p>
 
       
     </div>
@@ -307,7 +318,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/20/flink/%E7%96%91%E9%97%AE/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/20/sql/mysql/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -321,7 +332,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/20/flink/%E7%96%91%E9%97%AE/" class="post-title-link" itemprop="url">疑问</a>
+            <a href="/2021/02/20/sql/mysql/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">问题汇总</a>
         </h2>
 
         <div class="post-meta">
@@ -332,156 +343,8 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-20 11:05:57 / Modified: 11:06:34" itemprop="dateCreated datePublished" datetime="2021-01-20T11:05:57+08:00">2021-01-20</time>
+              <time title="Created: 2021-02-20 16:50:01 / Modified: 17:24:30" itemprop="dateCreated datePublished" datetime="2021-02-20T16:50:01+08:00">2021-02-20</time>
             </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="怎么理解flink的有状态"><a href="#怎么理解flink的有状态" class="headerlink" title="怎么理解flink的有状态"></a>怎么理解flink的有状态</h4>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/20/olap/%E5%BB%BA%E6%A8%A1%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/20/olap/%E5%BB%BA%E6%A8%A1%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">建模方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-20 10:30:01 / Modified: 14:06:45" itemprop="dateCreated datePublished" datetime="2021-01-20T10:30:01+08:00">2021-01-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/olap/" itemprop="url" rel="index"><span itemprop="name">olap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/109782553">数据仓库建设中的数据建模方法</a></p>
-<h2 id="实体建模"><a href="#实体建模" class="headerlink" title="实体建模"></a>实体建模</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaoyelinger0912/article/details/95517168">数据建模-建模方法三：实体建模</a></p>
-<p>实体建模法也有着自己先天的缺陷，由于实体说明法只是一种抽象客观世界的方法，因此，<strong>注定了该建模方法<br>只能局限在业务建模和领域概念建模阶段。因此，到了逻辑建模阶段和物理建模阶段，则是范式建模和维度建模发挥长处的阶段</strong></p>
-<p>实体是现实世界中存在的事物或发生的事件，是现实世界中任何可识别、可区分的事物。实体可以是人，可以是物，也可以是发生的某件事，比如一场篮球比赛。每一个实体都必须具备一定的特征，用来区分一个个实体，这些特征称为属性，每个实体可以用若干个属性来刻画，每个属性又有一定的取值类型和取值范围，属性是变量，其取值范围是属性的值域。实体建模法是根据客观世界中的一个个实体，以及实体之间的关系，在数据建模的过程中引入这种区分方法，将整个业务分成一个个实体，从而建立数据模型。实体建模可以比较容易的实现模型的划分，抽象出具体的业务概念，创建符合自己需要的数据库模型。实体建模是对客观世界的抽象，因此该方法建立的模型具有一定的局限性，适合于特定的领域。</p>
-<h2 id="维度建模法"><a href="#维度建模法" class="headerlink" title="维度建模法"></a>维度建模法</h2><p>维度在数学上指独立参数的数据，在数据分析领域，是指描述事物的角度和方面，是数据库当中，描述某一事物的方法和属性的数目。维度建模就是针对给定的事物，使用不同的描述方法，记录该事物在不同分类方法当中每个属性的值。如对人进行维度建模时，按照性别的维度可以分为男和女，按照年龄段可以分为儿童、少年、青年、中年、老年，按照收入水平可以分为3000以下、3000-6000、6000-10000，10000以上等集中类别。</p>
-<p> 维度建模法的好处是对于某个事物，可以在各个维度进行预处理，进行统计、分类、排序等，提高数据库操作性能，同时维度建模法建立的数据模型比较直观，可以紧密围绕业务需求建立模型，直观的反应业务中的问题，建模方法简单，不需要进行特别的抽象处理。但是维度建模法同时也存在缺点，一是在数据建模时需要进行预处理，存在大量的预处理工作，并且当业务需求发生变化时，需要重新定义维度，重新进行新维度的数据预处理，在数据预处理过程中往往存在大量数据冗余，另外就是在进行维度建模时，仅仅依靠维度进行建模，不能保证数据来源的准确性和一致性，不适合在数据库底层使用。</p>
-<h2 id="范式建模法"><a href="#范式建模法" class="headerlink" title="范式建模法"></a>范式建模法</h2><p>范式就是规则，是符合某一级别关系模式的集合，构造数据库时必须遵循一定的规则。关系数据库中的关系必须满足一定的规则，即满足不同的范式。</p>
-<p> 范式建模法是将原始数据信息根据一定的数据结构和转换模型，分解、转化为规范的格式，使数据遵守一定的约束条件，每一个数据项所表达的意思明确，不产生歧义，同时各条数据之间相互独立，不存在依赖关系。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/sql/mysql/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/19/sql/mysql/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">基础语法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-19 11:09:12" itemprop="dateCreated datePublished" datetime="2021-01-19T11:09:12+08:00">2021-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:17:33" itemprop="dateModified" datetime="2021-01-20T14:17:33+08:00">2021-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -503,7 +366,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h2><h3 id="1-单条更新"><a href="#1-单条更新" class="headerlink" title="1. 单条更新"></a>1. 单条更新</h3><h3 id="2-批量更新"><a href="#2-批量更新" class="headerlink" title="2. 批量更新"></a>2. 批量更新</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mytable </span><br><span class="line">SET myfield &#x3D; CASE other_field </span><br><span class="line">WHEN 1 THEN &#39;value&#39; </span><br><span class="line">WHEN 2 THEN &#39;value&#39; </span><br><span class="line">WHEN 3 THEN &#39;value&#39; </span><br><span class="line">END </span><br><span class="line">WHERE id IN (1,2,3) </span><br></pre></td></tr></table></figure>
+          <h3 id="1-时间类型字段问题"><a href="#1-时间类型字段问题" class="headerlink" title="1. 时间类型字段问题"></a>1. 时间类型字段问题</h3><h4 id="1-1-时区问题"><a href="#1-1-时区问题" class="headerlink" title="1.1 时区问题"></a>1.1 时区问题</h4><p>现象一：写入时间在mysql中查看，与实际时间相差几个小时，程序读出来又是正常的</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/PrayzzZ/p/10183470.html">关于MySQL存入的时间和取出时间不一致的解决</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/iris_xuting/article/details/84886483">MySQL数据时区问题，及datetime和timestamp类型存储的差异</a></p>
+<p><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_a72ec20c0101jgxd.html">Time Zone:GMT，UTC，DST，CST</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gaogao67/p/10686515.html">MySQL Config–参数system_time_zone和参数time_zone</a></p>
+<p>查询系统分区：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">global</span> <span class="keyword">variables</span> <span class="keyword">like</span><span class="string">&#x27;%time_zone%&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc:mysql:&#x2F;&#x2F;10.48.204.231:5002&#x2F;waimai_hubble_analysis_test?useUnicode&#x3D;true&amp;useSSL&#x3D;false&amp;serverTimezone&#x3D;GMT%2B8</span><br></pre></td></tr></table></figure>
 
 
       
@@ -524,7 +396,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/java/web/%E5%B8%B8%E8%A7%81%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/20/arithmetic/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -538,94 +410,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/19/java/web/%E5%B8%B8%E8%A7%81%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">常见安全漏洞及解决方案</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-19 11:03:01" itemprop="dateCreated datePublished" datetime="2021-01-19T11:03:01+08:00">2021-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:11:58" itemprop="dateModified" datetime="2021-01-20T14:11:58+08:00">2021-01-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-web/" itemprop="url" rel="index"><span itemprop="name">java-web</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/57489507">sql注入漏洞</a></p>
-<p>修复方案：<br>如果拼接参数是SQL的查询参数都可以通过将mybatis配置文件中的 $ 改为 #，来解决<br>替换规则如下：<br>1.将 WHERE <code>some_field</code> = ‘${变量}’ 替换为 WHERE <code>some_field</code> = #{param}</p>
-<p>2.将 like ‘%${变量}%’ 替换为 like concat(‘%’, #{变量}, ‘%’)</p>
-<p>3.将 like concat(‘%’, ${变量}, ‘%’) 替换成 like concat(‘%’, #{变量}, ‘%’)</p>
-<p>4.将 WHERE <code>some_field</code> IN (${变量}) 替换为</p>
-<p>WHERE <code>some_field</code> IN</p>
-<p>#{item}</p>
-<p>对于拼接的变量不是SQL参数的，而是字段名、表名的情况，可以使用安全SDK检查输入是否是合法的标识符。<br>1.pom 引入安全SDK依赖</p>
-<p>com.sankuai.security<br>sec-sdk<br>${尽可能最新版本}</p>
-<p>\2. 代码中检查输入的变量的值是否是合法的标识符。<br>String sortName = req.getParameter(“sortName”);<br>if (sortName != null &amp;&amp; !SecSdk.isValidSqlIdentifier(sortName)) {<br>// 危险，可能有SQL注入，<br>// return or throw exception<br>}</p>
-<p>参考文档：<br>SQL注入介绍：<a target="_blank" rel="noopener" href="https://sectraining.sankuai.com/?source=source-scanner/#/document/30001">https://sectraining.sankuai.com/?source=source-scanner/#/document/30001</a><br>安全SDK文档：<a target="_blank" rel="noopener" href="https://km.sankuai.com/page/234776924">https://km.sankuai.com/page/234776924</a></p>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/155875683">CORS 安全配置不当</a></p>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/68078369">XSS 跨站脚本攻击</a></p>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/64887091">越权类安全问题</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/flink/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/19/flink/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
+            <a href="/2021/02/20/arithmetic/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">动态规划</a>
         </h2>
 
         <div class="post-meta">
@@ -636,7 +421,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-19 09:13:38 / Modified: 09:17:15" itemprop="dateCreated datePublished" datetime="2021-01-19T09:13:38+08:00">2021-01-19</time>
+              <time title="Created: 2021-02-20 15:14:19 / Modified: 15:17:07" itemprop="dateCreated datePublished" datetime="2021-02-20T15:14:19+08:00">2021-02-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -644,7 +429,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -659,8 +444,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/sihs_qy6hcpmqnblti9m">Flink 滑动窗口优化</a></p>
-<p>超长滑动窗口优化及解决方案</p>
+          <h4 id="解题思路模板："><a href="#解题思路模板：" class="headerlink" title="解题思路模板："></a>解题思路模板：</h4><p>这是经典的动态编程问题。这是一个可以使用的模板：</p>
+<ul>
+<li>定义答案显而易见的基本情况。</li>
+<li>制定根据简单的情况计算复杂情况的策略。</li>
+<li>将此策略链接到基本情况。</li>
+</ul>
+<h4 id="常见问题汇总"><a href="#常见问题汇总" class="headerlink" title="常见问题汇总"></a>常见问题汇总</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/">leetcode-518.零钱兑换2</a></p>
 
       
     </div>
@@ -680,7 +470,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/doris/Colocate%20Join/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/tair/%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -694,7 +484,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/18/doris/Colocate%20Join/" class="post-title-link" itemprop="url">Colocate join</a>
+            <a href="/2021/02/10/tair/%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">tair使用规范</a>
         </h2>
 
         <div class="post-meta">
@@ -703,23 +493,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-01-18 11:22:47" itemprop="dateCreated datePublished" datetime="2021-01-18T11:22:47+08:00">2021-01-18</time>
+              <time title="Created: 2021-02-10 19:07:49 / Modified: 19:08:34" itemprop="dateCreated datePublished" datetime="2021-02-10T19:07:49+08:00">2021-02-10</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:13:10" itemprop="dateModified" datetime="2021-01-20T14:13:10+08:00">2021-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                  <a href="/categories/tair/" itemprop="url" rel="index"><span itemprop="name">tair</span></a>
                 </span>
             </span>
 
@@ -734,9 +518,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://blog.bcmeng.com/post/doris-colocate-join.html">Apache Doris Colocate Join 原理与实践</a></li>
-</ol>
+          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6417083301c2">缓存Tair高性能使用规范</a></p>
 
       
     </div>
@@ -756,7 +538,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/10/python/%E5%BE%85%E6%95%B4%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/redis/redis%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -770,7 +552,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/10/python/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
+            <a href="/2021/02/10/redis/redis%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">redis基本使用</a>
         </h2>
 
         <div class="post-meta">
@@ -779,23 +561,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-01-10 14:47:32" itemprop="dateCreated datePublished" datetime="2021-01-10T14:47:32+08:00">2021-01-10</time>
+              <time title="Created: 2021-02-10 19:04:49 / Modified: 19:06:44" itemprop="dateCreated datePublished" datetime="2021-02-10T19:04:49+08:00">2021-02-10</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:19:31" itemprop="dateModified" datetime="2021-01-20T14:19:31+08:00">2021-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                  <a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a>
                 </span>
             </span>
 
@@ -810,13 +586,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ol>
-<li>pycharm切换/添加python版本</li>
-<li>python安装</li>
-</ol>
-<h4 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h4><ol>
-<li>pip3 install PyMySQL</li>
-</ol>
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lizhenghn/p/5322887.html">Redis常用数据类型介绍、使用场景及其操作命令</a></p>
 
       
     </div>
@@ -836,7 +606,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/10/doris/%E7%96%91%E9%97%AE/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/arithmetic/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -850,7 +620,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/10/doris/%E7%96%91%E9%97%AE/" class="post-title-link" itemprop="url">疑问</a>
+            <a href="/2021/02/10/arithmetic/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" class="post-title-link" itemprop="url">一致性哈希</a>
         </h2>
 
         <div class="post-meta">
@@ -859,23 +629,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-01-10 12:00:49" itemprop="dateCreated datePublished" datetime="2021-01-10T12:00:49+08:00">2021-01-10</time>
+              <time title="Created: 2021-02-10 19:01:11 / Modified: 19:02:32" itemprop="dateCreated datePublished" datetime="2021-02-10T19:01:11+08:00">2021-02-10</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:13:35" itemprop="dateModified" datetime="2021-01-20T14:13:35+08:00">2021-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -890,8 +654,211 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="doris的分区规则"><a href="#doris的分区规则" class="headerlink" title="doris的分区规则"></a>doris的分区规则</h3><p>为什么表结构的分区与分区字段里去重值数量不一样？</p>
+          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/89605547">一致性哈希算法–&gt; 解决memecache 服务器扩容后的数据丢失</a></p>
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/java/base/%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/10/java/base/%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">java泛型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-10 18:53:54 / Modified: 18:58:47" itemprop="dateCreated datePublished" datetime="2021-02-10T18:53:54+08:00">2021-02-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="打印自定义对象数组内容"><a href="#打印自定义对象数组内容" class="headerlink" title="打印自定义对象数组内容"></a>打印自定义对象数组内容</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012491783/article/details/78957168">java中list和array打印对象的方法</a></p>
+<ol>
+<li>重写自定义类toString方法</li>
+<li>用google开源的lombok，加注释@Data，他自动帮你重写了toString方法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.toString(array);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/tools/git/git%E8%AE%BE%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/10/tools/git/git%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">git设置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-10 18:47:57 / Modified: 18:50:04" itemprop="dateCreated datePublished" datetime="2021-02-10T18:47:57+08:00">2021-02-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id><a href="#" class="headerlink" title></a></h2><h3 id="简化命令"><a href="#简化命令" class="headerlink" title="简化命令"></a>简化命令</h3><p>git 添加别名的方式,打开~/.gitconfig文件在其末尾添加：<br>在命令行输入以下命令：<br>1、进到根目录<br>cd ~/<br>2、打开.gitconfig,<br>vi ~/.gitconfig</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; add</span><br><span class="line">b &#x3D; branch</span><br><span class="line">c &#x3D; commit</span><br><span class="line">d &#x3D; diff</span><br><span class="line">l &#x3D; log --graph --pretty&#x3D;format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset | %C(bold)%an&#39; --abbrev-commit --date&#x3D;relative</span><br><span class="line">r &#x3D; reset</span><br><span class="line">aa &#x3D; add .</span><br><span class="line">ba &#x3D; branch -a</span><br><span class="line">ca &#x3D; commit -a</span><br><span class="line">cc &#x3D; commit -a -m</span><br><span class="line">cl &#x3D; clone</span><br><span class="line">cm &#x3D; commit -m</span><br><span class="line">co &#x3D; checkout</span><br><span class="line">cp &#x3D; cherry-pick</span><br><span class="line">nb &#x3D; checkout -b</span><br><span class="line">pl &#x3D; pull</span><br><span class="line">ps &#x3D; push origin master</span><br><span class="line">st &#x3D; status</span><br></pre></td></tr></table></figure>
+
+<p>git st 和 git status 等同效果<br>3、修改完后保存退出就可以了</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/sql/mysql/%E9%94%81%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/10/sql/mysql/%E9%94%81%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-10 15:08:31 / Modified: 15:08:35" itemprop="dateCreated datePublished" datetime="2021-02-10T15:08:31+08:00">2021-02-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
       
     </div>
 
@@ -909,7 +876,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -975,18 +942,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1056,6 +1023,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

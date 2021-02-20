@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="为了以后好好偷懒，现在必须加倍努力">
@@ -103,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -122,11 +123,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -149,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/career/%E7%A8%8B%E5%BA%8F%E5%91%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/27/flink/%E5%AE%98%E7%BD%91%E7%9B%AE%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +191,85 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/06/career/%E7%A8%8B%E5%BA%8F%E5%91%98/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2021/01/27/flink/%E5%AE%98%E7%BD%91%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">flink官网目录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-27 11:23:04" itemprop="dateCreated datePublished" datetime="2021-01-27T11:23:04+08:00">2021-01-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-28 19:23:29" itemprop="dateModified" datetime="2021-01-28T19:23:29+08:00">2021-01-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://flink.apache.org/">Apache Flink</a></p>
+<p><a target="_blank" rel="noopener" href="https://ci.apache.org/projects/flink/flink-docs-stable/#apache-flink-documentation">Apache Flink Documentation</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/flink">git地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://ci.apache.org/projects/flink/">不同版本根目录</a></p>
+<p>算子</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/26/shell/java%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/26/shell/java%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">java命令</a>
         </h2>
 
         <div class="post-meta">
@@ -174,79 +280,15 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-06 00:45:25 / Modified: 00:46:39" itemprop="dateCreated datePublished" datetime="2021-01-06T00:45:25+08:00">2021-01-06</time>
+              <time title="Created: 2021-01-26 15:26:56 / Modified: 15:29:07" itemprop="dateCreated datePublished" datetime="2021-01-26T15:26:56+08:00">2021-01-26</time>
             </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h5 id="程序员与架构师之间的差距很大吗？"><a href="#程序员与架构师之间的差距很大吗？" class="headerlink" title="程序员与架构师之间的差距很大吗？"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c6f8fd266bb6">程序员与架构师之间的差距很大吗？</a></h5><h5 id="中年IT男的转型思考：做个越老越吃香的事业吧！"><a href="#中年IT男的转型思考：做个越老越吃香的事业吧！" class="headerlink" title="中年IT男的转型思考：做个越老越吃香的事业吧！"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3aba78b9105e">中年IT男的转型思考：做个越老越吃香的事业吧！</a></h5>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">特殊语法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-06 00:43:35" itemprop="dateCreated datePublished" datetime="2021-01-06T00:43:35+08:00">2021-01-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:17:57" itemprop="dateModified" datetime="2021-01-20T14:17:57+08:00">2021-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
+                  <a href="/categories/shell/" itemprop="url" rel="index"><span itemprop="name">shell</span></a>
                 </span>
             </span>
 
@@ -261,7 +303,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h5 id="MYSQL中的COLLATE是什么？"><a href="#MYSQL中的COLLATE是什么？" class="headerlink" title="MYSQL中的COLLATE是什么？"></a><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1366841">MYSQL中的COLLATE是什么？</a></h5><p>指定排序规则</p>
+          <h4 id="查看jar包中是否包含某个文件"><a href="#查看jar包中是否包含某个文件" class="headerlink" title="查看jar包中是否包含某个文件"></a>查看jar包中是否包含某个文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar vtf analysis-tool-1.0.0-SNAPSHOT.jar application.yml</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -281,7 +324,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/tools/maven/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/26/tools/idea/idea%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -295,7 +338,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/06/tools/maven/" class="post-title-link" itemprop="url">[object Object]</a>
+            <a href="/2021/01/26/tools/idea/idea%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">idea问题汇总</a>
         </h2>
 
         <div class="post-meta">
@@ -304,91 +347,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-01-06 00:38:01" itemprop="dateCreated datePublished" datetime="2021-01-06T00:38:01+08:00">2021-01-06</time>
+              <time title="Created: 2021-01-26 15:21:04 / Modified: 15:23:57" itemprop="dateCreated datePublished" datetime="2021-01-26T15:21:04+08:00">2021-01-26</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-12 20:16:44" itemprop="dateModified" datetime="2021-01-12T20:16:44+08:00">2021-01-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="查看依赖jar包"><a href="#查看依赖jar包" class="headerlink" title="查看依赖jar包"></a>查看依赖jar包</h4><p>mvn dependency:tree -Dverbose</p>
-<h4 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean -U package -pl analysis-tool -am -P dev -Dmaven.source.skip&#x3D;true -Dmaven.test.skip&#x3D;true</span><br></pre></td></tr></table></figure>
-
-<p>要注意的是-P 对大小写敏感</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/debug/%E6%8A%80%E5%B7%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/java/debug/%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">技巧</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-06 00:34:56" itemprop="dateCreated datePublished" datetime="2021-01-06T00:34:56+08:00">2021-01-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:09:29" itemprop="dateModified" datetime="2021-01-20T14:09:29+08:00">2021-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-debug/" itemprop="url" rel="index"><span itemprop="name">java-debug</span></a>
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
                 </span>
             </span>
 
@@ -403,8 +372,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/slankka/p/13590451.html">SpringBoot启动后直接退出Process finished with exit code 1</a></p>
-<p>一般是有错误，但输出并不是console，可以修改log的输出，也可以用try catch查看异常</p>
+          <h4 id="执行main函数无反应"><a href="#执行main函数无反应" class="headerlink" title="执行main函数无反应"></a>执行main函数无反应</h4><p>​    <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39433059/article/details/109511733">Idea运行main方法没反应</a></p>
 
       
     </div>
@@ -424,7 +392,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/spring/%E6%B3%A8%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/26/tools/idea/idea%E8%AE%B2%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -438,7 +406,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/06/java/spring/%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">spring注解使用</a>
+            <a href="/2021/01/26/tools/idea/idea%E8%AE%B2%E8%A7%A3/" class="post-title-link" itemprop="url">idea软件使用教程</a>
         </h2>
 
         <div class="post-meta">
@@ -447,23 +415,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-01-06 00:27:17" itemprop="dateCreated datePublished" datetime="2021-01-06T00:27:17+08:00">2021-01-06</time>
+              <time title="Created: 2021-01-26 15:09:26 / Modified: 15:21:22" itemprop="dateCreated datePublished" datetime="2021-01-26T15:09:26+08:00">2021-01-26</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:05:39" itemprop="dateModified" datetime="2021-01-20T14:05:39+08:00">2021-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
                 </span>
             </span>
 
@@ -478,19 +440,212 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="自动化配置的问题"><a href="#自动化配置的问题" class="headerlink" title="自动化配置的问题"></a>自动化配置的问题</h2><h5 id="需要排除的配置"><a href="#需要排除的配置" class="headerlink" title="需要排除的配置"></a>需要排除的配置</h5><p>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/javastack/p/12016212.html">Spring Boot 排除自动配置的 4 种方法，关键时刻很有用！</a>]</p>
-<ol>
-<li>@SpringBootApplication</li>
-<li>@EnableAutoConfiguration</li>
-<li>@SpringCloudApplication</li>
-<li>spring.autoconfigure.exclude</li>
+          <h3 id="Project-Structure"><a href="#Project-Structure" class="headerlink" title="Project Structure"></a>Project Structure</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/deng-cc/p/6416332.html">理解 IntelliJ IDEA 的项目配置和Web部署</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/22/java/problem/NoSuchMethod/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/22/java/problem/NoSuchMethod/" class="post-title-link" itemprop="url">NoSuchMethod错误排查</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-22 20:09:13 / Modified: 20:25:20" itemprop="dateCreated datePublished" datetime="2021-01-22T20:09:13+08:00">2021-01-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-problem/" itemprop="url" rel="index"><span itemprop="name">java-problem</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>如果包含了不同版本的包，它的加载顺序是如何的？</li>
+<li>NoSuchMethod的报错是error级别的，exception是catch不住的。</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dyc87112/article/details/73739535">Spring Boot自动化配置的利弊及解决之道</a></p>
-<h6 id="排除的类总结"><a href="#排除的类总结" class="headerlink" title="排除的类总结"></a>排除的类总结</h6><ol>
-<li><a target="_blank" rel="noopener" href="https://github.com/SpringBootApplication">@SpringBootApplication</a>(exclude = DruidDataSourceAutoConfigure.class)</li>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/22/flink/flink%E7%AA%97%E5%8F%A3%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/22/flink/flink%E7%AA%97%E5%8F%A3%E7%B1%BB/" class="post-title-link" itemprop="url">flink窗口类</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-22 16:03:18 / Modified: 17:45:49" itemprop="dateCreated datePublished" datetime="2021-01-22T16:03:18+08:00">2021-01-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>WindowAssigner<ul>
+<li>SlidingProcessingTimeWindows</li>
+<li>BaseAlignedWindowAssigner<ul>
+<li>SlidingAlignedProcessingTimeWindows</li>
+</ul>
+</li>
+<li>TumblingEventTimeWindows<ul>
+<li>TumblingTimeWindows</li>
+</ul>
+</li>
+<li>MergingWindowAssigner<ul>
+<li>ProcessingTimeSessionWindows</li>
+<li>DynamicProcessingTimeSessionWindows</li>
+<li>DynamicEventTimeSessionWindows</li>
+<li>EventTimeSessionWindows</li>
+</ul>
+</li>
+<li>TumblingProcessingTimeWindows</li>
+<li>SlidingEventTimeWindows<ul>
+<li>SlidingTimeWindows</li>
+</ul>
+</li>
+<li>GlobalWindows</li>
+</ul>
+</li>
+</ul>
+<h2 id="WindowAssigner"><a href="#WindowAssigner" class="headerlink" title="WindowAssigner"></a>WindowAssigner</h2><h3 id="1-SlidingProcessingTimeWindows"><a href="#1-SlidingProcessingTimeWindows" class="headerlink" title="1. SlidingProcessingTimeWindows"></a>1. SlidingProcessingTimeWindows</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into sliding windows based on the current</span></span><br><span class="line"><span class="comment"> * system time of the machine the operation is running on. Windows can possibly overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute, every 10 seconds:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;String, Tuple2&lt;String, Integer&gt;&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindows&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(SlidingProcessingTimeWindows.of(Time.of(1, MINUTES), Time.of(10, SECONDS));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于flink处理时间的滑动窗口</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-SlidingEventTimeWindows"><a href="#6-SlidingEventTimeWindows" class="headerlink" title="6. SlidingEventTimeWindows"></a>6. SlidingEventTimeWindows</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into sliding windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows can possibly overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute, every 10 seconds:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;Tuple2&lt;String, Integer&gt;, String&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindow&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(SlidingEventTimeWindows.of(Time.minutes(1), Time.seconds(10)));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于元素时间的滑动窗口</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-1-SlidingTimeWindows-废弃"><a href="#6-1-SlidingTimeWindows-废弃" class="headerlink" title="6.1 SlidingTimeWindows(废弃)"></a>6.1 SlidingTimeWindows(废弃)</h4><h3 id="2-BaseAlignedWindowAssigner"><a href="#2-BaseAlignedWindowAssigner" class="headerlink" title="2. BaseAlignedWindowAssigner"></a>2. BaseAlignedWindowAssigner</h3><h4 id="1-1-SlidingAlignedProcessingTimeWindows"><a href="#1-1-SlidingAlignedProcessingTimeWindows" class="headerlink" title="1.1 SlidingAlignedProcessingTimeWindows"></a>1.1 SlidingAlignedProcessingTimeWindows</h4><h3 id="5-TumblingProcessingTimeWindows"><a href="#5-TumblingProcessingTimeWindows" class="headerlink" title="5. TumblingProcessingTimeWindows"></a>5. TumblingProcessingTimeWindows</h3><h3 id="3-TumblingEventTimeWindows"><a href="#3-TumblingEventTimeWindows" class="headerlink" title="3. TumblingEventTimeWindows"></a>3. TumblingEventTimeWindows</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows cannot overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;Tuple2&lt;String, Integer&gt;, String&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindow&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(TumblingEventTimeWindows.of(Time.minutes(1)));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-1-TumblingTimeWindows-废弃"><a href="#3-1-TumblingTimeWindows-废弃" class="headerlink" title="3.1 TumblingTimeWindows(废弃)"></a>3.1 TumblingTimeWindows(废弃)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows cannot overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@deprecated</span> Please use &#123;<span class="doctag">@link</span> TumblingEventTimeWindows&#125;.</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-MergingWindowAssigner"><a href="#4-MergingWindowAssigner" class="headerlink" title="4. MergingWindowAssigner"></a>4. MergingWindowAssigner</h3><h4 id="4-1-ProcessingTimeSessionWindows"><a href="#4-1-ProcessingTimeSessionWindows" class="headerlink" title="4.1 ProcessingTimeSessionWindows"></a>4.1 ProcessingTimeSessionWindows</h4><h4 id="4-2-DynamicProcessingTimeSessionWindows"><a href="#4-2-DynamicProcessingTimeSessionWindows" class="headerlink" title="4.2 DynamicProcessingTimeSessionWindows"></a>4.2 DynamicProcessingTimeSessionWindows</h4><h4 id="4-3-DynamicEventTimeSessionWindows"><a href="#4-3-DynamicEventTimeSessionWindows" class="headerlink" title="4.3 DynamicEventTimeSessionWindows"></a>4.3 DynamicEventTimeSessionWindows</h4><h4 id="4-4-EventTimeSessionWindows"><a href="#4-4-EventTimeSessionWindows" class="headerlink" title="4.4 EventTimeSessionWindows"></a>4.4 EventTimeSessionWindows</h4><h3 id="7-GlobalWindows"><a href="#7-GlobalWindows" class="headerlink" title="7. GlobalWindows"></a>7. GlobalWindows</h3><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><ol>
+<li><strong>滑动窗口</strong></li>
+</ol>
+<ul>
+<li>每条数据会发送到多个滑动窗口中，即在最终的输出中，一条数据要被统计多次</li>
+<li>适合统计据当前时间往前一段时间内的数据汇总</li>
+</ul>
+<ol start="2">
+<li><strong>滚动窗口</strong></li>
+</ol>
+<ul>
+<li>每条数据只会在一个滚动窗口中</li>
+<li>适合对数据进行简单聚合后，再次聚合的场景</li>
+<li>适合输出明细，不做聚合的场景，比如join后直接输出</li>
+</ul>
+<h3 id="占用内存比较"><a href="#占用内存比较" class="headerlink" title="占用内存比较"></a>占用内存比较</h3><ol>
+<li><strong>滑动窗口</strong><ul>
+<li><em>理论上一条数据会复制到多个窗口，被复制几次，占用内存就会扩大几倍，但不清楚是否有优化，比如只复制数据的引用？</em></li>
 <li></li>
+</ul>
+</li>
+<li><strong>滚动窗口</strong></li>
 </ol>
-
+<h3 id="关于时间点"><a href="#关于时间点" class="headerlink" title="关于时间点"></a>关于时间点</h3><h4 id="窗口的开始时间"><a href="#窗口的开始时间" class="headerlink" title="窗口的开始时间"></a>窗口的开始时间</h4><ol>
+<li>首先要明确的是，开始时间只与system time和offset参数相关，与程序开始运行时间无关</li>
+<li>比如设置了窗口size是1h，那么在</li>
+</ol>
+<h4 id="窗口的结束时间"><a href="#窗口的结束时间" class="headerlink" title="窗口的结束时间"></a>窗口的结束时间</h4>
       
     </div>
 
@@ -509,7 +664,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/mybatis/%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/21/sql/hive/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -523,7 +678,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/06/java/mybatis/%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">mybatis技巧</a>
+            <a href="/2021/01/21/sql/hive/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">hive常用函数</a>
         </h2>
 
         <div class="post-meta">
@@ -533,14 +688,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-01-06 00:11:03" itemprop="dateCreated datePublished" datetime="2021-01-06T00:11:03+08:00">2021-01-06</time>
+              <time title="Created: 2021-01-21 15:40:10" itemprop="dateCreated datePublished" datetime="2021-01-21T15:40:10+08:00">2021-01-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:10:31" itemprop="dateModified" datetime="2021-01-20T14:10:31+08:00">2021-01-20</time>
+                <time title="Modified: 2021-01-27 17:45:16" itemprop="dateModified" datetime="2021-01-27T17:45:16+08:00">2021-01-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -548,7 +703,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                  <a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a>
                 </span>
             </span>
 
@@ -563,17 +718,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h5 id="Mybatis中判断集合的-size-不为空"><a href="#Mybatis中判断集合的-size-不为空" class="headerlink" title="Mybatis中判断集合的 size 不为空"></a>Mybatis中判断集合的 size 不为空</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;null != staffCodeList and staffCodeList.size &gt; 0&quot;</span>&gt;</span></span><br><span class="line">and gui.USER_CODE not in</span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;staffCodeList&quot;</span> <span class="attr">item</span>=<span class="string">&quot;staffCode&quot;</span> <span class="attr">open</span>=<span class="string">&quot;(&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span>  <span class="attr">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span></span><br><span class="line">    #&#123;staffCode&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><h5 id="8位dt转10位"><a href="#8位dt转10位" class="headerlink" title="8位dt转10位"></a>8位dt转10位</h5><p><code>from_unixtime(unix_timestamp(t.dt,&#39;yyyymmdd&#39;),&#39;yyyy-mm-dd&#39;)</code></p>
+<h5 id="8位减1小时"><a href="#8位减1小时" class="headerlink" title="8位减1小时"></a>8位减1小时</h5><p>dt格式2019120100<br><code>from_unixtime(unix_timestamp(dt,&#39;yyyyMMddHH&#39;) - 60*60, &#39;yyyy-MM-dd&#39;)</code></p>
+<h5 id="8位日期计算"><a href="#8位日期计算" class="headerlink" title="8位日期计算"></a>8位日期计算</h5><p><code>regexp_replace(date_sub(from_unixtime(unix_timestamp(t.dt,&#39;yyyymmdd&#39;),&#39;yyyy-mm-dd&#39;), 10), &#39;-&#39;, &#39;&#39;)</code></p>
+<h5 id="当前日期前一天"><a href="#当前日期前一天" class="headerlink" title="当前日期前一天"></a>当前日期前一天</h5><h5 id="保留2位小数"><a href="#保留2位小数" class="headerlink" title="保留2位小数"></a>保留2位小数</h5><p><code>round(123.4567, 2)</code></p>
+<h5 id="时间戳转换"><a href="#时间戳转换" class="headerlink" title="时间戳转换"></a>时间戳转换</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">hour</span>(from_unixtime(event_timestamp/<span class="number">1000</span>,<span class="string">&#x27;yyyy-MM-dd HH:mm:ss&#x27;</span>)) hour_time, <span class="keyword">count</span>(<span class="keyword">distinct</span> session_id)</span><br><span class="line"><span class="keyword">from</span> mart_eif_flow.bas_log_sdk_waimai_c <span class="keyword">where</span> dt=<span class="string">&#x27;20201217&#x27;</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">hour</span>(from_unixtime(event_timestamp/<span class="number">1000</span>,<span class="string">&#x27;yyyy-MM-dd HH:mm:ss&#x27;</span>)) <span class="keyword">order</span> <span class="keyword">by</span> hour_time</span><br></pre></td></tr></table></figure>
 
-<h5 id="判断参数为空"><a href="#判断参数为空" class="headerlink" title="判断参数为空"></a>判断参数为空</h5><p>1.判断Double类型：<if test="probability != null">probability = #{probability},</if>，在实体类中probability字段是Double类型；</p>
-<p>2.判断Integer类型：<if test="faceValue != null">face_value = #{faceValue}, </if>，在实体类中faceValue字段是Integer类型；</p>
-<p>3.判断String类型：<if test="couponName != null and couponName != ''">coupon_name = #{couponName}, </if>，在实体类中couponName是String类型；</p>
-<p>4.判断Date类型：<if test="beginTime != null">begin_time = #{beginTime}, </if>，在实体类中beginTime字段是Date类型；</p>
-<p>因为String类型是符合的，但是如果是Integer类型的话，如果变量的值是0,即 faceValue = 0, mybatis在进行 faceValue != ‘’ 的时候会认为 faceValue 的值是空字符串, 即 faceValue == ‘’ 为true；</p>
-<p>同理，Double，Date也是如此。所以如果是Integer类型，Double类型，Date类型只需要判断 != null 即可。如果String类型需要判断不等于0，则需要写name != ‘0’.toString()，否则会报错。</p>
-<h5 id="mybatis-中-foreach-collection的三种用法"><a href="#mybatis-中-foreach-collection的三种用法" class="headerlink" title="mybatis 中 foreach collection的三种用法"></a>mybatis 中 foreach collection的三种用法</h5><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30684743/article/details/96912611?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control">mybatis 中 foreach collection的三种用法</a></p>
-<h5 id="Mybatis使用IN语句查询"><a href="#Mybatis使用IN语句查询" class="headerlink" title="Mybatis使用IN语句查询"></a>Mybatis使用IN语句查询</h5><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011781521/article/details/79669180">Mybatis使用IN语句查询</a></p>
 
+
+<h3 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h3><h5 id="保留小数"><a href="#保留小数" class="headerlink" title="保留小数"></a>保留小数</h5>
       
     </div>
 
@@ -592,7 +745,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/spring/%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/21/sql/hive/%E5%AE%98%E7%BD%91%E7%B4%A2%E5%BC%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -606,7 +759,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/06/java/spring/%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">数据源配置</a>
+            <a href="/2021/01/21/sql/hive/%E5%AE%98%E7%BD%91%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">hive-官网索引</a>
         </h2>
 
         <div class="post-meta">
@@ -615,93 +768,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-01-06 00:08:21" itemprop="dateCreated datePublished" datetime="2021-01-06T00:08:21+08:00">2021-01-06</time>
+              <time title="Created: 2021-01-21 15:35:09 / Modified: 15:39:04" itemprop="dateCreated datePublished" datetime="2021-01-21T15:35:09+08:00">2021-01-21</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:05:52" itemprop="dateModified" datetime="2021-01-20T14:05:52+08:00">2021-01-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="http://www.demodashi.com/demo/14622.html">基于springboot的多数据源配置</a></p>
-<p>使用<code>dynamic-datasource-spring-boot-starter</code>，并用@DS指定数据源</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/superyu1992/article/details/80336928">SpringBoot 配合 druid作为数据库连接池 时需要注意的一点</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/w57685321/article/details/106823660">使用dynamic-datasource-spring-boot-starter做多数据源及源码分析</a></p>
-<p>需要配置master作为默认数据源，否则会报，<code>请检查primary默认数据库设置</code>。</p>
-<p><a target="_blank" rel="noopener" href="https://my.oschina.net/TyTracy/blog/1926571">Spring多数据源、动态数据源源码解析</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/mybatis/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/java/mybatis/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-06 00:06:31" itemprop="dateCreated datePublished" datetime="2021-01-06T00:06:31+08:00">2021-01-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:09:48" itemprop="dateModified" datetime="2021-01-20T14:09:48+08:00">2021-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                  <a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a>
                 </span>
             </span>
 
@@ -716,9 +793,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://baomidou.com/guide/">官方文档</a></p>
-<p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#Parameters">官方文档二</a></p>
-<p><a target="_blank" rel="noopener" href="https://baomidou.com/guide/dynamic-datasource.html">多数据源</a></p>
+          <p><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/Home#Home-GeneralInformationaboutHive">https://cwiki.apache.org/confluence/display/Hive/Home#Home-GeneralInformationaboutHive</a></p>
+<p><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual">https://cwiki.apache.org/confluence/display/Hive/LanguageManual</a></p>
+<h2 id="首页"><a href="#首页" class="headerlink" title="首页"></a><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/Home">首页</a></h2><h2 id="语法手册"><a href="#语法手册" class="headerlink" title="语法手册"></a><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual">语法手册</a></h2><h3 id="1-命令行与客户端"><a href="#1-命令行与客户端" class="headerlink" title="1. 命令行与客户端"></a>1. 命令行与客户端</h3><h4 id="1-1-数据类型"><a href="#1-1-数据类型" class="headerlink" title="1.1 数据类型"></a>1.1 <a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types">数据类型</a></h4><ol>
+<li>数据类型转换(Change Types)</li>
+<li>数据类型隐式转换矩阵(Allowed Implicit Conversions)</li>
+</ol>
+<h4 id="1-2-参数配置"><a href="#1-2-参数配置" class="headerlink" title="1.2 参数配置"></a>1.2 <a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties">参数配置</a></h4><ol>
+<li>常用参数配置</li>
+</ol>
+<h4 id="1-3-select语法"><a href="#1-3-select语法" class="headerlink" title="1.3 select语法"></a>1.3 <a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Select">select语法</a></h4><ol>
+<li>All and DISTINCT 语句，UNION语句可以有相同效果</li>
+<li>Partition Based Queries</li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Select#LanguageManualSelect-HAVINGClause">HAVING Clause</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Select#LanguageManualSelect-REGEXColumnSpecification">REGEX Column Specification</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+GroupBy">GROUP BY</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+SortBy">SORT/ORDER/CLUSTER/DISTRIBUTE BY</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Joins">JOIN</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Union">UNION</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Sampling">TABLESAMPLE</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+SubQueries">Subqueries</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+VirtualColumns">Virtual Columns</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF">Operators and UDFs</a> <strong>hive函数</strong></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+LateralView">LATERAL VIEW</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+WindowingAndAnalytics">Windowing, OVER, and Analytics</a></li>
+<li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/Common+Table+Expression">Common Table Expressions</a> 临时表语法</li>
+</ol>
 
       
     </div>
@@ -738,7 +838,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/mybatis/mybatis%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/20/mac/%E5%BF%AB%E6%8D%B7%E9%94%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -752,7 +852,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/06/java/mybatis/mybatis%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">mybatis常用注解</a>
+            <a href="/2021/01/20/mac/%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">快捷键</a>
         </h2>
 
         <div class="post-meta">
@@ -761,23 +861,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-01-06 00:03:17" itemprop="dateCreated datePublished" datetime="2021-01-06T00:03:17+08:00">2021-01-06</time>
+              <time title="Created: 2021-01-20 16:25:11 / Modified: 16:28:05" itemprop="dateCreated datePublished" datetime="2021-01-20T16:25:11+08:00">2021-01-20</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:07:50" itemprop="dateModified" datetime="2021-01-20T14:07:50+08:00">2021-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mybatis/" itemprop="url" rel="index"><span itemprop="name">mybatis</span></a>
+                  <a href="/categories/Mac/" itemprop="url" rel="index"><span itemprop="name">Mac</span></a>
                 </span>
             </span>
 
@@ -792,7 +886,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/58040052">mybatis注解配置详解</a></p>
+          <h2 id="chrome"><a href="#chrome" class="headerlink" title="chrome"></a>chrome</h2><p>刷新 <code>command ＋r</code></p>
+<p>强制刷新 <code>command＋shift＋r</code></p>
+<p>删除cookie<code>command＋shift＋del</code>点击 清除数据 注意勾选的选项（不要把保存的密码也删除）</p>
 
       
     </div>
@@ -812,7 +908,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/05/doris/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/20/concept/%E6%9C%AF%E8%AF%AD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -826,7 +922,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/05/doris/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">官方文档目录摘要</a>
+            <a href="/2021/01/20/concept/%E6%9C%AF%E8%AF%AD/" class="post-title-link" itemprop="url">术语</a>
         </h2>
 
         <div class="post-meta">
@@ -835,23 +931,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-01-05 23:58:33" itemprop="dateCreated datePublished" datetime="2021-01-05T23:58:33+08:00">2021-01-05</time>
+              <time title="Created: 2021-01-20 16:22:38 / Modified: 16:23:46" itemprop="dateCreated datePublished" datetime="2021-01-20T16:22:38+08:00">2021-01-20</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:05:16" itemprop="dateModified" datetime="2021-01-20T14:05:16+08:00">2021-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                  <a href="/categories/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
                 </span>
             </span>
 
@@ -866,285 +956,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[toc]</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-doris/wiki">git wiki地址</a></p>
-<h1 id="编译与部署"><a href="#编译与部署" class="headerlink" title="编译与部署"></a>编译与部署</h1><h2 id="安装与部署"><a href="#安装与部署" class="headerlink" title="安装与部署"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/installing/install-deploy.html">安装与部署</a></h2><h3 id="软硬件需求"><a href="#软硬件需求" class="headerlink" title="软硬件需求"></a>软硬件需求</h3><ul>
-<li>FE（前端）和BE（后端）存储数据的区别，以及所需机器配置</li>
-<li>FE与BE端口、网络需求</li>
-<li>ip绑定</li>
-</ul>
-<h3 id="集群部署"><a href="#集群部署" class="headerlink" title="集群部署"></a>集群部署</h3><ul>
-<li><p>手动部署</p>
-</li>
-<li><ul>
-<li>FE部署</li>
-<li>BE部署</li>
-<li>FS_Broker部署</li>
-</ul>
-</li>
-</ul>
-<h3 id="扩容缩容"><a href="#扩容缩容" class="headerlink" title="扩容缩容"></a>扩容缩容</h3><ul>
-<li><p>FE扩容和缩容</p>
-</li>
-<li><ul>
-<li>增加FE节点</li>
-<li>删除FE节点</li>
-</ul>
-</li>
-<li><p>BE扩容和缩容</p>
-</li>
-<li><ul>
-<li>增加BE节点</li>
-<li>删除BE节点</li>
-</ul>
-</li>
-<li><p>Broker扩容缩容</p>
-</li>
-</ul>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h1 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h1><h2 id="基础使用指南"><a href="#基础使用指南" class="headerlink" title="基础使用指南"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/basic-usage.html">基础使用指南</a></h2><h3 id="1-创建用户"><a href="#1-创建用户" class="headerlink" title="1.创建用户"></a>1.创建用户</h3><ul>
-<li>Root用户登陆与密码修改</li>
-<li>创建新用户</li>
-</ul>
-<h3 id="2-数据表的创建与数据导入"><a href="#2-数据表的创建与数据导入" class="headerlink" title="2.数据表的创建与数据导入"></a>2.数据表的创建与数据导入</h3><ul>
-<li><p>创建数据库</p>
-</li>
-<li><p>账户授权</p>
-</li>
-<li><p>建表</p>
-</li>
-<li><ul>
-<li>单分区</li>
-<li>复合分区</li>
-</ul>
-</li>
-<li><p>导入数据</p>
-</li>
-<li><ul>
-<li>流式导入</li>
-<li>Broker导入</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-数据的查询"><a href="#3-数据的查询" class="headerlink" title="3.数据的查询"></a>3.数据的查询</h3><ul>
-<li>简单查询</li>
-<li>Join查询</li>
-<li>子查询</li>
-</ul>
-<h2 id="高级使用指南"><a href="#高级使用指南" class="headerlink" title="高级使用指南"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/advance-usage.html">高级使用指南</a></h2><h3 id="1-表结构变更"><a href="#1-表结构变更" class="headerlink" title="1. 表结构变更"></a>1. 表结构变更</h3><h3 id="2-Rollup"><a href="#2-Rollup" class="headerlink" title="2. Rollup"></a>2. Rollup</h3><h3 id="3-数据表的查询"><a href="#3-数据表的查询" class="headerlink" title="3. 数据表的查询"></a>3. 数据表的查询</h3><ul>
-<li>内存限制</li>
-<li>查询超时</li>
-<li>Broadcast/Shuffle Join</li>
-<li>查询重试和高可用</li>
-</ul>
-<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/best-practice.html">最佳实践</a></h2><h3 id="1-建表"><a href="#1-建表" class="headerlink" title="1. 建表"></a>1. 建表</h3><ul>
-<li><p>数据模型选择</p>
-</li>
-<li><ul>
-<li>AGGREGATE KEY</li>
-<li>UNIQUE KEY</li>
-<li>DUPLICATE KEY</li>
-</ul>
-</li>
-<li><p>大宽表与Star Schema</p>
-</li>
-<li><p>分区和分桶</p>
-</li>
-<li><ul>
-<li>Range分区(partition)</li>
-<li>HASH分桶(bucket)</li>
-</ul>
-</li>
-<li><p>稀疏索引和Bloom Filter</p>
-</li>
-<li><p>物化视图(rollup)</p>
-</li>
-<li><ul>
-<li>Base Table中数据聚合度不高</li>
-<li>Base Table中的前缀索引无法命中</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-Schema-Change"><a href="#2-Schema-Change" class="headerlink" title="2. Schema Change"></a>2. Schema Change</h3><ul>
-<li>Sorted Schema Change</li>
-<li>Direct Schema Change: 无需重新排序，但需要对数据做一次转换。例如修改列的类型，在稀疏索引中加一列等</li>
-<li>Linked Schema Change: 无需转换数据，直接完成。例如加列操作</li>
-</ul>
-<h2 id="数据划分"><a href="#数据划分" class="headerlink" title="数据划分"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-partition.html">数据划分</a></h2><h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><ul>
-<li>Row &amp; Column</li>
-<li>Tablet &amp; Partition</li>
-</ul>
-<h3 id="2-数据划分"><a href="#2-数据划分" class="headerlink" title="2. 数据划分"></a>2. 数据划分</h3><ul>
-<li><p>列定义</p>
-</li>
-<li><ul>
-<li>列定义建议</li>
-</ul>
-</li>
-<li><p>分区与分桶</p>
-</li>
-</ul>
-<p>Doris支持两层的数据划分。第一层是Partition，仅支持Range的划分方式。第二层是Bucket（Tablet），仅支持Hash的划分方式。也可以仅使用一层分区</p>
-<ul>
-<li><ul>
-<li>Partition</li>
-<li>Bucket</li>
-<li>关于Partition和Bucket的数量和数据量的建议</li>
-<li>多列分区</li>
-</ul>
-</li>
-<li><p>PROPERTIES</p>
-</li>
-<li><ul>
-<li>replication_num</li>
-<li>storage_medium &amp; storage_cooldown_time</li>
-</ul>
-</li>
-<li><p>ENGINE</p>
-</li>
-</ul>
-<h3 id="3-常见问题"><a href="#3-常见问题" class="headerlink" title="3. 常见问题"></a>3. 常见问题</h3><ul>
-<li><p>建表操作常见问题</p>
-</li>
-<li><ul>
-<li>如果在较长的建表语句中出现语法错误，可能会出现语法错误提示不全的现象。这里罗列可能的语法错误供手动纠错：</li>
-<li>Failed to create partition [xxx] . Timeout</li>
-<li>建表命令长时间不返回结果。</li>
-</ul>
-</li>
-</ul>
-<h2 id="数据模型、ROLLUP及前缀索引"><a href="#数据模型、ROLLUP及前缀索引" class="headerlink" title="数据模型、ROLLUP及前缀索引"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html">数据模型、ROLLUP及前缀索引</a></h2><p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-doris/wiki/Data-Model%2C-Rollup-%26-Prefix-Index">github wiki</a></p>
-<h3 id="1-基本概念-1"><a href="#1-基本概念-1" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><ul>
-<li><p>Row</p>
-</li>
-<li><p>Column</p>
-</li>
-<li><ul>
-<li>Key</li>
-<li>Value</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-Aggregate模型"><a href="#2-Aggregate模型" class="headerlink" title="2. Aggregate模型"></a>2. Aggregate模型</h3><ul>
-<li>示例1: 导入数据聚合</li>
-<li>示例2: 保留明细数据</li>
-<li>示例3: 导入数据与已有数据聚合</li>
-</ul>
-<h3 id="3-Uniq模型"><a href="#3-Uniq模型" class="headerlink" title="3. Uniq模型"></a>3. Uniq模型</h3><h3 id="4-Duplicate模型-冗余模型"><a href="#4-Duplicate模型-冗余模型" class="headerlink" title="4. Duplicate模型(冗余模型)"></a>4. Duplicate模型(冗余模型)</h3><h3 id="5-ROLLUP"><a href="#5-ROLLUP" class="headerlink" title="5. ROLLUP"></a>5. ROLLUP</h3><ul>
-<li><p>基本概念</p>
-</li>
-<li><ul>
-<li><p>Aggregate和Uniq模型中的ROLLUP</p>
-</li>
-<li><ul>
-<li>示例1: 获得每个用户的总消费</li>
-<li>示例2: 获得不同城市，不同年龄段用户的总消费、最长和最短页面驻留时间</li>
-</ul>
-</li>
-<li><p>Duplicate模型中的ROLLUP</p>
-</li>
-</ul>
-</li>
-<li><p>前缀索引与ROLLUP</p>
-</li>
-<li><ul>
-<li>前缀索引</li>
-</ul>
-</li>
-</ul>
-<p>我们将一行数据的前 36 个字节 作为这行数据的前缀索引。当遇到 VARCHAR 类型时，前缀索引会直接截断。</p>
-<ul>
-<li><ul>
-<li>ROLLUP调整前缀索引</li>
-</ul>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html#rollup-%E7%9A%84%E5%87%A0%E7%82%B9%E8%AF%B4%E6%98%8E">ROLLUP的几点说明</a></p>
-</li>
-<li><ul>
-<li>根本作用是提高某些查询的查询效率（无论是通过聚合来减少数据量，还是修改列顺序以匹配前缀索引）。因此 ROLLUP 的含义已经超出了 “上卷” 的范围。这也是为什么我们在源代码中，将其命名为 Materized Index（物化索引）的原因。</li>
-<li>ROLLUP是附属于Base表的，可以看作是Base表的一种辅助数据结构。用户可以在 Base 表的基础上，创建或删除 ROLLUP，但是不能在查询中显式的指定查询某 ROLLUP。是否命中 ROLLUP 完全由 Doris 系统自动决定。</li>
-<li>ROLLUP 的数据是独立物理存储的。因此，创建的 ROLLUP 越多，占用的磁盘空间也就越大。同时对导入速度也会有影响（导入的ETL阶段会自动产生所有 ROLLUP 的数据），但是不会降低查询效率（只会更好）。</li>
-</ul>
-</li>
-<li><ul>
-<li>ROLLUP 的数据更新与 Base 表示完全同步的。用户无需关心这个问题。</li>
-<li>ROLLUP 中列的聚合方式，与 Base 表完全相同。在创建 ROLLUP 无需指定，也不能修改。</li>
-<li>查询能否命中 ROLLUP 的一个必要条件（非充分条件）是，查询所涉及的所有列（包括 select list 和 where 中的查询条件列等）都存在于该 ROLLUP 的列中。否则，查询只能命中 Base 表。</li>
-<li>某些类型的查询（如 count(*)）在任何条件下，都无法命中 ROLLUP。具体参见接下来的 聚合模型的局限性 一节。</li>
-<li>可以通过 EXPLAIN your_sql; 命令获得查询执行计划，在执行计划中，查看是否命中 ROLLUP。</li>
-<li>可以通过 DESC tbl_name ALL; 语句显示 Base 表和所有已创建完成的 ROLLUP。</li>
-<li><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/hit-the-rollup">查询如何命中ROLLUP</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="6-聚合模型的局限性"><a href="#6-聚合模型的局限性" class="headerlink" title="6. 聚合模型的局限性"></a>6. 聚合模型的局限性</h3><ul>
-<li>Aggregate 模型（包括 Uniq 模型）</li>
-</ul>
-<p>在聚合模型中，模型对外展现的，是最终聚合后的数据。也就是说，任何还未聚合的数据（比如说两个不同导入批次的数据），必须通过某种方式，以保证对外展示的一致性。</p>
-<ul>
-<li>Duplicate 模型</li>
-</ul>
-<p>Duplicate 模型没有聚合模型的这个局限性。因为该模型不涉及聚合语意，在做 count(*) 查询时，任意选择一列查询，即可得到语意正确的结果。</p>
-<h3 id="7-数据模型的选择建议"><a href="#7-数据模型的选择建议" class="headerlink" title="7. 数据模型的选择建议"></a>7. 数据模型的选择建议</h3><p>因为数据模型在建表时就已经确定，且无法修改。所以，选择一个合适的数据模型非常重要。</p>
-<ol>
-<li>Aggregate 模型可以通过预聚合，极大地降低聚合查询时所需扫描的数据量和查询的计算量，非常适合有固定模式的报表类查询场景。但是该模型对 count(*) 查询很不友好。同时因为固定了 Value 列上的聚合方式，在进行其他类型的聚合查询时，需要考虑语意正确性。</li>
-<li>Uniq 模型针对需要唯一主键约束的场景，可以保证主键唯一性约束。但是无法利用 ROLLUP 等预聚合带来的查询优势（因为本质是 REPLACE，没有 SUM 这种聚合方式）。</li>
-<li>Duplicate 适合任意维度的 Ad-hoc 查询。虽然同样无法利用预聚合的特性，但是不受聚合模型的约束，可以发挥列存模型的优势（只读取相关列，而不需要读取所有 Key 列）。</li>
-</ol>
-<h2 id="Rollup与查询"><a href="#Rollup与查询" class="headerlink" title="Rollup与查询"></a><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/hit-the-rollup.html">Rollup与查询</a></h2><p>在 Doris 里 Rollup 作为一份聚合物化视图，其在查询中可以起到两个作用：</p>
-<ul>
-<li>索引</li>
-<li>聚合数据（仅用于聚合模型，即aggregate key）</li>
-</ul>
-<p>但是为了命中 Rollup 需要满足一定的条件，并且可以通过执行计划中 ScanNdoe 节点的 PreAggregation 的值来判断是否可以命中 Rollup，以及 Rollup 字段来判断命中的是哪一张 Rollup 表。</p>
-<h3 id="1-名词解释"><a href="#1-名词解释" class="headerlink" title="1. 名词解释"></a>1. 名词解释</h3><ul>
-<li>Base： 基表</li>
-<li>Rollup： 一般指基于 Base 表创建的 Rollup 表，但在一些场景包括 Base 以及 Rollup 表。</li>
-</ul>
-<h3 id="2-索引"><a href="#2-索引" class="headerlink" title="2. 索引"></a>2. 索引</h3><h3 id="3-聚合数据"><a href="#3-聚合数据" class="headerlink" title="3. 聚合数据"></a>3. 聚合数据</h3><h1 id="操作手册"><a href="#操作手册" class="headerlink" title="操作手册"></a>操作手册</h1><h2 id="数据导入"><a href="#数据导入" class="headerlink" title="数据导入"></a>数据导入</h2><h3 id="1-导入总览"><a href="#1-导入总览" class="headerlink" title="1. 导入总览"></a>1. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html">导入总览</a></h3><h4 id="1-1-基本概念"><a href="#1-1-基本概念" class="headerlink" title="1.1 基本概念"></a>1.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">基本概念</a></h4><ol>
-<li>Frontend（FE）：Doris 系统的元数据和调度节点。在导入流程中主要负责导入规划生成和导入任务的调度工作。</li>
-<li>Backend（BE）：Doris 系统的计算和存储节点。在导入流程中主要负责数据的 ETL 和存储。</li>
-<li>Broker：Broker 为一个独立的无状态进程。封装了文件系统接口，提供 Doris 读取远端存储系统中文件的能力。</li>
-<li>导入作业（Load job）：导入作业读取用户提交的源数据，转换或清洗后，将数据导入到 Doris 系统中。导入完成后，数据即可被用户查询到。</li>
-<li>Label：所有导入作业都有一个 Label。Label 在一个数据库内唯一，可由用户指定或系统自动生成，用于标识一个导入作业。相同的 Label 仅可用于一个成功的导入作业。</li>
-<li>MySQL 协议/HTTP 协议：Doris 提供两种访问协议接口。 MySQL 协议和 HTTP 协议。部分导入方式使用 MySQL 协议接口提交作业，部分导入方式使用 HTTP 协议接口提交作业。</li>
-</ol>
-<h4 id="1-2-导入方式"><a href="#1-2-导入方式" class="headerlink" title="1.2 导入方式"></a>1.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%AF%BC%E5%85%A5%E6%96%B9%E5%BC%8F">导入方式</a></h4><ol>
-<li>Broker load</li>
-<li>Stream load</li>
-<li>Insert</li>
-<li>Multi load</li>
-<li>Routine load</li>
-</ol>
-<h4 id="1-3-基本原理"><a href="#1-3-基本原理" class="headerlink" title="1.3 基本原理"></a>1.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">基本原理</a></h4><h5 id="1-3-1-导入执行流程"><a href="#1-3-1-导入执行流程" class="headerlink" title="1.3.1 导入执行流程"></a>1.3.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%AF%BC%E5%85%A5%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B">导入执行流程</a></h5><ol>
-<li>PENDING（非必须）</li>
-<li>ETL（非必须）</li>
-<li>LOADING</li>
-<li>FINISHED</li>
-<li>CANCELLED</li>
-</ol>
-<h5 id="1-3-2-Label和原子性"><a href="#1-3-2-Label和原子性" class="headerlink" title="1.3.2 Label和原子性"></a>1.3.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#label-%E5%92%8C-%E5%8E%9F%E5%AD%90%E6%80%A7">Label和原子性</a></h5><h4 id="1-4-同步和异步"><a href="#1-4-同步和异步" class="headerlink" title="1.4 同步和异步"></a>1.4 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5">同步和异步</a></h4><h5 id="1-4-1-同步"><a href="#1-4-1-同步" class="headerlink" title="1.4.1 同步"></a>1.4.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%90%8C%E6%AD%A5">同步</a></h5><h5 id="1-4-2-异步"><a href="#1-4-2-异步" class="headerlink" title="1.4.2 异步"></a>1.4.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%BC%82%E6%AD%A5">异步</a></h5><h5 id="1-4-3-注意事项"><a href="#1-4-3-注意事项" class="headerlink" title="1.4.3 注意事项"></a>1.4.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</a></h5><h4 id="1-5-内存限制"><a href="#1-5-内存限制" class="headerlink" title="1.5 内存限制"></a>1.5 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6">内存限制</a></h4><h4 id="1-6-最佳实践"><a href="#1-6-最佳实践" class="headerlink" title="1.6 最佳实践"></a>1.6 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></h4><h4 id="1-7-通用系统配置"><a href="#1-7-通用系统配置" class="headerlink" title="1.7 通用系统配置"></a>1.7 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E9%80%9A%E7%94%A8%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">通用系统配置</a></h4><h5 id="1-7-1-FE配置"><a href="#1-7-1-FE配置" class="headerlink" title="1.7.1 FE配置"></a>1.7.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#fe-%E9%85%8D%E7%BD%AE">FE配置</a></h5><h5 id="1-7-2-BE配置"><a href="#1-7-2-BE配置" class="headerlink" title="1.7.2 BE配置"></a>1.7.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#be-%E9%85%8D%E7%BD%AE">BE配置</a></h5><h5 id="1-7-3-列映射"><a href="#1-7-3-列映射" class="headerlink" title="1.7.3 列映射"></a>1.7.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%88%97%E6%98%A0%E5%B0%84">列映射</a></h5><h3 id="2-Broker-Load"><a href="#2-Broker-Load" class="headerlink" title="2.Broker Load"></a>2.<a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html">Broker Load</a></h3><p>一种异步导入方式</p>
-<h4 id="2-1-适用场景"><a href="#2-1-适用场景" class="headerlink" title="2.1 适用场景"></a>2.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF">适用场景</a></h4><h4 id="2-2-名词解释"><a href="#2-2-名词解释" class="headerlink" title="2.2 名词解释"></a>2.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A">名词解释</a></h4><h4 id="2-3-基本原理"><a href="#2-3-基本原理" class="headerlink" title="2.3 基本原理"></a>2.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">基本原理</a></h4><h4 id="2-4-基本操作"><a href="#2-4-基本操作" class="headerlink" title="2.4 基本操作"></a>2.4 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">基本操作</a></h4><h5 id="2-4-1-创建导入"><a href="#2-4-1-创建导入" class="headerlink" title="2.4.1 创建导入"></a>2.4.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%88%9B%E5%BB%BA%E5%AF%BC%E5%85%A5">创建导入</a></h5><h5 id="2-4-2-查看导入"><a href="#2-4-2-查看导入" class="headerlink" title="2.4.2 查看导入"></a>2.4.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E6%9F%A5%E7%9C%8B%E5%AF%BC%E5%85%A5">查看导入</a></h5><h5 id="2-4-3-取消导入"><a href="#2-4-3-取消导入" class="headerlink" title="2.4.3 取消导入"></a>2.4.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%8F%96%E6%B6%88%E5%AF%BC%E5%85%A5">取消导入</a></h5><h4 id="2-5-相关系统配置"><a href="#2-5-相关系统配置" class="headerlink" title="2.5 相关系统配置"></a>2.5 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E7%9B%B8%E5%85%B3%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">相关系统配置</a></h4><h5 id="2-5-1-FE-配置"><a href="#2-5-1-FE-配置" class="headerlink" title="2.5.1 FE 配置"></a>2.5.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#fe-%E9%85%8D%E7%BD%AE">FE 配置</a></h5><h4 id="2-6-最佳实践"><a href="#2-6-最佳实践" class="headerlink" title="2.6 最佳实践"></a>2.6 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></h4><h5 id="2-6-1-应用场景"><a href="#2-6-1-应用场景" class="headerlink" title="2.6.1 应用场景"></a>2.6.1 应用场景</h5><p>使用 Broker load 最适合的场景就是原始数据在文件系统（HDFS，BOS，AFS）中的场景。其次，由于 Broker load 是单次导入中唯一的一种异步导入的方式，所以如果用户在导入大文件中，需要使用异步接入，也可以考虑使用 Broker load。</p>
-<h5 id="2-6-2-数据量"><a href="#2-6-2-数据量" class="headerlink" title="2.6.2 数据量"></a>2.6.2 数据量</h5><p>这里仅讨论单个 BE 的情况，如果用户集群有多个 BE 则下面标题中的数据量应该乘以 BE 个数来计算。比如：如果用户有3个 BE，则 3G 以下（包含）则应该乘以 3，也就是 9G 以下（包含）。</p>
-<h5 id="2-6-3-性能分析"><a href="#2-6-3-性能分析" class="headerlink" title="2.6.3 性能分析"></a>2.6.3 性能分析</h5><h5 id="2-6-4-完整例子"><a href="#2-6-4-完整例子" class="headerlink" title="2.6.4 完整例子"></a>2.6.4 完整例子</h5><h4 id="2-7-常见问题"><a href="#2-7-常见问题" class="headerlink" title="2.7 常见问题"></a>2.7 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a></h4><h3 id="3-Stream-load"><a href="#3-Stream-load" class="headerlink" title="3. Stream load"></a>3. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/stream-load-manual.html#stream-load">Stream load</a></h3><p>Stream load 是一个同步的导入方式，用户通过发送 HTTP 协议发送请求将本地文件或数据流导入到 Doris 中。Stream load 同步执行导入并返回导入结果。用户可直接通过请求的返回体判断本次导入是否成功。</p>
-<p>Stream load 主要适用于导入本地文件，或通过程序导入数据流中的数据。</p>
-<h4 id="3-1-基本原理"><a href="#3-1-基本原理" class="headerlink" title="3.1 基本原理"></a>3.1 基本原理</h4><h4 id="3-2-基本操作"><a href="#3-2-基本操作" class="headerlink" title="3.2 基本操作"></a>3.2 基本操作</h4><h4 id="3-3-相关系统配置"><a href="#3-3-相关系统配置" class="headerlink" title="3.3 相关系统配置"></a>3.3 相关系统配置</h4><h4 id="3-4-最佳实践"><a href="#3-4-最佳实践" class="headerlink" title="3.4 最佳实践"></a>3.4 最佳实践</h4><h5 id="3-4-1-应用场景"><a href="#3-4-1-应用场景" class="headerlink" title="3.4.1 应用场景"></a>3.4.1 应用场景</h5><p>使用 Stream load 的最合适场景就是原始文件在内存中，或者在磁盘中。其次，由于 Stream load 是一种同步的导入方式，所以用户如果希望用同步方式获取导入结果，也可以使用这种导入。</p>
-<h5 id="3-4-2-数据量"><a href="#3-4-2-数据量" class="headerlink" title="3.4.2 数据量"></a>3.4.2 数据量</h5><h5 id="3-4-3-完整例子"><a href="#3-4-3-完整例子" class="headerlink" title="3.4.3 完整例子"></a>3.4.3 完整例子</h5><h4 id="3-5-常见问题"><a href="#3-5-常见问题" class="headerlink" title="3.5 常见问题"></a>3.5 常见问题</h4><h3 id="4-Routine-Load"><a href="#4-Routine-Load" class="headerlink" title="4. Routine Load"></a>4. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/routine-load-manual.html">Routine Load</a></h3><p>例行导入（Routine Load）功能为用户提供了一种自动从指定数据源进行数据导入的功能。</p>
-<p>本文档主要介绍该功能的实现原理、使用方式以及最佳实践。</p>
-<h3 id="5-insert-into"><a href="#5-insert-into" class="headerlink" title="5. insert into"></a>5. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/insert-into-manual.html"><u>insert into</u></a></h3><p>Insert Into 语句的使用方式和 MySQL 等数据库中 Insert Into 语句的使用方式类似。但在 Doris 中，所有的数据写入都是一个独立的导入作业。所以这里将 Insert Into 也作为一种导入方式介绍。</p>
-<p>主要的 Insert Into 命令包含以下两种；</p>
-<ul>
-<li>INSERT INTO tbl SELECT …</li>
-<li>INSERT INTO tbl (col1, col2, …) VALUES (1, 2, …), (1,3, …);</li>
-</ul>
-<p>其中第二种命令仅用于 Demo，不要使用在测试或生产环境中。</p>
-<h3 id="6-spark-Load"><a href="#6-spark-Load" class="headerlink" title="6. spark Load"></a>6. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/spark-load-manual.html"><u>spark Load</u></a></h3><p>Spark load 通过外部的 Spark 资源实现对导入数据的预处理，提高 Doris 大数据量的导入性能并且节省 Doris 集群的计算资源。主要用于初次迁移，大数据量导入 Doris 的场景。</p>
-<p>Spark load 是一种异步导入方式，用户需要通过 MySQL 协议创建 Spark 类型导入任务，并通过 <code>SHOW LOAD</code> 查看导入结果。</p>
-<h4 id="6-1-适用场景"><a href="#6-1-适用场景" class="headerlink" title="6.1 适用场景"></a>6.1 适用场景</h4><ul>
-<li>源数据在 Spark 可以访问的存储系统中，如 HDFS。</li>
-<li>数据量在 几十 GB 到 TB 级别。</li>
-</ul>
-<h3 id="7-delete"><a href="#7-delete" class="headerlink" title="7. delete"></a>7. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/delete-manual.html">delete</a></h3><p>Delete不同于其他导入方式，它是一个同步过程。和Insert into相似，所有的Delete操作在Doris中是一个独立的导入作业，一般Delete语句需要指定表和分区以及删除的条件来筛选要删除的数据，并将会同时删除base表和rollup表的数据。</p>
-<h2 id="表结构变更"><a href="#表结构变更" class="headerlink" title="表结构变更"></a>表结构变更</h2>
+          <p>SOP(Standard Operating Procedure) 标准作业程序</p>
+
       
     </div>
 
@@ -1162,7 +975,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1228,18 +1041,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1309,6 +1122,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

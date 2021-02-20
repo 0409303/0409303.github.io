@@ -17,18 +17,18 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="sparkUISpark UI (1) - Jobs页面 Spark Web UI 监控详解 优化spark执行map-join优化 使用Spark进行搜狗日志分析实例——map join的使用 解决方案Spark项目实战-数据倾斜解决方案之将reduce join转换为map join 常见错误汇总Container xxx is running beyond physical memory l">
+  <meta name="description" content="sparkUISpark UI (1) - Jobs页面 Spark Web UI 监控详解 sparkSQLspark sql多维分析优化——细节是魔鬼 从一个sql引发的hive谓词下推的全面复盘及源码分析(上) 优化spark执行map-join优化 使用Spark进行搜狗日志分析实例——map join的使用 记录一次spark sql的优化过程 spark sql多维分析优化——提高读取">
 <meta property="og:type" content="article">
 <meta property="og:title" content="待整理">
 <meta property="og:url" content="http://example.com/2021/01/06/spark/%E5%BE%85%E6%95%B4%E7%90%86/index.html">
 <meta property="og:site_name" content="生而为人">
-<meta property="og:description" content="sparkUISpark UI (1) - Jobs页面 Spark Web UI 监控详解 优化spark执行map-join优化 使用Spark进行搜狗日志分析实例——map join的使用 解决方案Spark项目实战-数据倾斜解决方案之将reduce join转换为map join 常见错误汇总Container xxx is running beyond physical memory l">
+<meta property="og:description" content="sparkUISpark UI (1) - Jobs页面 Spark Web UI 监控详解 sparkSQLspark sql多维分析优化——细节是魔鬼 从一个sql引发的hive谓词下推的全面复盘及源码分析(上) 优化spark执行map-join优化 使用Spark进行搜狗日志分析实例——map join的使用 记录一次spark sql的优化过程 spark sql多维分析优化——提高读取">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-01-05T16:52:50.671Z">
-<meta property="article:modified_time" content="2021-01-09T15:43:17.636Z">
+<meta property="article:modified_time" content="2021-02-10T02:29:43.465Z">
 <meta property="article:author" content="hash007">
 <meta property="article:tag" content="大数据，数据仓库，机器学习，flink，spark">
 <meta name="twitter:card" content="summary">
@@ -105,6 +105,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -124,11 +125,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -182,7 +210,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-09 23:43:17" itemprop="dateModified" datetime="2021-01-09T23:43:17+08:00">2021-01-09</time>
+                <time title="Modified: 2021-02-10 10:29:43" itemprop="dateModified" datetime="2021-02-10T10:29:43+08:00">2021-02-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -207,8 +235,12 @@
       
         <h2 id="sparkUI"><a href="#sparkUI" class="headerlink" title="sparkUI"></a>sparkUI</h2><p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/237242009">Spark UI (1) - Jobs页面</a></p>
 <p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1582307">Spark Web UI 监控详解</a></p>
+<h2 id="sparkSQL"><a href="#sparkSQL" class="headerlink" title="sparkSQL"></a>sparkSQL</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78804934">spark sql多维分析优化——细节是魔鬼</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78266517">从一个sql引发的hive谓词下推的全面复盘及源码分析(上)</a></p>
 <h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p><a target="_blank" rel="noopener" href="https://www.codercto.com/a/66295.html">spark执行map-join优化</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wbh1000/p/9827344.html">使用Spark进行搜狗日志分析实例——map join的使用</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/77614511">记录一次spark sql的优化过程</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/79737848">spark sql多维分析优化——提高读取文件的并行度</a></p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/anbang713/article/details/82858745">Spark项目实战-数据倾斜解决方案之将reduce join转换为map join</a></p>
 <h2 id="常见错误汇总"><a href="#常见错误汇总" class="headerlink" title="常见错误汇总"></a>常见错误汇总</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Gxiaobai/p/11166986.html">Container xxx is running beyond physical memory limits</a></p>
 
@@ -226,11 +258,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/01/06/redis/%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD/" rel="prev" title="">
-      <i class="fa fa-chevron-left"></i> 
+    <a href="/2021/01/06/redis/%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD/" rel="prev" title="redis高级功能">
+      <i class="fa fa-chevron-left"></i> redis高级功能
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/01/06/hive/%E5%BE%85%E6%95%B4%E7%90%86/" rel="next" title="">
+    <a href="/2021/01/06/sql/hive/%E5%BE%85%E6%95%B4%E7%90%86/" rel="next" title="">
        <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -291,7 +323,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sparkUI"><span class="nav-number">1.</span> <span class="nav-text">sparkUI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB"><span class="nav-number">4.</span> <span class="nav-text">常见错误汇总</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#sparkUI"><span class="nav-number">1.</span> <span class="nav-text">sparkUI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sparkSQL"><span class="nav-number">2.</span> <span class="nav-text">sparkSQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E6%B1%87%E6%80%BB"><span class="nav-number">5.</span> <span class="nav-text">常见错误汇总</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -305,18 +337,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -386,6 +418,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

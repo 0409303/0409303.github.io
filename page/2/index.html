@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="为了以后好好偷懒，现在必须加倍努力">
@@ -103,6 +103,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -122,11 +123,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -149,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/doris/%E5%AE%9E%E9%99%85%E6%93%8D%E4%BD%9C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/sql/mysql/%E6%9F%A5%E8%AF%A2%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,80 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/09/doris/%E5%AE%9E%E9%99%85%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">实践操作</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-09 23:35:48" itemprop="dateCreated datePublished" datetime="2021-01-09T23:35:48+08:00">2021-01-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:13:59" itemprop="dateModified" datetime="2021-01-20T14:13:59+08:00">2021-01-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-复制表"><a href="#1-复制表" class="headerlink" title="1. 复制表"></a>1. 复制表</h2><h3 id="1-1-复制表结构"><a href="#1-1-复制表结构" class="headerlink" title="1.1 复制表结构"></a>1.1 复制表结构</h3><h3 id="1-2-复制表数据"><a href="#1-2-复制表数据" class="headerlink" title="1.2 复制表数据"></a>1.2 复制表数据</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/problem/%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/java/problem/%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2021/02/10/sql/mysql/%E6%9F%A5%E8%AF%A2%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">mysql查询原理</a>
         </h2>
 
         <div class="post-meta">
@@ -247,81 +202,15 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-06 17:42:03 / Modified: 17:43:54" itemprop="dateCreated datePublished" datetime="2021-01-06T17:42:03+08:00">2021-01-06</time>
+              <time title="Created: 2021-02-10 15:07:38 / Modified: 15:08:44" itemprop="dateCreated datePublished" datetime="2021-02-10T15:07:38+08:00">2021-02-10</time>
             </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/jbgtwang/article/details/90443069?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control">intellij idea载入java工程报程序包不存在问题</a></p>
-<p>mvn idea:module 命令执行重新生成iml文件</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/olap/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/olap/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-06 17:31:42" itemprop="dateCreated datePublished" datetime="2021-01-06T17:31:42+08:00">2021-01-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 10:30:11" itemprop="dateModified" datetime="2021-01-20T10:30:11+08:00">2021-01-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/olap/" itemprop="url" rel="index"><span itemprop="name">olap</span></a>
+                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
                 </span>
             </span>
 
@@ -336,7 +225,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/40700596">数据挖掘…》 Chapter 4. 数据仓库与OLAP</a></p>
+          <h5 id><a href="#" class="headerlink" title></a></h5><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/minikobe/p/12359828.html">子查询与关联查询区别</a></p>
 
       
     </div>
@@ -356,7 +245,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/olap/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/arithmetic/%E7%BA%A2%E9%BB%91%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -370,80 +259,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/06/olap/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" class="post-title-link" itemprop="url">数据仓库</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-06 17:31:28" itemprop="dateCreated datePublished" datetime="2021-01-06T17:31:28+08:00">2021-01-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:08:38" itemprop="dateModified" datetime="2021-01-20T14:08:38+08:00">2021-01-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/olap/" itemprop="url" rel="index"><span itemprop="name">olap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/base/%E6%9E%9A%E4%B8%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/java/base/%E6%9E%9A%E4%B8%BE/" class="post-title-link" itemprop="url">java枚举</a>
+            <a href="/2021/02/10/arithmetic/%E7%BA%A2%E9%BB%91%E6%A0%91/" class="post-title-link" itemprop="url">红黑树</a>
         </h2>
 
         <div class="post-meta">
@@ -454,213 +270,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-06 17:29:56 / Modified: 17:30:48" itemprop="dateCreated datePublished" datetime="2021-01-06T17:29:56+08:00">2021-01-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_43401436/article/details/104130410">Java枚举类——valueOf()的用法</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/java/base/%E8%BF%90%E7%AE%97%E7%AC%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/java/base/%E8%BF%90%E7%AE%97%E7%AC%A6/" class="post-title-link" itemprop="url">java运算符</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-06 17:28:48 / Modified: 17:29:40" itemprop="dateCreated datePublished" datetime="2021-01-06T17:28:48+08:00">2021-01-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41050155/article/details/79725555">java位运算符详解</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/tools/git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/tools/git/" class="post-title-link" itemprop="url">git</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-06 16:37:01 / Modified: 16:39:07" itemprop="dateCreated datePublished" datetime="2021-01-06T16:37:01+08:00">2021-01-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012830148/article/details/77497240">如何使用git比较两次commit之间的差异文件</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git diff hash1 hash2</span><br><span class="line">hash2是后提交的commit</span><br><span class="line">即hash1是被对比commit，diff结果是hash2在hash1上的改动</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/arithmetic/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/arithmetic/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" class="post-title-link" itemprop="url">布隆过滤器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-06 16:33:56 / Modified: 16:37:12" itemprop="dateCreated datePublished" datetime="2021-01-06T16:33:56+08:00">2021-01-06</time>
+              <time title="Created: 2021-02-10 15:06:41 / Modified: 15:07:18" itemprop="dateCreated datePublished" datetime="2021-02-10T15:06:41+08:00">2021-02-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -683,7 +293,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liyulong1982/p/6013002.html">布隆过滤器(Bloom Filter)详解</a></p>
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/minikobe/p/12105991.html">红黑树详解，红黑树与AVL树区别</a></p>
 
       
     </div>
@@ -703,7 +313,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/doris/%E6%8A%A5%E9%94%99%E6%B1%87%E6%80%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/tools/maven/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -717,101 +327,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/06/doris/%E6%8A%A5%E9%94%99%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">报错汇总</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-06 16:26:44" itemprop="dateCreated datePublished" datetime="2021-01-06T16:26:44+08:00">2021-01-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 14:14:34" itemprop="dateModified" datetime="2021-01-20T14:14:34+08:00">2021-01-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Can-not-alter-table-when-there-are-temp-partitions-in-table"><a href="#Can-not-alter-table-when-there-are-temp-partitions-in-table" class="headerlink" title="Can not alter table when there are temp partitions in table"></a>Can not alter table when there are temp partitions in table</h3><p>原因是之前进行过改表操作，还没有完成</p>
-<p>可以通过<code>SHOW ALTER TABLE COLUMN;</code> 查看改表的进度</p>
-<h3 id="timeout"><a href="#timeout" class="headerlink" title="timeout"></a>timeout</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set query_timeout&#x3D;60;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Memory-exceed-limit-Hash-join-doris"><a href="#Memory-exceed-limit-Hash-join-doris" class="headerlink" title="Memory exceed limit. Hash join doris"></a>Memory exceed limit. Hash join doris</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET exec_mem_limit &#x3D; 8589934592;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Unexpected-exception-No-value-present"><a href="#Unexpected-exception-No-value-present" class="headerlink" title="Unexpected exception: No value present"></a>Unexpected exception: No value present</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">alter table topic_smart_user_group_detail_2 add partition IF NOT EXISTS p2 values less than (3);</span><br><span class="line">insert into topic_smart_user_group_detail_2 VALUES (2, 1, &#39;1004230612&#39;),(2, 1, &#39;1047296444&#39;),(2, 1, &#39;1053250666&#39;);</span><br><span class="line"></span><br><span class="line">org.jkiss.dbeaver.model.sql.DBSQLException: SQL 错误 [1064] [42000]: errCode &#x3D; 2, detailMessage &#x3D; Syntax error in line 1:</span><br><span class="line">...ISTS p2 values less than (3)</span><br><span class="line">                             ^</span><br><span class="line">Encountered: INTEGER LITERAL</span><br><span class="line">Expected: COMMA</span><br><span class="line"></span><br><span class="line">less than () 括号中必须是字符串</span><br><span class="line"></span><br><span class="line">alter table topic_smart_user_group_detail_2 add partition IF NOT EXISTS p2 values less than (&quot;3&quot;);</span><br><span class="line">insert into topic_smart_user_group_detail_2 VALUES (5, 1, &#39;1004230612&#39;),(5, 1, &#39;1047296444&#39;),(5, 1, &#39;1053250666&#39;);</span><br><span class="line"></span><br><span class="line">all partitions have no load data</span><br><span class="line">表示没有创建需要的分区</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/410003438">Doris建表 FAQ</a></li>
-<li><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/163452248#id-4.2%E4%B8%BA%E4%BB%80%E4%B9%88CreateTablet%E4%BC%9A%E8%B6%85%E6%97%B6%EF%BC%9F">Hive To Doris 数据同步事故</a></li>
-<li><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/311203973">Doris使用FAQ(持续更新中)</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/solution/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/solution/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2021/02/10/tools/maven/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">maven问题解决</a>
         </h2>
 
         <div class="post-meta">
@@ -822,7 +338,16 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-06 14:08:24 / Modified: 16:25:45" itemprop="dateCreated datePublished" datetime="2021-01-06T14:08:24+08:00">2021-01-06</time>
+              <time title="Created: 2021-02-10 14:42:35 / Modified: 15:17:04" itemprop="dateCreated datePublished" datetime="2021-02-10T14:42:35+08:00">2021-02-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                </span>
             </span>
 
           
@@ -836,10 +361,503 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="实时溯源"><a href="#实时溯源" class="headerlink" title="实时溯源"></a>实时溯源</h3><p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/315932570">一种外卖场景下用户行为实时溯源的方法</a></p>
-<h3 id="flink-hbase"><a href="#flink-hbase" class="headerlink" title="flink+hbase"></a>flink+hbase</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/god_zhi_big/article/details/78231134?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control">从kafka到flink到hbase的心酸路程示例（希望有用）</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34205826/article/details/89549380?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control">Flink+HBase场景化解决方案</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/javajxz008/article/details/83269108?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control">Flink读写系列之-读HBase并写入HBase</a></p>
+          <h3 id="包冲突"><a href="#包冲突" class="headerlink" title="包冲突"></a>包冲突</h3><p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/28132001">02_XMDLOG_绑定包冲突排查方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33037051/article/details/111892927">maven依赖的jar包版本不一样_Maven依赖jar包冲突常见的解决方法</a></p>
+<h3 id><a href="#" class="headerlink" title></a></h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/tools/maven/maven%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/10/tools/maven/maven%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">maven学习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-10 14:40:16 / Modified: 15:09:44" itemprop="dateCreated datePublished" datetime="2021-02-10T14:40:16+08:00">2021-02-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/EasonJim/p/6845012.html">Maven中plugins和pluginManagement的区别</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shawWey/p/7417335.html">maven依赖顺序原则</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/java/mult_thread/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/10/java/mult_thread/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">多线程参考资料</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-10 10:53:53 / Modified: 10:55:44" itemprop="dateCreated datePublished" datetime="2021-02-10T10:53:53+08:00">2021-02-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">java-多线程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33129875/article/details/93207370">volatile可见性的验证,system.out.println和sleep对可见性的影响</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31442743/article/details/107509580">volatile 、System.out.println() sleep()使用的有趣现象</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/java/base/%E6%B3%9B%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/10/java/base/%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">java泛型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-10 10:32:15 / Modified: 18:55:49" itemprop="dateCreated datePublished" datetime="2021-02-10T10:32:15+08:00">2021-02-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/coprince/p/8603492.html">java 泛型详解-绝对是对泛型方法讲解最详细的，没有之一</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xy-ouyang/p/10539999.html">泛型（一）泛型类和泛型方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lihaoyang/p/7105581.html">JAVA泛型—通配符,泛型嵌套</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/licqs/p/4608871.html">Java获取泛型的类型Class</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/minikobe/p/11547220.html">java泛型通配符详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_29595517/article/details/113693350">关于通配泛型类型有几种_泛型类型的子类及通配符的使用</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/10/java/mybatis/mysql%E6%95%B0%E6%8D%AE%E6%BA%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/10/java/mybatis/mysql%E6%95%B0%E6%8D%AE%E6%BA%90/" class="post-title-link" itemprop="url">mysql数据源</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-10 10:31:00 / Modified: 10:33:43" itemprop="dateCreated datePublished" datetime="2021-02-10T10:31:00+08:00">2021-02-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a05bf0e757ac">关于MySql链接url参数的设置</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/01/tools/idea/%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/01/tools/idea/%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">idea工程问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-01 18:30:09 / Modified: 18:33:28" itemprop="dateCreated datePublished" datetime="2021-02-01T18:30:09+08:00">2021-02-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="如何引入其他module"><a href="#如何引入其他module" class="headerlink" title="如何引入其他module"></a>如何引入其他module</h3><p>[SpringMVC 项目中引用其他 Module 中的方法</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/menggudaoke/article/details/90601008">Idea中同一工程不同module之间相互调用</a></p>
+<p>project structure 中添加依赖</p>
+<h5 id="与依赖module一起打包命令"><a href="#与依赖module一起打包命令" class="headerlink" title="与依赖module一起打包命令"></a>与依赖module一起打包命令</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/30/tools/git/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/30/tools/git/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">git基本命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-30 23:14:18" itemprop="dateCreated datePublished" datetime="2021-01-30T23:14:18+08:00">2021-01-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-10 18:48:13" itemprop="dateModified" datetime="2021-02-10T18:48:13+08:00">2021-02-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><h3 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h3><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p><a target="_blank" rel="noopener" href="https://chinese.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/">Git 操作——如何删除本地分支和远程分支</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/29/translate/%E7%9F%AD%E8%AF%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/29/translate/%E7%9F%AD%E8%AF%AD/" class="post-title-link" itemprop="url">短语收集</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-29 17:28:20 / Modified: 17:28:47" itemprop="dateCreated datePublished" datetime="2021-01-29T17:28:20+08:00">2021-01-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/translate/" itemprop="url" rel="index"><span itemprop="name">translate</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>In a nutshell 简而言之</li>
+</ol>
 
       
     </div>
@@ -858,7 +876,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -924,18 +942,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">87</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1005,6 +1023,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
