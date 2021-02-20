@@ -1,6 +1,9 @@
 ---
     title: markdown语法
     categories: tools
+    tags:
+    creator: cjq
+    create_time: 2021/01/27
 ---
 
 ## 参考资料
@@ -31,10 +34,55 @@ $$
 2. 下标：n~2~
 
 #### 颜色
-Markdown文字添加颜色
-https://www.jianshu.com/p/aefd0e50b802
+[Markdown文字添加颜色方法总结（珍藏）](https://blog.csdn.net/super828/article/details/99055541)
+[MarkDown: 为字体添加颜色](https://blog.csdn.net/liuhw4598/article/details/78279737)
+
+包含rgb
+
+```
+方法一：
+      <font face="微软雅黑" >微软雅黑字体</font>
+      <font face="黑体" >黑体</font>
+      <font size=3 >3号字</font>
+      <font size=4 >4号字</font>
+      <font color=#FF0000 >红色</font>
+      <font color=#008000 >绿色</font>
+      <font color=#0000FF >蓝色</font>
+
+方法二：
+			$\color{#FF3030}{红色文字}$
+
+rgb：
+			红：255，0，0 #FF0000
+      橙: 255,125,0 #FF7D00
+      黄：255，255，0 #FFFF00
+      绿：0，255，0 #00FF00
+      蓝：0，0，255 #0000FF
+      靛: 0,255,255 #00FFFF
+      紫: 255,0,255 #FF00FF
+
+```
+
+背景色
+
+```
+<table><tr><td bgcolor=orange> 背景色是 1 orange</td></tr></table>
+<table><tr><td bgcolor= BlueViolet > 背景色2 BlueViolet </td></tr></table>
+```
+
+
+
+## 表格
+
+| 表头   | 表头   |
+| ------ | ------ |
+| 单元格 | 单元格 |
+| 单元格 | 单元格 |
+
+
 
 ## 流程图
+
 ```
 graph TD
     a-->b
@@ -115,17 +163,24 @@ limit 10
 
 ## 支持html标签
 
-
 # 参考资料
+
+### 通用
+
 1. [完整整理版](https://blog.csdn.net/witnessai1/article/details/52551362)
 2. [流程图详细教程](https://mermaidjs.github.io/)
 3. [编辑数学公式](http://blog.csdn.net/lk7688535/article/details/52528307)
 4. [Markdown 高级技巧](https://www.runoob.com/markdown/md-advance.html)
-5. [Hexo下的Markdown语法](https://www.dazhuanlan.com/2019/10/16/5da6b7885b94f/)
-6. [【hexo博客进阶】1.Markdown语法](https://www.cnblogs.com/huanhao/p/markdown.html)
 7. [markdown语法](https://www.appinn.com/markdown/)
-8. [如何让hexo使用流程图](https://segmentfault.com/q/1010000009073806?utm_source=sf-similar-question)
-9. [Hexo优化 --- 利用 Markdown 语法画流程图](http://www.zhaojun.im/hexo-flowchart/)
+10. [Markdown进阶（更改字体、颜色、大小，设置文字背景色，调整图片大小设置居中）](https://blog.csdn.net/heimu24/article/details/81189700)
+7. [Markdown 技巧：如何改变表格宽度（列宽）？](https://zhuanlan.zhihu.com/p/93239297)
+
+### hexo
+
+1. [Hexo下的Markdown语法](https://www.dazhuanlan.com/2019/10/16/5da6b7885b94f/)
+2. [【hexo博客进阶】1.Markdown语法](https://www.cnblogs.com/huanhao/p/markdown.html)
+3. [如何让hexo使用流程图](https://segmentfault.com/q/1010000009073806?utm_source=sf-similar-question)
+4. [Hexo优化 --- 利用 Markdown 语法画流程图](http://www.zhaojun.im/hexo-flowchart/)
 
 # markdown工具
 1. [Typora](https://www.typora.io/)

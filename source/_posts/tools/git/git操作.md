@@ -1,5 +1,5 @@
 ---
-    title: git
+    title: git操作
     categories: tools
     tags:
     creator: cjq

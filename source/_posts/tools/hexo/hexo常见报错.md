@@ -43,3 +43,7 @@ hint: See "git help submodule" for more information.
 ## 参考资料
 
 [hexo部署成功仍未更新或无法打开的情况](https://blog.csdn.net/tappat/article/details/103299038)
+
+[修改scheme后发布不起作用](https://github.com/iissnan/hexo-theme-next/issues/1050)
+
+[Hexo博客 Next更换修改主题样式 不生效的解决](https://www.tuziang.com/combat/904.html)
