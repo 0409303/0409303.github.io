@@ -9,7 +9,7 @@
 
 [mybatis注解](https://km.sankuai.com/page/625212960)
 
-![](../../../picture/java-mybatis/spring中mybatis依赖关系.png)
+![](https://img-blog.csdnimg.cn/20210220193437502.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ExMjQ1OA==,size_16,color_FFFFFF,t_70)
 
 ### 1 介绍 
 
