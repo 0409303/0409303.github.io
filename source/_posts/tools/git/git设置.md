@@ -42,3 +42,4 @@ st = status
 
 git st 和 git status 等同效果
 3、修改完后保存退出就可以了
+
