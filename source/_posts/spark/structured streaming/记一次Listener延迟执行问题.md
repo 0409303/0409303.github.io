@@ -1,6 +1,7 @@
 ---
+
     title: 记一次Listener延迟执行问题
-    categories: spark-streaming
+    categories: spark-structured-streaming
     tags:
     creator: cjq
     create_time: 2021/07/01

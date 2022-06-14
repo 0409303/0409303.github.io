@@ -160,8 +160,11 @@ where dt='20200920'
 limit 10
 </code></pre>
 </details>
-
 ## 支持html标签
+
+### [html特殊字符及图标](https://blog.csdn.net/u013778905/article/details/53177042)
+
+后加";"生效
 
 # 参考资料
 

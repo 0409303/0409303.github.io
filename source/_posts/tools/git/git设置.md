@@ -38,8 +38,29 @@ nb = checkout -b
 pl = pull
 ps = push origin master
 st = status
+
+[diff]
+    tool = default-difftool
+[difftool "default-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+[difftool]
+	prompt = false
 ```
 
 git st 和 git status 等同效果
 3、修改完后保存退出就可以了
+
+
+
+### 杂项
+
+关闭difftool的使用询问：
+
+```
+询问：
+Launch 'default-difftool' [Y/n]
+
+关闭：
+git config --global difftool.prompt false
+```
 

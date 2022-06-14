@@ -1,6 +1,6 @@
 ---
     title: 多流join
-    categories: spark-streaming
+    categories: spark-structured-streaming
     tags:
     creator: cjq
     create_time: 2021/07/06
