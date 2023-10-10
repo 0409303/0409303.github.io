@@ -4,6 +4,8 @@
 
 ### 搭建github图床
 
+[下载地址](https://molunerfinn.com/PicGo/)
+
 参考资料：https://blog.csdn.net/yefcion/article/details/88412025
 
 [PicGo 配置](https://blog.csdn.net/weixin_42055106/article/details/127961451)
