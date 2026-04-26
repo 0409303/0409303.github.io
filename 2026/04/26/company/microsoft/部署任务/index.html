@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Auzre DevOps任务定时调度步骤：Onboard AP App Deployment using AzDeployer (Stratus)  Prepare workflow folder, master config and workflow config. Prepare APDrop.  Create APGold virtual environment.  Setup corres">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部署任务">
+<meta property="og:url" content="http://example.com/2026/04/26/company/microsoft/%E9%83%A8%E7%BD%B2%E4%BB%BB%E5%8A%A1/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="Auzre DevOps任务定时调度步骤：Onboard AP App Deployment using AzDeployer (Stratus)  Prepare workflow folder, master config and workflow config. Prepare APDrop.  Create APGold virtual environment.  Setup corres">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-04-26T14:33:39.811Z">
+<meta property="article:modified_time" content="2026-04-26T14:33:39.811Z">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="大数据，数据仓库，机器学习，flink，spark">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/04/26/company/microsoft/%E9%83%A8%E7%BD%B2%E4%BB%BB%E5%8A%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>部署任务 | 生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/%E9%83%A8%E7%BD%B2%E4%BB%BB%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          部署任务
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="Auzre-DevOps任务定时调度"><a href="#Auzre-DevOps任务定时调度" class="headerlink" title="Auzre DevOps任务定时调度"></a>Auzre DevOps任务定时调度</h4><p><a target="_blank" rel="noopener" href="https://dev.azure.com/msasg/Shared%20Data/_wiki/wikis/Shared%20Data.wiki/52258/Onboard-AP-App-Deployment-using-AzDeployer-(Stratus)">步骤：Onboard AP App Deployment using AzDeployer (Stratus)</a></p>
+<ol>
+<li>Prepare workflow folder, master config and workflow config.</li>
+<li>Prepare APDrop. </li>
+<li>Create APGold virtual environment. </li>
+<li>Setup corresponding Azure Dev Ops CD pipeline. Add Azure DevOps release pipeline</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">##[warning]C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets(2203,5): Warning MSB3245: Could not resolve this reference. Could not locate the assembly &quot;Google.Protobuf, Version&#x3D;3.6.1.0, Culture&#x3D;neutral, PublicKeyToken&#x3D;a7d26565bac4d604, processorArchitecture&#x3D;MSIL&quot;. Check to make sure the assembly exists on disk. If this reference is required by your code, you may get compilation errors.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">externalFeedCredentials: &#39;nuget-msazure-oldbond, nuget-msblox-azuregenevamonitoring, nuget-mscosmos-cosmosprod, nuget-mscosmos-cosmostest, nuget-msdata-bigdata, nuget-ossmsft-oss_all, nuget-trill-trill&#39;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">2021-08-02 06:33:05 ThreadId:   69	PauseAndResumeWorkflows() Process: MSNBI_S2BHourly_0 UserCommand: Run</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   79	Getting information about event AdsBI_MSNBI_S2B_Hourly_Done</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   88	Getting information about event AdsBI_MSNBI_S2B_Hourly_Done</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   83	Getting information about event AdsBI_MSNBI_S2B_Hourly_Done</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   83	Got SQL exception: System.Data.SqlClient.SqlException (0x80131904): -999999:3:2--prc_ProcessStateGetNextDelta-212--Violation of PRIMARY KEY constraint &#39;PK_PROCESSPRESTATE&#39;. Cannot insert duplicate key in object &#39;dbo.ProcessPrestate&#39;. The duplicate key value is (-1931531102, 20210731 1100).</span><br><span class="line">   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action&#96;1 wrapCloseInAction)</span><br><span class="line">   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)</span><br><span class="line">   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean&amp; dataReady)</span><br><span class="line">   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()</span><br><span class="line">   at System.Data.SqlClient.SqlDataReader.get_MetaData()</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task&amp; task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource&#96;1 completion, Int32 timeout, Task&amp; task, Boolean&amp; usedCache, Boolean asyncWrite, Boolean inRetry)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.ExecuteReader()</span><br><span class="line">   at Microsoft.AdCenter.WorkflowHost.CommunicationWorkflow.&lt;&gt;c__DisplayClass32_0.&lt;GetLastParam&gt;b__1(SqlConnection sqlConnection)</span><br><span class="line">   at Microsoft.AdCenter.WorkflowHost.SqlConnectionHelper.RunQuery(Action&#96;1 command)</span><br><span class="line">ClientConnectionId:0fd2a26b-bb72-4bbd-baec-a16499dff840</span><br><span class="line">Error Number:50000,State:1,Class:16</span><br><span class="line">ClientConnectionId before routing:bfc0cfb4-53ac-4a8f-a985-44e2e512efe2</span><br><span class="line">Routing Destination:b9d5d60a293f.tr147.westus2-a.worker.database.windows.net,11020</span><br><span class="line">connection string: Server&#x3D;adsdwctest.database.windows.net;Database&#x3D;DWC_DB;User ID&#x3D;AdsDataSI_Execution;Password&#x3D;AnotherPassword8!</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">2021-08-02T08:28:02.5629452Z          Checking compatibility for System.Security.Cryptography.Primitives 4.3.0 with .NETFramework,Version&#x3D;v4.7.2.</span><br><span class="line">2021-08-02T08:28:02.5630121Z          All packages and projects are compatible with .NETFramework,Version&#x3D;v4.7.2.</span><br><span class="line">2021-08-02T08:28:02.6040861Z          Committing restore...</span><br><span class="line">2021-08-02T08:28:02.6041989Z          Generating MSBuild file D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj.nuget.g.props.</span><br><span class="line">2021-08-02T08:28:02.6048518Z          Generating MSBuild file D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj.nuget.g.targets.</span><br><span class="line">2021-08-02T08:28:02.6053133Z          Writing assets file to disk. Path: D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\project.assets.json</span><br><span class="line">2021-08-02T08:28:02.6174412Z          Writing cache file to disk. Path: D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\project.nuget.cache</span><br><span class="line">2021-08-02T08:28:02.6187683Z          Persisting dg to D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj.nuget.dgspec.json</span><br><span class="line">2021-08-02T08:28:02.6200559Z          Failed to restore D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj (in 17.33 sec).</span><br><span class="line">2021-08-02T08:28:02.6260383Z          </span><br><span class="line">2021-08-02T08:28:02.6264281Z          NuGet Config files used:</span><br><span class="line">2021-08-02T08:28:02.6264975Z              D:\a\1\Nuget\tempNuGet_22994537.config</span><br><span class="line">2021-08-02T08:28:02.6265449Z          </span><br><span class="line">2021-08-02T08:28:02.6266040Z          Feeds used:</span><br><span class="line">2021-08-02T08:28:02.6266664Z              https:&#x2F;&#x2F;msasg.pkgs.visualstudio.com&#x2F;Shared%20Data&#x2F;_packaging&#x2F;Ads.BI.SubjectArea.Upstreams&#x2F;nuget&#x2F;v3&#x2F;index.json</span><br><span class="line">2021-08-02T08:28:02.6267321Z          </span><br><span class="line">2021-08-02T08:28:02.6267938Z          Installed:</span><br><span class="line">2021-08-02T08:28:02.6281713Z              60 package(s) to D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj</span><br><span class="line">2021-08-02T08:28:02.6297867Z        Done executing task &quot;RestoreTask&quot; -- FAILED.</span><br><span class="line">2021-08-02T08:28:02.6302830Z      1&gt;Done building target &quot;Restore&quot; in project &quot;dirs.proj&quot; -- FAILED.</span><br><span class="line">2021-08-02T08:28:02.6303710Z      1&gt;Done Building Project &quot;D:\a\1\s\private\src\Batch\dirs.proj&quot; (Restore target(s)) -- FAILED.</span><br><span class="line">2021-08-02T08:28:02.6405509Z </span><br><span class="line">2021-08-02T08:28:02.6547930Z Build FAILED.</span><br><span class="line">2021-08-02T08:28:02.6562009Z </span><br><span class="line">2021-08-02T08:28:02.6580770Z        &quot;D:\a\1\s\private\src\Batch\dirs.proj&quot; (Restore target) (1) -&gt;</span><br><span class="line">2021-08-02T08:28:02.6589059Z        (Restore target) -&gt; </span><br><span class="line">2021-08-02T08:28:02.6596250Z          D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605: Detected package downgrade: Microsoft.BI.Common from 4.21.0 to 4.5.0. Reference the package directly from the project to select a different version.  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6599483Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Ads.BI.StreamingToBatch 2.2.0 -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.21.0)  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6602014Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.5.0) [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6603542Z          D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605: Detected package downgrade: Microsoft.BI.Common from 4.12.0 to 4.5.0. Reference the package directly from the project to select a different version.  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6605044Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Ads.BI.Orchestration.Workflows 0.1.0 -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.12.0)  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6606611Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.5.0) [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6608307Z          D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605: Detected package downgrade: Microsoft.Bingads.Dwc.Tools from 2.2.0 to 2.0.5102033.20. Reference the package directly from the project to select a different version.  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6609947Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Ads.BI.Orchestration.Workflows 0.1.0 -&gt; Microsoft.Bingads.Dwc.Tools (&gt;&#x3D; 2.2.0)  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6612139Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Microsoft.BingAds.Dwc.Tools (&gt;&#x3D; 2.0.5102033.20) [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6612903Z </span><br><span class="line">2021-08-02T08:28:02.6613320Z     0 Warning(s)</span><br><span class="line">2021-08-02T08:28:02.6613727Z     3 Error(s)</span><br><span class="line">2021-08-02T08:28:02.6613981Z </span><br><span class="line">2021-08-02T08:28:02.6614474Z Time Elapsed 00:00:19.93</span><br><span class="line">2021-08-02T08:28:02.7009246Z ##[error]Error: The process &#39;C:\Program Files\dotnet\dotnet.exe&#39; failed with exit code 1</span><br><span class="line">2021-08-02T08:28:02.7020201Z ##[error]Packages failed to restore</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">可知，package引入如果指定了低层级的版本，会强制上层package统一使用，类似java的原理。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Ads.BI.BinplacingTools&quot;&gt;</span><br><span class="line">      &lt;Version&gt;3.0.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Ads.BI.PipelineApps.Egress&quot;&gt;</span><br><span class="line">      &lt;Version&gt;6.1.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.AdCenter.ExecuteSSISPackage&quot;&gt;</span><br><span class="line">      &lt;Version&gt;1.1.5102398-pacman&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.Azure.KeyVault.Core&quot;&gt;</span><br><span class="line">      &lt;Version&gt;1.0.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.BingAds.Dwc.Engine.Library&quot;&gt;</span><br><span class="line">      &lt;Version&gt;2.1.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.Search.Autopilot&quot;&gt;</span><br><span class="line">      &lt;Version&gt;1.0.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;WindowsAzure.Storage&quot;&gt;</span><br><span class="line">      &lt;Version&gt;7.1.2&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>ads Data live-site tracking v2</p>
+<p>Deployment process for FASTBI streaming pipeline - V2</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/04/26/AI/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/04/26/company/microsoft/%E8%AE%B0%E5%BD%95/" rel="next" title="记录">
+      记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">243</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
