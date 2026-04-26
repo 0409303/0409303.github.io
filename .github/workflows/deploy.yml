@@ -1,0 +1,30 @@
+name: Deploy Hexo Site to GitHub Pages
+
+on:
+  push:
+    branches: [ blog-source ] # 当 main 分支有推送时触发
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code 🛎️
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 🧰
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 请根据你的 Node 版本修改
+
+      - name: Install dependencies 📦
+        run: npm install
+
+      - name: Generate static site 🏗️
+        run: npm run build # 等同于 hexo generate
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub 自动创建的令牌
+          publish_dir: ./public
+          publish_branch: master # 指定推送到 gh-pages 分支
