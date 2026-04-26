@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/career/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/eventhub/%E9%94%99%E8%AF%AF%E6%8E%92%E6%9F%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/career/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">工作总结</a>
+            <a href="/2026/04/26/eventhub/%E9%94%99%E8%AF%AF%E6%8E%92%E6%9F%A5/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -201,16 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%81%8C%E4%B8%9A/" itemprop="url" rel="index"><span itemprop="name">职业</span></a>
-                </span>
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
             </span>
 
           
@@ -224,16 +215,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="工作总结"><a href="#工作总结" class="headerlink" title="工作总结"></a>工作总结</h2><h4 id="项目介绍，及推进过程"><a href="#项目介绍，及推进过程" class="headerlink" title="项目介绍，及推进过程"></a>项目介绍，及推进过程</h4><pre><code>   1. 项目简介（prd等）
-   2. 项目重点要完成或保证的功能
-   3. 项目中遇到的难点
-4. 项目中获得的经验
-5. 项目的结果/效果</code></pre>
-<h4 id="项目日志"><a href="#项目日志" class="headerlink" title="项目日志"></a>项目日志</h4><ol>
-<li>修改时间+修改内容</li>
-<li>可能存在的问题</li>
-<li>数据修复到什么情况，即变更口径后刷新到哪里了</li>
-</ol>
+          <p><a target="_blank" rel="noopener" href="https://github.com/Azure/azure-event-hubs-spark/blob/master/examples/multiple-readers-example.md#receivers-move-between-executor-nodes">How to Avoid the <code>ReceiverDisconnectedException</code></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">21&#x2F;08&#x2F;19 02:18:45 ERROR TaskSetManager [task-result-getter-0]: Task 32 in stage 73.0 failed 4 times; aborting job</span><br><span class="line">21&#x2F;08&#x2F;19 02:18:45 ERROR FileFormatWriter [stream execution thread for [id &#x3D; 5f382b82-2006-49a4-a657-5512d5bc6cce, runId &#x3D; e783c09d-8ea7-4848-b018-2422590426ce]]: Aborting job 6d36e286-ecb0-4a8e-9928-5ac7a0fbb7d2.</span><br><span class="line">org.apache.spark.SparkException: Job aborted due to stage failure: Task 32 in stage 73.0 failed 4 times, most recent failure: Lost task 32.3 in stage 73.0 (TID 18190, wn126-msnbi.awfbdxsze1iudhhki0l2sbzfaf.bx.internal.cloudapp.net, executor 8): java.util.concurrent.CompletionException: com.microsoft.azure.eventhubs.ReceiverDisconnectedException: New receiver &#39;spark-26-18237&#39; with higher epoch of &#39;0&#39; is created hence current receiver &#39;spark-8-18190&#39; with epoch &#39;0&#39; is getting disconnected. If you are recreating the receiver, make sure a higher epoch is used. TrackingId:ddef38220000007a00008bf9611dbf7b_G4_B16, SystemTracker:msnsam-prod:eventhub:sambeacon-ueq~4223|$default, Timestamp:2021-08-19T02:18:45, errorContext[NS: msnsam-prod.servicebus.windows.net, PATH: sambeacon-ueq&#x2F;ConsumerGroups&#x2F;$Default&#x2F;Partitions&#x2F;32, REFERENCE_ID: LN_23ed71_1629339510773_d5c9_G4, PREFETCH_COUNT: 500, LINK_CREDIT: 200, PREFETCH_Q_LEN: 0]</span><br><span class="line">	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:292)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:308)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.uniApply(CompletableFuture.java:607)</span><br><span class="line">	at java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:591)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:1990)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.ExceptionUtil.completeExceptionally(ExceptionUtil.java:116)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.drainPendingReceives(MessageReceiver.java:505)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.onError(MessageReceiver.java:490)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.onClose(MessageReceiver.java:790)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.BaseLinkHandler.processOnClose(BaseLinkHandler.java:73)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.BaseLinkHandler.handleRemoteLinkClosed(BaseLinkHandler.java:109)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.BaseLinkHandler.onLinkRemoteClose(BaseLinkHandler.java:51)</span><br><span class="line">	at org.apache.qpid.proton.engine.BaseHandler.handle(BaseHandler.java:176)</span><br><span class="line">	at org.apache.qpid.proton.engine.impl.EventImpl.dispatch(EventImpl.java:108)</span><br><span class="line">	at org.apache.qpid.proton.reactor.impl.ReactorImpl.dispatch(ReactorImpl.java:324)</span><br><span class="line">	at org.apache.qpid.proton.reactor.impl.ReactorImpl.process(ReactorImpl.java:291)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessagingFactory$RunReactor.run(MessagingFactory.java:784)</span><br><span class="line">	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)</span><br><span class="line">	at java.util.concurrent.FutureTask.run(FutureTask.java:266)</span><br><span class="line">	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)</span><br><span class="line">	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748)</span><br><span class="line">Caused by: com.microsoft.azure.eventhubs.ReceiverDisconnectedException: New receiver &#39;spark-26-18237&#39; with higher epoch of &#39;0&#39; is created hence current receiver &#39;spark-8-18190&#39; with epoch &#39;0&#39; is getting disconnected. If you are recreating the receiver, make sure a higher epoch is used. TrackingId:ddef38220000007a00008bf9611dbf7b_G4_B16, SystemTracker:msnsam-prod:eventhub:sambeacon-ueq~4223|$default, Timestamp:2021-08-19T02:18:45, errorContext[NS: msnsam-prod.servicebus.windows.net, PATH: sambeacon-ueq&#x2F;ConsumerGroups&#x2F;$Default&#x2F;Partitions&#x2F;32, REFERENCE_ID: LN_23ed71_1629339510773_d5c9_G4, PREFETCH_COUNT: 500, LINK_CREDIT: 200, PREFETCH_Q_LEN: 0]</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.ExceptionUtil.toException(ExceptionUtil.java:43)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.onClose(MessageReceiver.java:789)</span><br><span class="line">	... 15 more</span><br><span class="line"></span><br><span class="line">Driver stacktrace:</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1889)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1877)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1876)</span><br><span class="line">	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)</span><br><span class="line">	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:1876)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:926)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:926)</span><br><span class="line">	at scala.Option.foreach(Option.scala:257)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:926)</span><br><span class="line">	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:2110)</span><br><span class="line">	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2059)</span><br><span class="line">	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2048)</span><br><span class="line">	at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:737)</span><br><span class="line">	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2065)</span><br><span class="line">	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.write(FileFormatWriter.scala:167)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.FileStreamSink.addBatch(FileStreamSink.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch$5$$anonfun$apply$17.apply(MicroBatchExecution.scala:537)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$$anonfun$withNewExecutionId$1.apply(SQLExecution.scala:78)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:125)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:73)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch$5.apply(MicroBatchExecution.scala:535)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProgressReporter$class.reportTimeTaken(ProgressReporter.scala:351)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:58)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch(MicroBatchExecution.scala:534)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply$mcV$sp(MicroBatchExecution.scala:198)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProgressReporter$class.reportTimeTaken(ProgressReporter.scala:351)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:58)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1.apply$mcZ$sp(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProcessingTimeExecutor.execute(TriggerExecutor.scala:56)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.runActivatedStream(MicroBatchExecution.scala:160)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.org$apache$spark$sql$execution$streaming$StreamExecution$$runStream(StreamExecution.scala:281)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution$$anon$1.run(StreamExecution.scala:193)</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -253,7 +237,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/career/%E5%B7%A5%E4%BD%9C%E8%AF%84%E4%BB%B7/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/doris/%E7%96%91%E9%97%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -267,7 +251,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/career/%E5%B7%A5%E4%BD%9C%E8%AF%84%E4%BB%B7/" class="post-title-link" itemprop="url">工作评价</a>
+            <a href="/2026/04/26/doris/%E7%96%91%E9%97%AE/" class="post-title-link" itemprop="url">疑问</a>
         </h2>
 
         <div class="post-meta">
@@ -277,7 +261,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -285,7 +269,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%81%8C%E4%B8%9A/" itemprop="url" rel="index"><span itemprop="name">职业</span></a>
+                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
                 </span>
             </span>
 
@@ -300,503 +284,143 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>同学你好，非常感谢你抽时间参与于同学的反馈，帮助TA全面地了解自己的优势和不足。你所反馈的内容，将与他人的反馈整合后提供给本人及其主管。</p>
-<p>以下是本次问卷内容，共13题，填答约需10分钟。为了帮助反馈内容更加全面，反馈内容包括领导力、价值观和专业能力三个维度。 请在填答问卷之前，点击下面链接了解本次反馈的背景、目的、应用场景以及你将如何填答此份问卷的指引。项目介绍及问卷填答指引</p>
-<p>合作共赢是我们的价值观，相信每个人都将在他人的帮助下更全面地认知自己，迭代成长。再次感谢你的参与！</p>
+          <h3 id="doris的分区规则"><a href="#doris的分区规则" class="headerlink" title="doris的分区规则"></a>doris的分区规则</h3><p>为什么表结构的分区与分区字段里去重值数量不一样？</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/eventhub/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/26/eventhub/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/66284127/azure-eventhub-offset-vs-sequence-number">Azure eventhub : Offset vs Sequence number</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/NuGet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/26/company/microsoft/NuGet/" class="post-title-link" itemprop="url">NuGet</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="guide-line"><a href="#guide-line" class="headerlink" title="guide line"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/what-is-nuget">guide line</a></h4><h3 id="Restore-packages"><a href="#Restore-packages" class="headerlink" title="Restore packages"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore">Restore packages</a></h3><h3 id="Package-Manager-Console"><a href="#Package-Manager-Console" class="headerlink" title="Package Manager Console"></a>Package Manager Console</h3><p>参考资料：</p>
 <ol>
-<li>本次反馈中，所有的选择题均为匿名反馈，但你可选择简答题的反馈形式：</li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-powershell">Package Manager Console (PowerShell)</a><ol>
+<li>如何使用PMC</li>
+<li>命令list</li>
 </ol>
-<p>我要匿名反馈——简答题的反馈内容将以匿名的形式展示给被反馈同学及其主管，即反馈内容可见，但你的姓名不可见。</p>
-<p>我要实名反馈——简答题的反馈内容将以实名的形式展示给被反馈同学及其主管，即反馈内容与你的姓名均可见。 </p>
-<p>领导力相关</p>
-<p>说明：领导力相关的题目共4道选择题，2道简答题。你将从领导力四大维度中选择最有优势的和最需要提升的选项。为了帮助被反馈同学聚焦最为突出的优劣势，选择题为单选题，请基于对<strong>公司领导力模型的理解，进行综合判断。可参考</strong>公司领导力模型。</p>
-<p>请注意：你选择的最优势项与最需要提升项若相同或者【无法判断】的选项多于50%，领导力部分将视为无效问卷。 </p>
-<ol start="2">
-<li>在以下领导力四大维度中，你认为被反馈同学在哪个维度最有优势？</li>
+</li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/reference/powershell-reference">PowerShell reference</a><ol>
+<li>命令明细</li>
 </ol>
-<p>定策略：洞察行业趋势和战略方向，并务实决断。</p>
-<p>包含能力：</p>
-<p>专业决策：能主动通过内外不同渠道收集各种信息，了解行业&amp;专业发展趋势，利用专业经验，预判工作中可能存在的问题、障碍或机会。</p>
-<p>策略打法：充分理解上级制定的目标，结合现实情况，制定未来规划，确定落地策略。</p>
-<p>建团队：激发团队活力，打造团队战斗力。</p>
-<p>包含能力：</p>
-<p>团队搭建：投入精力提升招聘效率和质量，吸引行业优秀人才，保证团队人员供给 。</p>
-<p>激励： 通过团队氛围建设、人员配置、分工合作、流程优化等举措，为团队提升工作效能创造条件。</p>
-<p>培养：关注团队成员职业发展，将授人以鱼和授人以渔相结合，根据员工的不同情况给予有针对性的反馈和培养。</p>
-<p>拿结果：将策略目标转化为行动，不畏困难拿到结果。</p>
-<p>包含能力：</p>
-<p>计划： 把策略打法和现实相结合，保证计划实用、可执行，推动团队成员共同理解目标、路径和方法。</p>
-<p>监控： 有重点、有步骤地推动实施，对关键点进行重点监控，及时发现问题，调整应对策略和计划。</p>
-<p>结果导向： 百折不挠，该攻下来的山头不管怎样都能攻下来；即使遇到困难，带领团队尝试多种方法，通过沟通影响、资源协调等方式保质保量，如期完成任务。</p>
-<p>复盘： 能在任务完成后及时地进行反思，总结成功及失败的经验教训，为工作改进提供参考。</p>
-<p>炼心志：持续提升自我格局、长期有耐心、持续奋斗的能力。</p>
-<p>包含能力：</p>
-<p>胸怀： 对未来有信心，对现在有耐心，不计较短期得失，尊重并包容多元观点。</p>
-<p>使命感： 有强烈的事业心、使命感，践行公司的文化和价值观，即便面临较大的挑战或逆境，也能以自身的激情感召他人。</p>
-<p>同理心： 站在对方的角度想问题，理解并尊重他人的真实意图和感受，尊重对方的行业/专业规律，认可合作伙伴的价值。</p>
-<p>好学： 具有广阔的视野，成为所负责领域的行家里手；不满足现有答案，乐于探索不同领域，并形成自己独到的看法和见解。</p>
-<p>坚韧： 为实现理想和目标，甘愿承受压力，保持冷静、可靠、沉着，并能反思和自我批评，善于自我驱动。</p>
-<p>无法判断</p>
-<ol start="3">
-<li>在上题选出的领导力维度中，你认为被反馈同学以下哪项能力最有优势？</li>
+</li>
 </ol>
-<p>【建团队】-团队搭建：投入精力提升招聘效率和质量，吸引行业优秀人才，保证团队人员供给</p>
-<p>【建团队】-激励： 通过团队氛围建设、人员配置、分工合作、流程优化等举措，为团队提升工作效能创造条件</p>
-<p>【建团队】-培养：关注团队成员职业发展，将授人以鱼和授人以渔相结合，根据员工的不同情况给予有针对性的反馈和培养</p>
-<p>无法判断 </p>
-<ol start="4">
-<li>你可以对以上选择进行具体阐述。（可参考**公司领导力模型，也可以开放地针对领导力/管理方面进行反馈）</li>
-</ol>
-<p>填答示例</p>
-<p>小美从0快速搭建团队，还兼岗XX岗位，并快速在XX和XX等场景拿到结果，体现了非常过硬的团队建设和管理能力；能够找出下属们的各自优缺点，予以指导督促，同时对于自己也能不断地自我驱动；有清晰的目标，且可以有计划有节奏地落地，比如提出了XX愿景，并开展具体的知识图谱、对话平台等分领域的落地动作。</p>
-<p>(0/1000)<br>5. 在以下领导力四大维度中，你认为被反馈同学在哪个维度最需要提升？</p>
-<p>定策略：洞察行业趋势和战略方向，并务实决断。</p>
-<p>包含能力：</p>
-<p>专业决策：能主动通过内外不同渠道收集各种信息，了解行业&amp;专业发展趋势，利用专业经验，预判工作中可能存在的问题、障碍或机会。</p>
-<p>策略打法：充分理解上级制定的目标，结合现实情况，制定未来规划，确定落地策略。</p>
-<p>建团队：激发团队活力，打造团队战斗力。</p>
-<p>包含能力：</p>
-<p>团队搭建：投入精力提升招聘效率和质量，吸引行业优秀人才，保证团队人员供给 。</p>
-<p>激励： 通过团队氛围建设、人员配置、分工合作、流程优化等举措，为团队提升工作效能创造条件。</p>
-<p>培养：关注团队成员职业发展，将授人以鱼和授人以渔相结合，根据员工的不同情况给予有针对性的反馈和培养。</p>
-<p>拿结果：将策略目标转化为行动，不畏困难拿到结果。</p>
-<p>包含能力：</p>
-<p>计划： 把策略打法和现实相结合，保证计划实用、可执行，推动团队成员共同理解目标、路径和方法。</p>
-<p>监控： 有重点、有步骤地推动实施，对关键点进行重点监控，及时发现问题，调整应对策略和计划。</p>
-<p>结果导向： 百折不挠，该攻下来的山头不管怎样都能攻下来；即使遇到困难，带领团队尝试多种方法，通过沟通影响、资源协调等方式保质保量，如期完成任务。</p>
-<p>复盘： 能在任务完成后及时地进行反思，总结成功及失败的经验教训，为工作改进提供参考。</p>
-<p>炼心志：持续提升自我格局、长期有耐心、持续奋斗的能力。</p>
-<p>包含能力：</p>
-<p>胸怀： 对未来有信心，对现在有耐心，不计较短期得失，尊重并包容多元观点。</p>
-<p>使命感： 有强烈的事业心、使命感，践行公司的文化和价值观，即便面临较大的挑战或逆境，也能以自身的激情感召他人。</p>
-<p>同理心： 站在对方的角度想问题，理解并尊重他人的真实意图和感受，尊重对方的行业/专业规律，认可合作伙伴的价值。</p>
-<p>好学： 具有广阔的视野，成为所负责领域的行家里手；不满足现有答案，乐于探索不同领域，并形成自己独到的看法和见解。</p>
-<p>坚韧： 为实现理想和目标，甘愿承受压力，保持冷静、可靠、沉着，并能反思和自我批评，善于自我驱动。</p>
-<p>无法判断</p>
-<ol start="6">
-<li>在上题选出的领导力维度中，你认为被反馈同学以下哪项能力最需要提升？ </li>
-</ol>
-<p>【定策略】-专业决策：能主动通过内外不同渠道收集各种信息，了解行业&amp;专业发展趋势，利用专业经验，预判工作中可能存在的问题、障碍或机会。 </p>
-<p>【定策略】-策略打法：充分理解上级制定的目标，结合现实情况，制定未来规划，确定落地策略。 </p>
-<p>无法判断</p>
-<ol start="7">
-<li>你可以对以上选择进行具体阐述。（可参考**公司领导力模型， 也可以开放地针对领导力/管理方面进行反馈） </li>
-</ol>
-<p>填答示例</p>
-<p>建议小美同学更加外柔内刚，得失心不要这么重。方法1是看人所长，学人所长而非文人相轻，方法2是空间上看到更大世界而不是只看到小池塘，方法3是时间上思考更长时间的问题，而不是眼前某时某刻。祝小美成为一个更好的专业管理干部，成为一个更好的自己。</p>
-<p>(0/1000)<br>价值观相关</p>
-<p>说明：对价值观进行反馈是为了更全面地促进个人发展，更好地用价值观指导工作中的各种行为。 价值观相关的题目共2道选择题，2道简答题。你将从四项价值观中选择亮点和需要改进的选项。为了便于你作答，选择题可单选也可多选，请基于对<strong>公司价值观的理解，进行选择。可参考</strong>公司价值观。</p>
-<p>请注意：你选择的亮点项与需要改进项若相同或者【无法判断】的选项多于50%，价值观部分将视为无效问卷。 </p>
-<ol start="8">
-<li>在以下四条价值观中，请选出被反馈同学在践行价值观方面的亮点。（至少1项 ）『多选题』</li>
-</ol>
-<p>以客户为中心</p>
-<p>释义：所有直接或间接使用你的劳动成果的人，都是你的客户，包含外部客户与内部客户，只有把我们的客户服务好，我们的团队和个人的存在才有价值。</p>
-<p>正直诚信</p>
-<p>释义： 遵守国家法律与公司制度，不触犯公司高压线；正直诚信不仅是敢于严格要求自己，更重要的是为客户坚守承诺，对同事言行一致，对上级客观真实。</p>
-<p>合作共赢</p>
-<p>释义：不论团队内外，立足于大团队及公司目标，以成就他人为荣，小我服从大我，追求整体利益最大化。</p>
-<p>追求卓越</p>
-<p>释义：在工作中有前瞻思考，热爱自己的本职工作，主动接受困难与挑战，坚持精益求精的工匠精神。</p>
-<p>无法判断</p>
-<ol start="9">
-<li>你可以对以上选择进行具体阐述。（可参考**公司价值观，也可以开放地针对价值观进行反馈）  </li>
-</ol>
-<p>填答示例</p>
-<p>合作共赢是小美同学在践行价值观方面的亮点 。在跨部门共同推进某项目的过程中，新增加了原本不属于项目组各部门的一项任务。本着“合作共赢”的原则，小美同学仍积极主动地承担了这项任务，最终项目顺利推进，体现了合作共赢的价值观。</p>
-<p>(0/1000)<br>10. 在以下四条价值观中，请选出被反馈同学在践行价值观方面需要改进的选项。（至少1项） 『多选题』</p>
-<p>以客户为中心</p>
-<p>释义：所有直接或间接使用你的劳动成果的人，都是你的客户，包含外部客户与内部客户，只有把我们的客户服务好，我们的团队和个人的存在才有价值。</p>
-<p>正直诚信</p>
-<p>释义： 遵守国家法律与公司制度，不触犯公司高压线；正直诚信不仅是敢于严格要求自己，更重要的是为客户坚守承诺，对同事言行一致，对上级客观真实。</p>
-<p>合作共赢</p>
-<p>释义：不论团队内外，立足于大团队及公司目标，以成就他人为荣，小我服从大我，追求整体利益最大化。</p>
-<p>追求卓越</p>
-<p>释义：在工作中有前瞻思考，热爱自己的本职工作，主动接受困难与挑战，坚持精益求精的工匠精神。</p>
-<p>无法判断</p>
-<ol start="11">
-<li>你可以对以上选择进行具体阐述。（可参考**公司价值观，也可以开放地针对价值观进行反馈） </li>
-</ol>
-<p>填答示例</p>
-<p>我认为小美同学在“以客户为中心”上需要改进。在xx系统迭代项目中，客户提出了对某功能的强烈需求，小美同学考虑到实现难度和手头其他项目的排期，选择了暂时忽略客户的需求，给对方造成了不好的体验。没有做到拥抱变化，以客户为中心。希望今后能更加主动地考虑客户需求，积极拥抱变化，坚持做正确的事而不是容易的事。</p>
-<p>(0/1000)<br>专业能力相关</p>
-<p>说明：专业能力相关的题目共2道简答题，你将填写关于专业能力方面的优势与不足。可参考**公司专业能力模型。</p>
-<ol start="12">
-<li>你觉得在工作中，被反馈同学在专业能力方面的优势有哪些？（可参考**公司专业能力模型，也可以开放地针对专业能力进行反馈 ）</li>
-</ol>
-<p>填答示例</p>
-<p>小美同学在专业能力方面的优势是1.业务能力强，对业务有深入独到的见解，对业界产品发展保持密切的关注并持续指导自身产品的迭代发展；2.具有过硬的算法能力和工程能力，从业务需求出发并综合考虑实现成本和效果给出合理的解决方案；3.具有优秀的协作能力，善于总结工作中的经验和成果。</p>
-<p>(0/1000)<br>13. 你觉得在工作中，被反馈同学在专业能力方面的不足有哪些？ 你的发展建议是什么? （可参考**公司专业能力模型，也可以开放地针对专业能力进行反馈 ） </p>
-<p>填答示例</p>
-<p>小美同学在专业能力方面的不足是1.短期内的业务产出还不够明显；2.XX系统在短期用户活跃和留存方面的指标还不够出色，存在较大的用户引导、教育和体验优化的空间。</p>
-<p>发展建议：进一步提升运营能力。如XX换代以及淘汰的决策等，需要有广泛的数据收集，深入的数据分析，并总结出有效的判断；要不断拓展知识面，比如对XX等方面的了解，加深对客户的理解，能做出更合理的技术规划和项目规划。</p>
-<p>(0/1000)<br>已完成: 38%</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/career/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/career/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">职业规划</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%81%8C%E4%B8%9A/" itemprop="url" rel="index"><span itemprop="name">职业</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h5 id="程序员与架构师之间的差距很大吗？"><a href="#程序员与架构师之间的差距很大吗？" class="headerlink" title="程序员与架构师之间的差距很大吗？"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c6f8fd266bb6">程序员与架构师之间的差距很大吗？</a></h5><h5 id="中年IT男的转型思考：做个越老越吃香的事业吧！"><a href="#中年IT男的转型思考：做个越老越吃香的事业吧！" class="headerlink" title="中年IT男的转型思考：做个越老越吃香的事业吧！"></a><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3aba78b9105e">中年IT男的转型思考：做个越老越吃香的事业吧！</a></h5>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/cloud/virtual%20machine%E6%90%AD%E5%BB%BAvpn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/cloud/virtual%20machine%E6%90%AD%E5%BB%BAvpn/" class="post-title-link" itemprop="url">virtual machine搭建vpn</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cloud/" itemprop="url" rel="index"><span itemprop="name">cloud</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>yum install python3-setuptools or yum install python2-setuptools<br>yum install python3-pip</p>
-<p>Issue：</p>
-<ol>
-<li>ssserver: command not found<br>退出管理员账号</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/computer_theory/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/computer_theory/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">编码问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="注意点："><a href="#注意点：" class="headerlink" title="注意点："></a>注意点：</h2><ol>
-<li>系统编码</li>
-<li>程序中指定编码</li>
-</ol>
-<h2 id="case"><a href="#case" class="headerlink" title="case"></a>case</h2><ol>
-<li>微软spark机器写出中文都是问号乱码。输出了系统文件编码<code>System.getProperty(&quot;file.encoding&quot;)</code>, 是cp1252. 如何处理能正常输出中文？</li>
-</ol>
-<h2 id="编码简介"><a href="#编码简介" class="headerlink" title="编码简介"></a>编码简介</h2><table>
-<thead>
-<tr>
-<th align="center">编码</th>
-<th align="center">介绍</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Windows-1252 或CP-1252</td>
-<td align="center">是拉丁字母的字元編碼，主要用於英文、 愛爾蘭語、義大利語、挪威語、葡萄牙語、西班牙語、瑞典語以及德語、芬蘭語、冰島語、法語、荷蘭語（除了Ĳ字符）、斯洛維尼亞語(除了č字符)等西方文字版本Microsoft Windows 的預設編碼，為Windows代碼頁之一。</td>
-</tr>
-</tbody></table>
-<h2 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h2><h2 id="编码判断"><a href="#编码判断" class="headerlink" title="编码判断"></a>编码判断</h2><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_31994237/article/details/118828893">java cp1252,将cp-1252编码为utf-8？</a></li>
-<li></li>
-</ol>
-<h2 id="待整理"><a href="#待整理" class="headerlink" title="待整理"></a>待整理</h2><ol>
-<li>各种环境/语言中设置字符编码</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/concept/%E6%95%B0%E6%8D%AE%E6%A6%82%E5%BF%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/concept/%E6%95%B0%E6%8D%AE%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">数据概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903957693726727">漫画：什么是中台？</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/concept/%E6%9C%AF%E8%AF%AD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/concept/%E6%9C%AF%E8%AF%AD/" class="post-title-link" itemprop="url">术语</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>SOP(Standard Operating Procedure) 标准作业程序</p>
-<p>Feed流</p>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/67740541">https://km.sankuai.com/page/67740541</a></p>
-<h4 id="开箱即用"><a href="#开箱即用" class="headerlink" title="开箱即用"></a>开箱即用</h4><p>开箱即用功能（out-of-the-box feature，也称OOTB或off the shelf）在软件上指产品在安装后，无需配置或修改，即可使用的功能或特性。也指默认即对所有用户可用，不需支付额外费用或进行另外的配置。<br>我们常说的spring-boot或者vue组件等可以开箱即用，就是可以无需配置就可以实现大部分功能，但是他们依旧是可以配置的。（强调约定优于配置）</p>
 
       
     </div>
@@ -840,7 +464,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -910,7 +534,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
             </span>
 
           
@@ -970,7 +594,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/NuGet/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/component/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -984,7 +608,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/company/microsoft/NuGet/" class="post-title-link" itemprop="url">NuGet</a>
+            <a href="/2026/04/26/company/microsoft/component/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -994,16 +618,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
-                </span>
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
             </span>
 
           
@@ -1017,18 +632,199 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="guide-line"><a href="#guide-line" class="headerlink" title="guide line"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/what-is-nuget">guide line</a></h4><h3 id="Restore-packages"><a href="#Restore-packages" class="headerlink" title="Restore packages"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore">Restore packages</a></h3><h3 id="Package-Manager-Console"><a href="#Package-Manager-Console" class="headerlink" title="Package Manager Console"></a>Package Manager Console</h3><p>参考资料：</p>
+          <p>Severity    Code    Description    Project    File    Line    Suppression State<br>Error    MSB3680    The source file “D:\project\Ads.BI.MSNMediation\private\src\Batch/Autopilot/ExternalConfigs/Microsoft.BingAds.BI.APDeploy.exe.config” does not exist.    Microsoft.BI.MSNMediation.HourlyS2B.Drop    D:\project\Ads.BI.MSNMediation\private\src\Batch\build\targets\CreateDrop.targets    47    </p>
+<p>、</p>
+<p>Severity    Code    Description    Project    File    Line    Suppression State<br>Error    MSB3030    Could not copy the file “D:\project\Ads.BI.MSNMediation\private\src\Batch/SAMHourlyS2B/Microsoft.BI.MSNMediation.HourlyS2B.Drop/bin\Debug\net472**” because it was not found.    Microsoft.BI.MSNMediation.HourlyS2B.Drop    D:\project\Ads.BI.MSNMediation\private\src\Batch\build\targets\CreateDrop.targets    47    </p>
+<p>c:\Users\jingqicao.nuget\packages\microsoft.bingads.bi.apdeploy\10.5.2</p>
+<p>在sdk之外做的nuget package改动，比如删掉某个包</p>
+<p>resolved    Show files that have been merged but not submitted   跟执行目录无关<br>retype      Reappraise the file type for files on the client<br>revert      Discard changes from an opened file<br>review      List and track changelists (for the review daemon)</p>
+<p>sd review 如何只搜索某个人的review</p>
+<p>FAREAST\jingqicao</p>
+<p>sd opened</p>
+<p>sd submit -c <change list num></change></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/cosmos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/26/company/microsoft/cosmos/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>azure cosmos命令</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/26/company/microsoft/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/">Azure HDInsight documentation</a></p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-powershell">Package Manager Console (PowerShell)</a><ol>
-<li>如何使用PMC</li>
-<li>命令list</li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-rotate-storage-keys">Update Azure storage account access keys in HDInsight cluster</a> 当更新了remote key时，需要执行相关脚本，让节点更新。Azure Blob Storage fails to authenticate: “Make sure the value of Authorization header is formed correctly including the signature”</li>
 </ol>
-</li>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/reference/powershell-reference">PowerShell reference</a><ol>
-<li>命令明细</li>
-</ol>
-</li>
-</ol>
+<p><a target="_blank" rel="noopener" href="https://github.com/Azure-Samples">Azure Samples</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/virtual-network/">Virtual network</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/%E7%A6%8F%E5%88%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/26/company/microsoft/%E7%A6%8F%E5%88%A9/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>puid<br>gid 999+工号<br>company simple：  MSFT</p>
+<p>ESPP<br>R开头的一串数字</p>
+<p>HRWeb<br>信息维护，会影响摩根账户，需要全部都是英文，包括地址<br><a target="_blank" rel="noopener" href="https://myaccount.microsoft.com/?ref=MeControl">https://myaccount.microsoft.com/?ref=MeControl</a></p>
+<p>中意人寿<br>family</p>
+<p>143cc3b8f01f<br><a target="_blank" rel="noopener" href="https://apkpure.com/">https://apkpure.com</a></p>
 
       
     </div>

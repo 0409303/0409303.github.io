@@ -237,6 +237,7 @@ NexT.utils = {
       var link = element.querySelector('a.nav-link');
       var target = document.getElementById(decodeURI(link.getAttribute('href')).replace('#', ''));
       // TOC item animation navigate.
+      /*
       link.addEventListener('click', event => {
         event.preventDefault();
         var offset = target.getBoundingClientRect().top + window.scrollY;
@@ -247,6 +248,7 @@ NexT.utils = {
           scrollTop: offset + 10
         });
       });
+      */
       return target;
     });
 

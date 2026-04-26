@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E6%B9%96%E5%AD%98%E5%82%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/interview/project/MMS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E6%B9%96%E5%AD%98%E5%82%A8/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/04/26/interview/project/MMS/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
             </span>
 
           
@@ -215,7 +215,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <p>[toc]</p>
+<h2 id="简历描述"><a href="#简历描述" class="headerlink" title="简历描述"></a>简历描述</h2><p>业务数据处理管道搭建及维护</p>
+<p>\1. 负责 Mediation / MMS 原始业务数据的解析与处理，涵盖数据清洗、结构化、标准化等流程，确保下游消费系统的数据一致性和准确性</p>
+<p>\2. 基于 Spark实现大规模数据的 join、多维聚合、窗口函数等逻辑，支撑日报、计费、运营等核心场景</p>
+<p>\3. 设计并维护，高效的数据处理管道，具备良好的可扩展性与容错性</p>
+<p>\4. 通过优化处理逻辑及资源配置，使核心任务运行时长缩短 26%，资源占用降低17%</p>
+<p>主要技术：spark、scope、c#、powershell</p>
+<h2 id="项目简介："><a href="#项目简介：" class="headerlink" title="项目简介："></a>项目简介：</h2><p>如何确定水位线的延迟时间：</p>
+<p>通过测试job，对于不同水位线的join结果，统计准确度，5分钟延迟可以达到99.8%</p>
+<p>实际窗口是2h</p>
+<p>如何解决中间未join上的数据需要继续等待的问题，如何保证处理速度。</p>
+<p>使用状态文件，对join上的数据直接输出，对于没能join上的数据保留到state文件中，下此与新到的数据一同计算</p>
+<h2 id="深入挖掘"><a href="#深入挖掘" class="headerlink" title="深入挖掘"></a>深入挖掘</h2><h3 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h3><h4 id="1-流水线处理"><a href="#1-流水线处理" class="headerlink" title="1. 流水线处理"></a>1. 流水线处理</h4><h4 id="2-逻辑合并"><a href="#2-逻辑合并" class="headerlink" title="2. 逻辑合并"></a>2. 逻辑合并</h4>
       
     </div>
 
@@ -234,7 +246,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/interview/project/%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -248,7 +260,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/04/26/interview/project/%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -258,7 +270,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
             </span>
 
           
@@ -273,95 +285,7 @@
 
       
           <p>[toc]</p>
-<h1 id="对比Flink-CDC、Flume、DataX-优势，适用场景及项目上常遇到的问题有哪些"><a href="#对比Flink-CDC、Flume、DataX-优势，适用场景及项目上常遇到的问题有哪些" class="headerlink" title="对比Flink CDC、Flume、DataX 优势，适用场景及项目上常遇到的问题有哪些"></a>对比Flink CDC、Flume、DataX 优势，适用场景及项目上常遇到的问题有哪些</h1><p>这是一份关于 Flink CDC、Flume 和 DataX 这三个数据同步工具的对比分析，我会从核心定位、优势、适用场景以及项目实战中的常见问题这几个方面展开。</p>
-<h3 id="📊-核心定位速览"><a href="#📊-核心定位速览" class="headerlink" title="📊 核心定位速览"></a>📊 核心定位速览</h3><table>
-<thead>
-<tr>
-<th align="left">工具</th>
-<th align="left">核心定位</th>
-<th align="left">处理模式</th>
-<th align="left">典型场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>Flink CDC</strong></td>
-<td align="left"><strong>实时数据捕获与同步</strong></td>
-<td align="left">流处理 (Streaming)</td>
-<td align="left">实时数据集成、构建实时数仓、数据库变更订阅<a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/698f6656452a0f0efa5e3ec1">-6</a></td>
-</tr>
-<tr>
-<td align="left"><strong>Flume</strong></td>
-<td align="left"><strong>海量日志采集与传输</strong></td>
-<td align="left">流式传输 (Streaming)</td>
-<td align="left">日志收集、监控数据聚合、系统间事件中转-</td>
-</tr>
-<tr>
-<td align="left"><strong>DataX</strong></td>
-<td align="left"><strong>离线/批量数据同步</strong></td>
-<td align="left">批处理 (Batch)</td>
-<td align="left">异构数据源离线迁移、数据备份、T+1数据仓库构建–</td>
-</tr>
-</tbody></table>
-<h3 id="💎-各工具优势与适用场景详解"><a href="#💎-各工具优势与适用场景详解" class="headerlink" title="💎 各工具优势与适用场景详解"></a>💎 各工具优势与适用场景详解</h3><h4 id="Flink-CDC"><a href="#Flink-CDC" class="headerlink" title="Flink CDC"></a>Flink CDC</h4><p>Flink CDC（Change Data Capture）的优势在于其<strong>全增量一体化</strong>的流处理架构。它基于Flink引擎，不仅能实时捕获数据库的增量变更日志（如MySQL的binlog），还能一次性完成历史数据的全量快照读取，并在全量同步完成后无缝切换到增量模式，整个过程无需中断，保证数据一致性-。这使其成为<strong>构建实时数据湖、实时数仓和需要低延迟响应的数据管道</strong>的理想选择<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1711015">-1</a>。</p>
-<h4 id="Flume"><a href="#Flume" class="headerlink" title="Flume"></a>Flume</h4><p>Flume 的核心优势在于其<strong>专为日志而生</strong>的轻量级、高可靠架构。它采用简单的管道（Source-Channel-Sink）模型，稳定且易于部署，是处理非结构化或半结构化日志数据的利器<a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/information/flume%E8%AF%BB%E5%8F%96mysql-salon">-10</a>。因此，它广泛用于<strong>将分散在大量服务器上的应用日志、系统日志、访问日志等汇聚到HDFS、Kafka等中央存储系统</strong>中，为后续的离线或实时分析提供原始数据–。</p>
-<h4 id="DataX"><a href="#DataX" class="headerlink" title="DataX"></a>DataX</h4><p>DataX 的优势在于其<strong>高度的可扩展性和对离线批量同步场景的专注</strong>。它采用插件化架构，官方支持大量异构数据源（关系型数据库、NoSQL、大数据存储等），通过配置JSON文件即可完成开发，简单稳定<a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/698f6656452a0f0efa5e3ec1">-6</a><a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/6926bf1aaa20654bee738d42">-20</a>。因此，<strong>当需要进行大规模、周期性、对实时性无要求的离线数据迁移、数据备份或T+1数据仓库ETL</strong>时，DataX是一个非常成熟可靠的选择-<a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/6926bf1aaa20654bee738d42">-20</a>。</p>
-<h3 id="⚠️-项目实战中的常见问题"><a href="#⚠️-项目实战中的常见问题" class="headerlink" title="⚠️ 项目实战中的常见问题"></a>⚠️ 项目实战中的常见问题</h3><p>这三个工具在落地时也会遇到一些典型问题，以下是常见问题速查表，方便你快速定位和排查。</p>
-<table>
-<thead>
-<tr>
-<th align="left">问题维度</th>
-<th align="left">Flink CDC</th>
-<th align="left">Flume</th>
-<th align="left">DataX</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>数据重复/丢失</strong></td>
-<td align="left"><strong>高频问题</strong>。主要发生在全增量切换时，因位点（offset）管理或chunk边界重叠导致数据重复<a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/article/2594609?from=15425&frompage=seopage">-47</a>；或因Checkpoint未成功、重启时位点提交不及时导致<a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/article/2594609?from=15425&frompage=seopage">-47</a>。</td>
-<td align="left">可能因Source或Sink的事务配置不当导致数据重复或丢失，但日志场景通常对数据质量要求相对宽松。</td>
-<td align="left">任务中断后重启可能重跑部分数据，导致重复。不支持断点续传。</td>
-</tr>
-<tr>
-<td align="left"><strong>性能瓶颈</strong></td>
-<td align="left"><strong>数据库连接压力</strong>：全量读取和实时CDC会与数据库建立长连接，增加源库负载-。 <strong>状态管理</strong>：处理大规模数据时对Flink状态后端（如RocksDB）要求高-。</td>
-<td align="left"><strong>通道吞吐量</strong>：单个Source-Sink对的处理能力有限，处理海量数据时容易成为瓶颈。 <strong>缓存开销</strong>：Channel的内存或文件缓冲可能带来额外延迟<a target="_blank" rel="noopener" href="https://www.shanhaibi.com/article/v1/xq9zzn5imogmsa1t">-11</a>。</td>
-<td align="left"><strong>单机模式瓶颈</strong>：受限于单节点资源，处理TB级以上数据时性能可能不稳定<a target="_blank" rel="noopener" href="http://yisuapi.yisu.com/ask/87638337.html">-27</a>。 <strong>资源竞争</strong>：并发任务多时，对CPU和内存的争用明显。</td>
-</tr>
-<tr>
-<td align="left"><strong>部署与运维</strong></td>
-<td align="left"><strong>技术栈复杂</strong>：依赖Flink集群，需熟悉Flink作业的提交、调优和监控<a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/698f6656452a0f0efa5e3ec1">-6</a>。 <strong>Schema变更</strong>：需处理源表结构变化，配置较繁琐。</td>
-<td align="left"><strong>配置繁琐</strong>：每个数据流都需独立配置，维护大量Flume Agent较复杂<a target="_blank" rel="noopener" href="https://www.shanhaibi.com/article/v1/xq9zzn5imogmsa1t">-11</a>。 <strong>故障转移</strong>：Agent故障时的自动恢复和负载均衡需精心设计。</td>
-<td align="left"><strong>JSON配置复杂</strong>：复杂的同步任务需要编写冗长的JSON文件，易出错，缺乏可视化界面<a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/6926bf1aaa20654bee738d42">-20</a><a target="_blank" rel="noopener" href="http://yisuapi.yisu.com/ask/87638337.html">-27</a>。 <strong>依赖外部调度</strong>：本身无调度能力，需集成DolphinScheduler等工具。</td>
-</tr>
-<tr>
-<td align="left"><strong>数据一致性</strong></td>
-<td align="left"><strong>Exactly-Once保证</strong>：依赖Flink的Checkpoint机制，理论上可保证端到端的一致性，但在实际复杂环境中达成代价较高-。</td>
-<td align="left"><strong>At-least-Once保证</strong>：默认设计倾向于至少一次，确保数据不丢失，但可能重复。</td>
-<td align="left"><strong>批量一致</strong>：以批为单位，一批数据要么全成功要么全失败，无事务性支持，易出现数据不一致。</td>
-</tr>
-<tr>
-<td align="left"><strong>环境依赖</strong></td>
-<td align="left"><strong>强依赖Flink</strong>：必须有一套稳定、资源充足的Flink集群，且对Flink版本有要求。</td>
-<td align="left"><strong>依赖Hadoop生态</strong>：常用于与HDFS、HBase等集成，对Java环境有要求。</td>
-<td align="left"><strong>轻量级</strong>：只需Java环境，单机即可运行，对集群依赖小。</td>
-</tr>
-</tbody></table>
-<h3 id="💎-总结"><a href="#💎-总结" class="headerlink" title="💎 总结"></a>💎 总结</h3><h4 id="什么时候选-Flink-CDC？"><a href="#什么时候选-Flink-CDC？" class="headerlink" title="什么时候选 Flink CDC？"></a>什么时候选 Flink CDC？</h4><ul>
-<li>需要<strong>实时同步数据库变更</strong>，延迟要求在秒级甚至毫秒级。</li>
-<li>数据源为<strong>关系型数据库</strong>，需要同时处理历史全量数据和实时增量数据。</li>
-<li>希望利用Flink的流处理能力进行<strong>实时计算和清洗</strong>。</li>
-</ul>
-<h4 id="什么时候选-Flume？"><a href="#什么时候选-Flume？" class="headerlink" title="什么时候选 Flume？"></a>什么时候选 Flume？</h4><ul>
-<li>数据源是<strong>大量的日志文件、网络数据包、系统事件</strong>等。</li>
-<li>目标系统是 <strong>HDFS、Kafka、HBase</strong> 等大数据生态组件。</li>
-<li>对数据的<strong>实时性有一定要求</strong>，但对数据质量（如少量重复、丢失）的容忍度较高。</li>
-</ul>
-<h4 id="什么时候选-DataX？"><a href="#什么时候选-DataX？" class="headerlink" title="什么时候选 DataX？"></a>什么时候选 DataX？</h4><ul>
-<li>任务是<strong>离线的、批量的数据迁移</strong>，对实时性没有要求。</li>
-<li>需要在<strong>多种异构数据源之间</strong>进行数据交换（如MySQL → Hive, Oracle → HBase）。</li>
-<li>追求<strong>工具的稳定性和易用性</strong>，希望用简单的配置快速完成数据同步任务。</li>
-</ul>
-
+<h2 id="简历介绍"><a href="#简历介绍" class="headerlink" title="简历介绍"></a>简历介绍</h2>
       
     </div>
 
@@ -404,7 +328,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -459,7 +383,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/ImportSample/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -473,7 +397,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/flink/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
+            <a href="/2026/04/26/flink/ImportSample/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -483,7 +407,66 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.flink.streaming.api.scala._</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/flink%20window/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/26/flink/flink%20window/" class="post-title-link" itemprop="url">flink window</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -506,17 +489,284 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d2dbc089b0bd">Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cjblogs/p/12973063.html">Flink 流式聚合性能调优指南</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26983736">【资料合集】Apache Flink 精选PDF下载</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/zhisheng17/flink-learning">大数据实时计算引擎 Flink 实战与性能优化</a></p>
-<p><a target="_blank" rel="noopener" href="https://flymetothemars.github.io/2019/11/14/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E%20Flink%20%E5%AE%9E%E6%88%98%E4%B8%8E%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">大数据实时计算引擎 Flink 实战与性能优化</a></p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2017/11/17/flink-benchmark.html">流计算框架 Flink 与 Storm 的性能对比</a></p>
-<h2 id="聚合处理"><a href="#聚合处理" class="headerlink" title="聚合处理"></a>聚合处理</h2><ol>
-<li></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/131576782">Flink 消息聚合处理方案</a></li>
+          <h1 id="flink1-6"><a href="#flink1-6" class="headerlink" title="flink1.6"></a>flink1.6</h1><p><a target="_blank" rel="noopener" href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/dev/stream/operators/windows.html">官网链接</a></p>
+<p><strong>Keyed Windows</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">stream</span><br><span class="line">       .keyBy(...)               &lt;-  keyed versus non-keyed windows</span><br><span class="line">       .window(...)              &lt;-  required: &quot;assigner&quot;</span><br><span class="line">      [.trigger(...)]            &lt;-  optional: &quot;trigger&quot; (else default trigger)</span><br><span class="line">      [.evictor(...)]            &lt;-  optional: &quot;evictor&quot; (else no evictor)</span><br><span class="line">      [.allowedLateness(...)]    &lt;-  optional: &quot;lateness&quot; (else zero)</span><br><span class="line">      [.sideOutputLateData(...)] &lt;-  optional: &quot;output tag&quot; (else no side output for late data)</span><br><span class="line">       .reduce&#x2F;aggregate&#x2F;fold&#x2F;apply()      &lt;-  required: &quot;function&quot;</span><br><span class="line">      [.getSideOutput(...)]      &lt;-  optional: &quot;output tag&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Non-Keyed Windows</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">stream</span><br><span class="line">       .windowAll(...)           &lt;-  required: &quot;assigner&quot;</span><br><span class="line">      [.trigger(...)]            &lt;-  optional: &quot;trigger&quot; (else default trigger)</span><br><span class="line">      [.evictor(...)]            &lt;-  optional: &quot;evictor&quot; (else no evictor)</span><br><span class="line">      [.allowedLateness(...)]    &lt;-  optional: &quot;lateness&quot; (else zero)</span><br><span class="line">      [.sideOutputLateData(...)] &lt;-  optional: &quot;output tag&quot; (else no side output for late data)</span><br><span class="line">       .reduce&#x2F;aggregate&#x2F;fold&#x2F;apply()      &lt;-  required: &quot;function&quot;</span><br><span class="line">      [.getSideOutput(...)]      &lt;-  optional: &quot;output tag&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="窗口生命周期"><a href="#窗口生命周期" class="headerlink" title="窗口生命周期"></a>窗口生命周期</h2><h3 id="window"><a href="#window" class="headerlink" title="window"></a>window</h3><h3 id="trigger"><a href="#trigger" class="headerlink" title="trigger"></a>trigger</h3><p>The function will contain the computation to be applied to the contents of the window, while the <code>Trigger</code> specifies the conditions under which the window is considered ready for the function to be applied. A triggering policy might be something like “when the number of elements in the window is more than 4”, or “when the watermark passes the end of the window”. A trigger can also decide to purge a window’s contents any time between its creation and removal. Purging in this case only refers to the elements in the window, and <em>not</em> the window metadata. This means that new data can still be added to that window.</p>
+<p>function包含了窗口中数据的计算逻辑，trigger指定了在哪些条件下会调用这些function</p>
+<h3 id="Evictor"><a href="#Evictor" class="headerlink" title="Evictor"></a>Evictor</h3><p>Apart from the above, you can specify an <code>Evictor</code> (see <a target="_blank" rel="noopener" href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/dev/stream/operators/windows.html#evictors">Evictors</a>) which will be able to remove elements from the window after the trigger fires and before and/or after the function is applied.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/flink%E6%95%B0%E6%8D%AE%E6%BA%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/26/flink/flink%E6%95%B0%E6%8D%AE%E6%BA%90/" class="post-title-link" itemprop="url">flink数据源</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/boling_cavalry/article/details/105467076">Flink的DataSource三部曲之一：直接API</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/boling_cavalry/article/details/105471798">Flink的DataSource三部曲之二:内置connector</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/boling_cavalry/article/details/105472218">Flink的DataSource三部曲之三:自定义</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/flink%E7%AA%97%E5%8F%A3%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/26/flink/flink%E7%AA%97%E5%8F%A3%E7%B1%BB/" class="post-title-link" itemprop="url">flink窗口类</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>WindowAssigner<ul>
+<li>SlidingProcessingTimeWindows</li>
+<li>BaseAlignedWindowAssigner<ul>
+<li>SlidingAlignedProcessingTimeWindows</li>
+</ul>
+</li>
+<li>TumblingEventTimeWindows<ul>
+<li>TumblingTimeWindows</li>
+</ul>
+</li>
+<li>MergingWindowAssigner<ul>
+<li>ProcessingTimeSessionWindows</li>
+<li>DynamicProcessingTimeSessionWindows</li>
+<li>DynamicEventTimeSessionWindows</li>
+<li>EventTimeSessionWindows</li>
+</ul>
+</li>
+<li>TumblingProcessingTimeWindows</li>
+<li>SlidingEventTimeWindows<ul>
+<li>SlidingTimeWindows</li>
+</ul>
+</li>
+<li>GlobalWindows</li>
+</ul>
+</li>
+</ul>
+<h2 id="WindowAssigner"><a href="#WindowAssigner" class="headerlink" title="WindowAssigner"></a>WindowAssigner</h2><h3 id="1-SlidingProcessingTimeWindows"><a href="#1-SlidingProcessingTimeWindows" class="headerlink" title="1. SlidingProcessingTimeWindows"></a>1. SlidingProcessingTimeWindows</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into sliding windows based on the current</span></span><br><span class="line"><span class="comment"> * system time of the machine the operation is running on. Windows can possibly overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute, every 10 seconds:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;String, Tuple2&lt;String, Integer&gt;&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindows&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(SlidingProcessingTimeWindows.of(Time.of(1, MINUTES), Time.of(10, SECONDS));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于flink处理时间的滑动窗口</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-SlidingEventTimeWindows"><a href="#6-SlidingEventTimeWindows" class="headerlink" title="6. SlidingEventTimeWindows"></a>6. SlidingEventTimeWindows</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into sliding windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows can possibly overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute, every 10 seconds:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;Tuple2&lt;String, Integer&gt;, String&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindow&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(SlidingEventTimeWindows.of(Time.minutes(1), Time.seconds(10)));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于元素时间的滑动窗口</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-1-SlidingTimeWindows-废弃"><a href="#6-1-SlidingTimeWindows-废弃" class="headerlink" title="6.1 SlidingTimeWindows(废弃)"></a>6.1 SlidingTimeWindows(废弃)</h4><h3 id="2-BaseAlignedWindowAssigner"><a href="#2-BaseAlignedWindowAssigner" class="headerlink" title="2. BaseAlignedWindowAssigner"></a>2. BaseAlignedWindowAssigner</h3><h4 id="1-1-SlidingAlignedProcessingTimeWindows"><a href="#1-1-SlidingAlignedProcessingTimeWindows" class="headerlink" title="1.1 SlidingAlignedProcessingTimeWindows"></a>1.1 SlidingAlignedProcessingTimeWindows</h4><h3 id="5-TumblingProcessingTimeWindows"><a href="#5-TumblingProcessingTimeWindows" class="headerlink" title="5. TumblingProcessingTimeWindows"></a>5. TumblingProcessingTimeWindows</h3><h3 id="3-TumblingEventTimeWindows"><a href="#3-TumblingEventTimeWindows" class="headerlink" title="3. TumblingEventTimeWindows"></a>3. TumblingEventTimeWindows</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows cannot overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;Tuple2&lt;String, Integer&gt;, String&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindow&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(TumblingEventTimeWindows.of(Time.minutes(1)));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-1-TumblingTimeWindows-废弃"><a href="#3-1-TumblingTimeWindows-废弃" class="headerlink" title="3.1 TumblingTimeWindows(废弃)"></a>3.1 TumblingTimeWindows(废弃)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows cannot overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@deprecated</span> Please use &#123;<span class="doctag">@link</span> TumblingEventTimeWindows&#125;.</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-MergingWindowAssigner"><a href="#4-MergingWindowAssigner" class="headerlink" title="4. MergingWindowAssigner"></a>4. MergingWindowAssigner</h3><h4 id="4-1-ProcessingTimeSessionWindows"><a href="#4-1-ProcessingTimeSessionWindows" class="headerlink" title="4.1 ProcessingTimeSessionWindows"></a>4.1 ProcessingTimeSessionWindows</h4><h4 id="4-2-DynamicProcessingTimeSessionWindows"><a href="#4-2-DynamicProcessingTimeSessionWindows" class="headerlink" title="4.2 DynamicProcessingTimeSessionWindows"></a>4.2 DynamicProcessingTimeSessionWindows</h4><h4 id="4-3-DynamicEventTimeSessionWindows"><a href="#4-3-DynamicEventTimeSessionWindows" class="headerlink" title="4.3 DynamicEventTimeSessionWindows"></a>4.3 DynamicEventTimeSessionWindows</h4><h4 id="4-4-EventTimeSessionWindows"><a href="#4-4-EventTimeSessionWindows" class="headerlink" title="4.4 EventTimeSessionWindows"></a>4.4 EventTimeSessionWindows</h4><h3 id="7-GlobalWindows"><a href="#7-GlobalWindows" class="headerlink" title="7. GlobalWindows"></a>7. GlobalWindows</h3><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><ol>
+<li><strong>滑动窗口</strong></li>
 </ol>
-<h2 id="实时数仓"><a href="#实时数仓" class="headerlink" title="实时数仓"></a>实时数仓</h2><p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2018/10/18/meishi-data-flink.html">美团点评基于 Flink 的实时数仓建设实践</a></p>
+<ul>
+<li>每条数据会发送到多个滑动窗口中，即在最终的输出中，一条数据要被统计多次</li>
+<li>适合统计据当前时间往前一段时间内的数据汇总</li>
+</ul>
+<ol start="2">
+<li><strong>滚动窗口</strong></li>
+</ol>
+<ul>
+<li>每条数据只会在一个滚动窗口中</li>
+<li>适合对数据进行简单聚合后，再次聚合的场景</li>
+<li>适合输出明细，不做聚合的场景，比如join后直接输出</li>
+</ul>
+<h3 id="占用内存比较"><a href="#占用内存比较" class="headerlink" title="占用内存比较"></a>占用内存比较</h3><ol>
+<li><strong>滑动窗口</strong><ul>
+<li><em>理论上一条数据会复制到多个窗口，被复制几次，占用内存就会扩大几倍，但不清楚是否有优化，比如只复制数据的引用？</em></li>
+<li></li>
+</ul>
+</li>
+<li><strong>滚动窗口</strong></li>
+</ol>
+<h3 id="关于时间点"><a href="#关于时间点" class="headerlink" title="关于时间点"></a>关于时间点</h3><h4 id="窗口的开始时间"><a href="#窗口的开始时间" class="headerlink" title="窗口的开始时间"></a>窗口的开始时间</h4><ol>
+<li>首先要明确的是，开始时间只与system time和offset参数相关，与程序开始运行时间无关</li>
+<li>比如设置了窗口size是1h，那么在</li>
+</ol>
+<h4 id="窗口的结束时间"><a href="#窗口的结束时间" class="headerlink" title="窗口的结束时间"></a>窗口的结束时间</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/flink%E9%85%8D%E7%BD%AElog4j/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/04/26/flink/flink%E9%85%8D%E7%BD%AElog4j/" class="post-title-link" itemprop="url">flink配置log4j</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>因为本地测试中，本地构建的数据源并非预想中的单线程运行，所以想看下线程id，以确定是否每次都新起了线程。</p>
+<p>推荐使用xml，结构清晰</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Configuration</span> <span class="attr">status</span>=<span class="string">&quot;WARN&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Appenders</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 控制台输出 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Console</span> <span class="attr">name</span>=<span class="string">&quot;Console&quot;</span> <span class="attr">target</span>=<span class="string">&quot;SYSTEM_OUT&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Console</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 文件输出（可选） --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">File</span> <span class="attr">name</span>=<span class="string">&quot;File&quot;</span> <span class="attr">fileName</span>=<span class="string">&quot;logs/flink-job.log&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">File</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Appenders</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Loggers</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- Flink 相关日志级别 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;org.apache.flink&quot;</span> <span class="attr">level</span>=<span class="string">&quot;INFO&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 你的项目包名 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;com.jingqicao.code&quot;</span> <span class="attr">level</span>=<span class="string">&quot;DEBUG&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">Root</span> <span class="attr">level</span>=<span class="string">&quot;INFO&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;Console&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;File&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Root</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Loggers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>如果Logger不指定additivity=false，默认为true。此时当前Logger及Root都会处理日志，如果Logger与Root配了相同的Appender，就会重复输出。</p>
+<p>Root的level，表示的是Root使用的日志级别，如果有一个Logger没有具体指定，就会交由Root处理，即日志级别由Root决定。</p>
 
       
     </div>
@@ -560,7 +810,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -607,7 +857,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -621,7 +871,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/flink/%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">flink实践问题汇总</a>
+            <a href="/2026/04/26/flink/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
         </h2>
 
         <div class="post-meta">
@@ -631,7 +881,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
+              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -654,308 +904,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="待整理"><a href="#待整理" class="headerlink" title="待整理"></a>待整理</h2><ol>
-<li>本地自定义数据源，会启动多个线程，且不会停止，无法控制单线程输入</li>
+          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d2dbc089b0bd">Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cjblogs/p/12973063.html">Flink 流式聚合性能调优指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26983736">【资料合集】Apache Flink 精选PDF下载</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/zhisheng17/flink-learning">大数据实时计算引擎 Flink 实战与性能优化</a></p>
+<p><a target="_blank" rel="noopener" href="https://flymetothemars.github.io/2019/11/14/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E%20Flink%20%E5%AE%9E%E6%88%98%E4%B8%8E%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">大数据实时计算引擎 Flink 实战与性能优化</a></p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2017/11/17/flink-benchmark.html">流计算框架 Flink 与 Storm 的性能对比</a></p>
+<h2 id="聚合处理"><a href="#聚合处理" class="headerlink" title="聚合处理"></a>聚合处理</h2><ol>
+<li></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/131576782">Flink 消息聚合处理方案</a></li>
 </ol>
-<h3 id="本地自定义数据源，运行起来不停止"><a href="#本地自定义数据源，运行起来不停止" class="headerlink" title="本地自定义数据源，运行起来不停止"></a>本地自定义数据源，运行起来不停止</h3><details>
-<summary>日志记录</summary>
-<pre><code>
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:53 - loop:2
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:54 - operationInfo:&#123;"operationTimeStamp":"2021-01-27 16:58:23","pageId":"30001","sessionId":"abcd","unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:47 - loop:2
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:48 - orderInfo:&#123;"orderId":10001,"orderTimeStamp":"2021-01-27 16:58:23","price":39.8,"spuList":["spu1","spu2","spu3"],"unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:53 - loop:2
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:54 - operationInfo:&#123;"operationTimeStamp":"2021-01-27 16:58:23","pageId":"30001","sessionId":"abcd","unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:47 - loop:2
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:48 - orderInfo:&#123;"orderId":10001,"orderTimeStamp":"2021-01-27 16:58:23","price":39.8,"spuList":["spu1","spu2","spu3"],"unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:47 - loop:2
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:48 - orderInfo:&#123;"orderId":10001,"orderTimeStamp":"2021-01-27 16:58:23","price":39.8,"spuList":["spu1","spu2","spu3"],"unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:53 - loop:2
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:54 - operationInfo:&#123;"operationTimeStamp":"2021-01-27 16:58:23","pageId":"30001","sessionId":"abcd","unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:47 - loop:2
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:48 - orderInfo:&#123;"orderId":10001,"orderTimeStamp":"2021-01-27 16:58:23","price":39.8,"spuList":["spu1","spu2","spu3"],"unionId":"123","userId":"user_123"&#125;
-</code></pre>
-</details>
+<h2 id="实时数仓"><a href="#实时数仓" class="headerlink" title="实时数仓"></a>实时数仓</h2><p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2018/10/18/meishi-data-flink.html">美团点评基于 Flink 的实时数仓建设实践</a></p>
 
-<p>现象：</p>
-<ol>
-<li>两个数据源，都不断输出loop:2的记录，不会执行到loop:1，如果删除掉 <code>Thread.sleep()</code> 可以执行到loop:1</li>
-<li>不会停止，按理说只应该执行一次loop:2</li>
-</ol>
-<p>原因：</p>
-<ol>
-<li>估计是<code>Thread.sleep()</code>把线程挂起后，无法唤醒，所以执行不到loop:1</li>
-<li>可以判断与数据源无关，是受后续的处理方式影响的，如果直接sink，不会有问题2</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/flink/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hellojoy/article/details/101455711">Flink 原理与实现：理解 Flink 中的计算资源</a></p>
-<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/sihs_qy6hcpmqnblti9m">Flink 滑动窗口优化</a></p>
-<p>超长滑动窗口优化及解决方案</p>
-<h2 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiexiandong/p/12770187.html">flink系列-4、flink自定义source、sink</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.sohu.com/a/318353586_99973460">Flink 如何自定义Source</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43161811/article/details/88942806">Flink-04-Flink自定义Source</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/duxu24/article/details/105547283">Flink——自定义Source</a></p>
-<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1694062">5分钟Flink - 自定义Source源</a></p>
-<h2 id="join"><a href="#join" class="headerlink" title="join"></a>join</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/huzechen/article/details/102548858">Flink如何实现3个实时流同时join,leftjoin,rightjoin</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37142346/article/details/90176504">Flink Operator之CoGroup、Join以及Connect</a></p>
-<h2 id="方法详解"><a href="#方法详解" class="headerlink" title="方法详解"></a>方法详解</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/136671137">richXXXFunction的open,clone方法执行</a></p>
-<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><a target="_blank" rel="noopener" href="https://training.ververica.com/pages/training">在线训练地址</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/flink/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/" class="post-title-link" itemprop="url">数据倾斜问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/cbd7046e74aa">用两阶段聚合法解决Flink keyBy()算子倾斜</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/%E6%A6%82%E5%BF%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/flink/%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h1><h3 id="反压"><a href="#反压" class="headerlink" title="反压"></a>反压</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/flink/%E7%96%91%E9%97%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/flink/%E7%96%91%E9%97%AE/" class="post-title-link" itemprop="url">疑问</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:33:39" itemprop="dateCreated datePublished" datetime="2026-04-26T14:33:39+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="怎么理解flink的有状态"><a href="#怎么理解flink的有状态" class="headerlink" title="怎么理解flink的有状态"></a>怎么理解flink的有状态</h4>
       
     </div>
 
