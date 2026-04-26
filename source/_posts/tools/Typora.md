@@ -1,3 +1,11 @@
+[toc]
+
+
+
+文件间跳转
+
+[Markdown 语法](./markdown.md)
+
 
 
 [图片保存](https://zhuanlan.zhihu.com/p/344941041)
@@ -8,7 +16,7 @@
 
 
 
-数学表达式
+### 数学表达式
 
 要启用这个功能，首先到Preference->Editor中启用。然后使用$符号包裹Tex命令，例如：$lim_{x \to \infty} \ exp(-x)=0$将产生如下的数学表达式：
 
