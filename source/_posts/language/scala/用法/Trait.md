@@ -1,3 +1,15 @@
+---
+    title: Trait
+    creator: cjq
+    create_time: 2026/03/03
+    tags:
+      - scala
+    categories:
+      - [language, scala, 用法]
+
+
+---
+
 
 
 [toc]

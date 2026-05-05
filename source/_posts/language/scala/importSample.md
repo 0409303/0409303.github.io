@@ -1,3 +1,14 @@
+---
+    title: importSample
+    creator: cjq
+    create_time: 2026/03/03
+    tags:
+      - scala
+    categories:
+      - [language, scala]
+
+---
+
 
 
 ```scala
