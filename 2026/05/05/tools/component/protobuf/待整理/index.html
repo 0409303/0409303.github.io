@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生而为人">
+<meta property="og:url" content="http://example.com/2026/05/05/tools/component/protobuf/%E5%BE%85%E6%95%B4%E7%90%86/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-05-05T03:01:53.067Z">
+<meta property="article:modified_time" content="2026-05-05T03:01:53.067Z">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="大数据，数据仓库，机器学习，flink，spark">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/05/05/tools/component/protobuf/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title> | 生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/tools/component/protobuf/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">Microsoft Windows [Version 10.0.19044.2006]</span><br><span class="line">(c) Microsoft Corporation. All rights reserved.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo PATH</span><br><span class="line">PATH</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo $PATH</span><br><span class="line">$PATH</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo %PATH</span><br><span class="line">%PATH</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo %PATH%</span><br><span class="line">C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files\Common Files\Microsoft Shared\Microsoft Online Services;C:\Program Files (x86)\Common Files\Microsoft Shared\Microsoft Online Services;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;D:\Support\gawk-3.1.6-1-bin\bin;D:\Support\Nuget;C:\Program Files\dotnet\;C:\Users\jingqicao\AppData\Local\CloudBuild;C:\Users\jingqicao\AppData\Local\CloudBuild;C:\Users\jingqicao\AppData\Local\Microsoft\WindowsApps;C:\Users\jingqicao\.dotnet\tools;C:\Users\jingqicao\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\jingqicao\Program Files\protoc-3.13.0-win64\bin;D:\Support\spark-3.0.1-bin-hadoop2.7\bin;D:\Support\spark-3.0.1-bin-hadoop2.7\sbin;C:\Program Files\Java\jdk1.8.0_291\bin;D:\Support\hadoop-2.7.7\bin;D:\Support\hadoop-2.7.7\sbin;D:\Support\apache-maven-3.8.1\bin;C:\Users\jingqicao\AppData\Local\Programs\Python\Python39\Scripts;C:\Users\jingqicao\AppData\Local\atom\bin;C:\Users\jingqicao\.dotnet\tools;D:\Support\Go\bin;</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ --go_opt&#x3D;file_extension&#x3D;.pd.go D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: no such flag -file_extension</span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ --go_opt&#x3D;.pd.go D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: no such flag -.pd.go</span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ --go_opt&#x3D;. D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: no such flag -.</span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: unable to determine Go import path for &quot;Events&#x2F;App.proto&quot;</span><br><span class="line"></span><br><span class="line">Please specify either:</span><br><span class="line">        • a &quot;go_package&quot; option in the .proto source file, or</span><br><span class="line">        • a &quot;M&quot; argument on the command line.</span><br><span class="line"></span><br><span class="line">See https:&#x2F;&#x2F;developers.google.com&#x2F;protocol-buffers&#x2F;docs&#x2F;reference&#x2F;go-generated#package for more information.</span><br><span class="line"></span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Auction.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\AuctionFacts.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Bid.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ClickEvent.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\CommonTypes.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Device.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ExternalUser.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\L1ClassifierScore.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Location.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationConfigParams.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationServingLogRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\OperatingSystem.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\PiiRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Revenue.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Site.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\User.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ViewabilityEvent.proto</span><br><span class="line">google&#x2F;protobuf&#x2F;timestamp.proto: File not found.</span><br><span class="line">Events&#x2F;ViewabilityEvent.proto:4:1: Import &quot;google&#x2F;protobuf&#x2F;timestamp.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;ViewabilityEvent.proto:21:5: &quot;google.protobuf.Timestamp&quot; is not defined.</span><br><span class="line">Events&#x2F;ClickEvent.proto:4:1: Import &quot;google&#x2F;protobuf&#x2F;timestamp.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;ClickEvent.proto:18:9: &quot;google.protobuf.Timestamp&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:3:1: Import &quot;google&#x2F;protobuf&#x2F;timestamp.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:10:1: Import &quot;Events&#x2F;ViewabilityEvent.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:11:1: Import &quot;Events&#x2F;ClickEvent.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:23:9: &quot;google.protobuf.Timestamp&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:45:9: &quot;ViewabilityEvent&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:46:9: &quot;ViewabilityEvent&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:47:9: &quot;ClickEvent&quot; is not defined.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: unable to determine Go import path for &quot;Events&#x2F;App.proto&quot;</span><br><span class="line"></span><br><span class="line">Please specify either:</span><br><span class="line">        • a &quot;go_package&quot; option in the .proto source file, or</span><br><span class="line">        • a &quot;M&quot; argument on the command line.</span><br><span class="line"></span><br><span class="line">See https:&#x2F;&#x2F;developers.google.com&#x2F;protocol-buffers&#x2F;docs&#x2F;reference&#x2F;go-generated#package for more information.</span><br><span class="line"></span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: unable to determine Go import path for &quot;Events&#x2F;App.proto&quot;</span><br><span class="line"></span><br><span class="line">Please specify either:</span><br><span class="line">        • a &quot;go_package&quot; option in the .proto source file, or</span><br><span class="line">        • a &quot;M&quot; argument on the command line.</span><br><span class="line"></span><br><span class="line">See https:&#x2F;&#x2F;developers.google.com&#x2F;protocol-buffers&#x2F;docs&#x2F;reference&#x2F;go-generated#package for more information.</span><br><span class="line"></span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_package&#x3D;Microsoft.BI.Mediation.Schemas.Go --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Unknown flag: --go_package</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_package&#x3D;Microsoft.BI.Mediation.Schemas.Go --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Unknown flag: --go_package</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:31: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:48: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:56: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:64: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:6:1: Expected &quot;;&quot;.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:31: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:48: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:56: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:64: Invalid escape sequence in string literal.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:31: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:48: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:56: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:64: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:98: Invalid escape sequence in string literal.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:26: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:60: Invalid escape sequence in string literal.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Auction.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\AuctionFacts.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Bid.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ClickEvent.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\CommonTypes.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Device.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ExternalUser.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\L1ClassifierScore.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Location.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationConfigParams.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationServingLogRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\OperatingSystem.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\PiiRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Revenue.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Site.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\User.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ViewabilityEvent.proto</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/05/05/template/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/05/05/tools/idea/idea%E8%AE%B2%E8%A7%A3/" rel="next" title="idea软件使用教程">
+      idea软件使用教程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">252</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

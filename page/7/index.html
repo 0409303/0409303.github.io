@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/sql/hive/%E5%BE%85%E6%95%B4%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/sql/hive/%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/sql/hive/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/05/05/sql/hive/%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA/" class="post-title-link" itemprop="url">hive常用函数</a>
         </h2>
 
         <div class="post-meta">
@@ -201,65 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/helloxiaozhe/article/details/80363893">Hive下查看表占用空间大小的方法</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/sql/hive/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/sql/hive/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">hive常用函数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,19 +224,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><h5 id="8位dt转10位"><a href="#8位dt转10位" class="headerlink" title="8位dt转10位"></a>8位dt转10位</h5><p><code>from_unixtime(unix_timestamp(t.dt,&#39;yyyymmdd&#39;),&#39;yyyy-mm-dd&#39;)</code></p>
-<h5 id="8位减1小时"><a href="#8位减1小时" class="headerlink" title="8位减1小时"></a>8位减1小时</h5><p>dt格式2019120100<br><code>from_unixtime(unix_timestamp(dt,&#39;yyyyMMddHH&#39;) - 60*60, &#39;yyyy-MM-dd&#39;)</code></p>
-<h5 id="8位日期计算"><a href="#8位日期计算" class="headerlink" title="8位日期计算"></a>8位日期计算</h5><p><code>regexp_replace(date_sub(from_unixtime(unix_timestamp(t.dt,&#39;yyyymmdd&#39;),&#39;yyyy-mm-dd&#39;), 10), &#39;-&#39;, &#39;&#39;)</code></p>
-<h5 id="当前日期前一天"><a href="#当前日期前一天" class="headerlink" title="当前日期前一天"></a>当前日期前一天</h5><h5 id="保留2位小数"><a href="#保留2位小数" class="headerlink" title="保留2位小数"></a>保留2位小数</h5><p><code>round(123.4567, 2)</code></p>
-<h5 id="时间戳转换"><a href="#时间戳转换" class="headerlink" title="时间戳转换"></a>时间戳转换</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">hour</span>(from_unixtime(event_timestamp/<span class="number">1000</span>,<span class="string">&#x27;yyyy-MM-dd HH:mm:ss&#x27;</span>)) hour_time, <span class="keyword">count</span>(<span class="keyword">distinct</span> session_id)</span><br><span class="line"><span class="keyword">from</span> mart_eif_flow.bas_log_sdk_waimai_c <span class="keyword">where</span> dt=<span class="string">&#x27;20201217&#x27;</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">hour</span>(from_unixtime(event_timestamp/<span class="number">1000</span>,<span class="string">&#x27;yyyy-MM-dd HH:mm:ss&#x27;</span>)) <span class="keyword">order</span> <span class="keyword">by</span> hour_time</span><br></pre></td></tr></table></figure>
+          <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> temp_table <span class="keyword">as</span> (</span><br><span class="line">  <span class="keyword">select</span> <span class="string">&#x27;1&#x27;</span> <span class="keyword">as</span> f1, <span class="literal">null</span> <span class="keyword">as</span> f2</span><br><span class="line">  <span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line">  <span class="keyword">select</span> <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3&#x27;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h3><h5 id="保留小数"><a href="#保留小数" class="headerlink" title="保留小数"></a>保留小数</h5><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">regexp_replace(&#x27;abc/d&#x27;, &#x27;/&#x27;, &#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+<h3 id="count-distinct-结果是字段均不为null的去重值"><a href="#count-distinct-结果是字段均不为null的去重值" class="headerlink" title="count distinct 结果是字段均不为null的去重值"></a>count distinct 结果是字段均不为null的去重值</h3><p>所以在通过count distinct判断字段的重复情况时，注意把相关字段的null附上值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*)</span><br><span class="line"><span class="keyword">from</span> temp_table</span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="string">`count`</span>(*)</span><br><span class="line"><span class="number">2</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">distinct</span> f1, f2)</span><br><span class="line"><span class="keyword">from</span> temp_table</span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="string">`count`</span>(<span class="keyword">DISTINCT</span> <span class="string">`f1`</span>, <span class="string">`f2`</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(f1, f2)</span><br><span class="line"><span class="keyword">from</span> temp_table</span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="string">`count`</span>(<span class="string">`f1`</span>, <span class="string">`f2`</span>)</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="json"><a href="#json" class="headerlink" title="json"></a>json</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get_json_object(json_str, &#x27;$.csu_id&#x27;)</span><br><span class="line">// json_str可以标准的json字符串，也可以是包含转译符的字符串</span><br></pre></td></tr></table></figure>
+<h3 id="关联字段中有null时是关联不上的，即使左右都是null"><a href="#关联字段中有null时是关联不上的，即使左右都是null" class="headerlink" title="关联字段中有null时是关联不上的，即使左右都是null"></a>关联字段中有null时是关联不上的，即使左右都是null</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.f1, a.f2, b.f1, b.f2</span><br><span class="line"><span class="keyword">from</span> temp_table a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> temp_table b</span><br><span class="line"><span class="keyword">on</span> a.f1 = b.f1</span><br><span class="line"><span class="keyword">and</span> a.f2 = b.f2</span><br><span class="line"><span class="comment">--</span></span><br><span class="line">f1	f2	f1	f2</span><br><span class="line"><span class="number">1</span>	<span class="literal">NULL</span>	<span class="literal">NULL</span>	<span class="literal">NULL</span></span><br><span class="line"><span class="number">1</span>	<span class="number">3</span>	<span class="number">1</span>	<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="sum中包含null，不会影响sum的值"><a href="#sum中包含null，不会影响sum的值" class="headerlink" title="sum中包含null，不会影响sum的值"></a>sum中包含null，不会影响sum的值</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">sum</span>(ct)</span><br><span class="line"><span class="keyword">from</span>(<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">as</span> ct</span><br><span class="line"><span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line"><span class="keyword">select</span> <span class="literal">null</span>)a</span><br><span class="line"></span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="string">`sum`</span>(<span class="string">`ct`</span>)</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 
       
@@ -315,7 +258,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/sql/hive/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/sql/hive/%E6%95%B0%E6%8D%AE%E6%8E%A2%E6%9F%A5%E9%80%BB%E8%BE%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -329,7 +272,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/sql/hive/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/05/05/sql/hive/%E6%95%B0%E6%8D%AE%E6%8E%A2%E6%9F%A5%E9%80%BB%E8%BE%91/" class="post-title-link" itemprop="url">数据探查逻辑</a>
         </h2>
 
         <div class="post-meta">
@@ -339,64 +282,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/sql/hive/%E6%95%B0%E6%8D%AE%E6%8E%A2%E6%9F%A5%E9%80%BB%E8%BE%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/sql/hive/%E6%95%B0%E6%8D%AE%E6%8E%A2%E6%9F%A5%E9%80%BB%E8%BE%91/" class="post-title-link" itemprop="url">数据探查逻辑</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -445,7 +331,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/sql/mysql/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/sql/hive/%E5%BE%85%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -459,7 +345,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/sql/mysql/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">基础语法</a>
+            <a href="/2026/05/05/sql/hive/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -469,7 +355,122 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/helloxiaozhe/article/details/80363893">Hive下查看表占用空间大小的方法</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/sql/hive/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/sql/hive/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/sql/mysql/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/sql/mysql/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">基础语法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -520,7 +521,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/sql/mysql/%E6%9F%A5%E8%AF%A2%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/sql/mysql/%E6%9F%A5%E8%AF%A2%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -534,7 +535,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/sql/mysql/%E6%9F%A5%E8%AF%A2%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">mysql查询原理</a>
+            <a href="/2026/05/05/sql/mysql/%E6%9F%A5%E8%AF%A2%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">mysql查询原理</a>
         </h2>
 
         <div class="post-meta">
@@ -544,7 +545,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -587,7 +588,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/sql/mysql/%E9%94%81%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -601,7 +602,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">特殊语法</a>
+            <a href="/2026/05/05/sql/mysql/%E9%94%81%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -611,7 +612,64 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">特殊语法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -654,7 +712,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/sql/mysql/%E9%94%81%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/sql/mysql/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -668,7 +726,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/sql/mysql/%E9%94%81%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/05/05/sql/mysql/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">问题汇总</a>
         </h2>
 
         <div class="post-meta">
@@ -678,64 +736,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/sql/mysql/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/sql/mysql/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">问题汇总</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -788,7 +789,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/system/linux/%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/system/linux/%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -802,7 +803,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/system/linux/%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">命令</a>
+            <a href="/2026/05/05/system/linux/%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">命令</a>
         </h2>
 
         <div class="post-meta">
@@ -812,7 +813,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -870,7 +871,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -936,18 +937,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">243</span>
+          <span class="site-state-item-count">252</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

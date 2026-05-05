@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/language/java/problem/%E9%9B%B6%E6%95%A3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/language/java/spring/%E6%B3%A8%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/language/java/problem/%E9%9B%B6%E6%95%A3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">java零散问题汇总</a>
+            <a href="/2026/05/05/language/java/spring/%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">spring注解</a>
         </h2>
 
         <div class="post-meta">
@@ -201,150 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-problem/" itemprop="url" rel="index"><span itemprop="name">java-problem</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>当输出在sleep之后时，无法打印</p>
-<p>怀疑原因是因为线程被挂起，无法继续执行，但为什么每个线程都无法被唤醒？需要看下唤醒逻辑</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;orderInfo:&quot;</span> + orderInfo);</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="502错误"><a href="#502错误" class="headerlink" title="502错误"></a>502错误</h3><p>有可能是因为有人在进行远程调试</p>
-<h3 id="空指针可能情况"><a href="#空指针可能情况" class="headerlink" title="空指针可能情况"></a>空指针可能情况</h3><p>基本类型的值为null</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/language/java/rule/%E5%AF%B9%E8%B1%A1%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83(%E4%B8%80)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/language/java/rule/%E5%AF%B9%E8%B1%A1%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83(%E4%B8%80)/" class="post-title-link" itemprop="url">对象使用规范(一)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Po、Vo、Bo、Dto、、"><a href="#Po、Vo、Bo、Dto、、" class="headerlink" title="Po、Vo、Bo、Dto、、"></a>Po、Vo、Bo、Dto、、</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/uestcyms/article/details/80244407">Java中常见的对象类型简述(DO、BO、DTO、VO、AO、PO)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/language/java/spring/spring%20boot%E9%A1%B9%E7%9B%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/language/java/spring/spring%20boot%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">spring注解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -367,7 +224,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id><a href="#" class="headerlink" title></a></h2><h2 id="启动报错"><a href="#启动报错" class="headerlink" title="启动报错"></a>启动报错</h2><h3 id="Could-not-resolve-placeholder"><a href="#Could-not-resolve-placeholder" class="headerlink" title="Could not resolve placeholder"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/tonghuawanli/article/details/76595383">Could not resolve placeholder</a></h3><p>原因：没有指定好配置文件，因为src/main/resources下有多个配置文件，例如application-dev.properties, boss.properties等。</p>
+          <h2 id="自动化配置的问题"><a href="#自动化配置的问题" class="headerlink" title="自动化配置的问题"></a>自动化配置的问题</h2><h5 id="需要排除的配置"><a href="#需要排除的配置" class="headerlink" title="需要排除的配置"></a>需要排除的配置</h5><p>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/javastack/p/12016212.html">Spring Boot 排除自动配置的 4 种方法，关键时刻很有用！</a>]</p>
+<ol>
+<li>@SpringBootApplication</li>
+<li>@EnableAutoConfiguration</li>
+<li>@SpringCloudApplication</li>
+<li>spring.autoconfigure.exclude</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dyc87112/article/details/73739535">Spring Boot自动化配置的利弊及解决之道</a></p>
+<h6 id="排除的类总结"><a href="#排除的类总结" class="headerlink" title="排除的类总结"></a>排除的类总结</h6><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/SpringBootApplication">@SpringBootApplication</a>(exclude = DruidDataSourceAutoConfigure.class)</li>
+<li></li>
+</ol>
+<h2 id="注解用法"><a href="#注解用法" class="headerlink" title="注解用法"></a>注解用法</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sqlgao22/article/details/100095433">@RequestBody和@RequestParam注解使用</a></p>
+<h3 id="Async"><a href="#Async" class="headerlink" title="@Async"></a>@Async</h3><ol>
+<li>可以指定线程池</li>
+</ol>
+<h4 id="不生效原因："><a href="#不生效原因：" class="headerlink" title="不生效原因："></a>不生效原因：</h4><ol>
+<li>需要保证调用函数与注解修饰的函数在不同类中，因为不会走代理类。<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37760377/article/details/103627676">详解</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/YoungLee16/article/details/88398045">详解2</a></li>
+</ol>
+<h3 id="Value"><a href="#Value" class="headerlink" title="@Value"></a>@Value</h3><h4 id="注入static变量四种方法"><a href="#注入static变量四种方法" class="headerlink" title="注入static变量四种方法"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZYC88888/article/details/87863038">注入static变量四种方法</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalValue</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Getter</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String DATABASE;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;mysql.db:test&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDatabase</span><span class="params">(String db)</span> </span>&#123;</span><br><span class="line">        DATABASE = db;</span><br><span class="line">    &#125;</span><br><span class="line">  	<span class="comment">// 这里要特别注意:</span></span><br><span class="line">  	<span class="comment">// 1. @value需要注释set函数上</span></span><br><span class="line">  	<span class="comment">// 2. 自动生成的getter和setter方法，会带有static的限定符，需要去掉，才可以。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@Value<br>static<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZYC88888/article/details/87863038">https://blog.csdn.net/ZYC88888/article/details/87863038</a></p>
+<p>org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘pubApiPush’: Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder ‘group_url’ in value “${group_url}”</p>
+<p>group_url: [[查看结果|<a target="_blank" rel="noopener" href="http://wolf.waimai.dev.sankuai.com/group/hubble/page/dolphinManage]]">http://wolf.waimai.dev.sankuai.com/group/hubble/page/dolphinManage]]</a></p>
 
       
     </div>
@@ -387,7 +267,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/language/java/spring/%E5%BE%85%E6%95%B4%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/language/java/web/%E5%B8%B8%E8%A7%81%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -401,7 +281,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/language/java/spring/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/05/05/language/java/web/%E5%B8%B8%E8%A7%81%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">常见安全漏洞及解决方案</a>
         </h2>
 
         <div class="post-meta">
@@ -411,7 +291,16 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-web/" itemprop="url" rel="index"><span itemprop="name">java-web</span></a>
+                </span>
             </span>
 
           
@@ -425,8 +314,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>(exclude = DataSourceAutoConfiguration.class)</p>
-<p>DynamicDataSourceAutoConfiguration</p>
+          <p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/57489507">sql注入漏洞</a></p>
+<p>修复方案：<br>如果拼接参数是SQL的查询参数都可以通过将mybatis配置文件中的 $ 改为 #，来解决<br>替换规则如下：<br>1.将 WHERE <code>some_field</code> = ‘${变量}’ 替换为 WHERE <code>some_field</code> = #{param}</p>
+<p>2.将 like ‘%${变量}%’ 替换为 like concat(‘%’, #{变量}, ‘%’)</p>
+<p>3.将 like concat(‘%’, ${变量}, ‘%’) 替换成 like concat(‘%’, #{变量}, ‘%’)</p>
+<p>4.将 WHERE <code>some_field</code> IN (${变量}) 替换为</p>
+<p>WHERE <code>some_field</code> IN</p>
+<p>#{item}</p>
+<p>对于拼接的变量不是SQL参数的，而是字段名、表名的情况，可以使用安全SDK检查输入是否是合法的标识符。<br>1.pom 引入安全SDK依赖</p>
+<p>com.sankuai.security<br>sec-sdk<br>${尽可能最新版本}</p>
+<p>\2. 代码中检查输入的变量的值是否是合法的标识符。<br>String sortName = req.getParameter(“sortName”);<br>if (sortName != null &amp;&amp; !SecSdk.isValidSqlIdentifier(sortName)) {<br>// 危险，可能有SQL注入，<br>// return or throw exception<br>}</p>
+<p>参考文档：<br>SQL注入介绍：<a target="_blank" rel="noopener" href="https://sectraining.sankuai.com/?source=source-scanner/#/document/30001">https://sectraining.sankuai.com/?source=source-scanner/#/document/30001</a><br>安全SDK文档：<a target="_blank" rel="noopener" href="https://km.sankuai.com/page/234776924">https://km.sankuai.com/page/234776924</a></p>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/155875683">CORS 安全配置不当</a></p>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/68078369">XSS 跨站脚本攻击</a></p>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/64887091">越权类安全问题</a></p>
 
       
     </div>
@@ -446,7 +347,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/kafka/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/language/java/web/URL%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -460,7 +361,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/kafka/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/05/05/language/java/web/URL%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -470,7 +371,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
 
           
@@ -484,16 +385,98 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">21&#x2F;09&#x2F;08 03:17:10 WARN AbstractCoordinator [kafka-coordinator-heartbeat-thread | spark-kafka-source-babd462a-415a-413a-aeea-e55435fff762-448121830-driver-0]: [Consumer clientId&#x3D;consumer-1, groupId&#x3D;spark-kafka-source-babd462a-415a-413a-aeea-e55435fff762-448121830-driver-0] This member will leave the group because consumer poll timeout has expired. This means the time between subsequent calls to poll() was longer than the configured max.poll.interval.ms, which typically implies that the poll loop is spending too much time processing messages. You can address this either by increasing max.poll.interval.ms or by reducing the maximum size of batches returned in poll() with max.poll.records.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">21&#x2F;09&#x2F;06 07:15:58 WARN TaskSetManager [task-result-getter-3]: Lost task 78.0 in stage 11.0 (TID 3591, wn29-msnbi.awfbdxsze1iudhhki0l2sbzfaf.bx.internal.cloudapp.net, executor 22): org.apache.kafka.common.errors.TimeoutException: Failed to allocate memory within the configured max blocking time 60000 ms.</span><br><span class="line"></span><br><span class="line">21&#x2F;09&#x2F;06 07:16:57 WARN TaskSetManager [task-result-getter-1]: Lost task 112.0 in stage 11.0 (TID 3625, wn29-msnbi.awfbdxsze1iudhhki0l2sbzfaf.bx.internal.cloudapp.net, executor 22): org.apache.kafka.common.errors.TimeoutException: Expiring 22 record(s) for sambeacon-pressure-test-183:120029 ms has passed since batch creation</span><br><span class="line"></span><br><span class="line">21&#x2F;09&#x2F;06 07:16:57 WARN TaskSetManager [task-result-getter-0]: Lost task 248.0 in stage 11.0 (TID 3761, wn29-msnbi.awfbdxsze1iudhhki0l2sbzfaf.bx.internal.cloudapp.net, executor 22): org.apache.kafka.common.errors.NetworkException: The server disconnected before a response was received.</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Cannot fetch record for offset xxx in 120000 milliseconds</span><br><span class="line"></span><br><span class="line">backgroud:</span><br><span class="line">1. 读取3个topic，每个256partition</span><br><span class="line">2. 后续的default shuffle partitions 为1200，但还没执行到这个相关的</span><br><span class="line">3. offset xxx 不是我指定的startingOffsets</span><br><span class="line">4. 现象是卡在读取数据的stage，并且没有任何task完成</span><br><span class="line"></span><br><span class="line">结论：</span><br><span class="line">1. 没有设置maxOffsetPerTrigger，导致读了从startingOffsets以后全部的历史数据，数据量太大，导致卡死</span><br></pre></td></tr></table></figure>
-
+          <table>
+<thead>
+<tr>
+<th>%20</th>
+<th>空格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%21</td>
+<td>!</td>
+</tr>
+<tr>
+<td>%23</td>
+<td>#</td>
+</tr>
+<tr>
+<td>%24</td>
+<td>$</td>
+</tr>
+<tr>
+<td>%25</td>
+<td>%</td>
+</tr>
+<tr>
+<td>%26</td>
+<td>&amp;</td>
+</tr>
+<tr>
+<td>%27</td>
+<td>‘</td>
+</tr>
+<tr>
+<td>%28</td>
+<td>(</td>
+</tr>
+<tr>
+<td>%29</td>
+<td>)</td>
+</tr>
+<tr>
+<td>%2A</td>
+<td>*</td>
+</tr>
+<tr>
+<td>%2B</td>
+<td>+</td>
+</tr>
+<tr>
+<td>%2C</td>
+<td>,</td>
+</tr>
+<tr>
+<td>%2E</td>
+<td>.</td>
+</tr>
+<tr>
+<td>%2F</td>
+<td>/</td>
+</tr>
+<tr>
+<td>%3A</td>
+<td>:</td>
+</tr>
+<tr>
+<td>%3B</td>
+<td>;</td>
+</tr>
+<tr>
+<td>%3D</td>
+<td>=</td>
+</tr>
+<tr>
+<td>%3F</td>
+<td>?</td>
+</tr>
+<tr>
+<td>%40</td>
+<td>@</td>
+</tr>
+<tr>
+<td>%5B</td>
+<td>[</td>
+</tr>
+<tr>
+<td>%5C</td>
+<td>/</td>
+</tr>
+<tr>
+<td>%5D</td>
+<td>]</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -513,7 +496,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/language/c#/issue/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/language/c#/issue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -527,7 +510,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/language/c#/issue/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/05/05/language/c#/issue/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -537,7 +520,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
 
           
@@ -572,7 +555,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/language/c#/%E5%BE%85%E6%95%B4%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/language/c#/%E5%BE%85%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -586,7 +569,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/language/c#/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
+            <a href="/2026/05/05/language/c#/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
         </h2>
 
         <div class="post-meta">
@@ -596,7 +579,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -646,7 +629,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/language/go/%E5%A6%82%E4%BD%95%E5%BC%80%E5%A7%8B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/language/go/%E5%A6%82%E4%BD%95%E5%BC%80%E5%A7%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -660,7 +643,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/language/go/%E5%A6%82%E4%BD%95%E5%BC%80%E5%A7%8B/" class="post-title-link" itemprop="url">如何开始</a>
+            <a href="/2026/05/05/language/go/%E5%A6%82%E4%BD%95%E5%BC%80%E5%A7%8B/" class="post-title-link" itemprop="url">如何开始</a>
         </h2>
 
         <div class="post-meta">
@@ -670,7 +653,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -720,7 +703,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/language/java/base/%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/language/java/component/log4j/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -734,7 +717,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/language/java/base/%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">写法总结</a>
+            <a href="/2026/05/05/language/java/component/log4j/" class="post-title-link" itemprop="url">log4j配置及变量</a>
         </h2>
 
         <div class="post-meta">
@@ -744,7 +727,144 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">java-组件</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/caolaosanahnu/article/details/7366555">log4j配置文件中使用变量</a></p>
+<p>原理：运行时，在程序中将变量添加到系统变量中</p>
+<h3 id="输出格式控制"><a href="#输出格式控制" class="headerlink" title="输出格式控制"></a>输出格式控制</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guoquanyou/article/details/5689652">Log4j输出格式控制–log4j的PatternLayout参数含义</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/language/java/component/%E7%AC%AC%E4%B8%89%E6%96%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/language/java/component/%E7%AC%AC%E4%B8%89%E6%96%B9/" class="post-title-link" itemprop="url">第三方依赖</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">java-组件</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-typesafe-config"><a href="#1-typesafe-config" class="headerlink" title="1. typesafe.config"></a>1. typesafe.config</h2><p>管理配置信息，优点是：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010039929/article/details/76215687">JAVA 配置管理库 typesafe.config</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/language/java/base/%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/language/java/base/%E5%86%99%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">写法总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -791,7 +911,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/language/java/base/%E6%97%A5%E6%9C%9F%E7%9B%B8%E5%85%B3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/language/java/base/%E5%BE%85%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -805,7 +925,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/language/java/base/%E6%97%A5%E6%9C%9F%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">日期相关</a>
+            <a href="/2026/05/05/language/java/base/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -815,16 +935,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
-                </span>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
 
           
@@ -838,13 +949,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="joda-time"><a href="#joda-time" class="headerlink" title="joda.time"></a>joda.time</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String pattern =<span class="string">&quot;dd-MMM-yy hh.mm.ss aa&quot;</span>;</span><br><span class="line">DateTimeFormat.forPattern(pattern)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>字符串补位</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;%02d&quot;</span>.format(currentTime.getMinuteOfHour)</span><br></pre></td></tr></table></figure>
-
+          <p>interface 属性为 private static final</p>
+<p>abstract 父类中的属性，默认式private的，非private的在子类中可以使用</p>
 
       
     </div>
@@ -863,7 +969,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -929,18 +1035,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">243</span>
+          <span class="site-state-item-count">252</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

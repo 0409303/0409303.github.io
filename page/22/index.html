@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/eventhub/%E9%94%99%E8%AF%AF%E6%8E%92%E6%9F%A5/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/flink/probe/%E7%AA%97%E5%8F%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/eventhub/%E9%94%99%E8%AF%AF%E6%8E%92%E6%9F%A5/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/05/05/flink/probe/%E7%AA%97%E5%8F%A3/" class="post-title-link" itemprop="url">窗口</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,20 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/probe/" itemprop="url" rel="index"><span itemprop="name">probe</span></a>
+                </span>
             </span>
 
           
@@ -215,9 +228,210 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://github.com/Azure/azure-event-hubs-spark/blob/master/examples/multiple-readers-example.md#receivers-move-between-executor-nodes">How to Avoid the <code>ReceiverDisconnectedException</code></a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">21&#x2F;08&#x2F;19 02:18:45 ERROR TaskSetManager [task-result-getter-0]: Task 32 in stage 73.0 failed 4 times; aborting job</span><br><span class="line">21&#x2F;08&#x2F;19 02:18:45 ERROR FileFormatWriter [stream execution thread for [id &#x3D; 5f382b82-2006-49a4-a657-5512d5bc6cce, runId &#x3D; e783c09d-8ea7-4848-b018-2422590426ce]]: Aborting job 6d36e286-ecb0-4a8e-9928-5ac7a0fbb7d2.</span><br><span class="line">org.apache.spark.SparkException: Job aborted due to stage failure: Task 32 in stage 73.0 failed 4 times, most recent failure: Lost task 32.3 in stage 73.0 (TID 18190, wn126-msnbi.awfbdxsze1iudhhki0l2sbzfaf.bx.internal.cloudapp.net, executor 8): java.util.concurrent.CompletionException: com.microsoft.azure.eventhubs.ReceiverDisconnectedException: New receiver &#39;spark-26-18237&#39; with higher epoch of &#39;0&#39; is created hence current receiver &#39;spark-8-18190&#39; with epoch &#39;0&#39; is getting disconnected. If you are recreating the receiver, make sure a higher epoch is used. TrackingId:ddef38220000007a00008bf9611dbf7b_G4_B16, SystemTracker:msnsam-prod:eventhub:sambeacon-ueq~4223|$default, Timestamp:2021-08-19T02:18:45, errorContext[NS: msnsam-prod.servicebus.windows.net, PATH: sambeacon-ueq&#x2F;ConsumerGroups&#x2F;$Default&#x2F;Partitions&#x2F;32, REFERENCE_ID: LN_23ed71_1629339510773_d5c9_G4, PREFETCH_COUNT: 500, LINK_CREDIT: 200, PREFETCH_Q_LEN: 0]</span><br><span class="line">	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:292)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:308)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.uniApply(CompletableFuture.java:607)</span><br><span class="line">	at java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:591)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:1990)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.ExceptionUtil.completeExceptionally(ExceptionUtil.java:116)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.drainPendingReceives(MessageReceiver.java:505)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.onError(MessageReceiver.java:490)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.onClose(MessageReceiver.java:790)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.BaseLinkHandler.processOnClose(BaseLinkHandler.java:73)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.BaseLinkHandler.handleRemoteLinkClosed(BaseLinkHandler.java:109)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.BaseLinkHandler.onLinkRemoteClose(BaseLinkHandler.java:51)</span><br><span class="line">	at org.apache.qpid.proton.engine.BaseHandler.handle(BaseHandler.java:176)</span><br><span class="line">	at org.apache.qpid.proton.engine.impl.EventImpl.dispatch(EventImpl.java:108)</span><br><span class="line">	at org.apache.qpid.proton.reactor.impl.ReactorImpl.dispatch(ReactorImpl.java:324)</span><br><span class="line">	at org.apache.qpid.proton.reactor.impl.ReactorImpl.process(ReactorImpl.java:291)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessagingFactory$RunReactor.run(MessagingFactory.java:784)</span><br><span class="line">	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)</span><br><span class="line">	at java.util.concurrent.FutureTask.run(FutureTask.java:266)</span><br><span class="line">	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)</span><br><span class="line">	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748)</span><br><span class="line">Caused by: com.microsoft.azure.eventhubs.ReceiverDisconnectedException: New receiver &#39;spark-26-18237&#39; with higher epoch of &#39;0&#39; is created hence current receiver &#39;spark-8-18190&#39; with epoch &#39;0&#39; is getting disconnected. If you are recreating the receiver, make sure a higher epoch is used. TrackingId:ddef38220000007a00008bf9611dbf7b_G4_B16, SystemTracker:msnsam-prod:eventhub:sambeacon-ueq~4223|$default, Timestamp:2021-08-19T02:18:45, errorContext[NS: msnsam-prod.servicebus.windows.net, PATH: sambeacon-ueq&#x2F;ConsumerGroups&#x2F;$Default&#x2F;Partitions&#x2F;32, REFERENCE_ID: LN_23ed71_1629339510773_d5c9_G4, PREFETCH_COUNT: 500, LINK_CREDIT: 200, PREFETCH_Q_LEN: 0]</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.ExceptionUtil.toException(ExceptionUtil.java:43)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.onClose(MessageReceiver.java:789)</span><br><span class="line">	... 15 more</span><br><span class="line"></span><br><span class="line">Driver stacktrace:</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1889)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1877)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1876)</span><br><span class="line">	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)</span><br><span class="line">	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:1876)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:926)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:926)</span><br><span class="line">	at scala.Option.foreach(Option.scala:257)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:926)</span><br><span class="line">	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:2110)</span><br><span class="line">	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2059)</span><br><span class="line">	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2048)</span><br><span class="line">	at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:737)</span><br><span class="line">	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2065)</span><br><span class="line">	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.write(FileFormatWriter.scala:167)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.FileStreamSink.addBatch(FileStreamSink.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch$5$$anonfun$apply$17.apply(MicroBatchExecution.scala:537)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$$anonfun$withNewExecutionId$1.apply(SQLExecution.scala:78)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:125)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:73)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch$5.apply(MicroBatchExecution.scala:535)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProgressReporter$class.reportTimeTaken(ProgressReporter.scala:351)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:58)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch(MicroBatchExecution.scala:534)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply$mcV$sp(MicroBatchExecution.scala:198)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProgressReporter$class.reportTimeTaken(ProgressReporter.scala:351)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:58)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1.apply$mcZ$sp(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProcessingTimeExecutor.execute(TriggerExecutor.scala:56)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.runActivatedStream(MicroBatchExecution.scala:160)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.org$apache$spark$sql$execution$streaming$StreamExecution$$runStream(StreamExecution.scala:281)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution$$anon$1.run(StreamExecution.scala:193)</span><br></pre></td></tr></table></figure>
+          <p>[toc]</p>
+<h2 id="flink窗口不是纯流计算，是不是可以类比于spark的微批处理-这么理解对不对"><a href="#flink窗口不是纯流计算，是不是可以类比于spark的微批处理-这么理解对不对" class="headerlink" title="flink窗口不是纯流计算，是不是可以类比于spark的微批处理 这么理解对不对"></a>flink窗口不是纯流计算，是不是可以类比于spark的微批处理 这么理解对不对</h2><p>这个类比<strong>不完全准确</strong>，容易掩盖两者在底层机制上的本质差异。虽然表面上看，两者都“把数据切分成块”，但实现哲学和运行方式截然不同。</p>
+<hr>
+<h3 id="一、Flink窗口：纯流式，增量聚合"><a href="#一、Flink窗口：纯流式，增量聚合" class="headerlink" title="一、Flink窗口：纯流式，增量聚合"></a>一、Flink窗口：纯流式，增量聚合</h3><ul>
+<li><strong>逐条处理，状态化</strong>：Flink 的算子（包括窗口）是事件驱动的，每条数据到达时都会<strong>立即</strong>更新窗口内部的状态（如累加器、缓冲区），而不是先攒一批再处理。</li>
+<li><strong>窗口触发只是输出时机</strong>：窗口的输出（触发）是逻辑上的“时间到了”，但在此之前，聚合已经随着每条数据的到来在<strong>持续增量更新</strong>。窗口关闭后，状态会被清理。</li>
+<li><strong>处理粒度是事件</strong>：即使有窗口，底层的流引擎依然是逐条处理事件，没有任何“批次边界”的等待开销。</li>
+</ul>
+<p><strong>关键点</strong>：Flink 的窗口是<strong>逻辑切片</strong>，运行在<strong>连续流处理引擎</strong>之上。</p>
+<hr>
+<h3 id="二、Spark微批：纯批处理，周期性切割"><a href="#二、Spark微批：纯批处理，周期性切割" class="headerlink" title="二、Spark微批：纯批处理，周期性切割"></a>二、Spark微批：纯批处理，周期性切割</h3><ul>
+<li><strong>按间隔攒批</strong>：Spark Streaming（基于 DStream）以固定时间（如5秒）将流入的数据切分成一个<strong>独立的RDD批次</strong>。</li>
+<li><strong>批次独立执行</strong>：每个批次作为一个独立的批处理作业提交，包含完整的调度开销（任务启动、数据 shuffle 等）。</li>
+<li><strong>处理粒度是微批</strong>：在批次内部，数据是批处理的，不具备逐条实时响应的能力。</li>
+</ul>
+<p><strong>关键点</strong>：Spark 微批是<strong>物理切分</strong>，运行在<strong>批处理引擎</strong>之上。</p>
+<hr>
+<h3 id="三、核心差异对比"><a href="#三、核心差异对比" class="headerlink" title="三、核心差异对比"></a>三、核心差异对比</h3><table>
+<thead>
+<tr>
+<th align="left">维度</th>
+<th align="left">Flink 窗口</th>
+<th align="left">Spark Streaming 微批</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>底层模型</strong></td>
+<td align="left">连续流处理（每条数据触发计算）</td>
+<td align="left">离散流（每个微批独立执行）</td>
+</tr>
+<tr>
+<td align="left"><strong>延迟</strong></td>
+<td align="left">毫秒级（事件驱动）</td>
+<td align="left">秒级（批次间隔 + 调度开销）</td>
+</tr>
+<tr>
+<td align="left"><strong>聚合方式</strong></td>
+<td align="left">增量聚合（数据来一条更新一次）</td>
+<td align="left">全量聚合（批次内数据一起计算）</td>
+</tr>
+<tr>
+<td align="left"><strong>状态管理</strong></td>
+<td align="left">窗口状态持续存在，跨批次（微批）无状态，批次间需外部存储</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>语义一致性</strong></td>
+<td align="left">事件时间 + 水位线，精确一次</td>
+<td align="left">基于接收时间，至少一次/精确一次（需额外配置）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="四、为什么容易混淆？"><a href="#四、为什么容易混淆？" class="headerlink" title="四、为什么容易混淆？"></a>四、为什么容易混淆？</h3><ul>
+<li>两者都解决了“无限数据流如何做有界聚合”的问题。</li>
+<li>两者都引入了“时间维度”的切分。</li>
+<li>一些早期流处理框架（如 Storm）没有内置窗口，而 Spark 微批通过周期性触发实现了类似窗口的效果，导致人们把“窗口”和“微批”画上等号。</li>
+</ul>
+<p>但本质上，Flink 的窗口是<strong>流式引擎上的逻辑窗口</strong>，而 Spark 微批是<strong>批处理引擎模拟流式</strong>。前者是原生流，后者是伪流。</p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>不能简单将 Flink 窗口类比为 Spark 微批处理</strong>。</p>
+<ul>
+<li>Flink 窗口是纯流计算的一个功能特性，它在连续处理的基础上提供了时间切片的语义。</li>
+<li>Spark 微批则是用批处理来模拟流式，整个架构模型不同。</li>
+</ul>
+<p>如果你需要进一步对比两者的适用场景（如低延迟、事件时间处理、状态管理等），我可以展开说明。</p>
+<h2 id="事件时间和处理时间都支持？且都是通过水位线触发窗口输出的？"><a href="#事件时间和处理时间都支持？且都是通过水位线触发窗口输出的？" class="headerlink" title="事件时间和处理时间都支持？且都是通过水位线触发窗口输出的？"></a>事件时间和处理时间都支持？且都是通过水位线触发窗口输出的？</h2><p>你的理解基本正确，但有一个关键细节需要修正：<strong>处理时间窗口并不通过水位线触发，而是直接依赖系统时钟。</strong></p>
+<p>下面我来分别说明两种窗口的触发机制，并指出“处理时间的水位线”这个概念在Flink中其实是不存在的。</p>
+<hr>
+<h3 id="一、事件时间窗口：必须依赖水位线"><a href="#一、事件时间窗口：必须依赖水位线" class="headerlink" title="一、事件时间窗口：必须依赖水位线"></a>一、事件时间窗口：必须依赖水位线</h3><ul>
+<li><strong>触发条件</strong>：当水位线（Watermark） ≥ 窗口结束时间时，窗口触发计算。</li>
+<li><strong>水位线作用</strong>：<ol>
+<li><strong>触发窗口输出</strong>（主要作用）</li>
+<li><strong>清理状态</strong>：水位线越过窗口后，清理该窗口的状态，释放内存</li>
+<li><strong>处理乱序</strong>：通过允许的延迟（allowedLateness）配合水位线，决定何时彻底关闭窗口</li>
+</ol>
+</li>
+</ul>
+<p>所以对于事件时间窗口，水位线是<strong>核心驱动力</strong>。</p>
+<hr>
+<h3 id="二、处理时间窗口：依赖系统时钟，不需要水位线"><a href="#二、处理时间窗口：依赖系统时钟，不需要水位线" class="headerlink" title="二、处理时间窗口：依赖系统时钟，不需要水位线"></a>二、处理时间窗口：依赖系统时钟，不需要水位线</h3><ul>
+<li><strong>触发条件</strong>：当机器的系统时钟 ≥ 窗口结束时间时，窗口触发计算。</li>
+<li><strong>没有水位线</strong>：处理时间语义下，Flink 不会生成、传播或使用水位线。如果你在代码中调用了 <code>assignTimestampsAndWatermarks</code>，它会被忽略。</li>
+<li><strong>为什么不需要</strong>：<ul>
+<li>处理时间是<strong>单调递增</strong>的（系统时钟）</li>
+<li>不存在乱序问题（数据到达即赋予当前处理时间）</li>
+<li>窗口的触发完全由系统时钟驱动，不需要额外的逻辑时钟</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="三、你说的“处理时间的水位线”在Flink中不存在"><a href="#三、你说的“处理时间的水位线”在Flink中不存在" class="headerlink" title="三、你说的“处理时间的水位线”在Flink中不存在"></a>三、你说的“处理时间的水位线”在Flink中不存在</h3><p>你提到“处理时间的水位线因为是绝对递增的，所以只有触发窗口输出这一个作用”——这个思考方向是对的，但<strong>Flink并没有为处理时间设计水位线机制</strong>。</p>
+<p>如果你在代码中尝试给处理时间流设置水位线，实际上：</p>
+<ul>
+<li>水位线生成器会被忽略</li>
+<li>窗口仍然按系统时钟触发</li>
+<li>不会产生任何“处理时间水位线”的概念</li>
+</ul>
+<p>换句话说，<strong>水位线是事件时间语义的专属概念</strong>。</p>
+<hr>
+<h3 id="四、对比总结"><a href="#四、对比总结" class="headerlink" title="四、对比总结"></a>四、对比总结</h3><table>
+<thead>
+<tr>
+<th align="left">维度</th>
+<th align="left"><strong>事件时间窗口</strong></th>
+<th align="left"><strong>处理时间窗口</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>触发机制</strong></td>
+<td align="left">水位线 ≥ 窗口结束时间</td>
+<td align="left">系统时钟 ≥ 窗口结束时间</td>
+</tr>
+<tr>
+<td align="left"><strong>是否依赖水位线</strong></td>
+<td align="left"><strong>必须依赖</strong></td>
+<td align="left"><strong>不依赖</strong>（没有水位线）</td>
+</tr>
+<tr>
+<td align="left"><strong>水位线作用</strong></td>
+<td align="left">触发窗口 + 清理状态 + 处理乱序</td>
+<td align="left">不存在水位线</td>
+</tr>
+<tr>
+<td align="left"><strong>单调性</strong></td>
+<td align="left">不一定单调（可停滞、可回退？实际不会回退，但可能停滞）</td>
+<td align="left">绝对单调（系统时钟）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="五、一个容易混淆的点"><a href="#五、一个容易混淆的点" class="headerlink" title="五、一个容易混淆的点"></a>五、一个容易混淆的点</h3><p>有些开发者会误以为“处理时间也有水位线”，可能是因为：</p>
+<ul>
+<li>Flink 内部确实有一个 <code>TimeCharacteristic.ProcessingTime</code> 的配置</li>
+<li>某些监控或日志中会看到类似“当前处理时间”的指标</li>
+</ul>
+<p>但那只是<strong>系统时钟的当前值</strong>，并不是水位线。水位线这个术语特指事件时间下的逻辑时钟。</p>
+<hr>
+<h3 id="总结你的理解"><a href="#总结你的理解" class="headerlink" title="总结你的理解"></a>总结你的理解</h3><p>✅ <strong>正确部分</strong>：</p>
+<ul>
+<li>Flink 同时支持事件时间和处理时间窗口</li>
+<li>事件时间窗口必须通过水位线触发</li>
+<li>处理时间窗口的触发是绝对递增的（因为系统时钟单调递增）</li>
+</ul>
+<p>❌ <strong>需要修正的部分</strong>：</p>
+<ul>
+<li>处理时间窗口<strong>不是通过水位线触发</strong>，而是直接由系统时钟触发</li>
+<li>Flink 中不存在“处理时间的水位线”这个概念，水位线是事件时间的专属机制</li>
+</ul>
+<h2 id="凡是从数据中读取的时间-都被认为是事件时间，哪怕这个字段存的是落盘时间，而处理时间不是读取出来的，是直接用的系统时钟，在系统时钟走到某一个时间点自动触发处理时间窗口的输出，这么理解是对的吗"><a href="#凡是从数据中读取的时间-都被认为是事件时间，哪怕这个字段存的是落盘时间，而处理时间不是读取出来的，是直接用的系统时钟，在系统时钟走到某一个时间点自动触发处理时间窗口的输出，这么理解是对的吗" class="headerlink" title="凡是从数据中读取的时间 都被认为是事件时间，哪怕这个字段存的是落盘时间，而处理时间不是读取出来的，是直接用的系统时钟，在系统时钟走到某一个时间点自动触发处理时间窗口的输出，这么理解是对的吗"></a>凡是从数据中读取的时间 都被认为是事件时间，哪怕这个字段存的是落盘时间，而处理时间不是读取出来的，是直接用的系统时钟，在系统时钟走到某一个时间点自动触发处理时间窗口的输出，这么理解是对的吗</h2><p>你的理解<strong>基本正确</strong>，但有两个细节可以进一步明确，避免语义上的偏差。</p>
+<hr>
+<h3 id="一、关于“事件时间”的认定"><a href="#一、关于“事件时间”的认定" class="headerlink" title="一、关于“事件时间”的认定"></a>一、关于“事件时间”的认定</h3><p>✅ <strong>正确部分</strong>：<br>在 Flink 中，<strong>事件时间</strong>确实是指<strong>从数据记录中显式提取出来的时间戳字段</strong>。无论这个时间戳原本代表什么业务含义（事件发生时间、日志落盘时间、数据库写入时间等），只要你把它提取出来并告诉 Flink “这就是事件时间”，系统就会按这个时间来处理。</p>
+<p>⚠️ <strong>需要明确的点</strong>：<br>虽然技术上可以这样用，但从<strong>业务语义</strong>的角度，<strong>事件时间</strong>通常应代表<strong>业务发生的时间</strong>。如果把“落盘时间”当作事件时间，就会失去事件时间的核心价值——<strong>处理乱序和体现业务发生的真实时序</strong>。这可能导致窗口统计结果与业务预期不符（例如凌晨产生的数据因落盘延迟被算到早上的窗口里）。</p>
+<p>所以，技术上是“你指定哪个字段，哪个就是事件时间”，但设计上要确保这个字段能反映真实的业务时序。</p>
+<hr>
+<h3 id="二、关于“处理时间”的触发"><a href="#二、关于“处理时间”的触发" class="headerlink" title="二、关于“处理时间”的触发"></a>二、关于“处理时间”的触发</h3><p>✅ <strong>完全正确</strong>：</p>
+<ul>
+<li><strong>处理时间\</strong>**不是从数据中读取的<strong>，而是 Flink 算子所在机器的</strong>系统时钟**（如 <code>System.currentTimeMillis()</code>）。</li>
+<li>当使用处理时间窗口（如 <code>TumblingProcessingTimeWindows</code>）时，<strong>触发条件就是系统时钟到达窗口的结束时间</strong>，没有水位线参与，也不需要等待任何数据。</li>
+</ul>
+<p>举例：<br>如果你设置了一个 10 秒的滚动处理时间窗口，窗口范围是 <code>[12:00:00, 12:00:10)</code>，那么当机器系统时钟走到 <code>12:00:10</code> 的那一刻，这个窗口就会被触发并输出结果，<strong>无论这个窗口里有没有收到数据</strong>（空窗口也会触发）。</p>
+<hr>
+<h3 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h3><p>你的理解可以归纳为：</p>
+<ul>
+<li><strong>事件时间</strong> = 从数据中提取的时间戳（技术上任意字段皆可，但建议用业务时间）</li>
+<li><strong>处理时间</strong> = 机器系统时钟（不来自数据）</li>
+<li><strong>处理时间窗口触发</strong> = 系统时钟到达结束时间（自动触发）</li>
+</ul>
+<p>这个理解是正确的，足以指导你区分两种时间语义的使用场景。</p>
+<h2 id="滑动窗口的实现逻辑是什么样的，是每条数据进来，如果属于多个滑动窗口，会分别发送到不同的窗口中吗"><a href="#滑动窗口的实现逻辑是什么样的，是每条数据进来，如果属于多个滑动窗口，会分别发送到不同的窗口中吗" class="headerlink" title="滑动窗口的实现逻辑是什么样的，是每条数据进来，如果属于多个滑动窗口，会分别发送到不同的窗口中吗"></a>滑动窗口的实现逻辑是什么样的，是每条数据进来，如果属于多个滑动窗口，会分别发送到不同的窗口中吗</h2><p><strong>是的，每条数据如果属于多个滑动窗口，会分别被发送到所有相关的窗口中。</strong> 这正是滑动窗口与滚动窗口的核心区别之一。</p>
+<p>Flink 中滑动窗口的这种工作方式，由 <code>WindowAssigner</code> 的 <code>assignWindows()</code> 方法驱动。对于一条新到的数据，该方法会计算出它所属的<strong>所有</strong>窗口，并将其分发到这些窗口中进行计算–。</p>
+<h3 id="⚙️-滑动窗口的实现机制"><a href="#⚙️-滑动窗口的实现机制" class="headerlink" title="⚙️ 滑动窗口的实现机制"></a>⚙️ 滑动窗口的实现机制</h3><p>滑动窗口的行为由两个核心参数定义：</p>
+<ul>
+<li><strong>窗口大小（Window Size）</strong>：窗口覆盖的时间范围。</li>
+<li><strong>滑动步长（Window Slide）</strong>：窗口启动的时间间隔。</li>
+</ul>
+<p>当一个元素到达时，Flink 并不会主动将其复制并存储到不同的窗口中，而是通过一个更高效的方式进行逻辑关联。其底层逻辑是：</p>
+<ol>
+<li><p><strong>确定窗口归属</strong>：<code>WindowAssigner</code> 为每个元素调用 <code>assignWindows()</code> 方法。对于一个事件时间为 <code>T</code> 的元素，它会计算出该元素属于哪些起始时间 <code>start</code> 的窗口，其中 <code>start</code> 的范围是 <code>(timestamp - size, timestamp]</code><a target="_blank" rel="noopener" href="https://developers.youzanyun.com/article/1557135508214">-20</a>。</p>
+</li>
+<li><p><strong>核心计算公式</strong>：滑动窗口的起始时间计算方式如下<a target="_blank" rel="noopener" href="https://developers.youzanyun.com/article/1557135508214">-20</a>：</p>
+<p>text</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lastStart &#x3D; timestamp - (timestamp - offset + slide) % slide</span><br><span class="line">for (start &#x3D; lastStart; start &gt; timestamp - size; start -&#x3D; slide) &#123;</span><br><span class="line">    &#x2F;&#x2F; 添加窗口 [start, start + size)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
+
+</li>
+</ol>
+<ol start="3">
+<li><strong>窗口数量计算</strong>：一个元素所属的窗口数量最多为 <code>ceil(size / slide)</code><a target="_blank" rel="noopener" href="https://developers.youzanyun.com/article/1557135508214">-20</a>。</li>
+</ol>
+<p>例如，一个窗口大小为 20 秒，滑动步长为 5 秒的滑动窗口，一条数据可能会被分配到 4 个不同的窗口中<a target="_blank" rel="noopener" href="https://docs.otc.t-systems.com/mapreduce-service/umn/overview/components/flink/flink_enhanced_open_source_features/window.html#mrs-08-00345">-1</a><a target="_blank" rel="noopener" href="https://support.huaweicloud.com/intl/zh-cn/ae-ad-1-usermanual-mrs/mrs_08_00345.html">-8</a>。如果一条数据在 102 秒时到达，它可能被分配到 <code>[85, 105)</code>, <code>[90, 110)</code>, <code>[95, 115)</code>, <code>[100, 120)</code> 这四个窗口<a target="_blank" rel="noopener" href="https://docs.otc.t-systems.com/mapreduce-service/umn/overview/components/flink/flink_enhanced_open_source_features/window.html#mrs-08-00345">-1</a><a target="_blank" rel="noopener" href="https://support.huaweicloud.com/intl/zh-cn/ae-ad-1-usermanual-mrs/mrs_08_00345.html">-8</a>。</p>
+<h3 id="🚀-优化与性能考量"><a href="#🚀-优化与性能考量" class="headerlink" title="🚀 优化与性能考量"></a>🚀 优化与性能考量</h3><h4 id="数据存储方式与内存占用"><a href="#数据存储方式与内存占用" class="headerlink" title="数据存储方式与内存占用"></a>数据存储方式与内存占用</h4><p>根据计算方式的不同，滑动窗口在内存中的存储方式也不同，直接影响性能和内存占用。</p>
+<ul>
+<li><strong>直接存储（原始方式）</strong>：在直接存储模式下，如果使用自定义窗口函数（如 <code>.apply(new UDFWindowFunction)</code>），Flink 会在内存中保存每条原始数据的完整副本，数据冗余度高，内存开销巨大<a target="_blank" rel="noopener" href="https://docs.otc.t-systems.com/mapreduce-service/umn/overview/components/flink/flink_enhanced_open_source_features/window.html#mrs-08-00345">-1</a><a target="_blank" rel="noopener" href="https://support.huaweicloud.com/intl/zh-cn/ae-ad-1-usermanual-mrs/mrs_08_00345.html">-8</a>。</li>
+<li><strong>增量聚合（推荐方式）</strong>：使用内置聚合函数（如 <code>.sum()</code>， <code>.reduce()</code>， <code>.aggregate()</code>）时，Flink 不保存原始数据，而是维护一个计算中的中间结果。例如，在计算 <code>sum</code> 时，只会保存一个累加值，而不是所有数据<a target="_blank" rel="noopener" href="https://docs.otc.t-systems.com/mapreduce-service/umn/overview/components/flink/flink_enhanced_open_source_features/window.html#mrs-08-00345">-1</a>。</li>
+<li><strong>窗口优化（Pane 机制）</strong>：从 Flink 1.12 开始，社区引入了基于 Pane 的优化方案。它将窗口按滑动步长切分为更小的“桶”（Pane），每条数据只属于一个 Pane，只存储一份。当需要触发某个窗口时，Flink 会动态地将该窗口所覆盖的多个 Pane 的数据合并计算。这极大地减少了数据冗余，优化了内存占用<a target="_blank" rel="noopener" href="https://docs.otc.t-systems.com/mapreduce-service/umn/overview/components/flink/flink_enhanced_open_source_features/window.html#mrs-08-00345">-1</a><a target="_blank" rel="noopener" href="https://support.huaweicloud.com/intl/zh-cn/ae-ad-1-usermanual-mrs/mrs_08_00345.html">-8</a>。</li>
+</ul>
+<h4 id="性能考量与最佳实践"><a href="#性能考量与最佳实践" class="headerlink" title="性能考量与最佳实践"></a>性能考量与最佳实践</h4><p>滑动窗口的计算量与 <code>size/slide</code> 的比例直接相关。如果比例很大（例如窗口大小为 24 小时，滑动步长为 1 分钟），那么每条数据都会属于大量的窗口，导致极高的计算和存储开销-。</p>
+<p>针对这种情况，有以下最佳实践：</p>
+<ul>
+<li><strong>优先使用增量聚合</strong>：使用 <code>reduce()</code> 或 <code>aggregate()</code> 代替 <code>apply()</code>，可以显著减少状态大小。</li>
+<li><strong>使用 Pane 优化</strong>：确保 Flink 版本为 1.12 或更高，以自动利用基于 Pane 的优化。</li>
+<li><strong>评估业务需求</strong>：对于 <code>size/slide</code> 比例极大的场景（如 <code>24h/1min</code>），应重新评估业务需求。如果必须使用，可考虑自定义 <code>ProcessFunction</code> 结合状态和定时器来实现更精细的控制，但这通常会增加开发复杂度-。</li>
+</ul>
 
       
     </div>
@@ -237,7 +451,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/doris/%E7%96%91%E9%97%AE/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/flink/probe/%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -251,7 +465,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/04/26/doris/%E7%96%91%E9%97%AE/" class="post-title-link" itemprop="url">疑问</a>
+            <a href="/2026/05/05/flink/probe/%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">重载函数</a>
         </h2>
 
         <div class="post-meta">
@@ -261,7 +475,734 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/probe/" itemprop="url" rel="index"><span itemprop="name">probe</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h3 id="重载歧义问题"><a href="#重载歧义问题" class="headerlink" title="重载歧义问题"></a>重载歧义问题</h3><p>在 Scala 中调用 Java 重载方法时，即使只传递一个参数，也可能遇到重载歧义错误，这通常与 <strong>存在类型（existential type）</strong> 和 Scala 编译器的类型推断策略有关。下面解释原因及解决方法。</p>
+<hr>
+<h4 id="1-问题根源"><a href="#1-问题根源" class="headerlink" title="1. 问题根源"></a>1. 问题根源</h4><p>Reflections 库的两个重载方法签名如下：</p>
+<p>java</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public Set&lt;Class&lt;?&gt;&gt; getTypesAnnotatedWith(Class&lt;? extends Annotation&gt; annotation)</span><br><span class="line">public Set&lt;Class&lt;?&gt;&gt; getTypesAnnotatedWith(Class&lt;? extends Annotation&gt; annotation, boolean honorInherited)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在 Scala 中调用 <code>getTypesAnnotatedWith(classOf[Problem])</code> 时：</p>
+<ul>
+<li>参数 <code>classOf[Problem]</code> 的类型是 <code>Class[Problem]</code>。</li>
+<li>两个方法的第一个参数类型均为 <code>Class[_ &lt;: Annotation]</code>（Scala 对 <code>? extends</code> 的表示）。</li>
+<li>Scala 允许将 <code>Class[Problem]</code> 赋值给 <code>Class[_ &lt;: Annotation]</code>，因为 <code>Problem</code> 是 <code>Annotation</code> 的子类型，且存在类型是协变的。因此，<strong>两个方法都接受第一个参数的类型</strong>。</li>
+</ul>
+<p>按理说，第二个方法还需要一个 <code>boolean</code> 参数，而调用时只提供了一个参数，所以它应该被排除。但问题出在 Scala 的重载解析规则上：</p>
+<ul>
+<li>编译器会计算每个方法的<strong>适用性</strong>，考虑隐式转换、默认参数等。对于 Java 方法，默认参数不存在，隐式转换也可能被考虑。</li>
+<li>实际上，<strong>第二个方法也因为第一个参数类型匹配而被视为“可能适用”</strong>，但参数个数不匹配。然而，Scala 编译器在某些情况下会因存在类型而无法准确判断参数个数，或者认为第二个方法有可能通过隐式参数补全（即使不存在），导致歧义。</li>
+</ul>
+<p><strong>根本原因</strong>：Java 通配符 (<code>? extends</code>) 被映射为 Scala 的存在类型，这使得类型系统变得复杂。当两个重载方法的第一个参数类型在存在类型下被视为“相同”时，编译器需要额外的类型信息来区分它们。而只提供一个参数时，第二个方法在存在类型层面仍然可能被考虑，从而引发“无法解析重载方法”的错误。</p>
+<hr>
+<h4 id="2-示例验证"><a href="#2-示例验证" class="headerlink" title="2. 示例验证"></a>2. 示例验证</h4><p>尝试以下代码（假设 <code>Problem</code> 是注解）：</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import org.reflections.Reflections</span><br><span class="line"></span><br><span class="line">val reflections &#x3D; new Reflections(&quot;com.example&quot;)</span><br><span class="line">&#x2F;&#x2F; 这行可能报错：Cannot resolve overloaded method</span><br><span class="line">reflections.getTypesAnnotatedWith(classOf[Problem])</span><br></pre></td></tr></table></figure>
+
+
+
+<p>错误信息提示有多个重载方法适用，但实际上只有第一个方法参数个数匹配。这是因为编译器在存在类型转换后，无法唯一确定应该使用哪个方法。</p>
+<hr>
+<h4 id="3-解决方案"><a href="#3-解决方案" class="headerlink" title="3. 解决方案"></a>3. 解决方案</h4><h5 id="方法一：类型归属（推荐）"><a href="#方法一：类型归属（推荐）" class="headerlink" title="方法一：类型归属（推荐）"></a>方法一：类型归属（推荐）</h5><p>显式指定参数类型，帮助编译器消除歧义：</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reflections.getTypesAnnotatedWith(classOf[Problem]: Class[Problem])</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="方法二：使用双参数版本"><a href="#方法二：使用双参数版本" class="headerlink" title="方法二：使用双参数版本"></a>方法二：使用双参数版本</h5><p>提供第二个参数（通常为 <code>true</code>），参数个数不同即可区分：</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reflections.getTypesAnnotatedWith(classOf[Problem], true)</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="方法三：将参数赋给显式类型变量"><a href="#方法三：将参数赋给显式类型变量" class="headerlink" title="方法三：将参数赋给显式类型变量"></a>方法三：将参数赋给显式类型变量</h5><p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val annotationClass: Class[Problem] &#x3D; classOf[Problem]</span><br><span class="line">reflections.getTypesAnnotatedWith(annotationClass)</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="4-为什么类型归属有效？"><a href="#4-为什么类型归属有效？" class="headerlink" title="4. 为什么类型归属有效？"></a>4. 为什么类型归属有效？</h4><p>类型归属 <code>: Class[Problem]</code> 将表达式的类型明确固定为 <code>Class[Problem]</code>，而不是允许编译器推断为存在类型 <code>Class[_ &lt;: Annotation]</code>。这样，第一个方法的参数类型变为 <code>Class[Problem]</code>，而第二个方法需要的仍是 <code>Class[_ &lt;: Annotation]</code>，此时两个方法的第一个参数类型不再相同，加上参数个数的差异，编译器就能唯一选择第一个方法。</p>
+<hr>
+<h4 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h4><ul>
+<li>Scala 调用 Java 重载方法时，如果参数涉及通配符（存在类型），可能会因类型系统交互而产生重载歧义。</li>
+<li>即使参数个数不同，也可能因存在类型的存在而导致编译器无法区分。</li>
+<li>通过显式类型归属或提供完整参数列表，可以消除歧义。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/flink/probe/%E8%81%94%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/flink/probe/%E8%81%94%E7%BB%93/" class="post-title-link" itemprop="url">联结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/probe/" itemprop="url" rel="index"><span itemprop="name">probe</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="窗口联结的处理流程中，两条流经过keyBy分组后，进入对应的窗口进行存储，之后对窗口内两条流的数据做笛卡尔积，然后遍历输出结果，这对吗"><a href="#窗口联结的处理流程中，两条流经过keyBy分组后，进入对应的窗口进行存储，之后对窗口内两条流的数据做笛卡尔积，然后遍历输出结果，这对吗" class="headerlink" title="窗口联结的处理流程中，两条流经过keyBy分组后，进入对应的窗口进行存储，之后对窗口内两条流的数据做笛卡尔积，然后遍历输出结果，这对吗"></a>窗口联结的处理流程中，两条流经过keyBy分组后，进入对应的窗口进行存储，之后对窗口内两条流的数据做笛卡尔积，然后遍历输出结果，这对吗</h2><p>你的理解基本正确，抓住了窗口联结的核心逻辑。简单来说，窗口联结就是<strong>在窗口边界这个前提下执行 Inner Join</strong>。</p>
+<p>为了让你更透彻地理解，我们把这个逻辑拆解成三个核心环节：</p>
+<h3 id="1-⚙️-数据分发与缓存：KeyBy-和窗口存储"><a href="#1-⚙️-数据分发与缓存：KeyBy-和窗口存储" class="headerlink" title="1. ⚙️ 数据分发与缓存：KeyBy 和窗口存储"></a>1. ⚙️ 数据分发与缓存：KeyBy 和窗口存储</h3><p>Flink 在处理窗口联结时，第一步是<strong>将两条流的数据，按照相同的 key 和它们所属的窗口，分别存储到不同的窗口状态（Window State）中</strong>。</p>
+<ul>
+<li><strong>分发（KeyBy）</strong>：数据进入后，首先会通过 <code>where()</code> 和 <code>equalTo()</code> 指定的 key 进行分组<a target="_blank" rel="noopener" href="https://blog.csdn.net/jiang7chengzi/article/details/107897707">-1</a>。保证只有相同 key 的数据才可能被关联。</li>
+<li><strong>存储（窗口存储）</strong>：同时，<code>WindowAssigner</code> 会为每条数据分配一个或多个窗口-。随后，这条数据会连同其窗口归属信息，被写入该算子实例的内部状态（State）中，等待窗口触发时刻的到来<a target="_blank" rel="noopener" href="https://blog.csdn.net/jiang7chengzi/article/details/107897707">-1</a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhaoguanglu/p/15652998.html">-3</a>。</li>
+</ul>
+<h3 id="2-🔗-数据关联与输出：笛卡尔积"><a href="#2-🔗-数据关联与输出：笛卡尔积" class="headerlink" title="2. 🔗 数据关联与输出：笛卡尔积"></a>2. 🔗 数据关联与输出：笛卡尔积</h3><p>当水位线（Watermark）推进到窗口结束时间时，窗口被触发，进入最核心的关联计算阶段。这个阶段本质上执行的就是<strong>笛卡尔积</strong>操作–。</p>
+<ul>
+<li><strong>计算过程</strong>：Flink 会取出当前窗口内存储的所有数据，将左流（Left Stream）中的每一条数据，与右流（Right Stream）中的每一条数据进行配对–。</li>
+<li><strong>输出结果</strong>：每生成一个配对 <code>(e1, e2)</code>，都会立即调用你自定义的 <code>JoinFunction</code> 的 <code>join()</code> 方法，并输出计算结果<a target="_blank" rel="noopener" href="https://blog.csdn.net/jiang7chengzi/article/details/107897707">-1</a>。</li>
+</ul>
+<p>这就是为什么你的描述在逻辑上是准确的。一个经典的例子可以完美说明这一点：在一个大小为2毫秒的滚动窗口（Tumbling Window）中，如果左流有数据 <code>[1]</code>，右流有数据 <code>[1, 2]</code>，那么笛卡尔积就会生成 <code>(1,1)</code> 和 <code>(1,2)</code> 这两个配对，并分别传递给 <code>JoinFunction</code> 处理<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/128594">-7</a>。</p>
+<h3 id="3-🎯-遍历与Inner-Join语义"><a href="#3-🎯-遍历与Inner-Join语义" class="headerlink" title="3. 🎯 遍历与Inner Join语义"></a>3. 🎯 遍历与Inner Join语义</h3><p>值得注意的是，Flink 窗口联结的默认行为是 <strong>Inner Join</strong>，这完全符合你的描述-。</p>
+<ul>
+<li>配对过程中，只有<strong>两边都有数据</strong>才会产生输出。如果窗口内只有左流有数据而右流为空，则不会有任何输出<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhaoguanglu/p/15652998.html">-3</a>。</li>
+<li><code>JoinFunction</code> 中的 <code>join()</code> 方法会为每一对配对执行一次，正是我们上面提到的“遍历输出”。</li>
+</ul>
+<hr>
+<h3 id="💡-进阶思考：精确性之外的效率博弈"><a href="#💡-进阶思考：精确性之外的效率博弈" class="headerlink" title="💡 进阶思考：精确性之外的效率博弈"></a>💡 进阶思考：精确性之外的效率博弈</h3><p>然而，一个成熟的工业级引擎不会仅仅满足于逻辑上的“正确”。在“笛卡尔积”这个简洁的逻辑背后，隐藏着关于<strong>内存效率</strong>和<strong>计算延迟</strong>的深度博弈。</p>
+<table>
+<thead>
+<tr>
+<th align="left">对比维度</th>
+<th align="left">❌ 低效的朴素做法</th>
+<th align="left">✅ Flink的高效实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>存储策略</strong></td>
+<td align="left">无差别存储原始数据，极易引发内存溢出。</td>
+<td align="left"><strong>增量聚合</strong>：配合 <code>reduce()</code> 或 <code>aggregate()</code>，在存储时就进行预聚合，只保留中间结果而非原始数据。</td>
+</tr>
+<tr>
+<td align="left"><strong>内存管理</strong></td>
+<td align="left">依赖JVM进行垃圾回收（GC），海量配对下GC压力巨大。</td>
+<td align="left"><strong>托管内存（Managed Memory）</strong>：绕过JVM堆，使用预分配的二进制内存，序列化开销低，几乎无GC压力<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/73248">-19</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>溢出策略</strong></td>
+<td align="left">内存不足时直接报错（OOM）。</td>
+<td align="left"><strong>内存溢写（Spill）</strong>：数据量超过内存上限时，自动将部分数据溢写到磁盘，保证作业稳定运行<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/73248">-19</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>执行策略</strong></td>
+<td align="left">固定执行路径。</td>
+<td align="left"><strong>优化器选择</strong>：根据数据规模动态选择 <code>Hash Join</code> 或 <code>Sort-Merge Join</code> 等高效策略<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/73248">-19</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>结果生成</strong></td>
+<td align="left">生成所有配对后再批量输出。</td>
+<td align="left"><strong>流式输出</strong>：边生成配对边通过 <code>JoinFunction</code> 输出，实现低延迟。</td>
+</tr>
+<tr>
+<td align="left"><strong>复杂类型</strong></td>
+<td align="left">处理复杂嵌套结构时开销大。</td>
+<td align="left"><strong>二进制数据处理</strong>：对复杂类型同样采用紧凑的二进制格式，提升效率。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>延迟数据处理</strong>：官方文档也指出，目前的窗口联结算子（<code>WindowJoinOperator</code>）不支持<strong>提前触发（early-fire）</strong>和<strong>迟到数据（late-arrival）</strong>处理。这意味着它不适合需要处理严重乱序或对实时性有极致要求的场景-<a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-release-1.19/api/java/org/apache/flink/table/runtime/operators/join/window/WindowJoinOperator.html#join-java.lang.Iterable-java.lang.Iterable-">-33</a>。如果你的业务需要处理迟到数据，可以考虑使用更灵活的 <strong>Interval Join</strong>。</p>
+</blockquote>
+<hr>
+<h3 id="💎-总结"><a href="#💎-总结" class="headerlink" title="💎 总结"></a>💎 总结</h3><p>你的理解是正确的：窗口联结就是在 keyBy 和窗口分组的基础上，对窗口内的数据进行笛卡尔积配对，然后遍历输出。</p>
+<p>但更重要的是，要看到 Flink 在保证这个逻辑正确性的同时，通过增量聚合、托管内存、智能溢写和策略优化等一整套底层机制，巧妙地规避了“笛卡尔积”可能带来的性能陷阱。如果你对文中提到的 <strong>Interval Join</strong> 或者 <strong>CoGroup</strong> 等其他关联方式也感兴趣，我们可以继续探讨。</p>
+<h2 id="如果一个key-field中的值很多，会有不同的key被分到同一个子任务中吧，这种不会直接做笛卡尔积吧，怎么做的"><a href="#如果一个key-field中的值很多，会有不同的key被分到同一个子任务中吧，这种不会直接做笛卡尔积吧，怎么做的" class="headerlink" title="如果一个key field中的值很多，会有不同的key被分到同一个子任务中吧，这种不会直接做笛卡尔积吧，怎么做的"></a>如果一个key field中的值很多，会有不同的key被分到同一个子任务中吧，这种不会直接做笛卡尔积吧，怎么做的</h2><p>你的直觉很准确，<strong>“笛卡尔积”这个操作是严格在每个Key内部进行的</strong>，绝不会发生不同Key之间的数据胡乱配对。</p>
+<p>整个过程可以拆解为两层：<strong>路由层</strong>和<strong>存储层</strong>。</p>
+<h3 id="🚚-第一层：路由分发-KeyBy"><a href="#🚚-第一层：路由分发-KeyBy" class="headerlink" title="🚚 第一层：路由分发 (KeyBy)"></a>🚚 第一层：路由分发 (KeyBy)</h3><p>当你在两条流上分别调用 <code>.keyBy()</code> 时，Flink 的底层逻辑是做了一次 <code>Hash</code> 分发-<a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/ask/sof/1804526?from=16139">-1</a>。</p>
+<ul>
+<li><strong>物理隔离</strong>：虽然同一个并行子任务（Subtask）可能会收到很多个不同的 Key，但 Flink 会保证<strong>同一个 Key 的所有数据，一定全部进入到同一个 Subtask 中</strong>-<a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/flink-state-management">-9</a>。比如，<code>KeyA</code> 和 <code>KeyB</code> 的数据可能都进入了 Subtask 1，<code>KeyC</code> 和 <code>KeyD</code> 的数据进入了 Subtask 2。</li>
+<li><strong>效果</strong>：通过这一层，Flink 将 <strong>“全局大表”</strong> 的 Join 问题，拆分成了多个物理上独立的 <strong>“小表”</strong> Join 问题。这是分布式计算的基础。</li>
+</ul>
+<h3 id="🗄️-第二层：存储与计算-Window-Join"><a href="#🗄️-第二层：存储与计算-Window-Join" class="headerlink" title="🗄️ 第二层：存储与计算 (Window Join)"></a>🗄️ 第二层：存储与计算 (Window Join)</h3><p>在 Subtask 内部，数据会被存储起来，等待窗口触发。<strong>这里并不会出现一个混杂的“大池子”，而是为每个 Key 都划出了一个独立的“小隔间”</strong>。</p>
+<h4 id="物理存储：键控状态（Keyed-State）"><a href="#物理存储：键控状态（Keyed-State）" class="headerlink" title="物理存储：键控状态（Keyed State）"></a>物理存储：键控状态（Keyed State）</h4><p>窗口中的存储使用的是 <strong>键控状态（Keyed State）</strong>-。这是一种嵌入式键/值存储<a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/flink-state-management">-9</a>，Flink 会自动维护一个 Map，结构如下：</p>
+<p>text</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Subtask-1 内部维护的键控状态</span><br><span class="line">Map&lt;Key, WindowState&gt; stateMap &#x3D; &#123;</span><br><span class="line">    &quot;KeyA&quot; &#x3D;&gt; &#123; LeftStream: [数据A1, A2...], RightStream: [数据B1, B2...] &#125;,</span><br><span class="line">    &quot;KeyB&quot; &#x3D;&gt; &#123; LeftStream: [数据C1, C2...], RightStream: [数据D1, D2...] &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="逻辑计算：按Key隔离的笛卡尔积"><a href="#逻辑计算：按Key隔离的笛卡尔积" class="headerlink" title="逻辑计算：按Key隔离的笛卡尔积"></a>逻辑计算：按Key隔离的笛卡尔积</h4><p>当水位线到达，窗口触发时，Flink 会<strong>遍历当前 Subtask 内部的所有 Key</strong>，对每个 Key 独立执行以下操作<a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/ask/sof/1804526?from=16139">-1</a>：</p>
+<ol>
+<li>取出 <code>KeyA</code> 的“小隔间”里左右两边的数据集。</li>
+<li>在这两个数据集上执行<strong>笛卡尔积</strong>。</li>
+<li>把生成的每一对数据传递给 <code>JoinFunction</code> 处理。</li>
+<li>处理完 <code>KeyA</code> 后，再处理下一个 <code>KeyB</code>。</li>
+</ol>
+<blockquote>
+<p><strong>补充说明</strong>：你问的“会不会直接做笛卡尔积”，指的是不同 Key 之间的数据（如 KeyA 和 KeyB）是否会被错误地配对。答案是否定的，因为物理存储上的隔离从根本上杜绝了这种可能性<a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-release-1.20/api/java/org/apache/flink/streaming/api/datastream/JoinedStreams.html">-35</a>。</p>
+</blockquote>
+<h3 id="💡-数据隔离：从物理内存到磁盘"><a href="#💡-数据隔离：从物理内存到磁盘" class="headerlink" title="💡 数据隔离：从物理内存到磁盘"></a>💡 数据隔离：从物理内存到磁盘</h3><p>这种按 Key 隔离的机制，不仅保证了逻辑正确，还为大规模数据处理提供了物理层面的可行性：</p>
+<ul>
+<li><strong>内存优化</strong>：Flink 使用<strong>托管内存（Managed Memory）</strong>，绕过 JVM 堆，以紧凑的二进制格式存储数据。对于海量 Key，即使每个 Key 只存少量数据，这种内存管理方式也能避免 JVM 因对象过多而频繁 GC 或 OOM。</li>
+<li><strong>磁盘溢出（Spill）</strong>：如果某个 Key 的数据量实在太大（比如 <code>KeyA</code> 有数百万条数据），内存放不下，Flink 会自动将数据溢写到磁盘。这是 Flink 默认状态后端 <code>EmbeddedRocksDBStateBackend</code> 的典型能力，支持将状态存储扩展到磁盘<a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/flink-state-management">-9</a>。</li>
+<li><strong>动态扩容</strong>：键控状态是按 Key Group 组织的，当作业并行度调整时，Flink 可以以 Key Group 为单位重新分配 Key，从而实现状态的平滑迁移<a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/flink-state-management">-9</a>。</li>
+</ul>
+<h3 id="💎-总结-1"><a href="#💎-总结-1" class="headerlink" title="💎 总结"></a>💎 总结</h3><p>所以，你的疑问可以这样理解：</p>
+<ul>
+<li><strong>物理上</strong>：一个 Subtask 确实会收到多个 Key，但它们的数据在存储层面是完全<strong>隔离</strong>的。</li>
+<li><strong>逻辑上</strong>：Flink 对每个 Key 的窗口数据，独立地执行笛卡尔积。</li>
+<li><strong>本质上</strong>：窗口 Join 的执行逻辑可以看作是 <strong>“分组内的笛卡尔积”</strong> ，确保了计算结果的正确性。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/computer_theory/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/computer_theory/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">编码问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="注意点："><a href="#注意点：" class="headerlink" title="注意点："></a>注意点：</h2><ol>
+<li>系统编码</li>
+<li>程序中指定编码</li>
+</ol>
+<h2 id="case"><a href="#case" class="headerlink" title="case"></a>case</h2><ol>
+<li>微软spark机器写出中文都是问号乱码。输出了系统文件编码<code>System.getProperty(&quot;file.encoding&quot;)</code>, 是cp1252. 如何处理能正常输出中文？</li>
+</ol>
+<h2 id="编码简介"><a href="#编码简介" class="headerlink" title="编码简介"></a>编码简介</h2><table>
+<thead>
+<tr>
+<th align="center">编码</th>
+<th align="center">介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Windows-1252 或CP-1252</td>
+<td align="center">是拉丁字母的字元編碼，主要用於英文、 愛爾蘭語、義大利語、挪威語、葡萄牙語、西班牙語、瑞典語以及德語、芬蘭語、冰島語、法語、荷蘭語（除了Ĳ字符）、斯洛維尼亞語(除了č字符)等西方文字版本Microsoft Windows 的預設編碼，為Windows代碼頁之一。</td>
+</tr>
+</tbody></table>
+<h2 id="编码转换"><a href="#编码转换" class="headerlink" title="编码转换"></a>编码转换</h2><h2 id="编码判断"><a href="#编码判断" class="headerlink" title="编码判断"></a>编码判断</h2><h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_31994237/article/details/118828893">java cp1252,将cp-1252编码为utf-8？</a></li>
+<li></li>
+</ol>
+<h2 id="待整理"><a href="#待整理" class="headerlink" title="待整理"></a>待整理</h2><ol>
+<li>各种环境/语言中设置字符编码</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/concept/%E6%95%B0%E6%8D%AE%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/concept/%E6%95%B0%E6%8D%AE%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">数据概念</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903957693726727">漫画：什么是中台？</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/concept/%E6%9C%AF%E8%AF%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/concept/%E6%9C%AF%E8%AF%AD/" class="post-title-link" itemprop="url">术语</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>SOP(Standard Operating Procedure) 标准作业程序</p>
+<p>Feed流</p>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/67740541">https://km.sankuai.com/page/67740541</a></p>
+<h4 id="开箱即用"><a href="#开箱即用" class="headerlink" title="开箱即用"></a>开箱即用</h4><p>开箱即用功能（out-of-the-box feature，也称OOTB或off the shelf）在软件上指产品在安装后，无需配置或修改，即可使用的功能或特性。也指默认即对所有用户可用，不需支付额外费用或进行另外的配置。<br>我们常说的spring-boot或者vue组件等可以开箱即用，就是可以无需配置就可以实现大部分功能，但是他们依旧是可以配置的。（强调约定优于配置）</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/concept/%E7%BC%A9%E5%86%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/concept/%E7%BC%A9%E5%86%99/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>time to live (TTL)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/deep/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/deep/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">技术探索</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h4 id="bitMap"><a href="#bitMap" class="headerlink" title="bitMap"></a>bitMap</h4><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247492204&idx=1&sn=269493abe2acc61d06321e6aa5c6dbe5&chksm=fbd75000cca0d91668829252016209ff50a69b810bc5f98635f43324d8eb3ba4cec7e8105673&scene=21#wechat_redirect">快手 HBase 在千亿级用户特征数据分析中的应用与实践</a></p>
+<p>基于bitmap开发的bitbase，与成都开发的bitcube类似</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013516966/article/details/103917880">不得不掌握的三种BitMap</a></p>
+<ol>
+<li>BitMap</li>
+<li>RoaringBitmap</li>
+<li>Roaring64NavigableMap</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/818ac4e90daf">高效压缩位图RoaringBitmap的原理与应用</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903769201704973">漫画：什么是Bitmap算法？</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lucky52529/article/details/90172264">[数据结构]——位图原理及实现</a></p>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/454073303">概要设计-全局字典</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/deep/%E6%96%B9%E6%B3%95%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/deep/%E6%96%B9%E6%B3%95%E8%AE%BA/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在函数层面 尽量保证什么类型进什么类型出，除非本函数有转换类型的作用</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/doris/Colocate%20Join/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/05/05/doris/Colocate%20Join/" class="post-title-link" itemprop="url">Colocate join</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -284,547 +1225,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="doris的分区规则"><a href="#doris的分区规则" class="headerlink" title="doris的分区规则"></a>doris的分区规则</h3><p>为什么表结构的分区与分区字段里去重值数量不一样？</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/eventhub/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/eventhub/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/66284127/azure-eventhub-offset-vs-sequence-number">Azure eventhub : Offset vs Sequence number</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/NuGet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/company/microsoft/NuGet/" class="post-title-link" itemprop="url">NuGet</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="guide-line"><a href="#guide-line" class="headerlink" title="guide line"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/what-is-nuget">guide line</a></h4><h3 id="Restore-packages"><a href="#Restore-packages" class="headerlink" title="Restore packages"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore">Restore packages</a></h3><h3 id="Package-Manager-Console"><a href="#Package-Manager-Console" class="headerlink" title="Package Manager Console"></a>Package Manager Console</h3><p>参考资料：</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-powershell">Package Manager Console (PowerShell)</a><ol>
-<li>如何使用PMC</li>
-<li>命令list</li>
+          <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.bcmeng.com/post/doris-colocate-join.html">Apache Doris Colocate Join 原理与实践</a></li>
 </ol>
-</li>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/reference/powershell-reference">PowerShell reference</a><ol>
-<li>命令明细</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/HDInsight/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/company/microsoft/HDInsight/" class="post-title-link" itemprop="url">HDInsight</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="guide-line"><a href="#guide-line" class="headerlink" title="guide line"></a><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/">guide line</a></h4><h2 id="best-practise"><a href="#best-practise" class="headerlink" title="best practise"></a>best practise</h2><h4 id="新建cluster注意事项："><a href="#新建cluster注意事项：" class="headerlink" title="新建cluster注意事项："></a>新建cluster注意事项：</h4><ol>
-<li>指定独立的VNet，保证可以做灵活的网络管控</li>
-<li>对于节点多的cluster，为了保证Ambari监控性能，最好申请独立的DB，并且提高其等级，机器越多建议提高的等级越多。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/apgold/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/company/microsoft/apgold/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>d:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Test-MW1-MSNMediation&gt;sd edit deployment.int<br>deployment.int - file(s) not on client.</p>
-<p>直接编辑</p>
-<ol>
-<li>add/edit</li>
-<li>安装codeflow 提交pr<br>\codeflow.redmond.corp.microsoft.com\public\cf2Launcher.cmd</li>
-</ol>
-<p>codeflow作用</p>
-<p>ve作用：<br>pe作用：</p>
-<p>之前</p>
-<p>D:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Test-MW1-MSNMediation</p>
-<p>D:\project\APGold\autopilotservice\MW1\AdsMz-Prod-MW1</p>
-<p>A ServiceGroup is mandatory for every machine function</p>
-<p>VE中存储的可以理解为某个项目的global config，所有的PE公用这部分config<br>设计目的是在同一项目部署多个PE时，避免多次发布，只需要更新VE，相关PE就会生效</p>
-<p><a target="_blank" rel="noopener" href="https://msazure.visualstudio.com/">https://msazure.visualstudio.com</a></p>
-<p>D:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Prod-MW1-MSNMediation</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">07&#x2F;26&#x2F;21 16:54:01.841,error processing AdsMz-Test-MW1: Rollout &#39;AdsBI-AdsMz-Test-MW1-MzOrchestration-VE.6799404_17553440741849145769_0.Rollout_AdsBI_Streaming_CFR&#39; cannot be kicked due to status: InRollout - Rollout in progress..Rollout &#39;AdsBI-AdsMz-Test-MW1-MSNMediation-VE.6827694_4064931696698155710_0.Rollout_AdsBI_Streaming_CFR&#39; cannot be kicked due to status: OtherRollout - Waiting on other rollout on MF AdsBI_Streaming_CFR in progress: AdsBI_Streaming_CFR.AdvertiserAggs_94d0ef91_90546_1_15-0-897+94d0ef91_CL6670088_5920165827906938206_0.AdsBI-AdsMz-Test-MW1-AdvertiserAggs-VE.csv:AdsBI_Streaming_CFR.AgoraAggs_76700988_85934_1_16-0-173+76700988_CL6670088_4056715873563314682_0.AdsBI-AdsMz-Test-MW1-AgoraAggs-VE.csv:AdsBI_Streaming_CFR.CACFR_9a63868e_90143_2_1-0-2408+9a63868e_CL6670088_11167218336511992544_0.AdsBI-AdsMz-Test-MW1-CACFR-VE.csv:AdsBI_Streaming_CFR.CFR_2d2cea68_91067_1_17-0-6662+2d2cea68_CL6670088_18415503406869780426_0.AdsBI-AdsMz-Test-MW1-CFR-VE.csv:AdsBI_Streaming_CFR.KpiAggs_fdd5f92d_90180_1_17-0-433+fdd5f92d_CL6670088_6626197140932378707_0.AdsBI-AdsMz-Test-MW1-KPIAggs-VE.csv:AdsBI_Streaming_CFR.Monetization_de0db608_91071_1_1-0-2808+de0db608_CL6670088_351842135959690630_0.AdsBI-AdsMz-Test-MW1-Monetization-VE.csv:AdsBI_Streaming_CFR.Orchestration_93eb645e_91078_1_16-0-557+93eb645e_CL6799404_17553440741849145769_0.AdsBI-AdsMz-Test-MW1-MzOrchestration-VE.csv:AdsBI_Streaming_CFR.PublisherAggs_55bd6dd9_90534_1_17-0-474+55bd6dd9_CL6670088_15361642287162420254_0.AdsBI-AdsMz-Test-MW1-PublisherAggs-VE.csv:AdsBI_Streaming_CFR.Mediation_865d3b39_90170_1_merge_20210629_-1_CL6670088_3189803787641037971_0.AdsBI-AdsMz-Test-MW1-Mediation-VE.csv:AdsBI_Streaming_CFR.MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33_CL6827694_4798040603905411799_0.AdsBI-AdsMz-Test-MW1-MSNMediation-VE.csv:.OM.Autopilot-AutopilotClient-VE.csv..; .. Some rollouts not triggered.</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Deployment: 6827694_4798040603905411799 (this is NOT the latest deployment.ini change number)</span><br><span class="line">Downloaded 89 files, 21510455 bytes, compressed size: 8267353 bytes.</span><br><span class="line">Failed to build services: Failed to build service &#39;SAMHourlyS2B.MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33&#39;: Proxy error: not all data was received (DP: 25.68.114.53; by MW01NAP0000036C); ;  ;Log:e:GetStreamChunkMapWithRetry:stream does not exist [response from server] : GetStreamChunkMap(&#39;stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;ServiceMaps&#x2F;MSNMediationServiceMap.ini&#39;; &#39;MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33&#39;) failed ;Log:w:ApDynamicStorage::StorageConnectionEx::DownloadBufferFromStreamWithRetry:Stream (stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;ServiceMaps&#x2F;MSNMediationServiceMap.ini _ MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33) not found in storage ;</span><br><span class="line">Majority of the building errors are temporary and will be fixed automatically. </span><br><span class="line">If there is no change or progress in the app deployment log after 15 minutes, contact apswat for production environments and aptalk for non-production environment.</span><br><span class="line">Look in App Deployment log for more info</span><br><span class="line"></span><br><span class="line">Here are common error messages and possible fixes:</span><br><span class="line">     Msg: Error 53: The network path was not found.: ac: 0</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Msg: EDP010385: APSEQREAD::GetDataPointer error 2</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Proxy reported error: EDP010196: ApckBuilder Error 3: The system cannot find the path specified.</span><br><span class="line">     Fix: Look for missing directories under your build drop.</span><br><span class="line"></span><br><span class="line">For more troubleshooting info, please refer to App Deployment Troubleshooting</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Deployment: 6827694_9979618793807238839_0 (this is NOT the latest deployment.ini change number)</span><br><span class="line">Downloaded [unknown] files, [unknown] bytes.</span><br><span class="line">Failed to import version &#39;6827694_9979618793807238839&#39; of image for environment &#39;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#39;: Error downloading image from remote storage (stream &#39;stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;image.ini@6827694_9979618793807238839&#39;)</span><br><span class="line">Majority of the building errors are temporary and will be fixed automatically. </span><br><span class="line">If there is no change or progress in the app deployment log after 15 minutes, contact apswat for production environments and aptalk for non-production environment.</span><br><span class="line">Look in App Deployment log for more info</span><br><span class="line"></span><br><span class="line">Here are common error messages and possible fixes:</span><br><span class="line">     Msg: Error 53: The network path was not found.: ac: 0</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Msg: EDP010385: APSEQREAD::GetDataPointer error 2</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Proxy reported error: EDP010196: ApckBuilder Error 3: The system cannot find the path specified.</span><br><span class="line">     Fix: Look for missing directories under your build drop.</span><br><span class="line"></span><br><span class="line">For more troubleshooting info, please refer to App Deployment Troubleshooting</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/component/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/company/microsoft/component/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Severity    Code    Description    Project    File    Line    Suppression State<br>Error    MSB3680    The source file “D:\project\Ads.BI.MSNMediation\private\src\Batch/Autopilot/ExternalConfigs/Microsoft.BingAds.BI.APDeploy.exe.config” does not exist.    Microsoft.BI.MSNMediation.HourlyS2B.Drop    D:\project\Ads.BI.MSNMediation\private\src\Batch\build\targets\CreateDrop.targets    47    </p>
-<p>、</p>
-<p>Severity    Code    Description    Project    File    Line    Suppression State<br>Error    MSB3030    Could not copy the file “D:\project\Ads.BI.MSNMediation\private\src\Batch/SAMHourlyS2B/Microsoft.BI.MSNMediation.HourlyS2B.Drop/bin\Debug\net472**” because it was not found.    Microsoft.BI.MSNMediation.HourlyS2B.Drop    D:\project\Ads.BI.MSNMediation\private\src\Batch\build\targets\CreateDrop.targets    47    </p>
-<p>c:\Users\jingqicao.nuget\packages\microsoft.bingads.bi.apdeploy\10.5.2</p>
-<p>在sdk之外做的nuget package改动，比如删掉某个包</p>
-<p>resolved    Show files that have been merged but not submitted   跟执行目录无关<br>retype      Reappraise the file type for files on the client<br>revert      Discard changes from an opened file<br>review      List and track changelists (for the review daemon)</p>
-<p>sd review 如何只搜索某个人的review</p>
-<p>FAREAST\jingqicao</p>
-<p>sd opened</p>
-<p>sd submit -c <change list num></change></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/cosmos/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/company/microsoft/cosmos/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>azure cosmos命令</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/company/microsoft/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/">Azure HDInsight documentation</a></p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-rotate-storage-keys">Update Azure storage account access keys in HDInsight cluster</a> 当更新了remote key时，需要执行相关脚本，让节点更新。Azure Blob Storage fails to authenticate: “Make sure the value of Authorization header is formed correctly including the signature”</li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://github.com/Azure-Samples">Azure Samples</a></p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/virtual-network/">Virtual network</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/26/company/microsoft/%E7%A6%8F%E5%88%A9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/04/26/company/microsoft/%E7%A6%8F%E5%88%A9/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-04-26 14:42:51" itemprop="dateCreated datePublished" datetime="2026-04-26T14:42:51+00:00">2026-04-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>puid<br>gid 999+工号<br>company simple：  MSFT</p>
-<p>ESPP<br>R开头的一串数字</p>
-<p>HRWeb<br>信息维护，会影响摩根账户，需要全部都是英文，包括地址<br><a target="_blank" rel="noopener" href="https://myaccount.microsoft.com/?ref=MeControl">https://myaccount.microsoft.com/?ref=MeControl</a></p>
-<p>中意人寿<br>family</p>
-<p>143cc3b8f01f<br><a target="_blank" rel="noopener" href="https://apkpure.com/">https://apkpure.com</a></p>
 
       
     </div>
@@ -843,7 +1246,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -909,18 +1312,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">243</span>
+          <span class="site-state-item-count">252</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">54</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
