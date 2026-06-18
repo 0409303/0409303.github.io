@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/company/microsoft/%E9%83%A8%E7%BD%B2%E4%BB%BB%E5%8A%A1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/concept/%E7%BC%A9%E5%86%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/05/05/company/microsoft/%E9%83%A8%E7%BD%B2%E4%BB%BB%E5%8A%A1/" class="post-title-link" itemprop="url">部署任务</a>
+            <a href="/2026/06/18/concept/%E7%BC%A9%E5%86%99/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -201,16 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
-                </span>
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
             </span>
 
           
@@ -224,29 +215,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="Auzre-DevOps任务定时调度"><a href="#Auzre-DevOps任务定时调度" class="headerlink" title="Auzre DevOps任务定时调度"></a>Auzre DevOps任务定时调度</h4><p><a target="_blank" rel="noopener" href="https://dev.azure.com/msasg/Shared%20Data/_wiki/wikis/Shared%20Data.wiki/52258/Onboard-AP-App-Deployment-using-AzDeployer-(Stratus)">步骤：Onboard AP App Deployment using AzDeployer (Stratus)</a></p>
-<ol>
-<li>Prepare workflow folder, master config and workflow config.</li>
-<li>Prepare APDrop. </li>
-<li>Create APGold virtual environment. </li>
-<li>Setup corresponding Azure Dev Ops CD pipeline. Add Azure DevOps release pipeline</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">##[warning]C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets(2203,5): Warning MSB3245: Could not resolve this reference. Could not locate the assembly &quot;Google.Protobuf, Version&#x3D;3.6.1.0, Culture&#x3D;neutral, PublicKeyToken&#x3D;a7d26565bac4d604, processorArchitecture&#x3D;MSIL&quot;. Check to make sure the assembly exists on disk. If this reference is required by your code, you may get compilation errors.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">externalFeedCredentials: &#39;nuget-msazure-oldbond, nuget-msblox-azuregenevamonitoring, nuget-mscosmos-cosmosprod, nuget-mscosmos-cosmostest, nuget-msdata-bigdata, nuget-ossmsft-oss_all, nuget-trill-trill&#39;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">2021-08-02 06:33:05 ThreadId:   69	PauseAndResumeWorkflows() Process: MSNBI_S2BHourly_0 UserCommand: Run</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   79	Getting information about event AdsBI_MSNBI_S2B_Hourly_Done</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   88	Getting information about event AdsBI_MSNBI_S2B_Hourly_Done</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   83	Getting information about event AdsBI_MSNBI_S2B_Hourly_Done</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   83	Got SQL exception: System.Data.SqlClient.SqlException (0x80131904): -999999:3:2--prc_ProcessStateGetNextDelta-212--Violation of PRIMARY KEY constraint &#39;PK_PROCESSPRESTATE&#39;. Cannot insert duplicate key in object &#39;dbo.ProcessPrestate&#39;. The duplicate key value is (-1931531102, 20210731 1100).</span><br><span class="line">   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action&#96;1 wrapCloseInAction)</span><br><span class="line">   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)</span><br><span class="line">   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean&amp; dataReady)</span><br><span class="line">   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()</span><br><span class="line">   at System.Data.SqlClient.SqlDataReader.get_MetaData()</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task&amp; task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource&#96;1 completion, Int32 timeout, Task&amp; task, Boolean&amp; usedCache, Boolean asyncWrite, Boolean inRetry)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.ExecuteReader()</span><br><span class="line">   at Microsoft.AdCenter.WorkflowHost.CommunicationWorkflow.&lt;&gt;c__DisplayClass32_0.&lt;GetLastParam&gt;b__1(SqlConnection sqlConnection)</span><br><span class="line">   at Microsoft.AdCenter.WorkflowHost.SqlConnectionHelper.RunQuery(Action&#96;1 command)</span><br><span class="line">ClientConnectionId:0fd2a26b-bb72-4bbd-baec-a16499dff840</span><br><span class="line">Error Number:50000,State:1,Class:16</span><br><span class="line">ClientConnectionId before routing:bfc0cfb4-53ac-4a8f-a985-44e2e512efe2</span><br><span class="line">Routing Destination:b9d5d60a293f.tr147.westus2-a.worker.database.windows.net,11020</span><br><span class="line">connection string: Server&#x3D;adsdwctest.database.windows.net;Database&#x3D;DWC_DB;User ID&#x3D;AdsDataSI_Execution;Password&#x3D;AnotherPassword8!</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">2021-08-02T08:28:02.5629452Z          Checking compatibility for System.Security.Cryptography.Primitives 4.3.0 with .NETFramework,Version&#x3D;v4.7.2.</span><br><span class="line">2021-08-02T08:28:02.5630121Z          All packages and projects are compatible with .NETFramework,Version&#x3D;v4.7.2.</span><br><span class="line">2021-08-02T08:28:02.6040861Z          Committing restore...</span><br><span class="line">2021-08-02T08:28:02.6041989Z          Generating MSBuild file D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj.nuget.g.props.</span><br><span class="line">2021-08-02T08:28:02.6048518Z          Generating MSBuild file D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj.nuget.g.targets.</span><br><span class="line">2021-08-02T08:28:02.6053133Z          Writing assets file to disk. Path: D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\project.assets.json</span><br><span class="line">2021-08-02T08:28:02.6174412Z          Writing cache file to disk. Path: D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\project.nuget.cache</span><br><span class="line">2021-08-02T08:28:02.6187683Z          Persisting dg to D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj.nuget.dgspec.json</span><br><span class="line">2021-08-02T08:28:02.6200559Z          Failed to restore D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj (in 17.33 sec).</span><br><span class="line">2021-08-02T08:28:02.6260383Z          </span><br><span class="line">2021-08-02T08:28:02.6264281Z          NuGet Config files used:</span><br><span class="line">2021-08-02T08:28:02.6264975Z              D:\a\1\Nuget\tempNuGet_22994537.config</span><br><span class="line">2021-08-02T08:28:02.6265449Z          </span><br><span class="line">2021-08-02T08:28:02.6266040Z          Feeds used:</span><br><span class="line">2021-08-02T08:28:02.6266664Z              https:&#x2F;&#x2F;msasg.pkgs.visualstudio.com&#x2F;Shared%20Data&#x2F;_packaging&#x2F;Ads.BI.SubjectArea.Upstreams&#x2F;nuget&#x2F;v3&#x2F;index.json</span><br><span class="line">2021-08-02T08:28:02.6267321Z          </span><br><span class="line">2021-08-02T08:28:02.6267938Z          Installed:</span><br><span class="line">2021-08-02T08:28:02.6281713Z              60 package(s) to D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj</span><br><span class="line">2021-08-02T08:28:02.6297867Z        Done executing task &quot;RestoreTask&quot; -- FAILED.</span><br><span class="line">2021-08-02T08:28:02.6302830Z      1&gt;Done building target &quot;Restore&quot; in project &quot;dirs.proj&quot; -- FAILED.</span><br><span class="line">2021-08-02T08:28:02.6303710Z      1&gt;Done Building Project &quot;D:\a\1\s\private\src\Batch\dirs.proj&quot; (Restore target(s)) -- FAILED.</span><br><span class="line">2021-08-02T08:28:02.6405509Z </span><br><span class="line">2021-08-02T08:28:02.6547930Z Build FAILED.</span><br><span class="line">2021-08-02T08:28:02.6562009Z </span><br><span class="line">2021-08-02T08:28:02.6580770Z        &quot;D:\a\1\s\private\src\Batch\dirs.proj&quot; (Restore target) (1) -&gt;</span><br><span class="line">2021-08-02T08:28:02.6589059Z        (Restore target) -&gt; </span><br><span class="line">2021-08-02T08:28:02.6596250Z          D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605: Detected package downgrade: Microsoft.BI.Common from 4.21.0 to 4.5.0. Reference the package directly from the project to select a different version.  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6599483Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Ads.BI.StreamingToBatch 2.2.0 -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.21.0)  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6602014Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.5.0) [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6603542Z          D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605: Detected package downgrade: Microsoft.BI.Common from 4.12.0 to 4.5.0. Reference the package directly from the project to select a different version.  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6605044Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Ads.BI.Orchestration.Workflows 0.1.0 -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.12.0)  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6606611Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.5.0) [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6608307Z          D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605: Detected package downgrade: Microsoft.Bingads.Dwc.Tools from 2.2.0 to 2.0.5102033.20. Reference the package directly from the project to select a different version.  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6609947Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Ads.BI.Orchestration.Workflows 0.1.0 -&gt; Microsoft.Bingads.Dwc.Tools (&gt;&#x3D; 2.2.0)  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6612139Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Microsoft.BingAds.Dwc.Tools (&gt;&#x3D; 2.0.5102033.20) [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6612903Z </span><br><span class="line">2021-08-02T08:28:02.6613320Z     0 Warning(s)</span><br><span class="line">2021-08-02T08:28:02.6613727Z     3 Error(s)</span><br><span class="line">2021-08-02T08:28:02.6613981Z </span><br><span class="line">2021-08-02T08:28:02.6614474Z Time Elapsed 00:00:19.93</span><br><span class="line">2021-08-02T08:28:02.7009246Z ##[error]Error: The process &#39;C:\Program Files\dotnet\dotnet.exe&#39; failed with exit code 1</span><br><span class="line">2021-08-02T08:28:02.7020201Z ##[error]Packages failed to restore</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">可知，package引入如果指定了低层级的版本，会强制上层package统一使用，类似java的原理。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Ads.BI.BinplacingTools&quot;&gt;</span><br><span class="line">      &lt;Version&gt;3.0.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Ads.BI.PipelineApps.Egress&quot;&gt;</span><br><span class="line">      &lt;Version&gt;6.1.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.AdCenter.ExecuteSSISPackage&quot;&gt;</span><br><span class="line">      &lt;Version&gt;1.1.5102398-pacman&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.Azure.KeyVault.Core&quot;&gt;</span><br><span class="line">      &lt;Version&gt;1.0.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.BingAds.Dwc.Engine.Library&quot;&gt;</span><br><span class="line">      &lt;Version&gt;2.1.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.Search.Autopilot&quot;&gt;</span><br><span class="line">      &lt;Version&gt;1.0.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;WindowsAzure.Storage&quot;&gt;</span><br><span class="line">      &lt;Version&gt;7.1.2&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>ads Data live-site tracking v2</p>
-<p>Deployment process for FASTBI streaming pipeline - V2</p>
+          <p>time to live (TTL)</p>
 
       
     </div>
@@ -266,7 +235,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/arithmetic/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/dataQuality/%E8%B5%84%E6%96%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -280,7 +249,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/05/05/arithmetic/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" class="post-title-link" itemprop="url">一致性哈希</a>
+            <a href="/2026/06/18/dataQuality/%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -290,16 +259,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
             </span>
 
           
@@ -313,7 +273,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/89605547">一致性哈希算法–&gt; 解决memecache 服务器扩容后的数据丢失</a></p>
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fseast/article/details/116522172#comments_17892022">Griffin 系列（一）——Griffin的搭建</a></p>
 
       
     </div>
@@ -333,7 +293,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/AI/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/deep/%E5%BE%85%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -347,7 +307,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/05/05/AI/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/06/18/deep/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
         </h2>
 
         <div class="post-meta">
@@ -357,112 +317,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[toc]</p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h2 id="为什么当前的AI大模型可以在很快的时间内根据你的问题知道该参考哪些文章，并进行总结，这里面都包含哪些步骤或者哪些功能模块的参与"><a href="#为什么当前的AI大模型可以在很快的时间内根据你的问题知道该参考哪些文章，并进行总结，这里面都包含哪些步骤或者哪些功能模块的参与" class="headerlink" title="为什么当前的AI大模型可以在很快的时间内根据你的问题知道该参考哪些文章，并进行总结，这里面都包含哪些步骤或者哪些功能模块的参与"></a>为什么当前的AI大模型可以在很快的时间内根据你的问题知道该参考哪些文章，并进行总结，这里面都包含哪些步骤或者哪些功能模块的参与</h2><p>这是一个很专业的问题。你观察到的这种“快速定位并总结参考文献”的能力，并非单个模型的魔法，而是一套精密系统协同工作的结果。这套系统通常被称为 <strong>RAG（检索增强生成）</strong>。</p>
-<p>简单来说，整个过程可以分解为三个核心阶段，每个阶段都有专门的功能模块参与。</p>
-<h3 id="阶段一：理解你的问题（查询处理）"><a href="#阶段一：理解你的问题（查询处理）" class="headerlink" title="阶段一：理解你的问题（查询处理）"></a>阶段一：理解你的问题（查询处理）</h3><p>这个阶段的目标是把你的口语化问题，变成系统能精准检索的“钥匙”。</p>
-<ul>
-<li><strong>模块1：查询理解</strong>：系统会先分析你的问题，进行同义词替换（比如把“怎么减肥”理解为“减脂方法”）、识别专有名词，甚至把“苹果最新款手机”这种模糊指代明确为“iPhone 15 Pro Max”。</li>
-<li><strong>模块2：查询改写与扩展</strong>：为了增加命中率，系统可能会用大模型把你的问题改写成几个不同角度的搜索语句，或者拆成几个子问题（如“苹果公司财报”、“iPhone销量”）。</li>
-<li><strong>模块3：意图识别</strong>：快速判断你是想了解最新新闻（需要实时信息）、学术研究（需要论文库），还是常识问答（需要百科知识），以便后续去不同的知识库搜索。</li>
-</ul>
-<h3 id="阶段二：快速找到相关文章（检索）"><a href="#阶段二：快速找到相关文章（检索）" class="headerlink" title="阶段二：快速找到相关文章（检索）"></a>阶段二：快速找到相关文章（检索）</h3><p>这是实现“快速”的关键。系统不会去一篇篇阅读原始文档，而是通过“语义指纹”来匹配。</p>
-<ul>
-<li><strong>核心模块：向量数据库与嵌入模型</strong>：<ol>
-<li><strong>预处理</strong>：系统事先把所有知识库里的文章，都通过一个<strong>嵌入模型</strong>转换成一串由数字组成的“向量”。这个向量就像文章的语义指纹，意思相近的文章，指纹在空间里的位置也相近。</li>
-<li><strong>实时转换</strong>：收到你的问题时，系统用<strong>同一个嵌入模型</strong>，也把你的问题转换成一个向量。</li>
-<li><strong>相似度搜索</strong>：系统立刻在你问题的向量和数据库里海量的文章向量之间，进行一种数学运算（如余弦相似度），快速找出距离最近的N篇文章。这个过程借助了高效的索引算法（如HNSW），速度极快，哪怕在百万级文档里也只需毫秒级。</li>
-</ol>
-</li>
-<li><strong>补充模块：混合检索与重排序</strong>：为了更精准，系统还会结合传统的关键词搜索（比如匹配你问题里的专有名词），并用一个轻量级的<strong>重排序模型</strong>，把初步找出的文章按最相关顺序排好。</li>
-</ul>
-<h3 id="阶段三：进行总结与回答（生成）"><a href="#阶段三：进行总结与回答（生成）" class="headerlink" title="阶段三：进行总结与回答（生成）"></a>阶段三：进行总结与回答（生成）</h3><p>系统不是简单地把文章拼起来，而是让大模型扮演一个“擅长总结的编辑”。</p>
-<ul>
-<li><p><strong>核心模块：大语言模型</strong></p>
-<ol>
-<li><p><strong>构建上下文</strong>：系统会把你原始的问题，和阶段二找到的最相关的几篇文章（或段落），一起打包放进一个精心设计的提示模板里。比如：</p>
-<blockquote>
-<p>“根据以下参考资料，用中文简洁、准确地回答用户的问题。如果资料里没有答案，就说不知道。\n参考资料：\n[文章1内容]\n[文章2内容]\n…\n用户问题：[你的问题]”</p>
-</blockquote>
-</li>
-<li><p><strong>生成回答</strong>：大模型看到这个提示后，会“根据”提供的资料来生成答案。它会提取关键信息、理顺逻辑、用自己的话进行总结，并在结尾附上参考来源。</p>
-</li>
-<li><p><strong>流式输出</strong>：生成答案的同时，系统以“打字机效果”逐字返回，让你感觉响应极快。</p>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="一个简单的流程示例"><a href="#一个简单的流程示例" class="headerlink" title="一个简单的流程示例"></a>一个简单的流程示例</h3><p>假设你问：“2024年诺贝尔物理学奖得主是谁？”</p>
-<ol>
-<li><strong>查询处理</strong>：系统识别出关键词“2024年”、“诺贝尔物理学奖”、“得主”。</li>
-<li><strong>检索</strong>：系统将这几个词转换成向量，去维基百科、新闻库等向量数据库里搜索。瞬间定位到一篇名为“2024年诺贝尔物理学奖”的新闻文章。</li>
-<li><strong>生成</strong>：系统把问题和这篇文章的内容发给大模型。大模型读完文章，提炼出“约翰·J·霍普菲尔德和杰弗里·E·辛顿”，然后组织成一句通顺的回答：“2024年诺贝尔物理学奖授予了…”。同时附上参考文章链接。</li>
-</ol>
-<h3 id="总结：为什么这么快？"><a href="#总结：为什么这么快？" class="headerlink" title="总结：为什么这么快？"></a>总结：为什么这么快？</h3><ul>
-<li><strong>预处理</strong>：文章的向量指纹是事先算好的，不占用你提问时的时间。</li>
-<li><strong>向量检索</strong>：本质是数学计算，比人眼扫读文档快上亿倍。</li>
-<li><strong>并行计算</strong>：现代GPU（图形处理器）/TPU（张量处理器）硬件可以同时进行大量计算。</li>
-<li><strong>流式输出</strong>：模型算出第一个字就显示给你，减少等待的焦虑感。</li>
-</ul>
-<p>这套RAG架构，就像给大模型外挂了一个可以无限扩展的、能极速检索的“图书馆”，让它既能博闻强识（访问最新外部知识），又能避免胡编乱造（回答基于事实资料）。这已经成为目前解决大模型知识更新和幻觉问题的主流工业方案。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/arithmetic/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/05/05/arithmetic/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">动态规划</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -470,216 +325,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="解题思路模板："><a href="#解题思路模板：" class="headerlink" title="解题思路模板："></a>解题思路模板：</h4><p>这是经典的动态编程问题。这是一个可以使用的模板：</p>
-<ul>
-<li>定义答案显而易见的基本情况。</li>
-<li>制定根据简单的情况计算复杂情况的策略。</li>
-<li>将此策略链接到基本情况。</li>
-</ul>
-<h4 id="如何定义状态："><a href="#如何定义状态：" class="headerlink" title="如何定义状态："></a>如何定义状态：</h4><p>尝试题目问啥，就把啥定义成状态。</p>
-<h4 id="常见问题汇总"><a href="#常见问题汇总" class="headerlink" title="常见问题汇总"></a>常见问题汇总</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/">leetcode-518.零钱兑换2</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ones-and-zeroes/solution/dong-tai-gui-hua-zhuan-huan-wei-0-1-bei-bao-wen-ti/">leetcode-474.一和零</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/arithmetic/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/05/05/arithmetic/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" class="post-title-link" itemprop="url">布隆过滤器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liyulong1982/p/6013002.html">布隆过滤器(Bloom Filter)详解</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/arithmetic/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/05/05/arithmetic/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">排序算法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chengxiao/p/6129630.html">https://www.cnblogs.com/chengxiao/p/6129630.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/arithmetic/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/05/05/arithmetic/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">数据结构</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">技术探索</span></a>
                 </span>
             </span>
 
@@ -695,9 +341,20 @@
 
       
           <p>[toc]</p>
-<h2 id="链表类"><a href="#链表类" class="headerlink" title="链表类"></a>链表类</h2><h3 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h3><p>java</p>
-<h3 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h3><p>java</p>
-<h2 id="数组类"><a href="#数组类" class="headerlink" title="数组类"></a>数组类</h2><h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3>
+<h4 id="bitMap">bitMap</h4>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&amp;mid=2247492204&amp;idx=1&amp;sn=269493abe2acc61d06321e6aa5c6dbe5&amp;chksm=fbd75000cca0d91668829252016209ff50a69b810bc5f98635f43324d8eb3ba4cec7e8105673&amp;scene=21#wechat_redirect">快手 HBase 在千亿级用户特征数据分析中的应用与实践</a></p>
+<p>基于bitmap开发的bitbase，与成都开发的bitcube类似</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013516966/article/details/103917880">不得不掌握的三种BitMap</a></p>
+<ol>
+<li>BitMap</li>
+<li>RoaringBitmap</li>
+<li>Roaring64NavigableMap</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/818ac4e90daf">高效压缩位图RoaringBitmap的原理与应用</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903769201704973">漫画：什么是Bitmap算法？</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lucky52529/article/details/90172264">[数据结构]——位图原理及实现</a></p>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/454073303">概要设计-全局字典</a></p>
+
       
     </div>
 
@@ -716,7 +373,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/arithmetic/%E6%A0%91/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/deep/%E6%96%B9%E6%B3%95%E8%AE%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -730,7 +387,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/05/05/arithmetic/%E6%A0%91/" class="post-title-link" itemprop="url">树</a>
+            <a href="/2026/06/18/deep/%E6%96%B9%E6%B3%95%E8%AE%BA/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -740,7 +397,65 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在函数层面 尽量保证什么类型进什么类型出，除非本函数有转换类型的作用</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/doris/Colocate%20Join/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/doris/Colocate%20Join/" class="post-title-link" itemprop="url">Colocate join</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -748,7 +463,77 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="参考资料">参考资料</h3>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://blog.bcmeng.com/post/doris-colocate-join.html">Apache Doris Colocate Join 原理与实践</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/doris/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/doris/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
                 </span>
             </span>
 
@@ -764,73 +549,14 @@
 
       
           <p>[toc]</p>
-<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><h2 id="普通二叉树"><a href="#普通二叉树" class="headerlink" title="普通二叉树"></a>普通二叉树</h2><h2 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h2><h1 id="N叉树"><a href="#N叉树" class="headerlink" title="N叉树"></a>N叉树</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/arithmetic/%E7%BA%A2%E9%BB%91%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/05/05/arithmetic/%E7%BA%A2%E9%BB%91%E6%A0%91/" class="post-title-link" itemprop="url">红黑树</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/minikobe/p/12105991.html">红黑树详解，红黑树与AVL树区别</a></p>
+<h3 id="实践">实践</h3>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.sohu.com/a/390678890_505779">Apache Doris在美团外卖数仓中的应用实践</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huzechen/article/details/109376514">Doris在用户画像人群业务的应用</a></li>
+<li></li>
+</ol>
+<h3 id="原理">原理</h3>
+<h4 id="bitmap">bitmap</h4>
 
       
     </div>
@@ -850,7 +576,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/arithmetic/%E9%87%8D%E7%82%B9%E6%B1%87%E6%80%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/doris/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -864,7 +590,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/05/05/arithmetic/%E9%87%8D%E7%82%B9%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">重点汇总</a>
+            <a href="/2026/06/18/doris/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">官方文档目录摘要</a>
         </h2>
 
         <div class="post-meta">
@@ -874,7 +600,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -882,7 +608,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
                 </span>
             </span>
 
@@ -897,57 +623,613 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><ol>
-<li>数组</li>
-<li>链表</li>
-<li>栈</li>
-<li>队列</li>
-<li>散列表</li>
-<li>二叉树</li>
-<li>堆</li>
-<li>跳表</li>
-<li>图</li>
-<li>Trie数</li>
+          <p>[toc]</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-doris/wiki">git wiki地址</a></p>
+<h1>编译与部署</h1>
+<h2 id="安装与部署"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/installing/install-deploy.html">安装与部署</a></h2>
+<h3 id="软硬件需求">软硬件需求</h3>
+<ul>
+<li>FE（前端）和BE（后端）存储数据的区别，以及所需机器配置</li>
+<li>FE与BE端口、网络需求</li>
+<li>ip绑定</li>
+</ul>
+<h3 id="集群部署">集群部署</h3>
+<ul>
+<li>
+<p>手动部署</p>
+</li>
+<li>
+<ul>
+<li>FE部署</li>
+<li>BE部署</li>
+<li>FS_Broker部署</li>
+</ul>
+</li>
+</ul>
+<h3 id="扩容缩容">扩容缩容</h3>
+<ul>
+<li>
+<p>FE扩容和缩容</p>
+</li>
+<li>
+<ul>
+<li>增加FE节点</li>
+<li>删除FE节点</li>
+</ul>
+</li>
+<li>
+<p>BE扩容和缩容</p>
+</li>
+<li>
+<ul>
+<li>增加BE节点</li>
+<li>删除BE节点</li>
+</ul>
+</li>
+<li>
+<p>Broker扩容缩容</p>
+</li>
+</ul>
+<h2 id="常见问题">常见问题</h2>
+<h1>开始使用</h1>
+<h2 id="基础使用指南"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/basic-usage.html">基础使用指南</a></h2>
+<h3 id="1-创建用户">1.创建用户</h3>
+<ul>
+<li>Root用户登陆与密码修改</li>
+<li>创建新用户</li>
+</ul>
+<h3 id="2-数据表的创建与数据导入">2.数据表的创建与数据导入</h3>
+<ul>
+<li>
+<p>创建数据库</p>
+</li>
+<li>
+<p>账户授权</p>
+</li>
+<li>
+<p>建表</p>
+</li>
+<li>
+<ul>
+<li>单分区</li>
+<li>复合分区</li>
+</ul>
+</li>
+<li>
+<p>导入数据</p>
+</li>
+<li>
+<ul>
+<li>流式导入</li>
+<li>Broker导入</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-数据的查询">3.数据的查询</h3>
+<ul>
+<li>简单查询</li>
+<li>Join查询</li>
+<li>子查询</li>
+</ul>
+<h2 id="高级使用指南"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/advance-usage.html">高级使用指南</a></h2>
+<h3 id="1-表结构变更">1. 表结构变更</h3>
+<h3 id="2-Rollup">2. Rollup</h3>
+<h3 id="3-数据表的查询">3. 数据表的查询</h3>
+<ul>
+<li>内存限制</li>
+<li>查询超时</li>
+<li>Broadcast/Shuffle Join</li>
+<li>查询重试和高可用</li>
+</ul>
+<h2 id="最佳实践"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/best-practice.html">最佳实践</a></h2>
+<h3 id="1-建表">1. 建表</h3>
+<ul>
+<li>
+<p>数据模型选择</p>
+</li>
+<li>
+<ul>
+<li>AGGREGATE KEY</li>
+<li>UNIQUE KEY</li>
+<li>DUPLICATE KEY</li>
+</ul>
+</li>
+<li>
+<p>大宽表与Star Schema</p>
+</li>
+<li>
+<p>分区和分桶</p>
+</li>
+<li>
+<ul>
+<li>Range分区(partition)</li>
+<li>HASH分桶(bucket)</li>
+</ul>
+</li>
+<li>
+<p>稀疏索引和Bloom Filter</p>
+</li>
+<li>
+<p>物化视图(rollup)</p>
+</li>
+<li>
+<ul>
+<li>Base Table中数据聚合度不高</li>
+<li>Base Table中的前缀索引无法命中</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Schema-Change">2. Schema Change</h3>
+<ul>
+<li>Sorted Schema Change</li>
+<li>Direct Schema Change: 无需重新排序，但需要对数据做一次转换。例如修改列的类型，在稀疏索引中加一列等</li>
+<li>Linked Schema Change: 无需转换数据，直接完成。例如加列操作</li>
+</ul>
+<h2 id="数据划分"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-partition.html">数据划分</a></h2>
+<h3 id="1-基本概念">1. 基本概念</h3>
+<ul>
+<li>Row &amp; Column</li>
+<li>Tablet &amp; Partition</li>
+</ul>
+<h3 id="2-数据划分">2. 数据划分</h3>
+<ul>
+<li>
+<p>列定义</p>
+</li>
+<li>
+<ul>
+<li>列定义建议</li>
+</ul>
+</li>
+<li>
+<p>分区与分桶</p>
+</li>
+</ul>
+<p>Doris支持两层的数据划分。第一层是Partition，仅支持Range的划分方式。第二层是Bucket（Tablet），仅支持Hash的划分方式。也可以仅使用一层分区</p>
+<ul>
+<li>
+<ul>
+<li>Partition</li>
+<li>Bucket</li>
+<li>关于Partition和Bucket的数量和数据量的建议</li>
+<li>多列分区</li>
+</ul>
+</li>
+<li>
+<p>PROPERTIES</p>
+</li>
+<li>
+<ul>
+<li>replication_num</li>
+<li>storage_medium &amp; storage_cooldown_time</li>
+</ul>
+</li>
+<li>
+<p>ENGINE</p>
+</li>
+</ul>
+<h3 id="3-常见问题">3. 常见问题</h3>
+<ul>
+<li>
+<p>建表操作常见问题</p>
+</li>
+<li>
+<ul>
+<li>如果在较长的建表语句中出现语法错误，可能会出现语法错误提示不全的现象。这里罗列可能的语法错误供手动纠错：</li>
+<li>Failed to create partition [xxx] . Timeout</li>
+<li>建表命令长时间不返回结果。</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据模型、ROLLUP及前缀索引"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html">数据模型、ROLLUP及前缀索引</a></h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-doris/wiki/Data-Model%2C-Rollup-%26-Prefix-Index">github wiki</a></p>
+<h3 id="1-基本概念-2">1. 基本概念</h3>
+<ul>
+<li>
+<p>Row</p>
+</li>
+<li>
+<p>Column</p>
+</li>
+<li>
+<ul>
+<li>Key</li>
+<li>Value</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Aggregate模型">2. Aggregate模型</h3>
+<ul>
+<li>示例1: 导入数据聚合</li>
+<li>示例2: 保留明细数据</li>
+<li>示例3: 导入数据与已有数据聚合</li>
+</ul>
+<h3 id="3-Uniq模型">3. Uniq模型</h3>
+<h3 id="4-Duplicate模型-冗余模型">4. Duplicate模型(冗余模型)</h3>
+<h3 id="5-ROLLUP">5. ROLLUP</h3>
+<ul>
+<li>
+<p>基本概念</p>
+</li>
+<li>
+<ul>
+<li>
+<p>Aggregate和Uniq模型中的ROLLUP</p>
+</li>
+<li>
+<ul>
+<li>示例1: 获得每个用户的总消费</li>
+<li>示例2: 获得不同城市，不同年龄段用户的总消费、最长和最短页面驻留时间</li>
+</ul>
+</li>
+<li>
+<p>Duplicate模型中的ROLLUP</p>
+</li>
+</ul>
+</li>
+<li>
+<p>前缀索引与ROLLUP</p>
+</li>
+<li>
+<ul>
+<li>前缀索引</li>
+</ul>
+</li>
+</ul>
+<p>我们将一行数据的前 36 个字节 作为这行数据的前缀索引。当遇到 VARCHAR 类型时，前缀索引会直接截断。</p>
+<ul>
+<li>
+<ul>
+<li>ROLLUP调整前缀索引</li>
+</ul>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html#rollup-%E7%9A%84%E5%87%A0%E7%82%B9%E8%AF%B4%E6%98%8E">ROLLUP的几点说明</a></p>
+</li>
+<li>
+<ul>
+<li>根本作用是提高某些查询的查询效率（无论是通过聚合来减少数据量，还是修改列顺序以匹配前缀索引）。因此 ROLLUP 的含义已经超出了 “上卷” 的范围。这也是为什么我们在源代码中，将其命名为 Materized Index（物化索引）的原因。</li>
+<li>ROLLUP是附属于Base表的，可以看作是Base表的一种辅助数据结构。用户可以在 Base 表的基础上，创建或删除 ROLLUP，但是不能在查询中显式的指定查询某 ROLLUP。是否命中 ROLLUP 完全由 Doris 系统自动决定。</li>
+<li>ROLLUP 的数据是独立物理存储的。因此，创建的 ROLLUP 越多，占用的磁盘空间也就越大。同时对导入速度也会有影响（导入的ETL阶段会自动产生所有 ROLLUP 的数据），但是不会降低查询效率（只会更好）。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>ROLLUP 的数据更新与 Base 表示完全同步的。用户无需关心这个问题。</li>
+<li>ROLLUP 中列的聚合方式，与 Base 表完全相同。在创建 ROLLUP 无需指定，也不能修改。</li>
+<li>查询能否命中 ROLLUP 的一个必要条件（非充分条件）是，查询所涉及的所有列（包括 select list 和 where 中的查询条件列等）都存在于该 ROLLUP 的列中。否则，查询只能命中 Base 表。</li>
+<li>某些类型的查询（如 count(*)）在任何条件下，都无法命中 ROLLUP。具体参见接下来的 聚合模型的局限性 一节。</li>
+<li>可以通过 EXPLAIN your_sql; 命令获得查询执行计划，在执行计划中，查看是否命中 ROLLUP。</li>
+<li>可以通过 DESC tbl_name ALL; 语句显示 Base 表和所有已创建完成的 ROLLUP。</li>
+<li><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/hit-the-rollup">查询如何命中ROLLUP</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="6-聚合模型的局限性">6. 聚合模型的局限性</h3>
+<ul>
+<li>Aggregate 模型（包括 Uniq 模型）</li>
+</ul>
+<p>在聚合模型中，模型对外展现的，是最终聚合后的数据。也就是说，任何还未聚合的数据（比如说两个不同导入批次的数据），必须通过某种方式，以保证对外展示的一致性。</p>
+<ul>
+<li>Duplicate 模型</li>
+</ul>
+<p>Duplicate 模型没有聚合模型的这个局限性。因为该模型不涉及聚合语意，在做 count(*) 查询时，任意选择一列查询，即可得到语意正确的结果。</p>
+<h3 id="7-数据模型的选择建议">7. 数据模型的选择建议</h3>
+<p>因为数据模型在建表时就已经确定，且无法修改。所以，选择一个合适的数据模型非常重要。</p>
+<ol>
+<li>Aggregate 模型可以通过预聚合，极大地降低聚合查询时所需扫描的数据量和查询的计算量，非常适合有固定模式的报表类查询场景。但是该模型对 count(*) 查询很不友好。同时因为固定了 Value 列上的聚合方式，在进行其他类型的聚合查询时，需要考虑语意正确性。</li>
+<li>Uniq 模型针对需要唯一主键约束的场景，可以保证主键唯一性约束。但是无法利用 ROLLUP 等预聚合带来的查询优势（因为本质是 REPLACE，没有 SUM 这种聚合方式）。</li>
+<li>Duplicate 适合任意维度的 Ad-hoc 查询。虽然同样无法利用预聚合的特性，但是不受聚合模型的约束，可以发挥列存模型的优势（只读取相关列，而不需要读取所有 Key 列）。</li>
 </ol>
-<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ol>
-<li>递归</li>
-<li>排序</li>
-<li>二分查找</li>
-<li>搜索</li>
-<li>哈希算法</li>
-<li>贪心算法</li>
-<li>分治算法</li>
-<li>回溯算法</li>
-<li>动态规划</li>
-<li>字符串匹配算法</li>
+<h2 id="Rollup与查询"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/hit-the-rollup.html">Rollup与查询</a></h2>
+<p>在 Doris 里 Rollup 作为一份聚合物化视图，其在查询中可以起到两个作用：</p>
+<ul>
+<li>索引</li>
+<li>聚合数据（仅用于聚合模型，即aggregate key）</li>
+</ul>
+<p>但是为了命中 Rollup 需要满足一定的条件，并且可以通过执行计划中 ScanNdoe 节点的 PreAggregation 的值来判断是否可以命中 Rollup，以及 Rollup 字段来判断命中的是哪一张 Rollup 表。</p>
+<h3 id="1-名词解释">1. 名词解释</h3>
+<ul>
+<li>Base： 基表</li>
+<li>Rollup： 一般指基于 Base 表创建的 Rollup 表，但在一些场景包括 Base 以及 Rollup 表。</li>
+</ul>
+<h3 id="2-索引">2. 索引</h3>
+<h3 id="3-聚合数据">3. 聚合数据</h3>
+<h1>操作手册</h1>
+<h2 id="数据导入">数据导入</h2>
+<h3 id="1-导入总览">1. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html">导入总览</a></h3>
+<h4 id="1-1-基本概念">1.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">基本概念</a></h4>
+<ol>
+<li>Frontend（FE）：Doris 系统的元数据和调度节点。在导入流程中主要负责导入规划生成和导入任务的调度工作。</li>
+<li>Backend（BE）：Doris 系统的计算和存储节点。在导入流程中主要负责数据的 ETL 和存储。</li>
+<li>Broker：Broker 为一个独立的无状态进程。封装了文件系统接口，提供 Doris 读取远端存储系统中文件的能力。</li>
+<li>导入作业（Load job）：导入作业读取用户提交的源数据，转换或清洗后，将数据导入到 Doris 系统中。导入完成后，数据即可被用户查询到。</li>
+<li>Label：所有导入作业都有一个 Label。Label 在一个数据库内唯一，可由用户指定或系统自动生成，用于标识一个导入作业。相同的 Label 仅可用于一个成功的导入作业。</li>
+<li>MySQL 协议/HTTP 协议：Doris 提供两种访问协议接口。 MySQL 协议和 HTTP 协议。部分导入方式使用 MySQL 协议接口提交作业，部分导入方式使用 HTTP 协议接口提交作业。</li>
 </ol>
-<h3 id="算法题分类"><a href="#算法题分类" class="headerlink" title="算法题分类"></a>算法题分类</h3><h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><ol>
-<li>翻转</li>
-<li>两两翻转</li>
-<li>有序链表合并</li>
-<li>链表加法</li>
-<li>链表减法</li>
+<h4 id="1-2-导入方式">1.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%AF%BC%E5%85%A5%E6%96%B9%E5%BC%8F">导入方式</a></h4>
+<ol>
+<li>Broker load</li>
+<li>Stream load</li>
+<li>Insert</li>
+<li>Multi load</li>
+<li>Routine load</li>
 </ol>
-<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><ol>
-<li>加法</li>
-<li>减法</li>
-<li>字符串转double</li>
+<h4 id="1-3-基本原理">1.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">基本原理</a></h4>
+<h5 id="1-3-1-导入执行流程">1.3.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%AF%BC%E5%85%A5%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B">导入执行流程</a></h5>
+<ol>
+<li>PENDING（非必须）</li>
+<li>ETL（非必须）</li>
+<li>LOADING</li>
+<li>FINISHED</li>
+<li>CANCELLED</li>
 </ol>
-<h4 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h4><ol>
-<li>先、中、后序遍历，递归非递归</li>
-<li>层次遍历</li>
-<li>蛇形层次遍历，两个栈实现</li>
-</ol>
-<h4 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h4><ol>
-<li>队列实现栈</li>
-</ol>
-<h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><ol>
-<li>栈实现队列</li>
-</ol>
-<h4 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h4><ol>
-<li>股票买入时机</li>
-<li>硬币拿取方式数量</li>
-</ol>
+<h5 id="1-3-2-Label和原子性">1.3.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#label-%E5%92%8C-%E5%8E%9F%E5%AD%90%E6%80%A7">Label和原子性</a></h5>
+<h4 id="1-4-同步和异步">1.4 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5">同步和异步</a></h4>
+<h5 id="1-4-1-同步">1.4.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%90%8C%E6%AD%A5">同步</a></h5>
+<h5 id="1-4-2-异步">1.4.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%BC%82%E6%AD%A5">异步</a></h5>
+<h5 id="1-4-3-注意事项">1.4.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</a></h5>
+<h4 id="1-5-内存限制">1.5 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6">内存限制</a></h4>
+<h4 id="1-6-最佳实践">1.6 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></h4>
+<h4 id="1-7-通用系统配置">1.7 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E9%80%9A%E7%94%A8%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">通用系统配置</a></h4>
+<h5 id="1-7-1-FE配置">1.7.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#fe-%E9%85%8D%E7%BD%AE">FE配置</a></h5>
+<h5 id="1-7-2-BE配置">1.7.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#be-%E9%85%8D%E7%BD%AE">BE配置</a></h5>
+<h5 id="1-7-3-列映射">1.7.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%88%97%E6%98%A0%E5%B0%84">列映射</a></h5>
+<h3 id="2-Broker-Load">2.<a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html">Broker Load</a></h3>
+<p>一种异步导入方式</p>
+<h4 id="2-1-适用场景">2.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF">适用场景</a></h4>
+<h4 id="2-2-名词解释">2.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A">名词解释</a></h4>
+<h4 id="2-3-基本原理">2.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">基本原理</a></h4>
+<h4 id="2-4-基本操作">2.4 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">基本操作</a></h4>
+<h5 id="2-4-1-创建导入">2.4.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%88%9B%E5%BB%BA%E5%AF%BC%E5%85%A5">创建导入</a></h5>
+<h5 id="2-4-2-查看导入">2.4.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E6%9F%A5%E7%9C%8B%E5%AF%BC%E5%85%A5">查看导入</a></h5>
+<h5 id="2-4-3-取消导入">2.4.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%8F%96%E6%B6%88%E5%AF%BC%E5%85%A5">取消导入</a></h5>
+<h4 id="2-5-相关系统配置">2.5 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E7%9B%B8%E5%85%B3%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">相关系统配置</a></h4>
+<h5 id="2-5-1-FE-配置">2.5.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#fe-%E9%85%8D%E7%BD%AE">FE 配置</a></h5>
+<h4 id="2-6-最佳实践">2.6 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></h4>
+<h5 id="2-6-1-应用场景">2.6.1 应用场景</h5>
+<p>使用 Broker load 最适合的场景就是原始数据在文件系统（HDFS，BOS，AFS）中的场景。其次，由于 Broker load 是单次导入中唯一的一种异步导入的方式，所以如果用户在导入大文件中，需要使用异步接入，也可以考虑使用 Broker load。</p>
+<h5 id="2-6-2-数据量">2.6.2 数据量</h5>
+<p>这里仅讨论单个 BE 的情况，如果用户集群有多个 BE 则下面标题中的数据量应该乘以 BE 个数来计算。比如：如果用户有3个 BE，则 3G 以下（包含）则应该乘以 3，也就是 9G 以下（包含）。</p>
+<h5 id="2-6-3-性能分析">2.6.3 性能分析</h5>
+<h5 id="2-6-4-完整例子">2.6.4 完整例子</h5>
+<h4 id="2-7-常见问题">2.7 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a></h4>
+<h3 id="3-Stream-load">3. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/stream-load-manual.html#stream-load">Stream load</a></h3>
+<p>Stream load 是一个同步的导入方式，用户通过发送 HTTP 协议发送请求将本地文件或数据流导入到 Doris 中。Stream load 同步执行导入并返回导入结果。用户可直接通过请求的返回体判断本次导入是否成功。</p>
+<p>Stream load 主要适用于导入本地文件，或通过程序导入数据流中的数据。</p>
+<h4 id="3-1-基本原理">3.1 基本原理</h4>
+<h4 id="3-2-基本操作">3.2 基本操作</h4>
+<h4 id="3-3-相关系统配置">3.3 相关系统配置</h4>
+<h4 id="3-4-最佳实践">3.4 最佳实践</h4>
+<h5 id="3-4-1-应用场景">3.4.1 应用场景</h5>
+<p>使用 Stream load 的最合适场景就是原始文件在内存中，或者在磁盘中。其次，由于 Stream load 是一种同步的导入方式，所以用户如果希望用同步方式获取导入结果，也可以使用这种导入。</p>
+<h5 id="3-4-2-数据量">3.4.2 数据量</h5>
+<h5 id="3-4-3-完整例子">3.4.3 完整例子</h5>
+<h4 id="3-5-常见问题">3.5 常见问题</h4>
+<h3 id="4-Routine-Load">4. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/routine-load-manual.html">Routine Load</a></h3>
+<p>例行导入（Routine Load）功能为用户提供了一种自动从指定数据源进行数据导入的功能。</p>
+<p>本文档主要介绍该功能的实现原理、使用方式以及最佳实践。</p>
+<h3 id="5-u-insert-into-u">5. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/insert-into-manual.html"><u>insert into</u></a></h3>
+<p>Insert Into 语句的使用方式和 MySQL 等数据库中 Insert Into 语句的使用方式类似。但在 Doris 中，所有的数据写入都是一个独立的导入作业。所以这里将 Insert Into 也作为一种导入方式介绍。</p>
+<p>主要的 Insert Into 命令包含以下两种；</p>
+<ul>
+<li>INSERT INTO tbl SELECT …</li>
+<li>INSERT INTO tbl (col1, col2, …) VALUES (1, 2, …), (1,3, …);</li>
+</ul>
+<p>其中第二种命令仅用于 Demo，不要使用在测试或生产环境中。</p>
+<h3 id="6-u-spark-Load-u">6. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/spark-load-manual.html"><u>spark Load</u></a></h3>
+<p>Spark load 通过外部的 Spark 资源实现对导入数据的预处理，提高 Doris 大数据量的导入性能并且节省 Doris 集群的计算资源。主要用于初次迁移，大数据量导入 Doris 的场景。</p>
+<p>Spark load 是一种异步导入方式，用户需要通过 MySQL 协议创建 Spark 类型导入任务，并通过 <code>SHOW LOAD</code> 查看导入结果。</p>
+<h4 id="6-1-适用场景">6.1 适用场景</h4>
+<ul>
+<li>源数据在 Spark 可以访问的存储系统中，如 HDFS。</li>
+<li>数据量在 几十 GB 到 TB 级别。</li>
+</ul>
+<h3 id="7-delete">7. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/delete-manual.html">delete</a></h3>
+<p>Delete不同于其他导入方式，它是一个同步过程。和Insert into相似，所有的Delete操作在Doris中是一个独立的导入作业，一般Delete语句需要指定表和分区以及删除的条件来筛选要删除的数据，并将会同时删除base表和rollup表的数据。</p>
+<h2 id="表结构变更">表结构变更</h2>
+<h2 id="常用参考">常用参考</h2>
+<p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html#%E8%81%9A%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7">数据模型、ROLLUP 及前缀索引</a></p>
+<p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/sql-reference/sql-statements/Data%20Definition/ALTER%20TABLE.html#example">ALTER TABLE</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/doris/%E5%AE%9E%E9%99%85%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/doris/%E5%AE%9E%E9%99%85%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">实践操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-复制表">1. 复制表</h2>
+<h3 id="1-1-复制表结构">1.1 复制表结构</h3>
+<h3 id="1-2-复制表数据">1.2 复制表数据</h3>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/doris/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/doris/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>id:{} truncate partitions fail!</p>
+<p>alter table topic_flow_user_group_detail add partition IF NOT EXISTS p29 values [(“29”), (“30”));<br>
+SQL 错误 [1064] [42000]: errCode = 2, detailMessage = Failed to create partition[p29]. Timeout. Unfinished mark: 73448=53902647, 73448=53902643, 73448=53902655</p>
+<p>不知道是不是因为数据在写入导致的</p>
+<p>doris： tablet 99392436 has few replicas</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/doris/%E7%96%91%E9%97%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/doris/%E7%96%91%E9%97%AE/" class="post-title-link" itemprop="url">疑问</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="doris的分区规则">doris的分区规则</h3>
+<p>为什么表结构的分区与分区字段里去重值数量不一样？</p>
 
       
     </div>
@@ -966,7 +1248,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1032,13 +1314,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">252</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">

@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="为了以后好好偷懒，现在必须加倍努力">
+<meta property="og:type" content="website">
+<meta property="og:title" content="生而为人">
+<meta property="og:url" content="http://example.com/page/27/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="为了以后好好偷懒，现在必须加倍努力">
+<meta property="og:locale">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="大数据，数据仓库，机器学习，flink，spark">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/page/27/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/company/microsoft/HDInsight/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/company/microsoft/HDInsight/" class="post-title-link" itemprop="url">HDInsight</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="guide-line"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/">guide line</a></h4>
+<h2 id="best-practise">best practise</h2>
+<h4 id="新建cluster注意事项：">新建cluster注意事项：</h4>
+<ol>
+<li>指定独立的VNet，保证可以做灵活的网络管控</li>
+<li>对于节点多的cluster，为了保证Ambari监控性能，最好申请独立的DB，并且提高其等级，机器越多建议提高的等级越多。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/company/microsoft/cosmos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/company/microsoft/cosmos/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>azure cosmos命令</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/company/microsoft/apgold/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/company/microsoft/apgold/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>d:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Test-MW1-MSNMediation&gt;sd edit deployment.int<br>
+deployment.int - file(s) not on client.</p>
+<p>直接编辑</p>
+<ol>
+<li>add/edit</li>
+<li>安装codeflow 提交pr<br>
+\codeflow.redmond.corp.microsoft.com\public\cf2Launcher.cmd</li>
+</ol>
+<p>codeflow作用</p>
+<p>ve作用：<br>
+pe作用：</p>
+<p>之前</p>
+<p>D:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Test-MW1-MSNMediation</p>
+<p>D:\project\APGold\autopilotservice\MW1\AdsMz-Prod-MW1</p>
+<p>A ServiceGroup is mandatory for every machine function</p>
+<p>VE中存储的可以理解为某个项目的global config，所有的PE公用这部分config<br>
+设计目的是在同一项目部署多个PE时，避免多次发布，只需要更新VE，相关PE就会生效</p>
+<p><a target="_blank" rel="noopener" href="https://msazure.visualstudio.com">https://msazure.visualstudio.com</a></p>
+<p>D:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Prod-MW1-MSNMediation</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">07&#x2F;26&#x2F;21 16:54:01.841,error processing AdsMz-Test-MW1: Rollout &#39;AdsBI-AdsMz-Test-MW1-MzOrchestration-VE.6799404_17553440741849145769_0.Rollout_AdsBI_Streaming_CFR&#39; cannot be kicked due to status: InRollout - Rollout in progress..Rollout &#39;AdsBI-AdsMz-Test-MW1-MSNMediation-VE.6827694_4064931696698155710_0.Rollout_AdsBI_Streaming_CFR&#39; cannot be kicked due to status: OtherRollout - Waiting on other rollout on MF AdsBI_Streaming_CFR in progress: AdsBI_Streaming_CFR.AdvertiserAggs_94d0ef91_90546_1_15-0-897+94d0ef91_CL6670088_5920165827906938206_0.AdsBI-AdsMz-Test-MW1-AdvertiserAggs-VE.csv:AdsBI_Streaming_CFR.AgoraAggs_76700988_85934_1_16-0-173+76700988_CL6670088_4056715873563314682_0.AdsBI-AdsMz-Test-MW1-AgoraAggs-VE.csv:AdsBI_Streaming_CFR.CACFR_9a63868e_90143_2_1-0-2408+9a63868e_CL6670088_11167218336511992544_0.AdsBI-AdsMz-Test-MW1-CACFR-VE.csv:AdsBI_Streaming_CFR.CFR_2d2cea68_91067_1_17-0-6662+2d2cea68_CL6670088_18415503406869780426_0.AdsBI-AdsMz-Test-MW1-CFR-VE.csv:AdsBI_Streaming_CFR.KpiAggs_fdd5f92d_90180_1_17-0-433+fdd5f92d_CL6670088_6626197140932378707_0.AdsBI-AdsMz-Test-MW1-KPIAggs-VE.csv:AdsBI_Streaming_CFR.Monetization_de0db608_91071_1_1-0-2808+de0db608_CL6670088_351842135959690630_0.AdsBI-AdsMz-Test-MW1-Monetization-VE.csv:AdsBI_Streaming_CFR.Orchestration_93eb645e_91078_1_16-0-557+93eb645e_CL6799404_17553440741849145769_0.AdsBI-AdsMz-Test-MW1-MzOrchestration-VE.csv:AdsBI_Streaming_CFR.PublisherAggs_55bd6dd9_90534_1_17-0-474+55bd6dd9_CL6670088_15361642287162420254_0.AdsBI-AdsMz-Test-MW1-PublisherAggs-VE.csv:AdsBI_Streaming_CFR.Mediation_865d3b39_90170_1_merge_20210629_-1_CL6670088_3189803787641037971_0.AdsBI-AdsMz-Test-MW1-Mediation-VE.csv:AdsBI_Streaming_CFR.MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33_CL6827694_4798040603905411799_0.AdsBI-AdsMz-Test-MW1-MSNMediation-VE.csv:.OM.Autopilot-AutopilotClient-VE.csv..; .. Some rollouts not triggered.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Deployment: 6827694_4798040603905411799 (this is NOT the latest deployment.ini change number)</span><br><span class="line">Downloaded 89 files, 21510455 bytes, compressed size: 8267353 bytes.</span><br><span class="line">Failed to build services: Failed to build service &#39;SAMHourlyS2B.MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33&#39;: Proxy error: not all data was received (DP: 25.68.114.53; by MW01NAP0000036C); ;  ;Log:e:GetStreamChunkMapWithRetry:stream does not exist [response from server] : GetStreamChunkMap(&#39;stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;ServiceMaps&#x2F;MSNMediationServiceMap.ini&#39;; &#39;MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33&#39;) failed ;Log:w:ApDynamicStorage::StorageConnectionEx::DownloadBufferFromStreamWithRetry:Stream (stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;ServiceMaps&#x2F;MSNMediationServiceMap.ini _ MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33) not found in storage ;</span><br><span class="line">Majority of the building errors are temporary and will be fixed automatically. </span><br><span class="line">If there is no change or progress in the app deployment log after 15 minutes, contact apswat for production environments and aptalk for non-production environment.</span><br><span class="line">Look in App Deployment log for more info</span><br><span class="line"></span><br><span class="line">Here are common error messages and possible fixes:</span><br><span class="line">     Msg: Error 53: The network path was not found.: ac: 0</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Msg: EDP010385: APSEQREAD::GetDataPointer error 2</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Proxy reported error: EDP010196: ApckBuilder Error 3: The system cannot find the path specified.</span><br><span class="line">     Fix: Look for missing directories under your build drop.</span><br><span class="line"></span><br><span class="line">For more troubleshooting info, please refer to App Deployment Troubleshooting</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Deployment: 6827694_9979618793807238839_0 (this is NOT the latest deployment.ini change number)</span><br><span class="line">Downloaded [unknown] files, [unknown] bytes.</span><br><span class="line">Failed to import version &#39;6827694_9979618793807238839&#39; of image for environment &#39;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#39;: Error downloading image from remote storage (stream &#39;stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;image.ini@6827694_9979618793807238839&#39;)</span><br><span class="line">Majority of the building errors are temporary and will be fixed automatically. </span><br><span class="line">If there is no change or progress in the app deployment log after 15 minutes, contact apswat for production environments and aptalk for non-production environment.</span><br><span class="line">Look in App Deployment log for more info</span><br><span class="line"></span><br><span class="line">Here are common error messages and possible fixes:</span><br><span class="line">     Msg: Error 53: The network path was not found.: ac: 0</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Msg: EDP010385: APSEQREAD::GetDataPointer error 2</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Proxy reported error: EDP010196: ApckBuilder Error 3: The system cannot find the path specified.</span><br><span class="line">     Fix: Look for missing directories under your build drop.</span><br><span class="line"></span><br><span class="line">For more troubleshooting info, please refer to App Deployment Troubleshooting</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/company/microsoft/component/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/company/microsoft/component/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Severity	Code	Description	Project	File	Line	Suppression State<br>
+Error	MSB3680	The source file “D:\project\Ads.BI.MSNMediation\private\src\Batch/Autopilot/ExternalConfigs/Microsoft.BingAds.BI.APDeploy.exe.config” does not exist.	Microsoft.BI.MSNMediation.HourlyS2B.Drop	D:\project\Ads.BI.MSNMediation\private\src\Batch\build\targets\CreateDrop.targets	47</p>
+<p>、</p>
+<p>Severity	Code	Description	Project	File	Line	Suppression State<br>
+Error	MSB3030	Could not copy the file “D:\project\Ads.BI.MSNMediation\private\src\Batch/SAMHourlyS2B/Microsoft.BI.MSNMediation.HourlyS2B.Drop/bin\Debug\net472**” because it was not found.	Microsoft.BI.MSNMediation.HourlyS2B.Drop	D:\project\Ads.BI.MSNMediation\private\src\Batch\build\targets\CreateDrop.targets	47</p>
+<p>c:\Users\jingqicao.nuget\packages\microsoft.bingads.bi.apdeploy\10.5.2</p>
+<p>在sdk之外做的nuget package改动，比如删掉某个包</p>
+<p>resolved    Show files that have been merged but not submitted   跟执行目录无关<br>
+retype      Reappraise the file type for files on the client<br>
+revert      Discard changes from an opened file<br>
+review      List and track changelists (for the review daemon)</p>
+<p>sd review 如何只搜索某个人的review</p>
+<p>FAREAST\jingqicao</p>
+<p>sd opened</p>
+<p>sd submit -c <change list num></change></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/company/microsoft/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/company/microsoft/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/">Azure HDInsight documentation</a></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-rotate-storage-keys">Update Azure storage account access keys in HDInsight cluster</a> 当更新了remote key时，需要执行相关脚本，让节点更新。Azure Blob Storage fails to authenticate: “Make sure the value of Authorization header is formed correctly including the signature”</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://github.com/Azure-Samples">Azure Samples</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/virtual-network/">Virtual network</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/company/microsoft/%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/company/microsoft/%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="工具准备">工具准备</h4>
+<p>​	scope插件安装</p>
+<p>​	<a target="_blank" rel="noopener" href="https://mscosmos.visualstudio.com/CosmosWiki/_wiki/wikis/Cosmos.wiki/66/SCOPE-Tutorial">https://mscosmos.visualstudio.com/CosmosWiki/_wiki/wikis/Cosmos.wiki/66/SCOPE-Tutorial</a></p>
+<p>时区</p>
+<ol>
+<li>UTC时间</li>
+<li>美国时间：UTC - 7</li>
+<li>北京时间：UTC + 8</li>
+</ol>
+<p>服务器时间： UTC</p>
+<p>xts log中打印的时间：UTC</p>
+<p>xts log构建时间(xts服务器时间)：美国时间</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/company/microsoft/%E7%A6%8F%E5%88%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/company/microsoft/%E7%A6%8F%E5%88%A9/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>puid<br>
+gid 999+工号<br>
+company simple：  MSFT</p>
+<p>ESPP<br>
+R开头的一串数字</p>
+<p>HRWeb<br>
+信息维护，会影响摩根账户，需要全部都是英文，包括地址<br>
+<a target="_blank" rel="noopener" href="https://myaccount.microsoft.com/?ref=MeControl">https://myaccount.microsoft.com/?ref=MeControl</a></p>
+<p>中意人寿<br>
+family</p>
+<p>143cc3b8f01f<br>
+<a target="_blank" rel="noopener" href="https://apkpure.com">https://apkpure.com</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/company/microsoft/%E9%83%A8%E7%BD%B2%E4%BB%BB%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/company/microsoft/%E9%83%A8%E7%BD%B2%E4%BB%BB%E5%8A%A1/" class="post-title-link" itemprop="url">部署任务</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Auzre-DevOps任务定时调度">Auzre DevOps任务定时调度</h4>
+<p><a target="_blank" rel="noopener" href="https://dev.azure.com/msasg/Shared%20Data/_wiki/wikis/Shared%20Data.wiki/52258/Onboard-AP-App-Deployment-using-AzDeployer-(Stratus)">步骤：Onboard AP App Deployment using AzDeployer (Stratus)</a></p>
+<ol>
+<li>Prepare workflow folder, master config and workflow config.</li>
+<li>Prepare APDrop.</li>
+<li>Create APGold virtual environment.</li>
+<li>Setup corresponding Azure Dev Ops CD pipeline. Add Azure DevOps release pipeline</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">##[warning]C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets(2203,5): Warning MSB3245: Could not resolve this reference. Could not locate the assembly &quot;Google.Protobuf, Version&#x3D;3.6.1.0, Culture&#x3D;neutral, PublicKeyToken&#x3D;a7d26565bac4d604, processorArchitecture&#x3D;MSIL&quot;. Check to make sure the assembly exists on disk. If this reference is required by your code, you may get compilation errors.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">externalFeedCredentials: &#39;nuget-msazure-oldbond, nuget-msblox-azuregenevamonitoring, nuget-mscosmos-cosmosprod, nuget-mscosmos-cosmostest, nuget-msdata-bigdata, nuget-ossmsft-oss_all, nuget-trill-trill&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">2021-08-02 06:33:05 ThreadId:   69	PauseAndResumeWorkflows() Process: MSNBI_S2BHourly_0 UserCommand: Run</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   79	Getting information about event AdsBI_MSNBI_S2B_Hourly_Done</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   88	Getting information about event AdsBI_MSNBI_S2B_Hourly_Done</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   83	Getting information about event AdsBI_MSNBI_S2B_Hourly_Done</span><br><span class="line">2021-08-02 06:33:05 ThreadId:   83	Got SQL exception: System.Data.SqlClient.SqlException (0x80131904): -999999:3:2--prc_ProcessStateGetNextDelta-212--Violation of PRIMARY KEY constraint &#39;PK_PROCESSPRESTATE&#39;. Cannot insert duplicate key in object &#39;dbo.ProcessPrestate&#39;. The duplicate key value is (-1931531102, 20210731 1100).</span><br><span class="line">   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action&#96;1 wrapCloseInAction)</span><br><span class="line">   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)</span><br><span class="line">   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean&amp; dataReady)</span><br><span class="line">   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()</span><br><span class="line">   at System.Data.SqlClient.SqlDataReader.get_MetaData()</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task&amp; task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource&#96;1 completion, Int32 timeout, Task&amp; task, Boolean&amp; usedCache, Boolean asyncWrite, Boolean inRetry)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)</span><br><span class="line">   at System.Data.SqlClient.SqlCommand.ExecuteReader()</span><br><span class="line">   at Microsoft.AdCenter.WorkflowHost.CommunicationWorkflow.&lt;&gt;c__DisplayClass32_0.&lt;GetLastParam&gt;b__1(SqlConnection sqlConnection)</span><br><span class="line">   at Microsoft.AdCenter.WorkflowHost.SqlConnectionHelper.RunQuery(Action&#96;1 command)</span><br><span class="line">ClientConnectionId:0fd2a26b-bb72-4bbd-baec-a16499dff840</span><br><span class="line">Error Number:50000,State:1,Class:16</span><br><span class="line">ClientConnectionId before routing:bfc0cfb4-53ac-4a8f-a985-44e2e512efe2</span><br><span class="line">Routing Destination:b9d5d60a293f.tr147.westus2-a.worker.database.windows.net,11020</span><br><span class="line">connection string: Server&#x3D;adsdwctest.database.windows.net;Database&#x3D;DWC_DB;User ID&#x3D;AdsDataSI_Execution;Password&#x3D;AnotherPassword8!</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">2021-08-02T08:28:02.5629452Z          Checking compatibility for System.Security.Cryptography.Primitives 4.3.0 with .NETFramework,Version&#x3D;v4.7.2.</span><br><span class="line">2021-08-02T08:28:02.5630121Z          All packages and projects are compatible with .NETFramework,Version&#x3D;v4.7.2.</span><br><span class="line">2021-08-02T08:28:02.6040861Z          Committing restore...</span><br><span class="line">2021-08-02T08:28:02.6041989Z          Generating MSBuild file D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj.nuget.g.props.</span><br><span class="line">2021-08-02T08:28:02.6048518Z          Generating MSBuild file D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj.nuget.g.targets.</span><br><span class="line">2021-08-02T08:28:02.6053133Z          Writing assets file to disk. Path: D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\project.assets.json</span><br><span class="line">2021-08-02T08:28:02.6174412Z          Writing cache file to disk. Path: D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\project.nuget.cache</span><br><span class="line">2021-08-02T08:28:02.6187683Z          Persisting dg to D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\obj\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj.nuget.dgspec.json</span><br><span class="line">2021-08-02T08:28:02.6200559Z          Failed to restore D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj (in 17.33 sec).</span><br><span class="line">2021-08-02T08:28:02.6260383Z          </span><br><span class="line">2021-08-02T08:28:02.6264281Z          NuGet Config files used:</span><br><span class="line">2021-08-02T08:28:02.6264975Z              D:\a\1\Nuget\tempNuGet_22994537.config</span><br><span class="line">2021-08-02T08:28:02.6265449Z          </span><br><span class="line">2021-08-02T08:28:02.6266040Z          Feeds used:</span><br><span class="line">2021-08-02T08:28:02.6266664Z              https:&#x2F;&#x2F;msasg.pkgs.visualstudio.com&#x2F;Shared%20Data&#x2F;_packaging&#x2F;Ads.BI.SubjectArea.Upstreams&#x2F;nuget&#x2F;v3&#x2F;index.json</span><br><span class="line">2021-08-02T08:28:02.6267321Z          </span><br><span class="line">2021-08-02T08:28:02.6267938Z          Installed:</span><br><span class="line">2021-08-02T08:28:02.6281713Z              60 package(s) to D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj</span><br><span class="line">2021-08-02T08:28:02.6297867Z        Done executing task &quot;RestoreTask&quot; -- FAILED.</span><br><span class="line">2021-08-02T08:28:02.6302830Z      1&gt;Done building target &quot;Restore&quot; in project &quot;dirs.proj&quot; -- FAILED.</span><br><span class="line">2021-08-02T08:28:02.6303710Z      1&gt;Done Building Project &quot;D:\a\1\s\private\src\Batch\dirs.proj&quot; (Restore target(s)) -- FAILED.</span><br><span class="line">2021-08-02T08:28:02.6405509Z </span><br><span class="line">2021-08-02T08:28:02.6547930Z Build FAILED.</span><br><span class="line">2021-08-02T08:28:02.6562009Z </span><br><span class="line">2021-08-02T08:28:02.6580770Z        &quot;D:\a\1\s\private\src\Batch\dirs.proj&quot; (Restore target) (1) -&gt;</span><br><span class="line">2021-08-02T08:28:02.6589059Z        (Restore target) -&gt; </span><br><span class="line">2021-08-02T08:28:02.6596250Z          D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605: Detected package downgrade: Microsoft.BI.Common from 4.21.0 to 4.5.0. Reference the package directly from the project to select a different version.  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6599483Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Ads.BI.StreamingToBatch 2.2.0 -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.21.0)  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6602014Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.5.0) [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6603542Z          D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605: Detected package downgrade: Microsoft.BI.Common from 4.12.0 to 4.5.0. Reference the package directly from the project to select a different version.  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6605044Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Ads.BI.Orchestration.Workflows 0.1.0 -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.12.0)  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6606611Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Microsoft.BI.Common (&gt;&#x3D; 4.5.0) [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6608307Z          D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605: Detected package downgrade: Microsoft.Bingads.Dwc.Tools from 2.2.0 to 2.0.5102033.20. Reference the package directly from the project to select a different version.  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6609947Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Ads.BI.Orchestration.Workflows 0.1.0 -&gt; Microsoft.Bingads.Dwc.Tools (&gt;&#x3D; 2.2.0)  [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6612139Z        D:\a\1\s\private\src\Batch\SAMHourlyS2B\Microsoft.BI.MSNMediation.HourlyS2B.Drop\Microsoft.BI.MSNMediation.HourlyS2B.Drop.csproj : error NU1605:  Microsoft.BI.MSNMediation.HourlyS2B.Drop -&gt; Microsoft.BingAds.Dwc.Tools (&gt;&#x3D; 2.0.5102033.20) [D:\a\1\s\private\src\Batch\dirs.proj]</span><br><span class="line">2021-08-02T08:28:02.6612903Z </span><br><span class="line">2021-08-02T08:28:02.6613320Z     0 Warning(s)</span><br><span class="line">2021-08-02T08:28:02.6613727Z     3 Error(s)</span><br><span class="line">2021-08-02T08:28:02.6613981Z </span><br><span class="line">2021-08-02T08:28:02.6614474Z Time Elapsed 00:00:19.93</span><br><span class="line">2021-08-02T08:28:02.7009246Z ##[error]Error: The process &#39;C:\Program Files\dotnet\dotnet.exe&#39; failed with exit code 1</span><br><span class="line">2021-08-02T08:28:02.7020201Z ##[error]Packages failed to restore</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">可知，package引入如果指定了低层级的版本，会强制上层package统一使用，类似java的原理。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Ads.BI.BinplacingTools&quot;&gt;</span><br><span class="line">      &lt;Version&gt;3.0.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Ads.BI.PipelineApps.Egress&quot;&gt;</span><br><span class="line">      &lt;Version&gt;6.1.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.AdCenter.ExecuteSSISPackage&quot;&gt;</span><br><span class="line">      &lt;Version&gt;1.1.5102398-pacman&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.Azure.KeyVault.Core&quot;&gt;</span><br><span class="line">      &lt;Version&gt;1.0.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.BingAds.Dwc.Engine.Library&quot;&gt;</span><br><span class="line">      &lt;Version&gt;2.1.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;Microsoft.Search.Autopilot&quot;&gt;</span><br><span class="line">      &lt;Version&gt;1.0.0&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br><span class="line">    &lt;PackageReference Include&#x3D;&quot;WindowsAzure.Storage&quot;&gt;</span><br><span class="line">      &lt;Version&gt;7.1.2&lt;&#x2F;Version&gt;</span><br><span class="line">    &lt;&#x2F;PackageReference&gt;</span><br></pre></td></tr></table></figure>
+<p>ads Data live-site tracking v2</p>
+<p>Deployment process for FASTBI streaming pipeline - V2</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/AI/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/AI/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h1>原理</h1>
+<h2 id="为什么当前的AI大模型可以在很快的时间内根据你的问题知道该参考哪些文章，并进行总结，这里面都包含哪些步骤或者哪些功能模块的参与">为什么当前的AI大模型可以在很快的时间内根据你的问题知道该参考哪些文章，并进行总结，这里面都包含哪些步骤或者哪些功能模块的参与</h2>
+<p>这是一个很专业的问题。你观察到的这种“快速定位并总结参考文献”的能力，并非单个模型的魔法，而是一套精密系统协同工作的结果。这套系统通常被称为 <strong>RAG（检索增强生成）</strong>。</p>
+<p>简单来说，整个过程可以分解为三个核心阶段，每个阶段都有专门的功能模块参与。</p>
+<h3 id="阶段一：理解你的问题（查询处理）">阶段一：理解你的问题（查询处理）</h3>
+<p>这个阶段的目标是把你的口语化问题，变成系统能精准检索的“钥匙”。</p>
+<ul>
+<li><strong>模块1：查询理解</strong>：系统会先分析你的问题，进行同义词替换（比如把“怎么减肥”理解为“减脂方法”）、识别专有名词，甚至把“苹果最新款手机”这种模糊指代明确为“iPhone 15 Pro Max”。</li>
+<li><strong>模块2：查询改写与扩展</strong>：为了增加命中率，系统可能会用大模型把你的问题改写成几个不同角度的搜索语句，或者拆成几个子问题（如“苹果公司财报”、“iPhone销量”）。</li>
+<li><strong>模块3：意图识别</strong>：快速判断你是想了解最新新闻（需要实时信息）、学术研究（需要论文库），还是常识问答（需要百科知识），以便后续去不同的知识库搜索。</li>
+</ul>
+<h3 id="阶段二：快速找到相关文章（检索）">阶段二：快速找到相关文章（检索）</h3>
+<p>这是实现“快速”的关键。系统不会去一篇篇阅读原始文档，而是通过“语义指纹”来匹配。</p>
+<ul>
+<li><strong>核心模块：向量数据库与嵌入模型</strong>：
+<ol>
+<li><strong>预处理</strong>：系统事先把所有知识库里的文章，都通过一个<strong>嵌入模型</strong>转换成一串由数字组成的“向量”。这个向量就像文章的语义指纹，意思相近的文章，指纹在空间里的位置也相近。</li>
+<li><strong>实时转换</strong>：收到你的问题时，系统用<strong>同一个嵌入模型</strong>，也把你的问题转换成一个向量。</li>
+<li><strong>相似度搜索</strong>：系统立刻在你问题的向量和数据库里海量的文章向量之间，进行一种数学运算（如余弦相似度），快速找出距离最近的N篇文章。这个过程借助了高效的索引算法（如HNSW），速度极快，哪怕在百万级文档里也只需毫秒级。</li>
+</ol>
+</li>
+<li><strong>补充模块：混合检索与重排序</strong>：为了更精准，系统还会结合传统的关键词搜索（比如匹配你问题里的专有名词），并用一个轻量级的<strong>重排序模型</strong>，把初步找出的文章按最相关顺序排好。</li>
+</ul>
+<h3 id="阶段三：进行总结与回答（生成）">阶段三：进行总结与回答（生成）</h3>
+<p>系统不是简单地把文章拼起来，而是让大模型扮演一个“擅长总结的编辑”。</p>
+<ul>
+<li>
+<p><strong>核心模块：大语言模型</strong></p>
+<ol>
+<li>
+<p><strong>构建上下文</strong>：系统会把你原始的问题，和阶段二找到的最相关的几篇文章（或段落），一起打包放进一个精心设计的提示模板里。比如：</p>
+<blockquote>
+<p>“根据以下参考资料，用中文简洁、准确地回答用户的问题。如果资料里没有答案，就说不知道。\n参考资料：\n[文章1内容]\n[文章2内容]\n…\n用户问题：[你的问题]”</p>
+</blockquote>
+</li>
+<li>
+<p><strong>生成回答</strong>：大模型看到这个提示后，会“根据”提供的资料来生成答案。它会提取关键信息、理顺逻辑、用自己的话进行总结，并在结尾附上参考来源。</p>
+</li>
+<li>
+<p><strong>流式输出</strong>：生成答案的同时，系统以“打字机效果”逐字返回，让你感觉响应极快。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="一个简单的流程示例">一个简单的流程示例</h3>
+<p>假设你问：“2024年诺贝尔物理学奖得主是谁？”</p>
+<ol>
+<li><strong>查询处理</strong>：系统识别出关键词“2024年”、“诺贝尔物理学奖”、“得主”。</li>
+<li><strong>检索</strong>：系统将这几个词转换成向量，去维基百科、新闻库等向量数据库里搜索。瞬间定位到一篇名为“2024年诺贝尔物理学奖”的新闻文章。</li>
+<li><strong>生成</strong>：系统把问题和这篇文章的内容发给大模型。大模型读完文章，提炼出“约翰·J·霍普菲尔德和杰弗里·E·辛顿”，然后组织成一句通顺的回答：“2024年诺贝尔物理学奖授予了…”。同时附上参考文章链接。</li>
+</ol>
+<h3 id="总结：为什么这么快？">总结：为什么这么快？</h3>
+<ul>
+<li><strong>预处理</strong>：文章的向量指纹是事先算好的，不占用你提问时的时间。</li>
+<li><strong>向量检索</strong>：本质是数学计算，比人眼扫读文档快上亿倍。</li>
+<li><strong>并行计算</strong>：现代GPU（图形处理器）/TPU（张量处理器）硬件可以同时进行大量计算。</li>
+<li><strong>流式输出</strong>：模型算出第一个字就显示给你，减少等待的焦虑感。</li>
+</ul>
+<p>这套RAG架构，就像给大模型外挂了一个可以无限扩展的、能极速检索的“图书馆”，让它既能博闻强识（访问最新外部知识），又能避免胡编乱造（回答基于事实资料）。这已经成为目前解决大模型知识更新和幻觉问题的主流工业方案。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/arithmetic/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/arithmetic/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" class="post-title-link" itemprop="url">一致性哈希</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/89605547">一致性哈希算法–&gt; 解决memecache 服务器扩容后的数据丢失</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/26/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/28/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

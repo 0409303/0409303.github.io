@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/shell/powerShell/temp/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/spark/structured%20streaming/%E6%96%87%E6%A1%A3%E7%B4%A2%E5%BC%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/05/05/shell/powerShell/temp/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/06/18/spark/structured%20streaming/%E6%96%87%E6%A1%A3%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
             </span>
 
           
@@ -215,10 +215,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>ExecutionPolicy</p>
-<p>Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope MachinePolicy<br>Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope UserPolicy<br>Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process<br>Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser<br>Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine</p>
-<p>Get-ExecutionPolicy -List</p>
-<p>Set-ExecutionPolicy Bypass -Scope Process -Force; Copy-Item \cosbj-01\public\CosmosPowerShell\builds\install.ps1 $HOME\Downloads\install.ps1; &amp; $HOME\Downloads\install.ps1 -Force</p>
+          <h1>官方文档</h1>
+<h2 id="Structured-Streaming-Programming-Guide"><a target="_blank" rel="noopener" href="https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html">Structured Streaming Programming Guide</a></h2>
+<h3 id="1-Overview">1 <a target="_blank" rel="noopener" href="https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#overview">Overview</a></h3>
+<h3 id="2-Quick-Example">2 <a target="_blank" rel="noopener" href="https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#quick-example">Quick Example</a></h3>
+<h3 id="3-Programming-Model">3 Programming Model</h3>
+<h4 id="3-1-Basic-Concepts">3.1 Basic Concepts</h4>
+<h4 id="3-2-Handing-Event-time-and-Lake-Data">3.2 Handing Event-time and Lake Data</h4>
+<h4 id="3-3-Fault-Tolerance-Semantics">3.3 Fault Tolerance Semantics</h4>
+<h3 id="4-API-using-Datasets-and-DataFrames">4 API using Datasets and DataFrames</h3>
+<p>4.1</p>
+<h1>其他文档</h1>
+<p><a target="_blank" rel="noopener" href="https://jaceklaskowski.gitbooks.io/spark-structured-streaming/content/spark-sql-streaming-properties.html">sparkSession configuration</a></p>
 
       
     </div>
@@ -238,7 +246,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/software/excel/function/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/spark/structured%20streaming/%E7%8A%B6%E6%80%81%E4%BF%9D%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -252,7 +260,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/05/05/software/excel/function/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/06/18/spark/structured%20streaming/%E7%8A%B6%E6%80%81%E4%BF%9D%E5%AD%98/" class="post-title-link" itemprop="url">状态保存</a>
         </h2>
 
         <div class="post-meta">
@@ -262,134 +270,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="timestamp-to-date"><a href="#timestamp-to-date" class="headerlink" title="timestamp to date"></a>timestamp to date</h4><ol>
-<li>second: <code>=(A1+8*3600)/86400+70*365+19</code></li>
-<li>millsecond: <code>=(A1+8*3600)/8640000+70*365+19</code></li>
-</ol>
-<h4 id="date-to-timestamp"><a href="#date-to-timestamp" class="headerlink" title="date to timestamp"></a>date to timestamp</h4><ol>
-<li>second: <code>=(B1-70*365-19)*86400-8*3600</code></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/spark/instance/grouping%20sets%20%E8%B5%84%E6%BA%90%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/05/05/spark/instance/grouping%20sets%20%E8%B5%84%E6%BA%90%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="原始sql"><a href="#原始sql" class="headerlink" title="原始sql:"></a>原始sql:</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> sku_info <span class="keyword">AS</span></span><br><span class="line">  (<span class="keyword">SELECT</span> a.sku_id,</span><br><span class="line">          d.bu_id,</span><br><span class="line">          <span class="keyword">if</span>(c.management_type = <span class="number">3</span>, <span class="string">&#x27;pop&#x27;</span>, <span class="string">&#x27;自营&#x27;</span>) <span class="keyword">AS</span> is_3p,</span><br><span class="line">          b.cat1_id,</span><br><span class="line">          b.cat1_name,</span><br><span class="line">          b.cat2_id,</span><br><span class="line">          b.cat2_name,</span><br><span class="line">          <span class="keyword">max</span>(on_shelf) <span class="keyword">AS</span> is_onshelf</span><br><span class="line">   <span class="keyword">FROM</span></span><br><span class="line">     (<span class="keyword">SELECT</span> sku_code <span class="keyword">AS</span> sku_id,</span><br><span class="line">             sales_grid_id,</span><br><span class="line">             on_shelf,</span><br><span class="line">             bu_id</span><br><span class="line">      <span class="keyword">FROM</span> mart_caterb2b.dim_prod_all_map_csu__grid_his</span><br><span class="line">      <span class="keyword">WHERE</span> dt = <span class="string">&#x27;20210317&#x27;</span></span><br><span class="line">        <span class="keyword">AND</span> channel_id = <span class="string">&#x27;1001&#x27;</span></span><br><span class="line">      <span class="keyword">UNION</span> <span class="keyword">ALL</span> <span class="keyword">SELECT</span> sku_code,</span><br><span class="line">                       sales_grid_id,</span><br><span class="line">                       on_shelf,</span><br><span class="line">                       bu_id</span><br><span class="line">      <span class="keyword">FROM</span> mart_caterb2b.fact_caterb2b_csu_grid_onshelf_log</span><br><span class="line">      <span class="keyword">WHERE</span> update_time &gt;=<span class="string">&#x27;2021-03-18&#x27;</span></span><br><span class="line">        <span class="keyword">AND</span> update_time &lt;= <span class="string">&#x27;2021-03-19&#x27;</span></span><br><span class="line">        <span class="keyword">AND</span> on_shelf = <span class="number">1</span></span><br><span class="line">        <span class="keyword">AND</span> channel_id = <span class="string">&#x27;1001&#x27;</span></span><br><span class="line">      <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="number">1</span>,</span><br><span class="line">               <span class="number">2</span>,</span><br><span class="line">               <span class="number">3</span>,</span><br><span class="line">               <span class="number">4</span>) a</span><br><span class="line">   <span class="keyword">LEFT</span> <span class="keyword">JOIN</span></span><br><span class="line">     (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> sku_id,</span><br><span class="line">                      cat1_id,</span><br><span class="line">                      cat1_name,</span><br><span class="line">                      cat2_id,</span><br><span class="line">                      cat2_name</span><br><span class="line">      <span class="keyword">FROM</span> mart_caterb2b.dim_caterb2b_csu_his</span><br><span class="line">      <span class="keyword">WHERE</span> dt = <span class="string">&#x27;20210318&#x27;</span></span><br><span class="line">        <span class="keyword">AND</span> channel_id = <span class="string">&#x27;1001&#x27;</span>) b <span class="keyword">ON</span> a.sku_id = b.sku_id</span><br><span class="line">   <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> mart_caterb2b.dim_sm_business_entity c <span class="keyword">ON</span> a.bu_id = c.bu_id</span><br><span class="line">   <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> mart_caterb2b.dim_sell_grid d <span class="keyword">ON</span> a.sales_grid_id = d.sell_grid_id</span><br><span class="line">   <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="number">1</span>,</span><br><span class="line">            <span class="number">2</span>,</span><br><span class="line">            <span class="number">3</span>,</span><br><span class="line">            <span class="number">4</span>,</span><br><span class="line">            <span class="number">5</span>,</span><br><span class="line">            <span class="number">6</span>,</span><br><span class="line">            <span class="number">7</span>)</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">coalesce</span>(f.bu_id, <span class="string">&#x27;-1&#x27;</span>) <span class="keyword">AS</span> bu_id,</span><br><span class="line">       <span class="keyword">coalesce</span>(f.cat1_id, <span class="string">&#x27;-1&#x27;</span>) <span class="keyword">AS</span> cat1_id,</span><br><span class="line">       <span class="keyword">coalesce</span>(f.cat1_name, <span class="string">&#x27;全部&#x27;</span>) <span class="keyword">AS</span> cat1_name,</span><br><span class="line">       <span class="keyword">coalesce</span>(f.cat2_id, <span class="string">&#x27;-1&#x27;</span>) <span class="keyword">AS</span> cat2_id,</span><br><span class="line">       <span class="keyword">coalesce</span>(f.cat2_name, <span class="string">&#x27;全部&#x27;</span>) <span class="keyword">AS</span> cat2_name,</span><br><span class="line">       <span class="keyword">coalesce</span>(f.is_3p, <span class="string">&#x27;全部&#x27;</span>) <span class="keyword">AS</span> is_3p,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">if</span>(is_view = <span class="number">1</span>, f.sku_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> view_sku_ct,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">if</span>(is_view = <span class="number">1</span>, f.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> view_uv,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">if</span>(is_view = <span class="number">1</span>, f.sku_id, <span class="literal">NULL</span>), <span class="keyword">if</span>(is_view = <span class="number">1</span>, f.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> view_sku_uv,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">if</span>(is_intention = <span class="number">1</span>, f.sku_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> view_sku_ct,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">if</span>(is_intention = <span class="number">1</span>, f.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> view_uv,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">if</span>(is_intention = <span class="number">1</span>, f.sku_id, <span class="literal">NULL</span>), <span class="keyword">if</span>(is_intention = <span class="number">1</span>, f.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> view_sku_uv</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  (<span class="keyword">SELECT</span> d.sku_id,</span><br><span class="line">          d.bu_id,</span><br><span class="line">          d.customer_id,</span><br><span class="line">          <span class="keyword">coalesce</span>(e.cat1_id, <span class="string">&#x27;-99&#x27;</span>) <span class="keyword">AS</span> cat1_id,</span><br><span class="line">          <span class="keyword">coalesce</span>(e.cat1_name, <span class="string">&#x27;其他&#x27;</span>) <span class="keyword">AS</span> cat1_name,</span><br><span class="line">          <span class="keyword">coalesce</span>(e.cat2_id, <span class="string">&#x27;-99&#x27;</span>) <span class="keyword">AS</span> cat2_id,</span><br><span class="line">          <span class="keyword">coalesce</span>(e.cat2_name, <span class="string">&#x27;其他&#x27;</span>) <span class="keyword">AS</span> cat2_name,</span><br><span class="line">          <span class="keyword">coalesce</span>(e.is_3p, <span class="string">&#x27;其他&#x27;</span>) <span class="keyword">AS</span> is_3p,</span><br><span class="line">          d.is_view,</span><br><span class="line">          d.is_intention</span><br><span class="line">   <span class="keyword">FROM</span></span><br><span class="line">     (<span class="keyword">SELECT</span> <span class="keyword">if</span>(click.event_type = <span class="string">&#x27;view&#x27;</span>, <span class="number">1</span>, <span class="number">0</span>) <span class="keyword">AS</span> is_view,</span><br><span class="line">             <span class="keyword">CASE</span> <span class="keyword">WHEN</span> (click.val_cid = <span class="string">&#x27;page_csu_detail&#x27;</span></span><br><span class="line">                        <span class="keyword">AND</span> click.val_bid = <span class="string">&#x27;b_htrmpzlb&#x27;</span>)</span><br><span class="line">                    <span class="keyword">OR</span> click.val_bid <span class="keyword">IN</span> (<span class="string">&#x27;b_h856xuac&#x27;</span>,</span><br><span class="line">                           <span class="string">&#x27;b_x6m8625m&#x27;</span>) <span class="keyword">THEN</span> <span class="number">1</span></span><br><span class="line">                  <span class="keyword">ELSE</span> <span class="number">0</span></span><br><span class="line">              <span class="keyword">END</span> <span class="keyword">AS</span> is_intention,</span><br><span class="line">              c.sku_id,</span><br><span class="line">              <span class="keyword">coalesce</span>(cust.bu_id, <span class="string">&#x27;-99&#x27;</span>) <span class="keyword">AS</span> bu_id,</span><br><span class="line">              click.customer_id</span><br><span class="line">        <span class="keyword">FROM</span> mart_caterb2b.fact_flow_visit_click_kv_day click</span><br><span class="line">        <span class="keyword">JOIN</span> mart_caterb2b.dim_caterb2b_csu_his c</span><br><span class="line">          <span class="keyword">ON</span> click.csu_id = c.csu_id</span><br><span class="line">        <span class="keyword">LEFT</span> <span class="keyword">JOIN</span></span><br><span class="line">          (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> customer_id,</span><br><span class="line">                           bu_id</span><br><span class="line">           <span class="keyword">FROM</span> mart_caterb2b.dim_caterb2b_customer_his</span><br><span class="line">           <span class="keyword">WHERE</span> dt = <span class="string">&#x27;20210225&#x27;</span></span><br><span class="line">             <span class="keyword">AND</span> business_type = <span class="number">2</span></span><br><span class="line">             <span class="keyword">AND</span> cat_type = <span class="number">1</span></span><br><span class="line">             <span class="keyword">AND</span> channel_id = <span class="string">&#x27;1001&#x27;</span>) cust <span class="keyword">ON</span> click.customer_id = cust.customer_id</span><br><span class="line">        <span class="keyword">WHERE</span> click.dt = <span class="string">&#x27;20210225&#x27;</span></span><br><span class="line">          <span class="keyword">AND</span> click.csu_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line">          <span class="keyword">AND</span> c.dt = <span class="string">&#x27;20210225&#x27;</span> )d</span><br><span class="line">  <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> sku_info e <span class="keyword">ON</span> d.sku_id = e.sku_id</span><br><span class="line">  <span class="keyword">AND</span> d.bu_id = e.bu_id)f</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> f.bu_id,</span><br><span class="line">         f.cat1_id,</span><br><span class="line">         f.cat1_name,</span><br><span class="line">         f.cat2_id,</span><br><span class="line">         f.cat2_name,</span><br><span class="line">         f.is_3p</span><br><span class="line"><span class="keyword">GROUPING</span> <span class="keyword">sets</span>((f.bu_id, f.cat1_id, f.cat1_name, f.cat2_id, f.cat2_name, f.is_3p),</span><br><span class="line">            (f.bu_id, f.cat1_id, f.cat1_name, f.cat2_id, f.cat2_name),</span><br><span class="line">            (f.bu_id, f.cat1_id, f.cat1_name, f.is_3p),</span><br><span class="line">            (f.bu_id, f.cat1_id, f.cat1_name),</span><br><span class="line">            (f.bu_id, f.is_3p),</span><br><span class="line">            (f.bu_id),</span><br><span class="line">            (f.cat1_id, f.cat1_name, f.cat2_id, f.cat2_name, f.is_3p),</span><br><span class="line">            (f.cat1_id, f.cat1_name, f.cat2_id, f.cat2_name),</span><br><span class="line">            (f.cat1_id, f.cat1_name, f.is_3p),</span><br><span class="line">            (f.cat1_id, f.cat1_name),</span><br><span class="line">            (f.is_3p),</span><br><span class="line">            ())</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="添加参数："><a href="#添加参数：" class="headerlink" title="添加参数："></a>添加参数：</h4><p>SET hive.exec.dynamic.partition.mode=nonstrict;<br>SET hive.exec.dynamic.partition=true;<br>– 分区<br>SET hive.exec.max.dynamic.partitions=1000;<br>– 触发spark合并小文件的阈值(1M)<br>SET spark.sql.mergeSmallFileSize=1048576;<br>– spark shuffle默认分区数<br>SET spark.sql.shuffle.partitions=500;<br>– 限制最大申请资源<br>set spark.dynamicAllocation.enabled=true;<br>set spark.dynamicAllocation.minExecutors=3;<br>set spark.dynamicAllocation.maxExecutors=300;<br>set spark.executor.cores=2;</p>
-<p>如果不添加参数，在最后一步，资源急剧下降，导致执行时间很长</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/spark/instance/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E6%9F%90%E4%BA%9Bkey%E8%BF%87%E5%A4%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/05/05/spark/instance/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E6%9F%90%E4%BA%9Bkey%E8%BF%87%E5%A4%9A/" class="post-title-link" itemprop="url">数据倾斜优化——某些key过多</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -397,7 +278,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a>
+                  <a href="/categories/spark-structured-streaming/" itemprop="url" rel="index"><span itemprop="name">spark-structured-streaming</span></a>
                 </span>
             </span>
 
@@ -412,45 +293,49 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <details>
-<summary>explode 与 lateral view 对比</summary>
-<pre><code>
-select user_coupon_id, explode(split('0,1', ',')) as tag
-from mart_waimai.aggr_act_ord_use_coupon_dd
-where dt='20200920'
-limit 10
-</code></pre>
-</details>
+          <h3 id="状态保存的作用">状态保存的作用</h3>
+<p>将每次流计算的group结果，保存下来，用于下一次继续聚合。</p>
+<p>具体执行内容是如何的？下次聚合会使用状态中的什么数据？</p>
+<p>groupState.setTimeoutTimestamp()</p>
+<ol>
+<li><code>With EventTimeTimeout, the user also has to specify the the the event time watermark in the query using Dataset.withWatermark(). </code></li>
+<li><code>With this setting, data that is older than the watermark are filtered out. </code></li>
+<li><code>The timeout can be set for a group by setting a timeout timestamp usingGroupState.setTimeoutTimestamp(), and the timeout would occur when the watermark advances beyond the set timestamp. </code></li>
+<li><code>You can control the timeout delay by two parameters - watermark delay and an additional duration beyond the timestamp in the event (which is guaranteed to be newer than watermark due to the filtering). </code></li>
+<li><code>Guarantees provided by this timeout are as follows:</code></li>
+<li><code>Timeout will never be occur before watermark has exceeded the set timeout.</code></li>
+<li><code>Similar to processing time timeouts, there is a no strict upper bound on the delay when the timeout actually occurs. The watermark can advance only when there is data in the stream, and the event time of the data has actually advanced.</code></li>
+</ol>
+<p>timeout晚于watermark不生效，早于watermark会报错？到底应该如何设置？</p>
+<h3 id="问题">问题</h3>
+<ol>
+<li>flatmapgroupswithstate 什么时候会timeout</li>
+<li>state-store-maintenance-task</li>
+</ol>
+<p>参数调整</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> spark = <span class="type">SparkSession</span></span><br><span class="line">      .builder()</span><br><span class="line">      .appName(appName)</span><br><span class="line">      .config(sparkConf)</span><br><span class="line">      .getOrCreate()</span><br><span class="line">spark.sessionState.conf.setConfString(<span class="string">&quot;spark.sql.streaming.minBatchesToRetain&quot;</span>, <span class="string">&quot;5&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>这个参数放到sparkConf中，无效。</p>
+<h3 id="参考资料">参考资料</h3>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lovelsl/articles/14162130.html">spark 的 structured streaming 状态保存</a></li>
+<li><a target="_blank" rel="noopener" href="https://jaceklaskowski.gitbooks.io/spark-structured-streaming/content/spark-sql-streaming-GroupState.html">GroupState — Group State in Arbitrary Stateful Streaming Aggregation</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cxyzjd.com/article/bluishglc/80824522">Spark基于事件时间的“状态”流的深层分析 - withWatermark与mapGroupsWithState的关系</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.waitingforcode.com/apache-spark-structured-streaming/state-lifecycle-management-structured-streaming/read"><strong>State lifecycle management in Structured Streaming</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://spark.apache.org/docs/latest/api/scala/org/apache/spark/sql/streaming/GroupState.html">spark api doc</a></li>
+<li><a target="_blank" rel="noopener" href="https://jaceklaskowski.gitbooks.io/spark-structured-streaming/content/spark-sql-streaming-SQLConf.html">state相关配置</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/bluishglc/article/details/80844327">Spark Structured Streaming: 自维护（任意）状态流的“超时”(Timeout)问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.waitingforcode.com/apache-spark-structured-streaming/statestore-apache-spark-structured-streaming/read">StateStore in Apache Spark Structured Streaming</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lovelsl/articles/14162130.html">spark 的 structured streaming 状态保存</a></li>
+<li><a target="_blank" rel="noopener" href="https://jaceklaskowski.gitbooks.io/spark-structured-streaming/content/spark-sql-streaming-GroupStateImpl.html">GroupStateImpl</a></li>
+<li><a target="_blank" rel="noopener" href="https://n3xtchen.github.io/n3xtchen/spark/2020/09/05/spark-sss-state-management"><strong>Spark 流计算状态管理进化史</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://jaceklaskowski.gitbooks.io/spark-structured-streaming/content/spark-sql-streaming-StateStoreRDD.html#operatorId">StateStoreRDD — RDD for Updating State (in StateStores Across Spark Cluster)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/HeartSaVioR/spark-state-tools">Spark State Tools</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/tianjun2012/article/details/106308378">structured streaming的checkpoint文件无限增长</a></li>
+<li><a target="_blank" rel="noopener" href="https://polarpersonal.medium.com/state-storage-in-spark-structured-streaming-e5c8af7bf509">State Storage in Spark Structured Streaming</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.waitingforcode.com/apache-spark-structured-streaming/extending-data-reprocessing-period-arbitrary-stateful-processing-applications/read">Extending data reprocessing period for arbitrary stateful processing applications</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/luweiseu/p/7735821.html">StructuredStream StateStore机制</a></li>
+</ol>
 
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>统计端维度的日活、下单UV、成交UV等，由于端信息只能从流量表里获取，所以需要从流量表关联订单表得到成交信息。</p>
-<h2 id="开发过程"><a href="#开发过程" class="headerlink" title="开发过程"></a>开发过程</h2><h3 id="原始sql"><a href="#原始sql" class="headerlink" title="原始sql"></a>原始sql</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> b.region_id,</span><br><span class="line">       b.region_name,</span><br><span class="line">       b.management_city_id,</span><br><span class="line">       b.management_city_name,</span><br><span class="line">       a.device_type_id,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> a.customer_id) <span class="keyword">AS</span> dau,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.event_type = <span class="string">&#x27;view&#x27;</span></span><br><span class="line">                          <span class="keyword">AND</span> a.val_cid = <span class="string">&#x27;page_csu_list&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> home_expose_uv,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.event_type = <span class="string">&#x27;click&#x27;</span></span><br><span class="line">                          <span class="keyword">AND</span> a.val_cid = <span class="string">&#x27;page_csu_list&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> home_click_uv,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.val_bid = <span class="string">&#x27;b_h8ds56xuac&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> add_cart_uv,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.val_cid = <span class="string">&#x27;page_order_confirm&#x27;</span></span><br><span class="line">                          <span class="keyword">AND</span> a.val_bid = <span class="string">&#x27;b_drqbsnud&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> order_uv,</span><br><span class="line">       <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (c.order_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> order_arrange_uv,</span><br><span class="line">       <span class="keyword">sum</span>(<span class="keyword">IF</span> (c.order_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>, a.arranged_amt, <span class="number">0</span>)) <span class="keyword">AS</span> conversion_sales_amt</span><br><span class="line"><span class="keyword">FROM</span> mart_caterb2b.fact_flow_visit_click_kv_day a</span><br><span class="line"><span class="keyword">JOIN</span></span><br><span class="line">  (<span class="keyword">SELECT</span> m.dt,</span><br><span class="line">          m.customer_id,</span><br><span class="line">          n.region_id,</span><br><span class="line">          n.region_name,</span><br><span class="line">          n.management_city_id,</span><br><span class="line">          n.management_city_name</span><br><span class="line">   <span class="keyword">FROM</span> mart_caterb2b.dim_caterb2b_customer_his m</span><br><span class="line">   <span class="keyword">JOIN</span> mart_caterb2b.dim_sm_management_city_info n <span class="keyword">ON</span> m.city_id = n.city_id</span><br><span class="line">   <span class="keyword">WHERE</span> m.dt = <span class="string">&#x27;20210307&#x27;</span>) b <span class="keyword">ON</span> a.customer_id = b.customer_id</span><br><span class="line"><span class="keyword">AND</span> a.dt = b.dt</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span></span><br><span class="line">  (<span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> dt,</span><br><span class="line">                   order_id,</span><br><span class="line">                   parent_order_id</span><br><span class="line">   <span class="keyword">FROM</span> mart_caterb2b.fact_biz_order_day</span><br><span class="line">   <span class="keyword">WHERE</span> dt = <span class="string">&#x27;20210307&#x27;</span>) d <span class="keyword">ON</span> a.order_id = d.parent_order_id</span><br><span class="line"><span class="keyword">AND</span> a.dt = d.dt</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span></span><br><span class="line">  (<span class="keyword">SELECT</span> dt,</span><br><span class="line">          order_id,</span><br><span class="line">          <span class="keyword">sum</span>(arranged_amt) <span class="keyword">AS</span> arranged_amt</span><br><span class="line">   <span class="keyword">FROM</span> mart_caterb2b.mid_deal_order_item_withpop</span><br><span class="line">   <span class="keyword">WHERE</span> dt = <span class="string">&#x27;20210307&#x27;</span></span><br><span class="line">     <span class="keyword">AND</span> is_arranged = <span class="number">1</span></span><br><span class="line">     <span class="keyword">AND</span> channel_id = <span class="number">1001</span></span><br><span class="line">     <span class="keyword">AND</span> order_type <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="number">3</span>,</span><br><span class="line">                            <span class="number">4</span>)<span class="comment">-- 排除补货换货</span></span><br><span class="line"></span><br><span class="line">     <span class="keyword">AND</span> spu_type != <span class="number">5</span> <span class="comment">-- 排除包装物</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">GROUP</span> <span class="keyword">BY</span> dt,</span><br><span class="line">            order_id) c <span class="keyword">ON</span> d.dt = c.dt</span><br><span class="line"><span class="keyword">AND</span> d.order_id = c.order_id</span><br><span class="line"><span class="keyword">WHERE</span> a.dt = <span class="string">&#x27;20210307&#x27;</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> b.region_id,</span><br><span class="line">         b.region_name,</span><br><span class="line">         b.management_city_id,</span><br><span class="line">         b.management_city_name,</span><br><span class="line">         a.device_type_id</span><br></pre></td></tr></table></figure>
-
-<p>出现数据倾斜</p>
-<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goihhlc415j32q70go7af.jpg"></p>
-<p>查看出问题stage</p>
-<img src="https://tva1.sinaimg.cn/large/008eGmZEly1goihhltxigj30u00ujwk5.jpg" style="zoom:50%;">
-
-
-
-<p>定位sql</p>
-<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goihhln8kvj30u00xjqgy.jpg"></p>
-<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1goihni8b87j30hl0edabr.jpg"></p>
-<p>怀疑是因为d表dt很多关联不上为null，导致某些某些节点量特别大，所以考虑提前关联c表数据，如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> b.region_id,</span><br><span class="line">           b.region_name,</span><br><span class="line">           b.management_city_id,</span><br><span class="line">           b.management_city_name,</span><br><span class="line">           a.device_type_id,</span><br><span class="line">           <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> a.customer_id) <span class="keyword">AS</span> dau,</span><br><span class="line">           <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.event_type = <span class="string">&#x27;view&#x27;</span></span><br><span class="line">                              <span class="keyword">AND</span> a.val_cid = <span class="string">&#x27;page_csu_list&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> home_expose_uv,</span><br><span class="line">           <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.event_type = <span class="string">&#x27;click&#x27;</span></span><br><span class="line">                              <span class="keyword">AND</span> a.val_cid = <span class="string">&#x27;page_csu_list&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> home_click_uv,</span><br><span class="line">           <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.val_bid = <span class="string">&#x27;b_h856xuac&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> add_cart_uv,</span><br><span class="line">           <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.val_cid = <span class="string">&#x27;page_order_confirm&#x27;</span></span><br><span class="line">                              <span class="keyword">AND</span> a.val_bid = <span class="string">&#x27;b_drqbsnud&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> order_uv,</span><br><span class="line">           <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.val_cid = <span class="string">&#x27;page_order_confirm&#x27;</span></span><br><span class="line">                              <span class="keyword">AND</span> a.val_bid = <span class="string">&#x27;b_drqbsnud&#x27;</span></span><br><span class="line">                              <span class="keyword">AND</span> d.order_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> order_arrange_uv,</span><br><span class="line">           <span class="keyword">sum</span>(<span class="keyword">IF</span> (a.val_cid = <span class="string">&#x27;page_order_confirm&#x27;</span></span><br><span class="line">                   <span class="keyword">AND</span> a.val_bid = <span class="string">&#x27;b_drqbsnud&#x27;</span></span><br><span class="line">                   <span class="keyword">AND</span> d.order_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>, d.arranged_amt, <span class="number">0</span>)) <span class="keyword">AS</span> conversion_sales_amt</span><br><span class="line">    <span class="keyword">FROM</span> mart_caterb2b.fact_flow_visit_click_kv_day a</span><br><span class="line">    <span class="keyword">JOIN</span></span><br><span class="line">      (<span class="keyword">SELECT</span> m.dt,</span><br><span class="line">              m.customer_id,</span><br><span class="line">              n.region_id,</span><br><span class="line">              n.region_name,</span><br><span class="line">              n.management_city_id,</span><br><span class="line">              n.management_city_name</span><br><span class="line">       <span class="keyword">FROM</span> mart_caterb2b.dim_caterb2b_customer_his m</span><br><span class="line">       <span class="keyword">JOIN</span> mart_caterb2b.dim_sm_management_city_info n <span class="keyword">ON</span> m.city_id = n.city_id</span><br><span class="line">       <span class="keyword">WHERE</span> m.dt = <span class="string">&#x27;$now.datekey&#x27;</span>) b <span class="keyword">ON</span> a.customer_id = b.customer_id</span><br><span class="line">    <span class="keyword">AND</span> a.dt = b.dt</span><br><span class="line">    <span class="keyword">LEFT</span> <span class="keyword">JOIN</span></span><br><span class="line">      (<span class="keyword">SELECT</span> e.dt,</span><br><span class="line">              e.parent_order_id,</span><br><span class="line">              c.order_id,</span><br><span class="line">              c.arranged_amt</span><br><span class="line">       <span class="keyword">FROM</span> mart_caterb2b.fact_biz_order_day e</span><br><span class="line">       <span class="keyword">left</span> <span class="keyword">JOIN</span></span><br><span class="line">         (<span class="keyword">SELECT</span> dt,</span><br><span class="line">                 order_id,</span><br><span class="line">                 <span class="keyword">sum</span>(arranged_amt) <span class="keyword">AS</span> arranged_amt</span><br><span class="line">          <span class="keyword">FROM</span> mart_caterb2b.mid_deal_order_item_withpop</span><br><span class="line">          <span class="keyword">WHERE</span> dt = <span class="string">&#x27;$now.datekey&#x27;</span></span><br><span class="line">            <span class="keyword">AND</span> is_arranged = <span class="number">1</span></span><br><span class="line">            <span class="keyword">AND</span> channel_id = <span class="number">1001</span></span><br><span class="line">            <span class="keyword">AND</span> order_type <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="number">3</span>,</span><br><span class="line">                                   <span class="number">4</span>)<span class="comment">-- 排除补货换货</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">AND</span> spu_type != <span class="number">5</span> <span class="comment">-- 排除包装物</span></span><br><span class="line"></span><br><span class="line">          <span class="keyword">GROUP</span> <span class="keyword">BY</span> dt,</span><br><span class="line">                   order_id) c <span class="keyword">ON</span> e.dt = c.dt</span><br><span class="line">       <span class="keyword">AND</span> e.order_id = c.order_id</span><br><span class="line">       <span class="keyword">WHERE</span> e.dt = <span class="string">&#x27;$now.datekey&#x27;</span>) d <span class="keyword">ON</span> a.order_id = d.parent_order_id</span><br><span class="line">    <span class="keyword">AND</span> a.dt = d.dt</span><br><span class="line">    <span class="keyword">WHERE</span> a.dt = <span class="string">&#x27;$now.datekey&#x27;</span></span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> b.region_id,</span><br><span class="line">             b.region_name,</span><br><span class="line">             b.management_city_id,</span><br><span class="line">             b.management_city_name,</span><br><span class="line">             a.device_type_id</span><br><span class="line">    <span class="keyword">GROUPING</span> <span class="keyword">SETS</span> ((b.region_id, b.region_name, b.management_city_id, b.management_city_name, a.device_type_id),</span><br><span class="line">               (b.region_id, b.region_name, a.device_type_id),</span><br><span class="line">               (b.region_id, b.region_name, b.management_city_id, b.management_city_name),</span><br><span class="line">               (b.region_id, b.region_name),</span><br><span class="line">               (a.device_type_id),</span><br><span class="line">               ())</span><br></pre></td></tr></table></figure>
-
-
-
-<p>但是并没有改善</p>
-<p>说明a表与b表关联时候，由于能用order_id关联上是少部分的数据（下单数据），而不能关联上的还是被分配到两个节点上处理。</p>
-<p>所以只能将数据拆分处理，sql如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> flow_log_info <span class="keyword">AS</span></span><br><span class="line">  (<span class="keyword">SELECT</span> a.dt,</span><br><span class="line">          b.region_id,</span><br><span class="line">          b.region_name,</span><br><span class="line">          b.management_city_id,</span><br><span class="line">          b.management_city_name,</span><br><span class="line">          a.device_type_id,</span><br><span class="line">          a.customer_id,</span><br><span class="line">          a.event_type,</span><br><span class="line">          a.val_cid,</span><br><span class="line">          a.val_bid,</span><br><span class="line">          a.order_id</span><br><span class="line">   <span class="keyword">FROM</span> mart_caterb2b.fact_flow_visit_click_kv_day a</span><br><span class="line">   <span class="keyword">JOIN</span></span><br><span class="line">     (<span class="keyword">SELECT</span> m.dt,</span><br><span class="line">             m.customer_id,</span><br><span class="line">             n.region_id,</span><br><span class="line">             n.region_name,</span><br><span class="line">             n.management_city_id,</span><br><span class="line">             n.management_city_name</span><br><span class="line">      <span class="keyword">FROM</span> mart_caterb2b.dim_caterb2b_customer_his m</span><br><span class="line">      <span class="keyword">JOIN</span> mart_caterb2b.dim_sm_management_city_info n <span class="keyword">ON</span> m.city_id = n.city_id</span><br><span class="line">      <span class="keyword">WHERE</span> m.dt = <span class="string">&#x27;$now.datekey&#x27;</span>) b <span class="keyword">ON</span> a.customer_id = b.customer_id</span><br><span class="line">   <span class="keyword">AND</span> a.dt = b.dt</span><br><span class="line">   <span class="keyword">WHERE</span> a.dt = <span class="string">&#x27;$now.datekey&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> OVERWRITE <span class="keyword">TABLE</span> <span class="string">`$&#123;target.table&#125;`</span> <span class="keyword">PARTITION</span> (dt)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">coalesce</span>(e.region_id, <span class="string">&#x27;-1&#x27;</span>) <span class="keyword">AS</span> region_id,</span><br><span class="line">       <span class="keyword">coalesce</span>(e.region_name, <span class="string">&#x27;全部&#x27;</span>) <span class="keyword">AS</span> region_name,</span><br><span class="line">       <span class="keyword">coalesce</span>(e.management_city_id, <span class="string">&#x27;-1&#x27;</span>) <span class="keyword">AS</span> management_city_id,</span><br><span class="line">       <span class="keyword">coalesce</span>(e.management_city_name, <span class="string">&#x27;全部&#x27;</span>) <span class="keyword">AS</span> management_city_name,</span><br><span class="line">       <span class="keyword">coalesce</span>(e.device_type_id, <span class="string">&#x27;-1&#x27;</span>) <span class="keyword">AS</span> device_type_id,</span><br><span class="line">       e.dau,</span><br><span class="line">       e.home_expose_uv,</span><br><span class="line">       e.home_click_uv,</span><br><span class="line">       e.add_cart_uv,</span><br><span class="line">       e.order_uv,</span><br><span class="line">       e.order_arrange_uv,</span><br><span class="line">       e.conversion_sales_amt,</span><br><span class="line">       <span class="keyword">if</span>(e.home_expose_uv = <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span> - (e.home_click_uv / e.home_expose_uv)) <span class="keyword">AS</span> bounce_rate,</span><br><span class="line">       <span class="keyword">if</span>(e.dau = <span class="number">0</span>, <span class="number">0</span>, e.order_arrange_uv / e.dau) <span class="keyword">AS</span> dau_arrange_rate,</span><br><span class="line">       <span class="keyword">if</span>(e.dau = <span class="number">0</span>, <span class="number">0</span>, e.conversion_sales_amt / e.dau) <span class="keyword">AS</span> sales_amt_per_uv,</span><br><span class="line">       <span class="string">&#x27;$now.datekey&#x27;</span> <span class="keyword">AS</span> dt</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  (<span class="keyword">SELECT</span> c.region_id,</span><br><span class="line">          c.region_name,</span><br><span class="line">          c.management_city_id,</span><br><span class="line">          c.management_city_name,</span><br><span class="line">          c.device_type_id,</span><br><span class="line">          <span class="keyword">sum</span>(c.dau) <span class="keyword">AS</span> dau,</span><br><span class="line">          <span class="keyword">sum</span>(c.home_expose_uv) <span class="keyword">AS</span> home_expose_uv,</span><br><span class="line">          <span class="keyword">sum</span>(c.home_click_uv) <span class="keyword">AS</span> home_click_uv,</span><br><span class="line">          <span class="keyword">sum</span>(c.add_cart_uv) <span class="keyword">AS</span> add_cart_uv,</span><br><span class="line">          <span class="keyword">sum</span>(c.order_uv) <span class="keyword">AS</span> order_uv,</span><br><span class="line">          <span class="keyword">sum</span>(c.order_arrange_uv) <span class="keyword">AS</span> order_arrange_uv,</span><br><span class="line">          <span class="keyword">sum</span>(c.conversion_sales_amt) <span class="keyword">AS</span> conversion_sales_amt</span><br><span class="line">   <span class="keyword">FROM</span></span><br><span class="line">     (<span class="keyword">SELECT</span> a.region_id,</span><br><span class="line">             a.region_name,</span><br><span class="line">             a.management_city_id,</span><br><span class="line">             a.management_city_name,</span><br><span class="line">             a.device_type_id,</span><br><span class="line">             <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> a.customer_id) <span class="keyword">AS</span> dau,</span><br><span class="line">             <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.event_type = <span class="string">&#x27;view&#x27;</span></span><br><span class="line">                                <span class="keyword">AND</span> a.val_cid = <span class="string">&#x27;page_csu_list&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> home_expose_uv,</span><br><span class="line">             <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.event_type = <span class="string">&#x27;click&#x27;</span></span><br><span class="line">                                <span class="keyword">AND</span> a.val_cid = <span class="string">&#x27;page_csu_list&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> home_click_uv,</span><br><span class="line">             <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.val_bid = <span class="string">&#x27;b_h856xuac&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> add_cart_uv,</span><br><span class="line">             <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.val_cid = <span class="string">&#x27;page_order_confirm&#x27;</span></span><br><span class="line">                                <span class="keyword">AND</span> a.val_bid = <span class="string">&#x27;b_drqbsnud&#x27;</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> order_uv,</span><br><span class="line">             <span class="number">0</span> <span class="keyword">AS</span> order_arrange_uv,</span><br><span class="line">             <span class="number">0</span> <span class="keyword">AS</span> conversion_sales_amt</span><br><span class="line">      <span class="keyword">FROM</span> flow_log_info a</span><br><span class="line">      <span class="keyword">GROUP</span> <span class="keyword">BY</span> a.region_id,</span><br><span class="line">               a.region_name,</span><br><span class="line">               a.management_city_id,</span><br><span class="line">               a.management_city_name,</span><br><span class="line">               a.device_type_id</span><br><span class="line">      <span class="keyword">GROUPING</span> <span class="keyword">SETS</span> ((a.region_id, a.region_name, a.management_city_id, a.management_city_name, a.device_type_id),</span><br><span class="line">               (a.region_id, a.region_name, a.device_type_id),</span><br><span class="line">               (a.region_id, a.region_name, a.management_city_id, a.management_city_name),</span><br><span class="line">               (a.region_id, a.region_name),</span><br><span class="line">               (a.device_type_id),</span><br><span class="line">               ())</span><br><span class="line"></span><br><span class="line">      <span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">SELECT</span> a.region_id,</span><br><span class="line">           a.region_name,</span><br><span class="line">           a.management_city_id,</span><br><span class="line">           a.management_city_name,</span><br><span class="line">           a.device_type_id,</span><br><span class="line">           <span class="number">0</span> <span class="keyword">AS</span> dau,</span><br><span class="line">           <span class="number">0</span> <span class="keyword">AS</span> home_expose_uv,</span><br><span class="line">           <span class="number">0</span> <span class="keyword">AS</span> home_click_uv,</span><br><span class="line">           <span class="number">0</span> <span class="keyword">AS</span> add_cart_uv,</span><br><span class="line">           <span class="number">0</span> <span class="keyword">AS</span> order_uv,</span><br><span class="line">           <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> <span class="keyword">IF</span> (a.val_cid = <span class="string">&#x27;page_order_confirm&#x27;</span></span><br><span class="line">                              <span class="keyword">AND</span> a.val_bid = <span class="string">&#x27;b_drqbsnud&#x27;</span></span><br><span class="line">                              <span class="keyword">AND</span> d.order_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>, a.customer_id, <span class="literal">NULL</span>)) <span class="keyword">AS</span> order_arrange_uv,</span><br><span class="line">           <span class="keyword">sum</span>(<span class="keyword">IF</span> (a.val_cid = <span class="string">&#x27;page_order_confirm&#x27;</span></span><br><span class="line">                   <span class="keyword">AND</span> a.val_bid = <span class="string">&#x27;b_drqbsnud&#x27;</span></span><br><span class="line">                   <span class="keyword">AND</span> d.order_id <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>, d.arranged_amt, <span class="number">0</span>)) <span class="keyword">AS</span> conversion_sales_amt</span><br><span class="line">      <span class="keyword">FROM</span> flow_log_info a</span><br><span class="line">      <span class="keyword">JOIN</span></span><br><span class="line">        (<span class="keyword">SELECT</span> e.dt,</span><br><span class="line">                e.parent_order_id,</span><br><span class="line">                c.order_id,</span><br><span class="line">                c.arranged_amt</span><br><span class="line">         <span class="keyword">FROM</span> mart_caterb2b.fact_biz_order_day e</span><br><span class="line">         <span class="keyword">LEFT</span> <span class="keyword">JOIN</span></span><br><span class="line">           (<span class="keyword">SELECT</span> dt,</span><br><span class="line">                   order_id,</span><br><span class="line">                   <span class="keyword">sum</span>(arranged_amt) <span class="keyword">AS</span> arranged_amt</span><br><span class="line">            <span class="keyword">FROM</span> mart_caterb2b.mid_deal_order_item_withpop</span><br><span class="line">            <span class="keyword">WHERE</span> dt = <span class="string">&#x27;$now.datekey&#x27;</span></span><br><span class="line">              <span class="keyword">AND</span> is_arranged = <span class="number">1</span></span><br><span class="line">              <span class="keyword">AND</span> channel_id = <span class="number">1001</span></span><br><span class="line">              <span class="keyword">AND</span> order_type <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="number">3</span>,</span><br><span class="line">                                     <span class="number">4</span>)<span class="comment">-- 排除补货换货</span></span><br><span class="line"></span><br><span class="line">              <span class="keyword">AND</span> spu_type != <span class="number">5</span> <span class="comment">-- 排除包装物</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">GROUP</span> <span class="keyword">BY</span> dt,</span><br><span class="line">                     order_id) c <span class="keyword">ON</span> e.dt = c.dt</span><br><span class="line">         <span class="keyword">AND</span> e.order_id = c.order_id</span><br><span class="line">         <span class="keyword">WHERE</span> e.dt = <span class="string">&#x27;$now.datekey&#x27;</span>) d <span class="keyword">ON</span> a.order_id = d.parent_order_id</span><br><span class="line">      <span class="keyword">AND</span> a.dt = d.dt</span><br><span class="line">      <span class="keyword">GROUP</span> <span class="keyword">BY</span> a.region_id,</span><br><span class="line">               a.region_name,</span><br><span class="line">               a.management_city_id,</span><br><span class="line">               a.management_city_name,</span><br><span class="line">               a.device_type_id</span><br><span class="line">      <span class="keyword">GROUPING</span> <span class="keyword">SETS</span> ((a.region_id, a.region_name, a.management_city_id, a.management_city_name, a.device_type_id),</span><br><span class="line">               (a.region_id, a.region_name, a.device_type_id),</span><br><span class="line">               (a.region_id, a.region_name, a.management_city_id, a.management_city_name),</span><br><span class="line">               (a.region_id, a.region_name),</span><br><span class="line">               (a.device_type_id),</span><br><span class="line">               ()) )c</span><br><span class="line">   <span class="keyword">GROUP</span> <span class="keyword">BY</span> c.region_id,</span><br><span class="line">            c.region_name,</span><br><span class="line">            c.management_city_id,</span><br><span class="line">            c.management_city_name,</span><br><span class="line">            c.device_type_id) e</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>当用join关联时，一定要注意数据的量级分布，包括能关联上的和不能关联上的，提前计算一下！</p>
-<h2 id="原理探究"><a href="#原理探究" class="headerlink" title="原理探究"></a>原理探究</h2>
       
     </div>
 
@@ -469,7 +354,7 @@ limit 10
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/spark/learning/Spark%20UI/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/spark/structured%20streaming/%E8%AE%B0%E4%B8%80%E6%AC%A1Listener%E5%BB%B6%E8%BF%9F%E6%89%A7%E8%A1%8C%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -483,7 +368,7 @@ limit 10
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/05/05/spark/learning/Spark%20UI/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/06/18/spark/structured%20streaming/%E8%AE%B0%E4%B8%80%E6%AC%A1Listener%E5%BB%B6%E8%BF%9F%E6%89%A7%E8%A1%8C%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">记一次Listener延迟执行问题</a>
         </h2>
 
         <div class="post-meta">
@@ -493,64 +378,7 @@ limit 10
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/spark/learning/jar%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/05/05/spark/learning/jar%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F/" class="post-title-link" itemprop="url">jar加载顺序</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -558,7 +386,7 @@ limit 10
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a>
+                  <a href="/categories/spark-structured-streaming/" itemprop="url" rel="index"><span itemprop="name">spark-structured-streaming</span></a>
                 </span>
             </span>
 
@@ -573,7 +401,10 @@ limit 10
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/diaojing1918/article/details/101348708">https://blog.csdn.net/diaojing1918/article/details/101348708</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zpf_940810653842/article/details/103099795">https://blog.csdn.net/zpf_940810653842/article/details/103099795</a></p>
+
       
     </div>
 
@@ -592,7 +423,7 @@ limit 10
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/olap/%E5%AD%97%E6%AE%B5%E8%A7%84%E8%8C%83/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/olap/%E5%B7%A5%E5%85%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -606,7 +437,7 @@ limit 10
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/05/05/olap/%E5%AD%97%E6%AE%B5%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">字段规范</a>
+            <a href="/2026/06/18/olap/%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">olap工具</a>
         </h2>
 
         <div class="post-meta">
@@ -616,7 +447,7 @@ limit 10
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -639,7 +470,80 @@ limit 10
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="a、命名规范"><a href="#a、命名规范" class="headerlink" title="a、命名规范"></a><strong>a、命名规范</strong></h4><p>1、使用有意义英文词汇；使用约定俗成的词汇；禁止中文拼音或拼音缩写</p>
+          <h2 id="数据探查">数据探查</h2>
+<h4 id="Pandas-Profiling">Pandas Profiling</h4>
+<p><a target="_blank" rel="noopener" href="https://github.com/pandas-profiling/pandas-profiling">https://github.com/pandas-profiling/pandas-profiling</a></p>
+<ol>
+<li>生成探查报告，</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/olap/%E5%AD%97%E6%AE%B5%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/olap/%E5%AD%97%E6%AE%B5%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">字段规范</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/olap/" itemprop="url" rel="index"><span itemprop="name">olap</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="a、命名规范"><strong>a、命名规范</strong></h4>
+<p>1、使用有意义英文词汇；使用约定俗成的词汇；禁止中文拼音或拼音缩写</p>
 <p>2、字段名由字母、下划线组成，禁止滥用阿拉伯数字，不同词汇之间用下划线分隔；字符长度不超过30位</p>
 <p>3、为了意思清晰，加少混淆，并易于理解，应当使用 表名 ＋ id/name/type…的形式。例如，poi表里字段应该为poi_id、poi_type、 poi_name（不应该直接使用：id/name/type）</p>
 <p>4、基础字段命名：用num, amt, cnt, id, type等简写做后缀，如”order_cnt”表示订单数量，“product_id”标示产品ID</p>
@@ -649,32 +553,41 @@ limit 10
 <li>业务含义是动词时，尽量不用使用其分词命名,如is_paid，应为is_pay</li>
 <li>定义：是（1）非（0）或 肯（1）否（0）</li>
 </ul>
-<p>7、列里面存的是多值，可以用复数命名，例如 markland_ids, hotel_types </p>
+<p>7、列里面存的是多值，可以用复数命名，例如 markland_ids, hotel_types</p>
 <p>8、DW内部：相同含义的字段名称、数据类型在正常情况下须保持一致，减少使用过程中的混淆，避免造成数据流转时不能被抽取或数据截断情况</p>
-<h4 id="b、命名建议"><a href="#b、命名建议" class="headerlink" title="b、命名建议"></a><strong>b、命名建议</strong></h4><p><strong>原则：字段名尽量详细，易于理解</strong></p>
+<h4 id="b、命名建议"><strong>b、命名建议</strong></h4>
+<p><strong>原则：字段名尽量详细，易于理解</strong></p>
 <p><strong>命名规则</strong>：</p>
 <p><strong>字段名：[is]_[修饰词]＋字段描述词＋[后缀/度量]＋[时间周期词]，强烈建议保留后缀</strong></p>
 <p><strong>中文名：[时间周期词]＋[修饰词]＋字段描述词＋[度量]</strong></p>
 <ul>
-<li><p><strong>字段描述词（名词、动词）</strong></p>
+<li>
+<p><strong>字段描述词（名词、动词）</strong></p>
 </li>
-<li><p><strong>修饰词（名词、动词、形容词、topN）</strong></p>
+<li>
+<p><strong>修饰词（名词、动词、形容词、topN）</strong></p>
 </li>
-<li><p>名词修饰示例：dp_shop_id、mt_deal_id、business_area_name、province_location_id、hotel_star_name</p>
+<li>
+<p>名词修饰示例：dp_shop_id、mt_deal_id、business_area_name、province_location_id、hotel_star_name</p>
 </li>
-<li><p>动词修饰示例：pay_order_cnt、refund_apply_cnt、locate_city_name、checkout_city_id</p>
+<li>
+<p>动词修饰示例：pay_order_cnt、refund_apply_cnt、locate_city_name、checkout_city_id</p>
 </li>
-<li><p>形容词修饰示例：new_user_id、last_modify_operator_name、poi_first_cate_name</p>
+<li>
+<p>形容词修饰示例：new_user_id、last_modify_operator_name、poi_first_cate_name</p>
 </li>
-<li><p>topN修饰（top\d）示例：top10_click_uv</p>
+<li>
+<p>topN修饰（top\d）示例：top10_click_uv</p>
 </li>
-<li><p><strong>多个修饰词存在时，按主－谓－宾顺序、动作发生时间前后的顺序排列，例如：</strong></p>
+<li>
+<p><strong>多个修饰词存在时，按主－谓－宾顺序、动作发生时间前后的顺序排列，例如：</strong></p>
 </li>
 </ul>
 <p>主谓宾示例：biz_checkin_coupon_value（商家入住代金券补贴）</p>
 <p>多动作示例：auto_pass_update_cnt（自动通过更新量）、response_add_time（回应添加时间）</p>
 <ul>
-<li><p><strong>后缀（度量）</strong></p>
+<li>
+<p><strong>后缀（度量）</strong></p>
 <p><strong>常用基础后缀</strong></p>
 <table>
 <thead>
@@ -684,7 +597,8 @@ limit 10
 <th>备注</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>id</td>
 <td>唯一标示</td>
 <td></td>
@@ -824,7 +738,8 @@ limit 10
 <td>来源</td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>复合后缀：在基础后缀后使用</p>
 <table>
 <thead>
@@ -834,7 +749,8 @@ limit 10
 <th>备注</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>sum</td>
 <td>汇总值</td>
 <td></td>
@@ -884,9 +800,11 @@ limit 10
 <td>差异</td>
 <td>示例：[a]<em>to</em>[b]_amt_diff与自身对比时：diff后加时间周期pay_order_cnt_diff_14days（与前14天的支付订单数差异），如果需要时间周期修饰，仍可以在字段后加时间周期词：pay_order_cnt_diff_14days_7days（当前日期前7天的支付订单数与前14天的差异）</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </li>
-<li><p><strong>时间周期词（day、week、quarter、year、tenday、quarter、halfyear、period）</strong></p>
+<li>
+<p><strong>时间周期词（day、week、quarter、year、tenday、quarter、halfyear、period）</strong></p>
 <table>
 <thead>
 <tr>
@@ -895,7 +813,8 @@ limit 10
 <th>备注</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>(\d)days</td>
 <td>近n日</td>
 <td>当前日期之前</td>
@@ -920,10 +839,12 @@ limit 10
 <td></td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </li>
 </ul>
-<h4 id="c、设计原则"><a href="#c、设计原则" class="headerlink" title="c、设计原则"></a>c、设计原则</h4><p>1、各列必须有明确注释</p>
+<h4 id="c、设计原则">c、设计原则</h4>
+<p>1、各列必须有明确注释</p>
 <p>2、维度表：</p>
 <ul>
 <li>维度主键须在第一列，其余外键按重要性、相关性由高到低依次排列。</li>
@@ -938,7 +859,8 @@ limit 10
 <p>模型涉及多系统整合时，需要添加代理键字段标示唯一主键，命名后缀为_key，代理键码值维护在<strong>1.4、公共代码空间</strong></p>
 <p><strong>目前产品、交易主题需要设置代理键，因为这部分数据主要来自酒旅平台内部业务系统，我们作为数据的供给方是有权力制定码值的规范；</strong></p>
 <p><strong>商户、用户主题的数据不建议整合，因为数据供给方在平台，我们制定代理键规则的话，会影响与平台和其他BG的数据互通</strong></p>
-<h4 id="d、字段设计"><a href="#d、字段设计" class="headerlink" title="d、字段设计"></a>d、字段设计</h4><p>1、新增字段应参照已定义的字段标准</p>
+<h4 id="d、字段设计">d、字段设计</h4>
+<p>1、新增字段应参照已定义的字段标准</p>
 <p>2、字段类型严格遵循以下规范</p>
 <table>
 <thead>
@@ -953,7 +875,8 @@ limit 10
 <th><strong>说明</strong></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>日期类型</strong></td>
 <td>字符日期类</td>
 <td>string</td>
@@ -1060,7 +983,7 @@ limit 10
 <td>3</td>
 <td></td>
 <td>level</td>
-<td>1.2..N</td>
+<td>1.2…N</td>
 <td></td>
 </tr>
 <tr>
@@ -1120,11 +1043,13 @@ limit 10
 <td></td>
 <td></td>
 <td>array</td>
-<td>类似[<a target="_blank" rel="noopener" href="https://wiki.sankuai.com/pages/createpage.action?spaceKey=TRAVEL&title=a,b,c,d&linkCreation=true&fromPageId=1431717643">a,b,c,d</a>]结构</td>
+<td>类似[<a target="_blank" rel="noopener" href="https://wiki.sankuai.com/pages/createpage.action?spaceKey=TRAVEL&amp;title=a%2Cb%2Cc%2Cd&amp;linkCreation=true&amp;fromPageId=1431717643">a,b,c,d</a>]结构</td>
 <td></td>
 </tr>
-</tbody></table>
-<h4 id="e、主题关联键"><a href="#e、主题关联键" class="headerlink" title="e、主题关联键"></a>e、主题关联键</h4><table>
+</tbody>
+</table>
+<h4 id="e、主题关联键">e、主题关联键</h4>
+<table>
 <thead>
 <tr>
 <th>现有字段名</th>
@@ -1135,7 +1060,8 @@ limit 10
 <th>规范字段类型</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>order_id</td>
 <td>订单id</td>
 <td>bigint</td>
@@ -1503,25 +1429,27 @@ limit 10
 <td>org_id</td>
 <td>bigint</td>
 </tr>
-</tbody></table>
-<h4 id="f、MAP类型key值"><a href="#f、MAP类型key值" class="headerlink" title="f、MAP类型key值"></a>f、MAP类型key值</h4><ol>
-<li><p>key设计规则：</p>
+</tbody>
+</table>
+<h4 id="f、MAP类型key值">f、MAP类型key值</h4>
+<ol>
+<li>
+<p>key设计规则：</p>
 <p>1.1 时间key值</p>
-<p><strong>today       当日</strong>                  </p>
-<p><strong>(N)day     第N日之前</strong>         </p>
-<p><strong>(N)days   近N日</strong> </p>
+<p><strong>today       当日</strong></p>
+<p><strong>(N)day     第N日之前</strong></p>
+<p><strong>(N)days   近N日</strong></p>
 <p><strong>f(N)day    未来第N日</strong></p>
 <p><strong>f(N)days  未来N日/次N天</strong></p>
 <p><strong>toweek     当周</strong></p>
-<p><strong>(N)week     第N周之前</strong>         </p>
+<p><strong>(N)week     第N周之前</strong></p>
 <p><strong>f(N)week    未来第N周/次N周</strong></p>
 <p><strong>tomonth     当月</strong></p>
-<p><strong>(N)month     第N月之前</strong>         </p>
+<p><strong>(N)month     第N月之前</strong></p>
 <p><strong>f(N)month    未来第N月/次N月</strong></p>
 </li>
-</ol>
-<ol start="2">
-<li><p>key值枚举（<strong>只会新增、不会删减</strong>）</p>
+<li>
+<p>key值枚举（<strong>只会新增、不会删减</strong>）</p>
 <table>
 <thead>
 <tr>
@@ -1531,52 +1459,53 @@ limit 10
 <th>应用场景</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>today</strong></td>
 <td><strong>当天</strong></td>
-<td>dt=’20190328’，代表20190328当天的数据</td>
+<td>dt=‘20190328’，代表20190328当天的数据</td>
 <td>客户宽表、客户分群</td>
 </tr>
 <tr>
 <td><strong>1day</strong></td>
 <td><strong>1天前</strong></td>
-<td>dt=’20190328’，代表20190327的数据</td>
+<td>dt=‘20190328’，代表20190327的数据</td>
 <td>客户宽表、客户分群</td>
 </tr>
 <tr>
 <td><strong>7day</strong></td>
 <td><strong>7天前(上周同期)</strong></td>
-<td>dt=’20190328’，代表20190321的数据</td>
+<td>dt=‘20190328’，代表20190321的数据</td>
 <td>客户宽表、客户分群</td>
 </tr>
 <tr>
 <td><strong>1month</strong></td>
 <td><strong>1月前(上月同期)</strong></td>
-<td>dt=’20190328’，代表20190228的数据</td>
+<td>dt=‘20190328’，代表20190228的数据</td>
 <td>客户宽表、客户分群</td>
 </tr>
 <tr>
 <td><strong>7days</strong></td>
 <td><strong>近7天</strong></td>
-<td>dt=’20190328’，代表20190322-20190328的数据</td>
+<td>dt=‘20190328’，代表20190322-20190328的数据</td>
 <td>客户宽表、客户分群</td>
 </tr>
 <tr>
 <td><strong>30days</strong></td>
 <td><strong>近30天</strong></td>
-<td>dt=’20190328’，代表20190227-20190328的数据</td>
+<td>dt=‘20190328’，代表20190227-20190328的数据</td>
 <td>客户宽表、客户分群</td>
 </tr>
 <tr>
 <td><strong>total</strong></td>
 <td><strong>历史累计</strong></td>
-<td>dt=’20190328’，代表截止到20190328的数据</td>
+<td>dt=‘20190328’，代表截止到20190328的数据</td>
 <td>客户宽表、客户分群</td>
 </tr>
 <tr>
 <td>2days</td>
 <td>近2天</td>
-<td>dt=’20190328’，代表20190327-20190328的数据</td>
+<td>dt=‘20190328’，代表20190327-20190328的数据</td>
 <td>客户宽表、客户分群</td>
 </tr>
 <tr>
@@ -1705,10 +1634,12 @@ limit 10
 <td></td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 </li>
 </ol>
-<h4 id="g-多种日期维度字典值"><a href="#g-多种日期维度字典值" class="headerlink" title="g. 多种日期维度字典值"></a>g. 多种日期维度字典值</h4><table>
+<h4 id="g-多种日期维度字典值">g. 多种日期维度字典值</h4>
+<table>
 <thead>
 <tr>
 <th>日期含义</th>
@@ -1716,7 +1647,8 @@ limit 10
 <th>应用场景</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>日</td>
 <td>当天 例如：20191105</td>
 <td>星辰</td>
@@ -1761,7 +1693,8 @@ limit 10
 <td>MTD-20191028</td>
 <td>星辰-经营结果</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
       
     </div>
@@ -1781,7 +1714,7 @@ limit 10
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/olap/%E5%B7%A5%E5%85%B7/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/olap/%E5%BE%85%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1795,7 +1728,7 @@ limit 10
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/05/05/olap/%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">olap工具</a>
+            <a href="/2026/06/18/olap/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
         </h2>
 
         <div class="post-meta">
@@ -1805,155 +1738,7 @@ limit 10
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/olap/" itemprop="url" rel="index"><span itemprop="name">olap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="数据探查"><a href="#数据探查" class="headerlink" title="数据探查"></a>数据探查</h2><h4 id="Pandas-Profiling"><a href="#Pandas-Profiling" class="headerlink" title="Pandas Profiling"></a>Pandas Profiling</h4><p><a target="_blank" rel="noopener" href="https://github.com/pandas-profiling/pandas-profiling">https://github.com/pandas-profiling/pandas-profiling</a></p>
-<ol>
-<li>生成探查报告，</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/olap/%E5%BB%BA%E6%A8%A1%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/05/05/olap/%E5%BB%BA%E6%A8%A1%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">建模方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/olap/" itemprop="url" rel="index"><span itemprop="name">olap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/109782553">数据仓库建设中的数据建模方法</a></p>
-<h2 id="实体建模"><a href="#实体建模" class="headerlink" title="实体建模"></a>实体建模</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaoyelinger0912/article/details/95517168">数据建模-建模方法三：实体建模</a></p>
-<p>实体建模法也有着自己先天的缺陷，由于实体说明法只是一种抽象客观世界的方法，因此，<strong>注定了该建模方法<br>只能局限在业务建模和领域概念建模阶段。因此，到了逻辑建模阶段和物理建模阶段，则是范式建模和维度建模发挥长处的阶段</strong></p>
-<p>实体是现实世界中存在的事物或发生的事件，是现实世界中任何可识别、可区分的事物。实体可以是人，可以是物，也可以是发生的某件事，比如一场篮球比赛。每一个实体都必须具备一定的特征，用来区分一个个实体，这些特征称为属性，每个实体可以用若干个属性来刻画，每个属性又有一定的取值类型和取值范围，属性是变量，其取值范围是属性的值域。实体建模法是根据客观世界中的一个个实体，以及实体之间的关系，在数据建模的过程中引入这种区分方法，将整个业务分成一个个实体，从而建立数据模型。实体建模可以比较容易的实现模型的划分，抽象出具体的业务概念，创建符合自己需要的数据库模型。实体建模是对客观世界的抽象，因此该方法建立的模型具有一定的局限性，适合于特定的领域。</p>
-<h2 id="维度建模法"><a href="#维度建模法" class="headerlink" title="维度建模法"></a>维度建模法</h2><p>维度在数学上指独立参数的数据，在数据分析领域，是指描述事物的角度和方面，是数据库当中，描述某一事物的方法和属性的数目。维度建模就是针对给定的事物，使用不同的描述方法，记录该事物在不同分类方法当中每个属性的值。如对人进行维度建模时，按照性别的维度可以分为男和女，按照年龄段可以分为儿童、少年、青年、中年、老年，按照收入水平可以分为3000以下、3000-6000、6000-10000，10000以上等集中类别。</p>
-<p> 维度建模法的好处是对于某个事物，可以在各个维度进行预处理，进行统计、分类、排序等，提高数据库操作性能，同时维度建模法建立的数据模型比较直观，可以紧密围绕业务需求建立模型，直观的反应业务中的问题，建模方法简单，不需要进行特别的抽象处理。但是维度建模法同时也存在缺点，一是在数据建模时需要进行预处理，存在大量的预处理工作，并且当业务需求发生变化时，需要重新定义维度，重新进行新维度的数据预处理，在数据预处理过程中往往存在大量数据冗余，另外就是在进行维度建模时，仅仅依靠维度进行建模，不能保证数据来源的准确性和一致性，不适合在数据库底层使用。</p>
-<h2 id="范式建模法"><a href="#范式建模法" class="headerlink" title="范式建模法"></a>范式建模法</h2><p>范式就是规则，是符合某一级别关系模式的集合，构造数据库时必须遵循一定的规则。关系数据库中的关系必须满足一定的规则，即满足不同的范式。</p>
-<p> 范式建模法是将原始数据信息根据一定的数据结构和转换模型，分解、转化为规范的格式，使数据遵守一定的约束条件，每一个数据项所表达的意思明确，不产生歧义，同时各条数据之间相互独立，不存在依赖关系。</p>
-<h2 id="建模过程"><a href="#建模过程" class="headerlink" title="建模过程"></a>建模过程</h2><ol>
-<li></li>
-</ol>
-<p>3NF范式建模，实体模型中的关系作为fact表，实体作为维度表</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/05/olap/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/05/05/olap/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-05-05 03:01:53" itemprop="dateCreated datePublished" datetime="2026-05-05T03:01:53+00:00">2026-05-05</time>
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1978,7 +1763,303 @@ limit 10
       
           <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/40700596">数据挖掘…》 Chapter 4. 数据仓库与OLAP</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hellojoy/category_10715698.html">数仓理论</a></p>
-<h3 id="数据分层"><a href="#数据分层" class="headerlink" title="数据分层"></a>数据分层</h3><p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/37119772">模型层次</a></p>
+<h3 id="数据分层">数据分层</h3>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/37119772">模型层次</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/olap/%E5%BB%BA%E6%A8%A1%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/olap/%E5%BB%BA%E6%A8%A1%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">建模方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/olap/" itemprop="url" rel="index"><span itemprop="name">olap</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/109782553">数据仓库建设中的数据建模方法</a></p>
+<h2 id="实体建模">实体建模</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaoyelinger0912/article/details/95517168">数据建模-建模方法三：实体建模</a></p>
+<p>实体建模法也有着自己先天的缺陷，由于实体说明法只是一种抽象客观世界的方法，因此，<strong>注定了该建模方法<br>
+只能局限在业务建模和领域概念建模阶段。因此，到了逻辑建模阶段和物理建模阶段，则是范式建模和维度建模发挥长处的阶段</strong></p>
+<p>实体是现实世界中存在的事物或发生的事件，是现实世界中任何可识别、可区分的事物。实体可以是人，可以是物，也可以是发生的某件事，比如一场篮球比赛。每一个实体都必须具备一定的特征，用来区分一个个实体，这些特征称为属性，每个实体可以用若干个属性来刻画，每个属性又有一定的取值类型和取值范围，属性是变量，其取值范围是属性的值域。实体建模法是根据客观世界中的一个个实体，以及实体之间的关系，在数据建模的过程中引入这种区分方法，将整个业务分成一个个实体，从而建立数据模型。实体建模可以比较容易的实现模型的划分，抽象出具体的业务概念，创建符合自己需要的数据库模型。实体建模是对客观世界的抽象，因此该方法建立的模型具有一定的局限性，适合于特定的领域。</p>
+<h2 id="维度建模法">维度建模法</h2>
+<p>维度在数学上指独立参数的数据，在数据分析领域，是指描述事物的角度和方面，是数据库当中，描述某一事物的方法和属性的数目。维度建模就是针对给定的事物，使用不同的描述方法，记录该事物在不同分类方法当中每个属性的值。如对人进行维度建模时，按照性别的维度可以分为男和女，按照年龄段可以分为儿童、少年、青年、中年、老年，按照收入水平可以分为3000以下、3000-6000、6000-10000，10000以上等集中类别。</p>
+<p>维度建模法的好处是对于某个事物，可以在各个维度进行预处理，进行统计、分类、排序等，提高数据库操作性能，同时维度建模法建立的数据模型比较直观，可以紧密围绕业务需求建立模型，直观的反应业务中的问题，建模方法简单，不需要进行特别的抽象处理。但是维度建模法同时也存在缺点，一是在数据建模时需要进行预处理，存在大量的预处理工作，并且当业务需求发生变化时，需要重新定义维度，重新进行新维度的数据预处理，在数据预处理过程中往往存在大量数据冗余，另外就是在进行维度建模时，仅仅依靠维度进行建模，不能保证数据来源的准确性和一致性，不适合在数据库底层使用。</p>
+<h2 id="范式建模法">范式建模法</h2>
+<p>范式就是规则，是符合某一级别关系模式的集合，构造数据库时必须遵循一定的规则。关系数据库中的关系必须满足一定的规则，即满足不同的范式。</p>
+<p>范式建模法是将原始数据信息根据一定的数据结构和转换模型，分解、转化为规范的格式，使数据遵守一定的约束条件，每一个数据项所表达的意思明确，不产生歧义，同时各条数据之间相互独立，不存在依赖关系。</p>
+<h2 id="建模过程">建模过程</h2>
+<ol>
+<li></li>
+</ol>
+<p>3NF范式建模，实体模型中的关系作为fact表，实体作为维度表</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/olap/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/olap/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/" class="post-title-link" itemprop="url">数据仓库</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/olap/" itemprop="url" rel="index"><span itemprop="name">olap</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://dbaplus.cn/news-73-2934-1.html">数据仓库体系规划及实施流程</a></p>
+<p>分线和分主题有很多相似的地方，只是看待数据的角度不同，分主题是从数据内容分类和对外服务的角度看，类似商品分类；而分线是从数据生产加工过程的角度来看，类似业务生产流水线。</p>
+<p><a target="_blank" rel="noopener" href="https://www.huaweicloud.com/articles/432adc9ebe5d354c6393a3490a005d10.html">数据仓库、主题域、主题概念与定义</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/olap/%E9%9D%A2%E8%AF%95%E5%8F%82%E8%80%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/olap/%E9%9D%A2%E8%AF%95%E5%8F%82%E8%80%83/" class="post-title-link" itemprop="url">面试参考</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/olap/" itemprop="url" rel="index"><span itemprop="name">olap</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="主题分类">主题分类</h4>
+<ol>
+<li>商户</li>
+<li>用户</li>
+<li>活动</li>
+<li>订单</li>
+<li>营销</li>
+<li>流量</li>
+<li>商品</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/redis/redis%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/06/18/redis/redis%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">redis基本使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lizhenghn/p/5322887.html">Redis常用数据类型介绍、使用场景及其操作命令</a></p>
 
       
     </div>
@@ -1997,7 +2078,7 @@ limit 10
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2063,13 +2144,13 @@ limit 10
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">252</span>
+          <span class="site-state-item-count">277</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-count">56</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
