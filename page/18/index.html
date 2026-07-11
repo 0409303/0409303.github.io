@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/kafka/config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/18/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/07/11/kafka/config/" class="post-title-link" itemprop="url">config</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,221 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="consumer">consumer</h2>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">21/09/08</span> <span class="string">02:39:19 INFO ConsumerConfig [Executor task launch worker for task 2322]: ConsumerConfig values: </span></span><br><span class="line">	<span class="meta">auto.commit.interval.ms</span> = <span class="string">5000</span></span><br><span class="line">	<span class="meta">auto.offset.reset</span> = <span class="string">none</span></span><br><span class="line">	<span class="meta">bootstrap.servers</span> = <span class="string">[msnsam-prod.servicebus.windows.net:9093]</span></span><br><span class="line">	<span class="meta">check.crcs</span> = <span class="string">true</span></span><br><span class="line">	<span class="meta">client.dns.lookup</span> = <span class="string">default</span></span><br><span class="line">	<span class="meta">client.id</span> = <span class="string"></span></span><br><span class="line">	<span class="meta">connections.max.idle.ms</span> = <span class="string">540000</span></span><br><span class="line">	<span class="meta">default.api.timeout.ms</span> = <span class="string">60000</span></span><br><span class="line">	<span class="meta">enable.auto.commit</span> = <span class="string">false</span></span><br><span class="line">	<span class="meta">exclude.internal.topics</span> = <span class="string">true</span></span><br><span class="line">	<span class="meta">fetch.max.bytes</span> = <span class="string">52428800</span></span><br><span class="line">	<span class="meta">fetch.max.wait.ms</span> = <span class="string">500</span></span><br><span class="line">	<span class="meta">fetch.min.bytes</span> = <span class="string">1</span></span><br><span class="line">	<span class="meta">group.id</span> = <span class="string">spark-kafka-source-babd462a-415a-413a-aeea-e55435fff762-448121830-executor</span></span><br><span class="line">	<span class="meta">heartbeat.interval.ms</span> = <span class="string">3000</span></span><br><span class="line">	<span class="meta">interceptor.classes</span> = <span class="string">[]</span></span><br><span class="line">	<span class="meta">internal.leave.group.on.close</span> = <span class="string">true</span></span><br><span class="line">	<span class="meta">isolation.level</span> = <span class="string">read_uncommitted</span></span><br><span class="line">	<span class="meta">key.deserializer</span> = <span class="string">class org.apache.kafka.common.serialization.ByteArrayDeserializer</span></span><br><span class="line">	<span class="meta">max.partition.fetch.bytes</span> = <span class="string">1048576</span></span><br><span class="line">	<span class="meta">max.poll.interval.ms</span> = <span class="string">300000</span></span><br><span class="line">	<span class="meta">max.poll.records</span> = <span class="string">500</span></span><br><span class="line">	<span class="meta">metadata.max.age.ms</span> = <span class="string">300000</span></span><br><span class="line">	<span class="meta">metric.reporters</span> = <span class="string">[]</span></span><br><span class="line">	<span class="meta">metrics.num.samples</span> = <span class="string">2</span></span><br><span class="line">	<span class="meta">metrics.recording.level</span> = <span class="string">INFO</span></span><br><span class="line">	<span class="meta">metrics.sample.window.ms</span> = <span class="string">30000</span></span><br><span class="line">	<span class="meta">partition.assignment.strategy</span> = <span class="string">[class org.apache.kafka.clients.consumer.RangeAssignor]</span></span><br><span class="line">	<span class="meta">receive.buffer.bytes</span> = <span class="string">65536</span></span><br><span class="line">	<span class="meta">reconnect.backoff.max.ms</span> = <span class="string">1000</span></span><br><span class="line">	<span class="meta">reconnect.backoff.ms</span> = <span class="string">50</span></span><br><span class="line">	<span class="meta">request.timeout.ms</span> = <span class="string">30000</span></span><br><span class="line">	<span class="meta">retry.backoff.ms</span> = <span class="string">100</span></span><br><span class="line">	<span class="meta">sasl.client.callback.handler.class</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">sasl.jaas.config</span> = <span class="string">[hidden]</span></span><br><span class="line">	<span class="meta">sasl.kerberos.kinit.cmd</span> = <span class="string">/usr/bin/kinit</span></span><br><span class="line">	<span class="meta">sasl.kerberos.min.time.before.relogin</span> = <span class="string">60000</span></span><br><span class="line">	<span class="meta">sasl.kerberos.service.name</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">sasl.kerberos.ticket.renew.jitter</span> = <span class="string">0.05</span></span><br><span class="line">	<span class="meta">sasl.kerberos.ticket.renew.window.factor</span> = <span class="string">0.8</span></span><br><span class="line">	<span class="meta">sasl.login.callback.handler.class</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">sasl.login.class</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">sasl.login.refresh.buffer.seconds</span> = <span class="string">300</span></span><br><span class="line">	<span class="meta">sasl.login.refresh.min.period.seconds</span> = <span class="string">60</span></span><br><span class="line">	<span class="meta">sasl.login.refresh.window.factor</span> = <span class="string">0.8</span></span><br><span class="line">	<span class="meta">sasl.login.refresh.window.jitter</span> = <span class="string">0.05</span></span><br><span class="line">	<span class="meta">sasl.mechanism</span> = <span class="string">PLAIN</span></span><br><span class="line">	<span class="meta">security.protocol</span> = <span class="string">SASL_SSL</span></span><br><span class="line">	<span class="meta">send.buffer.bytes</span> = <span class="string">131072</span></span><br><span class="line">	<span class="meta">session.timeout.ms</span> = <span class="string">10000</span></span><br><span class="line">	<span class="meta">ssl.cipher.suites</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">ssl.enabled.protocols</span> = <span class="string">[TLSv1.2, TLSv1.1, TLSv1]</span></span><br><span class="line">	<span class="meta">ssl.endpoint.identification.algorithm</span> = <span class="string">https</span></span><br><span class="line">	<span class="meta">ssl.key.password</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">ssl.keymanager.algorithm</span> = <span class="string">SunX509</span></span><br><span class="line">	<span class="meta">ssl.keystore.location</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">ssl.keystore.password</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">ssl.keystore.type</span> = <span class="string">JKS</span></span><br><span class="line">	<span class="meta">ssl.protocol</span> = <span class="string">TLS</span></span><br><span class="line">	<span class="meta">ssl.provider</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">ssl.secure.random.implementation</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">ssl.trustmanager.algorithm</span> = <span class="string">PKIX</span></span><br><span class="line">	<span class="meta">ssl.truststore.location</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">ssl.truststore.password</span> = <span class="string">null</span></span><br><span class="line">	<span class="meta">ssl.truststore.type</span> = <span class="string">JKS</span></span><br><span class="line">	<span class="meta">value.deserializer</span> = <span class="string">class org.apache.kafka.common.serialization.ByteArrayDeserializer</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/kafka/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/11/kafka/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kafka/" itemprop="url" rel="index"><span itemprop="name">kafka</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="http://blog.itpub.net/69940568/viewspace-2653946/">迟来的干货 | Kafka权限管理实战</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.confluent.io/platform/current/kafka/authentication_sasl/index.html">kafka Authentication with SASL using JAAS</a></p>
+<p><a target="_blank" rel="noopener" href="http://kafka.apache.org/documentation.html#newconsumerconfigs">kafka Documentation</a></p>
+<p><a target="_blank" rel="noopener" href="http://spark.coolplayer.net/?p=2157">干货|kafka最佳实践</a></p>
+<p>kafka offset 设置</p>
+<ol>
+<li>如何查看当前offset</li>
+<li>如何指定offset</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZouChengli/article/details/82587404">Kafka手动设置offset</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/moschinoooo/topics/980340">Kafka手动设置offset</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lmb09122508/article/details/79891460">kafka消费者offset相关设置</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/449074d97daf">Kafka offset管理</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ITtangtang/p/8027217.html">Kafka文件存储机制及offset存取</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/huxi2b/p/8405566.html">Kafka的CommitFailedException异常</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/123361451">使用Kafka时一定要注意防止消费速度过慢触发rebalance而导致的重复消费</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000039768128">Kafka又出问题了！</a></p>
+<p>配置项</p>
+<p><a target="_blank" rel="noopener" href="https://spark.apache.org/docs/latest/structured-streaming-kafka-integration.html">https://spark.apache.org/docs/latest/structured-streaming-kafka-integration.html</a></p>
+<p>问题：</p>
+<ol>
+<li>This means the time between subsequent calls to poll() was longer than the</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E6%B9%96%E5%AD%98%E5%82%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/11/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E6%B9%96%E5%AD%98%E5%82%A8/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/11/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
             </span>
 
           
@@ -407,7 +621,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -421,7 +635,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/18/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/" class="post-title-link" itemprop="url">数据采集</a>
+            <a href="/2026/07/11/interview/tech_comparison/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/" class="post-title-link" itemprop="url">数据采集</a>
         </h2>
 
         <div class="post-meta">
@@ -431,7 +645,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -581,7 +795,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/interview/tech_comparison/%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/interview/tech_comparison/%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -595,7 +809,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/18/interview/tech_comparison/%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/07/11/interview/tech_comparison/%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -605,7 +819,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
             </span>
 
           
@@ -908,7 +1122,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/language/c#/issue/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/interview/references/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%AE%9D%E5%85%B8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -922,7 +1136,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/18/language/c#/issue/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/07/11/interview/references/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%AE%9D%E5%85%B8/" class="post-title-link" itemprop="url">机器学习/数据挖掘工程师面试宝典</a>
         </h2>
 
         <div class="post-meta">
@@ -932,213 +1146,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>“message”: “C# error CS1061: ‘DateTime?’ does not contain a definition for ‘AddHours’ and no accessible extension method ‘AddHours’ accepting a first argument of type ‘DateTime?’ could be found (are you missing a using directive or an assembly reference?)”,</p>
-<p>类后面有？ 类似scala的Option，需要先get，获取的才是DateTime对象，然后再调用其函数</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/language/c#/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/06/18/language/c#/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c#</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="代码整理">代码整理</h2>
-<ol>
-<li>string 相关方法(Contains/indexOf)</li>
-<li>类型转换</li>
-<li>字节数组 &lt;-&gt; 字符串 （编码） <a target="_blank" rel="noopener" href="https://blog.csdn.net/tom_221x/article/details/71643015">示例</a></li>
-<li></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/language/go/%E5%A6%82%E4%BD%95%E5%BC%80%E5%A7%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/06/18/language/go/%E5%A6%82%E4%BD%95%E5%BC%80%E5%A7%8B/" class="post-title-link" itemprop="url">如何开始</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index"><span itemprop="name">go</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>下载go安装包</p>
-<p>修改GoPath，可以使用默认的</p>
-<p>go env 可以查看当前配置项内容</p>
-<p>运行代码需要在%GoPath%/src/xx 下面</p>
-<p>当需要引入包时，执行go get -u &lt;package_name&gt;</p>
-<p>go mod init</p>
-<p>go mod tiny</p>
-<p>go build xxx.go</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/interview/references/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%AE%9D%E5%85%B8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/06/18/interview/references/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E5%AE%9D%E5%85%B8/" class="post-title-link" itemprop="url">机器学习/数据挖掘工程师面试宝典</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1388,7 +1396,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/interview/references/%E7%A8%8B%E5%BA%8F%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/interview/references/%E6%A6%82%E5%BF%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1402,7 +1410,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/18/interview/references/%E7%A8%8B%E5%BA%8F%E9%A2%98/" class="post-title-link" itemprop="url">程序题</a>
+            <a href="/2026/07/11/interview/references/%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">概念</a>
         </h2>
 
         <div class="post-meta">
@@ -1412,131 +1420,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/interview/references/" itemprop="url" rel="index"><span itemprop="name">references</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[toc]</p>
-<h2 id="大数据面试高频-SQL-必背真题（开窗-行列转换-倾斜优化-经典场景）">大数据面试高频 SQL 必背真题（开窗 + 行列转换 + 倾斜优化 + 经典场景）</h2>
-<p>全是面试常考，直接背语法和套路，现场就能写。</p>
-<h3 id="一、开窗函数-三大必考">一、开窗函数 三大必考</h3>
-<h4 id="1-row-number-rank-dense-rank-区别">1. row_number /rank/dense_rank 区别</h4>
-<ul>
-<li><strong>row_number()</strong>：连续不重复 1,2,3,4</li>
-<li><strong>rank()</strong>：跳跃排名 1,1,3,4</li>
-<li><strong>dense_rank()</strong>：连续排名 1,1,2,3</li>
-</ul>
-<h4 id="2-分组取-Top1（每组最新一条）">2. 分组取 Top1（每组最新一条）</h4>
-<p>场景：每个用户取最近一条行为记录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM (</span><br><span class="line">  SELECT </span><br><span class="line">    user_id,</span><br><span class="line">    event_time,</span><br><span class="line">    event_type,</span><br><span class="line">    ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY event_time DESC) AS rn</span><br><span class="line">  FROM user_behavior</span><br><span class="line">) t</span><br><span class="line">WHERE t.rn &#x3D; 1;</span><br></pre></td></tr></table></figure>
-<h4 id="3-累计求和（逐月累计）">3. 累计求和（逐月累计）</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  month,</span><br><span class="line">  amount,</span><br><span class="line">  SUM(amount) OVER(ORDER BY month) AS total_acc</span><br><span class="line">FROM sales;</span><br></pre></td></tr></table></figure>
-<h4 id="4-移动平均（近-3-日均值）">4. 移动平均（近 3 日均值）</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AVG(price) OVER(ORDER BY dt ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="二、行列转换-面试必写">二、行列转换 面试必写</h3>
-<h4 id="1-行转列（多行变一行，逗号拼接）">1. 行转列（多行变一行，逗号拼接）</h4>
-<p>Hive/Spark SQL</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  user_id,</span><br><span class="line">  CONCAT_WS(&#39;,&#39;, COLLECT_LIST(course)) AS course_list</span><br><span class="line">FROM user_course</span><br><span class="line">GROUP BY user_id;</span><br></pre></td></tr></table></figure>
-<h4 id="2-列转行（一行拆多行）">2. 列转行（一行拆多行）</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  user_id,</span><br><span class="line">  course</span><br><span class="line">FROM user_course</span><br><span class="line">LATERAL VIEW EXPLODE(SPLIT(course_list, &#39;,&#39;)) tmp AS course;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="三、数据倾斜-SQL-写法（面试高频）">三、数据倾斜 SQL 写法（面试高频）</h3>
-<h4 id="1-空值-大量-NULL-倾斜-优化">1. 空值 / 大量 NULL 倾斜 优化</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- 原写法倾斜</span><br><span class="line">WHERE city IS NULL</span><br><span class="line"></span><br><span class="line">-- 优化：加盐打散</span><br><span class="line">SELECT *</span><br><span class="line">FROM table</span><br><span class="line">WHERE IF(city IS NULL, CONCAT(&#39;rand_&#39;, RAND()), city) </span><br><span class="line">  &#x3D; IF(city IS NULL, CONCAT(&#39;rand_&#39;, RAND()), city);</span><br></pre></td></tr></table></figure>
-<h4 id="2-Key-热点倾斜-加盐两阶段聚合">2. Key 热点倾斜 加盐两阶段聚合</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-- 第一层：局部聚合加盐</span><br><span class="line">SELECT key, CONCAT(key,&#39;_&#39;,CAST(RAND()*10 AS INT)) AS salt_key, COUNT(1) AS cnt</span><br><span class="line">FROM log</span><br><span class="line">GROUP BY key, CONCAT(key,&#39;_&#39;,CAST(RAND()*10 AS INT));</span><br><span class="line"></span><br><span class="line">-- 第二层：去掉盐全局聚合</span><br><span class="line">SELECT REPLACE(salt_key,&#39;_&#39;,SUBSTRING_INDEX(salt_key,&#39;_&#39;,-1)) AS key, SUM(cnt)</span><br><span class="line">FROM tmp</span><br><span class="line">GROUP BY REPLACE(salt_key,&#39;_&#39;,SUBSTRING_INDEX(salt_key,&#39;_&#39;,-1));</span><br></pre></td></tr></table></figure>
-<h4 id="3-Join-倾斜优化">3. Join 倾斜优化</h4>
-<ul>
-<li>小表<strong>广播 Join</strong>：<code>/*+ BROADCAST(small_table) */</code></li>
-<li>大表倾斜 Key 单独处理，其余正常 Join，再 Union</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT &#x2F;*+ BROADCAST(b) *&#x2F; a.* </span><br><span class="line">FROM big_table a</span><br><span class="line">JOIN small_table b </span><br><span class="line">ON a.key &#x3D; b.key;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="四、经典业务-SQL-真题">四、经典业务 SQL 真题</h3>
-<h4 id="1-连续登录天数（超高频）">1. 连续登录天数（超高频）</h4>
-<p>思路：日期减去行号，相同即为连续</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_id, MIN(dt), MAX(dt), COUNT(1) AS continue_days</span><br><span class="line">FROM (</span><br><span class="line">  SELECT</span><br><span class="line">    user_id,</span><br><span class="line">    dt,</span><br><span class="line">    DATE_SUB(dt, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY dt)) AS flag</span><br><span class="line">  FROM login_log</span><br><span class="line">) t</span><br><span class="line">GROUP BY user_id, flag</span><br><span class="line">HAVING COUNT(1) &gt;&#x3D; 3;</span><br></pre></td></tr></table></figure>
-<h4 id="2-留存率计算（次日留存）">2. 留存率计算（次日留存）</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  t1.dt,</span><br><span class="line">  COUNT(DISTINCT t1.user_id) AS new_user,</span><br><span class="line">  COUNT(DISTINCT t2.user_id) AS retain_user</span><br><span class="line">FROM new_user t1</span><br><span class="line">LEFT JOIN login_log t2 </span><br><span class="line">  ON t1.user_id &#x3D; t2.user_id </span><br><span class="line">  AND t2.dt &#x3D; DATE_ADD(t1.dt,1)</span><br><span class="line">GROUP BY t1.dt;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="五、大数据-SQL-通用优化口诀（面试背）">五、大数据 SQL 通用优化口诀（面试背）</h3>
-<ol>
-<li>尽早过滤：<strong>先 where 后 join</strong>，减少 shuffle</li>
-<li>分组前过滤，聚合少数据</li>
-<li>小表<strong>广播 Join</strong>，避免 shuffle 倾斜</li>
-<li>避免 select *，只查需要字段</li>
-<li>分区过滤必加，禁止全表扫描</li>
-<li>倾斜 Key：<strong>加盐打散、局部 + 全局聚合</strong></li>
-<li>用好开窗代替子查询，简洁高效</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/interview/references/%E6%A6%82%E5%BF%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/06/18/interview/references/%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1653,7 +1537,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/18/interview/references/%E7%AE%80%E5%8E%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/interview/references/%E7%A8%8B%E5%BA%8F%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1667,7 +1551,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/06/18/interview/references/%E7%AE%80%E5%8E%86/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/07/11/interview/references/%E7%A8%8B%E5%BA%8F%E9%A2%98/" class="post-title-link" itemprop="url">程序题</a>
         </h2>
 
         <div class="post-meta">
@@ -1677,7 +1561,131 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-06-18 22:07:50" itemprop="dateCreated datePublished" datetime="2026-06-18T22:07:50+00:00">2026-06-18</time>
+              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/interview/references/" itemprop="url" rel="index"><span itemprop="name">references</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h2 id="大数据面试高频-SQL-必背真题（开窗-行列转换-倾斜优化-经典场景）">大数据面试高频 SQL 必背真题（开窗 + 行列转换 + 倾斜优化 + 经典场景）</h2>
+<p>全是面试常考，直接背语法和套路，现场就能写。</p>
+<h3 id="一、开窗函数-三大必考">一、开窗函数 三大必考</h3>
+<h4 id="1-row-number-rank-dense-rank-区别">1. row_number /rank/dense_rank 区别</h4>
+<ul>
+<li><strong>row_number()</strong>：连续不重复 1,2,3,4</li>
+<li><strong>rank()</strong>：跳跃排名 1,1,3,4</li>
+<li><strong>dense_rank()</strong>：连续排名 1,1,2,3</li>
+</ul>
+<h4 id="2-分组取-Top1（每组最新一条）">2. 分组取 Top1（每组最新一条）</h4>
+<p>场景：每个用户取最近一条行为记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM (</span><br><span class="line">  SELECT </span><br><span class="line">    user_id,</span><br><span class="line">    event_time,</span><br><span class="line">    event_type,</span><br><span class="line">    ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY event_time DESC) AS rn</span><br><span class="line">  FROM user_behavior</span><br><span class="line">) t</span><br><span class="line">WHERE t.rn &#x3D; 1;</span><br></pre></td></tr></table></figure>
+<h4 id="3-累计求和（逐月累计）">3. 累计求和（逐月累计）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  month,</span><br><span class="line">  amount,</span><br><span class="line">  SUM(amount) OVER(ORDER BY month) AS total_acc</span><br><span class="line">FROM sales;</span><br></pre></td></tr></table></figure>
+<h4 id="4-移动平均（近-3-日均值）">4. 移动平均（近 3 日均值）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AVG(price) OVER(ORDER BY dt ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="二、行列转换-面试必写">二、行列转换 面试必写</h3>
+<h4 id="1-行转列（多行变一行，逗号拼接）">1. 行转列（多行变一行，逗号拼接）</h4>
+<p>Hive/Spark SQL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  user_id,</span><br><span class="line">  CONCAT_WS(&#39;,&#39;, COLLECT_LIST(course)) AS course_list</span><br><span class="line">FROM user_course</span><br><span class="line">GROUP BY user_id;</span><br></pre></td></tr></table></figure>
+<h4 id="2-列转行（一行拆多行）">2. 列转行（一行拆多行）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  user_id,</span><br><span class="line">  course</span><br><span class="line">FROM user_course</span><br><span class="line">LATERAL VIEW EXPLODE(SPLIT(course_list, &#39;,&#39;)) tmp AS course;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="三、数据倾斜-SQL-写法（面试高频）">三、数据倾斜 SQL 写法（面试高频）</h3>
+<h4 id="1-空值-大量-NULL-倾斜-优化">1. 空值 / 大量 NULL 倾斜 优化</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-- 原写法倾斜</span><br><span class="line">WHERE city IS NULL</span><br><span class="line"></span><br><span class="line">-- 优化：加盐打散</span><br><span class="line">SELECT *</span><br><span class="line">FROM table</span><br><span class="line">WHERE IF(city IS NULL, CONCAT(&#39;rand_&#39;, RAND()), city) </span><br><span class="line">  &#x3D; IF(city IS NULL, CONCAT(&#39;rand_&#39;, RAND()), city);</span><br></pre></td></tr></table></figure>
+<h4 id="2-Key-热点倾斜-加盐两阶段聚合">2. Key 热点倾斜 加盐两阶段聚合</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-- 第一层：局部聚合加盐</span><br><span class="line">SELECT key, CONCAT(key,&#39;_&#39;,CAST(RAND()*10 AS INT)) AS salt_key, COUNT(1) AS cnt</span><br><span class="line">FROM log</span><br><span class="line">GROUP BY key, CONCAT(key,&#39;_&#39;,CAST(RAND()*10 AS INT));</span><br><span class="line"></span><br><span class="line">-- 第二层：去掉盐全局聚合</span><br><span class="line">SELECT REPLACE(salt_key,&#39;_&#39;,SUBSTRING_INDEX(salt_key,&#39;_&#39;,-1)) AS key, SUM(cnt)</span><br><span class="line">FROM tmp</span><br><span class="line">GROUP BY REPLACE(salt_key,&#39;_&#39;,SUBSTRING_INDEX(salt_key,&#39;_&#39;,-1));</span><br></pre></td></tr></table></figure>
+<h4 id="3-Join-倾斜优化">3. Join 倾斜优化</h4>
+<ul>
+<li>小表<strong>广播 Join</strong>：<code>/*+ BROADCAST(small_table) */</code></li>
+<li>大表倾斜 Key 单独处理，其余正常 Join，再 Union</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT &#x2F;*+ BROADCAST(b) *&#x2F; a.* </span><br><span class="line">FROM big_table a</span><br><span class="line">JOIN small_table b </span><br><span class="line">ON a.key &#x3D; b.key;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="四、经典业务-SQL-真题">四、经典业务 SQL 真题</h3>
+<h4 id="1-连续登录天数（超高频）">1. 连续登录天数（超高频）</h4>
+<p>思路：日期减去行号，相同即为连续</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_id, MIN(dt), MAX(dt), COUNT(1) AS continue_days</span><br><span class="line">FROM (</span><br><span class="line">  SELECT</span><br><span class="line">    user_id,</span><br><span class="line">    dt,</span><br><span class="line">    DATE_SUB(dt, ROW_NUMBER() OVER(PARTITION BY user_id ORDER BY dt)) AS flag</span><br><span class="line">  FROM login_log</span><br><span class="line">) t</span><br><span class="line">GROUP BY user_id, flag</span><br><span class="line">HAVING COUNT(1) &gt;&#x3D; 3;</span><br></pre></td></tr></table></figure>
+<h4 id="2-留存率计算（次日留存）">2. 留存率计算（次日留存）</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  t1.dt,</span><br><span class="line">  COUNT(DISTINCT t1.user_id) AS new_user,</span><br><span class="line">  COUNT(DISTINCT t2.user_id) AS retain_user</span><br><span class="line">FROM new_user t1</span><br><span class="line">LEFT JOIN login_log t2 </span><br><span class="line">  ON t1.user_id &#x3D; t2.user_id </span><br><span class="line">  AND t2.dt &#x3D; DATE_ADD(t1.dt,1)</span><br><span class="line">GROUP BY t1.dt;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="五、大数据-SQL-通用优化口诀（面试背）">五、大数据 SQL 通用优化口诀（面试背）</h3>
+<ol>
+<li>尽早过滤：<strong>先 where 后 join</strong>，减少 shuffle</li>
+<li>分组前过滤，聚合少数据</li>
+<li>小表<strong>广播 Join</strong>，避免 shuffle 倾斜</li>
+<li>避免 select *，只查需要字段</li>
+<li>分区过滤必加，禁止全表扫描</li>
+<li>倾斜 Key：<strong>加盐打散、局部 + 全局聚合</strong></li>
+<li>用好开窗代替子查询，简洁高效</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/interview/references/%E7%AE%80%E5%8E%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/11/interview/references/%E7%AE%80%E5%8E%86/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
             </span>
 
           
@@ -1716,7 +1724,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1782,7 +1790,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">282</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

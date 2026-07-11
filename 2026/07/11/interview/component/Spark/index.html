@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[toc] Spark 面试高频全集（核心原理 + 项目难点 + 踩坑 + 性能调优） 精简面试背诵版，全部是工作实战 + 面试官必问，直接背就能用。  一、Spark 基础高频必问 1. Spark 核心架构  Driver：调度任务、生成 DAG、划分 Stage、维护元数据 Executor：执行 Task、负责内存计算、存储缓存数据 ClusterManager：Yarn&#x2F;Standalo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark">
+<meta property="og:url" content="http://example.com/2026/07/11/interview/component/Spark/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="[toc] Spark 面试高频全集（核心原理 + 项目难点 + 踩坑 + 性能调优） 精简面试背诵版，全部是工作实战 + 面试官必问，直接背就能用。  一、Spark 基础高频必问 1. Spark 核心架构  Driver：调度任务、生成 DAG、划分 Stage、维护元数据 Executor：执行 Task、负责内存计算、存储缓存数据 ClusterManager：Yarn&#x2F;Standalo">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-07-11T00:08:03.980Z">
+<meta property="article:modified_time" content="2026-07-11T00:08:03.980Z">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="interview">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/07/11/interview/component/Spark/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Spark | 生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/interview/component/Spark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spark
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/interview/component/" itemprop="url" rel="index"><span itemprop="name">component</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[toc]</p>
+<h1>Spark 面试高频全集（核心原理 + 项目难点 + 踩坑 + 性能调优）</h1>
+<p>精简面试背诵版，全部是工作实战 + 面试官必问，直接背就能用。</p>
+<hr>
+<h2 id="一、Spark-基础高频必问">一、Spark 基础高频必问</h2>
+<h3 id="1-Spark-核心架构">1. Spark 核心架构</h3>
+<ul>
+<li><strong>Driver</strong>：调度任务、生成 DAG、划分 Stage、维护元数据</li>
+<li><strong>Executor</strong>：执行 Task、负责内存计算、存储缓存数据</li>
+<li><strong>ClusterManager</strong>：Yarn/Standalone/K8s 资源调度</li>
+<li><strong>Application</strong>：整个 Spark 应用程序</li>
+</ul>
+<h3 id="2-核心概念：RDD、DAG、Stage、Task">2. 核心概念：RDD、DAG、Stage、Task</h3>
+<ul>
+<li><strong>RDD</strong>：弹性分布式数据集，不可变、分区、惰性求值</li>
+<li><strong>DAG</strong>：任务有向无环图，宽窄依赖划分</li>
+<li><strong>Stage</strong>：遇到<strong>Shuffle</strong>就切分 Stage，上游结果给下游</li>
+<li><strong>Task</strong>：一个分区对应一个 Task，并行执行</li>
+</ul>
+<h3 id="3-窄依赖-宽依赖（必问）">3. 窄依赖 &amp; 宽依赖（必问）</h3>
+<ul>
+<li><strong>窄依赖</strong>：子 RDD 只依赖一个父 RDD，<strong>无 Shuffle</strong>，流水线执行</li>
+<li><strong>宽依赖</strong>：子 RDD 依赖多个父 RDD，<strong>产生 Shuffle</strong>，划分 Stage</li>
+</ul>
+<h3 id="4-Spark-运行模式">4. Spark 运行模式</h3>
+<p>Yarn（生产最常用）、Standalone、Local、K8s</p>
+<h3 id="5-Spark-两种调度模式">5. Spark 两种调度模式</h3>
+<ul>
+<li><strong>FIFO</strong>：先来先执行</li>
+<li><strong>FAIR 公平调度</strong>：资源均分，多任务互不抢占</li>
+</ul>
+<h3 id="6-缓存级别-Cache-Persist">6. 缓存级别 Cache &amp; Persist</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MEMORY_ONLY&#96;、&#96;MEMORY_AND_DISK&#96;、&#96;MEMORY_ONLY_SER</span><br></pre></td></tr></table></figure>
+<p>生产常用：<strong>MEMORY_AND_DISK</strong> 内存不够落盘</p>
+<h3 id="7-Spark-SQL-核心优化">7. Spark SQL 核心优化</h3>
+<p>Catalyst 优化器、逻辑计划 / 物理计划、谓词下推、列裁剪、常量折叠</p>
+<h3 id="8-Shuffle-是什么">8. Shuffle 是什么</h3>
+<p>数据按照<strong>Key 重新分区、跨节点传输</strong>，是 Spark 最耗性能、最容易出问题的环节。</p>
+<h3 id="9-Spark-分区原则">9. Spark 分区原则</h3>
+<p>分区数决定 Task 数量；</p>
+<p>分区太少：并行度低、执行慢；</p>
+<p>分区太多：任务过小、调度开销大。</p>
+<h3 id="10-Spark-和-Flink-区别">10. Spark 和 Flink 区别</h3>
+<p>Spark 是<strong>微批</strong>，离线强、准实时；</p>
+<p>Flink 是<strong>原生流</strong>，事件时间、水位线、低延迟、Exactly-Once 更强。</p>
+<hr>
+<h2 id="二、Spark-项目常见难点-实战坑（面试官最爱深挖）">二、Spark 项目常见难点 &amp; 实战坑（面试官最爱深挖）</h2>
+<h3 id="1-数据倾斜（Spark-头号问题）">1. 数据倾斜（Spark 头号问题）</h3>
+<p><strong>现象</strong>：个别 Key 数据量巨大，某个 Task 执行极慢，整体任务拖很久、OOM。</p>
+<p><strong>原因</strong>：热点用户、空值过多、分区键分布不均。</p>
+<p><strong>解决</strong>：</p>
+<ol>
+<li>热点 Key 加盐打散，局部聚合再全局聚合</li>
+<li>空值单独过滤或单独分区</li>
+<li>提高倾斜 Key 所在分区并行度</li>
+<li>使用 <code>salting</code> 加盐、分治 Join</li>
+</ol>
+<h3 id="2-Shuffle-量大、任务跑的慢">2. Shuffle 量大、任务跑的慢</h3>
+<p><strong>现象</strong>：Shuffle 读写磁盘、网络传输大，耗时占比极高。</p>
+<p><strong>解决</strong>：</p>
+<ul>
+<li>尽量提前过滤数据、减少 Shuffle 数据量</li>
+<li>合理设置 Shuffle 分区数</li>
+<li>能用 map 端聚合就不要等到 reduce</li>
+</ul>
+<h3 id="3-OOM-内存溢出（最常见）">3. OOM 内存溢出（最常见）</h3>
+<p>分三种：</p>
+<ol>
+<li>
+<p><strong>Driver OOM</strong>：收集太多数据、collect 拉取全量数据</p>
+</li>
+<li>
+<p><strong>Executor OOM</strong>：分区数据太大、缓存过多、笛卡尔积</p>
+</li>
+<li>
+<p>Shuffle OOM</p>
+<p>：Shuffle 文件过大、缓冲区溢出</p>
+<p>解决</p>
+<p>：</p>
+</li>
+</ol>
+<ul>
+<li>增大 Driver/Executor 内存</li>
+<li>避免 <code>collect()</code> 拉大表</li>
+<li>合理分区、过滤无用数据、少用笛卡尔积</li>
+<li>调整 Shuffle 缓冲区、排序缓冲区大小</li>
+</ul>
+<h3 id="4-小文件问题（落地-Hive-HDFS）">4. 小文件问题（落地 Hive/HDFS）</h3>
+<p><strong>现象</strong>：任务跑完生成几百上千个小文件，占用 NN 内存、查询极慢。</p>
+<p><strong>原因</strong>：分区过多、Task 数量太多、每次增量输出碎片化。</p>
+<p><strong>解决</strong>：</p>
+<ul>
+<li>控制输出分区数、重分区 <code>coalesce/repartition</code></li>
+<li>写入前合并分区</li>
+<li>定时离线合并小文件</li>
+</ul>
+<h3 id="5-分区数据倾斜、数据空分区多">5. 分区数据倾斜、数据空分区多</h3>
+<p><strong>现象</strong>：有的分区几百 MB，有的分区几 KB 甚至空分区。</p>
+<p><strong>解决</strong>：重分区、动态调整分区数、过滤无效数据。</p>
+<h3 id="6-谓词不下推、全表扫描">6. 谓词不下推、全表扫描</h3>
+<p><strong>现象</strong>：明明加了 where 条件，还是扫描全表。</p>
+<p><strong>原因</strong>：函数嵌套、子查询复杂、分区字段没写对。</p>
+<p><strong>解决</strong>：尽早过滤、条件放最外层、分区过滤优先。</p>
+<h3 id="7-缓存滥用导致内存不足">7. 缓存滥用导致内存不足</h3>
+<p><strong>现象</strong>：大量 RDD/DataFrame 缓存不释放，集群内存被占满。</p>
+<p><strong>解决</strong>：不用立刻 <code>unpersist</code>，只缓存高频复用中间表。</p>
+<h3 id="8-Join-顺序不对导致性能爆炸">8. Join 顺序不对导致性能爆炸</h3>
+<p><strong>现象</strong>：大表 join 大表、小表放后面，没走 Broadcast。</p>
+<p><strong>解决</strong>：小表放左边、开启自适应广播 Join、手动 Hint。</p>
+<hr>
+<h2 id="三、Spark-性能调优全套（面试直接背）">三、Spark 性能调优全套（面试直接背）</h2>
+<h3 id="1-资源参数调优">1. 资源参数调优</h3>
+<ul>
+<li>合理设置 <strong>Executor 内存、核数</strong></li>
+<li>Driver 内存适当加大，避免收集数据 OOM</li>
+<li>每个 Executor 核数不宜过多，防止 CPU 上下文切换</li>
+</ul>
+<h3 id="2-分区数调优">2. 分区数调优</h3>
+<ul>
+<li>分区数 = 核心数 2~3 倍最佳</li>
+<li>避免分区过少并行低、过多调度开销大</li>
+<li>用 <code>repartition/coalesce</code> 控制输出文件数量</li>
+</ul>
+<h3 id="3-Shuffle-调优">3. Shuffle 调优</h3>
+<ul>
+<li>合理设置 <code>spark.sql.shuffle.partitions</code></li>
+<li>调优 Shuffle 缓冲区、排序缓冲区</li>
+<li>尽量<strong>减少 Shuffle 次数</strong>，能合并算子就合并</li>
+</ul>
+<h3 id="4-数据倾斜调优">4. 数据倾斜调优</h3>
+<ul>
+<li>空值过滤、单独处理</li>
+<li>热点 Key 加盐打散、分两阶段聚合</li>
+<li>大 Key 单独拆分任务</li>
+</ul>
+<h3 id="5-算子优化">5. 算子优化</h3>
+<ul>
+<li>尽早过滤、列裁剪、谓词下推</li>
+<li>避免笛卡尔积、避免不必要的 Join</li>
+<li>少用 <code>collect、take</code> 拉取大量数据到 Driver</li>
+</ul>
+<h3 id="6-缓存优化">6. 缓存优化</h3>
+<ul>
+<li>只缓存复用多次的中间结果</li>
+<li>用完立即释放 <code>unpersist</code></li>
+<li>优先内存 + 磁盘缓存级别</li>
+</ul>
+<h3 id="7-Join-优化">7. Join 优化</h3>
+<ul>
+<li>大表 Join 小表走 <strong>Broadcast 广播 Join</strong></li>
+<li>调整 Join 顺序、小表前置</li>
+<li>避免大表 Join 大表，拆分成中间结果</li>
+</ul>
+<h3 id="8-自适应参数开启">8. 自适应参数开启</h3>
+<p>Spark3.x 开启自适应：</p>
+<p>动态调整分区、自动倾斜优化、自动广播 Join，大幅减少手动调优成本。</p>
+<hr>
+<h2 id="四、面试-30-秒口述满分总结">四、面试 30 秒口述满分总结</h2>
+<p>Spark 基于 RDD 惰性求值、DAG 宽窄依赖划分 Stage，核心瓶颈在<strong>Shuffle 和数据倾斜</strong>；</p>
+<p>项目中常遇到<strong>数据倾斜、OOM 内存溢出、Shuffle 量大、落地小文件过多、谓词不下推、Join 效率低</strong>等问题；</p>
+<p>调优主要从<strong>资源参数、分区数量、Shuffle 配置、数据倾斜打散、算子逻辑优化、缓存合理使用、广播 Join、自适应执行</strong>入手，减少 Shuffle 开销、控制内存占用、合并小文件，提升任务运行效率和稳定性。</p>
+<hr>
+<h2 id="五、可直接写简历的-Spark-项目描述">五、可直接写简历的 Spark 项目描述</h2>
+<p>基于 Spark/Spark SQL 负责离线数仓分层建模、海量日志清洗、维度关联、指标聚合开发；解决<strong>数据倾斜、任务 OOM、Shuffle 性能瓶颈、HDFS 小文件泛滥</strong>等问题；通过分区调优、Shuffle 参数优化、热点 Key 加盐打散、广播 Join、合理缓存与资源调优等方式，大幅缩短任务运行时长，保障离线数仓准时稳定产出。</p>
+<h1>Spark Structured Streaming 完整版合集</h1>
+<p>包含：高频 10 题标准答案 + 底层原理 + 与 Spark Streaming/Flink 对比 + 项目实战坑点 + 性能调优，全合并可直接背诵、面试通用。</p>
+<h2 id="一、基础高频-10-题（极简标准答案）">一、基础高频 10 题（极简标准答案）</h2>
+<h3 id="1-什么是-Spark-Structured-Streaming？">1. 什么是 Spark Structured Streaming？</h3>
+<p>Spark 新一代流式引擎，基于 DataFrame/Dataset 统一 API，把实时流视作<strong>无限增长的动态表</strong>，支持 SQL 开发；底层默认<strong>微批轮询</strong>调度。</p>
+<h3 id="2-底层是微批还是真流式？">2. 底层是微批还是真流式？</h3>
+<p>默认<strong>微批轮询触发</strong>，不是事件驱动；仅 Continuous 连续模式为真流式，但<strong>生产不稳定、功能阉割，基本不用</strong>。</p>
+<h3 id="3-和老版-Spark-Streaming-区别？">3. 和老版 Spark Streaming 区别？</h3>
+<p>老版基于 DStream 低级 API，已淘汰；</p>
+<p>SSS 用 DataFrame/SQL 更简洁，支持事件时间、窗口、 Exactly-Once，引擎优化更强，语义更标准。</p>
+<h3 id="4-支持哪几种时间语义？">4. 支持哪几种时间语义？</h3>
+<p>支持<strong>处理时间、事件时间</strong>；自带水位线和窗口机制，但<strong>乱序、迟到数据处理能力远弱于 Flink</strong>。</p>
+<h3 id="5-Trigger-触发方式有几种？">5. Trigger 触发方式有几种？</h3>
+<ol>
+<li>默认微批：固定间隔轮询触发</li>
+<li>一次性触发：消费完存量数据即停止</li>
+<li>Continuous 连续触发：真流式低延迟，生产极少落地</li>
+</ol>
+<h3 id="6-如何实现-Kafka-消费-Exactly-Once？">6. 如何实现 Kafka 消费 Exactly-Once？</h3>
+<p>依赖<strong>Checkpoint 保存 Kafka 偏移量 + 作业状态</strong>，引擎保证偏移量不丢不重；</p>
+<p>业务层配合<strong>唯一主键幂等写入</strong>，端到端实现精确一次。</p>
+<h3 id="7-Checkpoint-的作用是什么？">7. Checkpoint 的作用是什么？</h3>
+<p>周期性保存<strong>Kafka 偏移量、算子聚合状态、执行计划元数据</strong>；任务重启 / 故障可自动恢复，保证不丢数据、不重复消费。</p>
+<h3 id="8-支持哪些窗口？">8. 支持哪些窗口？</h3>
+<p>支持<strong>滚动、滑动、会话窗口</strong>，可基于事件时间；</p>
+<p>但缺少完善空闲流标记、精细迟到兜底，复杂时序场景不如 Flink。</p>
+<h3 id="9-能做实时数仓吗？">9. 能做实时数仓吗？</h3>
+<p>适合<strong>简单准实时（1~5 分钟延迟）</strong>；</p>
+<p>乱序严重、要求秒级低延迟、长期大状态聚合，不适合，优先 Flink。</p>
+<h3 id="10-SSS-和-Flink-怎么选型？">10. SSS 和 Flink 怎么选型？</h3>
+<p>熟悉 Spark 栈、业务不乱序、仅需准实时、想用统一 SQL 开发；选 <strong>Structured Streaming</strong>。</p>
+<p>要求低延迟、乱序明显、窗口精准、大状态常驻、强 Exactly-Once；选 <strong>Flink</strong>。</p>
+<hr>
+<h2 id="二、Spark-Streaming-SSS-Flink-三者对比">二、Spark Streaming / SSS / Flink 三者对比</h2>
+<h3 id="核心模型一句话">核心模型一句话</h3>
+<ol>
+<li><strong>Spark Streaming</strong>：固定间隔纯微批，DStream 老旧 API，已淘汰。</li>
+<li><strong>Spark Structured Streaming</strong>：API 封装成流，底层默认仍是<strong>微批轮询</strong>；Continuous 为真流但生产不用。</li>
+<li><strong>Flink</strong>：<strong>原生事件驱动流</strong>，来一条处理一条，不是微批。</li>
+</ol>
+<h3 id="对比总表">对比总表</h3>
+<p>表格</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">框架</th>
+<th style="text-align:center">计算模型</th>
+<th style="text-align:center">延迟</th>
+<th style="text-align:center">时间语义</th>
+<th style="text-align:center">窗口乱序</th>
+<th style="text-align:center">状态管理</th>
+<th style="text-align:center">生产常用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Spark Streaming</td>
+<td style="text-align:center">固定微批</td>
+<td style="text-align:center">秒～分钟级</td>
+<td style="text-align:center">处理时间为主</td>
+<td style="text-align:center">弱，无完善乱序</td>
+<td style="text-align:center">无原生状态</td>
+<td style="text-align:center">已淘汰</td>
+</tr>
+<tr>
+<td style="text-align:center">Structured Streaming</td>
+<td style="text-align:center">默认微批；Continuous 真流</td>
+<td style="text-align:center">百 ms~ 秒级</td>
+<td style="text-align:center">支持事件时间</td>
+<td style="text-align:center">中等，水位线偏弱</td>
+<td style="text-align:center">有状态但能力一般</td>
+<td style="text-align:center">准实时简单实时</td>
+</tr>
+<tr>
+<td style="text-align:center">Flink</td>
+<td style="text-align:center">原生事件驱动流</td>
+<td style="text-align:center">毫秒～秒级</td>
+<td style="text-align:center">完善 EventTime</td>
+<td style="text-align:center">水位线 + 迟到 + 侧输出全套</td>
+<td style="text-align:center">原生 RocksDB+TTL + 增量 CK</td>
+<td style="text-align:center">复杂实时首选</td>
+</tr>
+</tbody>
+</table>
+<h3 id="延迟排序">延迟排序</h3>
+<p>Flink (毫秒级)  &lt;  Structured Streaming (百毫秒)  &lt;  Spark Streaming (秒级以上)</p>
+<hr>
+<h2 id="三、项目实战常见坑-问题现象-原因-解决方案">三、项目实战常见坑 &amp; 问题现象 + 原因 + 解决方案</h2>
+<h3 id="坑-1：底层微批导致延迟降不下去">坑 1：底层微批导致延迟降不下去</h3>
+<p>现象：延迟最低只能到几百毫秒，压不到毫秒级。</p>
+<p>原因：默认按固定间隔轮询触发 Job，不是事件驱动。</p>
+<p>解决：接受准实时定位；超低延迟业务改用 Flink。</p>
+<h3 id="坑-2：Checkpoint-目录损坏、任务重启失败">坑 2：Checkpoint 目录损坏、任务重启失败</h3>
+<p>现象：改动代码、升级版本后，从旧 CK 重启直接报错。</p>
+<p>原因：SSS 的 CK 绑定执行计划，算子变更、字段增减、逻辑改动后<strong>旧 CK 不兼容</strong>。</p>
+<p>解决：版本迭代<strong>换新 CK 目录</strong>；上线前清空旧状态，不要复用历史 CK。</p>
+<h3 id="坑-3：Kafka-重复消费、落地数据重复">坑 3：Kafka 重复消费、落地数据重复</h3>
+<p>现象：任务重启后产生重复数据。</p>
+<p>原因：CK 未完成就重启、手动重置偏移量，偏移量回退。</p>
+<p>解决：开启 CK 自动管理偏移量；落地端用<strong>唯一主键幂等</strong>、主键冲突忽略写入。</p>
+<h3 id="坑-4：窗口计算不准、乱序数据对不上离线">坑 4：窗口计算不准、乱序数据对不上离线</h3>
+<p>现象：晚到数据没被窗口纳入，指标偏小。</p>
+<p>原因：水位线推进弱，无空闲流标记、无迟到兜底。</p>
+<p>解决：合理设置事件时间水位线；业务上容忍准实时误差，复杂乱序改用 Flink。</p>
+<h3 id="坑-5：状态持续膨胀、任务-OOM">坑 5：状态持续膨胀、任务 OOM</h3>
+<p>现象：运行越久内存占用越高，频繁 GC、OOM。</p>
+<p>原因：SSS 无原生状态 TTL，旧 Key 状态不会自动清理。</p>
+<p>解决：业务层手动做过期清理；拆分任务生命周期；大状态场景换 Flink RocksDB+TTL。</p>
+<h3 id="坑-6：输出大量-HDFS-小文件">坑 6：输出大量 HDFS 小文件</h3>
+<p>现象：持续微批输出，每个批次生成少量文件，小文件爆炸。</p>
+<p>原因：微批频繁触发，每次输出都生成新文件。</p>
+<p>解决：调大触发间隔攒批；控制输出分区数；离线定时合并小文件。</p>
+<h3 id="坑-7：任务自动重启、批次积压延迟走高">坑 7：任务自动重启、批次积压延迟走高</h3>
+<p>现象：批次堆积、处理跟不上消费，延迟持续上涨。</p>
+<p>原因：单批次数据量过大、算子逻辑过重、资源不足。</p>
+<p>解决：调小批次触发间隔；过滤前置减少计算量；调高 Executor 资源与并行度。</p>
+<hr>
+<h2 id="四、Structured-Streaming-性能调优要点">四、Structured Streaming 性能调优要点</h2>
+<ol>
+<li>
+<p><strong>微批触发调优</strong></p>
+<p>合理设置 Trigger 间隔，兼顾延迟与吞吐，避免过小批次产生小文件。</p>
+</li>
+<li>
+<p><strong>Checkpoint 调优</strong></p>
+<p>固定独立 CK 目录；版本迭代必换新目录；不随意复用旧状态。</p>
+</li>
+<li>
+<p><strong>并行度与 Kafka 分区对齐</strong></p>
+<p>并行度和 Kafka 分区数保持一致，避免空闲 Task 或数据倾斜。</p>
+</li>
+<li>
+<p><strong>前置过滤与列裁剪</strong></p>
+<p>尽早 where 过滤、只读取需要字段，减少微批计算压力与 Shuffle 量。</p>
+</li>
+<li>
+<p><strong>避免大算子与重 Shuffle</strong></p>
+<p>减少多轮 Join、distinct；能聚合先聚合，降低每批次数据量。</p>
+</li>
+<li>
+<p><strong>资源参数调优</strong></p>
+<p>适当加大 Executor 内存、核数；防止单批次数据过大引发 GC 与 OOM。</p>
+</li>
+<li>
+<p><strong>不滥用 Continuous 模式</strong></p>
+<p>低延迟不要强行开连续模式，稳定性差、功能受限，生产不推荐。</p>
+</li>
+</ol>
+<hr>
+<h2 id="五、面试-30-秒口述总结版">五、面试 30 秒口述总结版</h2>
+<p>Spark Structured Streaming 以 DataFrame/SQL 为统一 API，把流当作动态无限表处理，<strong>底层默认仍是微批轮询调度</strong>，并非 Flink 那种原生事件驱动流；支持事件时间、窗口和 Checkpoint 偏移量管理，适合 1~5 分钟准实时业务。</p>
+<p>项目中常遇到<strong>CK 版本不兼容、重复消费、状态膨胀 OOM、窗口不准、HDFS 小文件、批次积压延迟</strong>等问题；调优主要从触发间隔、CK 规范、并行度对齐、前置过滤、资源配置入手。</p>
+<p>技术选型上简单准实时选 SSS，低延迟、乱序复杂、大状态常驻实时业务优先 Flink。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/interview/" rel="tag"># interview</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/07/11/interview/component/TensorFlow/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/07/11/interview/component/PyTorch/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Spark 面试高频全集（核心原理 + 项目难点 + 踩坑 + 性能调优）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81Spark-%E5%9F%BA%E7%A1%80%E9%AB%98%E9%A2%91%E5%BF%85%E9%97%AE"><span class="nav-number">1.1.</span> <span class="nav-text">一、Spark 基础高频必问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Spark-%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. Spark 核心架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%EF%BC%9ARDD%E3%80%81DAG%E3%80%81Stage%E3%80%81Task"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 核心概念：RDD、DAG、Stage、Task</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%AA%84%E4%BE%9D%E8%B5%96-%E5%AE%BD%E4%BE%9D%E8%B5%96%EF%BC%88%E5%BF%85%E9%97%AE%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 窄依赖 &amp; 宽依赖（必问）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Spark-%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. Spark 运行模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Spark-%E4%B8%A4%E7%A7%8D%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. Spark 两种调度模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%BC%93%E5%AD%98%E7%BA%A7%E5%88%AB-Cache-Persist"><span class="nav-number">1.1.6.</span> <span class="nav-text">6. 缓存级别 Cache &amp; Persist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Spark-SQL-%E6%A0%B8%E5%BF%83%E4%BC%98%E5%8C%96"><span class="nav-number">1.1.7.</span> <span class="nav-text">7. Spark SQL 核心优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Shuffle-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.8.</span> <span class="nav-text">8. Shuffle 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Spark-%E5%88%86%E5%8C%BA%E5%8E%9F%E5%88%99"><span class="nav-number">1.1.9.</span> <span class="nav-text">9. Spark 分区原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Spark-%E5%92%8C-Flink-%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.10.</span> <span class="nav-text">10. Spark 和 Flink 区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Spark-%E9%A1%B9%E7%9B%AE%E5%B8%B8%E8%A7%81%E9%9A%BE%E7%82%B9-%E5%AE%9E%E6%88%98%E5%9D%91%EF%BC%88%E9%9D%A2%E8%AF%95%E5%AE%98%E6%9C%80%E7%88%B1%E6%B7%B1%E6%8C%96%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">二、Spark 项目常见难点 &amp; 实战坑（面试官最爱深挖）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%EF%BC%88Spark-%E5%A4%B4%E5%8F%B7%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 数据倾斜（Spark 头号问题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Shuffle-%E9%87%8F%E5%A4%A7%E3%80%81%E4%BB%BB%E5%8A%A1%E8%B7%91%E7%9A%84%E6%85%A2"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. Shuffle 量大、任务跑的慢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-OOM-%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%EF%BC%88%E6%9C%80%E5%B8%B8%E8%A7%81%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. OOM 内存溢出（最常见）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B0%8F%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98%EF%BC%88%E8%90%BD%E5%9C%B0-Hive-HDFS%EF%BC%89"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. 小文件问题（落地 Hive&#x2F;HDFS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%88%86%E5%8C%BA%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E3%80%81%E6%95%B0%E6%8D%AE%E7%A9%BA%E5%88%86%E5%8C%BA%E5%A4%9A"><span class="nav-number">1.2.5.</span> <span class="nav-text">5. 分区数据倾斜、数据空分区多</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%B0%93%E8%AF%8D%E4%B8%8D%E4%B8%8B%E6%8E%A8%E3%80%81%E5%85%A8%E8%A1%A8%E6%89%AB%E6%8F%8F"><span class="nav-number">1.2.6.</span> <span class="nav-text">6. 谓词不下推、全表扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E7%BC%93%E5%AD%98%E6%BB%A5%E7%94%A8%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3"><span class="nav-number">1.2.7.</span> <span class="nav-text">7. 缓存滥用导致内存不足</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Join-%E9%A1%BA%E5%BA%8F%E4%B8%8D%E5%AF%B9%E5%AF%BC%E8%87%B4%E6%80%A7%E8%83%BD%E7%88%86%E7%82%B8"><span class="nav-number">1.2.8.</span> <span class="nav-text">8. Join 顺序不对导致性能爆炸</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Spark-%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E5%85%A8%E5%A5%97%EF%BC%88%E9%9D%A2%E8%AF%95%E7%9B%B4%E6%8E%A5%E8%83%8C%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">三、Spark 性能调优全套（面试直接背）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%B5%84%E6%BA%90%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 资源参数调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%86%E5%8C%BA%E6%95%B0%E8%B0%83%E4%BC%98"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 分区数调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Shuffle-%E8%B0%83%E4%BC%98"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. Shuffle 调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E8%B0%83%E4%BC%98"><span class="nav-number">1.3.4.</span> <span class="nav-text">4. 数据倾斜调优</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%AE%97%E5%AD%90%E4%BC%98%E5%8C%96"><span class="nav-number">1.3.5.</span> <span class="nav-text">5. 算子优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%BC%93%E5%AD%98%E4%BC%98%E5%8C%96"><span class="nav-number">1.3.6.</span> <span class="nav-text">6. 缓存优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Join-%E4%BC%98%E5%8C%96"><span class="nav-number">1.3.7.</span> <span class="nav-text">7. Join 优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E8%87%AA%E9%80%82%E5%BA%94%E5%8F%82%E6%95%B0%E5%BC%80%E5%90%AF"><span class="nav-number">1.3.8.</span> <span class="nav-text">8. 自适应参数开启</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%9D%A2%E8%AF%95-30-%E7%A7%92%E5%8F%A3%E8%BF%B0%E6%BB%A1%E5%88%86%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">四、面试 30 秒口述满分总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%8F%AF%E7%9B%B4%E6%8E%A5%E5%86%99%E7%AE%80%E5%8E%86%E7%9A%84-Spark-%E9%A1%B9%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.5.</span> <span class="nav-text">五、可直接写简历的 Spark 项目描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Spark Structured Streaming 完整版合集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80%E9%AB%98%E9%A2%91-10-%E9%A2%98%EF%BC%88%E6%9E%81%E7%AE%80%E6%A0%87%E5%87%86%E7%AD%94%E6%A1%88%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">一、基础高频 10 题（极简标准答案）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF-Spark-Structured-Streaming%EF%BC%9F"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 什么是 Spark Structured Streaming？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%BA%95%E5%B1%82%E6%98%AF%E5%BE%AE%E6%89%B9%E8%BF%98%E6%98%AF%E7%9C%9F%E6%B5%81%E5%BC%8F%EF%BC%9F"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. 底层是微批还是真流式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%92%8C%E8%80%81%E7%89%88-Spark-Streaming-%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.1.3.</span> <span class="nav-text">3. 和老版 Spark Streaming 区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%94%AF%E6%8C%81%E5%93%AA%E5%87%A0%E7%A7%8D%E6%97%B6%E9%97%B4%E8%AF%AD%E4%B9%89%EF%BC%9F"><span class="nav-number">2.1.4.</span> <span class="nav-text">4. 支持哪几种时间语义？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Trigger-%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F%E6%9C%89%E5%87%A0%E7%A7%8D%EF%BC%9F"><span class="nav-number">2.1.5.</span> <span class="nav-text">5. Trigger 触发方式有几种？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-Kafka-%E6%B6%88%E8%B4%B9-Exactly-Once%EF%BC%9F"><span class="nav-number">2.1.6.</span> <span class="nav-text">6. 如何实现 Kafka 消费 Exactly-Once？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Checkpoint-%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.1.7.</span> <span class="nav-text">7. Checkpoint 的作用是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E7%AA%97%E5%8F%A3%EF%BC%9F"><span class="nav-number">2.1.8.</span> <span class="nav-text">8. 支持哪些窗口？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E8%83%BD%E5%81%9A%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93%E5%90%97%EF%BC%9F"><span class="nav-number">2.1.9.</span> <span class="nav-text">9. 能做实时数仓吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-SSS-%E5%92%8C-Flink-%E6%80%8E%E4%B9%88%E9%80%89%E5%9E%8B%EF%BC%9F"><span class="nav-number">2.1.10.</span> <span class="nav-text">10. SSS 和 Flink 怎么选型？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Spark-Streaming-SSS-Flink-%E4%B8%89%E8%80%85%E5%AF%B9%E6%AF%94"><span class="nav-number">2.2.</span> <span class="nav-text">二、Spark Streaming &#x2F; SSS &#x2F; Flink 三者对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9E%8B%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="nav-number">2.2.1.</span> <span class="nav-text">核心模型一句话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94%E6%80%BB%E8%A1%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">对比总表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F%E6%8E%92%E5%BA%8F"><span class="nav-number">2.2.3.</span> <span class="nav-text">延迟排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E5%B8%B8%E8%A7%81%E5%9D%91-%E9%97%AE%E9%A2%98%E7%8E%B0%E8%B1%A1-%E5%8E%9F%E5%9B%A0-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">2.3.</span> <span class="nav-text">三、项目实战常见坑 &amp; 问题现象 + 原因 + 解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-1%EF%BC%9A%E5%BA%95%E5%B1%82%E5%BE%AE%E6%89%B9%E5%AF%BC%E8%87%B4%E5%BB%B6%E8%BF%9F%E9%99%8D%E4%B8%8D%E4%B8%8B%E5%8E%BB"><span class="nav-number">2.3.1.</span> <span class="nav-text">坑 1：底层微批导致延迟降不下去</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-2%EF%BC%9ACheckpoint-%E7%9B%AE%E5%BD%95%E6%8D%9F%E5%9D%8F%E3%80%81%E4%BB%BB%E5%8A%A1%E9%87%8D%E5%90%AF%E5%A4%B1%E8%B4%A5"><span class="nav-number">2.3.2.</span> <span class="nav-text">坑 2：Checkpoint 目录损坏、任务重启失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-3%EF%BC%9AKafka-%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9%E3%80%81%E8%90%BD%E5%9C%B0%E6%95%B0%E6%8D%AE%E9%87%8D%E5%A4%8D"><span class="nav-number">2.3.3.</span> <span class="nav-text">坑 3：Kafka 重复消费、落地数据重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-4%EF%BC%9A%E7%AA%97%E5%8F%A3%E8%AE%A1%E7%AE%97%E4%B8%8D%E5%87%86%E3%80%81%E4%B9%B1%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%AF%B9%E4%B8%8D%E4%B8%8A%E7%A6%BB%E7%BA%BF"><span class="nav-number">2.3.4.</span> <span class="nav-text">坑 4：窗口计算不准、乱序数据对不上离线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-5%EF%BC%9A%E7%8A%B6%E6%80%81%E6%8C%81%E7%BB%AD%E8%86%A8%E8%83%80%E3%80%81%E4%BB%BB%E5%8A%A1-OOM"><span class="nav-number">2.3.5.</span> <span class="nav-text">坑 5：状态持续膨胀、任务 OOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-6%EF%BC%9A%E8%BE%93%E5%87%BA%E5%A4%A7%E9%87%8F-HDFS-%E5%B0%8F%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.6.</span> <span class="nav-text">坑 6：输出大量 HDFS 小文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-7%EF%BC%9A%E4%BB%BB%E5%8A%A1%E8%87%AA%E5%8A%A8%E9%87%8D%E5%90%AF%E3%80%81%E6%89%B9%E6%AC%A1%E7%A7%AF%E5%8E%8B%E5%BB%B6%E8%BF%9F%E8%B5%B0%E9%AB%98"><span class="nav-number">2.3.7.</span> <span class="nav-text">坑 7：任务自动重启、批次积压延迟走高</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Structured-Streaming-%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E8%A6%81%E7%82%B9"><span class="nav-number">2.4.</span> <span class="nav-text">四、Structured Streaming 性能调优要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E9%9D%A2%E8%AF%95-30-%E7%A7%92%E5%8F%A3%E8%BF%B0%E6%80%BB%E7%BB%93%E7%89%88"><span class="nav-number">2.5.</span> <span class="nav-text">五、面试 30 秒口述总结版</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">282</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
