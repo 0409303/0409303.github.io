@@ -201,7 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -281,7 +281,7 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -379,7 +379,7 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -453,7 +453,7 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
             </span>
 
           
@@ -468,92 +468,6 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
 
       
           <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/helloxiaozhe/article/details/80363893">Hive下查看表占用空间大小的方法</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/sql/hive/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/sql/hive/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">hive常用函数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="常用">常用</h2>
-<h5 id="8位dt转10位">8位dt转10位</h5>
-<p><code>from_unixtime(unix_timestamp(t.dt,'yyyymmdd'),'yyyy-mm-dd')</code></p>
-<h5 id="8位减1小时">8位减1小时</h5>
-<p>dt格式2019120100<br>
-<code>from_unixtime(unix_timestamp(dt,'yyyyMMddHH') - 60*60, 'yyyy-MM-dd')</code></p>
-<h5 id="8位日期计算">8位日期计算</h5>
-<p><code>regexp_replace(date_sub(from_unixtime(unix_timestamp(t.dt,'yyyymmdd'),'yyyy-mm-dd'), 10), '-', '')</code></p>
-<h5 id="当前日期前一天">当前日期前一天</h5>
-<h5 id="保留2位小数">保留2位小数</h5>
-<p><code>round(123.4567, 2)</code></p>
-<h5 id="时间戳转换">时间戳转换</h5>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">hour</span>(from_unixtime(event_timestamp/<span class="number">1000</span>,<span class="string">&#x27;yyyy-MM-dd HH:mm:ss&#x27;</span>)) hour_time, <span class="keyword">count</span>(<span class="keyword">distinct</span> session_id)</span><br><span class="line"><span class="keyword">from</span> mart_eif_flow.bas_log_sdk_waimai_c <span class="keyword">where</span> dt=<span class="string">&#x27;20201217&#x27;</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">hour</span>(from_unixtime(event_timestamp/<span class="number">1000</span>,<span class="string">&#x27;yyyy-MM-dd HH:mm:ss&#x27;</span>)) <span class="keyword">order</span> <span class="keyword">by</span> hour_time</span><br></pre></td></tr></table></figure>
-<h3 id="计算">计算</h3>
-<h5 id="保留小数">保留小数</h5>
-<h2 id="字符串">字符串</h2>
-<h3 id="替换">替换</h3>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">regexp_replace(&#x27;abc/d&#x27;, &#x27;/&#x27;, &#x27;&#x27;)</span><br></pre></td></tr></table></figure>
-<h3 id="json">json</h3>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get_json_object(json_str, &#x27;$.csu_id&#x27;)</span><br><span class="line">// json_str可以标准的json字符串，也可以是包含转译符的字符串</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -597,7 +511,7 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -669,7 +583,7 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
             </span>
 
           
@@ -726,7 +640,7 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -800,7 +714,7 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -868,7 +782,7 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
             </span>
 
           
@@ -883,6 +797,74 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
 
       
           
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">特殊语法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="MYSQL中的COLLATE是什么？"><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1366841">MYSQL中的COLLATE是什么？</a></h5>
+<p>指定排序规则</p>
+
       
     </div>
 
