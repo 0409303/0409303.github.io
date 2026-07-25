@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/web/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/base/%E6%97%A5%E6%9C%9F%E7%9B%B8%E5%85%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/language/java/web/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">枚举类用法</a>
+            <a href="/2026/07/25/language/java/base/%E6%97%A5%E6%9C%9F%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">日期相关</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -209,7 +209,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
                 </span>
             </span>
 
@@ -224,10 +224,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="Connection-reset原因分析和解决方案">Connection reset原因分析和解决方案</h4>
-<p>一般引起这个问题的原因是服务器服务关闭。</p>
-<p>我遇到过一次问题是因为http端口填写错误。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liyantianmin/article/details/82505734">Connection reset原因分析和解决方案</a></p>
+          <h2 id="joda-time">joda.time</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String pattern =<span class="string">&quot;dd-MMM-yy hh.mm.ss aa&quot;</span>;</span><br><span class="line">DateTimeFormat.forPattern(pattern)</span><br></pre></td></tr></table></figure>
+<p>字符串补位</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;%02d&quot;</span>.format(currentTime.getMinuteOfHour)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -247,7 +247,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/scala/%E7%94%A8%E6%B3%95/Collection/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/base/%E6%9E%9A%E4%B8%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -261,7 +261,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/language/scala/%E7%94%A8%E6%B3%95/Collection/" class="post-title-link" itemprop="url">Collection</a>
+            <a href="/2026/07/25/language/java/base/%E6%9E%9A%E4%B8%BE/" class="post-title-link" itemprop="url">java枚举</a>
         </h2>
 
         <div class="post-meta">
@@ -271,7 +271,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,15 +279,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/scala/%E7%94%A8%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">用法</span></a>
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
                 </span>
             </span>
 
@@ -302,82 +294,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[toc]</p>
-<h1>待整理</h1>
-<h3 id="什么版本的scala-sdk-collection中包含breakOut">什么版本的scala sdk collection中包含breakOut</h3>
-<p><code>breakOut</code> 是 Scala 2.8 标准库 <code>scala.collection</code> 包中的一个方法<a target="_blank" rel="noopener" href="https://stackoverflow.com/posts/1715681/revisions">-3</a>，在 Scala 2.13 中被移除–。</p>
-<p>下面整理了 <code>breakOut</code> 的版本支持情况，并提供了从 2.13 开始的替代方案。</p>
-<hr>
-<h4 id="⏳-breakOut-的版本变迁">⏳ <code>breakOut</code> 的版本变迁</h4>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Scala 版本</th>
-<th style="text-align:left"><code>breakOut</code> 支持状态</th>
-<th style="text-align:left">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>2.8 至 2.12</strong></td>
-<td style="text-align:left">✅ <strong>可用</strong></td>
-<td style="text-align:left">核心功能，需要 <code>import scala.collection.breakOut</code><a target="_blank" rel="noopener" href="https://stackoverflow.com/posts/1715681/revisions">-3</a></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>2.13</strong></td>
-<td style="text-align:left">❌ <strong>已移除</strong></td>
-<td style="text-align:left">官方推荐使用 <code>.view</code> + <code>.to(Collection)</code> 组合替代-<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/68723881/conversion-of-breakout-use-iterator-or-view/68725937#68725937">-14</a></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>3.x</strong></td>
-<td style="text-align:left">❌ <strong>已移除</strong></td>
-<td style="text-align:left">无此方法，需使用替代方案</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h4 id="💡-breakOut-是什么？">💡 <code>breakOut</code> 是什么？</h4>
-<p><code>breakOut</code> 是一个基于 <code>CanBuildFrom</code> 机制的工具，作用是在集合类型转换时<strong>避免创建不必要的中间集合</strong>，从而提升性能并简化代码。</p>
-<p>例如，将 <code>List[String]</code> 直接转为 <code>Map[Int, String]</code>，原本需要生成中间 <code>List[(Int, String)]</code> 再调用 <code>.toMap</code>。使用 <code>breakOut</code> 可以一步完成：</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import scala.collection.breakOut</span><br><span class="line">val m: Map[Int, String] &#x3D; List(&quot;London&quot;, &quot;Paris&quot;).map(x &#x3D;&gt; (x.length, x))(breakOut)</span><br><span class="line">&#x2F;&#x2F; m: Map(6 -&gt; London, 5 -&gt; Paris)</span><br></pre></td></tr></table></figure>
-<p>在 2.8 至 2.12 版本中，这种方式有效避免了中间集合的开销，并让集合类型推断更为灵活<a target="_blank" rel="noopener" href="https://stackoverflow.com/posts/1715681/revisions">-3</a>。</p>
-<hr>
-<h4 id="🔁-从-2-13-开始的替代方案">🔁 从 2.13 开始的替代方案</h4>
-<p>从 2.13 起，<code>CanBuildFrom</code> 被 <code>BuildFrom</code> 替代，标准库推荐以下方式实现类似效果：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">替代方式</th>
-<th style="text-align:left">示例代码</th>
-<th style="text-align:left">特点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong><code>.view.map(...).to(...)</code></strong></td>
-<td style="text-align:left"><code>List(&quot;London&quot;, &quot;Paris&quot;).view.map(x =&gt; (x.length, x)).to(Map)</code></td>
-<td style="text-align:left"><strong>官方推荐</strong>，懒加载中间步骤，清晰高效</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong><code>.iterator.map(...).to(...)</code></strong></td>
-<td style="text-align:left"><code>List(&quot;London&quot;, &quot;Paris&quot;).iterator.map(x =&gt; (x.length, x)).to(Map)</code></td>
-<td style="text-align:left">与视图类似，但迭代器不可重用</td>
-</tr>
-</tbody>
-</table>
-<p>两种方式都能避免创建中间集合，性能与原先的 <code>breakOut</code> 相当。其中视图可以被多次重用，而迭代器在使用一次后就失效了<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/68723881/conversion-of-breakout-use-iterator-or-view/68725937#68725937">-14</a>。</p>
-<blockquote>
-<p>对于需要一步完成类型转换的场景，优先使用 <strong><code>.view.map(...).to(...)</code></strong> 即可。</p>
-</blockquote>
-<hr>
-<h4 id="💎-总结">💎 总结</h4>
-<ul>
-<li><strong>版本支持</strong>：<code>breakOut</code> 在 <strong>Scala 2.8 ~ 2.12</strong> 中可用，2.13 起被移除。</li>
-<li><strong>替代方案</strong>：升级到 2.13+ 后，改用 <strong><code>.view.map(...).to(Collection)</code></strong>。</li>
-<li><strong>核心目标</strong>：避免中间集合，提升转换性能与代码可读性。</li>
-</ul>
+          <h3 id="参考资料">参考资料</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_43401436/article/details/104130410">Java枚举类——valueOf()的用法</a></p>
 
       
     </div>
@@ -397,7 +315,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/scala/%E7%94%A8%E6%B3%95/Trait/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/base/%E6%B3%9B%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -411,7 +329,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/language/scala/%E7%94%A8%E6%B3%95/Trait/" class="post-title-link" itemprop="url">Trait</a>
+            <a href="/2026/07/25/language/java/base/%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">java泛型</a>
         </h2>
 
         <div class="post-meta">
@@ -421,7 +339,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -429,15 +347,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/scala/%E7%94%A8%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">用法</span></a>
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
                 </span>
             </span>
 
@@ -452,77 +362,152 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[toc]</p>
-<h1>Solutions</h1>
-<h2 id="如果想在scala里面保存一个类似于模板的类，里面规定了继承某个trait需要实现的方法，但是这个方法的返回值和参数是不定的，有什么方式实现吗">如果想在scala里面保存一个类似于模板的类，里面规定了继承某个trait需要实现的方法，但是这个方法的返回值和参数是不定的，有什么方式实现吗</h2>
-<p>在 Scala 中，你可以利用<strong>泛型（type parameters）</strong> 或<strong>抽象类型成员（abstract type members）</strong> 来定义一个“模板” trait，其中方法的参数类型和返回值类型可以留给子类去具体指定。这两种方式都能实现你的需求，下面分别介绍。</p>
-<hr>
-<h3 id="方案一：泛型-trait（类型参数）">方案一：泛型 trait（类型参数）</h3>
-<p>这是最直接的方式。在 trait 上声明类型参数，然后在抽象方法中使用这些参数。</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 定义一个模板 trait，其中 F 是参数类型，R 是返回值类型</span><br><span class="line">trait Processor[F, R] &#123;</span><br><span class="line">  def process(input: F): R</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 具体实现：处理 String 返回 Int</span><br><span class="line">class StringLengthProcessor extends Processor[String, Int] &#123;</span><br><span class="line">  override def process(input: String): Int &#x3D; input.length</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 具体实现：处理 (Int, Int) 返回 Boolean</span><br><span class="line">class SumEvenProcessor extends Processor[(Int, Int), Boolean] &#123;</span><br><span class="line">  override def process(input: (Int, Int)): Boolean &#x3D; (input._1 + input._2) % 2 &#x3D;&#x3D; 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>优点</strong>：清晰、类型安全，子类只需指定具体类型。<br>
-<strong>缺点</strong>：如果多个方法共享相同的类型参数，所有方法必须统一使用这些参数。如果你希望不同方法有不同的参数/返回类型，可以为每个方法单独定义类型参数。</p>
-<hr>
-<h3 id="方案二：抽象类型成员（Abstract-Type-Members）">方案二：抽象类型成员（Abstract Type Members）</h3>
-<p>将类型参数内化为 trait 的抽象成员，子类通过 <code>type</code> 关键字来具体化。</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">trait Processor &#123;</span><br><span class="line">  type Input</span><br><span class="line">  type Output</span><br><span class="line">  def process(input: Input): Output</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 子类实现</span><br><span class="line">class StringLengthProcessor extends Processor &#123;</span><br><span class="line">  override type Input &#x3D; String</span><br><span class="line">  override type Output &#x3D; Int</span><br><span class="line">  override def process(input: Input): Output &#x3D; input.length</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 另一种实现</span><br><span class="line">class SumEvenProcessor extends Processor &#123;</span><br><span class="line">  override type Input &#x3D; (Int, Int)</span><br><span class="line">  override type Output &#x3D; Boolean</span><br><span class="line">  override def process(input: Input): Output &#x3D; (input._1 + input._2) % 2 &#x3D;&#x3D; 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>优点</strong>：有时更符合直觉，尤其是当类型与类紧密相关时。<br>
-<strong>缺点</strong>：在外部使用抽象类型成员时，类型推断可能不如泛型方便（需要使用 <code>#</code> 投影或路径依赖类型）。</p>
-<hr>
-<h3 id="方案三：高阶类型（Higher-Kinded-Types）——-适用于参数化容器">方案三：高阶类型（Higher-Kinded Types）—— 适用于参数化容器</h3>
-<p>如果你的方法需要接收一个类型构造器（例如 <code>List[_]</code> 或 <code>Future[_]</code>），可以用高阶类型。</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">trait Wrapper[F[_]] &#123;</span><br><span class="line">  def wrap[A](value: A): F[A]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ListWrapper extends Wrapper[List] &#123;</span><br><span class="line">  override def wrap[A](value: A): List[A] &#x3D; List(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="方案四：使用元组或-HList-处理不定数量的参数">方案四：使用元组或 HList 处理不定数量的参数</h3>
-<p>如果“参数是不定的”指的是<strong>参数个数</strong>不定（而非类型不定），可以用元组（固定个数但类型可不同）或 HList（如 Shapeless）。元组是最简单的方案：</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">trait Processor[Args, R] &#123;</span><br><span class="line">  def process(args: Args): R</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 处理两个参数：Int 和 String，返回 Boolean</span><br><span class="line">class Example extends Processor[(Int, String), Boolean] &#123;</span><br><span class="line">  override def process(args: (Int, String)): Boolean &#x3D; args._1 &gt; 0 &amp;&amp; args._2.nonEmpty</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果需要真正的<strong>变长参数</strong>（varargs），可以定义方法参数为 <code>Seq[A]</code>：</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">trait SumProcessor[A, R] &#123;</span><br><span class="line">  def process(args: A*): R   &#x2F;&#x2F; 注意：Scala 中的 varargs 实际上是 Seq[A]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但注意：<code>A*</code> 在 trait 中定义时，实现类必须同样使用 <code>A*</code>，这可能会带来一些限制。</p>
-<hr>
-<h3 id="推荐方案总结">推荐方案总结</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">需求</th>
-<th style="text-align:left">推荐方案</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">单个方法，参数和返回值类型可变</td>
-<td style="text-align:left"><strong>泛型 trait</strong>（方案一）</td>
-</tr>
-<tr>
-<td style="text-align:left">多个方法共享同一组类型</td>
-<td style="text-align:left"><strong>泛型 trait</strong> 或 <strong>抽象类型成员</strong></td>
-</tr>
-<tr>
-<td style="text-align:left">类型与类实例绑定（路径依赖）</td>
-<td style="text-align:left"><strong>抽象类型成员</strong>（方案二）</td>
-</tr>
-<tr>
-<td style="text-align:left">参数个数不定但类型相同</td>
-<td style="text-align:left"><code>Seq[A]</code> 或 <code>A*</code></td>
-</tr>
-<tr>
-<td style="text-align:left">参数个数不定且类型不同</td>
-<td style="text-align:left"><strong>元组</strong>（TupleX）或 <strong>Shapeless HList</strong></td>
-</tr>
-</tbody>
-</table>
-<p>绝大多数场景下，<strong>方案一（泛型 trait）</strong> 足够简洁且强大，建议优先使用。</p>
-<p>如果你需要更具体的代码示例（比如结合隐式参数、上下界等），可以补充说明你的实际应用场景，我会给出更贴合的例子。</p>
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/coprince/p/8603492.html">java 泛型详解-绝对是对泛型方法讲解最详细的，没有之一</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xy-ouyang/p/10539999.html">泛型（一）泛型类和泛型方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lihaoyang/p/7105581.html">JAVA泛型—通配符,泛型嵌套</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/licqs/p/4608871.html">Java获取泛型的类型Class</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/minikobe/p/11547220.html">java泛型通配符详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_29595517/article/details/113693350">关于通配泛型类型有几种_泛型类型的子类及通配符的使用</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/base/%E8%BF%90%E7%AE%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/language/java/base/%E8%BF%90%E7%AE%97%E7%AC%A6/" class="post-title-link" itemprop="url">java运算符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41050155/article/details/79725555">java位运算符详解</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/base/%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/language/java/base/%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">java泛型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="打印自定义对象数组内容">打印自定义对象数组内容</h4>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012491783/article/details/78957168">java中list和array打印对象的方法</a></p>
+<ol>
+<li>重写自定义类toString方法</li>
+<li>用google开源的lombok，加注释@Data，他自动帮你重写了toString方法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.toString(array);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -566,7 +551,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -615,6 +600,76 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/component/log4j/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/language/java/component/log4j/" class="post-title-link" itemprop="url">log4j配置及变量</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">java-组件</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/caolaosanahnu/article/details/7366555">log4j配置文件中使用变量</a></p>
+<p>原理：运行时，在程序中将变量添加到系统变量中</p>
+<h3 id="输出格式控制">输出格式控制</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guoquanyou/article/details/5689652">Log4j输出格式控制–log4j的PatternLayout参数含义</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/debug/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -639,7 +694,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -683,6 +738,75 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/component/%E7%AC%AC%E4%B8%89%E6%96%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/language/java/component/%E7%AC%AC%E4%B8%89%E6%96%B9/" class="post-title-link" itemprop="url">第三方依赖</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">java-组件</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-typesafe-config">1. typesafe.config</h2>
+<p>管理配置信息，优点是：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010039929/article/details/76215687">JAVA 配置管理库 typesafe.config</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/interview/java%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -707,7 +831,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -732,270 +856,6 @@
       
           <h4 id="java是值传递">java是值传递</h4>
 <p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/31203609">https://www.zhihu.com/question/31203609</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/debug/%E6%8A%80%E5%B7%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/language/java/debug/%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">技巧</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-debug/" itemprop="url" rel="index"><span itemprop="name">java-debug</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/slankka/p/13590451.html">SpringBoot启动后直接退出Process finished with exit code 1</a></p>
-<p>一般是有错误，但输出并不是console，可以修改log的输出，也可以用try catch查看异常</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/interview/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/language/java/interview/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/jvm/%E5%8F%82%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/language/java/jvm/%E5%8F%82%E6%95%B0/" class="post-title-link" itemprop="url">参数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-jvm/" itemprop="url" rel="index"><span itemprop="name">java-jvm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id></h2>
-<p>JVM_EXT_ARGS=“-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8418”</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/mult_thread/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/language/java/mult_thread/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">多线程参考资料</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">java-多线程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="volatile">volatile</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33129875/article/details/93207370">volatile可见性的验证,system.out.println和sleep对可见性的影响</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31442743/article/details/107509580">volatile 、System.out.println() sleep()使用的有趣现象</a></p>
-<p>threadlocal变量在线程池中使用</p>
-<p><a target="_blank" rel="noopener" href="https://dzone.com/articles/how-to-read-a-thread-dump">How to Read a Thread Dump</a></p>
 
       
     </div>

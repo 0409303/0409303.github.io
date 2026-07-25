@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/sql/mysql/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/spark/%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/sql/mysql/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">问题汇总</a>
+            <a href="/2026/07/25/spark/%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">参数优化</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -209,7 +209,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
+                  <a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a>
                 </span>
             </span>
 
@@ -224,17 +224,310 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="1-时间类型字段问题">1. 时间类型字段问题</h3>
-<h4 id="1-1-时区问题">1.1 时区问题</h4>
-<p>现象一：写入时间在mysql中查看，与实际时间相差几个小时，程序读出来又是正常的</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/PrayzzZ/p/10183470.html">关于MySQL存入的时间和取出时间不一致的解决</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/iris_xuting/article/details/84886483">MySQL数据时区问题，及datetime和timestamp类型存储的差异</a></p>
-<p><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_a72ec20c0101jgxd.html">Time Zone:GMT，UTC，DST，CST</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gaogao67/p/10686515.html">MySQL Config–参数system_time_zone和参数time_zone</a></p>
-<p>查询系统分区：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">global</span> <span class="keyword">variables</span> <span class="keyword">like</span><span class="string">&#x27;%time_zone%&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>解决方案：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc:mysql:&#x2F;&#x2F;10.48.204.231:5002&#x2F;waimai_hubble_analysis_test?useUnicode&#x3D;true&amp;useSSL&#x3D;false&amp;serverTimezone&#x3D;GMT%2B8</span><br></pre></td></tr></table></figure>
+          <h2 id="触发spark合并小文件的阈值-1M">触发spark合并小文件的阈值(1M)</h2>
+<p>SET spark.sql.mergeSmallFileSize=104857600;</p>
+<h2 id="spark-shuffle默认分区数">spark shuffle默认分区数</h2>
+<p>set spark.sql.shuffle.partitions=3000;<br>
+set spark.dynamicAllocation.enabled=true;<br>
+set spark.dynamicAllocation.minExecutors=100;<br>
+set spark.dynamicAllocation.maxExecutors=1000;<br>
+set spark.speculation.multiplier=1.5;<br>
+set spark.speculation.quantile=0.85;<br>
+set spark.driver.memory=8g;<br>
+set spark.executor.memory=13G;</p>
+<h3 id="2-详细内容">2 详细内容</h3>
+<h4 id="2-1-参数">2.1 参数</h4>
+<h5 id="2-1-1-资源参数">2.1.1 资源参数</h5>
+<table>
+<thead>
+<tr>
+<th>托管平台参数名</th>
+<th>xt平台参数</th>
+<th>含义</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>num-executors</td>
+<td>set spark.dynamicAllocation.enabled=true;set spark.dynamicAllocation.minExecutors=10;set spark.dynamicAllocation.maxExecutors=200;</td>
+<td>决定作业会向yarn申请多少executor，如果设置过少会导致并行度不够，过多会导致浪费资源或pending</td>
+<td>根据数据量，以及设置的并行度（最大最慢的stage的并行度）和executor-cores来决定设置，建议根据瓶颈的stage的并行度来决定申请资源，一般使并行度=(num-executors * executor-cores)*(2~3)</td>
+</tr>
+<tr>
+<td>executor-memory</td>
+<td>set spark.executor.memory=2g;</td>
+<td>缓存数据、代码执行的堆内存以及JVM运行时需要的内存，堆内+对外=一个container内存大小。spark任务并不是内存申请越大执行越快，而是合理利用内存之后才会变快。</td>
+<td>根据处理的数据量来申请，或者debug过程中，oom的情况，建议调大参数，考虑到队列资源情况，可以1G为粒度向上加，直至解决问题</td>
+</tr>
+<tr>
+<td>set spark.yarn.executor.memoryOverhead=1024;</td>
+<td>堆外内存，直接向系统申请，如数据传输时的netty等。</td>
+<td>如果shuffle数据量比较大，或者排序逻辑很复杂时可以调大参数</td>
+<td></td>
+</tr>
+<tr>
+<td>executor-cores</td>
+<td>set spark.executor.cores=5;</td>
+<td>决定了每个executor进程并行执行task线程的能力。因为每个cu同一时间只能执行一个task线程，与并行度相关很大。</td>
+<td>根据 并行度=(num-executors * executor-cores)*(2~3)</td>
+</tr>
+<tr>
+<td>driver-memory</td>
+<td>set spark.driver.memory=4g;</td>
+<td>driver的内存，如果有collect操作，或者在driver有复杂计算，或者executor num和task num很大可以多申请些。</td>
+<td>一般4g足够了，如果executor和并行度很大，建议设置高一些，避免oom</td>
+</tr>
+<tr>
+<td>spark.memory.fraction</td>
+<td>set spark.memory.fraction=0.6</td>
+<td>storage和execution相加占JVM内存占比，默认0.6，剩余0.4用于用户数据结构以及spark元数据（整体内存还有约300M系统预留）</td>
+<td>建议根据缓存数据，自定义数据结构调整比例。</td>
+</tr>
+<tr>
+<td>spark.memory.storageFraction</td>
+<td>set spark.memory.storageFraction=0.5</td>
+<td>storage和execution内存比例，由于spark2.0后这部分内存动态占用机制，所以这块基本可以忽略</td>
+<td>建议忽略</td>
+</tr>
+<tr>
+<td>spark.network.timeout</td>
+<td>set spark.network.timeout=480s;</td>
+<td>由网络或者gc引起,worker或executor没有接收到executor或task的心跳反馈。</td>
+<td>适当提高可以提升稳定性，shuffle很重（shuffle read，write数据量很大）的场景下可以提升点</td>
+</tr>
+<tr>
+<td>spark.task.maxFailures</td>
+<td>set spark.task.maxFailures=6;</td>
+<td>单个task失败次数上限，触发后job会失败</td>
+<td>适当提高可以提升稳定性，一般不需要调整</td>
+</tr>
+<tr>
+<td>spark.speculation</td>
+<td>set spark.speculation=true</td>
+<td>推测执行的开关, 默认是true，推测执行的各个参数调整都会使得任务处于多申请资源，无法避免慢节点的情况，因此调整需要尽量保证测试效果。</td>
+<td>因为是分布式计算引擎，task分散在各个服务器上运行，而每个服务器又承载不止一个任务，因为大体量的集群下，慢节点（磁盘io满，网络io满，cpu满）这种情况几乎是无法避免的，因此出现个别task在慢节点执行时，需要推测执行（将相同的task分发到别的节点去执行，避免慢节点拖垮任务）</td>
+</tr>
+<tr>
+<td>spark.speculation.interval</td>
+<td>set spark.speculation.interval=1000ms</td>
+<td>检查task是否需要推测执行的时间间隔, 默认1000ms</td>
+<td></td>
+</tr>
+<tr>
+<td>spark.speculation.multiplier</td>
+<td>set spark.speculation.multiplier=3</td>
+<td>当task的时间超过已完成task执行时间中位数的几倍后, 才对这个task开启推测执行, 默认是3倍</td>
+<td>谨慎调整，如果任务平均task时间都很快，且任务很重要，可以适当调低这个值，更快的发起推测执行，尽量避免慢节点</td>
+</tr>
+<tr>
+<td>spark.speculation.quantile</td>
+<td>set spark.speculation.quantile=0.99</td>
+<td>当一个stage中有多少task已经完成后才开启推测执行, 默认0.75(75%)</td>
+<td>谨慎调整，如果任务平均task时间都很快，且任务很重要，可以适当调低这个值，更大范围的发起推测执行，尽量避免慢节点</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="2-2-2-读写文件">2.2.2 读写文件</h5>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>set hive.exec.orc.split.strategy=HYBRID;</td>
+<td>读取ORC表时生成split的策略//BI策略以文件为粒度进行split划分；//ETL策略会将文件进行切分，多个stripe组成一个split；//HYBRID策略为：当文件的平均大小大于hadoop最大split值（默认256 * 1024 * 1024）时使用ETL策略，否则使用BI策略。//对于一些较大的ORC表，可能其footer较大，ETL策略可能会导致其从hdfs拉取大量的数据来切分split，甚至会导致driver端OOM，因此这类表的读取建议使用BI策略。//对于一些较小的尤其有数据倾斜的表（这里的数据倾斜指大量stripe存储于少数文件中），建议使用ETL策略。//不想麻烦的可以直接使用HYBRID策略//平台默认应该是HYBRID，个人感觉一般情况下不需要调整</td>
+<td>默认值即可，但是如果读取文件数特别大，大小也特别大时需要考虑切分策略</td>
+</tr>
+<tr>
+<td>set spark.hadoop.mapreduce.input.fileinputformat.split.maxsize=134217728set spark.hadoop.mapreduce.input.fileinputformat.split.minsize=134217728</td>
+<td>如果使用ETL策略读取orc文件，设置以上参数可以完成对小文件的合并效果~</td>
+<td></td>
+</tr>
+<tr>
+<td>set spark.hadoopRDD.targetBytesInPartition=134217728;</td>
+<td>//Spark在读取hive表时，默认会为每个文件创建一个task，如果一个SQL没有shuffle类型的算子，每个task执行完都会产生一个文件写回HDFS，这样就潜在存在小文件问题。//该参数可以将多个文件放到一个task中处理，默认为33554432，即如果一个文件和另一个文件大小之和小于32M，就会被放到一个task钟处理。适当提高该值，可以降低调度压力，避免无shuffle作业产生</td>
+<td>读取文件慢的时候，可以调小</td>
+</tr>
+<tr>
+<td>set spark.sql.mergeSmallFileSize=134217728;</td>
+<td>//如果最终写入分区目录下文件平均大小小于参数，会再启动一个map only的stage做合并，强烈建议设置该参数</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="2-2-3-shuffle参数">2.2.3 shuffle参数</h5>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>spark-sql</th>
+<th>含义</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>spark.sql.shuffle.partitions</td>
+<td>set spark.sql.shuffle.partitions=800;</td>
+<td>每个stage的默认task数量，也就是默认并行度。在shuffle操作时从mapper端写出的partition个数，平台默认2000</td>
+<td>可以根据申请的executor和cores数来决定，建议代码中会对瓶颈的stage对rdd做repartition操作，</td>
+</tr>
+<tr>
+<td>spark.sql.adaptive.enabled</td>
+<td>set spark.sql.adaptive.enabled=true</td>
+<td>是否开启调整partition功能，如果开启，spark.sql.shuffle.partitions设置的partition可能会被合并到一个reducer里运行，</td>
+<td>类似于repartition操作只不过是自动化的</td>
+</tr>
+<tr>
+<td>spark.sql.adaptive.shuffle.targetPostShuffleInputSize</td>
+<td>set spark.sql.adaptive.shuffle.targetPostShuffleInputSize</td>
+<td>开启spark.sql.adaptive.enabled后，两个partition的和低于该阈值会合并到一个reducer</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>spark.sql.adaptive.minNumPostShufflePartitions</td>
+<td>set spark.sql.adaptive.minNumPostShufflePartitions</td>
+<td>开启spark.sql.adaptive.enabled后，最小的分区数</td>
+<td>同上</td>
+</tr>
+<tr>
+<td></td>
+<td>set spark.hadoop.mapreduce.input.fileinputformat.split.maxsize</td>
+<td>当几个stripe的大小大于该值时，会合并到一个task中处理</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>spark.shuffle.compress</td>
+<td>set spark.shuffle.compress=true;</td>
+<td>shuffle过程是否压缩</td>
+<td>建议开启</td>
+</tr>
+<tr>
+<td>spark.io.compression.codec</td>
+<td>set spark.io.compression.codec=org.apache.spark.io.SnappyCompressionCodec;</td>
+<td>压缩的编码格式</td>
+<td>建议默认值即可，这块对性能提升影响不是很大</td>
+</tr>
+<tr>
+<td>spark.io.compression.snappy.block.size</td>
+<td>set spark.io.compression.snappy.block.size=65536;</td>
+<td>压缩时每个block的size</td>
+<td>建议默认值即可，这块对性能提升影响不是很大</td>
+</tr>
+<tr>
+<td>spark.shuffle.manager=rss;</td>
+<td>set spark.shuffle.manager=rss;</td>
+<td>使用平台的rss服务，用于超大shuffle作业的性能优化</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="2-2-3-其他">2.2.3 其他</h5>
+<h4 id="2-2-日志界面介绍与问题定位">2.2 日志界面介绍与问题定位</h4>
+<p><a target="_blank" rel="noopener" href="http://spark-his.data.sankuai.com/history/application_1600078095841_2155359/1/stages/">http://spark-his.data.sankuai.com/history/application_1600078095841_2155359/1/stages/</a></p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>介绍</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>job</td>
+<td>作业的基本job信息</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Stages</strong></td>
+<td>作业划分各个stage的完成情况与并行度，以及task的执行情况</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>缓存的数据情况，比如cache操作</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Environment</strong></td>
+<td>环境变量以及参数的设置</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Executors</strong></td>
+<td>申请到的executor与task执行情况，日志，driver日志，以及堆栈</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SQL</td>
+<td>任务的dag图，以及Logical Plan ，Physical Plan等</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Debug</td>
+<td>任务资源申请的metrics</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-3-问题解决思路">2.3 问题解决思路</h4>
+<p><strong>ETL的优化尽量按照 分析日志  ----&gt; 找到问题点 ----&gt; 思考如何解决问题点 的模式进行，解决瓶颈问题需要靠设置参数，改部分逻辑联动进行，才能得到最大收益，因此一定要找到瓶颈问题对症下药。</strong></p>
+<p>任务优化举例：<a target="_blank" rel="noopener" href="https://km.sankuai.com/page/469785434">https://km.sankuai.com/page/469785434</a></p>
+<h5 id="2-3-1-oom">2.3.1 oom</h5>
+<p>内存不足需要看任务执行到哪个stage，对应sql的哪块逻辑，是否有数据倾斜。</p>
+<p>调整的话调大spark.executor.memory一般都可以解决。</p>
+<h5 id="2-3-2-数据倾斜">2.3.2 数据倾斜</h5>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/150274845">https://km.sankuai.com/page/150274845</a></p>
+<h5 id="2-3-3-资源不足">2.3.3 资源不足</h5>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/345269968">https://km.sankuai.com/page/345269968</a></p>
+<h3 id="3-一些开发上的建议">3 一些开发上的建议</h3>
+<p>ETL：</p>
+<p>尽量根据作业处理数据量合理设置 至少是（set spark.dynamicAllocation.maxExecutors=200; set spark.executor.memory=2g; set spark.executor.cores=5; set spark.sql.shuffle.partitions=800;）这四个参数；</p>
+<p>读取hive表时，尽量加上分区的限制，无论是左表还是右表；</p>
+<p>关联时，小表写在右边，尽量对小表进行cache处理；</p>
+<p>关联时，尽量把右表的限制条件写在子查询里；</p>
+<p>关联时，尽量避免笛卡尔积，实在无法避免的情况下，请做好分区扩张（调大spark.sql.shuffle.partitiions）；</p>
+<p>对于sql中多次使用的数据，尽量做cache处理；</p>
+<p>使用grouping set的时，尽量做到输入最小的数据，最少的字段，尽可能通过设计数据结构避免count distinct。</p>
+<p>RDD：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">1，避免创建重复的rdd</span><br><span class="line">避免以下操作</span><br><span class="line">val rdd1 &#x3D; sqlContext.sql(&quot;select A.a,A.b from A&quot;).rdd</span><br><span class="line">rdd1.map()</span><br><span class="line">val rdd2 &#x3D; sqlContext.sql(&quot;select A.a,A.b from A&quot;).rdd</span><br><span class="line">rdd2.reduce()</span><br><span class="line">2，尽量复用同一个rdd</span><br><span class="line">val rdd1 &#x3D; sqlContext.sql(&quot;select A.a,A.b from A&quot;).rdd</span><br><span class="line">rdd1.map(_._1).map(...)...</span><br><span class="line">rdd1.filter(_._1 &gt; 5).map(...)...</span><br><span class="line">避免以下操作</span><br><span class="line">val rdd2 &#x3D; sqlContext.sql(&quot;select A.a,A.b from A where A.a &gt; 5&quot;).rdd.map(...)</span><br><span class="line">val rdd2 &#x3D; rdd1.map(_._1)</span><br><span class="line">rdd2.map(...)</span><br><span class="line">3，对多次使用的rdd，尽量进行持久化</span><br><span class="line">rdd.persist(storageLevel)</span><br><span class="line">4，尽量避免shuffle算子，如无法避免，使用map端预聚合的shuffle算子</span><br><span class="line">使用reduceByKey，aggregateByKey 替换 groupByKey</span><br><span class="line">5，使用高性能算子</span><br><span class="line">使用mapPartition代替map：</span><br><span class="line">使用mapPartitions时，函数会一次接受一个partition的数据中计算，性能会高。</span><br><span class="line">使用foreachPartitions代替foreach：</span><br><span class="line">原理类似mapPartitions，在批量插入数据（mysql等）时优势明显，因为避免了每条数据都调用数据库连接。</span><br><span class="line">rdd在filter后根据过滤数据量做coalesce&#x2F;repartition：</span><br><span class="line">6，大变量用广播</span><br><span class="line">val map &#x3D; Map(1 -&gt; &quot;a&quot;)</span><br><span class="line">val mapBc &#x3D; sc.broadcast(map)</span><br><span class="line">避免直接在map或reduce算子中使用driver声明的大变量</span><br></pre></td></tr></table></figure>
+<h3 id="4-附录">4 附录</h3>
+<p>其实平台已经对spark文档做过很详细的整理了，这里附一些链接，希望能帮到大家，日常大家在优化过程中有问题也可以找zhaoxu05或者duntianlun，我们一起讨论，共同解决问题，共同学习：</p>
+<p>总目录：  <a target="_blank" rel="noopener" href="https://km.sankuai.com/page/69786825">https://km.sankuai.com/page/69786825</a></p>
+<p>Spark UI ： <a target="_blank" rel="noopener" href="https://km.sankuai.com/page/237124654">https://km.sankuai.com/page/237124654</a></p>
+<p>常见问题：<a target="_blank" rel="noopener" href="https://km.sankuai.com/page/50309540">https://km.sankuai.com/page/50309540</a></p>
+<p>待整理config</p>
+<ol>
+<li>spark.sql.shuffle.partitions</li>
+</ol>
 
       
     </div>
@@ -254,7 +547,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/system/linux/%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/spark/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -268,7 +561,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/system/linux/%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">命令</a>
+            <a href="/2026/07/25/spark/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">安装与配置</a>
         </h2>
 
         <div class="post-meta">
@@ -278,7 +571,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -286,7 +579,75 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system-linux/" itemprop="url" rel="index"><span itemprop="name">system-linux</span></a>
+                  <a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="windows">windows</h2>
+<p><a target="_blank" rel="noopener" href="https://yxnchen.github.io/technique/Windows%E5%B9%B3%E5%8F%B0%E4%B8%8B%E5%8D%95%E6%9C%BASpark%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">https://yxnchen.github.io/technique/Windows平台下单机Spark环境搭建/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/spark/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/spark/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a>
                 </span>
             </span>
 
@@ -302,24 +663,64 @@
 
       
           <p>[toc]</p>
-<h2 id="find">find</h2>
-<h2 id="grep">grep</h2>
-<p><a target="_blank" rel="noopener" href="https://www.huaweicloud.com/articles/ea6b3b0030ff441a87033810832c4440.html">linux使用find命令和grep命令查找文件和文件内容</a></p>
-<h2 id="awk">awk</h2>
-<h2 id="curl">curl</h2>
-<p>如果有特殊字符，导致解析失败</p>
+<h2 id="总结">总结</h2>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shun7man/p/12736702.html">大数据基础—Spark整体复习</a></p>
+<h2 id="sparkUI">sparkUI</h2>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/237242009">Spark UI (1) - Jobs页面</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1582307">Spark Web UI 监控详解</a></p>
+<h2 id="sparkSQL">sparkSQL</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78804934">spark sql多维分析优化——细节是魔鬼</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78266517">从一个sql引发的hive谓词下推的全面复盘及源码分析(上)</a></p>
+<h2 id="优化">优化</h2>
+<p><a target="_blank" rel="noopener" href="https://www.codercto.com/a/66295.html">spark执行map-join优化</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wbh1000/p/9827344.html">使用Spark进行搜狗日志分析实例——map join的使用</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/77614511">记录一次spark sql的优化过程</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/79737848">spark sql多维分析优化——提高读取文件的并行度</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zyzdisciple/p/12198182.html">SparkConfiguration</a></p>
+<p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2016/05/12/spark-tuning-pro.html">Spark性能优化指南——高级篇</a></p>
+<h2 id="Streaming">Streaming</h2>
+<p><a target="_blank" rel="noopener" href="https://jaceklaskowski.gitbooks.io/spark-structured-streaming/content/spark-sql-streaming-join.html">Streaming Join</a></p>
+<p><a target="_blank" rel="noopener" href="https://databricks.com/blog/2018/03/13/introducing-stream-stream-joins-in-apache-spark-2-3.html">Introducing Stream-Stream Joins in Apache Spark 2.3</a></p>
+<h2 id="架构">架构</h2>
+<p><a target="_blank" rel="noopener" href="https://spark.apache.org/docs/latest/running-on-yarn.html">Running Spark on YARN</a></p>
+<p><a target="_blank" rel="noopener" href="https://spark.apache.org/docs/latest/job-scheduling.html">Job Scheduling</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zpf336/article/details/102820745">Spark 如何并行执行多个job</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.51cto.com/davidwang456/3084991">Task如何共享变量</a></p>
+<h2 id="解决方案">解决方案</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/anbang713/article/details/82858745">Spark项目实战-数据倾斜解决方案之将reduce join转换为map join</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/37132559/add-jars-to-a-spark-job-spark-submit">Add jars to a Spark Job - spark-submit</a></p>
+<p>spark3 jar加载顺序</p>
+<p>use batch or streaming</p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/57168267/5-minutes-spark-batch-job-vs-streaming-job">5 Minutes Spark Batch Job vs Streaming Job</a></p>
+<h2 id="常见错误汇总">常见错误汇总</h2>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Gxiaobai/p/11166986.html">Container xxx is running beyond physical memory limits</a></p>
+<p>spark读文件</p>
+<p><a target="_blank" rel="noopener" href="http://www.waitingfy.com/archives/4325">http://www.waitingfy.com/archives/4325</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.waitingfy.com/archives/4342">http://www.waitingfy.com/archives/4342</a></p>
+<p>读文件tips：</p>
 <ol>
-<li>
-<p>用单引号引起来，这样会原封不动的使用，而不会尝试去解析</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -k -v -X POST &quot;https:&#x2F;&#x2F;xxx.net&#x2F;livy&#x2F;batches&quot; -u &#39;admin:xxx!QAZ&#39; -H &quot;Content-Type: application&#x2F;json&quot; -H &quot;X-Requested-By: admin&quot; -d &#39;&#123;&quot;file&quot;:&quot;&#x2F;users&#x2F;jingqicao&#x2F;sparkSubmission&#x2F;SAMStreaming&#x2F;ver-01&#x2F;bin&#x2F;SAM-1.0-SNAPSHOT.jar&quot;, &quot;driverMemory&quot;: &quot;30G&quot;, &quot;driverCores&quot;: 4, &quot;executorCores&quot;: 14, &quot;executorMemory&quot;: &quot;98G&quot;, &quot;numExecutors&quot;: 256, &quot;name&quot;: &quot;SAMStreaming-ver01-1020-02&quot;, &quot;className&quot;:&quot;com.microsoft.sam.SAMJobRunner&quot;, &quot;args&quot;:[&quot;ver-01-1020-02&quot;,&quot;&#x2F;users&#x2F;jingqicao&#x2F;sparkSubmission&#x2F;SAMStreaming&#x2F;ver-01&#x2F;bin&#x2F;SAMJob_4HD.conf&quot;]&#125;&#39;</span><br></pre></td></tr></table></figure>
-<p>nautilus</p>
-</li>
+<li>可以写路径&quot;path/xxx/*&quot; 来读取全部的文件</li>
 </ol>
-<h2 id="ps">ps</h2>
-<h3 id="查看当前进程">查看当前进程</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps aux</span><br><span class="line">ps -ef</span><br></pre></td></tr></table></figure>
-<h3 id="查看进程父子关系">查看进程父子关系</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1. </span></span><br><span class="line">ps -o pid,ppid,cmd | grep xxx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. </span></span><br><span class="line">ps l | grep xxx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3. 保底方式</span></span><br><span class="line">for pid in $(ps w | grep network_monitor.sh | grep -v grep | awk &#x27;&#123;print $1&#125;&#x27;); do</span><br><span class="line">    ppid=$(awk &#x27;/PPid/ &#123;print $2&#125;&#x27; /proc/$pid/status 2&gt;/dev/null)</span><br><span class="line">    echo &quot;PID $pid, PPID $ppid&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>本地搭建spark环境</p>
+<h3 id="原理">原理</h3>
+<p><a target="_blank" rel="noopener" href="https://www.waitingforcode.com/apache-spark/dynamic-resource-allocation-spark/read">Dynamic resource allocation in Spark</a></p>
+<h3 id="序列化">序列化</h3>
+<p>spark之kryo 序列化</p>
+<h3 id="配置">配置</h3>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/s/spark%E5%B9%BF%E6%92%AD%E5%8F%98%E9%87%8F%E7%9A%84%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6">spark广播变量大小</a></p>
+<h3 id="调试">调试</h3>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/42171499/get-current-number-of-partitions-of-a-dataframe">Get current number of partitions of a DataFrame</a></li>
+</ol>
+<h1>questions</h1>
+<ol>
+<li>spark batch任务可以并行执行吗</li>
+<li>spark.streams.awaitAnyTermination()</li>
+<li>java.lang.RuntimeException: Could not serialize lambda broadcast</li>
+<li>为什么spark任务，建议每个executor不超过5个core</li>
+<li>spark广播变量的最大值</li>
+<li></li>
+</ol>
 
       
     </div>
@@ -339,7 +740,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/system/mac/terminal/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/spark/%E6%8F%90%E9%AB%98%E5%8F%AF%E7%94%A8%E6%80%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -353,7 +754,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/system/mac/terminal/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/07/25/spark/%E6%8F%90%E9%AB%98%E5%8F%AF%E7%94%A8%E6%80%A7/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -363,7 +764,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
 
           
@@ -377,31 +778,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1>基础</h1>
-<h2 id="确认">确认</h2>
-<h3 id="使用的shell类型">使用的shell类型</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $SHELL</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>登陆时读取的配置文件</th>
-<th>未登录时读取的配置文件</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Zsh</td>
-<td>~/.zprofile<code>或</code>~/.zlogin</td>
-<td>~/.zshrc</td>
-</tr>
-<tr>
-<td>Bash</td>
-<td><code>~/.bash_profile</code>、<code>~/.bash_login</code>、<code>~/.profile</code>（按顺序查找第一个）</td>
-<td>~/.bashrc</td>
-</tr>
-</tbody>
-</table>
+          <ol>
+<li>在driver打印spark所有参数，包括默认参数</li>
+</ol>
 
       
     </div>
@@ -421,7 +800,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/system/mac/%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/spark/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -435,7 +814,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/system/mac/%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">命令</a>
+            <a href="/2026/07/25/spark/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/" class="post-title-link" itemprop="url">数据倾斜</a>
         </h2>
 
         <div class="post-meta">
@@ -445,7 +824,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -453,7 +832,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system-mac/" itemprop="url" rel="index"><span itemprop="name">system-mac</span></a>
+                  <a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a>
                 </span>
             </span>
 
@@ -468,9 +847,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="查看系统信息">查看系统信息</h3>
-<h5 id="架构">架构</h5>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
+          <h2 id="join">join</h2>
+<h3 id="1-大表join小表">1. 大表join小表</h3>
+<p>产生原因：</p>
+<p>解决方案：</p>
+<p>使用mapjoin，spark程序则广播小表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*+ mapjoin(table_aliases) */</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-某些key数量过大">2. 某些key数量过大</h3>
+<p>产生原因：join过程中，某些key数据量大，导致某些节点的处理数据明显多于其他节点。</p>
+<p>解决方案：</p>
+<p>进行数据拆分，将量大的key单独处理</p>
+<p>示例：</p>
+<p><a href="./instance/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E4%BC%98%E5%8C%96%E2%80%94%E2%80%94%E6%9F%90%E4%BA%9Bkey%E8%BF%87%E5%A4%9A.md">数据倾斜优化——某些key过多</a></p>
+<h2 id="聚合">聚合</h2>
 
       
     </div>
@@ -490,7 +879,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/system/windows/%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/spark/%E6%97%A5%E5%BF%97%E6%9F%A5%E7%9C%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -504,7 +893,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/system/windows/%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/07/25/spark/%E6%97%A5%E5%BF%97%E6%9F%A5%E7%9C%8B/" class="post-title-link" itemprop="url">日志查看</a>
         </h2>
 
         <div class="post-meta">
@@ -514,121 +903,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/system/windows/%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/system/windows/%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/system/windows/%E5%BF%AB%E6%8D%B7%E9%94%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/system/windows/%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">快捷键</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -636,7 +911,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools-windows/" itemprop="url" rel="index"><span itemprop="name">tools-windows</span></a>
+                  <a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a>
                 </span>
             </span>
 
@@ -651,11 +926,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="运行">运行</h3>
-<p>win+R  mstsc 远程连接</p>
-<h3 id="certificate">certificate</h3>
-<p>win search 中 搜cert即可</p>
-
+          
       
     </div>
 
@@ -674,7 +945,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/system/windows/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/spark/%E6%8A%A5%E9%94%99%E6%9A%82%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -688,7 +959,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/system/windows/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/07/25/spark/%E6%8A%A5%E9%94%99%E6%9A%82%E5%AD%98/" class="post-title-link" itemprop="url">报错暂存</a>
         </h2>
 
         <div class="post-meta">
@@ -698,65 +969,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/iway_lch/article/details/50408796">https://blog.csdn.net/iway_lch/article/details/50408796</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/system/windows/%E8%BD%AF%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/system/windows/%E8%BD%AF%E4%BB%B6/" class="post-title-link" itemprop="url">软件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -764,7 +977,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools-windows/" itemprop="url" rel="index"><span itemprop="name">tools-windows</span></a>
+                  <a href="/categories/spark/" itemprop="url" rel="index"><span itemprop="name">spark</span></a>
                 </span>
             </span>
 
@@ -779,8 +992,45 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>截图</p>
-<p>snapaste</p>
+          <p>[toc]</p>
+<h3 id="考虑driver内存不够">考虑driver内存不够</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Caused by: org.apache.spark.SparkException: Job aborted due to stage failure: Total size of serialized results of 153 tasks (10.2 GB) is bigger than spark.driver.maxResultSize (10.0 GB)</span><br><span class="line">    at org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1580)</span><br><span class="line">    at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1568)</span><br><span class="line">    at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1567)</span><br><span class="line">    at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)</span><br><span class="line">    at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)</span><br><span class="line">    at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:1567)</span><br><span class="line">    at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:825)</span><br><span class="line">    at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:825)</span><br><span class="line">    at scala.Option.foreach(Option.scala:257)</span><br><span class="line">    at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:825)</span><br><span class="line">    at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:1798)</span><br><span class="line">    at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1750)</span><br><span class="line">    at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:1739)</span><br><span class="line">    at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:48)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">org.apache.spark.shuffle.MetadataFetchFailedException: Missing an output location for shuffle 0</span><br><span class="line">    at org.apache.spark.MapOutputTracker$$anonfun$org$apache$spark$MapOutputTracker$$convertMapStatuses$1.apply(MapOutputTracker.scala:384)</span><br><span class="line">    at org.apache.spark.MapOutputTracker$$anonfun$org$apache$spark$MapOutputTracker$$convertMapStatuses$1.apply(MapOutputTracker.scala:381)</span><br><span class="line">    at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)</span><br><span class="line">    at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)</span><br><span class="line">    at scala.collection.IndexedSeqOptimized$class.foreach(IndexedSeqOptimized.scala:33)</span><br><span class="line">    at scala.collection.mutable.ArrayOps$ofRef.foreach(ArrayOps.scala:108)</span><br><span class="line">    at scala.collection.TraversableLike$class.map(TraversableLike.scala:244)</span><br><span class="line">    at scala.collection.mutable.ArrayOps$ofRef.map(ArrayOps.scala:108)</span><br><span class="line">    at org.apache.spark.MapOutputTracker$.org$apache$spark$MapOutputTracker$$convertMapStatuses(MapOutputTracker.scala:380)</span><br><span class="line">    at org.apache.spark.MapOutputTracker.getServerStatuses(MapOutputTracker.scala:176)</span><br><span class="line">    at org.apache.spark.shuffle.hash.BlockStoreShuffleFetcher$.fetch(BlockStoreShuffleFetcher.scala:42)</span><br><span class="line">    at org.apache.spark.shuffle.hash.HashShuffleReader.read(HashShuffleReader.scala:40)</span><br><span class="line">    at org.apache.spark.rdd.ShuffledRDD.compute(ShuffledRDD.scala:92)</span><br><span class="line">    at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:263)</span><br><span class="line">    at org.apache.spark.rdd.RDD.iterator(RDD.scala:230)</span><br><span class="line">    at org.apache.spark.rdd.MappedRDD.compute(MappedRDD.scala:31)</span><br><span class="line">    at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:263)</span><br><span class="line">    at org.apache.spark.rdd.RDD.iterator(RDD.scala:230)</span><br><span class="line">    at org.apache.spark.rdd.FlatMappedRDD.compute(FlatMappedRDD.scala:33)</span><br><span class="line">    at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:263)</span><br><span class="line">    at org.apache.spark.rdd.RDD.iterator(RDD.scala:230)</span><br><span class="line">    at org.apache.spark.rdd.MappedRDD.compute(MappedRDD.scala:31)</span><br><span class="line">    at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:263)</span><br><span class="line">    at org.apache.spark.rdd.RDD.iterator(RDD.scala:230)</span><br><span class="line">    at org.apache.spark.rdd.MappedRDD.compute(MappedRDD.scala:31)</span><br><span class="line">    at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:263)</span><br><span class="line">    at org.apache.spark.rdd.RDD.iterator(RDD.scala:230)</span><br><span class="line">    at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:61)</span><br><span class="line">    at org.apache.spark.scheduler.Task.run(Task.scala:56)</span><br><span class="line">    at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:196)</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)</span><br><span class="line">    at java.lang.Thread.run(Thread.java:722)</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/28901123/why-do-spark-jobs-fail-with-org-apache-spark-shuffle-metadatafetchfailedexceptio">https://stackoverflow.com/questions/28901123/why-do-spark-jobs-fail-with-org-apache-spark-shuffle-metadatafetchfailedexceptio</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/35918095/why-does-spark-fail-with-fetchfailed-error?noredirect=1&amp;lq=1">https://stackoverflow.com/questions/35918095/why-does-spark-fail-with-fetchfailed-error?noredirect=1&amp;lq=1</a></p>
+<p><a target="_blank" rel="noopener" href="https://community.cloudera.com/t5/Support-Questions/Spark-Metadata-Fetch-Failed-Exception-Missing-an-output/td-p/203771">https://community.cloudera.com/t5/Support-Questions/Spark-Metadata-Fetch-Failed-Exception-Missing-an-output/td-p/203771</a></p>
+<h3 id="NPE">NPE</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br></pre></td><td class="code"><pre><span class="line">21&#x2F;07&#x2F;01 19:58:59 WARN [SparkUI-42] server.HttpChannel: &#x2F;api&#x2F;v1&#x2F;applications&#x2F;application_1625117983144_0490&#x2F;sql</span><br><span class="line">javax.servlet.ServletException: java.lang.NullPointerException</span><br><span class="line">	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:410)</span><br><span class="line">	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:346)</span><br><span class="line">	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:366)</span><br><span class="line">	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:319)</span><br><span class="line">	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:205)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHolder.handle(ServletHolder.java:763)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1633)</span><br><span class="line">	at org.apache.spark.ui.HttpSecurityFilter.doFilter(HttpSecurityFilter.scala:95)</span><br><span class="line">	at org.sparkproject.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:193)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1609)</span><br><span class="line">	at org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter.doFilter(AmIpFilter.java:162)</span><br><span class="line">	at org.sparkproject.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:193)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1609)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:561)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:233)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1434)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:188)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHandler.doScope(ServletHandler.java:501)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:186)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1349)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.gzip.GzipHandler.handle(GzipHandler.java:766)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:234)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127)</span><br><span class="line">	at org.sparkproject.jetty.server.Server.handle(Server.java:516)</span><br><span class="line">	at org.sparkproject.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383)</span><br><span class="line">	at org.sparkproject.jetty.server.HttpChannel.dispatch(HttpChannel.java:556)</span><br><span class="line">	at org.sparkproject.jetty.server.HttpChannel.handle(HttpChannel.java:375)</span><br><span class="line">	at org.sparkproject.jetty.server.HttpConnection.onFillable(HttpConnection.java:273)</span><br><span class="line">	at org.sparkproject.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311)</span><br><span class="line">	at org.sparkproject.jetty.io.FillInterest.fillable(FillInterest.java:105)</span><br><span class="line">	at org.sparkproject.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:336)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:313)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:171)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:129)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:375)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:773)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:905)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748)</span><br><span class="line">Caused by: java.lang.NullPointerException</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.getMetric$1(SqlResource.scala:120)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.$anonfun$printableMetrics$3(SqlResource.scala:130)</span><br><span class="line">	at scala.collection.TraversableLike.$anonfun$flatMap$1(TraversableLike.scala:245)</span><br><span class="line">	at scala.collection.Iterator.foreach(Iterator.scala:941)</span><br><span class="line">	at scala.collection.Iterator.foreach$(Iterator.scala:941)</span><br><span class="line">	at scala.collection.AbstractIterator.foreach(Iterator.scala:1429)</span><br><span class="line">	at scala.collection.IterableLike.foreach(IterableLike.scala:74)</span><br><span class="line">	at scala.collection.IterableLike.foreach$(IterableLike.scala:73)</span><br><span class="line">	at scala.collection.AbstractIterable.foreach(Iterable.scala:56)</span><br><span class="line">	at scala.collection.TraversableLike.flatMap(TraversableLike.scala:245)</span><br><span class="line">	at scala.collection.TraversableLike.flatMap$(TraversableLike.scala:242)</span><br><span class="line">	at scala.collection.AbstractTraversable.flatMap(Traversable.scala:108)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.$anonfun$printableMetrics$2(SqlResource.scala:130)</span><br><span class="line">	at scala.collection.TraversableLike.$anonfun$map$1(TraversableLike.scala:238)</span><br><span class="line">	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)</span><br><span class="line">	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)</span><br><span class="line">	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)</span><br><span class="line">	at scala.collection.TraversableLike.map(TraversableLike.scala:238)</span><br><span class="line">	at scala.collection.TraversableLike.map$(TraversableLike.scala:231)</span><br><span class="line">	at scala.collection.AbstractTraversable.map(Traversable.scala:108)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.printableMetrics(SqlResource.scala:127)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.prepareExecutionData(SqlResource.scala:97)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.$anonfun$sqlList$2(SqlResource.scala:45)</span><br><span class="line">	at scala.collection.immutable.Stream.map(Stream.scala:418)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.$anonfun$sqlList$1(SqlResource.scala:43)</span><br><span class="line">	at org.apache.spark.status.api.v1.BaseAppResource.$anonfun$withUI$1(ApiRootResource.scala:140)</span><br><span class="line">	at org.apache.spark.ui.SparkUI.withSparkUI(SparkUI.scala:117)</span><br><span class="line">	at org.apache.spark.status.api.v1.BaseAppResource.withUI(ApiRootResource.scala:135)</span><br><span class="line">	at org.apache.spark.status.api.v1.BaseAppResource.withUI$(ApiRootResource.scala:133)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.withUI(SqlResource.scala:31)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.sqlList(SqlResource.scala:41)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)</span><br><span class="line">	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:124)</span><br><span class="line">	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:167)</span><br><span class="line">	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)</span><br><span class="line">	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:79)</span><br><span class="line">	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:469)</span><br><span class="line">	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:391)</span><br><span class="line">	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:80)</span><br><span class="line">	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:253)</span><br><span class="line">	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)</span><br><span class="line">	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)</span><br><span class="line">	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)</span><br><span class="line">	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)</span><br><span class="line">	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)</span><br><span class="line">	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)</span><br><span class="line">	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:232)</span><br><span class="line">	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:680)</span><br><span class="line">	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:394)</span><br><span class="line">	... 39 more</span><br><span class="line">21&#x2F;07&#x2F;01 19:58:59 WARN [SparkUI-42] server.HttpChannelState: unhandled due to prior sendError</span><br><span class="line">javax.servlet.ServletException: java.lang.NullPointerException</span><br><span class="line">	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:410)</span><br><span class="line">	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:346)</span><br><span class="line">	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:366)</span><br><span class="line">	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:319)</span><br><span class="line">	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:205)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHolder.handle(ServletHolder.java:763)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHandler$ChainEnd.doFilter(ServletHandler.java:1633)</span><br><span class="line">	at org.apache.spark.ui.HttpSecurityFilter.doFilter(HttpSecurityFilter.scala:95)</span><br><span class="line">	at org.sparkproject.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:193)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1609)</span><br><span class="line">	at org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter.doFilter(AmIpFilter.java:162)</span><br><span class="line">	at org.sparkproject.jetty.servlet.FilterHolder.doFilter(FilterHolder.java:193)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHandler$Chain.doFilter(ServletHandler.java:1609)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:561)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:233)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1434)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:188)</span><br><span class="line">	at org.sparkproject.jetty.servlet.ServletHandler.doScope(ServletHandler.java:501)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:186)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1349)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.gzip.GzipHandler.handle(GzipHandler.java:766)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:234)</span><br><span class="line">	at org.sparkproject.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:127)</span><br><span class="line">	at org.sparkproject.jetty.server.Server.handle(Server.java:516)</span><br><span class="line">	at org.sparkproject.jetty.server.HttpChannel.lambda$handle$1(HttpChannel.java:383)</span><br><span class="line">	at org.sparkproject.jetty.server.HttpChannel.dispatch(HttpChannel.java:556)</span><br><span class="line">	at org.sparkproject.jetty.server.HttpChannel.handle(HttpChannel.java:375)</span><br><span class="line">	at org.sparkproject.jetty.server.HttpConnection.onFillable(HttpConnection.java:273)</span><br><span class="line">	at org.sparkproject.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:311)</span><br><span class="line">	at org.sparkproject.jetty.io.FillInterest.fillable(FillInterest.java:105)</span><br><span class="line">	at org.sparkproject.jetty.io.ChannelEndPoint$1.run(ChannelEndPoint.java:104)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:336)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:313)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:171)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:129)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:375)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:773)</span><br><span class="line">	at org.sparkproject.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:905)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748)</span><br><span class="line">Caused by: java.lang.NullPointerException</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.getMetric$1(SqlResource.scala:120)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.$anonfun$printableMetrics$3(SqlResource.scala:130)</span><br><span class="line">	at scala.collection.TraversableLike.$anonfun$flatMap$1(TraversableLike.scala:245)</span><br><span class="line">	at scala.collection.Iterator.foreach(Iterator.scala:941)</span><br><span class="line">	at scala.collection.Iterator.foreach$(Iterator.scala:941)</span><br><span class="line">	at scala.collection.AbstractIterator.foreach(Iterator.scala:1429)</span><br><span class="line">	at scala.collection.IterableLike.foreach(IterableLike.scala:74)</span><br><span class="line">	at scala.collection.IterableLike.foreach$(IterableLike.scala:73)</span><br><span class="line">	at scala.collection.AbstractIterable.foreach(Iterable.scala:56)</span><br><span class="line">	at scala.collection.TraversableLike.flatMap(TraversableLike.scala:245)</span><br><span class="line">	at scala.collection.TraversableLike.flatMap$(TraversableLike.scala:242)</span><br><span class="line">	at scala.collection.AbstractTraversable.flatMap(Traversable.scala:108)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.$anonfun$printableMetrics$2(SqlResource.scala:130)</span><br><span class="line">	at scala.collection.TraversableLike.$anonfun$map$1(TraversableLike.scala:238)</span><br><span class="line">	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)</span><br><span class="line">	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)</span><br><span class="line">	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)</span><br><span class="line">	at scala.collection.TraversableLike.map(TraversableLike.scala:238)</span><br><span class="line">	at scala.collection.TraversableLike.map$(TraversableLike.scala:231)</span><br><span class="line">	at scala.collection.AbstractTraversable.map(Traversable.scala:108)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.printableMetrics(SqlResource.scala:127)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.prepareExecutionData(SqlResource.scala:97)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.$anonfun$sqlList$2(SqlResource.scala:45)</span><br><span class="line">	at scala.collection.immutable.Stream.map(Stream.scala:418)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.$anonfun$sqlList$1(SqlResource.scala:43)</span><br><span class="line">	at org.apache.spark.status.api.v1.BaseAppResource.$anonfun$withUI$1(ApiRootResource.scala:140)</span><br><span class="line">	at org.apache.spark.ui.SparkUI.withSparkUI(SparkUI.scala:117)</span><br><span class="line">	at org.apache.spark.status.api.v1.BaseAppResource.withUI(ApiRootResource.scala:135)</span><br><span class="line">	at org.apache.spark.status.api.v1.BaseAppResource.withUI$(ApiRootResource.scala:133)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.withUI(SqlResource.scala:31)</span><br><span class="line">	at org.apache.spark.status.api.v1.sql.SqlResource.sqlList(SqlResource.scala:41)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)</span><br><span class="line">	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:124)</span><br><span class="line">	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:167)</span><br><span class="line">	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)</span><br><span class="line">	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:79)</span><br><span class="line">	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:469)</span><br><span class="line">	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:391)</span><br><span class="line">	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:80)</span><br><span class="line">	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:253)</span><br><span class="line">	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)</span><br><span class="line">	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)</span><br><span class="line">	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)</span><br><span class="line">	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)</span><br><span class="line">	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)</span><br><span class="line">	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)</span><br><span class="line">	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:232)</span><br><span class="line">	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:680)</span><br><span class="line">	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:394)</span><br><span class="line">	... 39 more</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">21&#x2F;08&#x2F;20 02:52:56 ERROR TransportRequestHandler [rpc-server-3-3]: Error while invoking RpcHandler#receive() for one-way message.</span><br><span class="line">org.apache.spark.SparkException: Could not find CoarseGrainedScheduler.</span><br><span class="line">	at org.apache.spark.rpc.netty.Dispatcher.postMessage(Dispatcher.scala:160)</span><br><span class="line">	at org.apache.spark.rpc.netty.Dispatcher.postOneWayMessage(Dispatcher.scala:140)</span><br><span class="line">	at org.apache.spark.rpc.netty.NettyRpcHandler.receive(NettyRpcEnv.scala:655)</span><br><span class="line">	at org.apache.spark.network.server.TransportRequestHandler.processOneWayMessage(TransportRequestHandler.java:274)</span><br><span class="line">	at org.apache.spark.network.server.TransportRequestHandler.handle(TransportRequestHandler.java:105)</span><br><span class="line">	at org.apache.spark.network.server.TransportChannelHandler.channelRead(TransportChannelHandler.java:118)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:374)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:360)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:352)</span><br><span class="line">	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:287)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:374)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:360)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:352)</span><br><span class="line">	at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:102)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:374)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:360)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:352)</span><br><span class="line">	at org.apache.spark.network.util.TransportFrameDecoder.channelRead(TransportFrameDecoder.java:85)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:374)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:360)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:352)</span><br><span class="line">	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1422)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:374)</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:360)</span><br><span class="line">	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:931)</span><br><span class="line">	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:163)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:700)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:635)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:552)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:514)</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor$6.run(SingleThreadEventExecutor.java:1044)</span><br><span class="line">	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)</span><br><span class="line">	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FetchFailed(null, shuffleId&#x3D;0, mapIndex&#x3D;-1, mapId&#x3D;-1, reduceId&#x3D;0, message&#x3D; org.apache.spark.shuffle.MetadataFetchFailedException: Missing an output location for shuffle 0 at org.apache.spark.MapOutputTracker$.$anonfun$convertMapStatuses$2(MapOutputTracker.scala:1010) at org.apache.spark.MapOutputTracker$.$anonfun$convertMapStatuses$2$adapted(MapOutputTracker.scala:1006) at scala.collection.Iterator.foreach(Iterator.scala:941) at scala.collection.Iterator.foreach$(Iterator.scala:941) at scala.collection.AbstractIterator.foreach(Iterator.scala:1429) at org.apache.spark.MapOutputTracker$.convertMapStatuses(MapOutputTracker.scala:1006) at org.apache.spark.MapOutputTrackerWorker.getMapSizesByExecutorId(MapOutputTracker.scala:811) at org.apache.spark.shuffle.sort.SortShuffleManager.getReader(SortShuffleManager.scala:128) at org.apache.spark.sql.execution.ShuffledRowRDD.compute(ShuffledRowRDD.scala:185) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.sql.execution.streaming.state.StateStoreRDD.compute(StateStoreRDD.scala:91) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.rdd.UnionRDD.compute(UnionRDD.scala:106) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.sql.execution.SQLExecutionRDD.compute(SQLExecutionRDD.scala:55) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.$anonfun$getOrCompute$1(RDD.scala:362) at org.apache.spark.storage.BlockManager.$anonfun$doPutIterator$1(BlockManager.scala:1374) at org.apache.spark.storage.BlockManager.org$apache$spark$storage$BlockManager$$doPut(BlockManager.scala:1301) at org.apache.spark.storage.BlockManager.doPutIterator(BlockManager.scala:1365) at org.apache.spark.storage.BlockManager.getOrElseUpdate(BlockManager.scala:1189) at org.apache.spark.rdd.RDD.getOrCompute(RDD.scala:360) at org.apache.spark.rdd.RDD.iterator(RDD.scala:311) at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:349) at org.apache.spark.rdd.RDD.iterator(RDD.scala:313) at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:90) at org.apache.spark.scheduler.Task.run(Task.scala:127) at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$3(Executor.scala:446) at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:1377) at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:449) at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) at java.lang.Thread.run(Thread.java:748) )</span><br></pre></td></tr></table></figure>
+<h3 id="NoClassDefFoundError">NoClassDefFoundError</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/jamesjxin/article/details/46606307">怎么解决java.lang.NoClassDefFoundError错误</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/45768480/java-lang-noclassdeffounderror-org-apache-logging-log4j-logger">java.lang.NoClassDefFoundError: org/apache/logging/log4j/Logger</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">21&#x2F;09&#x2F;29 09:10:00 ERROR ApplicationMaster [Driver]: User class threw exception: java.lang.NoClassDefFoundError: org&#x2F;apache&#x2F;logging&#x2F;log4j&#x2F;core&#x2F;lookup&#x2F;AbstractLookup</span><br><span class="line">java.lang.NoClassDefFoundError: org&#x2F;apache&#x2F;logging&#x2F;log4j&#x2F;core&#x2F;lookup&#x2F;AbstractLookup</span><br><span class="line">	at java.lang.ClassLoader.defineClass1(Native Method)</span><br><span class="line">	at java.lang.ClassLoader.defineClass(ClassLoader.java:757)</span><br><span class="line">	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)</span><br><span class="line">	at java.net.URLClassLoader.defineClass(URLClassLoader.java:468)</span><br><span class="line">	at java.net.URLClassLoader.access$100(URLClassLoader.java:74)</span><br><span class="line">	at java.net.URLClassLoader$1.run(URLClassLoader.java:369)</span><br><span class="line">	at java.net.URLClassLoader$1.run(URLClassLoader.java:363)</span><br><span class="line">	at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">	at java.net.URLClassLoader.findClass(URLClassLoader.java:362)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:419)</span><br><span class="line">	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:352)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:406)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:352)</span><br><span class="line">	at java.lang.Class.forName0(Native Method)</span><br><span class="line">	at java.lang.Class.forName(Class.java:264)</span><br><span class="line">	at org.apache.logging.log4j.util.LoaderUtil.loadClass(LoaderUtil.java:168)</span><br><span class="line">	at org.apache.logging.log4j.util.LoaderUtil.newInstanceOf(LoaderUtil.java:207)</span><br><span class="line">	at org.apache.logging.log4j.util.LoaderUtil.newCheckedInstanceOf(LoaderUtil.java:228)</span><br><span class="line">	at org.apache.logging.log4j.core.util.Loader.newCheckedInstanceOf(Loader.java:311)</span><br><span class="line">	at org.apache.logging.log4j.core.lookup.Interpolator.&lt;init&gt;(Interpolator.java:124)</span><br><span class="line">	at org.apache.logging.log4j.core.config.AbstractConfiguration.&lt;init&gt;(AbstractConfiguration.java:129)</span><br><span class="line">	at org.apache.logging.log4j.core.config.NullConfiguration.&lt;init&gt;(NullConfiguration.java:32)</span><br><span class="line">	at org.apache.logging.log4j.core.LoggerContext.&lt;clinit&gt;(LoggerContext.java:85)</span><br><span class="line">	at org.apache.logging.log4j.core.selector.ClassLoaderContextSelector.createContext(ClassLoaderContextSelector.java:179)</span><br><span class="line">	at org.apache.logging.log4j.core.selector.ClassLoaderContextSelector.locateContext(ClassLoaderContextSelector.java:153)</span><br><span class="line">	at org.apache.logging.log4j.core.selector.ClassLoaderContextSelector.getContext(ClassLoaderContextSelector.java:78)</span><br><span class="line">	at org.apache.logging.log4j.core.selector.ClassLoaderContextSelector.getContext(ClassLoaderContextSelector.java:65)</span><br><span class="line">	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:148)</span><br><span class="line">	at org.apache.logging.log4j.core.impl.Log4jContextFactory.getContext(Log4jContextFactory.java:45)</span><br><span class="line">	at org.apache.logging.log4j.LogManager.getContext(LogManager.java:194)</span><br><span class="line">	at org.apache.logging.log4j.LogManager.getLogger(LogManager.java:581)</span><br><span class="line">	at com.microsoft.sam.SAMJobRunner$.&lt;init&gt;(SAMJobRunner.scala:9)</span><br><span class="line">	at com.microsoft.sam.SAMJobRunner$.&lt;clinit&gt;(SAMJobRunner.scala)</span><br><span class="line">	at com.microsoft.sam.SAMJobRunner.main(SAMJobRunner.scala)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at org.apache.spark.deploy.yarn.ApplicationMaster$$anon$2.run(ApplicationMaster.scala:684)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.apache.logging.log4j.core.lookup.AbstractLookup</span><br><span class="line">	at java.net.URLClassLoader.findClass(URLClassLoader.java:382)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:419)</span><br><span class="line">	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:352)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:352)</span><br><span class="line">	... 39 more</span><br><span class="line"></span><br><span class="line">因为引入了以下jar？</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.logging.log4j&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;log4j-core&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.12.1&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">tips:</span><br><span class="line">1. 程序中用的是3.0的spark，但集群是2.4的版本</span><br><span class="line">2. 3.0中弃用了org.apache.log4j，使用的是log4j2（org.apache.logging.log4j）</span><br><span class="line"></span><br><span class="line">解决办法：</span><br><span class="line">1. 注释掉log4j-core的引用</span><br><span class="line">2. 程序中的Logger类替换成 org.apache.log4j.Logger</span><br></pre></td></tr></table></figure>
+<h3 id="Task-not-serializable">Task not serializable</h3>
+<p>表面上看，该序列化的类都做了序列化，所以怀疑是<code>processorMap.asJava</code>导致的</p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/38422812/scala-converters-convert-java-collections-to-wrapper-objects">Scala converters convert Java collections to Wrapper objects</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/how-to-serialize-hashmap-in-java/">How to Serialize HashMap in Java?</a></p>
+<p>java. util. HashMap$Values is NOT Serializable</p>
+<p><a target="_blank" rel="noopener" href="https://www.infoworld.com/article/2073605/cannot-assume-serializability-for-java-map-s-nested-classes.html">Cannot Assume Serializability for Java Map’s Nested Classes</a></p>
+<p>另外，需要了解下，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sparkConf.set(&quot;spark.serializer&quot;,&quot;org.apache.spark.serializer.KryoSerializer&quot;)</span><br><span class="line">sparkConf.registerKryoClasses(Array(classOf[com.sdp.hbase.entity.IndexRowkeyMetaData]))</span><br></pre></td></tr></table></figure>
+<p>可以解决哪些序列化问题。</p>
+<p>在 Spark 程序中，在 map 等算子内部使用了外部定义的变量和函数，从而引发 Task 未序列化问题。其中最普遍的是当引用了某个类的成员函数或变量时，会导致这个类的所有成员（整个类）都需要支持序列化。虽然许多情形下，类使用了<code>extends Serializable</code>声明支持序列化，但是由于某些字段不支持序列化，仍然会导致整个类序列化时出现问题，最终导致出现 Task 未序列化问题。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45492007/article/details/119979785">Apache Spark：Task not serializable异常的排查和解决</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sogerno1/article/details/45935159">Spark Task未序列化(Task not serializable)问题分析及解决</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogRecordProcessorFactory</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, GetRowsStragety&gt; processorMap;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LogRecordProcessorFactory</span><span class="params">(Map&lt;String, GetRowsStragety&gt; processorMap)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.processorMap = processorMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> GetRowsStragety <span class="title">getProcessor</span><span class="params">(String topic)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> processorMap.getOrDefault(topic, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GetRowsStragety</span> </span>&#123;</span><br><span class="line">    <span class="function">List&lt;MediationGenericRecord&gt; <span class="title">getRows</span><span class="params">(<span class="keyword">byte</span>[] bytes )</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServingLogProcessor</span> <span class="keyword">extends</span> <span class="title">LogRecordProcessor</span> <span class="keyword">implements</span> <span class="title">GetRowsStragety</span>, <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger logger = Logger.getLogger(ServingLogProcessor.class);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> LogType logType = LogType.Serving;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;MediationGenericRecord&gt; <span class="title">getRows</span><span class="params">(<span class="keyword">byte</span>[] bytes)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scala.collection.<span class="type">JavaConverters</span>._</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> processorMap : <span class="type">Map</span>[<span class="type">String</span>, <span class="type">GetRowsStragety</span>] = <span class="type">Map</span>()</span><br><span class="line">processorMap += (<span class="string">&quot;servinglog&quot;</span> -&gt; <span class="keyword">new</span> <span class="type">ServingLogProcessor</span>())</span><br><span class="line">logRecordProcessorFactory = <span class="keyword">new</span> <span class="type">LogRecordProcessorFactory</span>(processorMap.asJava)</span><br><span class="line">logRecordProcessorFactory.getProcessor(<span class="string">&quot;servinglog&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br></pre></td><td class="code"><pre><span class="line">21&#x2F;09&#x2F;30 03:03:18 ERROR MicroBatchExecution [stream execution thread for [id &#x3D; 9e6c637b-d8a1-4709-8949-ee3cdf7bbef7, runId &#x3D; 49c19ca4-3204-44ff-805c-44029b734f74]]: Query [id &#x3D; 9e6c637b-d8a1-4709-8949-ee3cdf7bbef7, runId &#x3D; 49c19ca4-3204-44ff-805c-44029b734f74] terminated with error</span><br><span class="line">org.apache.spark.SparkException: Task not serializable</span><br><span class="line">	at org.apache.spark.util.ClosureCleaner$.ensureSerializable(ClosureCleaner.scala:403)</span><br><span class="line">	at org.apache.spark.util.ClosureCleaner$.org$apache$spark$util$ClosureCleaner$$clean(ClosureCleaner.scala:393)</span><br><span class="line">	at org.apache.spark.util.ClosureCleaner$.clean(ClosureCleaner.scala:162)</span><br><span class="line">	at org.apache.spark.SparkContext.clean(SparkContext.scala:2330)</span><br><span class="line">	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsWithIndex$1.apply(RDD.scala:850)</span><br><span class="line">	at org.apache.spark.rdd.RDD$$anonfun$mapPartitionsWithIndex$1.apply(RDD.scala:849)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:112)</span><br><span class="line">	at org.apache.spark.rdd.RDD.withScope(RDD.scala:363)</span><br><span class="line">	at org.apache.spark.rdd.RDD.mapPartitionsWithIndex(RDD.scala:849)</span><br><span class="line">	at org.apache.spark.sql.execution.WholeStageCodegenExec.doExecute(WholeStageCodegenExec.scala:630)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.GenerateExec.doExecute(GenerateExec.scala:80)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.InputAdapter.inputRDDs(WholeStageCodegenExec.scala:391)</span><br><span class="line">	at org.apache.spark.sql.execution.ProjectExec.inputRDDs(basicPhysicalOperators.scala:41)</span><br><span class="line">	at org.apache.spark.sql.execution.WholeStageCodegenExec.doExecute(WholeStageCodegenExec.scala:627)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.EventTimeWatermarkExec.doExecute(EventTimeWatermarkExec.scala:99)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.AppendColumnsExec.doExecute(objects.scala:261)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.exchange.ShuffleExchangeExec.prepareShuffleDependency(ShuffleExchangeExec.scala:92)</span><br><span class="line">	at org.apache.spark.sql.execution.exchange.ShuffleExchangeExec$$anonfun$doExecute$1.apply(ShuffleExchangeExec.scala:128)</span><br><span class="line">	at org.apache.spark.sql.execution.exchange.ShuffleExchangeExec$$anonfun$doExecute$1.apply(ShuffleExchangeExec.scala:119)</span><br><span class="line">	at org.apache.spark.sql.catalyst.errors.package$.attachTree(package.scala:52)</span><br><span class="line">	at org.apache.spark.sql.execution.exchange.ShuffleExchangeExec.doExecute(ShuffleExchangeExec.scala:119)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.InputAdapter.inputRDDs(WholeStageCodegenExec.scala:391)</span><br><span class="line">	at org.apache.spark.sql.execution.SortExec.inputRDDs(SortExec.scala:121)</span><br><span class="line">	at org.apache.spark.sql.execution.WholeStageCodegenExec.doExecute(WholeStageCodegenExec.scala:627)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.FlatMapGroupsWithStateExec.doExecute(FlatMapGroupsWithStateExec.scala:107)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.InputAdapter.inputRDDs(WholeStageCodegenExec.scala:391)</span><br><span class="line">	at org.apache.spark.sql.execution.SerializeFromObjectExec.inputRDDs(objects.scala:110)</span><br><span class="line">	at org.apache.spark.sql.execution.FilterExec.inputRDDs(basicPhysicalOperators.scala:121)</span><br><span class="line">	at org.apache.spark.sql.execution.WholeStageCodegenExec.doExecute(WholeStageCodegenExec.scala:627)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.UnionExec$$anonfun$doExecute$1.apply(basicPhysicalOperators.scala:582)</span><br><span class="line">	at org.apache.spark.sql.execution.UnionExec$$anonfun$doExecute$1.apply(basicPhysicalOperators.scala:582)</span><br><span class="line">	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)</span><br><span class="line">	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)</span><br><span class="line">	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)</span><br><span class="line">	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)</span><br><span class="line">	at scala.collection.TraversableLike$class.map(TraversableLike.scala:234)</span><br><span class="line">	at scala.collection.AbstractTraversable.map(Traversable.scala:104)</span><br><span class="line">	at org.apache.spark.sql.execution.UnionExec.doExecute(basicPhysicalOperators.scala:582)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.EventTimeWatermarkExec.doExecute(EventTimeWatermarkExec.scala:99)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.AppendColumnsExec.doExecute(objects.scala:261)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.exchange.ShuffleExchangeExec.prepareShuffleDependency(ShuffleExchangeExec.scala:92)</span><br><span class="line">	at org.apache.spark.sql.execution.exchange.ShuffleExchangeExec$$anonfun$doExecute$1.apply(ShuffleExchangeExec.scala:128)</span><br><span class="line">	at org.apache.spark.sql.execution.exchange.ShuffleExchangeExec$$anonfun$doExecute$1.apply(ShuffleExchangeExec.scala:119)</span><br><span class="line">	at org.apache.spark.sql.catalyst.errors.package$.attachTree(package.scala:52)</span><br><span class="line">	at org.apache.spark.sql.execution.exchange.ShuffleExchangeExec.doExecute(ShuffleExchangeExec.scala:119)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.InputAdapter.inputRDDs(WholeStageCodegenExec.scala:391)</span><br><span class="line">	at org.apache.spark.sql.execution.SortExec.inputRDDs(SortExec.scala:121)</span><br><span class="line">	at org.apache.spark.sql.execution.WholeStageCodegenExec.doExecute(WholeStageCodegenExec.scala:627)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.FlatMapGroupsWithStateExec.doExecute(FlatMapGroupsWithStateExec.scala:107)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.InputAdapter.inputRDDs(WholeStageCodegenExec.scala:391)</span><br><span class="line">	at org.apache.spark.sql.execution.SerializeFromObjectExec.inputRDDs(objects.scala:110)</span><br><span class="line">	at org.apache.spark.sql.execution.WholeStageCodegenExec.doExecute(WholeStageCodegenExec.scala:627)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.UnionExec$$anonfun$doExecute$1.apply(basicPhysicalOperators.scala:582)</span><br><span class="line">	at org.apache.spark.sql.execution.UnionExec$$anonfun$doExecute$1.apply(basicPhysicalOperators.scala:582)</span><br><span class="line">	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)</span><br><span class="line">	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)</span><br><span class="line">	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)</span><br><span class="line">	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)</span><br><span class="line">	at scala.collection.TraversableLike$class.map(TraversableLike.scala:234)</span><br><span class="line">	at scala.collection.AbstractTraversable.map(Traversable.scala:104)</span><br><span class="line">	at org.apache.spark.sql.execution.UnionExec.doExecute(basicPhysicalOperators.scala:582)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.InputAdapter.inputRDDs(WholeStageCodegenExec.scala:391)</span><br><span class="line">	at org.apache.spark.sql.execution.DeserializeToObjectExec.inputRDDs(objects.scala:76)</span><br><span class="line">	at org.apache.spark.sql.execution.MapElementsExec.inputRDDs(objects.scala:207)</span><br><span class="line">	at org.apache.spark.sql.execution.SerializeFromObjectExec.inputRDDs(objects.scala:110)</span><br><span class="line">	at org.apache.spark.sql.execution.ProjectExec.inputRDDs(basicPhysicalOperators.scala:41)</span><br><span class="line">	at org.apache.spark.sql.execution.WholeStageCodegenExec.doExecute(WholeStageCodegenExec.scala:627)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:155)</span><br><span class="line">	at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:152)</span><br><span class="line">	at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:127)</span><br><span class="line">	at org.apache.spark.sql.execution.QueryExecution.toRdd$lzycompute(QueryExecution.scala:80)</span><br><span class="line">	at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:80)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.sources.ForeachBatchSink.addBatch(ForeachBatchSink.scala:33)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch$5$$anonfun$apply$17.apply(MicroBatchExecution.scala:537)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$$anonfun$withNewExecutionId$1.apply(SQLExecution.scala:78)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:125)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:73)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch$5.apply(MicroBatchExecution.scala:535)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProgressReporter$class.reportTimeTaken(ProgressReporter.scala:351)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:58)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch(MicroBatchExecution.scala:534)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply$mcV$sp(MicroBatchExecution.scala:198)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProgressReporter$class.reportTimeTaken(ProgressReporter.scala:351)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:58)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1.apply$mcZ$sp(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProcessingTimeExecutor.execute(TriggerExecutor.scala:56)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.runActivatedStream(MicroBatchExecution.scala:160)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.org$apache$spark$sql$execution$streaming$StreamExecution$$runStream(StreamExecution.scala:281)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution$$anon$1.run(StreamExecution.scala:193)</span><br><span class="line">Caused by: java.io.NotSerializableException: scala.collection.convert.Wrappers$MapWrapper</span><br><span class="line">Serialization stack:</span><br><span class="line">	- object not serializable (class: scala.collection.convert.Wrappers$MapWrapper, value: &#123;samauctionlogs-ueq&#x3D;com.microsoft.ads.bi.processor.impl.ServingLogProcessor@3d519353, sambeacon-ueq&#x3D;com.microsoft.ads.bi.processor.impl.ViewabilityLogProcessor@90c5f43, samclickbeacon-ueq&#x3D;com.microsoft.ads.bi.processor.impl.ClickLogProcessor@2c55e9c&#125;)</span><br><span class="line">	- field (class: com.microsoft.ads.bi.processor.LogRecordProcessorFactory, name: processorMap, type: interface java.util.Map)</span><br><span class="line">	- object (class com.microsoft.ads.bi.processor.LogRecordProcessorFactory, com.microsoft.ads.bi.processor.LogRecordProcessorFactory@6287391e)</span><br><span class="line">	- field (class: com.microsoft.sam.SAMStreamingJob, name: logRecordProcessorFactory, type: class com.microsoft.ads.bi.processor.LogRecordProcessorFactory)</span><br><span class="line">	- object (class com.microsoft.sam.SAMStreamingJob, com.microsoft.sam.SAMStreamingJob@d67a7c6)</span><br><span class="line">	- field (class: com.microsoft.sam.SAMStreamingJob$$anonfun$callLogRecordProcessor$1, name: $outer, type: class com.microsoft.sam.SAMStreamingJob)</span><br><span class="line">	- object (class com.microsoft.sam.SAMStreamingJob$$anonfun$callLogRecordProcessor$1, &lt;function2&gt;)</span><br><span class="line">	- element of array (index: 3)</span><br><span class="line">	- array (class [Ljava.lang.Object;, size 4)</span><br><span class="line">	- field (class: org.apache.spark.sql.execution.WholeStageCodegenExec$$anonfun$13, name: references$1, type: class [Ljava.lang.Object;)</span><br><span class="line">	- object (class org.apache.spark.sql.execution.WholeStageCodegenExec$$anonfun$13, &lt;function2&gt;)</span><br><span class="line">	at org.apache.spark.serializer.SerializationDebugger$.improveException(SerializationDebugger.scala:40)</span><br><span class="line">	at org.apache.spark.serializer.JavaSerializationStream.writeObject(JavaSerializer.scala:46)</span><br><span class="line">	at org.apache.spark.serializer.JavaSerializerInstance.serialize(JavaSerializer.scala:100)</span><br><span class="line">	at org.apache.spark.util.ClosureCleaner$.ensureSerializable(ClosureCleaner.scala:400)</span><br><span class="line">	... 196 more</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br></pre></td><td class="code"><pre><span class="line">22&#x2F;10&#x2F;12 23:35:56 ERROR [rpc-server-4-6] client.TransportClient: Failed to send RPC RPC 6830745377217288298 to &#x2F;100.103.234.130:38594: java.nio.channels.ClosedChannelException</span><br><span class="line">java.nio.channels.ClosedChannelException: null</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.newClosedChannelException(AbstractChannel.java:957) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(AbstractChannel.java:865) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.DefaultChannelPipeline$HeadContext.write(DefaultChannelPipeline.java:1367) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:717) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:764) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext$WriteTask.run(AbstractChannelHandlerContext.java:1104) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:497) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_202]</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:56 WARN [block-manager-ask-thread-pool-164719] storage.BlockManagerMasterEndpoint: Error trying to remove broadcast 18736 from block manager BlockManagerId(165, CO01APBA132288B, 38614, None)</span><br><span class="line">java.io.IOException: Failed to send RPC RPC 6830745377217288298 to &#x2F;100.103.234.130:38594: java.nio.channels.ClosedChannelException</span><br><span class="line">	at org.apache.spark.network.client.TransportClient$RpcChannelListener.handleFailure(TransportClient.java:363) ~[spark-network-common_2.12-3.0.1-mt-SNAPSHOT.jar:3.0.1-mt-SNAPSHOT]</span><br><span class="line">	at org.apache.spark.network.client.TransportClient$StdChannelListener.operationComplete(TransportClient.java:340) ~[spark-network-common_2.12-3.0.1-mt-SNAPSHOT.jar:3.0.1-mt-SNAPSHOT]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:577) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:551) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:490) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:615) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:608) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:117) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.safeSetFailure(AbstractChannel.java:993) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(AbstractChannel.java:865) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.DefaultChannelPipeline$HeadContext.write(DefaultChannelPipeline.java:1367) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:717) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:764) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext$WriteTask.run(AbstractChannelHandlerContext.java:1104) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:497) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_202]</span><br><span class="line">Caused by: java.nio.channels.ClosedChannelException</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.newClosedChannelException(AbstractChannel.java:957) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	... 12 more</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:56 ERROR [rpc-server-4-6] client.TransportClient: Failed to send RPC RPC 6308174558094175038 to &#x2F;100.103.230.170:56350: java.nio.channels.ClosedChannelException</span><br><span class="line">java.nio.channels.ClosedChannelException: null</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.newClosedChannelException(AbstractChannel.java:957) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(AbstractChannel.java:865) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.DefaultChannelPipeline$HeadContext.write(DefaultChannelPipeline.java:1367) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:717) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:764) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext$WriteTask.run(AbstractChannelHandlerContext.java:1104) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:497) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_202]</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:56 WARN [block-manager-ask-thread-pool-164714] storage.BlockManagerMasterEndpoint: Error trying to remove broadcast 18736 from block manager BlockManagerId(136, CO01AP2455B8898, 56404, None)</span><br><span class="line">java.io.IOException: Failed to send RPC RPC 6308174558094175038 to &#x2F;100.103.230.170:56350: java.nio.channels.ClosedChannelException</span><br><span class="line">	at org.apache.spark.network.client.TransportClient$RpcChannelListener.handleFailure(TransportClient.java:363) ~[spark-network-common_2.12-3.0.1-mt-SNAPSHOT.jar:3.0.1-mt-SNAPSHOT]</span><br><span class="line">	at org.apache.spark.network.client.TransportClient$StdChannelListener.operationComplete(TransportClient.java:340) ~[spark-network-common_2.12-3.0.1-mt-SNAPSHOT.jar:3.0.1-mt-SNAPSHOT]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:577) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:551) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:490) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:615) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:608) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:117) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.safeSetFailure(AbstractChannel.java:993) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(AbstractChannel.java:865) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.DefaultChannelPipeline$HeadContext.write(DefaultChannelPipeline.java:1367) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:717) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:764) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext$WriteTask.run(AbstractChannelHandlerContext.java:1104) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:497) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_202]</span><br><span class="line">Caused by: java.nio.channels.ClosedChannelException</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.newClosedChannelException(AbstractChannel.java:957) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	... 12 more</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">22&#x2F;10&#x2F;12 23:34:57 INFO [Thread-44891] autopilot.AutopilotTopologyMapping: Read 0 physical mappings (removed 0) in 352 ms</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:01 INFO [task-result-getter-3] scheduler.TaskSetManager: Finished task 145.0 in stage 1734.0 (TID 7309398) in 148688 ms on CO01AP512A3516E (executor 8) (998&#x2F;1000)</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:14 INFO [task-result-getter-0] scheduler.TaskSetManager: Finished task 749.0 in stage 1734.0 (TID 7309924) in 161694 ms on CO01AP7F54C63C6 (executor 209) (999&#x2F;1000)</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 INFO [task-result-getter-1] scheduler.TaskSetManager: Finished task 480.0 in stage 1734.0 (TID 7309162) in 205635 ms on CO01AP36214B261 (executor 17) (1000&#x2F;1000)</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 INFO [task-result-getter-1] cluster.YarnClusterScheduler: Removed TaskSet 1734.0, whose tasks have all completed, from pool</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 INFO [dag-scheduler-event-loop] scheduler.DAGScheduler: ResultStage 1734 (foreachPartition at M2BMain.scala:233) finished in 205.773 s</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 INFO [dag-scheduler-event-loop] scheduler.DAGScheduler: Job 1387 is finished. Cancelling potential speculative or zombie tasks for this job</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 INFO [dag-scheduler-event-loop] cluster.YarnClusterScheduler: Killing all running tasks in stage 1734: Stage finished</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 INFO [Driver] scheduler.DAGScheduler: Job 1387 finished: foreachPartition at M2BMain.scala:233, took 205.787261 s</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 ERROR [spark-listener-group-eventLog] scheduler.AsyncEventQueue: Listener EventLoggingListener threw an exception</span><br><span class="line">java.io.IOException: Lease timeout of 30 seconds expired.</span><br><span class="line">	at org.apache.hadoop.hdfs.DFSOutputStream.abort(DFSOutputStream.java:763) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.DFSClient.closeAllFilesBeingWritten(DFSClient.java:656) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.client.impl.LeaseRenewer.run(LeaseRenewer.java:434) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.client.impl.LeaseRenewer.access$600(LeaseRenewer.java:76) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.client.impl.LeaseRenewer$1.run(LeaseRenewer.java:307) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748) ~[?:1.8.0_202]</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 ERROR [spark-listener-group-eventLog] scheduler.AsyncEventQueue: Listener EventLoggingListener threw an exception</span><br><span class="line">java.io.IOException: Lease timeout of 30 seconds expired.</span><br><span class="line">	at org.apache.hadoop.hdfs.DFSOutputStream.abort(DFSOutputStream.java:763) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.DFSClient.closeAllFilesBeingWritten(DFSClient.java:656) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.client.impl.LeaseRenewer.run(LeaseRenewer.java:434) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.client.impl.LeaseRenewer.access$600(LeaseRenewer.java:76) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.client.impl.LeaseRenewer$1.run(LeaseRenewer.java:307) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748) ~[?:1.8.0_202]</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 ERROR [spark-listener-group-eventLog] scheduler.AsyncEventQueue: Listener EventLoggingListener threw an exception</span><br><span class="line">java.io.IOException: Lease timeout of 30 seconds expired.</span><br><span class="line">	at org.apache.hadoop.hdfs.DFSOutputStream.abort(DFSOutputStream.java:763) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.DFSClient.closeAllFilesBeingWritten(DFSClient.java:656) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.client.impl.LeaseRenewer.run(LeaseRenewer.java:434) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.client.impl.LeaseRenewer.access$600(LeaseRenewer.java:76) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at org.apache.hadoop.hdfs.client.impl.LeaseRenewer$1.run(LeaseRenewer.java:307) ~[hadoop-hdfs-client-2.9.2-MT-SNAPSHOT.jar:?]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748) ~[?:1.8.0_202]</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 ERROR [rpc-server-4-6] client.TransportClient: Failed to send RPC RPC 7505683107670261422 to &#x2F;100.103.234.130:38594: java.nio.channels.ClosedChannelException</span><br><span class="line">java.nio.channels.ClosedChannelException: null</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.newClosedChannelException(AbstractChannel.java:957) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(AbstractChannel.java:865) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.DefaultChannelPipeline$HeadContext.write(DefaultChannelPipeline.java:1367) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:717) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:764) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext$WriteTask.run(AbstractChannelHandlerContext.java:1104) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:500) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_202]</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 WARN [block-manager-ask-thread-pool-164647] storage.BlockManagerMasterEndpoint: Error trying to remove broadcast 18734 from block manager BlockManagerId(165, CO01APBA132288B, 38614, None)</span><br><span class="line">java.io.IOException: Failed to send RPC RPC 7505683107670261422 to &#x2F;100.103.234.130:38594: java.nio.channels.ClosedChannelException</span><br><span class="line">	at org.apache.spark.network.client.TransportClient$RpcChannelListener.handleFailure(TransportClient.java:363) ~[spark-network-common_2.12-3.0.1-mt-SNAPSHOT.jar:3.0.1-mt-SNAPSHOT]</span><br><span class="line">	at org.apache.spark.network.client.TransportClient$StdChannelListener.operationComplete(TransportClient.java:340) ~[spark-network-common_2.12-3.0.1-mt-SNAPSHOT.jar:3.0.1-mt-SNAPSHOT]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:577) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:551) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:490) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:615) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:608) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:117) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.safeSetFailure(AbstractChannel.java:993) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(AbstractChannel.java:865) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.DefaultChannelPipeline$HeadContext.write(DefaultChannelPipeline.java:1367) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:717) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:764) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext$WriteTask.run(AbstractChannelHandlerContext.java:1104) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:500) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_202]</span><br><span class="line">Caused by: java.nio.channels.ClosedChannelException</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.newClosedChannelException(AbstractChannel.java:957) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	... 12 more</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 ERROR [rpc-server-4-6] client.TransportClient: Failed to send RPC RPC 9181049462703589877 to &#x2F;100.103.230.170:56350: java.nio.channels.ClosedChannelException</span><br><span class="line">java.nio.channels.ClosedChannelException: null</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.newClosedChannelException(AbstractChannel.java:957) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(AbstractChannel.java:865) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.DefaultChannelPipeline$HeadContext.write(DefaultChannelPipeline.java:1367) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:717) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:764) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext$WriteTask.run(AbstractChannelHandlerContext.java:1104) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:497) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_202]</span><br><span class="line">22&#x2F;10&#x2F;12 23:35:54 WARN [block-manager-ask-thread-pool-164648] storage.BlockManagerMasterEndpoint: Error trying to remove broadcast 18734 from block manager BlockManagerId(136, CO01AP2455B8898, 56404, None)</span><br><span class="line">java.io.IOException: Failed to send RPC RPC 9181049462703589877 to &#x2F;100.103.230.170:56350: java.nio.channels.ClosedChannelException</span><br><span class="line">	at org.apache.spark.network.client.TransportClient$RpcChannelListener.handleFailure(TransportClient.java:363) ~[spark-network-common_2.12-3.0.1-mt-SNAPSHOT.jar:3.0.1-mt-SNAPSHOT]</span><br><span class="line">	at org.apache.spark.network.client.TransportClient$StdChannelListener.operationComplete(TransportClient.java:340) ~[spark-network-common_2.12-3.0.1-mt-SNAPSHOT.jar:3.0.1-mt-SNAPSHOT]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:577) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:551) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:490) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:615) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:608) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:117) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.safeSetFailure(AbstractChannel.java:993) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.write(AbstractChannel.java:865) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.DefaultChannelPipeline$HeadContext.write(DefaultChannelPipeline.java:1367) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:717) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:764) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.AbstractChannelHandlerContext$WriteTask.run(AbstractChannelHandlerContext.java:1104) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:497) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_202]</span><br><span class="line">Caused by: java.nio.channels.ClosedChannelException</span><br><span class="line">	at io.netty.channel.AbstractChannel$AbstractUnsafe.newClosedChannelException(AbstractChannel.java:957) ~[netty-all-4.1.47.Final.jar:4.1.47.Final]</span><br><span class="line">	... 12 more</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">这个节点一直在报错，是否开启blacklist会缓解这个问题？</span><br></pre></td></tr></table></figure>
+<p>lambda serialize</p>
+<p>广播kafka连接，然后在foreach中send msg</p>
+<p><a target="_blank" rel="noopener" href="https://dzone.com/articles/how-and-why-to-serialialize-lambdas">How and Why to Serialize Lambdas</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/iteye_19045/article/details/119299015">Lambda表达式秒用——SerializedLambda序列化</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.thinbug.com/q/63686403">spark无法序列化lambda</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/63686403/spark-could-not-serialize-lambda">spark Could not serialize lambda</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22807912/how-to-serialize-a-lambda">How to serialize a lambda?</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/58887548/configure-function-lambda-serialization-in-spark">Configure function/lambda serialization in Spark</a></p>
 
       
     </div>
@@ -800,7 +1050,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/sql/hive/%E6%B5%81%E9%87%8F%E6%95%B0%E6%8D%AE%E6%9E%84%E5%BB%BA/%E6%9E%B6%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/spark/%E9%85%8D%E7%BD%AE%E9%A1%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -814,7 +1064,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/sql/hive/%E6%B5%81%E9%87%8F%E6%95%B0%E6%8D%AE%E6%9E%84%E5%BB%BA/%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/07/25/spark/%E9%85%8D%E7%BD%AE%E9%A1%B9/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -824,7 +1074,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 14:52:41" itemprop="dateCreated datePublished" datetime="2026-07-25T14:52:41+00:00">2026-07-25</time>
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
             </span>
 
           
@@ -838,7 +1088,156 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spark.sessionState.conf.setConfString(&quot;spark.sql.streaming.minBatchesToRetain&quot;, &quot;5&quot;)</span><br><span class="line">logger.info(&quot;spark.sql.streaming.minBatchesToRetain:&quot; + spark.sessionState.conf.minBatchesToRetain)</span><br><span class="line">logger.info(&quot;spark.sql.shuffle.partitions:&quot; + spark.sparkContext.getConf.get(&quot;spark.sql.shuffle.partitions&quot;))</span><br><span class="line">logger.info(&quot;spark.sql.streaming.multipleWatermarkPolicy:&quot; + spark.sparkContext.getConf.get(&quot;spark.sql.streaming.multipleWatermarkPolicy&quot;))</span><br><span class="line">val logSparkConf &#x3D; config.getConfig(&quot;logSparkConf&quot;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/sql/hive/group%E7%94%A8%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
           
+            <a href="/2026/07/25/sql/hive/group%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">hive-官网索引</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>grouping sets 要保证sets中每个组合中缺失的维度，不能包含null值</p>
+<p>group语法增强，可以使用维度下标表示，但如果grouping sets不支持，只能写字段名</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/sql/hive/join/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/sql/hive/join/" class="post-title-link" itemprop="url">hive-join</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Join-类别">Join 类别</h2>
+<h4 id="1-inner-join">1. inner join</h4>
+<h4 id="2-left-right-join">2. left/right join</h4>
+<h4 id="3-cross-join">3. cross join</h4>
+<h4 id="4-left-right-semi-join-半开连接">4. left/right semi join 半开连接</h4>
+<p>LEFT SEMI JOIN:左半开连接会返回左边表的记录，前提是其记录对于右边表满足ON语句中的判定条件。对于常见的内连接（INNER JOIN），这是一个特殊的，优化了的情况。大多数的SQL方言会通过in…exists结构来处理这种情况。</p>
+<ul>
+<li>只会保留左/右表中能关联上的数据，且数量不会受另一张表影响而膨胀（即在原表中是几条数据，结果还是几条）</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gqi7ne1000j314m0qewig.jpg" alt></p>
+<p>总结：</p>
+<p>对待右表中重复key的处理方式差异：因为 left semi join 是 in(keySet) 的关系，遇到右表重复记录，左表会跳过，而 join on 则会一直遍历。<br>
+left semi join 中最后 select 的结果只许出现左表，因为右表只有 join key 参与关联计算了，而 join on 默认是整个关系模型都参与计算了。</p>
+<h4 id="5">5.</h4>
+
       
     </div>
 
