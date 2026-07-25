@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/concept/%E6%95%B0%E6%8D%AE%E6%A6%82%E5%BF%B5/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/flink/flink%20window/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/11/concept/%E6%95%B0%E6%8D%AE%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">数据概念</a>
+            <a href="/2026/07/25/flink/flink%20window/" class="post-title-link" itemprop="url">flink window</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -209,7 +209,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
                 </span>
             </span>
 
@@ -224,7 +224,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903957693726727">漫画：什么是中台？</a></p>
+          <h1>flink1.6</h1>
+<p><a target="_blank" rel="noopener" href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/dev/stream/operators/windows.html">官网链接</a></p>
+<p><strong>Keyed Windows</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">stream</span><br><span class="line">       .keyBy(...)               &lt;-  keyed versus non-keyed windows</span><br><span class="line">       .window(...)              &lt;-  required: &quot;assigner&quot;</span><br><span class="line">      [.trigger(...)]            &lt;-  optional: &quot;trigger&quot; (else default trigger)</span><br><span class="line">      [.evictor(...)]            &lt;-  optional: &quot;evictor&quot; (else no evictor)</span><br><span class="line">      [.allowedLateness(...)]    &lt;-  optional: &quot;lateness&quot; (else zero)</span><br><span class="line">      [.sideOutputLateData(...)] &lt;-  optional: &quot;output tag&quot; (else no side output for late data)</span><br><span class="line">       .reduce&#x2F;aggregate&#x2F;fold&#x2F;apply()      &lt;-  required: &quot;function&quot;</span><br><span class="line">      [.getSideOutput(...)]      &lt;-  optional: &quot;output tag&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>Non-Keyed Windows</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">stream</span><br><span class="line">       .windowAll(...)           &lt;-  required: &quot;assigner&quot;</span><br><span class="line">      [.trigger(...)]            &lt;-  optional: &quot;trigger&quot; (else default trigger)</span><br><span class="line">      [.evictor(...)]            &lt;-  optional: &quot;evictor&quot; (else no evictor)</span><br><span class="line">      [.allowedLateness(...)]    &lt;-  optional: &quot;lateness&quot; (else zero)</span><br><span class="line">      [.sideOutputLateData(...)] &lt;-  optional: &quot;output tag&quot; (else no side output for late data)</span><br><span class="line">       .reduce&#x2F;aggregate&#x2F;fold&#x2F;apply()      &lt;-  required: &quot;function&quot;</span><br><span class="line">      [.getSideOutput(...)]      &lt;-  optional: &quot;output tag&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="窗口生命周期">窗口生命周期</h2>
+<h3 id="window">window</h3>
+<h3 id="trigger">trigger</h3>
+<p>The function will contain the computation to be applied to the contents of the window, while the <code>Trigger</code> specifies the conditions under which the window is considered ready for the function to be applied. A triggering policy might be something like “when the number of elements in the window is more than 4”, or “when the watermark passes the end of the window”. A trigger can also decide to purge a window’s contents any time between its creation and removal. Purging in this case only refers to the elements in the window, and <em>not</em> the window metadata. This means that new data can still be added to that window.</p>
+<p>function包含了窗口中数据的计算逻辑，trigger指定了在哪些条件下会调用这些function</p>
+<h3 id="Evictor">Evictor</h3>
+<p>Apart from the above, you can specify an <code>Evictor</code> (see <a target="_blank" rel="noopener" href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/dev/stream/operators/windows.html#evictors">Evictors</a>) which will be able to remove elements from the window after the trigger fires and before and/or after the function is applied.</p>
 
       
     </div>
@@ -244,7 +256,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/concept/%E6%9C%AF%E8%AF%AD/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/flink/flink%E6%95%B0%E6%8D%AE%E6%BA%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -258,7 +270,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/11/concept/%E6%9C%AF%E8%AF%AD/" class="post-title-link" itemprop="url">术语</a>
+            <a href="/2026/07/25/flink/flink%E6%95%B0%E6%8D%AE%E6%BA%90/" class="post-title-link" itemprop="url">flink数据源</a>
         </h2>
 
         <div class="post-meta">
@@ -268,7 +280,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -276,7 +288,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
                 </span>
             </span>
 
@@ -291,12 +303,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>SOP(Standard Operating Procedure) 标准作业程序</p>
-<p>Feed流</p>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/67740541">https://km.sankuai.com/page/67740541</a></p>
-<h4 id="开箱即用">开箱即用</h4>
-<p>开箱即用功能（out-of-the-box feature，也称OOTB或off the shelf）在软件上指产品在安装后，无需配置或修改，即可使用的功能或特性。也指默认即对所有用户可用，不需支付额外费用或进行另外的配置。<br>
-我们常说的spring-boot或者vue组件等可以开箱即用，就是可以无需配置就可以实现大部分功能，但是他们依旧是可以配置的。（强调约定优于配置）</p>
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/boling_cavalry/article/details/105467076">Flink的DataSource三部曲之一：直接API</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/boling_cavalry/article/details/105471798">Flink的DataSource三部曲之二:内置connector</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/boling_cavalry/article/details/105472218">Flink的DataSource三部曲之三:自定义</a></p>
 
       
     </div>
@@ -316,7 +325,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/company/microsoft/HDInsight/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/flink/flink%E7%AA%97%E5%8F%A3%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -330,7 +339,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/11/company/microsoft/HDInsight/" class="post-title-link" itemprop="url">HDInsight</a>
+            <a href="/2026/07/25/flink/flink%E7%AA%97%E5%8F%A3%E7%B1%BB/" class="post-title-link" itemprop="url">flink窗口类</a>
         </h2>
 
         <div class="post-meta">
@@ -340,7 +349,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -348,7 +357,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
                 </span>
             </span>
 
@@ -363,13 +372,91 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="guide-line"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/">guide line</a></h4>
-<h2 id="best-practise">best practise</h2>
-<h4 id="新建cluster注意事项：">新建cluster注意事项：</h4>
+          <ul>
+<li>WindowAssigner
+<ul>
+<li>SlidingProcessingTimeWindows</li>
+<li>BaseAlignedWindowAssigner
+<ul>
+<li>SlidingAlignedProcessingTimeWindows</li>
+</ul>
+</li>
+<li>TumblingEventTimeWindows
+<ul>
+<li>TumblingTimeWindows</li>
+</ul>
+</li>
+<li>MergingWindowAssigner
+<ul>
+<li>ProcessingTimeSessionWindows</li>
+<li>DynamicProcessingTimeSessionWindows</li>
+<li>DynamicEventTimeSessionWindows</li>
+<li>EventTimeSessionWindows</li>
+</ul>
+</li>
+<li>TumblingProcessingTimeWindows</li>
+<li>SlidingEventTimeWindows
+<ul>
+<li>SlidingTimeWindows</li>
+</ul>
+</li>
+<li>GlobalWindows</li>
+</ul>
+</li>
+</ul>
+<h2 id="WindowAssigner">WindowAssigner</h2>
+<h3 id="1-SlidingProcessingTimeWindows">1. SlidingProcessingTimeWindows</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into sliding windows based on the current</span></span><br><span class="line"><span class="comment"> * system time of the machine the operation is running on. Windows can possibly overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute, every 10 seconds:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;String, Tuple2&lt;String, Integer&gt;&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindows&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(SlidingProcessingTimeWindows.of(Time.of(1, MINUTES), Time.of(10, SECONDS));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于flink处理时间的滑动窗口</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-SlidingEventTimeWindows">6. SlidingEventTimeWindows</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into sliding windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows can possibly overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute, every 10 seconds:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;Tuple2&lt;String, Integer&gt;, String&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindow&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(SlidingEventTimeWindows.of(Time.minutes(1), Time.seconds(10)));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于元素时间的滑动窗口</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-1-SlidingTimeWindows-废弃">6.1 SlidingTimeWindows(废弃)</h4>
+<h3 id="2-BaseAlignedWindowAssigner">2. BaseAlignedWindowAssigner</h3>
+<h4 id="1-1-SlidingAlignedProcessingTimeWindows">1.1 SlidingAlignedProcessingTimeWindows</h4>
+<h3 id="5-TumblingProcessingTimeWindows">5. TumblingProcessingTimeWindows</h3>
+<h3 id="3-TumblingEventTimeWindows">3. TumblingEventTimeWindows</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows cannot overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;Tuple2&lt;String, Integer&gt;, String&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindow&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(TumblingEventTimeWindows.of(Time.minutes(1)));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-1-TumblingTimeWindows-废弃">3.1 TumblingTimeWindows(废弃)</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows cannot overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@deprecated</span> Please use &#123;<span class="doctag">@link</span> TumblingEventTimeWindows&#125;.</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-MergingWindowAssigner">4. MergingWindowAssigner</h3>
+<h4 id="4-1-ProcessingTimeSessionWindows">4.1 ProcessingTimeSessionWindows</h4>
+<h4 id="4-2-DynamicProcessingTimeSessionWindows">4.2 DynamicProcessingTimeSessionWindows</h4>
+<h4 id="4-3-DynamicEventTimeSessionWindows">4.3 DynamicEventTimeSessionWindows</h4>
+<h4 id="4-4-EventTimeSessionWindows">4.4 EventTimeSessionWindows</h4>
+<h3 id="7-GlobalWindows">7. GlobalWindows</h3>
+<h2 id="总结">总结</h2>
+<h3 id="适用场景">适用场景</h3>
 <ol>
-<li>指定独立的VNet，保证可以做灵活的网络管控</li>
-<li>对于节点多的cluster，为了保证Ambari监控性能，最好申请独立的DB，并且提高其等级，机器越多建议提高的等级越多。</li>
+<li><strong>滑动窗口</strong></li>
 </ol>
+<ul>
+<li>每条数据会发送到多个滑动窗口中，即在最终的输出中，一条数据要被统计多次</li>
+<li>适合统计据当前时间往前一段时间内的数据汇总</li>
+</ul>
+<ol start="2">
+<li><strong>滚动窗口</strong></li>
+</ol>
+<ul>
+<li>每条数据只会在一个滚动窗口中</li>
+<li>适合对数据进行简单聚合后，再次聚合的场景</li>
+<li>适合输出明细，不做聚合的场景，比如join后直接输出</li>
+</ul>
+<h3 id="占用内存比较">占用内存比较</h3>
+<ol>
+<li><strong>滑动窗口</strong>
+<ul>
+<li><em>理论上一条数据会复制到多个窗口，被复制几次，占用内存就会扩大几倍，但不清楚是否有优化，比如只复制数据的引用？</em></li>
+<li></li>
+</ul>
+</li>
+<li><strong>滚动窗口</strong></li>
+</ol>
+<h3 id="关于时间点">关于时间点</h3>
+<h4 id="窗口的开始时间">窗口的开始时间</h4>
+<ol>
+<li>首先要明确的是，开始时间只与system time和offset参数相关，与程序开始运行时间无关</li>
+<li>比如设置了窗口size是1h，那么在</li>
+</ol>
+<h4 id="窗口的结束时间">窗口的结束时间</h4>
 
       
     </div>
@@ -389,7 +476,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/company/microsoft/NuGet/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/flink/flink%E9%85%8D%E7%BD%AElog4j/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -403,7 +490,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/11/company/microsoft/NuGet/" class="post-title-link" itemprop="url">NuGet</a>
+            <a href="/2026/07/25/flink/flink%E9%85%8D%E7%BD%AElog4j/" class="post-title-link" itemprop="url">flink配置log4j</a>
         </h2>
 
         <div class="post-meta">
@@ -413,7 +500,70 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>因为本地测试中，本地构建的数据源并非预想中的单线程运行，所以想看下线程id，以确定是否每次都新起了线程。</p>
+<p>推荐使用xml，结构清晰</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Configuration</span> <span class="attr">status</span>=<span class="string">&quot;WARN&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Appenders</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 控制台输出 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Console</span> <span class="attr">name</span>=<span class="string">&quot;Console&quot;</span> <span class="attr">target</span>=<span class="string">&quot;SYSTEM_OUT&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Console</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 文件输出（可选） --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">File</span> <span class="attr">name</span>=<span class="string">&quot;File&quot;</span> <span class="attr">fileName</span>=<span class="string">&quot;logs/flink-job.log&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">File</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Appenders</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Loggers</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- Flink 相关日志级别 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;org.apache.flink&quot;</span> <span class="attr">level</span>=<span class="string">&quot;INFO&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 你的项目包名 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;com.jingqicao.code&quot;</span> <span class="attr">level</span>=<span class="string">&quot;DEBUG&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">Root</span> <span class="attr">level</span>=<span class="string">&quot;INFO&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;Console&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;File&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Root</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Loggers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="解析">解析</h3>
+<p>如果Logger不指定additivity=false，默认为true。此时当前Logger及Root都会处理日志，如果Logger与Root配了相同的Appender，就会重复输出。</p>
+<p>Root的level，表示的是Root使用的日志级别，如果有一个Logger没有具体指定，就会交由Root处理，即日志级别由Root决定。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/flink/class/createTypeInformation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/flink/class/createTypeInformation/" class="post-title-link" itemprop="url">createTypeInfomation</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -421,7 +571,11 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/class/" itemprop="url" rel="index"><span itemprop="name">class</span></a>
                 </span>
             </span>
 
@@ -436,442 +590,890 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="guide-line"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/what-is-nuget">guide line</a></h4>
-<h3 id="Restore-packages"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore">Restore packages</a></h3>
-<h3 id="Package-Manager-Console">Package Manager Console</h3>
-<p>参考资料：</p>
+          <h3 id="⚙️-原理简述">⚙️ 原理简述</h3>
+<ul>
+<li>Flink 为许多常见 Scala 类型（如基本类型、集合、元组、case class 等）提供了内置的 <code>TypeInformation</code> 工厂。</li>
+<li><code>createTypeInformation</code> 结合 <code>ClassTag</code> 和这些工厂，在编译期生成正确的 <code>TypeInformation</code>，避免了手动构造的繁琐和错误。</li>
+</ul>
+<h3 id="⚠️-注意事项">⚠️ 注意事项</h3>
+<ul>
+<li><strong>必须导入</strong>：如果忘记导入 <code>org.apache.flink.streaming.api.scala._</code>，编译器会报错“无法找到隐式值”，提示需要 <code>TypeInformation</code>。</li>
+<li><strong>自定义类型</strong>：对于自定义的 case class 或类，只要其成员类型都有可用的 <code>TypeInformation</code>，<code>createTypeInformation</code> 也能自动组合生成。</li>
+<li><strong>Table API 中也有类似机制</strong>，但通常通过导入 <code>org.apache.flink.table.api.bridge.scala._</code> 来提供。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/flink/probe/checkpoint/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/flink/probe/checkpoint/" class="post-title-link" itemprop="url">checkpoint</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/probe/" itemprop="url" rel="index"><span itemprop="name">probe</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h1>保存算法</h1>
+<h2 id="checkpoint保存算法有几种">checkpoint保存算法有几种</h2>
+<p>Flink的Checkpoint机制是其容错和状态一致性的核心。根据触发机制、数据保存方式和处理逻辑的不同，Checkpoint的实现方式可以从几个不同的维度进行分类。</p>
+<h3 id="🔀-按屏障对齐方式分类">🔀 按屏障对齐方式分类</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">对齐检查点 (Aligned Checkpoint)</th>
+<th style="text-align:left">非对齐检查点 (Unaligned Checkpoint)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>核心机制</strong></td>
+<td style="text-align:left">基于Chandy-Lamport分布式快照算法变体–，通过Barrier对齐保证快照一致性。</td>
+<td style="text-align:left">在Flink 1.11引入，1.13达到生产可用<a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/643e3d7864edaee92e117b7b7aaa26b7?name=author&amp;page=xiangguanwenzhang">-2</a>，优化反压场景下的Checkpoint性能<a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=188745770&amp;navigatingVersions=true">-33</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>触发时机</strong></td>
+<td style="text-align:left">当算子<strong>最后一个</strong>输入流的Barrier到达时触发-<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/651536">-10</a>。</td>
+<td style="text-align:left">当算子<strong>第一个</strong>输入流的Barrier到达时就触发-<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/651536">-10</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>阻塞情况</strong></td>
+<td style="text-align:left">Barrier对齐期间会<strong>阻塞</strong>后续数据处理-<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/651536">-10</a>。</td>
+<td style="text-align:left"><strong>无需阻塞</strong>数据处理，Barrier会越过正在处理的数据<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/651536">-10</a><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=188745770&amp;navigatingVersions=true">-33</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>状态大小</strong></td>
+<td style="text-align:left">仅保存算子状态，状态大小相对较小<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/651536">-10</a>。</td>
+<td style="text-align:left">额外保存Barrier之后“正在传输中”的数据，状态大小可能膨胀，每个Task可能达到几GB<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/651536">-10</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>适用场景</strong></td>
+<td style="text-align:left">状态较小、反压不严重的常规场景。</td>
+<td style="text-align:left"><strong>反压严重</strong>、需要保证Checkpoint快速完成的场景-<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/651536">-10</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Exactly-Once</strong></td>
+<td style="text-align:left">严格保证。</td>
+<td style="text-align:left">同样保证Exactly-Once语义<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/651536">-10</a><a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/article/1972196?from=15425">-11</a>。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>从Flink 1.13开始，官方引入了超时对齐机制，即“对齐超时后自动切换为非对齐”的混合模式，以平衡两种方式的优缺点-。</p>
+</blockquote>
+<h3 id="📊-按状态备份方式分类">📊 按状态备份方式分类</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">全量检查点 (Full Checkpoint)</th>
+<th style="text-align:left">增量检查点 (Incremental Checkpoint)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>核心机制</strong></td>
+<td style="text-align:left">每次Checkpoint都<strong>完整备份</strong>所有状态数据<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/124234">-6</a>。</td>
+<td style="text-align:left">仅备份自上次Checkpoint以来的<strong>状态变化部分</strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/JiShuiSanQianLi/article/details/127531616">-5</a><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/6636e468bc961f789f8d0ba8ffd51a95?name=article&amp;tab=suoyou&amp;page=37">-21</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>存储开销</strong></td>
+<td style="text-align:left">较大，每次备份完整状态。</td>
+<td style="text-align:left"><strong>显著降低</strong>存储开销，尤其适合大状态场景<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/124234">-6</a><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/6636e468bc961f789f8d0ba8ffd51a95?name=article&amp;tab=suoyou&amp;page=37">-21</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Checkpoint时间</strong></td>
+<td style="text-align:left">较长，与状态大小成正比。</td>
+<td style="text-align:left"><strong>大幅缩短</strong>Checkpoint时间（TB级作业可从3分钟降至30秒）<a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/6636e468bc961f789f8d0ba8ffd51a95?name=article&amp;tab=suoyou&amp;page=37">-21</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>恢复时间</strong></td>
+<td style="text-align:left">较快，直接加载完整快照。</td>
+<td style="text-align:left">相对较长，需要从基础快照+多个增量文件恢复-。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>适用场景</strong></td>
+<td style="text-align:left">状态较小、对恢复时间要求高的场景。</td>
+<td style="text-align:left"><strong>状态巨大</strong>（GB/TB级别）、希望减少Checkpoint开销的场景<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/124234">-6</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>支持状态后端</strong></td>
+<td style="text-align:left">所有状态后端。</td>
+<td style="text-align:left">主要支持<code>RocksDBStateBackend</code><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/6636e468bc961f789f8d0ba8ffd51a95?name=article&amp;tab=suoyou&amp;page=37">-21</a>。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="⚡-按执行阶段分类">⚡ 按执行阶段分类</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">同步阶段 (Synchronous Phase)</th>
+<th style="text-align:left">异步阶段 (Asynchronous Phase)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>执行内容</strong></td>
+<td style="text-align:left">调用<code>snapshotState()</code>方法，进行状态快照的<strong>准备或浅拷贝</strong><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/3ef2695bda7fa6b11cca814381cb2c16?name=article&amp;page=16">-19</a>。</td>
+<td style="text-align:left">将同步阶段准备好的状态数据<strong>持久化</strong>到远程存储<a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/abdd791ed070da92981825da780b7d3d?name=article&amp;tab=suoyou&amp;page=17">-18</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>对数据处理影响</strong></td>
+<td style="text-align:left"><strong>会阻塞</strong>数据处理，是Checkpoint的停顿时间。</td>
+<td style="text-align:left"><strong>不阻塞</strong>数据处理，后台线程执行上传<a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/643e3d7864edaee92e117b7b7aaa26b7?name=author&amp;page=xiangguanwenzhang">-2</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>优化方向</strong></td>
+<td style="text-align:left">优化同步阶段的逻辑，减少状态复制开销。</td>
+<td style="text-align:left">通过增量Checkpoint等机制减少上传数据量，或通过通用增量Checkpoint架构解耦。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="🚀-高级优化：通用增量检查点-Generic-Log-Based-Incremental-Checkpoint">🚀 高级优化：通用增量检查点 (Generic Log-Based Incremental Checkpoint)</h3>
+<blockquote>
+<p>在Flink 1.15引入，1.16达到生产可用<a target="_blank" rel="noopener" href="https://www.alibabacloud.com/en/developer/a/flink/table-general-incremental-checkpoint?_p_lc=1">-1</a><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/abdd791ed070da92981825da780b7d3d?name=article&amp;tab=suoyou&amp;page=17">-18</a></p>
+</blockquote>
+<p>这是一种更先进的增量Checkpoint架构，主要优化包括：</p>
+<ul>
+<li><strong>核心机制</strong>：引入State Changelog机制，将状态更新的变化日志<strong>持续</strong>写入远程存储（如HDFS/S3），而Checkpoint仅需Flush这些日志<a target="_blank" rel="noopener" href="https://www.alibabacloud.com/en/developer/a/flink/table-general-incremental-checkpoint?_p_lc=1">-1</a><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/abdd791ed070da92981825da780b7d3d?name=article&amp;tab=suoyou&amp;page=17">-18</a>。</li>
+<li><strong>异步优化</strong>：将状态持久化与Checkpoint过程<strong>完全解耦</strong>，避免大文件上传的不确定性<a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/abdd791ed070da92981825da780b7d3d?name=article&amp;tab=suoyou&amp;page=17">-18</a>。</li>
+<li><strong>主要优势</strong>：Checkpoint完成时间更<strong>稳定、快速</strong>，端到端延迟更低<a target="_blank" rel="noopener" href="https://www.alibabacloud.com/en/developer/a/flink/table-general-incremental-checkpoint?_p_lc=1">-1</a><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/abdd791ed070da92981825da780b7d3d?name=article&amp;tab=suoyou&amp;page=17">-18</a>。</li>
+</ul>
+<hr>
+<h3 id="💎-总结">💎 总结</h3>
+<p>Flink的Checkpoint算法可以根据不同维度进行分类：</p>
+<ul>
+<li><strong>按屏障对齐方式</strong>：分为<strong>对齐</strong>和<strong>非对齐</strong>两种，主要权衡反压场景下的Checkpoint完成速度与额外的存储开销。</li>
+<li><strong>按状态备份方式</strong>：分为<strong>全量</strong>和<strong>增量</strong>两种，增量方式极大地优化了大状态作业的Checkpoint性能。</li>
+<li><strong>按执行阶段</strong>：分为<strong>同步</strong>和<strong>异步</strong>两个阶段，将耗时的持久化操作异步化，减少对数据处理路径的影响。</li>
+<li><strong>高级优化</strong>：<strong>通用增量Checkpoint</strong>（1.15+）是面向未来的架构，通过解耦Checkpoint与状态存储，实现了更稳定高效的Checkpoint。</li>
+</ul>
+<p>这些算法通常<strong>组合使用</strong>。例如，一个生产作业可能配置为：使用<strong>RocksDB状态后端</strong>、开启<strong>增量Checkpoint</strong>、并设置<strong>对齐超时自动切换为非对齐</strong>。</p>
+<h2 id="对齐算法中-Barrier对齐期间会阻塞后续数据处理-是什么意思">对齐算法中 Barrier对齐期间会阻塞后续数据处理 是什么意思</h2>
+<p>简单来说，<strong>“Barrier对齐期间会阻塞后续数据处理”</strong> 指的是Flink为了保证数据一致性，在Exactly-Once模式下执行检查点时，会采取的一种“停下来等”的策略。这个策略确实会导致数据处理出现短暂的“暂停”，以换取状态快照的绝对精准。</p>
+<h3 id="⏸️-阻塞场景：为什么必须“等”？">⏸️ 阻塞场景：为什么必须“等”？</h3>
+<p>要理解阻塞，需要先了解Flink的Barrier对齐机制。当JobManager触发一次Checkpoint时，Source算子会向数据流中注入带有ID的Barrier（屏障）<a target="_blank" rel="noopener" href="https://blog.csdn.net/lifallen/article/details/148476015">-11</a>。对于<strong>只有一个输入流</strong>的算子，Barrier的处理相对简单，它会在收到Barrier时直接触发快照<a target="_blank" rel="noopener" href="https://blog.csdn.net/zznanyou/article/details/121347608#comments_25443477">-23</a>。</p>
+<p>阻塞主要发生在**有多个输入流的算子（如<code>CoProcessFunction</code>, <code>Join</code>等）**上<a target="_blank" rel="noopener" href="https://blog.csdn.net/zznanyou/article/details/121347608#comments_25443477">-23</a>。因为不同的输入流数据到达速度可能不同，Barrier到达的时间也会有先后-。</p>
+<p>为了保证快照能精准地反映Barrier到达前那一刻所有输入流的状态，算子必须执行“对齐”操作：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-powershell">Package Manager Console (PowerShell)</a>
+<li><strong>先到的先等</strong>：当算子从某个输入流（比如<code>输入流A</code>）收到了一个Barrier（编号为<code>n</code>）时，它立即停止处理<strong>该输入流</strong>Barrier之后的任何新数据<a target="_blank" rel="noopener" href="https://blog.csdn.net/zznanyou/article/details/121347608#comments_25443477">-23</a>。</li>
+<li><strong>继续处理其他</strong>：算子会继续处理其他尚未收到Barrier的输入流（比如<code>输入流B</code>）中的数据<a target="_blank" rel="noopener" href="https://blog.csdn.net/lifallen/article/details/148476015">-11</a>。</li>
+<li><strong>对齐完成</strong>：直到<code>输入流B</code>的Barrier（编号也是<code>n</code>）也到达后，所有输入流的Barrier才算“对齐”<a target="_blank" rel="noopener" href="https://blog.csdn.net/lifallen/article/details/148476015">-11</a>。这时，算子才会触发自己的状态快照，并向下游广播Barrier<a target="_blank" rel="noopener" href="https://blog.csdn.net/zznanyou/article/details/121347608#comments_25443477">-23</a>。</li>
+</ol>
+<p>这个过程中，从第一个Barrier到达，到最后一个Barrier到达的这段时间，就是“对齐时间”（Alignment Duration）<a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-master/zh/docs/ops/state/large_state_tuning/index.html">-2</a>-。在此期间，<code>输入流A</code>的处理被阻塞，<code>输入流A</code>后续的数据会被暂存在一个缓冲区里，等待对齐完成后才被继续处理<a target="_blank" rel="noopener" href="https://blog.csdn.net/zznanyou/article/details/121347608#comments_25443477">-23</a><a target="_blank" rel="noopener" href="https://www.modb.pro/db/81196">-25</a>。如果这个过程非常耗时，就说明作业可能正经历反压<a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-master/zh/docs/ops/state/large_state_tuning/index.html">-2</a>。</p>
+<h3 id="🆚-两种语义：阻塞与不阻塞的区别">🆚 两种语义：阻塞与不阻塞的区别</h3>
+<p>这种“阻塞”行为，是实现 <strong>Exactly-Once</strong> 的关键，它能确保所有输入流的状态在快照时是完全一致的。</p>
+<p>如果为了追求低延迟而选择“不等待”，即一旦接收到任何一个Barrier就立即触发快照并继续处理所有数据，这就变成了 <strong>At-Least-Once</strong> 语义。这样虽然减少了阻塞，但可能在恢复时造成数据重复处理<a target="_blank" rel="noopener" href="https://juejin.cn/post/7126119375530098724?from=search-suggest">-7</a>。</p>
+<h3 id="💡-阻塞的影响：反压与性能">💡 阻塞的影响：反压与性能</h3>
+<p>“阻塞”虽然保证了准确性，但也可能带来一些副作用：</p>
+<ul>
+<li><strong>加剧反压</strong>：在数据倾斜或下游处理能力不足时，对齐过程中的等待会进一步减慢数据处理速度，导致Barrier流动缓慢，Checkpoint耗时变长<a target="_blank" rel="noopener" href="https://blog.csdn.net/lifallen/article/details/148476015">-11</a>。</li>
+<li><strong>增加内存开销</strong>：用于暂存阻塞数据的输入缓冲区会消耗内存。如果对齐时间过长，缓冲区积压的数据会增多，可能导致内存压力过大<a target="_blank" rel="noopener" href="https://blog.csdn.net/zznanyou/article/details/121347608#comments_25443477">-23</a>。</li>
+</ul>
+<h3 id="🔧-解决方案：非对齐检查点-Unaligned-Checkpoint">🔧 解决方案：非对齐检查点 (Unaligned Checkpoint)</h3>
+<p>为了解决“对齐阻塞”在反压场景下带来的性能问题，Flink从1.11版本开始引入了 <strong>非对齐检查点 (Unaligned Checkpoint)</strong> <a target="_blank" rel="noopener" href="https://juejin.cn/post/7126119375530098724?from=search-suggest">-7</a>。</p>
+<p>它的核心思路是 <strong>“不停下来等，而是把等待时正在传输的数据也保存起来”</strong>。当算子的某个输入流收到Barrier后，它不再阻塞该通道，而是立即开始做快照，并将所有输入和输出缓冲区中“正在飞行”的数据作为快照的一部分一起持久化<a target="_blank" rel="noopener" href="https://blog.csdn.net/lifallen/article/details/148476015">-11</a>。<font color="#FF0000">这相当于把对齐的压力从运行时转移到了恢复时</font>，有效避免了因对齐阻塞而加剧反压的问题<a target="_blank" rel="noopener" href="https://blog.csdn.net/lifallen/article/details/148476015">-11</a>。</p>
+<h3 id="💎-总结-2">💎 总结</h3>
+<p>“Barrier对齐阻塞”是Flink为换取Exactly-Once语义而设计的机制，它通过在快照制作时暂停部分数据处理来确保状态的一致性。这个机制在反压时可能成为瓶颈，而非对齐检查点正是为了解决这一问题而生的。</p>
+<h2 id="书中exactly-once语义一节中看到一句话，其中一个步骤是算子任务对状态做快照，书上说，当分界线传递到了内部的window-算子，它同样会对自己的状态进行快照保存，并写入远程的持久化存储中。状态后端不是有两种吗，其中一种是写入内存的，为什么这里直接说写入持久化存储了？">书中exactly once语义一节中看到一句话，其中一个步骤是算子任务对状态做快照，书上说，当分界线传递到了内部的window()算子，它同样会对自己的状态进行快照保存，并写入远程的持久化存储中。状态后端不是有两种吗，其中一种是写入内存的，为什么这里直接说写入持久化存储了？</h2>
+<p>这个观察很敏锐。书中的描述其实是从实现原理的角度出发的。对于Flink来说，只要开启了Checkpoint，即使使用看起来只存在内存中的<code>MemoryStateBackend</code>，状态也会以<strong>文件形式被持久化到远程存储</strong>。这其实是Flink实现Exactly-Once语义的基石。</p>
+<p><code>MemoryStateBackend</code>这个名称确实容易引起误解，它指的主要是运行时状态在内存中，但Checkpoint数据依然需要可靠的持久化。</p>
+<hr>
+<h3 id="🧐-一个名字引发的误解：MemoryStateBackend">🧐 一个名字引发的误解：<code>MemoryStateBackend</code></h3>
+<p>根据Flink官方文档，<code>MemoryStateBackend</code>的核心行为是：</p>
+<ul>
+<li><strong>运行时状态</strong>：保存在TaskManager的JVM堆内存中<a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-release-1.19/api/java/org/apache/flink/runtime/state/memory/MemoryStateBackend.html#createKeyedStateBackend-org.apache.flink.runtime.state.StateBackend.KeyedStateBackendParameters-">-1</a>。</li>
+<li><strong>Checkpoint时</strong>：状态数据被发送到JobManager，并<strong>为了高可用性（HA）被持久化到文件系统中</strong><a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-release-1.19/api/java/org/apache/flink/runtime/state/memory/MemoryStateBackend.html#createKeyedStateBackend-org.apache.flink.runtime.state.StateBackend.KeyedStateBackendParameters-">-1</a>。它本质上是一个可以脱离文件系统工作的“基于文件系统的后端”<a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-release-1.19/api/java/org/apache/flink/runtime/state/memory/MemoryStateBackend.html#createKeyedStateBackend-org.apache.flink.runtime.state.StateBackend.KeyedStateBackendParameters-">-1</a>。</li>
+</ul>
+<p>这种设计在Flink 1.12的官方文档里说得更直接：<code>MemoryStateBackend</code>在Checkpoint时，<strong>“将快照信息作为CheckPoint应答消息的一部分发送给JobManager(master)，同时JobManager也将快照信息存储在堆内存中”</strong><a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-release-1.12/zh/ops/state/state_backends.html">-5</a>。这里并没有提及直接持久化到远程存储，所以书里的说法，很可能是基于更高版本中对其HA机制的描述，或是从“实现Exactly-Once语义”这个更高阶的视角出发，将Checkpoint视为<strong>最终必须写入持久化存储</strong>的行为。</p>
+<h3 id="💡-概念重塑：状态后端与检查点存储的“解耦”">💡 概念重塑：状态后端与检查点存储的“解耦”</h3>
+<p>Flink 1.15及之后版本的重要演进，可以帮助我们更好地理解这种设计：<strong>Flink将状态后端（State Backend）和检查点存储（Checkpoint Storage）这两个概念彻底分开了</strong><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/pages/diffpages.action?originalId=158878190&amp;pageId=158878672">-3</a>。这意味着，你完全可以组合使用不同的后端和存储方式：</p>
+<ul>
+<li><code>HashMapStateBackend</code> (等价于<code>MemoryStateBackend</code>) 处理运行时状态。</li>
+<li><code>JobManagerCheckpointStorage</code> 负责将Checkpoint数据存储在JobManager内存中，适用于本地测试<a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/pages/diffpages.action?originalId=158878190&amp;pageId=158878672">-3</a>。</li>
+</ul>
+<p>但为了实现生产级的容错（Exactly-Once语义），通常会将<code>HashMapStateBackend</code>与<code>FileSystemCheckpointStorage</code>搭配使用，这样状态快照就会被可靠地写入HDFS或S3等分布式文件系统<a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/pages/diffpages.action?originalId=158878190&amp;pageId=158878672">-3</a>。</p>
+<hr>
+<h3 id="⚙️-三种官方状态后端如何工作">⚙️ 三种官方状态后端如何工作</h3>
+<p>下图清晰地展示了Flink官方提供的三种状态后端，在工作状态存储和Checkpoint持久化上的分工：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">状态后端</th>
+<th style="text-align:left">工作状态存储 (TaskManager 本地)</th>
+<th style="text-align:left">Checkpoint 持久化存储 (远程)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>MemoryStateBackend</code> (旧版，已不推荐)</td>
+<td style="text-align:left">TaskManager JVM 堆内存<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/456253">-2</a></td>
+<td style="text-align:left">JobManager 内存 (HA模式下可持久化到文件系统)<a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-release-1.19/api/java/org/apache/flink/runtime/state/memory/MemoryStateBackend.html#createKeyedStateBackend-org.apache.flink.runtime.state.StateBackend.KeyedStateBackendParameters-">-1</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>FsStateBackend</code> (旧版，已不推荐)</td>
+<td style="text-align:left">TaskManager 内存<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/456253">-2</a></td>
+<td style="text-align:left">远程文件系统 (如 HDFS, S3)<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/456253">-2</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>RocksDBStateBackend</code> (推荐)</td>
+<td style="text-align:left">本地 RocksDB 实例 (内存+磁盘)<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/456253">-2</a></td>
+<td style="text-align:left">远程文件系统<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/456253">-2</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="💎-总结-3">💎 总结</h3>
+<p>所以，书上的那句话并没有错。它强调的是Exactly-Once语义实现的关键一环——<strong>将全局一致的状态快照进行持久化存储</strong>，而具体存到哪里，则由所选的状态后端和检查点存储配置共同决定。<code>MemoryStateBackend</code>虽然运行时状态在内存中，但为了实现生产级的容错，它的Checkpoint数据最终也需要被写入可靠的存储中。</p>
+<h2 id="也就是说，当开启了checkpoint，状态可能会存两份，一份在内存，一份要持久化？">也就是说，当开启了checkpoint，状态可能会存两份，一份在内存，一份要持久化？</h2>
+<p>是的，你的理解非常准确。开启 Checkpoint 后，Flink 的状态确实会存在“两份”：一份是用于处理实时数据的<strong>工作状态（Working State）</strong>，另一份是用于故障恢复的<strong>快照状态（Snapshot State）</strong>。</p>
+<p>这“两份”数据虽然内容上有关联，但它们的<strong>存储位置、生命周期和作用</strong>是完全不同的。</p>
+<h3 id="两份状态的详细对比">两份状态的详细对比</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">工作状态 (Working State)</th>
+<th style="text-align:left">快照状态 (Snapshot State / Checkpoint)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>作用</strong></td>
+<td style="text-align:left">用于处理实时数据，例如存储窗口中的元素、键控状态的值。</td>
+<td style="text-align:left">用于故障恢复，是一个<strong>全局一致的状态副本</strong>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>存储位置</strong></td>
+<td style="text-align:left">存储在 <strong>TaskManager 本地</strong>。根据状态后端不同，可能在内存或RocksDB。</td>
+<td style="text-align:left">存储在 <strong>远程持久化存储</strong>（如 HDFS, S3）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>生命周期</strong></td>
+<td style="text-align:left">随作业持续运行，不断被读写和更新。</td>
+<td style="text-align:left">周期性生成，且是<strong>只读</strong>的，生成后不再改变。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>数量</strong></td>
+<td style="text-align:left">一份（每个算子实例一个）。</td>
+<td style="text-align:left">可能有多份（由 <code>num-retained</code> 控制）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>是否必须</strong></td>
+<td style="text-align:left">是，数据处理的基础。</td>
+<td style="text-align:left">是，容错机制的基础。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="一个类比：文档编辑的“自动保存”">一个类比：文档编辑的“自动保存”</h3>
+<p>你可以把它们想象成正在编辑一份文档：</p>
+<ul>
+<li><strong>工作状态</strong> 就是你屏幕上正在编辑的文档内容，你所有的修改都在这里实时发生。它就相当于保存在你电脑内存/缓存里的“工作状态”。</li>
+<li><strong>快照状态</strong> 就是你每隔一段时间点击“保存”后，存到硬盘上的那个文件。那个文件是过去某个时间点的<strong>静态副本</strong>，主要用于系统崩溃后恢复。</li>
+</ul>
+<p><strong>而开启 Checkpoint 后的过程就像这样：</strong></p>
 <ol>
-<li>如何使用PMC</li>
-<li>命令list</li>
+<li>你的文档（工作状态）一直在内存中，你可以随时编辑（处理数据）。</li>
+<li>每隔几分钟，系统自动帮你把当前文档内容完整地存一次盘（生成快照）。</li>
+<li>你的电脑内存里有一份正在编辑的文档（工作状态），硬盘上则可能保留着最近几次存盘的副本（快照状态）。</li>
+</ol>
+<h3 id="两点补充说明">两点补充说明</h3>
+<ol>
+<li><strong>“两份”不等于“双倍”开销</strong>
+<ul>
+<li>虽然数据是两份，但生成快照的过程（特别是异步和增量快照）已经高度优化，通常不会让数据处理的延迟翻倍。</li>
+<li>增量快照每次只保存<strong>自上次快照以来的变化部分</strong>，而不是全部数据，这大大减少了快照的数据量和网络传输。</li>
+</ul>
+</li>
+<li><strong>不是所有状态后端都“在内存”</strong>
+<ul>
+<li>如果使用 <code>RocksDBStateBackend</code>，工作状态本身主要存储在本地磁盘（RocksDB），而不仅仅是内存。这时，“两份”的含义就变成了：<strong>一份在本地磁盘（工作状态）</strong>，另一份在<strong>远程存储（快照）</strong>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结">总结</h3>
+<p>所以，你的理解完全正确：Checkpoint 机制本质上就是用<strong>远程存储的静态快照</strong>，为<strong>本地运行的动态工作状态</strong>提供了一层可靠的容错保障。这是一套非常经典的“动态数据 + 静态备份”的分布式系统设计模式。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/flink/probe/%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/flink/probe/%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">函数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/probe/" itemprop="url" rel="index"><span itemprop="name">probe</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<p>Map[String, () =&gt; Solution]</p>
+<p>以函数作为map值存储的</p>
+<p>在 Scala 中，<code>Map[String, () =&gt; Solution]</code> 里的 <code>() =&gt; Solution</code> 是一个<strong>函数类型</strong>，它表示一个<strong>不接受任何参数、返回一个 <code>Solution</code> 对象</strong>的函数。将这样的函数作为 Map 的值存储，体现了 <strong>函数作为一等公民（first-class citizen）</strong> 的特性，即函数可以像普通值一样被传递、存储和调用。</p>
+<p>具体来说，这里的 <code>() =&gt; Solution</code> 是一个<strong>函数值</strong>（function value），它是函数类型的实例。你可以把它看作是一个<strong>工厂</strong>：当你需要一个新的 <code>Solution</code> 实例时，就调用这个函数（通过 <code>apply()</code> 或直接加括号 <code>()</code>），它会生成一个实例。这种存储函数而不是直接存储实例的做法，本质上是在存储一个<strong>生产实例的行为</strong>，而不是实例本身。</p>
+<p>这种设计模式常被称为<strong>工厂函数存储</strong>或<strong>延迟初始化</strong>，它是函数式编程中常见的技巧，利用了函数作为值的灵活性。</p>
+<h2 id="函数的返回值">函数的返回值</h2>
+<h3 id="根据返回值数量选择合适的数据类型">根据返回值数量选择合适的数据类型</h3>
+<p>固定数量、相同类型 → 元组 / case class</p>
+<p>可变数量、相同类型 → 集合（List、Seq、Vector 等）</p>
+<p>可变数量、不同类型 → 用 sealed trait 和集合模拟，或使用 HList（shapeless）</p>
+<p>两种可能的结果 → Either、Try、Option</p>
+<h4 id="当返回值可能成功也可能失败时：使用-Either-或-Try">当返回值可能成功也可能失败时：使用 Either 或 Try</h4>
+<p>如果你的函数可能返回多种结果（例如成功时返回一个值，失败时返回错误信息），可以使用 <code>Either</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def divide(a: Int, b: Int): Either[String, Int] &#x3D; </span><br><span class="line">  if (b &#x3D;&#x3D; 0) Left(&quot;Division by zero&quot;)</span><br><span class="line">  else Right(a &#x2F; b)</span><br></pre></td></tr></table></figure>
+<p><code>Either</code> 通常用于表示两种可能的结果，但你可以嵌套组合来表示更多情况。</p>
+<h1>富函数</h1>
+<h2 id="为什么可以通过富函数类来自定义按键分区状态">为什么可以通过富函数类来自定义按键分区状态</h2>
+<p>在 Flink 中，<strong>富函数（RichFunction）</strong> 能够自定义<strong>按键分区状态（Keyed State）</strong>，是因为 Flink 的设计将 <strong>“运行时上下文（RuntimeContext）”</strong> 和 <strong>“状态后端（State Backend）”</strong> 无缝集成到了富函数的生命周期中。</p>
+<p>简单来说：<strong>富函数充当了用户逻辑与 Flink 分布式状态管理机制之间的桥梁</strong>。下面从几个关键点解释其原理。</p>
+<hr>
+<h3 id="1-富函数提供-RuntimeContext，这是状态管理的入口">1. 富函数提供 <code>RuntimeContext</code>，这是状态管理的入口</h3>
+<p>当你在 <code>KeyedStream</code> 上使用富函数（如 <code>RichFlatMapFunction</code>、<code>KeyedProcessFunction</code>）时，Flink 会在算子初始化时通过 <code>open()</code> 方法将 <strong><code>RuntimeContext</code></strong> 注入到函数实例中。</p>
+<p><code>RuntimeContext</code> 提供了以下关键方法，用于创建和管理按键分区状态：</p>
+<ul>
+<li><code>getState(ValueStateDescriptor)</code></li>
+<li><code>getListState(ListStateDescriptor)</code></li>
+<li><code>getMapState(MapStateDescriptor)</code></li>
+<li><code>getReducingState(ReducingStateDescriptor)</code></li>
+<li><code>getAggregatingState(AggregatingStateDescriptor)</code></li>
+</ul>
+<p>这些方法返回的状态对象（如 <code>ValueState</code>）会自动绑定到<strong>当前处理的数据的 key</strong> 上。</p>
+<hr>
+<h3 id="2-按键分区状态的自动-key-感知">2. 按键分区状态的自动 key 感知</h3>
+<p>按键分区状态的核心特点是：<strong>每个不同的 key 都有自己独立的状态副本</strong>。富函数在 <code>KeyedStream</code> 上使用时，Flink 的运行时框架会<strong>自动将当前处理的元素的 key 与状态对象关联</strong>。</p>
+<p>具体流程：</p>
+<ul>
+<li>当数据进入算子时，Flink 知道这条数据属于哪个 key（通过 <code>KeySelector</code> 或分区方式确定）。</li>
+<li>在调用 <code>processElement()</code> 等方法时，<code>RuntimeContext</code> 内部会根据当前 key 找到对应的状态分区。</li>
+<li>用户代码通过状态对象读写时，实际上操作的是<strong>当前 key 对应的状态</strong>，无需手动管理 key 到状态的映射。</li>
+</ul>
+<p>这种机制被称为 <strong>“按键分区状态的自动作用域（scoping）”</strong>。</p>
+<hr>
+<h3 id="3-状态后端负责实际存储和容错">3. 状态后端负责实际存储和容错</h3>
+<p>用户通过富函数定义的状态描述符（<code>StateDescriptor</code>）只声明了状态的<strong>名称、类型、序列化器</strong>以及可选的<strong>TTL（Time-To-Live）</strong>。真正的状态数据由 <strong>状态后端（State Backend）</strong> 管理：</p>
+<ul>
+<li><strong><code>MemoryStateBackend</code></strong>：状态存储在 JVM 堆内存中，适合本地测试。</li>
+<li><strong><code>FsStateBackend</code></strong>：状态存储在内存中，但检查点会持久化到文件系统。</li>
+<li><strong><code>RocksDBStateBackend</code></strong>：状态存储在本地 RocksDB 数据库中，支持超大状态。</li>
+</ul>
+<p>无论使用哪种状态后端，富函数中的状态操作都通过统一的 <code>State</code> 接口访问，Flink 会在后台处理序列化、缓存、磁盘读写、检查点快照等复杂逻辑。</p>
+<hr>
+<h3 id="4-容错与一致性保证">4. 容错与一致性保证</h3>
+<p>富函数中的按键分区状态会<strong>自动参与检查点（Checkpoint）</strong> 机制。当作业失败恢复时，Flink 会从最近成功的检查点中恢复所有 key 的状态，并将其重新加载到对应的算子实例中。这一过程对用户代码完全透明，只需在富函数中定义状态即可。</p>
+<hr>
+<h3 id="5-设计优势：为什么不用普通函数？">5. 设计优势：为什么不用普通函数？</h3>
+<p>如果不使用富函数，而是自己维护一个 <code>Map&lt;Key, Value&gt;</code> 来实现类似功能，会遇到以下问题：</p>
+<ul>
+<li><strong>内存溢出</strong>：状态无法自动溢写到磁盘。</li>
+<li><strong>故障恢复困难</strong>：需要手动实现状态的快照和恢复。</li>
+<li><strong>无法感知 key 的变化</strong>：需要手动从数据中提取 key 并维护映射。</li>
+<li><strong>性能差</strong>：缺少 Flink 内部的优化（如状态缓、增量快照、异步检查点等）。</li>
+</ul>
+<p>富函数 + 按键分区状态的设计，将分布式状态管理的复杂性完全封装，让用户能像写单机程序一样使用状态，同时享受 Flink 提供的高性能、一致性和容错能力。</p>
+<hr>
+<h3 id="💎-总结">💎 总结</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">组件</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>富函数</strong></td>
+<td style="text-align:left">提供生命周期方法（<code>open</code>、<code>close</code>）和运行时上下文（<code>RuntimeContext</code>）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><code>RuntimeContext</code></strong></td>
+<td style="text-align:left">状态创建入口，自动绑定当前 key。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><code>StateDescriptor</code></strong></td>
+<td style="text-align:left">声明状态的名称、类型、序列化器、TTL 等元信息。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>状态后端</strong></td>
+<td style="text-align:left">实际存储状态数据，支持内存、文件系统、RocksDB，并负责检查点容错。</td>
+</tr>
+</tbody>
+</table>
+<p>因此，通过富函数自定义按键分区状态，本质上是 <strong>Flink 将分布式状态管理抽象为易用的编程模型</strong>，让开发者无需关心底层的 key 路由、状态分区、容错快照等细节。</p>
+<h2 id="富函数只能在KeyedStream上使用吗">富函数只能在KeyedStream上使用吗</h2>
+<p>不是的，<strong>富函数（<code>RichFunction</code>）并不仅限于 <code>KeyedStream</code>，它可以在任何数据流上使用</strong>。</p>
+<p>几乎所有 Flink 算子（如 <code>map</code>, <code>filter</code>, <code>flatMap</code> 等）都同时提供了普通函数和对应的富函数版本，例如 <code>RichMapFunction</code>, <code>RichFilterFunction</code>, <code>RichFlatMapFunction</code><a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/article/2428275">-20</a><a target="_blank" rel="noopener" href="https://dataartist.blog.csdn.net/article/details/136114081">-8</a>。即使是在非按键分区的普通数据流（<code>DataStream</code>）上，你依然可以无缝地使用这些富函数-。</p>
+<hr>
+<h3 id="🧩-富函数在非KeyedStream上的主要应用">🧩 富函数在非KeyedStream上的主要应用</h3>
+<p>虽然不能使用<strong>键控状态（Keyed State）</strong>，但在非KeyedStream上，富函数依然提供了两个非常重要的能力：</p>
+<ul>
+<li><strong>生命周期管理 (Lifecycle Management)</strong>：<code>RichFunction</code> 提供了 <code>open()</code> 和 <code>close()</code> 两个生命周期方法<a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunny3158/p/18095186">-36</a>。
+<ul>
+<li><strong><code>open()</code></strong>：在算子的实际工作方法（如 <code>map()</code>）被调用之前执行一次，常用于<strong>一次性初始化</strong>任务，如建立数据库连接、加载配置文件等<a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/article/2428275">-20</a>。</li>
+<li><strong><code>close()</code></strong>：在算子生命周期结束时调用，用于执行<strong>清理工作</strong>，如关闭连接、释放资源等<a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/article/2428275">-20</a>。</li>
+</ul>
+</li>
+<li><strong>获取运行时上下文 (Access to <code>RuntimeContext</code>)</strong>：通过 <code>getRuntimeContext()</code> 方法，可以获取算子的运行时信息，例如<strong>算子并行度、任务名称</strong>等<a target="_blank" rel="noopener" href="https://www.cnblogs.com/sunny3158/p/18095186">-36</a>。这为开发通用、自适应的函数提供了基础。</li>
+</ul>
+<h3 id="🚫-在非KeyedStream上的能力限制">🚫 在非KeyedStream上的能力限制</h3>
+<p>在非 <code>KeyedStream</code> 上使用富函数时，确实无法访问以下两项关键功能：</p>
+<ul>
+<li><strong>无法访问键控状态 (Keyed State)</strong>：键控状态是基于 Key 进行分区的，由于 <code>DataStream</code> 没有经过 <code>keyBy()</code> 分区，因此无法获取和使用 <code>ValueState</code>, <code>ListState</code> 等键控状态-<a target="_blank" rel="noopener" href="https://www.yisu.com/jc/1058791.html">-5</a>。</li>
+<li><strong>无法访问定时器服务 (TimerService)</strong>：<code>TimerService</code>（如 <code>registerEventTimeTimer()</code>）依赖于为特定 Key 注册定时器的能力，因此在非 <code>KeyedStream</code> 上不可用-<a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-master/api/java/org/apache/flink/streaming/api/functions/KeyedProcessFunction.html">-1</a>。</li>
+</ul>
+<h3 id="💎-总结-2">💎 总结</h3>
+<ul>
+<li><strong>能否使用？</strong> <strong>可以</strong>，富函数可以用在任何数据流上。</li>
+<li><strong>与 KeyedStream 的区别？</strong> 非 <code>KeyedStream</code> 上<strong>无法使用</strong>键控状态和定时器服务<a target="_blank" rel="noopener" href="https://www.javadoc.io/static/org.apache.flink/flink-streaming-java/1.20.1/org/apache/flink/streaming/api/functions/ProcessFunction.html">-2</a>，但可以正常使用生命周期方法和运行时上下文。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/booknote/labuladong%E7%9A%84%E7%AE%97%E6%B3%95%E7%A7%98%E7%B1%8Dv2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/booknote/labuladong%E7%9A%84%E7%AE%97%E6%B3%95%E7%A7%98%E7%B1%8Dv2/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h1>梳理</h1>
+<h3 id="解题思考">解题思考</h3>
+<ol>
+<li>每个题的时间/空间复杂度是多少，及最好/最坏情况的时间/空间复杂度</li>
+</ol>
+<h1>算法框架</h1>
+<h3 id="前缀和">前缀和</h3>
+<p>解决的问题：</p>
+<ol>
+<li></li>
+</ol>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<h3 id="差分数组">差分数组</h3>
+<p>解决的问题：</p>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<h3 id="双指针">双指针</h3>
+<p>解决的问题：</p>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<h3 id="滑动窗口">滑动窗口</h3>
+<p>解决的问题：</p>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<h3 id="二分查找">二分查找</h3>
+<p>解决的问题：</p>
+<ol>
+<li>查找某个数</li>
+<li>确定左/右边界线</li>
+</ol>
+<p>题目特点（如何辨析是否使用）：</p>
+<ol>
+<li></li>
+</ol>
+<p>经典题目：</p>
+<ol>
+<li>⼒扣第 34 题「在排序数组中查找元素的第⼀个和最后⼀个位置」</li>
+<li>力扣875. 爱吃⾹蕉的珂珂（中等）</li>
+<li>力扣1011. 在D天内送达包裹的能⼒（中等）</li>
+</ol>
+<h3 id="田忌赛马">田忌赛马</h3>
+<p>解决的问题：</p>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<ol>
+<li>力扣870. 优势洗牌（中等）</li>
+</ol>
+<h3 id="链表操作递归秘籍">链表操作递归秘籍</h3>
+<p>解决的问题：</p>
+<ol>
+<li>翻转链表</li>
+<li>部分翻转链表</li>
+</ol>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<ol>
+<li>
+<p>LeetCode 206. 反转链表（简单）</p>
+</li>
+<li>
+<p>LeetCode 92. 反转链表 II（中等）</p>
+<p>---------</p>
+</li>
+</ol>
+<h3 id="括号题目">括号题目</h3>
+<p>解决的问题：</p>
+<ol>
+<li>平衡括号串（一）p119</li>
+<li>平衡括号串（二）p120</li>
+</ol>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<ol>
+<li>⼒扣第 921 题「使括号有效的最少添加」</li>
+<li>⼒扣第 1541 题「平衡括号字符串的最少插⼊次数」</li>
+</ol>
+<h3 id="单调栈">单调栈</h3>
+<p>解决的问题：</p>
+<ol>
+<li>后面第一个更大的数</li>
+<li></li>
+</ol>
+<p>思考：</p>
+<ol>
+<li>为什么要用从后往前的方式入栈？
+<ol>
+<li>因为最后要输出的是更大的数的值，而不是索引，如果是从前往后入栈，入栈的元素就只能存入值，它的索引就丢了，而最终的结果是要按照这个索引把值替换掉，所以不能这么解</li>
 </ol>
 </li>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/reference/powershell-reference">PowerShell reference</a>
-<ol>
-<li>命令明细</li>
 </ol>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<ol>
+<li>
+<p>LeetCode 上拿下如下题⽬：</p>
+<p>\496. 下⼀个更⼤元素I（简单）</p>
+<p>\503. 下⼀个更⼤元素II（中等）</p>
+<p>\739. 每⽇温度（中等）</p>
+<p>----------</p>
 </li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/company/microsoft/apgold/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/company/microsoft/apgold/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>d:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Test-MW1-MSNMediation&gt;sd edit deployment.int<br>
-deployment.int - file(s) not on client.</p>
-<p>直接编辑</p>
+<h3 id="单调队列">单调队列</h3>
+<p>解决的问题：</p>
 <ol>
-<li>add/edit</li>
-<li>安装codeflow 提交pr<br>
-\codeflow.redmond.corp.microsoft.com\public\cf2Launcher.cmd</li>
+<li>滑动窗口</li>
 </ol>
-<p>codeflow作用</p>
-<p>ve作用：<br>
-pe作用：</p>
-<p>之前</p>
-<p>D:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Test-MW1-MSNMediation</p>
-<p>D:\project\APGold\autopilotservice\MW1\AdsMz-Prod-MW1</p>
-<p>A ServiceGroup is mandatory for every machine function</p>
-<p>VE中存储的可以理解为某个项目的global config，所有的PE公用这部分config<br>
-设计目的是在同一项目部署多个PE时，避免多次发布，只需要更新VE，相关PE就会生效</p>
-<p><a target="_blank" rel="noopener" href="https://msazure.visualstudio.com">https://msazure.visualstudio.com</a></p>
-<p>D:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Prod-MW1-MSNMediation</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">07&#x2F;26&#x2F;21 16:54:01.841,error processing AdsMz-Test-MW1: Rollout &#39;AdsBI-AdsMz-Test-MW1-MzOrchestration-VE.6799404_17553440741849145769_0.Rollout_AdsBI_Streaming_CFR&#39; cannot be kicked due to status: InRollout - Rollout in progress..Rollout &#39;AdsBI-AdsMz-Test-MW1-MSNMediation-VE.6827694_4064931696698155710_0.Rollout_AdsBI_Streaming_CFR&#39; cannot be kicked due to status: OtherRollout - Waiting on other rollout on MF AdsBI_Streaming_CFR in progress: AdsBI_Streaming_CFR.AdvertiserAggs_94d0ef91_90546_1_15-0-897+94d0ef91_CL6670088_5920165827906938206_0.AdsBI-AdsMz-Test-MW1-AdvertiserAggs-VE.csv:AdsBI_Streaming_CFR.AgoraAggs_76700988_85934_1_16-0-173+76700988_CL6670088_4056715873563314682_0.AdsBI-AdsMz-Test-MW1-AgoraAggs-VE.csv:AdsBI_Streaming_CFR.CACFR_9a63868e_90143_2_1-0-2408+9a63868e_CL6670088_11167218336511992544_0.AdsBI-AdsMz-Test-MW1-CACFR-VE.csv:AdsBI_Streaming_CFR.CFR_2d2cea68_91067_1_17-0-6662+2d2cea68_CL6670088_18415503406869780426_0.AdsBI-AdsMz-Test-MW1-CFR-VE.csv:AdsBI_Streaming_CFR.KpiAggs_fdd5f92d_90180_1_17-0-433+fdd5f92d_CL6670088_6626197140932378707_0.AdsBI-AdsMz-Test-MW1-KPIAggs-VE.csv:AdsBI_Streaming_CFR.Monetization_de0db608_91071_1_1-0-2808+de0db608_CL6670088_351842135959690630_0.AdsBI-AdsMz-Test-MW1-Monetization-VE.csv:AdsBI_Streaming_CFR.Orchestration_93eb645e_91078_1_16-0-557+93eb645e_CL6799404_17553440741849145769_0.AdsBI-AdsMz-Test-MW1-MzOrchestration-VE.csv:AdsBI_Streaming_CFR.PublisherAggs_55bd6dd9_90534_1_17-0-474+55bd6dd9_CL6670088_15361642287162420254_0.AdsBI-AdsMz-Test-MW1-PublisherAggs-VE.csv:AdsBI_Streaming_CFR.Mediation_865d3b39_90170_1_merge_20210629_-1_CL6670088_3189803787641037971_0.AdsBI-AdsMz-Test-MW1-Mediation-VE.csv:AdsBI_Streaming_CFR.MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33_CL6827694_4798040603905411799_0.AdsBI-AdsMz-Test-MW1-MSNMediation-VE.csv:.OM.Autopilot-AutopilotClient-VE.csv..; .. Some rollouts not triggered.</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Deployment: 6827694_4798040603905411799 (this is NOT the latest deployment.ini change number)</span><br><span class="line">Downloaded 89 files, 21510455 bytes, compressed size: 8267353 bytes.</span><br><span class="line">Failed to build services: Failed to build service &#39;SAMHourlyS2B.MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33&#39;: Proxy error: not all data was received (DP: 25.68.114.53; by MW01NAP0000036C); ;  ;Log:e:GetStreamChunkMapWithRetry:stream does not exist [response from server] : GetStreamChunkMap(&#39;stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;ServiceMaps&#x2F;MSNMediationServiceMap.ini&#39;; &#39;MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33&#39;) failed ;Log:w:ApDynamicStorage::StorageConnectionEx::DownloadBufferFromStreamWithRetry:Stream (stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;ServiceMaps&#x2F;MSNMediationServiceMap.ini _ MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33) not found in storage ;</span><br><span class="line">Majority of the building errors are temporary and will be fixed automatically. </span><br><span class="line">If there is no change or progress in the app deployment log after 15 minutes, contact apswat for production environments and aptalk for non-production environment.</span><br><span class="line">Look in App Deployment log for more info</span><br><span class="line"></span><br><span class="line">Here are common error messages and possible fixes:</span><br><span class="line">     Msg: Error 53: The network path was not found.: ac: 0</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Msg: EDP010385: APSEQREAD::GetDataPointer error 2</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Proxy reported error: EDP010196: ApckBuilder Error 3: The system cannot find the path specified.</span><br><span class="line">     Fix: Look for missing directories under your build drop.</span><br><span class="line"></span><br><span class="line">For more troubleshooting info, please refer to App Deployment Troubleshooting</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Deployment: 6827694_9979618793807238839_0 (this is NOT the latest deployment.ini change number)</span><br><span class="line">Downloaded [unknown] files, [unknown] bytes.</span><br><span class="line">Failed to import version &#39;6827694_9979618793807238839&#39; of image for environment &#39;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#39;: Error downloading image from remote storage (stream &#39;stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;image.ini@6827694_9979618793807238839&#39;)</span><br><span class="line">Majority of the building errors are temporary and will be fixed automatically. </span><br><span class="line">If there is no change or progress in the app deployment log after 15 minutes, contact apswat for production environments and aptalk for non-production environment.</span><br><span class="line">Look in App Deployment log for more info</span><br><span class="line"></span><br><span class="line">Here are common error messages and possible fixes:</span><br><span class="line">     Msg: Error 53: The network path was not found.: ac: 0</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Msg: EDP010385: APSEQREAD::GetDataPointer error 2</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Proxy reported error: EDP010196: ApckBuilder Error 3: The system cannot find the path specified.</span><br><span class="line">     Fix: Look for missing directories under your build drop.</span><br><span class="line"></span><br><span class="line">For more troubleshooting info, please refer to App Deployment Troubleshooting</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/company/microsoft/component/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/company/microsoft/component/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Severity	Code	Description	Project	File	Line	Suppression State<br>
-Error	MSB3680	The source file “D:\project\Ads.BI.MSNMediation\private\src\Batch/Autopilot/ExternalConfigs/Microsoft.BingAds.BI.APDeploy.exe.config” does not exist.	Microsoft.BI.MSNMediation.HourlyS2B.Drop	D:\project\Ads.BI.MSNMediation\private\src\Batch\build\targets\CreateDrop.targets	47</p>
-<p>、</p>
-<p>Severity	Code	Description	Project	File	Line	Suppression State<br>
-Error	MSB3030	Could not copy the file “D:\project\Ads.BI.MSNMediation\private\src\Batch/SAMHourlyS2B/Microsoft.BI.MSNMediation.HourlyS2B.Drop/bin\Debug\net472**” because it was not found.	Microsoft.BI.MSNMediation.HourlyS2B.Drop	D:\project\Ads.BI.MSNMediation\private\src\Batch\build\targets\CreateDrop.targets	47</p>
-<p>c:\Users\jingqicao.nuget\packages\microsoft.bingads.bi.apdeploy\10.5.2</p>
-<p>在sdk之外做的nuget package改动，比如删掉某个包</p>
-<p>resolved    Show files that have been merged but not submitted   跟执行目录无关<br>
-retype      Reappraise the file type for files on the client<br>
-revert      Discard changes from an opened file<br>
-review      List and track changelists (for the review daemon)</p>
-<p>sd review 如何只搜索某个人的review</p>
-<p>FAREAST\jingqicao</p>
-<p>sd opened</p>
-<p>sd submit -c <change list num></change></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/company/microsoft/cosmos/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/company/microsoft/cosmos/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>azure cosmos命令</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/company/microsoft/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/company/microsoft/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/">Azure HDInsight documentation</a></p>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-rotate-storage-keys">Update Azure storage account access keys in HDInsight cluster</a> 当更新了remote key时，需要执行相关脚本，让节点更新。Azure Blob Storage fails to authenticate: “Make sure the value of Authorization header is formed correctly including the signature”</li>
+<li>\239. 滑动窗⼝最⼤值（困难）</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://github.com/Azure-Samples">Azure Samples</a></p>
-<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/virtual-network/">Virtual network</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/company/microsoft/%E7%A6%8F%E5%88%A9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/company/microsoft/%E7%A6%8F%E5%88%A9/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>puid<br>
-gid 999+工号<br>
-company simple：  MSFT</p>
-<p>ESPP<br>
-R开头的一串数字</p>
-<p>HRWeb<br>
-信息维护，会影响摩根账户，需要全部都是英文，包括地址<br>
-<a target="_blank" rel="noopener" href="https://myaccount.microsoft.com/?ref=MeControl">https://myaccount.microsoft.com/?ref=MeControl</a></p>
-<p>中意人寿<br>
-family</p>
-<p>143cc3b8f01f<br>
-<a target="_blank" rel="noopener" href="https://apkpure.com">https://apkpure.com</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/company/microsoft/%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/company/microsoft/%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="工具准备">工具准备</h4>
-<p>​	scope插件安装</p>
-<p>​	<a target="_blank" rel="noopener" href="https://mscosmos.visualstudio.com/CosmosWiki/_wiki/wikis/Cosmos.wiki/66/SCOPE-Tutorial">https://mscosmos.visualstudio.com/CosmosWiki/_wiki/wikis/Cosmos.wiki/66/SCOPE-Tutorial</a></p>
-<p>时区</p>
+<h3 id="去重算法">去重算法</h3>
+<p>解决的问题：</p>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
 <ol>
-<li>UTC时间</li>
-<li>美国时间：UTC - 7</li>
-<li>北京时间：UTC + 8</li>
+<li>
+<p>LeetCode 上拿下如下题⽬：</p>
+<p>\316. 去除重复字⺟（中等）</p>
+<p>\1081. 不同字符的最⼩⼦序列（中等）</p>
+</li>
 </ol>
-<p>服务器时间： UTC</p>
-<p>xts log中打印的时间：UTC</p>
-<p>xts log构建时间(xts服务器时间)：美国时间</p>
+<h3 id="LRU">LRU</h3>
+<p>解决的问题：</p>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<h3 id="LFU">LFU</h3>
+<p>解决的问题：</p>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<h3 id="常数时间随机读取-删除数组元素（P153）">常数时间随机读取/删除数组元素（P153）</h3>
+<p>数据结构设计题</p>
+<p>解决的问题：</p>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<ol>
+<li>
+<p>LeetCode：</p>
+<p>\380. 常数时间插⼊、删除和获取随机元素（中等）</p>
+<p>\710. ⿊名单中的随机数（困难）</p>
+</li>
+</ol>
+<h3 id="如何在无限序列中随机抽取元素（P611）">如何在无限序列中随机抽取元素（P611）</h3>
+<p>解决的问题：</p>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+<ol>
+<li>
+<p>去 LeetCode 上拿下如下题⽬：</p>
+<p>\382. 链表随机节点（中等）</p>
+<p>\398. 随机数索引（中等）</p>
+</li>
+</ol>
+<h3 id="笔记框架">笔记框架</h3>
+<p>解决的问题：</p>
+<p>题目特点（如何辨析是否使用）：</p>
+<p>经典题目：</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/booknote/%E4%B9%A6%E7%B1%8D%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/booknote/%E4%B9%A6%E7%B1%8D%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>麦肯锡问题分析与解决技巧</p>
+<p>失败的逻辑</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/booknote/%E6%84%9F%E6%82%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/booknote/%E6%84%9F%E6%82%9F/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>听社会的意见，保留自己的判断</p>
 
       
     </div>
@@ -890,7 +1492,7 @@ family</p>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -956,18 +1558,18 @@ family</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">282</span>
+          <span class="site-state-item-count">291</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

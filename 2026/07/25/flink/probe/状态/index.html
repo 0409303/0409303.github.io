@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[toc] 算子状态 问题 listState一般存储什么状态，为什么并行度发生改变的时候可以直接轮询平均分配，为什么这个状态分到哪个子任务都一样 ListState 是 Flink 算子状态（Operator State）的一种，主要用于存储独立、可重分布的状态项集合。下面逐一回答你的三个问题。  1. ListState 一般存储什么状态？ 典型场景：Source 算子中需要保存的分区偏移量（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="状态">
+<meta property="og:url" content="http://example.com/2026/07/25/flink/probe/%E7%8A%B6%E6%80%81/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="[toc] 算子状态 问题 listState一般存储什么状态，为什么并行度发生改变的时候可以直接轮询平均分配，为什么这个状态分到哪个子任务都一样 ListState 是 Flink 算子状态（Operator State）的一种，主要用于存储独立、可重分布的状态项集合。下面逐一回答你的三个问题。  1. ListState 一般存储什么状态？ 典型场景：Source 算子中需要保存的分区偏移量（">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-07-25T14:42:03.609Z">
+<meta property="article:modified_time" content="2026-07-25T14:42:03.609Z">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="flink">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/07/25/flink/probe/%E7%8A%B6%E6%80%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>状态 | 生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/flink/probe/%E7%8A%B6%E6%80%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          状态
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/probe/" itemprop="url" rel="index"><span itemprop="name">probe</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[toc]</p>
+<h1>算子状态</h1>
+<h2 id="问题">问题</h2>
+<h3 id="listState一般存储什么状态，为什么并行度发生改变的时候可以直接轮询平均分配，为什么这个状态分到哪个子任务都一样">listState一般存储什么状态，为什么并行度发生改变的时候可以直接轮询平均分配，为什么这个状态分到哪个子任务都一样</h3>
+<p><code>ListState</code> 是 Flink 算子状态（Operator State）的一种，主要用于存储<strong>独立、可重分布的状态项集合</strong>。下面逐一回答你的三个问题。</p>
+<hr>
+<h4 id="1-ListState-一般存储什么状态？">1. <code>ListState</code> 一般存储什么状态？</h4>
+<p>典型场景：<strong>Source 算子中需要保存的分区偏移量（或类似的分区元数据）</strong>。</p>
+<p>例如，Kafka Source 的每个并行子任务可能消费多个 Kafka 分区。它需要记录每个分区的当前消费偏移量。这些偏移量彼此独立，且不依赖于特定的子任务（任意子任务都能消费任意分区）。因此，将它们存储在一个 <code>ListState&lt;Long&gt;</code> 中，每个偏移量就是列表中的一个元素。</p>
+<p>其他例子：</p>
+<ul>
+<li>文件读取的偏移量（每个文件块的偏移量）。</li>
+<li>外部系统的连接ID或令牌（可独立重分配）。</li>
+</ul>
+<p>总之，<code>ListState</code> 适合存储<strong>一组相互独立、可以自由重新分配给不同并行子任务的状态条目</strong>。</p>
+<hr>
+<h4 id="2-为什么并行度改变时可以直接轮询平均分配？">2. 为什么并行度改变时可以直接轮询平均分配？</h4>
+<p>因为 <code>ListState</code> 的语义保证了：<strong>列表中的每个状态条目都是独立且同质的（homogeneous）</strong>。</p>
+<p>当 Flink 作业的并行度发生变化（例如从 4 增加到 6）时，需要将旧并行子任务的算子状态重新分配到新的子任务上。对于普通的 <code>ListState</code>（非 <code>UnionListState</code>），Flink 默认的分配策略是 <strong>轮询（Round‑Robin）</strong>：</p>
+<ul>
+<li>将所有旧子任务中的 <code>ListState</code> 条目收集到一起，形成一个大的条目列表。</li>
+<li>然后按照新并行度，将列表中的条目依次轮询分配给每个新子任务。</li>
+</ul>
+<p>之所以可以这样简单地平均分配，是因为 <strong><code>ListState</code> 的设计前提是：条目之间没有顺序依赖，也没有必须绑定到特定子任务的约束</strong>。每个条目可以被任何新子任务处理，因此分配策略可以只是负载均衡，无需考虑亲和性。</p>
+<hr>
+<h4 id="3-为什么这个状态分到哪个子任务都一样？">3. 为什么这个状态分到哪个子任务都一样？</h4>
+<p>因为 <strong>状态条目本身不携带“必须由哪个子任务处理”的信息</strong>。它们所代表的资源（如 Kafka 分区）通常可以由任何子任务接管。</p>
+<p>以 Kafka 偏移量为例：</p>
+<ul>
+<li>偏移量只记录了“某个分区已经消费到的位置”。</li>
+<li>当作业重启或并行度改变后，新的子任务可以接收任何分区的偏移量，并据此从该位置继续消费。</li>
+<li>也就是说，<strong>偏移量与子任务之间没有固定的绑定关系</strong>，所以任意分配都是正确的。</li>
+</ul>
+<p>同理，其他使用 <code>ListState</code> 存储的元数据（如文件块偏移量、外部资源句柄）通常也满足“无亲缘性”这一特征。</p>
+<p>如果某个状态条目必须由特定子任务处理（例如，某个 Key 的状态只能由某个子任务处理），那就应该使用 <strong>键控状态（Keyed State）</strong> 而非算子状态。键控状态在重分配时会保证同一个 Key 的状态始终进入同一个子任务（通过 Key Group 重分配机制），而不会用简单的轮询。</p>
+<hr>
+<h4 id="💎-总结">💎 总结</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">问题</th>
+<th style="text-align:left">答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>ListState</code> 存什么？</td>
+<td style="text-align:left">独立的状态条目集合，如 Kafka 分区偏移量。</td>
+</tr>
+<tr>
+<td style="text-align:left">为什么可以轮询平均分配？</td>
+<td style="text-align:left">条目之间相互独立，没有顺序或亲和性要求。</td>
+</tr>
+<tr>
+<td style="text-align:left">为什么分到哪个子任务都一样？</td>
+<td style="text-align:left">状态条目本身不绑定特定子任务，任意子任务都能处理。</td>
+</tr>
+</tbody>
+</table>
+<p>如果状态有亲缘性要求（如必须由特定子任务处理），则应当使用键控状态而非 <code>ListState</code>。</p>
+<h3 id="给举个例子，什么情况下每个并行子任务消费多个kafka分区">给举个例子，什么情况下每个并行子任务消费多个kafka分区</h3>
+<p>Flink 的 Source 并行度（即同时运行的 Source 子任务数量）如果小于 Kafka Topic 的分区总数，就会出现一个子任务负责消费多个 Kafka 分区的情况–。</p>
+<p>举个例子，如果你有一个 Kafka Topic，它包含 4 个分区（KP1, KP2, KP3, KP4），而你为 Flink Source 算子设置的并行度是 2，那么 Flink 会为 2 个 Source 子任务（S1, S2）分配分区，结果通常是每个子任务负责消费其中 2 个分区<a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/pages/diffpages.action?originalId=65865788&amp;pageId=65865789">-5</a>。</p>
+<p>text</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Kafka Topic (4 Partitions)        Flink (Parallelism &#x3D; 2)</span><br><span class="line">+----------------------+          +------------------------+</span><br><span class="line">| Partition 1 (KP1)  |---------&gt; | Source SubTask 1 (S1) |</span><br><span class="line">| Partition 2 (KP2)  |---------&gt; |  (Consumes KP1, KP2)  |</span><br><span class="line">| Partition 3 (KP3)  |---------&gt; | Source SubTask 2 (S2) |</span><br><span class="line">| Partition 4 (KP4)  |---------&gt; |  (Consumes KP3, KP4)  |</span><br><span class="line">+----------------------+          +------------------------+</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="🔍-为什么会有这样的设计？">🔍 为什么会有这样的设计？</h4>
+<p>这种分配方式是由Kafka消费者组的核心语义决定的：同一个消费者组内，每个分区只能被一个消费者（即Flink的Source子任务）消费-<a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/ask/sof/1256612">-2</a>。同时，为了让分区在子任务间尽量均匀分布，以实现负载均衡，当子任务数少于分区数时，就自然出现了这种一对多的分配关系<a target="_blank" rel="noopener" href="https://blog.csdn.net/goTsHgo/article/details/144673724#comments_36626999">-17</a>。</p>
+<h4 id="⚙️-Flink-具体是如何分配分区的？">⚙️ Flink 具体是如何分配分区的？</h4>
+<p>Flink 的 Kafka 连接器内部有一个 <code>KafkaSourceEnumerator</code>，它的职责就是发现 Topic 下的所有分区，并决定将这些分区分配给哪些 Source 子任务<a target="_blank" rel="noopener" href="https://blog.csdn.net/goTsHgo/article/details/144673724#comments_36626999">-17</a>。分配策略通常是基于分区ID对子任务总数进行取模运算，即 <code>分区ID % 子任务总数</code> 的结果就决定了该分区由哪个子任务负责<a target="_blank" rel="noopener" href="https://blog.csdn.net/u014407873/article/details/126421208">-24</a>。</p>
+<h4 id="📌-不同场景下的并行度设置">📌 不同场景下的并行度设置</h4>
+<p>这种分配机制在实际生产中会对应几种不同的情况，这里有一些常见的设置模式：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">设置模式</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">优点</th>
+<th style="text-align:left">缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>并行度 &lt; 分区数</strong></td>
+<td style="text-align:left">部分子任务消费多个分区，是<strong>资源不足时的常见情况</strong><a target="_blank" rel="noopener" href="https://juejin.cn/s/flink%E5%B9%B6%E8%A1%8C%E5%BA%A6%E5%92%8Ckafka%E5%88%86%E5%8C%BA">-30</a>。</td>
+<td style="text-align:left">能处理的数据总量上限高。</td>
+<td style="text-align:left">部分子任务会成为处理瓶颈；如果分区数远大于并行度，可能导致数据倾斜<a target="_blank" rel="noopener" href="https://blog.csdn.net/goTsHgo/article/details/144673724#comments_36626999">-17</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>并行度 = 分区数</strong></td>
+<td style="text-align:left"><strong>理想配置</strong>，通常能实现最优性能和负载均衡–。</td>
+<td style="text-align:left">每个子任务处理一个分区的数据，负载最均衡。</td>
+<td style="text-align:left">并行度受限于分区数量，不易动态调整。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>并行度 &gt; 分区数</strong></td>
+<td style="text-align:left">部分子任务会分不到分区，处于空闲状态，<strong>通常建议避免</strong>-。</td>
+<td style="text-align:left">无实际收益。</td>
+<td style="text-align:left">浪费计算资源，对性能有负面影响-。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>消费多个 Topic</strong></td>
+<td style="text-align:left">将多个 Topic 的<strong>所有分区总数</strong>作为参考来设置并行度。</td>
+<td style="text-align:left">可以统一管理多个 Topic 的消费。</td>
+<td style="text-align:left">分区数计算和管理更复杂-。</td>
+</tr>
+</tbody>
+</table>
+<p>如果你结合你的业务场景，有具体的设置疑问，或者想深入了解如何调优，可以随时继续交流。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/flink/" rel="tag"># flink</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/07/25/flink/probe/%E7%AA%97%E5%8F%A3/" rel="prev" title="窗口">
+      <i class="fa fa-chevron-left"></i> 窗口
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/07/25/flink/probe/%E6%B0%B4%E4%BD%8D%E7%BA%BF/" rel="next" title="水位线">
+      水位线 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">算子状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#listState%E4%B8%80%E8%88%AC%E5%AD%98%E5%82%A8%E4%BB%80%E4%B9%88%E7%8A%B6%E6%80%81%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B9%B6%E8%A1%8C%E5%BA%A6%E5%8F%91%E7%94%9F%E6%94%B9%E5%8F%98%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E8%BD%AE%E8%AF%A2%E5%B9%B3%E5%9D%87%E5%88%86%E9%85%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B8%AA%E7%8A%B6%E6%80%81%E5%88%86%E5%88%B0%E5%93%AA%E4%B8%AA%E5%AD%90%E4%BB%BB%E5%8A%A1%E9%83%BD%E4%B8%80%E6%A0%B7"><span class="nav-number">1.1.1.</span> <span class="nav-text">listState一般存储什么状态，为什么并行度发生改变的时候可以直接轮询平均分配，为什么这个状态分到哪个子任务都一样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99%E4%B8%BE%E4%B8%AA%E4%BE%8B%E5%AD%90%EF%BC%8C%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E6%AF%8F%E4%B8%AA%E5%B9%B6%E8%A1%8C%E5%AD%90%E4%BB%BB%E5%8A%A1%E6%B6%88%E8%B4%B9%E5%A4%9A%E4%B8%AAkafka%E5%88%86%E5%8C%BA"><span class="nav-number">1.1.2.</span> <span class="nav-text">给举个例子，什么情况下每个并行子任务消费多个kafka分区</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">291</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

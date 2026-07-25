@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/tools/git/git%E8%AE%BE%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/tools/git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/11/tools/git/git%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">git设置</a>
+            <a href="/2026/07/25/tools/git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">问题解决</a>
         </h2>
 
         <div class="post-meta">
@@ -201,354 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id></h2>
-<h3 id="简化命令">简化命令</h3>
-<p>git 添加别名的方式,打开~/.gitconfig文件在其末尾添加：<br>
-在命令行输入以下命令：<br>
-1、进到根目录<br>
-cd ~/<br>
-2、打开.gitconfig,<br>
-vi ~/.gitconfig</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; add</span><br><span class="line">b &#x3D; branch</span><br><span class="line">c &#x3D; commit</span><br><span class="line">d &#x3D; diff</span><br><span class="line">l &#x3D; log --graph --pretty&#x3D;format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset | %C(bold)%an&#39; --abbrev-commit --date&#x3D;relative</span><br><span class="line">r &#x3D; reset</span><br><span class="line">aa &#x3D; add .</span><br><span class="line">ba &#x3D; branch -a</span><br><span class="line">ca &#x3D; commit -a</span><br><span class="line">cc &#x3D; commit -a -m</span><br><span class="line">cl &#x3D; clone</span><br><span class="line">cm &#x3D; commit -m</span><br><span class="line">co &#x3D; checkout</span><br><span class="line">cp &#x3D; cherry-pick</span><br><span class="line">nb &#x3D; checkout -b</span><br><span class="line">pl &#x3D; pull</span><br><span class="line">ps &#x3D; push origin master</span><br><span class="line">st &#x3D; status</span><br><span class="line"></span><br><span class="line">[diff]</span><br><span class="line">    tool &#x3D; default-difftool</span><br><span class="line">[difftool &quot;default-difftool&quot;]</span><br><span class="line">    cmd &#x3D; code --wait --diff $LOCAL $REMOTE</span><br><span class="line">[difftool]</span><br><span class="line">	prompt &#x3D; false</span><br></pre></td></tr></table></figure>
-<p>git st 和 git status 等同效果<br>
-3、修改完后保存退出就可以了</p>
-<h3 id="杂项">杂项</h3>
-<p>关闭difftool的使用询问：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">询问：</span><br><span class="line">Launch &#39;default-difftool&#39; [Y&#x2F;n]</span><br><span class="line"></span><br><span class="line">关闭：</span><br><span class="line">git config --global difftool.prompt false</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/tools/git/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/tools/git/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%92%A4%E6%B6%88%E6%93%8D%E4%BD%9C">官方文档</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/tools/git/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/tools/git/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/75499871">git merge和git rebase的区别, 切记：永远用rebase</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaomingyang/article/details/80514941">git将一个分支完全覆盖另外一个分支如：paytest分支代码完全覆盖master分支</a></p>
-<p>git remote set-url origin <a href="mailto:msasg@vs-ssh.visualstudio.com">msasg@vs-ssh.visualstudio.com</a>:v3/msasg/Shared%20Data/xxx</p>
-<blockquote>
-<p>git reset --hard origin/users/jingqicao/feature-metadata-output</p>
-</blockquote>
-<p>.gitignore</p>
-<ol>
-<li>为什么有的repo不会上传这个文件</li>
-<li>当某些文件不想要再次被更改了，就可以在这个文件中排除掉那个文件。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/tools/git/%E6%A6%82%E5%BF%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/tools/git/%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">git概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>工作区、暂存区、版本库</p>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/git/git-workspace-index-repo.html">link</a></p>
-<ul>
-<li>**工作区：**就是你在电脑里能看到的目录。</li>
-<li>**暂存区：**英文叫 stage 或 index。一般存放在 <strong>.git</strong> 目录下的 index 文件（.git/index）中，所以我们把暂存区有时也叫作索引（index）。</li>
-<li>**版本库：**工作区有一个隐藏目录 <strong>.git</strong>，这个不算工作区，而是 Git 的版本库。</li>
-</ul>
-<p>正常编写是在工作区，git add 之后提交到暂存区，git commit之后放到版本库</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/tools/git/%E6%B3%A8%E6%84%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/tools/git/%E6%B3%A8%E6%84%8F/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>每次与origin分支对比前，先执行git pull操作，才能获取到远端的最新代码。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/tools/git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/tools/git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">问题解决</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -582,7 +235,7 @@ vi ~/.gitconfig</p>
 <li><a target="_blank" rel="noopener" href="https://sites.ipaddress.com/assets-cdn.github.com/">https://sites.ipaddress.com/assets-cdn.github.com/</a></li>
 </ol>
 <p><a target="_blank" rel="noopener" href="https://www.ipaddress.com/">My IP | IP Address Tools | IP Geolocation | Website Traffic Checker</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">140.82.114.4 github.com</span><br><span class="line">151.101.1.6 github.global.ssl.fastly.net</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">185.199.109.153 assets-cdn.github.com</span><br><span class="line">185.199.110.153 assets-cdn.github.com</span><br><span class="line">185.199.111.153 assets-cdn.github.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">140.82.113.3 github.com</span><br><span class="line">151.101.1.194 github.global.ssl.fastly.net</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">185.199.109.153 assets-cdn.github.com</span><br><span class="line">185.199.110.153 assets-cdn.github.com</span><br><span class="line">185.199.111.153 assets-cdn.github.com</span><br></pre></td></tr></table></figure>
 <p>Mac:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/hosts</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 刷新DNS</span></span><br><span class="line">sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder</span><br></pre></td></tr></table></figure>
 <p>Windows:</p>
@@ -611,7 +264,7 @@ vi ~/.gitconfig</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/tools/editor/Atom/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -625,7 +278,7 @@ vi ~/.gitconfig</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/11/tools/editor/Atom/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/07/25/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">hexo常用命令</a>
         </h2>
 
         <div class="post-meta">
@@ -635,65 +288,7 @@ vi ~/.gitconfig</p>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://qastack.cn/superuser/999695/how-to-disable-spell-checking-in-atom">拼写检查</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/11/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">hexo常用命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -744,7 +339,7 @@ vi ~/.gitconfig</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/tools/hexo/hexo%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/tools/hexo/hexo%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -758,7 +353,7 @@ vi ~/.gitconfig</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/11/tools/hexo/hexo%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/" class="post-title-link" itemprop="url">hexo常见报错</a>
+            <a href="/2026/07/25/tools/hexo/hexo%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/" class="post-title-link" itemprop="url">hexo常见报错</a>
         </h2>
 
         <div class="post-meta">
@@ -768,7 +363,7 @@ vi ~/.gitconfig</p>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -821,7 +416,7 @@ vi ~/.gitconfig</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/11/tools/component/protobuf/%E5%BE%85%E6%95%B4%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/tools/component/protobuf/%E5%BE%85%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -835,7 +430,7 @@ vi ~/.gitconfig</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/11/tools/component/protobuf/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/07/25/tools/component/protobuf/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -845,7 +440,7 @@ vi ~/.gitconfig</p>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-11 00:08:03" itemprop="dateCreated datePublished" datetime="2026-07-11T00:08:03+00:00">2026-07-11</time>
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
             </span>
 
           
@@ -875,10 +470,437 @@ vi ~/.gitconfig</p>
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/template/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/template/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/spark/%E9%85%8D%E7%BD%AE%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/spark/%E9%85%8D%E7%BD%AE%E9%A1%B9/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spark.sessionState.conf.setConfString(&quot;spark.sql.streaming.minBatchesToRetain&quot;, &quot;5&quot;)</span><br><span class="line">logger.info(&quot;spark.sql.streaming.minBatchesToRetain:&quot; + spark.sessionState.conf.minBatchesToRetain)</span><br><span class="line">logger.info(&quot;spark.sql.shuffle.partitions:&quot; + spark.sparkContext.getConf.get(&quot;spark.sql.shuffle.partitions&quot;))</span><br><span class="line">logger.info(&quot;spark.sql.streaming.multipleWatermarkPolicy:&quot; + spark.sparkContext.getConf.get(&quot;spark.sql.streaming.multipleWatermarkPolicy&quot;))</span><br><span class="line">val logSparkConf &#x3D; config.getConfig(&quot;logSparkConf&quot;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/sql/%E5%AF%B9%E6%AF%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/sql/%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/tair/%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/tair/%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">tair使用规范</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tair/" itemprop="url" rel="index"><span itemprop="name">tair</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6417083301c2">缓存Tair高性能使用规范</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/tools/Typora/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/tools/Typora/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<p>文件间跳转</p>
+<p><a href="./markdown.md">Markdown 语法</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/344941041">图片保存</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904120667602958">PicGo config</a></p>
+<p><a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Core-Doc/zh/guide/config.html">PicGo config2</a></p>
+<h2 id="设置">设置</h2>
+<h3 id="配置文件">配置文件</h3>
+<p>通过<code>文件-偏好设置-外观-打开主题文件夹</code>，找到主题配置文件目录。如果没有找到对应的配置文件，可以手动生成。</p>
+<h4 id="配置文件分类">配置文件分类</h4>
+<ol>
+<li>base.user.css 基础的用户自定义配置文件，会全局生效，优先级第二。</li>
+<li>{当前主题}.user.css 主题级的用户自定义配置文件，当前主题生效，优先级最高。</li>
+<li>{当前主题}.css 主题基础配置文件，当前主题生效，优先级最低。</li>
+</ol>
+<p>优先级逻辑：自定义 &gt; 基础；{当前主题} &gt; base</p>
+<p>加载顺序: {当前主题}.css -&gt; base.user.css -&gt; {当前主题}.user.css</p>
+<h3 id="toc展示的目录层级">toc展示的目录层级</h3>
+<p>配置文件中加入如下内容，建议加在base.user.css中</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 隐藏四级、五级、六级标题（只显示 h1, h2, h3） */</span></span><br><span class="line"><span class="selector-class">.md-toc-h4</span>,</span><br><span class="line"><span class="selector-class">.md-toc-h5</span>,</span><br><span class="line"><span class="selector-class">.md-toc-h6</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="格式">格式</h2>
+<h3 id="数学表达式">数学表达式</h3>
+<p>要启用这个功能，首先到Preference-&gt;Editor中启用。然后使用$符号包裹Tex命令，例如：$lim_{x \to \infty} \ exp(-x)=0$将产生如下的数学表达式：</p>
+<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104343.png" alt="img"></p>
+<h3 id="下标">下标</h3>
+<p>下标使用~包裹，例如：H~2~O将产生水的分子式。</p>
+<h3 id="上标">上标</h3>
+<p>上标使用^包裹，例如：y^2^=4将产生表达式</p>
+<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104354.png" alt="img"></p>
+<h3 id="下划线">下划线</h3>
+<p>用HTML的语法Underline将产生下划线Underline.</p>
+<h3 id="删除线">删除线</h3>
+<p>GFM添加了删除文本的语法，这是标准的Markdown语法木有的。使用~~包裹的文本将会具有删除的样式，例如~删除文本~将产生删除文本的样式。</p>
+<h3 id="代码">代码</h3>
+<p>使用`包裹的内容将会以代码样式显示，例如</p>
+<p>使用<code>printf()</code></p>
+<p>则会产生printf()样式。</p>
+<p>输入~~~或者```然后回车，可以输入代码块，并且可以选择代码的语言。例如：public Class HelloWorld{ System.out.println(“Hello World!”); }</p>
+<h3 id="目录列表Table-of-Contents-TOC">目录列表Table of Contents(TOC)</h3>
+<p>输入[toc]然后回车，将会产生一个目录，这个目录抽取了文章的所有标题，自动更新内容。</p>
+<h3 id="水平分割线">水平分割线</h3>
+<p>使用***或者—，然后回车，来产生水平分割线。</p>
+<h3 id="标注">标注</h3>
+<p>我们可以对某一个词语进行标注。例如</p>
+<p>某些人用过了才知道[^注释] [^注释]:Somebody that I used to know.</p>
+<p>将产生：</p>
+<p>把鼠标放在注释上，将会有提示内容。</p>
+<h3 id="强调">强调</h3>
+<p>使用两个*号或者两个_包裹的内容将会被强调。例如</p>
+<p><strong>使用两个*号强调内容</strong> <strong>使用两个下划线强调内容</strong></p>
+<p>将会输出</p>
+<p>使用两个<em>号强调内容 使用两个下划线强调内容 Typroa 推荐使用两个</em>号。</p>
+<h3 id="斜体">斜体</h3>
+<p>在标准的Markdown语法中，*和_包裹的内容会是斜体显示，但是GFM下划线一般用来分隔人名和代码变量名，因此我们推荐是用星号来包裹斜体内容。如果要显示星号，则使用转义：</p>
+<p>*</p>
+<h3 id="插入图片">插入图片</h3>
+<p>我们可以通过拖拉的方式，将本地文件夹中的图片或者网络上的图片插入。</p>
+<h3 id="插入URL连接">插入URL连接</h3>
+<p>使用尖括号包裹的url将产生一个连接，例如：将产生连接:www.baidu.com.</p>
+<p>如果是标准的url，则会自动产生连接，例如:www.baidu.com</p>
+<h3 id="插入表情">插入表情</h3>
+<p>使用:happy:输入高兴的表情，使用:sad:输入悲伤的表情，使用:cry:输入哭的表情等。以此类推!</p>
+<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104355.png" alt="img"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/sql/hive/group%E7%94%A8%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/07/25/sql/hive/group%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">hive-官网索引</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-07-25 14:42:03" itemprop="dateCreated datePublished" datetime="2026-07-25T14:42:03+00:00">2026-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>grouping sets 要保证sets中每个组合中缺失的维度，不能包含null值</p>
+<p>group语法增强，可以使用维度下标表示，但如果grouping sets不支持，只能写字段名</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -944,18 +966,18 @@ vi ~/.gitconfig</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">282</span>
+          <span class="site-state-item-count">291</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
