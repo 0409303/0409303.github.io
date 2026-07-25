@@ -1230,3 +1230,32 @@ state.backend.rocksdb.checkpoint.write-option: FLUSH_BEFORE_WRITE
    - 检查是否有无限增长的状态 (如全局计数器)
 
    
+
+## 问题 2：Flink 状态管理（10 分）
+
+**面试官提问**：Flink 的状态有哪几种类型？什么是 Keyed State 和 Operator State？它们分别适用于什么场景？Flink 的 Checkpoint 和 Savepoint 有什么区别？
+
+#### 评分标准
+
+| 评分项                       | 分值 | 扣分点                                           |
+| ---------------------------- | ---- | ------------------------------------------------ |
+| 状态类型理解                 | 4 分 | 不能区分 Keyed State 和 Operator State 扣 3-4 分 |
+| 适用场景                     | 3 分 | 不能说明各自的适用场景扣 2-3 分                  |
+| Checkpoint 和 Savepoint 区别 | 3 分 | 混淆两者的用途扣 2-3 分                          |
+
+#### 参考答案（9 分版本）
+
+Flink 的状态主要分为两种类型：**Keyed State**和**Operator State**。
+
+**Keyed State**是与特定 key 相关联的状态，只能在 KeyedStream 上使用。每个 key 对应一个状态实例，Flink 会自动将状态按照 key 进行分区，分布到不同的 taskmanager 上。
+
+Keyed State 适用于需要按 key 进行聚合或计算的场景，比如统计每个用户的订单量、每个商品的点击量等。
+
+**Operator State**是与算子实例相关联的状态，每个算子实例对应一个状态实例。Operator State 与 key 无关，所有流入该算子实例的数据都会共享同一个状态。
+
+Operator State 适用于源算子和汇算子，比如 Kafka 消费者的 offset 状态、文件输出的分片状态等。
+
+Checkpoint 和 Savepoint 的区别：
+
+- **Checkpoint**是 Flink 自动触发的，用于故障恢复。Checkpoint 的生命周期由 Flink 管理，当作业停止时，Checkpoint 会被自动删除。Checkpoint 通常是增量的，速度比较快。
+- **Savepoint**是用户手动触发的，用于作业的升级、迁移和备份。Savepoint 的生命周期由用户管理，不会被 Flink 自动删除。Savepoint 通常是全量的，速度比较慢，但更加稳定。
