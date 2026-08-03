@@ -49,19 +49,37 @@ error: src refspec users/jingqicao/performance-optimize does not match any
 
 ### 本地关联远程分支
 
-```
+```shell
 1. push同时关联
 git push --set-upstream origin xxx
+
 2. 关联已经存在的
 git branch --set-upstream-to=origin/dev
+
+3. 重新关联
+# 切换到该分支（如果不在的话）
+git switch feature/login
+# 将当前分支强制重置为远程分支的状态（注意：这会丢弃本地的所有未推送提交！）
+git reset --hard origin/feature/login
 ```
 
 
 
 ### 本地切换远程已有分支
 
+```shell
+1. git 2.23+
+# 1. 先从远程仓库拉取最新的分支引用信息
+git fetch
+# 2. 直接切换到远程分支（git 会自动识别 origin/分支名）
+git switch 远程分支名
+
+2. git 2.23-
+git fetch
+git checkout -b 本地分支名 origin/远程分支名
 ```
-```
+
+
 
 
 
