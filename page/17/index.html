@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/mybatis/%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/java/base/%E6%97%A5%E6%9C%9F%E7%9B%B8%E5%85%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/language/java/mybatis/%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">mybatis用法总结</a>
+            <a href="/2026/08/03/language/java/base/%E6%97%A5%E6%9C%9F%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">日期相关</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -209,7 +209,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
                 </span>
             </span>
 
@@ -224,22 +224,290 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="selectById">selectById</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&#123;</span></span><br><span class="line"><span class="meta">        &quot;select&quot;,</span></span><br><span class="line"><span class="meta">        &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_start_time, build_end_time, import_start_time, import_end_time, front_end, create_time&quot;,</span></span><br><span class="line"><span class="meta">        &quot;from dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">        &quot;where id = #&#123;id,jdbcType=INTEGER&#125;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;id&quot;, property=&quot;id&quot;, jdbcType=JdbcType.INTEGER, id=true),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;source_type&quot;, property=&quot;sourceType&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;source_id&quot;, property=&quot;sourceId&quot;, jdbcType=JdbcType.BIGINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;name&quot;, property=&quot;name&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;creator&quot;, property=&quot;creator&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;user_type&quot;, property=&quot;userType&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;count&quot;, property=&quot;count&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;create_mode&quot;, property=&quot;createMode&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;status&quot;, property=&quot;status&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;detail_status&quot;, property=&quot;detailStatus&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;build_start_time&quot;, property=&quot;buildStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;build_end_time&quot;, property=&quot;buildEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;import_start_time&quot;, property=&quot;importStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;import_end_time&quot;, property=&quot;importEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;front_end&quot;, property=&quot;frontEnd&quot;, jdbcType=JdbcType.LONGVARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;create_time&quot;, property=&quot;createTime&quot;, jdbcType=JdbcType.TIMESTAMP)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">GroupingMsgPo <span class="title">selectById</span><span class="params">(Integer id)</span></span>;</span><br></pre></td></tr></table></figure>
-<h3 id="selectByCondition">selectByCondition</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;select&quot;,</span></span><br><span class="line"><span class="meta">            &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;build_start_time, build_end_time, import_start_time, import_end_time, front_end, create_time&quot;,</span></span><br><span class="line"><span class="meta">            &quot;from dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">            &quot;where status != &#x27;0&#x27; and create_time between #&#123;startDate&#125; and #&#123;endDate&#125;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;id != null&#x27;&gt; and id=#&#123;id&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;name != null&#x27;&gt; and name like concat(&#x27;%&#x27;, #&#123;name&#125;, &#x27;%&#x27;) &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;creator != null&#x27;&gt; and creator like concat(&#x27;%&#x27;, #&#123;creator&#125;, &#x27;%&#x27;) &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;userType != null and userType.size &gt; 0&#x27; &gt;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;and user_type in &quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;foreach collection=&#x27;userType&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; open=&#x27;(&#x27; close=&#x27;)&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">                    &quot;$&#123;item&#125;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createMode != null and createMode.size &gt; 0&#x27; &gt;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;and create_mode in&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;foreach collection=&#x27;createMode&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; open=&#x27;(&#x27; close=&#x27;)&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">                    &quot;#&#123;item&#125;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;order by id desc&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;offset != null and pageSize != null&#x27;&gt; limit $&#123;offset&#125;, $&#123;pageSize&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;id&quot;, property=&quot;id&quot;, jdbcType=JdbcType.INTEGER, id=true),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;source_type&quot;, property=&quot;sourceType&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;source_id&quot;, property=&quot;sourceId&quot;, jdbcType=JdbcType.BIGINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;name&quot;, property=&quot;name&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;creator&quot;, property=&quot;creator&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;user_type&quot;, property=&quot;userType&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;count&quot;, property=&quot;count&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;create_mode&quot;, property=&quot;createMode&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;status&quot;, property=&quot;status&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;detail_status&quot;, property=&quot;detailStatus&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;build_start_time&quot;, property=&quot;buildStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;build_end_time&quot;, property=&quot;buildEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;import_start_time&quot;, property=&quot;importStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;import_end_time&quot;, property=&quot;importEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;front_end&quot;, property=&quot;frontEnd&quot;, jdbcType=JdbcType.LONGVARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;create_time&quot;, property=&quot;createTime&quot;, jdbcType=JdbcType.TIMESTAMP)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">List&lt;GroupingMsgPo&gt; <span class="title">selectByCondition</span><span class="params">(UserGroupingMetaBo userGroupingMetaBo)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>分页查询的两个参数，分别是偏移量和size。偏移量需要通过页数和size计算出来。</p>
-<h3 id="insert">insert</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&#123;</span></span><br><span class="line"><span class="meta">        &quot;insert into dim_wm_grouping_status (source_type, source_id, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;name, creator, user_type, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;count, create_mode, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_start_time, build_end_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;import_start_time, import_end_time, front_end, create_time)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;values (#&#123;sourceType,jdbcType=SMALLINT&#125;, #&#123;sourceId,jdbcType=BIGINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;name,jdbcType=VARCHAR&#125;, #&#123;creator,jdbcType=VARCHAR&#125;, #&#123;userType,jdbcType=INTEGER&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;count,jdbcType=INTEGER&#125;, #&#123;createMode,jdbcType=SMALLINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;status,jdbcType=VARCHAR&#125;, #&#123;detailStatus,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;buildStartTime,jdbcType=TIMESTAMP&#125;, #&#123;buildEndTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;importStartTime,jdbcType=TIMESTAMP&#125;, #&#123;importEndTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;frontEnd,jdbcType=LONGVARCHAR&#125;, #&#123;createTime,jdbcType=TIMESTAMP&#125;)&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@SelectKey(statement=&quot;SELECT LAST_INSERT_ID()&quot;, keyProperty=&quot;id&quot;, before=false, resultType=Integer.class)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(GroupingMsgPo record)</span></span>;</span><br></pre></td></tr></table></figure>
-<h3 id="batchInsert">batchInsert</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;insert into dim_wm_grouping_status (source_type, source_id, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;name, creator, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;user_type, count, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;create_mode, status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;detail_status, build_start_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_end_time, import_start_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;import_end_time, front_end, create_time)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;values&quot;,</span></span><br><span class="line"><span class="meta">        &quot;&lt;foreach collection=&#x27;list&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot; (#&#123;item.sourceType,jdbcType=SMALLINT&#125;, #&#123;item.sourceId,jdbcType=BIGINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.name,jdbcType=VARCHAR&#125;, #&#123;item.creator,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.userType,jdbcType=INTEGER&#125;, #&#123;item.count,jdbcType=INTEGER&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.createMode,jdbcType=SMALLINT&#125;, #&#123;item.status,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.detailStatus,jdbcType=VARCHAR&#125;, #&#123;item.buildStartTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.buildEndTime,jdbcType=TIMESTAMP&#125;, #&#123;item.importStartTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.importEndTime,jdbcType=TIMESTAMP&#125;, #&#123;item.frontEnd,jdbcType=LONGVARCHAR&#125;,&quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.createTime,jdbcType=TIMESTAMP&#125;)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Options(useGeneratedKeys=true,keyProperty=&quot;id&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">batchInsert</span><span class="params">(<span class="meta">@Param(&quot;list&quot;)</span> List&lt;GroupingMsgPo&gt; list)</span></span>;</span><br></pre></td></tr></table></figure>
-<h3 id="update">update</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Update(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;update dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">        &quot;set id = #&#123;id,jdbcType=INTEGER&#125;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;sourceType != null&#x27;&gt; ,source_type = #&#123;sourceType,jdbcType=SMALLINT&#125;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;sourceId != null&#x27;&gt; ,source_id = #&#123;sourceId,jdbcType=BIGINT&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;name != null&#x27;&gt; ,name = #&#123;name,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;creator != null&#x27;&gt; ,creator = #&#123;creator,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;userType != null&#x27;&gt; ,user_type = #&#123;userType,jdbcType=INTEGER&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;count != null&#x27;&gt; ,count = #&#123;count,jdbcType=INTEGER&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createMode != null&#x27;&gt; ,create_mode = #&#123;createMode,jdbcType=SMALLINT&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;status != null&#x27;&gt; ,status = #&#123;status,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;detailStatus != null&#x27;&gt; ,detail_status = #&#123;detailStatus,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;buildStartTime != null&#x27;&gt; ,build_start_time = #&#123;buildStartTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;buildEndTime != null&#x27;&gt; ,build_end_time = #&#123;buildEndTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;importStartTime != null&#x27;&gt; ,import_start_time = #&#123;importStartTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;importEndTime != null&#x27;&gt; ,import_end_time = #&#123;importEndTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;frontEnd != null&#x27;&gt; ,front_end = #&#123;frontEnd,jdbcType=LONGVARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createTime != null&#x27;&gt; ,create_time = #&#123;createTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;where id = #&#123;id,jdbcType=INTEGER&#125;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateById</span><span class="params">(GroupingMsgPo record)</span></span>;</span><br></pre></td></tr></table></figure>
-<h2 id="用法对比">用法对比</h2>
-<h4 id="jdbcType-“DATE”-和-jdbcType-“TIMESTAMP”-两种类型的区别"><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010526028/article/details/74315775">jdbcType=“DATE” 和 jdbcType=“TIMESTAMP” 两种类型的区别</a></h4>
+          <h2 id="joda-time">joda.time</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String pattern =<span class="string">&quot;dd-MMM-yy hh.mm.ss aa&quot;</span>;</span><br><span class="line">DateTimeFormat.forPattern(pattern)</span><br></pre></td></tr></table></figure>
+<p>字符串补位</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;%02d&quot;</span>.format(currentTime.getMinuteOfHour)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/java/base/%E6%9E%9A%E4%B8%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/03/language/java/base/%E6%9E%9A%E4%B8%BE/" class="post-title-link" itemprop="url">java枚举</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="参考资料">参考资料</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_43401436/article/details/104130410">Java枚举类——valueOf()的用法</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/java/base/%E6%B3%9B%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/03/language/java/base/%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">java泛型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/coprince/p/8603492.html">java 泛型详解-绝对是对泛型方法讲解最详细的，没有之一</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xy-ouyang/p/10539999.html">泛型（一）泛型类和泛型方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lihaoyang/p/7105581.html">JAVA泛型—通配符,泛型嵌套</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/licqs/p/4608871.html">Java获取泛型的类型Class</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/minikobe/p/11547220.html">java泛型通配符详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_29595517/article/details/113693350">关于通配泛型类型有几种_泛型类型的子类及通配符的使用</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/java/base/%E8%BF%90%E7%AE%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/03/language/java/base/%E8%BF%90%E7%AE%97%E7%AC%A6/" class="post-title-link" itemprop="url">java运算符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41050155/article/details/79725555">java位运算符详解</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/java/base/%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/03/language/java/base/%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">java泛型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java-基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="打印自定义对象数组内容">打印自定义对象数组内容</h4>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012491783/article/details/78957168">java中list和array打印对象的方法</a></p>
 <ol>
-<li>DATE只有年月日，没有时分秒</li>
+<li>重写自定义类toString方法</li>
+<li>用google开源的lombok，加注释@Data，他自动帮你重写了toString方法</li>
 </ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.toString(array);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -259,7 +527,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/problem/%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/java/component/log4j/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -273,7 +541,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/language/java/problem/%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">工程问题</a>
+            <a href="/2026/08/03/language/java/component/log4j/" class="post-title-link" itemprop="url">log4j配置及变量</a>
         </h2>
 
         <div class="post-meta">
@@ -283,7 +551,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -291,7 +559,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-problem/" itemprop="url" rel="index"><span itemprop="name">java-problem</span></a>
+                  <a href="/categories/java-%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">java-组件</span></a>
                 </span>
             </span>
 
@@ -306,10 +574,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/jbgtwang/article/details/90443069?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control">intellij idea载入java工程报程序包不存在问题</a></p>
-<p>没有或无法加载主类<br>
-Java:程序包xxxx不存在</p>
-<p>mvn idea:module 命令执行重新生成iml文件</p>
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/caolaosanahnu/article/details/7366555">log4j配置文件中使用变量</a></p>
+<p>原理：运行时，在程序中将变量添加到系统变量中</p>
+<h3 id="输出格式控制">输出格式控制</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guoquanyou/article/details/5689652">Log4j输出格式控制–log4j的PatternLayout参数含义</a></p>
 
       
     </div>
@@ -329,7 +597,7 @@ Java:程序包xxxx不存在</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/problem/%E9%9B%B6%E6%95%A3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/java/component/%E7%AC%AC%E4%B8%89%E6%96%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -343,7 +611,7 @@ Java:程序包xxxx不存在</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/language/java/problem/%E9%9B%B6%E6%95%A3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">java零散问题汇总</a>
+            <a href="/2026/08/03/language/java/component/%E7%AC%AC%E4%B8%89%E6%96%B9/" class="post-title-link" itemprop="url">第三方依赖</a>
         </h2>
 
         <div class="post-meta">
@@ -353,7 +621,7 @@ Java:程序包xxxx不存在</p>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -361,7 +629,7 @@ Java:程序包xxxx不存在</p>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-problem/" itemprop="url" rel="index"><span itemprop="name">java-problem</span></a>
+                  <a href="/categories/java-%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">java-组件</span></a>
                 </span>
             </span>
 
@@ -376,13 +644,9 @@ Java:程序包xxxx不存在</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>当输出在sleep之后时，无法打印</p>
-<p>怀疑原因是因为线程被挂起，无法继续执行，但为什么每个线程都无法被唤醒？需要看下唤醒逻辑</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;orderInfo:&quot;</span> + orderInfo);</span><br></pre></td></tr></table></figure>
-<h3 id="502错误">502错误</h3>
-<p>有可能是因为有人在进行远程调试</p>
-<h3 id="空指针可能情况">空指针可能情况</h3>
-<p>基本类型的值为null</p>
+          <h2 id="1-typesafe-config">1. typesafe.config</h2>
+<p>管理配置信息，优点是：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010039929/article/details/76215687">JAVA 配置管理库 typesafe.config</a></p>
 
       
     </div>
@@ -402,7 +666,7 @@ Java:程序包xxxx不存在</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/problem/NoSuchMethod/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/java/confuse/%E6%98%93%E6%B7%B7%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -416,7 +680,7 @@ Java:程序包xxxx不存在</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/language/java/problem/NoSuchMethod/" class="post-title-link" itemprop="url">NoSuchMethod错误排查</a>
+            <a href="/2026/08/03/language/java/confuse/%E6%98%93%E6%B7%B7%E7%82%B9/" class="post-title-link" itemprop="url">易混点</a>
         </h2>
 
         <div class="post-meta">
@@ -426,7 +690,7 @@ Java:程序包xxxx不存在</p>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -434,7 +698,7 @@ Java:程序包xxxx不存在</p>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-problem/" itemprop="url" rel="index"><span itemprop="name">java-problem</span></a>
+                  <a href="/categories/java-confuse/" itemprop="url" rel="index"><span itemprop="name">java-confuse</span></a>
                 </span>
             </span>
 
@@ -449,445 +713,149 @@ Java:程序包xxxx不存在</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <ol>
-<li>如果包含了不同版本的包，它的加载顺序是如何的？</li>
-<li>NoSuchMethod的报错是error级别的，exception是catch不住的。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/rule/%E4%BC%98%E9%9B%85%E7%9A%84%E5%86%99Api%E6%8E%A5%E5%8F%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/language/java/rule/%E4%BC%98%E9%9B%85%E7%9A%84%E5%86%99Api%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">如何优雅的写api接口</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fa75acba5b07">看看人家那后端API接口写得，那叫一个优雅！</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/rule/%E5%AF%B9%E8%B1%A1%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83(%E4%B8%80)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/language/java/rule/%E5%AF%B9%E8%B1%A1%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83(%E4%B8%80)/" class="post-title-link" itemprop="url">对象使用规范(一)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Po、Vo、Bo、Dto、、">Po、Vo、Bo、Dto、、</h3>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/uestcyms/article/details/80244407">Java中常见的对象类型简述(DO、BO、DTO、VO、AO、PO)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/spring/spring%20boot%E9%A1%B9%E7%9B%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/language/java/spring/spring%20boot%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">spring注解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-spring/" itemprop="url" rel="index"><span itemprop="name">java-spring</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id></h2>
-<h2 id="启动报错">启动报错</h2>
-<h3 id="Could-not-resolve-placeholder"><a target="_blank" rel="noopener" href="https://blog.csdn.net/tonghuawanli/article/details/76595383">Could not resolve placeholder</a></h3>
-<p>原因：没有指定好配置文件，因为src/main/resources下有多个配置文件，例如application-dev.properties, boss.properties等。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/spring/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/language/java/spring/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>(exclude = DataSourceAutoConfiguration.class)</p>
-<p>DynamicDataSourceAutoConfiguration</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/spring/%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/language/java/spring/%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">spring数据源配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-spring/" itemprop="url" rel="index"><span itemprop="name">java-spring</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="http://www.demodashi.com/demo/14622.html">基于springboot的多数据源配置</a></p>
-<p>使用<code>dynamic-datasource-spring-boot-starter</code>，并用@DS指定数据源</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/superyu1992/article/details/80336928">SpringBoot 配合 druid作为数据库连接池 时需要注意的一点</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/w57685321/article/details/106823660">使用dynamic-datasource-spring-boot-starter做多数据源及源码分析</a></p>
-<p>需要配置master作为默认数据源，否则会报，<code>请检查primary默认数据库设置</code>。</p>
-<p><a target="_blank" rel="noopener" href="https://my.oschina.net/TyTracy/blog/1926571">Spring多数据源、动态数据源源码解析</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/spring/%E6%B3%A8%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/language/java/spring/%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">spring注解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-spring/" itemprop="url" rel="index"><span itemprop="name">java-spring</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="自动化配置的问题">自动化配置的问题</h2>
-<h5 id="需要排除的配置">需要排除的配置</h5>
-<p>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/javastack/p/12016212.html">Spring Boot 排除自动配置的 4 种方法，关键时刻很有用！</a>]</p>
+          <h3 id="参数赋值">参数赋值</h3>
+<p>能够赋值的结构：</p>
 <ol>
-<li>@SpringBootApplication</li>
-<li>@EnableAutoConfiguration</li>
-<li>@SpringCloudApplication</li>
-<li>spring.autoconfigure.exclude</li>
+<li>数组</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dyc87112/article/details/73739535">Spring Boot自动化配置的利弊及解决之道</a></p>
-<h6 id="排除的类总结">排除的类总结</h6>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://github.com/SpringBootApplication">@SpringBootApplication</a>(exclude = DruidDataSourceAutoConfigure.class)</li>
-<li></li>
-</ol>
-<h2 id="注解用法">注解用法</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sqlgao22/article/details/100095433">@RequestBody和@RequestParam注解使用</a></p>
-<h3 id="Async">@Async</h3>
-<ol>
-<li>可以指定线程池</li>
-</ol>
-<h4 id="不生效原因：">不生效原因：</h4>
-<ol>
-<li>需要保证调用函数与注解修饰的函数在不同类中，因为不会走代理类。<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37760377/article/details/103627676">详解</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/YoungLee16/article/details/88398045">详解2</a></li>
-</ol>
-<h3 id="Value">@Value</h3>
-<h4 id="注入static变量四种方法"><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZYC88888/article/details/87863038">注入static变量四种方法</a></h4>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalValue</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Getter</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String DATABASE;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;mysql.db:test&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDatabase</span><span class="params">(String db)</span> </span>&#123;</span><br><span class="line">        DATABASE = db;</span><br><span class="line">    &#125;</span><br><span class="line">  	<span class="comment">// 这里要特别注意:</span></span><br><span class="line">  	<span class="comment">// 1. @value需要注释set函数上</span></span><br><span class="line">  	<span class="comment">// 2. 自动生成的getter和setter方法，会带有static的限定符，需要去掉，才可以。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>@Value<br>
-static<br>
-<a target="_blank" rel="noopener" href="https://blog.csdn.net/ZYC88888/article/details/87863038">https://blog.csdn.net/ZYC88888/article/details/87863038</a></p>
-<p>org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘pubApiPush’: Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder ‘group_url’ in value “${group_url}”</p>
-<p>group_url: [[查看结果|<a target="_blank" rel="noopener" href="http://wolf.waimai.dev.sankuai.com/group/hubble/page/dolphinManage">http://wolf.waimai.dev.sankuai.com/group/hubble/page/dolphinManage</a>]]</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  	<span class="comment">// 二维数组</span></span><br><span class="line">    <span class="keyword">int</span>[][] temp = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">    test(temp);</span><br><span class="line">    System.out.println(temp[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span>[][] temp)</span> </span>&#123;</span><br><span class="line">    temp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/java/debug/%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/03/language/java/debug/%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">技巧</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-debug/" itemprop="url" rel="index"><span itemprop="name">java-debug</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/slankka/p/13590451.html">SpringBoot启动后直接退出Process finished with exit code 1</a></p>
+<p>一般是有错误，但输出并不是console，可以修改log的输出，也可以用try catch查看异常</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/java/debug/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/03/language/java/debug/%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/" class="post-title-link" itemprop="url">远程调试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-debug/" itemprop="url" rel="index"><span itemprop="name">java-debug</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/432424885">ST远程debug拒绝连接解决方案</a></p>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/213152503">如何远程debug服务的代码</a></p>
 
       
     </div>
@@ -972,7 +940,7 @@ static<br>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">291</span>
+          <span class="site-state-item-count">293</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

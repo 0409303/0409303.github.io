@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/scala/%E5%BE%85%E6%95%B4%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/python/init/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/language/scala/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
+            <a href="/2026/08/03/language/python/init/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,165 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h2 id="库">库</h2>
+<h3 id="安装库">安装库</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br><span class="line">pip install spotipy</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 🇨🇳 中国用户必看：解决下载慢/超时报错（换国内镜像源）</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 临时使用一次（推荐，最简单）</span></span><br><span class="line">pip install 库名 -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果不想每次都加 -i，可以永久设置（一行命令搞定）</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置后，以后直接输入 pip install 库名 就会自动走国内源，网速飞起</span></span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+<h3 id="批量安装">批量安装</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>requirements.txt</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">requests&#x3D;&#x3D;2.31.0</span><br><span class="line">numpy&#x3D;&#x3D;1.26.0</span><br><span class="line">pysimplegui&#x3D;&#x3D;4.60.5.1</span><br><span class="line">spotipy&#x3D;&#x3D;2.25.2</span><br><span class="line">pylast&#x3D;&#x3D;5.3.0</span><br><span class="line">musicbrainzngs&#x3D;&#x3D;0.7.1</span><br><span class="line">python-dotenv&#x3D;&#x3D;1.0.1</span><br><span class="line">pandas&#x3D;&#x3D;2.2.3</span><br><span class="line"># 安装 pandas-stubs 后，PyCharm 就能像查字典一样，在你写 df. 或 pd. 时，精准地给出 pandas 特有的方法补全和参数提示，让编码效率和准确性大大提升。</span><br><span class="line">pandas-stubs&#x3D;&#x3D;2.2.3</span><br><span class="line">mutagen&#x3D;&#x3D;1.47.0</span><br><span class="line">tqdm&#x3D;&#x3D;4.66.5</span><br><span class="line"></span><br><span class="line"># excel</span><br><span class="line">openpyxl&#x3D;&#x3D;3.1.5</span><br><span class="line"></span><br><span class="line"># 压缩</span><br><span class="line"># pyzipper 是 Python 标准库 zipfile 的增强版，最大的特点是支持 AES 加密的 ZIP 文件</span><br><span class="line">pyzipper&#x3D;&#x3D;0.4.0</span><br><span class="line"># 支持多种压缩算法（如 LZMA2, BZip2, Deflate 等）和加密方法（如 7zAES），并提供命令行工具，方便直接操作 7z 文件</span><br><span class="line">py7zr&#x3D;&#x3D;0.21.0</span><br><span class="line"># 支持 RAR3 和 RAR5 格式的归档文件，以及多卷归档和密码保护</span><br><span class="line">rarfile&#x3D;&#x3D;4.2</span><br><span class="line"></span><br><span class="line"># 提供在 CPU 或 GPU 上运行的张量（Tensor）计算，并支持自动微分，用于构建和训练神经网络</span><br><span class="line">torch&#x3D;&#x3D;2.4.0</span><br><span class="line"></span><br><span class="line"># 第三方库</span><br><span class="line"># 这是一个网易云音乐的第三方库</span><br><span class="line">git+https:&#x2F;&#x2F;github.com&#x2F;zixing131&#x2F;pyncm.git</span><br></pre></td></tr></table></figure>
+<h3 id="查看安装结果">查看安装结果</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip show python-dotenv</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/python/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/03/language/python/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="依赖准备">依赖准备</h2>
+<h3 id="安装">安装</h3>
+<ol>
+<li>pycharm切换/添加python版本</li>
+<li>python安装</li>
+</ol>
+<h3 id="插件">插件</h3>
+<ol>
+<li>pip3 install PyMySQL</li>
+</ol>
+<h2 id="语法">语法</h2>
+<h3 id="占位符">占位符</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42269023/article/details/80719992">Python 占位符的使用</a></p>
+<h3 id="异常处理">异常处理</h3>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-exceptions.html">Python 异常处理</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/aircoder/p/4415387.html">python expect 工作的使用代码</a></p>
+<h3 id="文件相关">文件相关</h3>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/erchun/p/11766408.html">python-写入文件</a></p>
+<h2 id="插件-2">插件</h2>
+<h3 id="PyMysql">PyMysql</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaosongshupy/article/details/78462553">pymysql.connect()参数说明</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/scala/importSample/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/03/language/scala/importSample/" class="post-title-link" itemprop="url">importSample</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,8 +386,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import scala.collection.JavaConversions._</span><br><span class="line"></span><br><span class="line">for()</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">val failingBids &#x3D; ArrayBuffer[BidRecord]()</span><br><span class="line">val failingBids &#x3D; ArrayBuffer[BidRecord]</span><br><span class="line"></span><br><span class="line">区别？</span><br><span class="line">前者可以用</span><br><span class="line">failingBids +&#x3D; new BidRecord(bid)</span><br></pre></td></tr></table></figure>
+          <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scala.jdk.<span class="type">CollectionConverters</span>._</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> scala.collection.<span class="type">JavaConverters</span>._		<span class="comment">//如果scala SDK version &lt;= 2.12</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scala.collection.mutable</span><br><span class="line"><span class="keyword">import</span> scala.collection.immutable</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -249,7 +407,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/scala/%E5%BE%85%E8%A7%A3%E5%86%B3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/scala/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -263,7 +421,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/language/scala/%E5%BE%85%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">待解决</a>
+            <a href="/2026/08/03/language/scala/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">学习资料</a>
         </h2>
 
         <div class="post-meta">
@@ -273,7 +431,159 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://nummy-demo.readthedocs.io/zh_CN/latest/chapter/chapter07.html">学习笔记</a></p>
+<p>疑问：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chorm590/p/scala_201904221054.html">伴生对象有什么作用</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/scala/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/03/language/scala/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">基本类型详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="List">List</h2>
+<p>底层实现是单向链表，所以慎用通过index的遍历方式，因为每次都要从头节点开始查。IndexedSeq可以使用</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i until nums.lenght) &#123;</span><br><span class="line">  println(nums(i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果需要遍历List，又同时需要获取到index，可以改用迭代或zipWithIndex</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 迭代</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// zipWithIndex</span></span><br><span class="line"><span class="keyword">for</span> ((value, index) &lt;- nums.zipWithIndex) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>IndexedSeq 的实现主要包括：</p>
+<h2 id="Array">Array</h2>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/scala/%E5%BE%85%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/03/language/scala/%E5%BE%85%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">待解决</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -321,7 +631,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/scala/%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/scala/%E5%BE%85%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -335,7 +645,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/language/scala/%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">语法解析</a>
+            <a href="/2026/08/03/language/scala/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
         </h2>
 
         <div class="post-meta">
@@ -345,7 +655,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -372,19 +682,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> hasAnnotation = annotations.exists(</span><br><span class="line">    _.tree.tpe =:= typeOf[<span class="type">MyAnnotation</span>]</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
-<p>这段 Scala 代码的作用是检查 <code>annotations</code> 集合中是否包含特定类型的注解:</p>
-<ul>
-<li><code>annotations</code>：一个集合（如 <code>List</code>、<code>Seq</code>），其中每个元素代表一个注解。</li>
-<li><code>exists</code>：集合的一个方法，判断是否存在至少一个元素满足给定的条件，返回布尔值。</li>
-<li><code>_</code>：占位符，表示集合中的每个元素。</li>
-<li><code>_.tree.tpe</code>：假设每个注解元素有一个 <code>tree</code> 字段（可能表示抽象语法树节点），该字段又有 <code>tpe</code> 字段，表示该节点的类型信息（通常是 <code>scala.reflect.api.Types.Type</code>）。</li>
-<li><code>=:=</code>：类型相等性比较操作符，用于判断两个 <code>Type</code> 是否完全相同。</li>
-<li><code>typeOf[MyAnnotation]</code>：通过 Scala 反射获取 <code>MyAnnotation</code> 的类型 <code>Type</code> 对象。</li>
-</ul>
-<p><strong>整句含义</strong>：<br>
-判断 <code>annotations</code> 集合中是否存在一个注解，其对应的语法树节点的类型与 <code>MyAnnotation</code> 类型完全一致。如果存在，<code>hasAnnotation</code> 为 <code>true</code>，否则为 <code>false</code>。</p>
-<p>这种写法常见于 Scala 宏或编译时反射中，用于检查某个元素是否被特定注解标记。</p>
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import scala.collection.JavaConversions._</span><br><span class="line"></span><br><span class="line">for()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">val failingBids &#x3D; ArrayBuffer[BidRecord]()</span><br><span class="line">val failingBids &#x3D; ArrayBuffer[BidRecord]</span><br><span class="line"></span><br><span class="line">区别？</span><br><span class="line">前者可以用</span><br><span class="line">failingBids +&#x3D; new BidRecord(bid)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -404,7 +703,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/scala/%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/scala/%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -418,7 +717,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/language/scala/%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">版本区别</a>
+            <a href="/2026/08/03/language/scala/%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">版本区别</a>
         </h2>
 
         <div class="post-meta">
@@ -428,7 +727,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -746,7 +1045,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/olap/practice/%E6%B5%81%E9%87%8F%E6%95%B0%E4%BB%93%E6%9E%84%E5%BB%BA%E7%BB%8F%E9%AA%8C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/language/scala/%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -760,7 +1059,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/07/25/olap/practice/%E6%B5%81%E9%87%8F%E6%95%B0%E4%BB%93%E6%9E%84%E5%BB%BA%E7%BB%8F%E9%AA%8C/" class="post-title-link" itemprop="url">流量数仓构建经验</a>
+            <a href="/2026/08/03/language/scala/%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">语法解析</a>
         </h2>
 
         <div class="post-meta">
@@ -770,7 +1069,90 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> hasAnnotation = annotations.exists(</span><br><span class="line">    _.tree.tpe =:= typeOf[<span class="type">MyAnnotation</span>]</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<p>这段 Scala 代码的作用是检查 <code>annotations</code> 集合中是否包含特定类型的注解:</p>
+<ul>
+<li><code>annotations</code>：一个集合（如 <code>List</code>、<code>Seq</code>），其中每个元素代表一个注解。</li>
+<li><code>exists</code>：集合的一个方法，判断是否存在至少一个元素满足给定的条件，返回布尔值。</li>
+<li><code>_</code>：占位符，表示集合中的每个元素。</li>
+<li><code>_.tree.tpe</code>：假设每个注解元素有一个 <code>tree</code> 字段（可能表示抽象语法树节点），该字段又有 <code>tpe</code> 字段，表示该节点的类型信息（通常是 <code>scala.reflect.api.Types.Type</code>）。</li>
+<li><code>=:=</code>：类型相等性比较操作符，用于判断两个 <code>Type</code> 是否完全相同。</li>
+<li><code>typeOf[MyAnnotation]</code>：通过 Scala 反射获取 <code>MyAnnotation</code> 的类型 <code>Type</code> 对象。</li>
+</ul>
+<p><strong>整句含义</strong>：<br>
+判断 <code>annotations</code> 集合中是否存在一个注解，其对应的语法树节点的类型与 <code>MyAnnotation</code> 类型完全一致。如果存在，<code>hasAnnotation</code> 为 <code>true</code>，否则为 <code>false</code>。</p>
+<p>这种写法常见于 Scala 宏或编译时反射中，用于检查某个元素是否被特定注解标记。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/olap/practice/%E6%B5%81%E9%87%8F%E6%95%B0%E4%BB%93%E6%9E%84%E5%BB%BA%E7%BB%8F%E9%AA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/03/olap/practice/%E6%B5%81%E9%87%8F%E6%95%B0%E4%BB%93%E6%9E%84%E5%BB%BA%E7%BB%8F%E9%AA%8C/" class="post-title-link" itemprop="url">流量数仓构建经验</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -881,355 +1263,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/olap/practice/%E8%A7%84%E5%88%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/olap/practice/%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">规划</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/olap-%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">olap-实践</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="流量-用户">流量-用户</h3>
-<p>待解决问题：</p>
-<p>对于不同页面流量的统计，比如首页点击uv，没有细粒度聚合表</p>
-<p>中间层</p>
-<ol>
-<li>用户页面相关数据汇总
-<ol>
-<li>维度：用户、端、页面</li>
-<li>指标：曝光pv、停留时长</li>
-</ol>
-</li>
-<li>用户模块相关数据汇总
-<ol>
-<li>维度：用户、端、页面、模块。</li>
-<li>指标：曝光pv、点击pv、停留时长？</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/others/laws/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/others/laws/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="被打了一巴掌">被打了一巴掌</h3>
-<p>跟警察说3句话</p>
-<ol>
-<li>对方当众殴打我，事实清楚，他已经违反了治安管理处罚法，我要求依法处理，并且立刻向我出具立案的回执</li>
-<li>我现在已经有点儿恶心，并且视线模糊，我要求立刻调取现场监控，并依法对我的伤情进行鉴定</li>
-<li>如果我的合法诉求不被受理，那我将通过12389热线向你们上级部门进行投诉，并追究相关的不作为责任。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/software/excel/function/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/software/excel/function/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="timestamp-to-date">timestamp to date</h4>
-<ol>
-<li>second: <code>=(A1+8*3600)/86400+70*365+19</code></li>
-<li>millsecond: <code>=(A1+8*3600)/8640000+70*365+19</code></li>
-</ol>
-<h4 id="date-to-timestamp">date to timestamp</h4>
-<ol>
-<li>second: <code>=(B1-70*365-19)*86400-8*3600</code></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/shell/powerShell/temp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/shell/powerShell/temp/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>ExecutionPolicy</p>
-<p>Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope MachinePolicy<br>
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope UserPolicy<br>
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process<br>
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser<br>
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine</p>
-<p>Get-ExecutionPolicy -List</p>
-<p>Set-ExecutionPolicy Bypass -Scope Process -Force; Copy-Item \cosbj-01\public\CosmosPowerShell\builds\install.ps1 $HOME\Downloads\install.ps1; &amp; $HOME\Downloads\install.ps1 -Force</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/07/25/language/java/web/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/07/25/language/java/web/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">枚举类用法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-07-25 15:52:13" itemprop="dateCreated datePublished" datetime="2026-07-25T15:52:13+00:00">2026-07-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="Connection-reset原因分析和解决方案">Connection reset原因分析和解决方案</h4>
-<p>一般引起这个问题的原因是服务器服务关闭。</p>
-<p>我遇到过一次问题是因为http端口填写错误。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liyantianmin/article/details/82505734">Connection reset原因分析和解决方案</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1299,7 +1332,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">291</span>
+          <span class="site-state-item-count">293</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
