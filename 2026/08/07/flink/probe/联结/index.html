@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[toc] 问题 窗口联结的处理流程中，两条流经过keyBy分组后，进入对应的窗口进行存储，之后对窗口内两条流的数据做笛卡尔积，然后遍历输出结果，这对吗 你的理解基本正确，抓住了窗口联结的核心逻辑。简单来说，窗口联结就是在窗口边界这个前提下执行 Inner Join。 为了让你更透彻地理解，我们把这个逻辑拆解成三个核心环节： 1. ⚙️ 数据分发与缓存：KeyBy 和窗口存储 Flink 在处理窗">
+<meta property="og:type" content="article">
+<meta property="og:title" content="联结">
+<meta property="og:url" content="http://example.com/2026/08/07/flink/probe/%E8%81%94%E7%BB%93/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="[toc] 问题 窗口联结的处理流程中，两条流经过keyBy分组后，进入对应的窗口进行存储，之后对窗口内两条流的数据做笛卡尔积，然后遍历输出结果，这对吗 你的理解基本正确，抓住了窗口联结的核心逻辑。简单来说，窗口联结就是在窗口边界这个前提下执行 Inner Join。 为了让你更透彻地理解，我们把这个逻辑拆解成三个核心环节： 1. ⚙️ 数据分发与缓存：KeyBy 和窗口存储 Flink 在处理窗">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-08-07T09:19:18.332Z">
+<meta property="article:modified_time" content="2026-08-07T09:19:18.332Z">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="flink">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/08/07/flink/probe/%E8%81%94%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>联结 | 生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/flink/probe/%E8%81%94%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          联结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/probe/" itemprop="url" rel="index"><span itemprop="name">probe</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[toc]</p>
+<h1>问题</h1>
+<h2 id="窗口联结的处理流程中，两条流经过keyBy分组后，进入对应的窗口进行存储，之后对窗口内两条流的数据做笛卡尔积，然后遍历输出结果，这对吗">窗口联结的处理流程中，两条流经过keyBy分组后，进入对应的窗口进行存储，之后对窗口内两条流的数据做笛卡尔积，然后遍历输出结果，这对吗</h2>
+<p>你的理解基本正确，抓住了窗口联结的核心逻辑。简单来说，窗口联结就是<strong>在窗口边界这个前提下执行 Inner Join</strong>。</p>
+<p>为了让你更透彻地理解，我们把这个逻辑拆解成三个核心环节：</p>
+<h3 id="1-⚙️-数据分发与缓存：KeyBy-和窗口存储">1. ⚙️ 数据分发与缓存：KeyBy 和窗口存储</h3>
+<p>Flink 在处理窗口联结时，第一步是<strong>将两条流的数据，按照相同的 key 和它们所属的窗口，分别存储到不同的窗口状态（Window State）中</strong>。</p>
+<ul>
+<li><strong>分发（KeyBy）</strong>：数据进入后，首先会通过 <code>where()</code> 和 <code>equalTo()</code> 指定的 key 进行分组<a target="_blank" rel="noopener" href="https://blog.csdn.net/jiang7chengzi/article/details/107897707">-1</a>。保证只有相同 key 的数据才可能被关联。</li>
+<li><strong>存储（窗口存储）</strong>：同时，<code>WindowAssigner</code> 会为每条数据分配一个或多个窗口-。随后，这条数据会连同其窗口归属信息，被写入该算子实例的内部状态（State）中，等待窗口触发时刻的到来<a target="_blank" rel="noopener" href="https://blog.csdn.net/jiang7chengzi/article/details/107897707">-1</a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhaoguanglu/p/15652998.html">-3</a>。</li>
+</ul>
+<h3 id="2-🔗-数据关联与输出：笛卡尔积">2. 🔗 数据关联与输出：笛卡尔积</h3>
+<p>当水位线（Watermark）推进到窗口结束时间时，窗口被触发，进入最核心的关联计算阶段。这个阶段本质上执行的就是<strong>笛卡尔积</strong>操作–。</p>
+<ul>
+<li><strong>计算过程</strong>：Flink 会取出当前窗口内存储的所有数据，将左流（Left Stream）中的每一条数据，与右流（Right Stream）中的每一条数据进行配对–。</li>
+<li><strong>输出结果</strong>：每生成一个配对 <code>(e1, e2)</code>，都会立即调用你自定义的 <code>JoinFunction</code> 的 <code>join()</code> 方法，并输出计算结果<a target="_blank" rel="noopener" href="https://blog.csdn.net/jiang7chengzi/article/details/107897707">-1</a>。</li>
+</ul>
+<p>这就是为什么你的描述在逻辑上是准确的。一个经典的例子可以完美说明这一点：在一个大小为2毫秒的滚动窗口（Tumbling Window）中，如果左流有数据 <code>[1]</code>，右流有数据 <code>[1, 2]</code>，那么笛卡尔积就会生成 <code>(1,1)</code> 和 <code>(1,2)</code> 这两个配对，并分别传递给 <code>JoinFunction</code> 处理<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/128594">-7</a>。</p>
+<h3 id="3-🎯-遍历与Inner-Join语义">3. 🎯 遍历与Inner Join语义</h3>
+<p>值得注意的是，Flink 窗口联结的默认行为是 <strong>Inner Join</strong>，这完全符合你的描述-。</p>
+<ul>
+<li>配对过程中，只有<strong>两边都有数据</strong>才会产生输出。如果窗口内只有左流有数据而右流为空，则不会有任何输出<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhaoguanglu/p/15652998.html">-3</a>。</li>
+<li><code>JoinFunction</code> 中的 <code>join()</code> 方法会为每一对配对执行一次，正是我们上面提到的“遍历输出”。</li>
+</ul>
+<hr>
+<h3 id="💡-进阶思考：精确性之外的效率博弈">💡 进阶思考：精确性之外的效率博弈</h3>
+<p>然而，一个成熟的工业级引擎不会仅仅满足于逻辑上的“正确”。在“笛卡尔积”这个简洁的逻辑背后，隐藏着关于<strong>内存效率</strong>和<strong>计算延迟</strong>的深度博弈。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">对比维度</th>
+<th style="text-align:left">❌ 低效的朴素做法</th>
+<th style="text-align:left">✅ Flink的高效实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>存储策略</strong></td>
+<td style="text-align:left">无差别存储原始数据，极易引发内存溢出。</td>
+<td style="text-align:left"><strong>增量聚合</strong>：配合 <code>reduce()</code> 或 <code>aggregate()</code>，在存储时就进行预聚合，只保留中间结果而非原始数据。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>内存管理</strong></td>
+<td style="text-align:left">依赖JVM进行垃圾回收（GC），海量配对下GC压力巨大。</td>
+<td style="text-align:left"><strong>托管内存（Managed Memory）</strong>：绕过JVM堆，使用预分配的二进制内存，序列化开销低，几乎无GC压力<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/73248">-19</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>溢出策略</strong></td>
+<td style="text-align:left">内存不足时直接报错（OOM）。</td>
+<td style="text-align:left"><strong>内存溢写（Spill）</strong>：数据量超过内存上限时，自动将部分数据溢写到磁盘，保证作业稳定运行<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/73248">-19</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>执行策略</strong></td>
+<td style="text-align:left">固定执行路径。</td>
+<td style="text-align:left"><strong>优化器选择</strong>：根据数据规模动态选择 <code>Hash Join</code> 或 <code>Sort-Merge Join</code> 等高效策略<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/73248">-19</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>结果生成</strong></td>
+<td style="text-align:left">生成所有配对后再批量输出。</td>
+<td style="text-align:left"><strong>流式输出</strong>：边生成配对边通过 <code>JoinFunction</code> 输出，实现低延迟。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>复杂类型</strong></td>
+<td style="text-align:left">处理复杂嵌套结构时开销大。</td>
+<td style="text-align:left"><strong>二进制数据处理</strong>：对复杂类型同样采用紧凑的二进制格式，提升效率。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>延迟数据处理</strong>：官方文档也指出，目前的窗口联结算子（<code>WindowJoinOperator</code>）不支持**提前触发（early-fire）<strong>和</strong>迟到数据（late-arrival）**处理。这意味着它不适合需要处理严重乱序或对实时性有极致要求的场景-<a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-release-1.19/api/java/org/apache/flink/table/runtime/operators/join/window/WindowJoinOperator.html#join-java.lang.Iterable-java.lang.Iterable-">-33</a>。如果你的业务需要处理迟到数据，可以考虑使用更灵活的 <strong>Interval Join</strong>。</p>
+</blockquote>
+<hr>
+<h3 id="💎-总结">💎 总结</h3>
+<p>你的理解是正确的：窗口联结就是在 keyBy 和窗口分组的基础上，对窗口内的数据进行笛卡尔积配对，然后遍历输出。</p>
+<p>但更重要的是，要看到 Flink 在保证这个逻辑正确性的同时，通过增量聚合、托管内存、智能溢写和策略优化等一整套底层机制，巧妙地规避了“笛卡尔积”可能带来的性能陷阱。如果你对文中提到的 <strong>Interval Join</strong> 或者 <strong>CoGroup</strong> 等其他关联方式也感兴趣，我们可以继续探讨。</p>
+<h2 id="如果一个key-field中的值很多，会有不同的key被分到同一个子任务中吧，这种不会直接做笛卡尔积吧，怎么做的">如果一个key field中的值很多，会有不同的key被分到同一个子任务中吧，这种不会直接做笛卡尔积吧，怎么做的</h2>
+<p>你的直觉很准确，<strong>“笛卡尔积”这个操作是严格在每个Key内部进行的</strong>，绝不会发生不同Key之间的数据胡乱配对。</p>
+<p>整个过程可以拆解为两层：<strong>路由层</strong>和<strong>存储层</strong>。</p>
+<h3 id="🚚-第一层：路由分发-KeyBy">🚚 第一层：路由分发 (KeyBy)</h3>
+<p>当你在两条流上分别调用 <code>.keyBy()</code> 时，Flink 的底层逻辑是做了一次 <code>Hash</code> 分发-<a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/ask/sof/1804526?from=16139">-1</a>。</p>
+<ul>
+<li><strong>物理隔离</strong>：虽然同一个并行子任务（Subtask）可能会收到很多个不同的 Key，但 Flink 会保证<strong>同一个 Key 的所有数据，一定全部进入到同一个 Subtask 中</strong>-<a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/flink-state-management">-9</a>。比如，<code>KeyA</code> 和 <code>KeyB</code> 的数据可能都进入了 Subtask 1，<code>KeyC</code> 和 <code>KeyD</code> 的数据进入了 Subtask 2。</li>
+<li><strong>效果</strong>：通过这一层，Flink 将 <strong>“全局大表”</strong> 的 Join 问题，拆分成了多个物理上独立的 <strong>“小表”</strong> Join 问题。这是分布式计算的基础。</li>
+</ul>
+<h3 id="🗄️-第二层：存储与计算-Window-Join">🗄️ 第二层：存储与计算 (Window Join)</h3>
+<p>在 Subtask 内部，数据会被存储起来，等待窗口触发。<strong>这里并不会出现一个混杂的“大池子”，而是为每个 Key 都划出了一个独立的“小隔间”</strong>。</p>
+<h4 id="物理存储：键控状态（Keyed-State）">物理存储：键控状态（Keyed State）</h4>
+<p>窗口中的存储使用的是 <strong>键控状态（Keyed State）</strong>-。这是一种嵌入式键/值存储<a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/flink-state-management">-9</a>，Flink 会自动维护一个 Map，结构如下：</p>
+<p>text</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Subtask-1 内部维护的键控状态</span><br><span class="line">Map&lt;Key, WindowState&gt; stateMap &#x3D; &#123;</span><br><span class="line">    &quot;KeyA&quot; &#x3D;&gt; &#123; LeftStream: [数据A1, A2...], RightStream: [数据B1, B2...] &#125;,</span><br><span class="line">    &quot;KeyB&quot; &#x3D;&gt; &#123; LeftStream: [数据C1, C2...], RightStream: [数据D1, D2...] &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="逻辑计算：按Key隔离的笛卡尔积">逻辑计算：按Key隔离的笛卡尔积</h4>
+<p>当水位线到达，窗口触发时，Flink 会<strong>遍历当前 Subtask 内部的所有 Key</strong>，对每个 Key 独立执行以下操作<a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/ask/sof/1804526?from=16139">-1</a>：</p>
+<ol>
+<li>取出 <code>KeyA</code> 的“小隔间”里左右两边的数据集。</li>
+<li>在这两个数据集上执行<strong>笛卡尔积</strong>。</li>
+<li>把生成的每一对数据传递给 <code>JoinFunction</code> 处理。</li>
+<li>处理完 <code>KeyA</code> 后，再处理下一个 <code>KeyB</code>。</li>
+</ol>
+<blockquote>
+<p><strong>补充说明</strong>：你问的“会不会直接做笛卡尔积”，指的是不同 Key 之间的数据（如 KeyA 和 KeyB）是否会被错误地配对。答案是否定的，因为物理存储上的隔离从根本上杜绝了这种可能性<a target="_blank" rel="noopener" href="https://nightlies.apache.org/flink/flink-docs-release-1.20/api/java/org/apache/flink/streaming/api/datastream/JoinedStreams.html">-35</a>。</p>
+</blockquote>
+<h3 id="💡-数据隔离：从物理内存到磁盘">💡 数据隔离：从物理内存到磁盘</h3>
+<p>这种按 Key 隔离的机制，不仅保证了逻辑正确，还为大规模数据处理提供了物理层面的可行性：</p>
+<ul>
+<li><strong>内存优化</strong>：Flink 使用<strong>托管内存（Managed Memory）</strong>，绕过 JVM 堆，以紧凑的二进制格式存储数据。对于海量 Key，即使每个 Key 只存少量数据，这种内存管理方式也能避免 JVM 因对象过多而频繁 GC 或 OOM。</li>
+<li><strong>磁盘溢出（Spill）</strong>：如果某个 Key 的数据量实在太大（比如 <code>KeyA</code> 有数百万条数据），内存放不下，Flink 会自动将数据溢写到磁盘。这是 Flink 默认状态后端 <code>EmbeddedRocksDBStateBackend</code> 的典型能力，支持将状态存储扩展到磁盘<a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/flink-state-management">-9</a>。</li>
+<li><strong>动态扩容</strong>：键控状态是按 Key Group 组织的，当作业并行度调整时，Flink 可以以 Key Group 为单位重新分配 Key，从而实现状态的平滑迁移<a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/flink-state-management">-9</a>。</li>
+</ul>
+<h3 id="💎-总结-2">💎 总结</h3>
+<p>所以，你的疑问可以这样理解：</p>
+<ul>
+<li><strong>物理上</strong>：一个 Subtask 确实会收到多个 Key，但它们的数据在存储层面是完全<strong>隔离</strong>的。</li>
+<li><strong>逻辑上</strong>：Flink 对每个 Key 的窗口数据，独立地执行笛卡尔积。</li>
+<li><strong>本质上</strong>：窗口 Join 的执行逻辑可以看作是 <strong>“分组内的笛卡尔积”</strong> ，确保了计算结果的正确性。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/flink/" rel="tag"># flink</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/07/flink/probe/%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0/" rel="prev" title="重载函数">
+      <i class="fa fa-chevron-left"></i> 重载函数
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/07/flink/probe/%E7%AA%97%E5%8F%A3/" rel="next" title="窗口">
+      窗口 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AA%97%E5%8F%A3%E8%81%94%E7%BB%93%E7%9A%84%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%E4%B8%AD%EF%BC%8C%E4%B8%A4%E6%9D%A1%E6%B5%81%E7%BB%8F%E8%BF%87keyBy%E5%88%86%E7%BB%84%E5%90%8E%EF%BC%8C%E8%BF%9B%E5%85%A5%E5%AF%B9%E5%BA%94%E7%9A%84%E7%AA%97%E5%8F%A3%E8%BF%9B%E8%A1%8C%E5%AD%98%E5%82%A8%EF%BC%8C%E4%B9%8B%E5%90%8E%E5%AF%B9%E7%AA%97%E5%8F%A3%E5%86%85%E4%B8%A4%E6%9D%A1%E6%B5%81%E7%9A%84%E6%95%B0%E6%8D%AE%E5%81%9A%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%EF%BC%8C%E7%84%B6%E5%90%8E%E9%81%8D%E5%8E%86%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%EF%BC%8C%E8%BF%99%E5%AF%B9%E5%90%97"><span class="nav-number">1.1.</span> <span class="nav-text">窗口联结的处理流程中，两条流经过keyBy分组后，进入对应的窗口进行存储，之后对窗口内两条流的数据做笛卡尔积，然后遍历输出结果，这对吗</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E2%9A%99%EF%B8%8F-%E6%95%B0%E6%8D%AE%E5%88%86%E5%8F%91%E4%B8%8E%E7%BC%93%E5%AD%98%EF%BC%9AKeyBy-%E5%92%8C%E7%AA%97%E5%8F%A3%E5%AD%98%E5%82%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. ⚙️ 数据分发与缓存：KeyBy 和窗口存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%F0%9F%94%97-%E6%95%B0%E6%8D%AE%E5%85%B3%E8%81%94%E4%B8%8E%E8%BE%93%E5%87%BA%EF%BC%9A%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 🔗 数据关联与输出：笛卡尔积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%F0%9F%8E%AF-%E9%81%8D%E5%8E%86%E4%B8%8EInner-Join%E8%AF%AD%E4%B9%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 🎯 遍历与Inner Join语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A1-%E8%BF%9B%E9%98%B6%E6%80%9D%E8%80%83%EF%BC%9A%E7%B2%BE%E7%A1%AE%E6%80%A7%E4%B9%8B%E5%A4%96%E7%9A%84%E6%95%88%E7%8E%87%E5%8D%9A%E5%BC%88"><span class="nav-number">1.1.4.</span> <span class="nav-text">💡 进阶思考：精确性之外的效率博弈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%8E-%E6%80%BB%E7%BB%93"><span class="nav-number">1.1.5.</span> <span class="nav-text">💎 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%80%E4%B8%AAkey-field%E4%B8%AD%E7%9A%84%E5%80%BC%E5%BE%88%E5%A4%9A%EF%BC%8C%E4%BC%9A%E6%9C%89%E4%B8%8D%E5%90%8C%E7%9A%84key%E8%A2%AB%E5%88%86%E5%88%B0%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AD%90%E4%BB%BB%E5%8A%A1%E4%B8%AD%E5%90%A7%EF%BC%8C%E8%BF%99%E7%A7%8D%E4%B8%8D%E4%BC%9A%E7%9B%B4%E6%8E%A5%E5%81%9A%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF%E5%90%A7%EF%BC%8C%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84"><span class="nav-number">1.2.</span> <span class="nav-text">如果一个key field中的值很多，会有不同的key被分到同一个子任务中吧，这种不会直接做笛卡尔积吧，怎么做的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9A%9A-%E7%AC%AC%E4%B8%80%E5%B1%82%EF%BC%9A%E8%B7%AF%E7%94%B1%E5%88%86%E5%8F%91-KeyBy"><span class="nav-number">1.2.1.</span> <span class="nav-text">🚚 第一层：路由分发 (KeyBy)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%97%84%EF%B8%8F-%E7%AC%AC%E4%BA%8C%E5%B1%82%EF%BC%9A%E5%AD%98%E5%82%A8%E4%B8%8E%E8%AE%A1%E7%AE%97-Window-Join"><span class="nav-number">1.2.2.</span> <span class="nav-text">🗄️ 第二层：存储与计算 (Window Join)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A1-%E6%95%B0%E6%8D%AE%E9%9A%94%E7%A6%BB%EF%BC%9A%E4%BB%8E%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E5%88%B0%E7%A3%81%E7%9B%98"><span class="nav-number">1.2.3.</span> <span class="nav-text">💡 数据隔离：从物理内存到磁盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%8E-%E6%80%BB%E7%BB%93-2"><span class="nav-number">1.2.4.</span> <span class="nav-text">💎 总结</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">293</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

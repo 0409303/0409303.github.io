@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/flink/ImportSample/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/flink/%E6%A6%82%E5%BF%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/flink/ImportSample/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/08/07/flink/%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
 
           
@@ -215,7 +215,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.flink.streaming.api.scala._</span><br></pre></td></tr></table></figure>
+          <h1>数据处理</h1>
+<h3 id="反压">反压</h3>
 
       
     </div>
@@ -235,7 +236,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/flink/flink%20window/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/flink/%E7%96%91%E9%97%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -249,7 +250,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/flink/flink%20window/" class="post-title-link" itemprop="url">flink window</a>
+            <a href="/2026/08/07/flink/%E7%96%91%E9%97%AE/" class="post-title-link" itemprop="url">疑问</a>
         </h2>
 
         <div class="post-meta">
@@ -259,7 +260,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,19 +283,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1>flink1.6</h1>
-<p><a target="_blank" rel="noopener" href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/dev/stream/operators/windows.html">官网链接</a></p>
-<p><strong>Keyed Windows</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">stream</span><br><span class="line">       .keyBy(...)               &lt;-  keyed versus non-keyed windows</span><br><span class="line">       .window(...)              &lt;-  required: &quot;assigner&quot;</span><br><span class="line">      [.trigger(...)]            &lt;-  optional: &quot;trigger&quot; (else default trigger)</span><br><span class="line">      [.evictor(...)]            &lt;-  optional: &quot;evictor&quot; (else no evictor)</span><br><span class="line">      [.allowedLateness(...)]    &lt;-  optional: &quot;lateness&quot; (else zero)</span><br><span class="line">      [.sideOutputLateData(...)] &lt;-  optional: &quot;output tag&quot; (else no side output for late data)</span><br><span class="line">       .reduce&#x2F;aggregate&#x2F;fold&#x2F;apply()      &lt;-  required: &quot;function&quot;</span><br><span class="line">      [.getSideOutput(...)]      &lt;-  optional: &quot;output tag&quot;</span><br></pre></td></tr></table></figure>
-<p><strong>Non-Keyed Windows</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">stream</span><br><span class="line">       .windowAll(...)           &lt;-  required: &quot;assigner&quot;</span><br><span class="line">      [.trigger(...)]            &lt;-  optional: &quot;trigger&quot; (else default trigger)</span><br><span class="line">      [.evictor(...)]            &lt;-  optional: &quot;evictor&quot; (else no evictor)</span><br><span class="line">      [.allowedLateness(...)]    &lt;-  optional: &quot;lateness&quot; (else zero)</span><br><span class="line">      [.sideOutputLateData(...)] &lt;-  optional: &quot;output tag&quot; (else no side output for late data)</span><br><span class="line">       .reduce&#x2F;aggregate&#x2F;fold&#x2F;apply()      &lt;-  required: &quot;function&quot;</span><br><span class="line">      [.getSideOutput(...)]      &lt;-  optional: &quot;output tag&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="窗口生命周期">窗口生命周期</h2>
-<h3 id="window">window</h3>
-<h3 id="trigger">trigger</h3>
-<p>The function will contain the computation to be applied to the contents of the window, while the <code>Trigger</code> specifies the conditions under which the window is considered ready for the function to be applied. A triggering policy might be something like “when the number of elements in the window is more than 4”, or “when the watermark passes the end of the window”. A trigger can also decide to purge a window’s contents any time between its creation and removal. Purging in this case only refers to the elements in the window, and <em>not</em> the window metadata. This means that new data can still be added to that window.</p>
-<p>function包含了窗口中数据的计算逻辑，trigger指定了在哪些条件下会调用这些function</p>
-<h3 id="Evictor">Evictor</h3>
-<p>Apart from the above, you can specify an <code>Evictor</code> (see <a target="_blank" rel="noopener" href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/dev/stream/operators/windows.html#evictors">Evictors</a>) which will be able to remove elements from the window after the trigger fires and before and/or after the function is applied.</p>
+          <h4 id="怎么理解flink的有状态">怎么理解flink的有状态</h4>
 
       
     </div>
@@ -314,7 +303,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/flink/flink%E6%95%B0%E6%8D%AE%E6%BA%90/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/framework/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -328,7 +317,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/flink/flink%E6%95%B0%E6%8D%AE%E6%BA%90/" class="post-title-link" itemprop="url">flink数据源</a>
+            <a href="/2026/08/07/framework/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -338,16 +327,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
-                </span>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
 
           
@@ -361,9 +341,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/boling_cavalry/article/details/105467076">Flink的DataSource三部曲之一：直接API</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/boling_cavalry/article/details/105471798">Flink的DataSource三部曲之二:内置connector</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/boling_cavalry/article/details/105472218">Flink的DataSource三部曲之三:自定义</a></p>
+          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/33c6a7ed126f">可视化架构设计——C4介绍</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/0e4cd54094f9">微信支付的架构到底有多牛？</a></p>
 
       
     </div>
@@ -383,7 +362,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/flink/flink%E7%AA%97%E5%8F%A3%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/hbase/%E5%BE%85%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -397,7 +376,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/flink/flink%E7%AA%97%E5%8F%A3%E7%B1%BB/" class="post-title-link" itemprop="url">flink窗口类</a>
+            <a href="/2026/08/07/hbase/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
         </h2>
 
         <div class="post-meta">
@@ -407,16 +386,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
-                </span>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
 
           
@@ -430,489 +400,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ul>
-<li>WindowAssigner
-<ul>
-<li>SlidingProcessingTimeWindows</li>
-<li>BaseAlignedWindowAssigner
-<ul>
-<li>SlidingAlignedProcessingTimeWindows</li>
-</ul>
-</li>
-<li>TumblingEventTimeWindows
-<ul>
-<li>TumblingTimeWindows</li>
-</ul>
-</li>
-<li>MergingWindowAssigner
-<ul>
-<li>ProcessingTimeSessionWindows</li>
-<li>DynamicProcessingTimeSessionWindows</li>
-<li>DynamicEventTimeSessionWindows</li>
-<li>EventTimeSessionWindows</li>
-</ul>
-</li>
-<li>TumblingProcessingTimeWindows</li>
-<li>SlidingEventTimeWindows
-<ul>
-<li>SlidingTimeWindows</li>
-</ul>
-</li>
-<li>GlobalWindows</li>
-</ul>
-</li>
-</ul>
-<h2 id="WindowAssigner">WindowAssigner</h2>
-<h3 id="1-SlidingProcessingTimeWindows">1. SlidingProcessingTimeWindows</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into sliding windows based on the current</span></span><br><span class="line"><span class="comment"> * system time of the machine the operation is running on. Windows can possibly overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute, every 10 seconds:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;String, Tuple2&lt;String, Integer&gt;&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindows&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(SlidingProcessingTimeWindows.of(Time.of(1, MINUTES), Time.of(10, SECONDS));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于flink处理时间的滑动窗口</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-<h3 id="6-SlidingEventTimeWindows">6. SlidingEventTimeWindows</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into sliding windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows can possibly overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute, every 10 seconds:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;Tuple2&lt;String, Integer&gt;, String&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindow&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(SlidingEventTimeWindows.of(Time.minutes(1), Time.seconds(10)));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于元素时间的滑动窗口</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-<h4 id="6-1-SlidingTimeWindows-废弃">6.1 SlidingTimeWindows(废弃)</h4>
-<h3 id="2-BaseAlignedWindowAssigner">2. BaseAlignedWindowAssigner</h3>
-<h4 id="1-1-SlidingAlignedProcessingTimeWindows">1.1 SlidingAlignedProcessingTimeWindows</h4>
-<h3 id="5-TumblingProcessingTimeWindows">5. TumblingProcessingTimeWindows</h3>
-<h3 id="3-TumblingEventTimeWindows">3. TumblingEventTimeWindows</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows cannot overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;For example, in order to window into windows of 1 minute:</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt; &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * DataStream&lt;Tuple2&lt;String, Integer&gt;&gt; in = ...;</span></span><br><span class="line"><span class="comment"> * KeyedStream&lt;Tuple2&lt;String, Integer&gt;, String&gt; keyed = in.keyBy(...);</span></span><br><span class="line"><span class="comment"> * WindowedStream&lt;Tuple2&lt;String, Integer&gt;, String, TimeWindow&gt; windowed =</span></span><br><span class="line"><span class="comment"> *   keyed.window(TumblingEventTimeWindows.of(Time.minutes(1)));</span></span><br><span class="line"><span class="comment"> * &#125; &lt;/pre&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-1-TumblingTimeWindows-废弃">3.1 TumblingTimeWindows(废弃)</h4>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A &#123;<span class="doctag">@link</span> WindowAssigner&#125; that windows elements into windows based on the timestamp of the</span></span><br><span class="line"><span class="comment"> * elements. Windows cannot overlap.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@deprecated</span> Please use &#123;<span class="doctag">@link</span> TumblingEventTimeWindows&#125;.</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-<h3 id="4-MergingWindowAssigner">4. MergingWindowAssigner</h3>
-<h4 id="4-1-ProcessingTimeSessionWindows">4.1 ProcessingTimeSessionWindows</h4>
-<h4 id="4-2-DynamicProcessingTimeSessionWindows">4.2 DynamicProcessingTimeSessionWindows</h4>
-<h4 id="4-3-DynamicEventTimeSessionWindows">4.3 DynamicEventTimeSessionWindows</h4>
-<h4 id="4-4-EventTimeSessionWindows">4.4 EventTimeSessionWindows</h4>
-<h3 id="7-GlobalWindows">7. GlobalWindows</h3>
-<h2 id="总结">总结</h2>
-<h3 id="适用场景">适用场景</h3>
-<ol>
-<li><strong>滑动窗口</strong></li>
-</ol>
-<ul>
-<li>每条数据会发送到多个滑动窗口中，即在最终的输出中，一条数据要被统计多次</li>
-<li>适合统计据当前时间往前一段时间内的数据汇总</li>
-</ul>
-<ol start="2">
-<li><strong>滚动窗口</strong></li>
-</ol>
-<ul>
-<li>每条数据只会在一个滚动窗口中</li>
-<li>适合对数据进行简单聚合后，再次聚合的场景</li>
-<li>适合输出明细，不做聚合的场景，比如join后直接输出</li>
-</ul>
-<h3 id="占用内存比较">占用内存比较</h3>
-<ol>
-<li><strong>滑动窗口</strong>
-<ul>
-<li><em>理论上一条数据会复制到多个窗口，被复制几次，占用内存就会扩大几倍，但不清楚是否有优化，比如只复制数据的引用？</em></li>
-<li></li>
-</ul>
-</li>
-<li><strong>滚动窗口</strong></li>
-</ol>
-<h3 id="关于时间点">关于时间点</h3>
-<h4 id="窗口的开始时间">窗口的开始时间</h4>
-<ol>
-<li>首先要明确的是，开始时间只与system time和offset参数相关，与程序开始运行时间无关</li>
-<li>比如设置了窗口size是1h，那么在</li>
-</ol>
-<h4 id="窗口的结束时间">窗口的结束时间</h4>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/flink/flink%E9%85%8D%E7%BD%AElog4j/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/flink/flink%E9%85%8D%E7%BD%AElog4j/" class="post-title-link" itemprop="url">flink配置log4j</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>因为本地测试中，本地构建的数据源并非预想中的单线程运行，所以想看下线程id，以确定是否每次都新起了线程。</p>
-<p>推荐使用xml，结构清晰</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Configuration</span> <span class="attr">status</span>=<span class="string">&quot;WARN&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Appenders</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 控制台输出 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Console</span> <span class="attr">name</span>=<span class="string">&quot;Console&quot;</span> <span class="attr">target</span>=<span class="string">&quot;SYSTEM_OUT&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;%d&#123;HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Console</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 文件输出（可选） --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">File</span> <span class="attr">name</span>=<span class="string">&quot;File&quot;</span> <span class="attr">fileName</span>=<span class="string">&quot;logs/flink-job.log&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">File</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Appenders</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Loggers</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- Flink 相关日志级别 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;org.apache.flink&quot;</span> <span class="attr">level</span>=<span class="string">&quot;INFO&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 你的项目包名 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">&quot;com.jingqicao.code&quot;</span> <span class="attr">level</span>=<span class="string">&quot;DEBUG&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">Root</span> <span class="attr">level</span>=<span class="string">&quot;INFO&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;Console&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;File&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">Root</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Loggers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="解析">解析</h3>
-<p>如果Logger不指定additivity=false，默认为true。此时当前Logger及Root都会处理日志，如果Logger与Root配了相同的Appender，就会重复输出。</p>
-<p>Root的level，表示的是Root使用的日志级别，如果有一个Logger没有具体指定，就会交由Root处理，即日志级别由Root决定。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/flink/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/flink/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d2dbc089b0bd">Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cjblogs/p/12973063.html">Flink 流式聚合性能调优指南</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26983736">【资料合集】Apache Flink 精选PDF下载</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/zhisheng17/flink-learning">大数据实时计算引擎 Flink 实战与性能优化</a></p>
-<p><a target="_blank" rel="noopener" href="https://flymetothemars.github.io/2019/11/14/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E%20Flink%20%E5%AE%9E%E6%88%98%E4%B8%8E%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">大数据实时计算引擎 Flink 实战与性能优化</a></p>
-<h2 id="介绍">介绍</h2>
-<p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2017/11/17/flink-benchmark.html">流计算框架 Flink 与 Storm 的性能对比</a></p>
-<h2 id="聚合处理">聚合处理</h2>
-<ol>
-<li></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/131576782">Flink 消息聚合处理方案</a></li>
-</ol>
-<h2 id="实时数仓">实时数仓</h2>
-<p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2018/10/18/meishi-data-flink.html">美团点评基于 Flink 的实时数仓建设实践</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/flink/%E5%AE%98%E7%BD%91%E7%9B%AE%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/flink/%E5%AE%98%E7%BD%91%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">flink官网目录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://flink.apache.org/">Apache Flink</a></p>
-<p><a target="_blank" rel="noopener" href="https://ci.apache.org/projects/flink/flink-docs-stable/#apache-flink-documentation">Apache Flink Documentation</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/apache/flink">git地址</a></p>
-<p><a target="_blank" rel="noopener" href="https://ci.apache.org/projects/flink/">不同版本根目录</a></p>
-<p>算子</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/flink/%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/flink/%E5%AE%9E%E8%B7%B5%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">flink实践问题汇总</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="待整理">待整理</h2>
-<ol>
-<li>本地自定义数据源，会启动多个线程，且不会停止，无法控制单线程输入</li>
-</ol>
-<h3 id="本地自定义数据源，运行起来不停止">本地自定义数据源，运行起来不停止</h3>
-<details>
-<summary>日志记录</summary>
-<pre><code>
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:53 - loop:2
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:54 - operationInfo:&#123;"operationTimeStamp":"2021-01-27 16:58:23","pageId":"30001","sessionId":"abcd","unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:47 - loop:2
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:48 - orderInfo:&#123;"orderId":10001,"orderTimeStamp":"2021-01-27 16:58:23","price":39.8,"spuList":["spu1","spu2","spu3"],"unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:53 - loop:2
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:54 - operationInfo:&#123;"operationTimeStamp":"2021-01-27 16:58:23","pageId":"30001","sessionId":"abcd","unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:47 - loop:2
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:48 - orderInfo:&#123;"orderId":10001,"orderTimeStamp":"2021-01-27 16:58:23","price":39.8,"spuList":["spu1","spu2","spu3"],"unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:47 - loop:2
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:48 - orderInfo:&#123;"orderId":10001,"orderTimeStamp":"2021-01-27 16:58:23","price":39.8,"spuList":["spu1","spu2","spu3"],"unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:53 - loop:2
-2021-01-27 16:58:23 Source: operation_data_stream (1/1) ERROR LocalOperationSource:54 - operationInfo:&#123;"operationTimeStamp":"2021-01-27 16:58:23","pageId":"30001","sessionId":"abcd","unionId":"123","userId":"user_123"&#125;
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:47 - loop:2
-2021-01-27 16:58:23 Source: order_data_stream (1/1) ERROR LocalOrderSource:48 - orderInfo:&#123;"orderId":10001,"orderTimeStamp":"2021-01-27 16:58:23","price":39.8,"spuList":["spu1","spu2","spu3"],"unionId":"123","userId":"user_123"&#125;
-</code></pre>
-</details>
-<p>现象：</p>
-<ol>
-<li>两个数据源，都不断输出loop:2的记录，不会执行到loop:1，如果删除掉 <code>Thread.sleep()</code> 可以执行到loop:1</li>
-<li>不会停止，按理说只应该执行一次loop:2</li>
-</ol>
-<p>原因：</p>
-<ol>
-<li>估计是<code>Thread.sleep()</code>把线程挂起后，无法唤醒，所以执行不到loop:1</li>
-<li>可以判断与数据源无关，是受后续的处理方式影响的，如果直接sink，不会有问题2</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/flink/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/flink/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="原理">原理</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hellojoy/article/details/101455711">Flink 原理与实现：理解 Flink 中的计算资源</a></p>
+          <h2 id="基础">基础</h2>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1702319">初识 HBase</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1722656?from=information.detail.hbase%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0">Hbase入门详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1424162?from=information.detail.hbase%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0">一篇文章入门Hbase</a></p>
+<h2 id="原理">原理</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38023225/article/details/102570639?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-6&amp;spm=1001.2101.3001.4242">HBase原理（读写流程）</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ASN_forever/article/details/104763712/">hbase为什么能够实现实时读写</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zmanzi/p/10864091.html">hbase知识点及实时读写原理</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1358126?from=information.detail.hbase%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0">Hbase原理详解</a></p>
 <h2 id="优化">优化</h2>
-<p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/sihs_qy6hcpmqnblti9m">Flink 滑动窗口优化</a></p>
-<p>超长滑动窗口优化及解决方案</p>
-<h2 id="数据源">数据源</h2>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiexiandong/p/12770187.html">flink系列-4、flink自定义source、sink</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.sohu.com/a/318353586_99973460">Flink 如何自定义Source</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43161811/article/details/88942806">Flink-04-Flink自定义Source</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/duxu24/article/details/105547283">Flink——自定义Source</a></p>
-<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1694062">5分钟Flink - 自定义Source源</a></p>
-<h2 id="join">join</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/huzechen/article/details/102548858">Flink如何实现3个实时流同时join,leftjoin,rightjoin</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37142346/article/details/90176504">Flink Operator之CoGroup、Join以及Connect</a></p>
-<h2 id="方法详解">方法详解</h2>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/136671137">richXXXFunction的open,clone方法执行</a></p>
-<h2 id="资源">资源</h2>
-<p><a target="_blank" rel="noopener" href="https://training.ververica.com/pages/training">在线训练地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zx8167107/article/details/78753634">hbase读写性能测试调优</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lisulong1/article/details/53617234?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control">优化hbase的查询提升读写速率优化案例及性能提升的几种方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/codemosi/article/details/48681679">实时系统HBase读写优化–大量写入无障碍</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cxhfuujust/p/7771123.html">hbase大规模数据写入的优化历程</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1337350?from=information.detail.hbase%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0">HBase篇–HBase常用优化</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/su20145104009/article/details/80614425">hbase实时优化思路</a></p>
+<h2 id="深入学习">深入学习</h2>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1005990?from=information.detail.hbase%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0">HBase 学习分享</a></p>
+<h2 id="面试">面试</h2>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1674199?from=information.detail.hbase%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0">Hbase 基础面试题</a></p>
 
       
     </div>
@@ -932,7 +439,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/flink/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/framework/%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -946,7 +453,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/flink/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/" class="post-title-link" itemprop="url">数据倾斜问题</a>
+            <a href="/2026/08/07/framework/%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">数据架构</a>
         </h2>
 
         <div class="post-meta">
@@ -956,7 +463,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -964,7 +471,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                  <a href="/categories/framework/" itemprop="url" rel="index"><span itemprop="name">framework</span></a>
                 </span>
             </span>
 
@@ -979,7 +486,962 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/cbd7046e74aa">用两阶段聚合法解决Flink keyBy()算子倾斜</a></p>
+          <p>[toc]</p>
+<h1>待整理</h1>
+<h2 id="Kappa-架构是什么样的，运用在实际业务上是否合理，还有什么其他架构的选择，以及哪些公司采用了这些架构">Kappa 架构是什么样的，运用在实际业务上是否合理，还有什么其他架构的选择，以及哪些公司采用了这些架构</h2>
+<h3 id="⚙️-Kappa架构是什么样的？">⚙️ Kappa架构是什么样的？</h3>
+<p>Kappa架构的核心思想可以概括为一句话：<strong>一切皆为流，用一套流处理引擎处理所有数据</strong>-<a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/692d51adaa20654bee7a75d8">-1</a>。</p>
+<p>它由Apache Kafka的创始人Jay Kreps提出，旨在解决早期Lambda架构的复杂性<a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/692d51adaa20654bee7a75d8">-1</a><a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/kappa-architecture-guide">-4</a>。</p>
+<ul>
+<li><strong>Lambda架构的痛点</strong>：Lambda架构为了兼顾“实时”与“准确”，维护着<strong>两套独立的处理逻辑</strong>：一套是低延迟的<strong>流处理层</strong>，产出近实时的近似结果；另一套是高准确度的<strong>批处理层</strong>，定期（如每天）重算全量数据以修正结果<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a><a target="_blank" rel="noopener" href="https://risingwave.com/blog/lambda-to-kappa-stream-processing-architecture/">-5</a>。这导致系统复杂、维护成本高，且实时与离线结果常对不上<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。</li>
+<li><strong>Kappa的解决思路</strong>：它砍掉了独立的批处理层，<strong>只保留一个流处理层</strong>-<a target="_blank" rel="noopener" href="https://cloud.tencent.com.cn/developer/article/2607231?policyId=1003">-17</a>。其核心是依赖一个<strong>可重放的事件日志</strong>（如Kafka）<a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/kappa-architecture-guide">-4</a>。所有新数据源源不断地流入这个日志，流处理引擎实时消费并计算结果。当业务逻辑变更或需要修正历史数据时，<strong>只需将日志从头开始“重放”（Replay）一遍</strong>，通过同一个流处理任务就能得到修正后的结果-<a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/692d51adaa20654bee7a75d8">-1</a>。</li>
+</ul>
+<blockquote>
+<p><strong>形象理解</strong>：Lambda像两条生产线（一条快但不精细，一条慢但精准），最后再合并产品；Kappa则是一条高度自动化的柔性生产线，需要返工时，就把原材料（日志）从头再走一遍流程<a target="_blank" rel="noopener" href="https://risingwave.com/blog/lambda-to-kappa-stream-processing-architecture/">-5</a>。</p>
+</blockquote>
+<hr>
+<h3 id="🎯-运用于实际业务是否合理？">🎯 运用于实际业务是否合理？</h3>
+<p><strong>合理，但并非“银弹”</strong>。它在特定场景下优势巨大，但也有明显的局限。</p>
+<h4 id="✅-优势与适用场景">✅ 优势与适用场景</h4>
+<p>Kappa架构最适合<strong>数据源是事件流（如日志、埋点、IoT数据）、对实时性要求极高，且希望简化系统</strong>的场景-<a target="_blank" rel="noopener" href="https://cloud.tencent.com.cn/developer/article/2607231?policyId=1003">-17</a>。</p>
+<ul>
+<li><strong>架构极简</strong>：只需维护<strong>一套代码、一条链路</strong>，大大降低了开发和运维的复杂度和心智负担-<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。</li>
+<li><strong>逻辑一致</strong>：彻底消除了实时与离线结果对不上的“数据对账”难题<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。</li>
+<li><strong>典型行业</strong>：
+<ul>
+<li><strong>金融</strong>：实时交易监控、欺诈检测-<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1640896">-2</a></li>
+<li><strong>电商/零售</strong>：实时推荐、库存管理、销售大屏-<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1640896">-2</a></li>
+<li><strong>物联网(IoT)</strong>：设备实时监控、预测性维护<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1640896">-2</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="⚠️-挑战与局限">⚠️ 挑战与局限</h4>
+<ul>
+<li><strong>历史数据重放成本高昂</strong>：Kafka并非无限存储<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。如需重放数月甚至一年的数据，<strong>存储成本巨大，且重放过程会大量消耗计算资源</strong>，可能导致集群不稳定<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。</li>
+<li><strong>复杂状态计算困难</strong>：实时计算去重、多流JOIN等复杂指标时，流处理引擎需要维护庞大的状态（State）<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。这可能导致<strong>状态爆炸、内存溢出</strong>，且故障恢复极其复杂<a target="_blank" rel="noopener" href="https://risingwave.com/blog/lambda-to-kappa-stream-processing-architecture/">-5</a>。</li>
+<li><strong>对技术人员要求高</strong>：设计和实现高效的流处理逻辑，比传统的批处理SQL难度更高<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1640896">-2</a>。</li>
+</ul>
+<blockquote>
+<p><strong>现实是</strong>：完全的Kappa架构在大型企业里并不常见。更普遍的做法是**“Kappa + 数据湖”的混合模式**，即用Kappa处理实时数据，同时将数据沉淀到数据湖中，用批处理引擎（如Spark）进行低成本的历史数据分析<a target="_blank" rel="noopener" href="https://risingwave.com/blog/lambda-vs-kappa-architecture-2026/">-21</a>。</p>
+</blockquote>
+<hr>
+<h3 id="🏗️-还有哪些其他架构选择？">🏗️ 还有哪些其他架构选择？</h3>
+<p>除了Kappa，目前业界主流的大数据架构还有以下几种：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">架构</th>
+<th style="text-align:left">核心思想</th>
+<th style="text-align:left">优点</th>
+<th style="text-align:left">缺点</th>
+<th style="text-align:left">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Lambda架构</strong></td>
+<td style="text-align:left"><strong>批流协同</strong>：维护批处理和流处理两套系统，兼顾准确与实时<a target="_blank" rel="noopener" href="https://cloud.tencent.com.cn/developer/article/2607231?policyId=1003">-17</a>。</td>
+<td style="text-align:left">成熟稳定，能同时保证历史数据的准确性和实时数据的低延迟-<a target="_blank" rel="noopener" href="https://cloud.tencent.com.cn/developer/article/2607231?policyId=1003">-17</a>。</td>
+<td style="text-align:left">架构复杂，维护两套代码，数据一致性难保证<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1640896">-2</a>。</td>
+<td style="text-align:left">对数据准确性要求极高，且需要实时与历史分析兼顾的场景<a target="_blank" rel="noopener" href="https://cloud.tencent.com.cn/developer/article/2607231?policyId=1003">-17</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Lakehouse (湖仓一体)</strong></td>
+<td style="text-align:left"><strong>统一存储</strong>：基于数据湖（如Iceberg, Hudi）构建，同时支持高效的BI分析和AI/机器学习-。</td>
+<td style="text-align:left">存储成本低（使用廉价存储），支持多种数据类型（结构化、非结构化），并能提供数据仓库的ACID事务能力-。</td>
+<td style="text-align:left">技术相对较新，数据治理和元数据管理是挑战。</td>
+<td style="text-align:left">希望用一个平台同时支撑BI报表、数据科学和AI分析的企业-。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Data Mesh (数据网格)</strong></td>
+<td style="text-align:left"><strong>去中心化</strong>：将数据所有权和责任分散到各个业务域团队，每个团队负责输出自己的“数据产品”-。</td>
+<td style="text-align:left">解决了超大型组织中数据团队成为瓶颈的问题，提升了数据交付的敏捷性-。</td>
+<td style="text-align:left">对组织文化、数据治理和基础设施要求极高，实施难度大-。</td>
+<td style="text-align:left">业务线众多、组织架构复杂的大型或超大型企业-。</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="🏢-哪些公司采用了这些架构？">🏢 哪些公司采用了这些架构？</h3>
+<ul>
+<li><strong>Kappa架构</strong>：
+<ul>
+<li><strong>海通证券</strong>：上线了基于Kappa架构的实时日志分析平台-。</li>
+<li><strong>某大型零售企业</strong>：利用Kafka打通ERP、CRM、POS等系统，构建实时销售分析-。</li>
+<li><strong>某跨境电商平台</strong>：基于Kafka+ElasticSearch搭建轻量级Kappa架构，处理日均百万级数据-。</li>
+<li>此外，不少公司将原有Lambda改造为Kappa后，实现了<strong>服务器成本降低30%</strong> 等显著收益–。</li>
+</ul>
+</li>
+<li><strong>Lambda架构</strong>：
+<ul>
+<li><strong>Yahoo、Netflix</strong>：是大数据领域早期Lambda架构的知名实践者-。</li>
+<li><strong>腾讯云</strong>：在其方案中，用Lambda架构处理电商用户行为分析等场景-。</li>
+<li>注意：这里的“Lambda”指大数据处理架构，与AWS的Serverless计算服务“AWS Lambda”是不同概念-。</li>
+</ul>
+</li>
+<li><strong>Lakehouse (湖仓一体) 架构</strong>：
+<ul>
+<li><strong>中国移动</strong>：在其集团大数据平台进行了湖仓一体架构的升级和落地-。</li>
+<li><strong>京东</strong>：为解决Lambda架构痛点，在流量资产场景中引入了湖仓一体架构-。</li>
+<li><strong>中信建投、齐鲁银行</strong>等金融机构，也纷纷建设湖仓一体数据平台-。</li>
+</ul>
+</li>
+<li><strong>Data Mesh (数据网格) 架构</strong>：
+<ul>
+<li><strong>宝马集团</strong>：与AWS合作，深化其云数据中心的建设，是数据网格理念的实践者之一-。</li>
+<li><strong>诺基亚</strong>：采用去中心化的数据网格架构，称其将机器学习运营效率提升了70%-。</li>
+</ul>
+</li>
+</ul>
+<h2 id="字节，百度，阿里分别使用的什么架构">字节，百度，阿里分别使用的什么架构</h2>
+<p>这三家公司的数据架构演进，清晰地勾勒出了一幅从经典的 Lambda 架构向<strong>湖仓一体</strong>架构转型的图谱。</p>
+<p>简单来说，它们的共同趋势是：为了追求<strong>更低的数据延迟</strong>、<strong>更统一的存储</strong>和<strong>更简化的开发运维</strong>，正逐步摒弃传统的 Lambda 或 Kappa 架构，全面拥抱“湖仓一体”-<a target="_blank" rel="noopener" href="https://hub.baai.ac.cn/view/43582">-20</a>。</p>
+<p>下面是这三家公司各自的具体实践：</p>
+<h3 id="🏢-字节跳动：从-Lambda-迈向自研湖仓一体">🏢 字节跳动：从 Lambda 迈向自研湖仓一体</h3>
+<p>字节跳动早期为了快速支持业务，采用了经典的 <strong>Lambda 架构</strong>-。但随着业务（尤其是电商、抖音等）的精细化发展，Lambda 架构的弊端（如数据口径对齐难、维护双套代码成本高）日益凸显。</p>
+<p>因此，字节跳动正积极向<strong>湖仓一体</strong>架构演进，其核心特点是<strong>存储层的统一</strong>：</p>
+<ul>
+<li><strong>核心思路</strong>：通过引入数据湖技术（如 <strong>Apache Hudi</strong>）-，实现实时数据和离线数据的<strong>一份存储</strong>，从而解决存储翻倍和口径不一致的问题。</li>
+<li><strong>技术方案</strong>：字节内部基于 <strong>Hudi</strong> 等开源技术，自研了高吞吐、高并发、秒级延迟可见的实时数据湖方案，并在上层构建了名为 <strong>LAS</strong> 的服务-<a target="_blank" rel="noopener" href="https://developer.volcengine.com/articles/7265258672085794879">-5</a>。</li>
+<li><strong>应用场景</strong>：该方案已在<strong>电商流量数据</strong>-等对实时性要求极高的核心业务场景中落地。</li>
+</ul>
+<h3 id="🏢-百度：Lambda-与-Kappa-的混合实践">🏢 百度：Lambda 与 Kappa 的混合实践</h3>
+<p>与字节跳动激进的转型不同，百度采用了一种更为折中的 <strong>Lambda 和 Kappa 的混合架构</strong>-。</p>
+<ul>
+<li><strong>核心思路</strong>：在数据清洗和数仓构建等关键环节，百度尝试融合两种架构的优势。一方面，通过<strong>流批一体</strong>的技术方案，让实时和离线任务<strong>共用一套代码</strong>，以解决 Lambda 的双代码问题<a target="_blank" rel="noopener" href="https://blog.itpub.net/70024420/viewspace-2931888/">-8</a><a target="_blank" rel="noopener" href="https://www.e-com-net.com/article/1666994308026294272.htm">-9</a>；另一方面，并未完全放弃批处理层，而是让<strong>离线链路作为数据准确性的最终保障</strong><a target="_blank" rel="noopener" href="https://blog.itpub.net/70024420/viewspace-2931888/">-8</a>。</li>
+<li><strong>技术方案</strong>：百度在技术栈上同时兼容传统（如 Hive, Spark<a target="_blank" rel="noopener" href="https://blog.itpub.net/70024420/viewspace-2931888/">-8</a>）和现代（如 Flink<a target="_blank" rel="noopener" href="https://blog.itpub.net/70024420/viewspace-2931888/">-8</a>）计算框架，并积极构建自己的<strong>云原生湖仓一体架构</strong>-。</li>
+<li><strong>应用场景</strong>：这种架构被应用于其<strong>用户产品</strong>等业务的<strong>实时数仓</strong>建设中-<a target="_blank" rel="noopener" href="https://www.e-com-net.com/article/1666994308026294272.htm">-9</a>。</li>
+</ul>
+<h3 id="🏢-阿里巴巴：力推“Flink-Paimon-Hologres”实时湖仓">🏢 阿里巴巴：力推“Flink + Paimon + Hologres”实时湖仓</h3>
+<p>阿里巴巴因其电商业务对实时性的极致追求，在数据架构的演进上最为激进，大力推动以 <strong>Flink + Paimon + Hologres</strong> 为核心的实时湖仓一体方案-。</p>
+<ul>
+<li><strong>核心思路</strong>：阿里巴巴的目标是打造<strong>一体化实时湖仓</strong>-。其演进路径清晰展示了从 Lambda 到 Kafka 分层，再到 Hologres 统一存储的历程<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1651957?spm=a2c6h.13046898.publish-article.61.68276ffan6aa4T">-16</a>。</li>
+<li><strong>技术方案</strong>：
+<ol>
+<li><strong>湖存储层</strong>：主推自研的 <strong>Paimon</strong> 数据湖格式<a target="_blank" rel="noopener" href="https://hub.baai.ac.cn/view/43582">-20</a>。</li>
+<li><strong>计算引擎层</strong>：基于 <strong>Flink</strong> 实现流批一体计算-。</li>
+<li><strong>服务引擎层</strong>：由 <strong>Hologres</strong> 统一提供高性能的实时查询与分析服务-<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1651957?spm=a2c6h.13046898.publish-article.61.68276ffan6aa4T">-16</a>。</li>
+</ol>
+</li>
+<li><strong>应用场景</strong>：这套方案已在<strong>阿里妈妈</strong>等核心业务中落地，实现了<strong>流批一体的开发模式</strong>，显著节省了人力和计算存储成本<a target="_blank" rel="noopener" href="https://hub.baai.ac.cn/view/43582">-20</a>。</li>
+</ul>
+<hr>
+<h3 id="📈-总结：架构演进趋势">📈 总结：架构演进趋势</h3>
+<p>从这三家巨头的实践中，可以总结出大数据架构演进的清晰脉络：</p>
+<ul>
+<li><strong>从 Lambda 到湖仓一体</strong>：为解决 Lambda 架构的双代码、双存储和口径不一致等核心痛点<a target="_blank" rel="noopener" href="https://blog.itpub.net/70024420/viewspace-2931888/">-8</a>。</li>
+<li><strong>计算层：从“批流分离”到“流批一体”</strong>：使用 Flink 等引擎，用<strong>一套代码</strong>同时处理实时和离线任务，降低开发和维护成本<a target="_blank" rel="noopener" href="https://hub.baai.ac.cn/view/43582">-20</a>。</li>
+<li><strong>存储层：从“双存储”到“湖仓一体”</strong>：基于数据湖技术（如 Hudi, Paimon），实现实时和离线数据的<strong>统一存储</strong>，从根本上解决数据一致性问题。</li>
+</ul>
+<p>总的来说，虽然这三家公司的技术选型和演进路径各有侧重，但最终都指向了“<strong>湖仓一体</strong>”这个共同的未来方向。</p>
+<h2 id="湖仓一体是什么架构-请详细描述一下，包括对哪些业务场景支持比较好，解决了哪些痛点，用到的技术都有哪些，分别使用在哪些业务场景中">湖仓一体是什么架构 请详细描述一下，包括对哪些业务场景支持比较好，解决了哪些痛点，用到的技术都有哪些，分别使用在哪些业务场景中</h2>
+<p>这些资料提供了关于湖仓一体架构的详细信息。我需要组织一个全面的回答，涵盖定义、优势、业务场景、技术组件和实际案例。回答将采用标题和段落的形式，并引用这些来源。</p>
+<p>湖仓一体（Lakehouse）可以理解为一种<strong>数据平台新架构</strong>，它尝试融合数据湖和数据仓库的优势，旨在提供一个更统一、高效的数据底座-<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。</p>
+<p>简单来说，它希望解决一个核心问题：企业数据越来越多，格式越来越杂，传统的单一数据湖或数据仓库架构都有些力不从心了<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1674499">-10</a>。</p>
+<h3 id="🤔-它解决了什么核心痛点？">🤔 它解决了什么核心痛点？</h3>
+<p>在湖仓一体出现之前，很多公司采用的是“数据湖+数据仓库”两套并行的架构（Lambda架构），这带来了不少麻烦。湖仓一体正是为了解决这些痛点而生：</p>
+<ul>
+<li><strong>存储与计算成本高昂</strong>：Lambda架构需要维护离线和实时两条独立链路，导致计算和存储资源<strong>双倍消耗</strong>。湖仓一体通过<strong>存算分离</strong>-和<strong>统一存储</strong>，一份数据只存一次，显著降低成本-。</li>
+<li><strong>数据口径不一致</strong>：两套链路处理逻辑不同，导致离线报表和实时看板的数据经常对不上，业务人员需要花大量时间排查。湖仓一体通过<strong>流批一体</strong>，用一套代码处理所有数据，从根源上保证了数据一致性<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1664847">-4</a>。</li>
+<li><strong>数据时效性不足</strong>：传统数仓通常是T+1的批处理，无法满足实时或近实时分析需求。湖仓一体支持<strong>分钟级甚至秒级的数据延迟</strong><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>。</li>
+<li><strong>数据治理困难</strong>：缺乏管理的数据湖容易变成“数据沼泽”，难以被有效利用<a target="_blank" rel="noopener" href="https://www.ibm.com/cn-zh/think/architectures/patterns/data-lakehouse">-9</a>。湖仓一体在湖上构建了<strong>元数据管理、事务、索引</strong>等能力，让数据变得可查、可信-<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。</li>
+<li><strong>无法处理多样化数据</strong>：传统数仓难以处理日志、图片等非结构化数据-。湖仓一体原生支持<strong>结构化、半结构化和非结构化</strong>数据的存储与分析-<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。</li>
+</ul>
+<h3 id="🧱-湖仓一体的核心架构与关键技术">🧱 湖仓一体的核心架构与关键技术</h3>
+<p>湖仓一体并不是一个单一的产品，而是一套技术组合，其架构大致可以分为以下几个层面：</p>
+<ol>
+<li><strong>统一的存储层 (Storage Layer)</strong>：这是湖仓一体的基石，通常基于<strong>对象存储</strong>（如AWS S3、阿里云OSS）或<strong>分布式文件系统</strong>（如HDFS）构建<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。关键在于使用了<strong>开放的表格式（Open Table Formats）</strong>，如 <strong>Apache Iceberg</strong><a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>、<strong>Apache Hudi</strong>、<strong>Delta Lake</strong>-和 <strong>Apache Paimon</strong><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>。它们为数据湖带来了数据仓库才有的ACID事务、时间旅行（Time Travel）和高效更新删除等能力-。</li>
+<li><strong>强大的计算层 (Compute Layer)</strong>：在统一存储之上，湖仓一体支持多种计算引擎，让不同的工具做最擅长的事<a target="_blank" rel="noopener" href="https://www.ibm.com/cn-zh/think/architectures/patterns/data-lakehouse">-9</a>。
+<ul>
+<li><strong>批处理</strong>：如 <strong>Apache Spark</strong>，用于处理大规模历史数据的ETL<a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>。</li>
+<li><strong>流处理</strong>：如 <strong>Apache Flink</strong>，用于处理实时数据，实现“流批一体”<a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>。</li>
+<li><strong>交互式查询</strong>：如 <strong>StarRocks</strong><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>、<strong>Apache Doris</strong>-、<strong>Hologres</strong><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1664847">-4</a>，用于提供高性能的BI报表和Ad-hoc查询。</li>
+</ul>
+</li>
+<li><strong>统一的元数据层 (Metadata Layer)</strong>：这是“一体”的关键。通过统一的数据目录（如<strong>Hive Metastore</strong>或<strong>AWS Glue</strong>），让所有计算引擎都能访问到相同的数据集，避免了数据孤岛<a target="_blank" rel="noopener" href="https://www.ibm.com/cn-zh/think/architectures/patterns/data-lakehouse">-9</a>。</li>
+<li><strong>完善的数据治理层 (Governance Layer)</strong>：提供数据血缘、数据质量、权限管理等能力，确保数据的安全与合规-<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。例如，<strong>Microsoft Purview</strong>-就是这方面的工具。</li>
+</ol>
+<h3 id="💡-哪些业务场景支持比较好？">💡 哪些业务场景支持比较好？</h3>
+<p>湖仓一体的架构特性使其在以下场景中表现突出：</p>
+<ul>
+<li><strong>实时/准实时BI与决策</strong>：这是最典型的场景。例如<strong>京东</strong>将流量数据接入湖仓，将数据时效从T+1提升到<strong>分钟级</strong>，支撑了搜索推荐等核心业务。<strong>vivo</strong>也利用此架构将数据处理从小时级缩短到<strong>十分钟以内</strong><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>。</li>
+<li><strong>AI与机器学习</strong>：AI模型训练需要海量且多样的数据（文本、图片、日志）。湖仓一体能作为统一的“数据食堂”，高效地为模型提供特征数据，并支持特征工程的反复迭代-<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。</li>
+<li><strong>数据中台与统一数据服务</strong>：湖仓一体非常适合作为企业的数据中台底座<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1674499">-10</a>。<strong>云南红塔银行</strong>-和<strong>长城人寿</strong>-等机构，都基于湖仓一体构建了新一代数据中台，以统一对外提供服务。</li>
+<li><strong>日志与物联网（IoT）数据分析</strong>：面对IoT设备或服务器产生的海量、格式不一的日志数据，湖仓一体的存储和分析能力是天然的优势<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1674499">-10</a>。</li>
+<li><strong>金融行业实时风控与监管</strong>：金融行业对数据时效性和一致性要求极高。<strong>农业银行</strong>用其弥补了传统数仓实时处理能力的不足-，<strong>齐鲁银行</strong>则通过湖仓一体使<strong>存储成本直降50%，计算速度提升70%</strong>-，中信建投也以此为基础推动数字化转型-。</li>
+</ul>
+<h3 id="🏢-哪些公司在使用？">🏢 哪些公司在使用？</h3>
+<p>湖仓一体已成为各行业头部企业的共同选择：</p>
+<ul>
+<li><strong>互联网巨头</strong>：<strong>字节、百度、阿里、京东、快手、vivo、淘天集团</strong>都在积极实践湖仓一体架构-。</li>
+<li><strong>金融机构</strong>：<strong>农业银行、交通银行、中信建投、齐鲁银行、长城人寿、云南红塔银行</strong>等，都在利用湖仓一体构建新一代数据底座-。</li>
+<li><strong>其他行业</strong>：<strong>中国电财</strong>等大型集团也在采用“流批湖仓”的融合架构-。</li>
+</ul>
+<h3 id="💎-总结">💎 总结</h3>
+<p>湖仓一体并非凭空创造的新概念，而是为了解决大数据领域长期存在的“数据孤岛”和“架构复杂”等问题，将<strong>数据湖的灵活性、低成本</strong>与<strong>数据仓库的性能、规范性</strong>相结合的必然产物-。它通过<strong>开放的表格式</strong>和<strong>存算分离</strong>等核心技术，为企业提供了一个能同时支撑BI、AI和实时分析等多种负载的统一数据平台<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1674499">-10</a>。</p>
+<p>当然，湖仓一体也并非“银弹”，其技术栈相对较新，对团队的技术能力要求较高，且在数据治理和元数据管理方面仍有挑战-。但不可否认的是，它代表了数据平台架构演进的一个重要方向-。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/doris/%E5%AE%9E%E9%99%85%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/doris/%E5%AE%9E%E9%99%85%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">实践操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-复制表">1. 复制表</h2>
+<h3 id="1-1-复制表结构">1.1 复制表结构</h3>
+<h3 id="1-2-复制表数据">1.2 复制表数据</h3>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/doris/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/doris/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">官方文档目录摘要</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-doris/wiki">git wiki地址</a></p>
+<h1>编译与部署</h1>
+<h2 id="安装与部署"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/installing/install-deploy.html">安装与部署</a></h2>
+<h3 id="软硬件需求">软硬件需求</h3>
+<ul>
+<li>FE（前端）和BE（后端）存储数据的区别，以及所需机器配置</li>
+<li>FE与BE端口、网络需求</li>
+<li>ip绑定</li>
+</ul>
+<h3 id="集群部署">集群部署</h3>
+<ul>
+<li>
+<p>手动部署</p>
+</li>
+<li>
+<ul>
+<li>FE部署</li>
+<li>BE部署</li>
+<li>FS_Broker部署</li>
+</ul>
+</li>
+</ul>
+<h3 id="扩容缩容">扩容缩容</h3>
+<ul>
+<li>
+<p>FE扩容和缩容</p>
+</li>
+<li>
+<ul>
+<li>增加FE节点</li>
+<li>删除FE节点</li>
+</ul>
+</li>
+<li>
+<p>BE扩容和缩容</p>
+</li>
+<li>
+<ul>
+<li>增加BE节点</li>
+<li>删除BE节点</li>
+</ul>
+</li>
+<li>
+<p>Broker扩容缩容</p>
+</li>
+</ul>
+<h2 id="常见问题">常见问题</h2>
+<h1>开始使用</h1>
+<h2 id="基础使用指南"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/basic-usage.html">基础使用指南</a></h2>
+<h3 id="1-创建用户">1.创建用户</h3>
+<ul>
+<li>Root用户登陆与密码修改</li>
+<li>创建新用户</li>
+</ul>
+<h3 id="2-数据表的创建与数据导入">2.数据表的创建与数据导入</h3>
+<ul>
+<li>
+<p>创建数据库</p>
+</li>
+<li>
+<p>账户授权</p>
+</li>
+<li>
+<p>建表</p>
+</li>
+<li>
+<ul>
+<li>单分区</li>
+<li>复合分区</li>
+</ul>
+</li>
+<li>
+<p>导入数据</p>
+</li>
+<li>
+<ul>
+<li>流式导入</li>
+<li>Broker导入</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-数据的查询">3.数据的查询</h3>
+<ul>
+<li>简单查询</li>
+<li>Join查询</li>
+<li>子查询</li>
+</ul>
+<h2 id="高级使用指南"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/advance-usage.html">高级使用指南</a></h2>
+<h3 id="1-表结构变更">1. 表结构变更</h3>
+<h3 id="2-Rollup">2. Rollup</h3>
+<h3 id="3-数据表的查询">3. 数据表的查询</h3>
+<ul>
+<li>内存限制</li>
+<li>查询超时</li>
+<li>Broadcast/Shuffle Join</li>
+<li>查询重试和高可用</li>
+</ul>
+<h2 id="最佳实践"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/best-practice.html">最佳实践</a></h2>
+<h3 id="1-建表">1. 建表</h3>
+<ul>
+<li>
+<p>数据模型选择</p>
+</li>
+<li>
+<ul>
+<li>AGGREGATE KEY</li>
+<li>UNIQUE KEY</li>
+<li>DUPLICATE KEY</li>
+</ul>
+</li>
+<li>
+<p>大宽表与Star Schema</p>
+</li>
+<li>
+<p>分区和分桶</p>
+</li>
+<li>
+<ul>
+<li>Range分区(partition)</li>
+<li>HASH分桶(bucket)</li>
+</ul>
+</li>
+<li>
+<p>稀疏索引和Bloom Filter</p>
+</li>
+<li>
+<p>物化视图(rollup)</p>
+</li>
+<li>
+<ul>
+<li>Base Table中数据聚合度不高</li>
+<li>Base Table中的前缀索引无法命中</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Schema-Change">2. Schema Change</h3>
+<ul>
+<li>Sorted Schema Change</li>
+<li>Direct Schema Change: 无需重新排序，但需要对数据做一次转换。例如修改列的类型，在稀疏索引中加一列等</li>
+<li>Linked Schema Change: 无需转换数据，直接完成。例如加列操作</li>
+</ul>
+<h2 id="数据划分"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-partition.html">数据划分</a></h2>
+<h3 id="1-基本概念">1. 基本概念</h3>
+<ul>
+<li>Row &amp; Column</li>
+<li>Tablet &amp; Partition</li>
+</ul>
+<h3 id="2-数据划分">2. 数据划分</h3>
+<ul>
+<li>
+<p>列定义</p>
+</li>
+<li>
+<ul>
+<li>列定义建议</li>
+</ul>
+</li>
+<li>
+<p>分区与分桶</p>
+</li>
+</ul>
+<p>Doris支持两层的数据划分。第一层是Partition，仅支持Range的划分方式。第二层是Bucket（Tablet），仅支持Hash的划分方式。也可以仅使用一层分区</p>
+<ul>
+<li>
+<ul>
+<li>Partition</li>
+<li>Bucket</li>
+<li>关于Partition和Bucket的数量和数据量的建议</li>
+<li>多列分区</li>
+</ul>
+</li>
+<li>
+<p>PROPERTIES</p>
+</li>
+<li>
+<ul>
+<li>replication_num</li>
+<li>storage_medium &amp; storage_cooldown_time</li>
+</ul>
+</li>
+<li>
+<p>ENGINE</p>
+</li>
+</ul>
+<h3 id="3-常见问题">3. 常见问题</h3>
+<ul>
+<li>
+<p>建表操作常见问题</p>
+</li>
+<li>
+<ul>
+<li>如果在较长的建表语句中出现语法错误，可能会出现语法错误提示不全的现象。这里罗列可能的语法错误供手动纠错：</li>
+<li>Failed to create partition [xxx] . Timeout</li>
+<li>建表命令长时间不返回结果。</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据模型、ROLLUP及前缀索引"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html">数据模型、ROLLUP及前缀索引</a></h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-doris/wiki/Data-Model%2C-Rollup-%26-Prefix-Index">github wiki</a></p>
+<h3 id="1-基本概念-2">1. 基本概念</h3>
+<ul>
+<li>
+<p>Row</p>
+</li>
+<li>
+<p>Column</p>
+</li>
+<li>
+<ul>
+<li>Key</li>
+<li>Value</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Aggregate模型">2. Aggregate模型</h3>
+<ul>
+<li>示例1: 导入数据聚合</li>
+<li>示例2: 保留明细数据</li>
+<li>示例3: 导入数据与已有数据聚合</li>
+</ul>
+<h3 id="3-Uniq模型">3. Uniq模型</h3>
+<h3 id="4-Duplicate模型-冗余模型">4. Duplicate模型(冗余模型)</h3>
+<h3 id="5-ROLLUP">5. ROLLUP</h3>
+<ul>
+<li>
+<p>基本概念</p>
+</li>
+<li>
+<ul>
+<li>
+<p>Aggregate和Uniq模型中的ROLLUP</p>
+</li>
+<li>
+<ul>
+<li>示例1: 获得每个用户的总消费</li>
+<li>示例2: 获得不同城市，不同年龄段用户的总消费、最长和最短页面驻留时间</li>
+</ul>
+</li>
+<li>
+<p>Duplicate模型中的ROLLUP</p>
+</li>
+</ul>
+</li>
+<li>
+<p>前缀索引与ROLLUP</p>
+</li>
+<li>
+<ul>
+<li>前缀索引</li>
+</ul>
+</li>
+</ul>
+<p>我们将一行数据的前 36 个字节 作为这行数据的前缀索引。当遇到 VARCHAR 类型时，前缀索引会直接截断。</p>
+<ul>
+<li>
+<ul>
+<li>ROLLUP调整前缀索引</li>
+</ul>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html#rollup-%E7%9A%84%E5%87%A0%E7%82%B9%E8%AF%B4%E6%98%8E">ROLLUP的几点说明</a></p>
+</li>
+<li>
+<ul>
+<li>根本作用是提高某些查询的查询效率（无论是通过聚合来减少数据量，还是修改列顺序以匹配前缀索引）。因此 ROLLUP 的含义已经超出了 “上卷” 的范围。这也是为什么我们在源代码中，将其命名为 Materized Index（物化索引）的原因。</li>
+<li>ROLLUP是附属于Base表的，可以看作是Base表的一种辅助数据结构。用户可以在 Base 表的基础上，创建或删除 ROLLUP，但是不能在查询中显式的指定查询某 ROLLUP。是否命中 ROLLUP 完全由 Doris 系统自动决定。</li>
+<li>ROLLUP 的数据是独立物理存储的。因此，创建的 ROLLUP 越多，占用的磁盘空间也就越大。同时对导入速度也会有影响（导入的ETL阶段会自动产生所有 ROLLUP 的数据），但是不会降低查询效率（只会更好）。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>ROLLUP 的数据更新与 Base 表示完全同步的。用户无需关心这个问题。</li>
+<li>ROLLUP 中列的聚合方式，与 Base 表完全相同。在创建 ROLLUP 无需指定，也不能修改。</li>
+<li>查询能否命中 ROLLUP 的一个必要条件（非充分条件）是，查询所涉及的所有列（包括 select list 和 where 中的查询条件列等）都存在于该 ROLLUP 的列中。否则，查询只能命中 Base 表。</li>
+<li>某些类型的查询（如 count(*)）在任何条件下，都无法命中 ROLLUP。具体参见接下来的 聚合模型的局限性 一节。</li>
+<li>可以通过 EXPLAIN your_sql; 命令获得查询执行计划，在执行计划中，查看是否命中 ROLLUP。</li>
+<li>可以通过 DESC tbl_name ALL; 语句显示 Base 表和所有已创建完成的 ROLLUP。</li>
+<li><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/hit-the-rollup">查询如何命中ROLLUP</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="6-聚合模型的局限性">6. 聚合模型的局限性</h3>
+<ul>
+<li>Aggregate 模型（包括 Uniq 模型）</li>
+</ul>
+<p>在聚合模型中，模型对外展现的，是最终聚合后的数据。也就是说，任何还未聚合的数据（比如说两个不同导入批次的数据），必须通过某种方式，以保证对外展示的一致性。</p>
+<ul>
+<li>Duplicate 模型</li>
+</ul>
+<p>Duplicate 模型没有聚合模型的这个局限性。因为该模型不涉及聚合语意，在做 count(*) 查询时，任意选择一列查询，即可得到语意正确的结果。</p>
+<h3 id="7-数据模型的选择建议">7. 数据模型的选择建议</h3>
+<p>因为数据模型在建表时就已经确定，且无法修改。所以，选择一个合适的数据模型非常重要。</p>
+<ol>
+<li>Aggregate 模型可以通过预聚合，极大地降低聚合查询时所需扫描的数据量和查询的计算量，非常适合有固定模式的报表类查询场景。但是该模型对 count(*) 查询很不友好。同时因为固定了 Value 列上的聚合方式，在进行其他类型的聚合查询时，需要考虑语意正确性。</li>
+<li>Uniq 模型针对需要唯一主键约束的场景，可以保证主键唯一性约束。但是无法利用 ROLLUP 等预聚合带来的查询优势（因为本质是 REPLACE，没有 SUM 这种聚合方式）。</li>
+<li>Duplicate 适合任意维度的 Ad-hoc 查询。虽然同样无法利用预聚合的特性，但是不受聚合模型的约束，可以发挥列存模型的优势（只读取相关列，而不需要读取所有 Key 列）。</li>
+</ol>
+<h2 id="Rollup与查询"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/hit-the-rollup.html">Rollup与查询</a></h2>
+<p>在 Doris 里 Rollup 作为一份聚合物化视图，其在查询中可以起到两个作用：</p>
+<ul>
+<li>索引</li>
+<li>聚合数据（仅用于聚合模型，即aggregate key）</li>
+</ul>
+<p>但是为了命中 Rollup 需要满足一定的条件，并且可以通过执行计划中 ScanNdoe 节点的 PreAggregation 的值来判断是否可以命中 Rollup，以及 Rollup 字段来判断命中的是哪一张 Rollup 表。</p>
+<h3 id="1-名词解释">1. 名词解释</h3>
+<ul>
+<li>Base： 基表</li>
+<li>Rollup： 一般指基于 Base 表创建的 Rollup 表，但在一些场景包括 Base 以及 Rollup 表。</li>
+</ul>
+<h3 id="2-索引">2. 索引</h3>
+<h3 id="3-聚合数据">3. 聚合数据</h3>
+<h1>操作手册</h1>
+<h2 id="数据导入">数据导入</h2>
+<h3 id="1-导入总览">1. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html">导入总览</a></h3>
+<h4 id="1-1-基本概念">1.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">基本概念</a></h4>
+<ol>
+<li>Frontend（FE）：Doris 系统的元数据和调度节点。在导入流程中主要负责导入规划生成和导入任务的调度工作。</li>
+<li>Backend（BE）：Doris 系统的计算和存储节点。在导入流程中主要负责数据的 ETL 和存储。</li>
+<li>Broker：Broker 为一个独立的无状态进程。封装了文件系统接口，提供 Doris 读取远端存储系统中文件的能力。</li>
+<li>导入作业（Load job）：导入作业读取用户提交的源数据，转换或清洗后，将数据导入到 Doris 系统中。导入完成后，数据即可被用户查询到。</li>
+<li>Label：所有导入作业都有一个 Label。Label 在一个数据库内唯一，可由用户指定或系统自动生成，用于标识一个导入作业。相同的 Label 仅可用于一个成功的导入作业。</li>
+<li>MySQL 协议/HTTP 协议：Doris 提供两种访问协议接口。 MySQL 协议和 HTTP 协议。部分导入方式使用 MySQL 协议接口提交作业，部分导入方式使用 HTTP 协议接口提交作业。</li>
+</ol>
+<h4 id="1-2-导入方式">1.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%AF%BC%E5%85%A5%E6%96%B9%E5%BC%8F">导入方式</a></h4>
+<ol>
+<li>Broker load</li>
+<li>Stream load</li>
+<li>Insert</li>
+<li>Multi load</li>
+<li>Routine load</li>
+</ol>
+<h4 id="1-3-基本原理">1.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">基本原理</a></h4>
+<h5 id="1-3-1-导入执行流程">1.3.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%AF%BC%E5%85%A5%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B">导入执行流程</a></h5>
+<ol>
+<li>PENDING（非必须）</li>
+<li>ETL（非必须）</li>
+<li>LOADING</li>
+<li>FINISHED</li>
+<li>CANCELLED</li>
+</ol>
+<h5 id="1-3-2-Label和原子性">1.3.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#label-%E5%92%8C-%E5%8E%9F%E5%AD%90%E6%80%A7">Label和原子性</a></h5>
+<h4 id="1-4-同步和异步">1.4 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5">同步和异步</a></h4>
+<h5 id="1-4-1-同步">1.4.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%90%8C%E6%AD%A5">同步</a></h5>
+<h5 id="1-4-2-异步">1.4.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%BC%82%E6%AD%A5">异步</a></h5>
+<h5 id="1-4-3-注意事项">1.4.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</a></h5>
+<h4 id="1-5-内存限制">1.5 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6">内存限制</a></h4>
+<h4 id="1-6-最佳实践">1.6 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></h4>
+<h4 id="1-7-通用系统配置">1.7 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E9%80%9A%E7%94%A8%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">通用系统配置</a></h4>
+<h5 id="1-7-1-FE配置">1.7.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#fe-%E9%85%8D%E7%BD%AE">FE配置</a></h5>
+<h5 id="1-7-2-BE配置">1.7.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#be-%E9%85%8D%E7%BD%AE">BE配置</a></h5>
+<h5 id="1-7-3-列映射">1.7.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%88%97%E6%98%A0%E5%B0%84">列映射</a></h5>
+<h3 id="2-Broker-Load">2.<a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html">Broker Load</a></h3>
+<p>一种异步导入方式</p>
+<h4 id="2-1-适用场景">2.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF">适用场景</a></h4>
+<h4 id="2-2-名词解释">2.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A">名词解释</a></h4>
+<h4 id="2-3-基本原理">2.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">基本原理</a></h4>
+<h4 id="2-4-基本操作">2.4 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">基本操作</a></h4>
+<h5 id="2-4-1-创建导入">2.4.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%88%9B%E5%BB%BA%E5%AF%BC%E5%85%A5">创建导入</a></h5>
+<h5 id="2-4-2-查看导入">2.4.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E6%9F%A5%E7%9C%8B%E5%AF%BC%E5%85%A5">查看导入</a></h5>
+<h5 id="2-4-3-取消导入">2.4.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%8F%96%E6%B6%88%E5%AF%BC%E5%85%A5">取消导入</a></h5>
+<h4 id="2-5-相关系统配置">2.5 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E7%9B%B8%E5%85%B3%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">相关系统配置</a></h4>
+<h5 id="2-5-1-FE-配置">2.5.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#fe-%E9%85%8D%E7%BD%AE">FE 配置</a></h5>
+<h4 id="2-6-最佳实践">2.6 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></h4>
+<h5 id="2-6-1-应用场景">2.6.1 应用场景</h5>
+<p>使用 Broker load 最适合的场景就是原始数据在文件系统（HDFS，BOS，AFS）中的场景。其次，由于 Broker load 是单次导入中唯一的一种异步导入的方式，所以如果用户在导入大文件中，需要使用异步接入，也可以考虑使用 Broker load。</p>
+<h5 id="2-6-2-数据量">2.6.2 数据量</h5>
+<p>这里仅讨论单个 BE 的情况，如果用户集群有多个 BE 则下面标题中的数据量应该乘以 BE 个数来计算。比如：如果用户有3个 BE，则 3G 以下（包含）则应该乘以 3，也就是 9G 以下（包含）。</p>
+<h5 id="2-6-3-性能分析">2.6.3 性能分析</h5>
+<h5 id="2-6-4-完整例子">2.6.4 完整例子</h5>
+<h4 id="2-7-常见问题">2.7 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a></h4>
+<h3 id="3-Stream-load">3. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/stream-load-manual.html#stream-load">Stream load</a></h3>
+<p>Stream load 是一个同步的导入方式，用户通过发送 HTTP 协议发送请求将本地文件或数据流导入到 Doris 中。Stream load 同步执行导入并返回导入结果。用户可直接通过请求的返回体判断本次导入是否成功。</p>
+<p>Stream load 主要适用于导入本地文件，或通过程序导入数据流中的数据。</p>
+<h4 id="3-1-基本原理">3.1 基本原理</h4>
+<h4 id="3-2-基本操作">3.2 基本操作</h4>
+<h4 id="3-3-相关系统配置">3.3 相关系统配置</h4>
+<h4 id="3-4-最佳实践">3.4 最佳实践</h4>
+<h5 id="3-4-1-应用场景">3.4.1 应用场景</h5>
+<p>使用 Stream load 的最合适场景就是原始文件在内存中，或者在磁盘中。其次，由于 Stream load 是一种同步的导入方式，所以用户如果希望用同步方式获取导入结果，也可以使用这种导入。</p>
+<h5 id="3-4-2-数据量">3.4.2 数据量</h5>
+<h5 id="3-4-3-完整例子">3.4.3 完整例子</h5>
+<h4 id="3-5-常见问题">3.5 常见问题</h4>
+<h3 id="4-Routine-Load">4. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/routine-load-manual.html">Routine Load</a></h3>
+<p>例行导入（Routine Load）功能为用户提供了一种自动从指定数据源进行数据导入的功能。</p>
+<p>本文档主要介绍该功能的实现原理、使用方式以及最佳实践。</p>
+<h3 id="5-u-insert-into-u">5. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/insert-into-manual.html"><u>insert into</u></a></h3>
+<p>Insert Into 语句的使用方式和 MySQL 等数据库中 Insert Into 语句的使用方式类似。但在 Doris 中，所有的数据写入都是一个独立的导入作业。所以这里将 Insert Into 也作为一种导入方式介绍。</p>
+<p>主要的 Insert Into 命令包含以下两种；</p>
+<ul>
+<li>INSERT INTO tbl SELECT …</li>
+<li>INSERT INTO tbl (col1, col2, …) VALUES (1, 2, …), (1,3, …);</li>
+</ul>
+<p>其中第二种命令仅用于 Demo，不要使用在测试或生产环境中。</p>
+<h3 id="6-u-spark-Load-u">6. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/spark-load-manual.html"><u>spark Load</u></a></h3>
+<p>Spark load 通过外部的 Spark 资源实现对导入数据的预处理，提高 Doris 大数据量的导入性能并且节省 Doris 集群的计算资源。主要用于初次迁移，大数据量导入 Doris 的场景。</p>
+<p>Spark load 是一种异步导入方式，用户需要通过 MySQL 协议创建 Spark 类型导入任务，并通过 <code>SHOW LOAD</code> 查看导入结果。</p>
+<h4 id="6-1-适用场景">6.1 适用场景</h4>
+<ul>
+<li>源数据在 Spark 可以访问的存储系统中，如 HDFS。</li>
+<li>数据量在 几十 GB 到 TB 级别。</li>
+</ul>
+<h3 id="7-delete">7. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/delete-manual.html">delete</a></h3>
+<p>Delete不同于其他导入方式，它是一个同步过程。和Insert into相似，所有的Delete操作在Doris中是一个独立的导入作业，一般Delete语句需要指定表和分区以及删除的条件来筛选要删除的数据，并将会同时删除base表和rollup表的数据。</p>
+<h2 id="表结构变更">表结构变更</h2>
+<h2 id="常用参考">常用参考</h2>
+<p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html#%E8%81%9A%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7">数据模型、ROLLUP 及前缀索引</a></p>
+<p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/sql-reference/sql-statements/Data%20Definition/ALTER%20TABLE.html#example">ALTER TABLE</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/doris/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/doris/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>id:{} truncate partitions fail!</p>
+<p>alter table topic_flow_user_group_detail add partition IF NOT EXISTS p29 values [(“29”), (“30”));<br>
+SQL 错误 [1064] [42000]: errCode = 2, detailMessage = Failed to create partition[p29]. Timeout. Unfinished mark: 73448=53902647, 73448=53902643, 73448=53902655</p>
+<p>不知道是不是因为数据在写入导致的</p>
+<p>doris： tablet 99392436 has few replicas</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/doris/%E7%96%91%E9%97%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/doris/%E7%96%91%E9%97%AE/" class="post-title-link" itemprop="url">疑问</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="doris的分区规则">doris的分区规则</h3>
+<p>为什么表结构的分区与分区字段里去重值数量不一样？</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/doris/%E6%8A%A5%E9%94%99%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/doris/%E6%8A%A5%E9%94%99%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">报错汇总</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1-1-Can-not-alter-table-when-there-are-temp-partitions-in-table">1.1 Can not alter table when there are temp partitions in table</h3>
+<p>原因是之前进行过改表操作，还没有完成</p>
+<p>可以通过<code>SHOW ALTER TABLE COLUMN;</code> 查看改表的进度</p>
+<h3 id="1-2-timeout">1.2 timeout</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set query_timeout&#x3D;60;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-Memory-exceed-limit-Hash-join-doris">1.3 Memory exceed limit. Hash join doris</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET exec_mem_limit &#x3D; 8589934592;</span><br></pre></td></tr></table></figure>
+<h3 id="1-4-Unexpected-exception-No-value-present">1.4 Unexpected exception: No value present</h3>
+<h3 id="1-5-there-is-no-scanNode-Backend-doris">1.5 there is no scanNode Backend doris</h3>
+<h3 id="1-6-bitmap-union-int-cause-‘be’-node-hang">1.6 bitmap_union_int cause ‘be’ node hang</h3>
+<h3 id="1-7-Failed-to-get-scan-range-no-queryable-replica-found-in-tablet">1.7 Failed to get scan range, no queryable replica found in tablet</h3>
+<h3 id="2-1-分区报错">2.1 分区报错</h3>
+<p>注意：</p>
+<ol>
+<li>已经划分好的区间分区，不能在被切分，即分区（1，3），不能被拆分为(1,2)和(2,3)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">alter table topic_smart_user_group_detail_2 add partition IF NOT EXISTS p2 values less than (3);</span><br><span class="line">insert into topic_smart_user_group_detail_2 VALUES (2, 1, &#39;1004230612&#39;),(2, 1, &#39;1047296444&#39;),(2, 1, &#39;1053250666&#39;);</span><br><span class="line"></span><br><span class="line">org.jkiss.dbeaver.model.sql.DBSQLException: SQL 错误 [1064] [42000]: errCode &#x3D; 2, detailMessage &#x3D; Syntax error in line 1:</span><br><span class="line">...ISTS p2 values less than (3)</span><br><span class="line">                             ^</span><br><span class="line">Encountered: INTEGER LITERAL</span><br><span class="line">Expected: COMMA</span><br><span class="line"></span><br><span class="line">less than () 括号中必须是字符串</span><br><span class="line"></span><br><span class="line">alter table topic_smart_user_group_detail_2 add partition IF NOT EXISTS p2 values less than (&quot;3&quot;);</span><br><span class="line">insert into topic_smart_user_group_detail_2 VALUES (5, 1, &#39;1004230612&#39;),(5, 1, &#39;1047296444&#39;),(5, 1, &#39;1053250666&#39;);</span><br><span class="line"></span><br><span class="line">all partitions have no load data</span><br><span class="line">表示没有创建需要的分区</span><br></pre></td></tr></table></figure>
+<h3 id="参考资料">参考资料</h3>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/410003438">Doris建表 FAQ</a></li>
+<li><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/163452248#id-4.2%E4%B8%BA%E4%BB%80%E4%B9%88CreateTablet%E4%BC%9A%E8%B6%85%E6%97%B6%EF%BC%9F">Hive To Doris 数据同步事故</a></li>
+<li><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/311203973">Doris使用FAQ(持续更新中)</a></li>
+</ol>
 
       
     </div>

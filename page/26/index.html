@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/deep/%E6%96%B9%E6%B3%95%E8%AE%BA/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/flink/probe/%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/deep/%E6%96%B9%E6%B3%95%E8%AE%BA/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/08/07/flink/probe/%E9%87%8D%E8%BD%BD%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">重载函数</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,567 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/probe/" itemprop="url" rel="index"><span itemprop="name">probe</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h3 id="重载歧义问题">重载歧义问题</h3>
+<p>在 Scala 中调用 Java 重载方法时，即使只传递一个参数，也可能遇到重载歧义错误，这通常与 <strong>存在类型（existential type）</strong> 和 Scala 编译器的类型推断策略有关。下面解释原因及解决方法。</p>
+<hr>
+<h4 id="1-问题根源">1. 问题根源</h4>
+<p>Reflections 库的两个重载方法签名如下：</p>
+<p>java</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public Set&lt;Class&lt;?&gt;&gt; getTypesAnnotatedWith(Class&lt;? extends Annotation&gt; annotation)</span><br><span class="line">public Set&lt;Class&lt;?&gt;&gt; getTypesAnnotatedWith(Class&lt;? extends Annotation&gt; annotation, boolean honorInherited)</span><br></pre></td></tr></table></figure>
+<p>在 Scala 中调用 <code>getTypesAnnotatedWith(classOf[Problem])</code> 时：</p>
+<ul>
+<li>参数 <code>classOf[Problem]</code> 的类型是 <code>Class[Problem]</code>。</li>
+<li>两个方法的第一个参数类型均为 <code>Class[_ &lt;: Annotation]</code>（Scala 对 <code>? extends</code> 的表示）。</li>
+<li>Scala 允许将 <code>Class[Problem]</code> 赋值给 <code>Class[_ &lt;: Annotation]</code>，因为 <code>Problem</code> 是 <code>Annotation</code> 的子类型，且存在类型是协变的。因此，<strong>两个方法都接受第一个参数的类型</strong>。</li>
+</ul>
+<p>按理说，第二个方法还需要一个 <code>boolean</code> 参数，而调用时只提供了一个参数，所以它应该被排除。但问题出在 Scala 的重载解析规则上：</p>
+<ul>
+<li>编译器会计算每个方法的<strong>适用性</strong>，考虑隐式转换、默认参数等。对于 Java 方法，默认参数不存在，隐式转换也可能被考虑。</li>
+<li>实际上，<strong>第二个方法也因为第一个参数类型匹配而被视为“可能适用”</strong>，但参数个数不匹配。然而，Scala 编译器在某些情况下会因存在类型而无法准确判断参数个数，或者认为第二个方法有可能通过隐式参数补全（即使不存在），导致歧义。</li>
+</ul>
+<p><strong>根本原因</strong>：Java 通配符 (<code>? extends</code>) 被映射为 Scala 的存在类型，这使得类型系统变得复杂。当两个重载方法的第一个参数类型在存在类型下被视为“相同”时，编译器需要额外的类型信息来区分它们。而只提供一个参数时，第二个方法在存在类型层面仍然可能被考虑，从而引发“无法解析重载方法”的错误。</p>
+<hr>
+<h4 id="2-示例验证">2. 示例验证</h4>
+<p>尝试以下代码（假设 <code>Problem</code> 是注解）：</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import org.reflections.Reflections</span><br><span class="line"></span><br><span class="line">val reflections &#x3D; new Reflections(&quot;com.example&quot;)</span><br><span class="line">&#x2F;&#x2F; 这行可能报错：Cannot resolve overloaded method</span><br><span class="line">reflections.getTypesAnnotatedWith(classOf[Problem])</span><br></pre></td></tr></table></figure>
+<p>错误信息提示有多个重载方法适用，但实际上只有第一个方法参数个数匹配。这是因为编译器在存在类型转换后，无法唯一确定应该使用哪个方法。</p>
+<hr>
+<h4 id="3-解决方案">3. 解决方案</h4>
+<h5 id="方法一：类型归属（推荐）">方法一：类型归属（推荐）</h5>
+<p>显式指定参数类型，帮助编译器消除歧义：</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reflections.getTypesAnnotatedWith(classOf[Problem]: Class[Problem])</span><br></pre></td></tr></table></figure>
+<h5 id="方法二：使用双参数版本">方法二：使用双参数版本</h5>
+<p>提供第二个参数（通常为 <code>true</code>），参数个数不同即可区分：</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reflections.getTypesAnnotatedWith(classOf[Problem], true)</span><br></pre></td></tr></table></figure>
+<h5 id="方法三：将参数赋给显式类型变量">方法三：将参数赋给显式类型变量</h5>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val annotationClass: Class[Problem] &#x3D; classOf[Problem]</span><br><span class="line">reflections.getTypesAnnotatedWith(annotationClass)</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="4-为什么类型归属有效？">4. 为什么类型归属有效？</h4>
+<p>类型归属 <code>: Class[Problem]</code> 将表达式的类型明确固定为 <code>Class[Problem]</code>，而不是允许编译器推断为存在类型 <code>Class[_ &lt;: Annotation]</code>。这样，第一个方法的参数类型变为 <code>Class[Problem]</code>，而第二个方法需要的仍是 <code>Class[_ &lt;: Annotation]</code>，此时两个方法的第一个参数类型不再相同，加上参数个数的差异，编译器就能唯一选择第一个方法。</p>
+<hr>
+<h4 id="5-总结">5. 总结</h4>
+<ul>
+<li>Scala 调用 Java 重载方法时，如果参数涉及通配符（存在类型），可能会因类型系统交互而产生重载歧义。</li>
+<li>即使参数个数不同，也可能因存在类型的存在而导致编译器无法区分。</li>
+<li>通过显式类型归属或提供完整参数列表，可以消除歧义。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/computer_theory/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/computer_theory/%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">编码问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">计算机原理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="注意点：">注意点：</h2>
+<ol>
+<li>系统编码</li>
+<li>程序中指定编码</li>
+</ol>
+<h2 id="case">case</h2>
+<ol>
+<li>微软spark机器写出中文都是问号乱码。输出了系统文件编码<code>System.getProperty(&quot;file.encoding&quot;)</code>, 是cp1252. 如何处理能正常输出中文？</li>
+</ol>
+<h2 id="编码简介">编码简介</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">编码</th>
+<th style="text-align:center">介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Windows-1252 或CP-1252</td>
+<td style="text-align:center">是拉丁字母的字元編碼，主要用於英文、 愛爾蘭語、義大利語、挪威語、葡萄牙語、西班牙語、瑞典語以及德語、芬蘭語、冰島語、法語、荷蘭語（除了Ĳ字符）、斯洛維尼亞語(除了č字符)等西方文字版本Microsoft Windows 的預設編碼，為Windows代碼頁之一。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="编码转换">编码转换</h2>
+<h2 id="编码判断">编码判断</h2>
+<h2 id="参考：">参考：</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_31994237/article/details/118828893">java cp1252,将cp-1252编码为utf-8？</a></li>
+<li></li>
+</ol>
+<h2 id="待整理">待整理</h2>
+<ol>
+<li>各种环境/语言中设置字符编码</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/concept/%E6%95%B0%E6%8D%AE%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/concept/%E6%95%B0%E6%8D%AE%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">数据概念</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903957693726727">漫画：什么是中台？</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/concept/%E6%9C%AF%E8%AF%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/concept/%E6%9C%AF%E8%AF%AD/" class="post-title-link" itemprop="url">术语</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>SOP(Standard Operating Procedure) 标准作业程序</p>
+<p>Feed流</p>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/67740541">https://km.sankuai.com/page/67740541</a></p>
+<h4 id="开箱即用">开箱即用</h4>
+<p>开箱即用功能（out-of-the-box feature，也称OOTB或off the shelf）在软件上指产品在安装后，无需配置或修改，即可使用的功能或特性。也指默认即对所有用户可用，不需支付额外费用或进行另外的配置。<br>
+我们常说的spring-boot或者vue组件等可以开箱即用，就是可以无需配置就可以实现大部分功能，但是他们依旧是可以配置的。（强调约定优于配置）</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/concept/%E7%BC%A9%E5%86%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/concept/%E7%BC%A9%E5%86%99/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>time to live (TTL)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/dataQuality/%E8%B5%84%E6%96%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/dataQuality/%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fseast/article/details/116522172#comments_17892022">Griffin 系列（一）——Griffin的搭建</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/deep/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/deep/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">技术探索</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h4 id="bitMap">bitMap</h4>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&amp;mid=2247492204&amp;idx=1&amp;sn=269493abe2acc61d06321e6aa5c6dbe5&amp;chksm=fbd75000cca0d91668829252016209ff50a69b810bc5f98635f43324d8eb3ba4cec7e8105673&amp;scene=21#wechat_redirect">快手 HBase 在千亿级用户特征数据分析中的应用与实践</a></p>
+<p>基于bitmap开发的bitbase，与成都开发的bitcube类似</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013516966/article/details/103917880">不得不掌握的三种BitMap</a></p>
+<ol>
+<li>BitMap</li>
+<li>RoaringBitmap</li>
+<li>Roaring64NavigableMap</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/818ac4e90daf">高效压缩位图RoaringBitmap的原理与应用</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903769201704973">漫画：什么是Bitmap算法？</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lucky52529/article/details/90172264">[数据结构]——位图原理及实现</a></p>
+<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/454073303">概要设计-全局字典</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/deep/%E6%96%B9%E6%B3%95%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/deep/%E6%96%B9%E6%B3%95%E8%AE%BA/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
 
           
@@ -235,7 +795,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/doris/Colocate%20Join/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/doris/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -249,7 +809,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/doris/Colocate%20Join/" class="post-title-link" itemprop="url">Colocate join</a>
+            <a href="/2026/08/07/doris/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
         </h2>
 
         <div class="post-meta">
@@ -259,77 +819,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="参考资料">参考资料</h3>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://blog.bcmeng.com/post/doris-colocate-join.html">Apache Doris Colocate Join 原理与实践</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/doris/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/doris/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -380,7 +870,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/doris/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/doris/Colocate%20Join/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -394,7 +884,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/doris/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">官方文档目录摘要</a>
+            <a href="/2026/08/07/doris/Colocate%20Join/" class="post-title-link" itemprop="url">Colocate join</a>
         </h2>
 
         <div class="post-meta">
@@ -404,7 +894,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -427,819 +917,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[toc]</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-doris/wiki">git wiki地址</a></p>
-<h1>编译与部署</h1>
-<h2 id="安装与部署"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/installing/install-deploy.html">安装与部署</a></h2>
-<h3 id="软硬件需求">软硬件需求</h3>
-<ul>
-<li>FE（前端）和BE（后端）存储数据的区别，以及所需机器配置</li>
-<li>FE与BE端口、网络需求</li>
-<li>ip绑定</li>
-</ul>
-<h3 id="集群部署">集群部署</h3>
-<ul>
-<li>
-<p>手动部署</p>
-</li>
-<li>
-<ul>
-<li>FE部署</li>
-<li>BE部署</li>
-<li>FS_Broker部署</li>
-</ul>
-</li>
-</ul>
-<h3 id="扩容缩容">扩容缩容</h3>
-<ul>
-<li>
-<p>FE扩容和缩容</p>
-</li>
-<li>
-<ul>
-<li>增加FE节点</li>
-<li>删除FE节点</li>
-</ul>
-</li>
-<li>
-<p>BE扩容和缩容</p>
-</li>
-<li>
-<ul>
-<li>增加BE节点</li>
-<li>删除BE节点</li>
-</ul>
-</li>
-<li>
-<p>Broker扩容缩容</p>
-</li>
-</ul>
-<h2 id="常见问题">常见问题</h2>
-<h1>开始使用</h1>
-<h2 id="基础使用指南"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/basic-usage.html">基础使用指南</a></h2>
-<h3 id="1-创建用户">1.创建用户</h3>
-<ul>
-<li>Root用户登陆与密码修改</li>
-<li>创建新用户</li>
-</ul>
-<h3 id="2-数据表的创建与数据导入">2.数据表的创建与数据导入</h3>
-<ul>
-<li>
-<p>创建数据库</p>
-</li>
-<li>
-<p>账户授权</p>
-</li>
-<li>
-<p>建表</p>
-</li>
-<li>
-<ul>
-<li>单分区</li>
-<li>复合分区</li>
-</ul>
-</li>
-<li>
-<p>导入数据</p>
-</li>
-<li>
-<ul>
-<li>流式导入</li>
-<li>Broker导入</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-数据的查询">3.数据的查询</h3>
-<ul>
-<li>简单查询</li>
-<li>Join查询</li>
-<li>子查询</li>
-</ul>
-<h2 id="高级使用指南"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/advance-usage.html">高级使用指南</a></h2>
-<h3 id="1-表结构变更">1. 表结构变更</h3>
-<h3 id="2-Rollup">2. Rollup</h3>
-<h3 id="3-数据表的查询">3. 数据表的查询</h3>
-<ul>
-<li>内存限制</li>
-<li>查询超时</li>
-<li>Broadcast/Shuffle Join</li>
-<li>查询重试和高可用</li>
-</ul>
-<h2 id="最佳实践"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/best-practice.html">最佳实践</a></h2>
-<h3 id="1-建表">1. 建表</h3>
-<ul>
-<li>
-<p>数据模型选择</p>
-</li>
-<li>
-<ul>
-<li>AGGREGATE KEY</li>
-<li>UNIQUE KEY</li>
-<li>DUPLICATE KEY</li>
-</ul>
-</li>
-<li>
-<p>大宽表与Star Schema</p>
-</li>
-<li>
-<p>分区和分桶</p>
-</li>
-<li>
-<ul>
-<li>Range分区(partition)</li>
-<li>HASH分桶(bucket)</li>
-</ul>
-</li>
-<li>
-<p>稀疏索引和Bloom Filter</p>
-</li>
-<li>
-<p>物化视图(rollup)</p>
-</li>
-<li>
-<ul>
-<li>Base Table中数据聚合度不高</li>
-<li>Base Table中的前缀索引无法命中</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-Schema-Change">2. Schema Change</h3>
-<ul>
-<li>Sorted Schema Change</li>
-<li>Direct Schema Change: 无需重新排序，但需要对数据做一次转换。例如修改列的类型，在稀疏索引中加一列等</li>
-<li>Linked Schema Change: 无需转换数据，直接完成。例如加列操作</li>
-</ul>
-<h2 id="数据划分"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-partition.html">数据划分</a></h2>
-<h3 id="1-基本概念">1. 基本概念</h3>
-<ul>
-<li>Row &amp; Column</li>
-<li>Tablet &amp; Partition</li>
-</ul>
-<h3 id="2-数据划分">2. 数据划分</h3>
-<ul>
-<li>
-<p>列定义</p>
-</li>
-<li>
-<ul>
-<li>列定义建议</li>
-</ul>
-</li>
-<li>
-<p>分区与分桶</p>
-</li>
-</ul>
-<p>Doris支持两层的数据划分。第一层是Partition，仅支持Range的划分方式。第二层是Bucket（Tablet），仅支持Hash的划分方式。也可以仅使用一层分区</p>
-<ul>
-<li>
-<ul>
-<li>Partition</li>
-<li>Bucket</li>
-<li>关于Partition和Bucket的数量和数据量的建议</li>
-<li>多列分区</li>
-</ul>
-</li>
-<li>
-<p>PROPERTIES</p>
-</li>
-<li>
-<ul>
-<li>replication_num</li>
-<li>storage_medium &amp; storage_cooldown_time</li>
-</ul>
-</li>
-<li>
-<p>ENGINE</p>
-</li>
-</ul>
-<h3 id="3-常见问题">3. 常见问题</h3>
-<ul>
-<li>
-<p>建表操作常见问题</p>
-</li>
-<li>
-<ul>
-<li>如果在较长的建表语句中出现语法错误，可能会出现语法错误提示不全的现象。这里罗列可能的语法错误供手动纠错：</li>
-<li>Failed to create partition [xxx] . Timeout</li>
-<li>建表命令长时间不返回结果。</li>
-</ul>
-</li>
-</ul>
-<h2 id="数据模型、ROLLUP及前缀索引"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html">数据模型、ROLLUP及前缀索引</a></h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/apache/incubator-doris/wiki/Data-Model%2C-Rollup-%26-Prefix-Index">github wiki</a></p>
-<h3 id="1-基本概念-2">1. 基本概念</h3>
-<ul>
-<li>
-<p>Row</p>
-</li>
-<li>
-<p>Column</p>
-</li>
-<li>
-<ul>
-<li>Key</li>
-<li>Value</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-Aggregate模型">2. Aggregate模型</h3>
-<ul>
-<li>示例1: 导入数据聚合</li>
-<li>示例2: 保留明细数据</li>
-<li>示例3: 导入数据与已有数据聚合</li>
-</ul>
-<h3 id="3-Uniq模型">3. Uniq模型</h3>
-<h3 id="4-Duplicate模型-冗余模型">4. Duplicate模型(冗余模型)</h3>
-<h3 id="5-ROLLUP">5. ROLLUP</h3>
-<ul>
-<li>
-<p>基本概念</p>
-</li>
-<li>
-<ul>
-<li>
-<p>Aggregate和Uniq模型中的ROLLUP</p>
-</li>
-<li>
-<ul>
-<li>示例1: 获得每个用户的总消费</li>
-<li>示例2: 获得不同城市，不同年龄段用户的总消费、最长和最短页面驻留时间</li>
-</ul>
-</li>
-<li>
-<p>Duplicate模型中的ROLLUP</p>
-</li>
-</ul>
-</li>
-<li>
-<p>前缀索引与ROLLUP</p>
-</li>
-<li>
-<ul>
-<li>前缀索引</li>
-</ul>
-</li>
-</ul>
-<p>我们将一行数据的前 36 个字节 作为这行数据的前缀索引。当遇到 VARCHAR 类型时，前缀索引会直接截断。</p>
-<ul>
-<li>
-<ul>
-<li>ROLLUP调整前缀索引</li>
-</ul>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html#rollup-%E7%9A%84%E5%87%A0%E7%82%B9%E8%AF%B4%E6%98%8E">ROLLUP的几点说明</a></p>
-</li>
-<li>
-<ul>
-<li>根本作用是提高某些查询的查询效率（无论是通过聚合来减少数据量，还是修改列顺序以匹配前缀索引）。因此 ROLLUP 的含义已经超出了 “上卷” 的范围。这也是为什么我们在源代码中，将其命名为 Materized Index（物化索引）的原因。</li>
-<li>ROLLUP是附属于Base表的，可以看作是Base表的一种辅助数据结构。用户可以在 Base 表的基础上，创建或删除 ROLLUP，但是不能在查询中显式的指定查询某 ROLLUP。是否命中 ROLLUP 完全由 Doris 系统自动决定。</li>
-<li>ROLLUP 的数据是独立物理存储的。因此，创建的 ROLLUP 越多，占用的磁盘空间也就越大。同时对导入速度也会有影响（导入的ETL阶段会自动产生所有 ROLLUP 的数据），但是不会降低查询效率（只会更好）。</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>ROLLUP 的数据更新与 Base 表示完全同步的。用户无需关心这个问题。</li>
-<li>ROLLUP 中列的聚合方式，与 Base 表完全相同。在创建 ROLLUP 无需指定，也不能修改。</li>
-<li>查询能否命中 ROLLUP 的一个必要条件（非充分条件）是，查询所涉及的所有列（包括 select list 和 where 中的查询条件列等）都存在于该 ROLLUP 的列中。否则，查询只能命中 Base 表。</li>
-<li>某些类型的查询（如 count(*)）在任何条件下，都无法命中 ROLLUP。具体参见接下来的 聚合模型的局限性 一节。</li>
-<li>可以通过 EXPLAIN your_sql; 命令获得查询执行计划，在执行计划中，查看是否命中 ROLLUP。</li>
-<li>可以通过 DESC tbl_name ALL; 语句显示 Base 表和所有已创建完成的 ROLLUP。</li>
-<li><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/hit-the-rollup">查询如何命中ROLLUP</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="6-聚合模型的局限性">6. 聚合模型的局限性</h3>
-<ul>
-<li>Aggregate 模型（包括 Uniq 模型）</li>
-</ul>
-<p>在聚合模型中，模型对外展现的，是最终聚合后的数据。也就是说，任何还未聚合的数据（比如说两个不同导入批次的数据），必须通过某种方式，以保证对外展示的一致性。</p>
-<ul>
-<li>Duplicate 模型</li>
-</ul>
-<p>Duplicate 模型没有聚合模型的这个局限性。因为该模型不涉及聚合语意，在做 count(*) 查询时，任意选择一列查询，即可得到语意正确的结果。</p>
-<h3 id="7-数据模型的选择建议">7. 数据模型的选择建议</h3>
-<p>因为数据模型在建表时就已经确定，且无法修改。所以，选择一个合适的数据模型非常重要。</p>
+          <h3 id="参考资料">参考资料</h3>
 <ol>
-<li>Aggregate 模型可以通过预聚合，极大地降低聚合查询时所需扫描的数据量和查询的计算量，非常适合有固定模式的报表类查询场景。但是该模型对 count(*) 查询很不友好。同时因为固定了 Value 列上的聚合方式，在进行其他类型的聚合查询时，需要考虑语意正确性。</li>
-<li>Uniq 模型针对需要唯一主键约束的场景，可以保证主键唯一性约束。但是无法利用 ROLLUP 等预聚合带来的查询优势（因为本质是 REPLACE，没有 SUM 这种聚合方式）。</li>
-<li>Duplicate 适合任意维度的 Ad-hoc 查询。虽然同样无法利用预聚合的特性，但是不受聚合模型的约束，可以发挥列存模型的优势（只读取相关列，而不需要读取所有 Key 列）。</li>
+<li><a target="_blank" rel="noopener" href="https://blog.bcmeng.com/post/doris-colocate-join.html">Apache Doris Colocate Join 原理与实践</a></li>
 </ol>
-<h2 id="Rollup与查询"><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/hit-the-rollup.html">Rollup与查询</a></h2>
-<p>在 Doris 里 Rollup 作为一份聚合物化视图，其在查询中可以起到两个作用：</p>
-<ul>
-<li>索引</li>
-<li>聚合数据（仅用于聚合模型，即aggregate key）</li>
-</ul>
-<p>但是为了命中 Rollup 需要满足一定的条件，并且可以通过执行计划中 ScanNdoe 节点的 PreAggregation 的值来判断是否可以命中 Rollup，以及 Rollup 字段来判断命中的是哪一张 Rollup 表。</p>
-<h3 id="1-名词解释">1. 名词解释</h3>
-<ul>
-<li>Base： 基表</li>
-<li>Rollup： 一般指基于 Base 表创建的 Rollup 表，但在一些场景包括 Base 以及 Rollup 表。</li>
-</ul>
-<h3 id="2-索引">2. 索引</h3>
-<h3 id="3-聚合数据">3. 聚合数据</h3>
-<h1>操作手册</h1>
-<h2 id="数据导入">数据导入</h2>
-<h3 id="1-导入总览">1. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html">导入总览</a></h3>
-<h4 id="1-1-基本概念">1.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">基本概念</a></h4>
-<ol>
-<li>Frontend（FE）：Doris 系统的元数据和调度节点。在导入流程中主要负责导入规划生成和导入任务的调度工作。</li>
-<li>Backend（BE）：Doris 系统的计算和存储节点。在导入流程中主要负责数据的 ETL 和存储。</li>
-<li>Broker：Broker 为一个独立的无状态进程。封装了文件系统接口，提供 Doris 读取远端存储系统中文件的能力。</li>
-<li>导入作业（Load job）：导入作业读取用户提交的源数据，转换或清洗后，将数据导入到 Doris 系统中。导入完成后，数据即可被用户查询到。</li>
-<li>Label：所有导入作业都有一个 Label。Label 在一个数据库内唯一，可由用户指定或系统自动生成，用于标识一个导入作业。相同的 Label 仅可用于一个成功的导入作业。</li>
-<li>MySQL 协议/HTTP 协议：Doris 提供两种访问协议接口。 MySQL 协议和 HTTP 协议。部分导入方式使用 MySQL 协议接口提交作业，部分导入方式使用 HTTP 协议接口提交作业。</li>
-</ol>
-<h4 id="1-2-导入方式">1.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%AF%BC%E5%85%A5%E6%96%B9%E5%BC%8F">导入方式</a></h4>
-<ol>
-<li>Broker load</li>
-<li>Stream load</li>
-<li>Insert</li>
-<li>Multi load</li>
-<li>Routine load</li>
-</ol>
-<h4 id="1-3-基本原理">1.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">基本原理</a></h4>
-<h5 id="1-3-1-导入执行流程">1.3.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%AF%BC%E5%85%A5%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B">导入执行流程</a></h5>
-<ol>
-<li>PENDING（非必须）</li>
-<li>ETL（非必须）</li>
-<li>LOADING</li>
-<li>FINISHED</li>
-<li>CANCELLED</li>
-</ol>
-<h5 id="1-3-2-Label和原子性">1.3.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#label-%E5%92%8C-%E5%8E%9F%E5%AD%90%E6%80%A7">Label和原子性</a></h5>
-<h4 id="1-4-同步和异步">1.4 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5">同步和异步</a></h4>
-<h5 id="1-4-1-同步">1.4.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%90%8C%E6%AD%A5">同步</a></h5>
-<h5 id="1-4-2-异步">1.4.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%BC%82%E6%AD%A5">异步</a></h5>
-<h5 id="1-4-3-注意事项">1.4.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</a></h5>
-<h4 id="1-5-内存限制">1.5 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6">内存限制</a></h4>
-<h4 id="1-6-最佳实践">1.6 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></h4>
-<h4 id="1-7-通用系统配置">1.7 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E9%80%9A%E7%94%A8%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">通用系统配置</a></h4>
-<h5 id="1-7-1-FE配置">1.7.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#fe-%E9%85%8D%E7%BD%AE">FE配置</a></h5>
-<h5 id="1-7-2-BE配置">1.7.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#be-%E9%85%8D%E7%BD%AE">BE配置</a></h5>
-<h5 id="1-7-3-列映射">1.7.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/load-manual.html#%E5%88%97%E6%98%A0%E5%B0%84">列映射</a></h5>
-<h3 id="2-Broker-Load">2.<a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html">Broker Load</a></h3>
-<p>一种异步导入方式</p>
-<h4 id="2-1-适用场景">2.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF">适用场景</a></h4>
-<h4 id="2-2-名词解释">2.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A">名词解释</a></h4>
-<h4 id="2-3-基本原理">2.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86">基本原理</a></h4>
-<h4 id="2-4-基本操作">2.4 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">基本操作</a></h4>
-<h5 id="2-4-1-创建导入">2.4.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%88%9B%E5%BB%BA%E5%AF%BC%E5%85%A5">创建导入</a></h5>
-<h5 id="2-4-2-查看导入">2.4.2 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E6%9F%A5%E7%9C%8B%E5%AF%BC%E5%85%A5">查看导入</a></h5>
-<h5 id="2-4-3-取消导入">2.4.3 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%8F%96%E6%B6%88%E5%AF%BC%E5%85%A5">取消导入</a></h5>
-<h4 id="2-5-相关系统配置">2.5 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E7%9B%B8%E5%85%B3%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE">相关系统配置</a></h4>
-<h5 id="2-5-1-FE-配置">2.5.1 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#fe-%E9%85%8D%E7%BD%AE">FE 配置</a></h5>
-<h4 id="2-6-最佳实践">2.6 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">最佳实践</a></h4>
-<h5 id="2-6-1-应用场景">2.6.1 应用场景</h5>
-<p>使用 Broker load 最适合的场景就是原始数据在文件系统（HDFS，BOS，AFS）中的场景。其次，由于 Broker load 是单次导入中唯一的一种异步导入的方式，所以如果用户在导入大文件中，需要使用异步接入，也可以考虑使用 Broker load。</p>
-<h5 id="2-6-2-数据量">2.6.2 数据量</h5>
-<p>这里仅讨论单个 BE 的情况，如果用户集群有多个 BE 则下面标题中的数据量应该乘以 BE 个数来计算。比如：如果用户有3个 BE，则 3G 以下（包含）则应该乘以 3，也就是 9G 以下（包含）。</p>
-<h5 id="2-6-3-性能分析">2.6.3 性能分析</h5>
-<h5 id="2-6-4-完整例子">2.6.4 完整例子</h5>
-<h4 id="2-7-常见问题">2.7 <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/broker-load-manual.html#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a></h4>
-<h3 id="3-Stream-load">3. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/stream-load-manual.html#stream-load">Stream load</a></h3>
-<p>Stream load 是一个同步的导入方式，用户通过发送 HTTP 协议发送请求将本地文件或数据流导入到 Doris 中。Stream load 同步执行导入并返回导入结果。用户可直接通过请求的返回体判断本次导入是否成功。</p>
-<p>Stream load 主要适用于导入本地文件，或通过程序导入数据流中的数据。</p>
-<h4 id="3-1-基本原理">3.1 基本原理</h4>
-<h4 id="3-2-基本操作">3.2 基本操作</h4>
-<h4 id="3-3-相关系统配置">3.3 相关系统配置</h4>
-<h4 id="3-4-最佳实践">3.4 最佳实践</h4>
-<h5 id="3-4-1-应用场景">3.4.1 应用场景</h5>
-<p>使用 Stream load 的最合适场景就是原始文件在内存中，或者在磁盘中。其次，由于 Stream load 是一种同步的导入方式，所以用户如果希望用同步方式获取导入结果，也可以使用这种导入。</p>
-<h5 id="3-4-2-数据量">3.4.2 数据量</h5>
-<h5 id="3-4-3-完整例子">3.4.3 完整例子</h5>
-<h4 id="3-5-常见问题">3.5 常见问题</h4>
-<h3 id="4-Routine-Load">4. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/routine-load-manual.html">Routine Load</a></h3>
-<p>例行导入（Routine Load）功能为用户提供了一种自动从指定数据源进行数据导入的功能。</p>
-<p>本文档主要介绍该功能的实现原理、使用方式以及最佳实践。</p>
-<h3 id="5-u-insert-into-u">5. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/insert-into-manual.html"><u>insert into</u></a></h3>
-<p>Insert Into 语句的使用方式和 MySQL 等数据库中 Insert Into 语句的使用方式类似。但在 Doris 中，所有的数据写入都是一个独立的导入作业。所以这里将 Insert Into 也作为一种导入方式介绍。</p>
-<p>主要的 Insert Into 命令包含以下两种；</p>
-<ul>
-<li>INSERT INTO tbl SELECT …</li>
-<li>INSERT INTO tbl (col1, col2, …) VALUES (1, 2, …), (1,3, …);</li>
-</ul>
-<p>其中第二种命令仅用于 Demo，不要使用在测试或生产环境中。</p>
-<h3 id="6-u-spark-Load-u">6. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/spark-load-manual.html"><u>spark Load</u></a></h3>
-<p>Spark load 通过外部的 Spark 资源实现对导入数据的预处理，提高 Doris 大数据量的导入性能并且节省 Doris 集群的计算资源。主要用于初次迁移，大数据量导入 Doris 的场景。</p>
-<p>Spark load 是一种异步导入方式，用户需要通过 MySQL 协议创建 Spark 类型导入任务，并通过 <code>SHOW LOAD</code> 查看导入结果。</p>
-<h4 id="6-1-适用场景">6.1 适用场景</h4>
-<ul>
-<li>源数据在 Spark 可以访问的存储系统中，如 HDFS。</li>
-<li>数据量在 几十 GB 到 TB 级别。</li>
-</ul>
-<h3 id="7-delete">7. <a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/administrator-guide/load-data/delete-manual.html">delete</a></h3>
-<p>Delete不同于其他导入方式，它是一个同步过程。和Insert into相似，所有的Delete操作在Doris中是一个独立的导入作业，一般Delete语句需要指定表和分区以及删除的条件来筛选要删除的数据，并将会同时删除base表和rollup表的数据。</p>
-<h2 id="表结构变更">表结构变更</h2>
-<h2 id="常用参考">常用参考</h2>
-<p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/getting-started/data-model-rollup.html#%E8%81%9A%E5%90%88%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7">数据模型、ROLLUP 及前缀索引</a></p>
-<p><a target="_blank" rel="noopener" href="http://doris.apache.org/master/zh-CN/sql-reference/sql-statements/Data%20Definition/ALTER%20TABLE.html#example">ALTER TABLE</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/doris/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/doris/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>id:{} truncate partitions fail!</p>
-<p>alter table topic_flow_user_group_detail add partition IF NOT EXISTS p29 values [(“29”), (“30”));<br>
-SQL 错误 [1064] [42000]: errCode = 2, detailMessage = Failed to create partition[p29]. Timeout. Unfinished mark: 73448=53902647, 73448=53902643, 73448=53902655</p>
-<p>不知道是不是因为数据在写入导致的</p>
-<p>doris： tablet 99392436 has few replicas</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/doris/%E5%AE%9E%E9%99%85%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/doris/%E5%AE%9E%E9%99%85%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">实践操作</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-复制表">1. 复制表</h2>
-<h3 id="1-1-复制表结构">1.1 复制表结构</h3>
-<h3 id="1-2-复制表数据">1.2 复制表数据</h3>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/doris/%E6%8A%A5%E9%94%99%E6%B1%87%E6%80%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/doris/%E6%8A%A5%E9%94%99%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">报错汇总</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="1-1-Can-not-alter-table-when-there-are-temp-partitions-in-table">1.1 Can not alter table when there are temp partitions in table</h3>
-<p>原因是之前进行过改表操作，还没有完成</p>
-<p>可以通过<code>SHOW ALTER TABLE COLUMN;</code> 查看改表的进度</p>
-<h3 id="1-2-timeout">1.2 timeout</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set query_timeout&#x3D;60;</span><br></pre></td></tr></table></figure>
-<h3 id="1-3-Memory-exceed-limit-Hash-join-doris">1.3 Memory exceed limit. Hash join doris</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET exec_mem_limit &#x3D; 8589934592;</span><br></pre></td></tr></table></figure>
-<h3 id="1-4-Unexpected-exception-No-value-present">1.4 Unexpected exception: No value present</h3>
-<h3 id="1-5-there-is-no-scanNode-Backend-doris">1.5 there is no scanNode Backend doris</h3>
-<h3 id="1-6-bitmap-union-int-cause-‘be’-node-hang">1.6 bitmap_union_int cause ‘be’ node hang</h3>
-<h3 id="1-7-Failed-to-get-scan-range-no-queryable-replica-found-in-tablet">1.7 Failed to get scan range, no queryable replica found in tablet</h3>
-<h3 id="2-1-分区报错">2.1 分区报错</h3>
-<p>注意：</p>
-<ol>
-<li>已经划分好的区间分区，不能在被切分，即分区（1，3），不能被拆分为(1,2)和(2,3)</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">alter table topic_smart_user_group_detail_2 add partition IF NOT EXISTS p2 values less than (3);</span><br><span class="line">insert into topic_smart_user_group_detail_2 VALUES (2, 1, &#39;1004230612&#39;),(2, 1, &#39;1047296444&#39;),(2, 1, &#39;1053250666&#39;);</span><br><span class="line"></span><br><span class="line">org.jkiss.dbeaver.model.sql.DBSQLException: SQL 错误 [1064] [42000]: errCode &#x3D; 2, detailMessage &#x3D; Syntax error in line 1:</span><br><span class="line">...ISTS p2 values less than (3)</span><br><span class="line">                             ^</span><br><span class="line">Encountered: INTEGER LITERAL</span><br><span class="line">Expected: COMMA</span><br><span class="line"></span><br><span class="line">less than () 括号中必须是字符串</span><br><span class="line"></span><br><span class="line">alter table topic_smart_user_group_detail_2 add partition IF NOT EXISTS p2 values less than (&quot;3&quot;);</span><br><span class="line">insert into topic_smart_user_group_detail_2 VALUES (5, 1, &#39;1004230612&#39;),(5, 1, &#39;1047296444&#39;),(5, 1, &#39;1053250666&#39;);</span><br><span class="line"></span><br><span class="line">all partitions have no load data</span><br><span class="line">表示没有创建需要的分区</span><br></pre></td></tr></table></figure>
-<h3 id="参考资料">参考资料</h3>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/410003438">Doris建表 FAQ</a></li>
-<li><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/163452248#id-4.2%E4%B8%BA%E4%BB%80%E4%B9%88CreateTablet%E4%BC%9A%E8%B6%85%E6%97%B6%EF%BC%9F">Hive To Doris 数据同步事故</a></li>
-<li><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/311203973">Doris使用FAQ(持续更新中)</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/doris/%E7%96%91%E9%97%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/doris/%E7%96%91%E9%97%AE/" class="post-title-link" itemprop="url">疑问</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="doris的分区规则">doris的分区规则</h3>
-<p>为什么表结构的分区与分区字段里去重值数量不一样？</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/eventhub/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/eventhub/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/66284127/azure-eventhub-offset-vs-sequence-number">Azure eventhub : Offset vs Sequence number</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/eventhub/%E9%94%99%E8%AF%AF%E6%8E%92%E6%9F%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/eventhub/%E9%94%99%E8%AF%AF%E6%8E%92%E6%9F%A5/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://github.com/Azure/azure-event-hubs-spark/blob/master/examples/multiple-readers-example.md#receivers-move-between-executor-nodes">How to Avoid the <code>ReceiverDisconnectedException</code></a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">21&#x2F;08&#x2F;19 02:18:45 ERROR TaskSetManager [task-result-getter-0]: Task 32 in stage 73.0 failed 4 times; aborting job</span><br><span class="line">21&#x2F;08&#x2F;19 02:18:45 ERROR FileFormatWriter [stream execution thread for [id &#x3D; 5f382b82-2006-49a4-a657-5512d5bc6cce, runId &#x3D; e783c09d-8ea7-4848-b018-2422590426ce]]: Aborting job 6d36e286-ecb0-4a8e-9928-5ac7a0fbb7d2.</span><br><span class="line">org.apache.spark.SparkException: Job aborted due to stage failure: Task 32 in stage 73.0 failed 4 times, most recent failure: Lost task 32.3 in stage 73.0 (TID 18190, wn126-msnbi.awfbdxsze1iudhhki0l2sbzfaf.bx.internal.cloudapp.net, executor 8): java.util.concurrent.CompletionException: com.microsoft.azure.eventhubs.ReceiverDisconnectedException: New receiver &#39;spark-26-18237&#39; with higher epoch of &#39;0&#39; is created hence current receiver &#39;spark-8-18190&#39; with epoch &#39;0&#39; is getting disconnected. If you are recreating the receiver, make sure a higher epoch is used. TrackingId:ddef38220000007a00008bf9611dbf7b_G4_B16, SystemTracker:msnsam-prod:eventhub:sambeacon-ueq~4223|$default, Timestamp:2021-08-19T02:18:45, errorContext[NS: msnsam-prod.servicebus.windows.net, PATH: sambeacon-ueq&#x2F;ConsumerGroups&#x2F;$Default&#x2F;Partitions&#x2F;32, REFERENCE_ID: LN_23ed71_1629339510773_d5c9_G4, PREFETCH_COUNT: 500, LINK_CREDIT: 200, PREFETCH_Q_LEN: 0]</span><br><span class="line">	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:292)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:308)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.uniApply(CompletableFuture.java:607)</span><br><span class="line">	at java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:591)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488)</span><br><span class="line">	at java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:1990)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.ExceptionUtil.completeExceptionally(ExceptionUtil.java:116)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.drainPendingReceives(MessageReceiver.java:505)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.onError(MessageReceiver.java:490)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.onClose(MessageReceiver.java:790)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.BaseLinkHandler.processOnClose(BaseLinkHandler.java:73)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.BaseLinkHandler.handleRemoteLinkClosed(BaseLinkHandler.java:109)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.BaseLinkHandler.onLinkRemoteClose(BaseLinkHandler.java:51)</span><br><span class="line">	at org.apache.qpid.proton.engine.BaseHandler.handle(BaseHandler.java:176)</span><br><span class="line">	at org.apache.qpid.proton.engine.impl.EventImpl.dispatch(EventImpl.java:108)</span><br><span class="line">	at org.apache.qpid.proton.reactor.impl.ReactorImpl.dispatch(ReactorImpl.java:324)</span><br><span class="line">	at org.apache.qpid.proton.reactor.impl.ReactorImpl.process(ReactorImpl.java:291)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessagingFactory$RunReactor.run(MessagingFactory.java:784)</span><br><span class="line">	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)</span><br><span class="line">	at java.util.concurrent.FutureTask.run(FutureTask.java:266)</span><br><span class="line">	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)</span><br><span class="line">	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748)</span><br><span class="line">Caused by: com.microsoft.azure.eventhubs.ReceiverDisconnectedException: New receiver &#39;spark-26-18237&#39; with higher epoch of &#39;0&#39; is created hence current receiver &#39;spark-8-18190&#39; with epoch &#39;0&#39; is getting disconnected. If you are recreating the receiver, make sure a higher epoch is used. TrackingId:ddef38220000007a00008bf9611dbf7b_G4_B16, SystemTracker:msnsam-prod:eventhub:sambeacon-ueq~4223|$default, Timestamp:2021-08-19T02:18:45, errorContext[NS: msnsam-prod.servicebus.windows.net, PATH: sambeacon-ueq&#x2F;ConsumerGroups&#x2F;$Default&#x2F;Partitions&#x2F;32, REFERENCE_ID: LN_23ed71_1629339510773_d5c9_G4, PREFETCH_COUNT: 500, LINK_CREDIT: 200, PREFETCH_Q_LEN: 0]</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.ExceptionUtil.toException(ExceptionUtil.java:43)</span><br><span class="line">	at com.microsoft.azure.eventhubs.impl.MessageReceiver.onClose(MessageReceiver.java:789)</span><br><span class="line">	... 15 more</span><br><span class="line"></span><br><span class="line">Driver stacktrace:</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.org$apache$spark$scheduler$DAGScheduler$$failJobAndIndependentStages(DAGScheduler.scala:1889)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1877)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$abortStage$1.apply(DAGScheduler.scala:1876)</span><br><span class="line">	at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)</span><br><span class="line">	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:1876)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:926)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler$$anonfun$handleTaskSetFailed$1.apply(DAGScheduler.scala:926)</span><br><span class="line">	at scala.Option.foreach(Option.scala:257)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:926)</span><br><span class="line">	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:2110)</span><br><span class="line">	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2059)</span><br><span class="line">	at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2048)</span><br><span class="line">	at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49)</span><br><span class="line">	at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:737)</span><br><span class="line">	at org.apache.spark.SparkContext.runJob(SparkContext.scala:2065)</span><br><span class="line">	at org.apache.spark.sql.execution.datasources.FileFormatWriter$.write(FileFormatWriter.scala:167)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.FileStreamSink.addBatch(FileStreamSink.scala:131)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch$5$$anonfun$apply$17.apply(MicroBatchExecution.scala:537)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$$anonfun$withNewExecutionId$1.apply(SQLExecution.scala:78)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:125)</span><br><span class="line">	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:73)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch$5.apply(MicroBatchExecution.scala:535)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProgressReporter$class.reportTimeTaken(ProgressReporter.scala:351)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:58)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.org$apache$spark$sql$execution$streaming$MicroBatchExecution$$runBatch(MicroBatchExecution.scala:534)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply$mcV$sp(MicroBatchExecution.scala:198)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1$$anonfun$apply$mcZ$sp$1.apply(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProgressReporter$class.reportTimeTaken(ProgressReporter.scala:351)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.reportTimeTaken(StreamExecution.scala:58)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution$$anonfun$runActivatedStream$1.apply$mcZ$sp(MicroBatchExecution.scala:166)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.ProcessingTimeExecutor.execute(TriggerExecutor.scala:56)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.MicroBatchExecution.runActivatedStream(MicroBatchExecution.scala:160)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution.org$apache$spark$sql$execution$streaming$StreamExecution$$runStream(StreamExecution.scala:281)</span><br><span class="line">	at org.apache.spark.sql.execution.streaming.StreamExecution$$anon$1.run(StreamExecution.scala:193)</span><br></pre></td></tr></table></figure>
 
       
     </div>

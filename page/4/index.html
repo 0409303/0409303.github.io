@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/tools/maven/sample/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/tools/git/%E6%A6%82%E5%BF%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/tools/maven/sample/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/08/07/tools/git/%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">git概念</a>
         </h2>
 
         <div class="post-meta">
@@ -201,65 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;transformers&gt;</span><br><span class="line">        &lt;transformer implementation&#x3D;&quot;org.apache.maven.plugins.shade.resource.ServicesResourceTransformer&quot; &#x2F;&gt;</span><br><span class="line">        &lt;transformer implementation&#x3D;&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;</span><br><span class="line">            &lt;mainClass&gt;com.microsoft.sam.SAMJobRunner&lt;&#x2F;mainClass&gt;</span><br><span class="line">            &lt;manifestEntries&gt;</span><br><span class="line">                &lt;Class-Path&gt;..&lt;&#x2F;Class-Path&gt;</span><br><span class="line">            &lt;&#x2F;manifestEntries&gt;</span><br><span class="line">        &lt;&#x2F;transformer&gt;</span><br><span class="line"></span><br><span class="line">        &lt;transformer implementation&#x3D;&quot;org.apache.maven.plugins.shade.resource.AppendingTransformer&quot;&gt;</span><br><span class="line">            &lt;resource&gt;META-INF&#x2F;cxf&#x2F;bus-extensions.txt&lt;&#x2F;resource&gt;</span><br><span class="line">        &lt;&#x2F;transformer&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;transformers&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/tools/maven/maven%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/tools/maven/maven%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">maven学习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,11 +224,170 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/EasonJim/p/6845012.html">Maven中plugins和pluginManagement的区别</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shawWey/p/7417335.html">maven依赖顺序原则</a></p>
-<h3 id="dependencyManagement">dependencyManagement</h3>
+          <p>工作区、暂存区、版本库</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/git/git-workspace-index-repo.html">link</a></p>
+<ul>
+<li>**工作区：**就是你在电脑里能看到的目录。</li>
+<li>**暂存区：**英文叫 stage 或 index。一般存放在 <strong>.git</strong> 目录下的 index 文件（.git/index）中，所以我们把暂存区有时也叫作索引（index）。</li>
+<li>**版本库：**工作区有一个隐藏目录 <strong>.git</strong>，这个不算工作区，而是 Git 的版本库。</li>
+</ul>
+<p>正常编写是在工作区，git add 之后提交到暂存区，git commit之后放到版本库</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/tools/git/%E6%B3%A8%E6%84%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/tools/git/%E6%B3%A8%E6%84%8F/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>每次与origin分支对比前，先执行git pull操作，才能获取到远端的最新代码。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/tools/git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/tools/git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">问题解决</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h2 id="网络问题">网络问题</h2>
+<h3 id="github-网址访问不了">github 网址访问不了</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43804496/article/details/131475204">GitHub打不开的解决方案（超简单）</a></p>
 <ol>
-<li>这里包名写错不会报错，不会实际尝试去仓库下载，只有在dependencies中定义的才会检查，才会报错</li>
+<li><a target="_blank" rel="noopener" href="https://sites.ipaddress.com/github.com/">https://sites.ipaddress.com/github.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://sites.ipaddress.com/fastly.net/">https://sites.ipaddress.com/fastly.net/</a></li>
+<li><a target="_blank" rel="noopener" href="https://sites.ipaddress.com/assets-cdn.github.com/">https://sites.ipaddress.com/assets-cdn.github.com/</a></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.ipaddress.com/">My IP | IP Address Tools | IP Geolocation | Website Traffic Checker</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">140.82.113.4 github.com</span><br><span class="line">151.101.1.194 github.global.ssl.fastly.net</span><br><span class="line">151.101.65.194 github.global.ssl.fastly.net</span><br><span class="line">151.101.129.194 github.global.ssl.fastly.net</span><br><span class="line">151.101.193.194 github.global.ssl.fastly.net</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">185.199.109.153 assets-cdn.github.com</span><br><span class="line">185.199.110.153 assets-cdn.github.com</span><br><span class="line">185.199.111.153 assets-cdn.github.com</span><br></pre></td></tr></table></figure>
+<p>Mac:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/hosts</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 刷新DNS</span></span><br><span class="line">sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder</span><br></pre></td></tr></table></figure>
+<p>Windows:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> ipconfig /flushdns</span></span><br></pre></td></tr></table></figure>
+<h2 id="问题">问题</h2>
+<h3 id="LF-will-be-replaced-by-CRLF">LF will be replaced by CRLF</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config core.autocrlf false</span><br><span class="line">1. true:</span><br><span class="line">2. false:</span><br><span class="line">3. input:</span><br></pre></td></tr></table></figure>
+<h3 id="切换分支时-如何保证文件完全与线上一致，即其他分支新加的文件被删掉">切换分支时 如何保证文件完全与线上一致，即其他分支新加的文件被删掉</h3>
+<h2 id="命令报错">命令报错</h2>
+<h3 id="Author-identity-unknown">Author identity unknown</h3>
+<p>报错信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Author identity unknown</span><br><span class="line"></span><br><span class="line">*** Please tell me who you are.</span><br><span class="line"></span><br><span class="line">Run</span><br><span class="line"></span><br><span class="line">  git config --global user.email &quot;you@example.com&quot;</span><br><span class="line">  git config --global user.name &quot;Your Name&quot;</span><br><span class="line"></span><br><span class="line">to set your account&#39;s default identity.</span><br><span class="line">Omit --global to set the identity only in this repository.</span><br><span class="line"></span><br><span class="line">fatal: unable to auto-detect email address (got &#39;jingqi@DESKTOP-BKUPVT9.(none)&#39;)</span><br></pre></td></tr></table></figure>
+<p>解决办法</p>
+<ol>
+<li>按照指导重新设置<code>user.email</code>和<code>user.name</code>，注意变量名称不要设置错了</li>
+<li>用<code>git var GIT_AUTHOR_IDENT</code> 验证是否设置成功。</li>
+</ol>
+<p>参考资料：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#Formatting-and-Whitespace">git config doc</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings">Configuring Git to handle line endings</a></li>
 </ol>
 
       
@@ -307,7 +408,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/tools/maven/%E5%BE%85%E6%95%B4%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -321,7 +422,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/tools/maven/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
+            <a href="/2026/08/07/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">hexo常用命令</a>
         </h2>
 
         <div class="post-meta">
@@ -331,7 +432,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -354,15 +455,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id></h3>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/62796806">解决jar包冲突新思路 - maven-shade-plugin</a></p>
-<p>shade relocation 注意事项</p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c41f2b8f1adf">maven-shade-plugin 使用体验</a></p>
-<p><a target="_blank" rel="noopener" href="https://ffpeng90.github.io/2018-10-18/Maven-Shade-Plugin%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/">Maven-Shade-Plugin必知必会</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33037051/article/details/111892927">maven依赖的jar包版本不一样_Maven依赖jar包冲突常见的解决方法</a></p>
-<p>指定了scope是provided 打包时还会包含吗？</p>
-<p>当引入layout非常规的maven proj时<br>
-maven script found</p>
+          <h2 id="本地运行">本地运行</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="服务器部署">服务器部署</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo d -g</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="源码提交">源码提交</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b blog-source</span><br><span class="line">git add -A</span><br><span class="line">git commit -m &quot;init blog&quot;</span><br><span class="line">git push origin blog-source</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/111639860">如何用 Github 搭建博客</a></p>
 
       
     </div>
@@ -382,7 +483,7 @@ maven script found</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/tools/maven/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/tools/hexo/hexo%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -396,7 +497,7 @@ maven script found</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/tools/maven/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">maven问题解决</a>
+            <a href="/2026/08/07/tools/hexo/hexo%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/" class="post-title-link" itemprop="url">hexo常见报错</a>
         </h2>
 
         <div class="post-meta">
@@ -406,7 +507,7 @@ maven script found</p>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -429,12 +530,17 @@ maven script found</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="包冲突">包冲突</h3>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/28132001">02_XMDLOG_绑定包冲突排查方法</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33037051/article/details/111892927">maven依赖的jar包版本不一样_Maven依赖jar包冲突常见的解决方法</a></p>
-<h3 id></h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[ERROR] Failed to execute goal on project SAM: Could not resolve dependencies for project com.microsoft:SAM:jar:1.0-SNAPSHOT: The following artifacts could not be resolved: org.scala-lang:scala-reflect:jar:2.12.12, org.scalatest:scalatest_2.12:jar:3.0.8, org.scalactic:scalactic_2.12:jar:3.0.8: Could not transfer artifact org.scala-lang:scala-reflect:jar:2.12.12 from&#x2F;to BingDM (https:&#x2F;&#x2F;msasg.pkgs.visualstudio.com&#x2F;_packaging&#x2F;BingDM&#x2F;maven&#x2F;v1): authentication failed for https:&#x2F;&#x2F;msasg.pkgs.visualstudio.com&#x2F;_packaging&#x2F;BingDM&#x2F;maven&#x2F;v1&#x2F;org&#x2F;scala-lang&#x2F;scala-reflect&#x2F;2.12.12&#x2F;scala-reflect-2.12.12.jar, status: 401 Unauthorized -&gt; [Help 1]</span><br><span class="line">[ERROR] </span><br><span class="line">[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.</span><br><span class="line">[ERROR] Re-run Maven using the -X switch to enable full debug logging.</span><br><span class="line">[ERROR] </span><br><span class="line">[ERROR] For more information about the errors and possible solutions, please read the following articles:</span><br><span class="line">[ERROR] [Help 1] http:&#x2F;&#x2F;cwiki.apache.org&#x2F;confluence&#x2F;display&#x2F;MAVEN&#x2F;DependencyResolutionException</span><br><span class="line">[ERROR] </span><br><span class="line">[ERROR] After correcting the problems, you can resume the build with the command</span><br><span class="line">[ERROR]   mvn &lt;args&gt; -rf :SAM</span><br></pre></td></tr></table></figure>
-<p>setting.xml设置有问题</p>
+          <h3 id="bad-indentation-of-a-mapping-entry">bad indentation of a mapping entry</h3>
+<ol>
+<li>title中缩进不正常，均要用tab缩进</li>
+</ol>
+<h3 id="warning-adding-embedded-git-repository-themes-next">warning: adding embedded git repository: themes/next</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">warning: adding embedded git repository: themes&#x2F;next</span><br><span class="line">hint: You&#39;ve added another git repository inside your current repository.</span><br><span class="line">hint: Clones of the outer repository will not contain the contents of</span><br><span class="line">hint: the embedded repository and will not know how to obtain it.</span><br><span class="line">hint: If you meant to add a submodule, use:</span><br><span class="line">hint:</span><br><span class="line">hint: 	git submodule add &lt;url&gt; themes&#x2F;next</span><br><span class="line">hint:</span><br><span class="line">hint: If you added this path by mistake, you can remove it from the</span><br><span class="line">hint: index with:</span><br><span class="line">hint:</span><br><span class="line">hint: 	git rm --cached themes&#x2F;next</span><br><span class="line">hint:</span><br><span class="line">hint: See &quot;git help submodule&quot; for more information.</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1583762">git仓库包含子仓库时，add报错的解决办法</a></p>
+<h2 id="参考资料">参考资料</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tappat/article/details/103299038">hexo部署成功仍未更新或无法打开的情况</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next/issues/1050">修改scheme后发布不起作用</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.tuziang.com/combat/904.html">Hexo博客 Next更换修改主题样式 不生效的解决</a></p>
 
       
     </div>
@@ -454,7 +560,7 @@ maven script found</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/tools/office/excel/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/tools/hexo/hexo%E6%8F%92%E4%BB%B6&%E4%B8%BB%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -468,7 +574,7 @@ maven script found</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/tools/office/excel/" class="post-title-link" itemprop="url">极客时间下载</a>
+            <a href="/2026/08/07/tools/hexo/hexo%E6%8F%92%E4%BB%B6&%E4%B8%BB%E9%A2%98/" class="post-title-link" itemprop="url">hexo插件</a>
         </h2>
 
         <div class="post-meta">
@@ -478,7 +584,100 @@ maven script found</p>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="数学公式">数学公式</h3>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-math">hexo-math</a> KaTeX语法</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-filter-mathjax">hexo-filter-mathjax</a> LaTeX语法</li>
+</ol>
+<h3 id="功能">功能</h3>
+<h5 id="1-本地搜索">1.本地搜索</h5>
+<ul>
+<li>
+<p><code>npm install hexo-generator-search</code></p>
+</li>
+<li>
+<p>查找主题配置文件<code>themes/next/_config.yml</code>中的 <code>local_search</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="主题">主题</h3>
+<h3 id="常用插件推荐">常用插件推荐</h3>
+<ol>
+<li><a href>分享几个实用的HEXO博客功能插件</a></li>
+<li><a target="_blank" rel="noopener" href="https://plushine.cn/54808.html#%E4%B8%8D%E5%AE%89%E5%85%A8%E6%B3%95">Hexo常用插件</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zdynb.cn/2019/hexo-bi-bei-cha-jian.html">常用插件</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/q2158798/article/details/82354154">hexo博客常用插件及教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/2020/03/12/5e69772f9d2c2/">hexo常用插件</a></li>
+</ol>
+<h3 id="参考资料">参考资料</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39345384/article/details/80785373?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control">Hexo框架下用NexT(v7.0+)主题美化博客</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/tools/hexo/hexo%E6%A0%BC%E5%BC%8F%E6%A8%A1%E6%9D%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/tools/hexo/hexo%E6%A0%BC%E5%BC%8F%E6%A8%A1%E6%9D%BF/" class="post-title-link" itemprop="url">[object Object]</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -502,12 +701,96 @@ maven script found</p>
 
       
           <p>[toc]</p>
-<h2 id="公式">公式</h2>
-<h3 id="时间转换">时间转换</h3>
-<h4 id="ms-unix-timestamp-to-date">ms unix timestamp to date</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;(F2+8*3600)&#x2F;86400000+70*365+19</span><br></pre></td></tr></table></figure>
-<h4 id="second-unix-timestamp-to-date">second unix timestamp to date</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;(F2+8*3600)&#x2F;86400+70*365+19</span><br></pre></td></tr></table></figure>
+<h2 id="给我一个Front-matter例子">给我一个Front-matter例子</h2>
+<p>这里是一个包含了常用字段的 <strong>Hexo Front-matter 示例</strong>，可以直接复制使用：</p>
+<p>yaml</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 使用Hexo搭建个人博客的完整指南</span><br><span class="line">date: 2026-04-24 10:30:00</span><br><span class="line">updated: 2026-04-25 15:20:00</span><br><span class="line">tags:</span><br><span class="line">  - Hexo</span><br><span class="line">  - GitHub Pages</span><br><span class="line">  - 教程</span><br><span class="line">categories:</span><br><span class="line">  - [技术, 前端, 静态博客]</span><br><span class="line">  - [工具]</span><br><span class="line">keywords: Hexo,博客搭建,教程</span><br><span class="line">description: 这是一篇详细介绍如何使用Hexo和GitHub Pages搭建个人博客的文章，包含完整的配置步骤和常见问题解答。</span><br><span class="line">author: 你的名字</span><br><span class="line">layout: post</span><br><span class="line">comments: true</span><br><span class="line">toc: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<h3 id="📌-各项字段说明">📌 各项字段说明</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段</th>
+<th style="text-align:left">是否必需</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>title</code></td>
+<td style="text-align:left">✅ 必需</td>
+<td style="text-align:left">文章标题，会在页面上显示</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>date</code></td>
+<td style="text-align:left">✅ 必需</td>
+<td style="text-align:left">文章创建时间，影响排序和归档</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>updated</code></td>
+<td style="text-align:left">❌ 可选</td>
+<td style="text-align:left">文章最后修改时间，SEO友好</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>tags</code></td>
+<td style="text-align:left">❌ 可选</td>
+<td style="text-align:left">文章标签（可以是列表或单值）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>categories</code></td>
+<td style="text-align:left">❌ 可选</td>
+<td style="text-align:left">文章分类，支持<strong>多级层级</strong>（写法如示例所示）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>keywords</code></td>
+<td style="text-align:left">❌ 可选</td>
+<td style="text-align:left">用于SEO的页面关键词</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>description</code></td>
+<td style="text-align:left">❌ 可选</td>
+<td style="text-align:left">页面描述，在搜索引擎结果中展示</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>author</code></td>
+<td style="text-align:left">❌ 可选</td>
+<td style="text-align:left">作者名（若主题支持多作者时可使用）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>layout</code></td>
+<td style="text-align:left">❌ 可选</td>
+<td style="text-align:left">指定布局模板，默认<code>post</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>comments</code></td>
+<td style="text-align:left">❌ 可选</td>
+<td style="text-align:left">是否开启评论（需主题支持）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>toc</code></td>
+<td style="text-align:left">❌ 可选</td>
+<td style="text-align:left">是否显示目录（需主题支持）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="💡-关于-categories-多级写法的补充说明">💡 关于 <code>categories</code> 多级写法的补充说明</h3>
+<p>如果你希望一篇文章同时属于 <strong>两个不同的分类体系</strong>（例如既属于“日常/游记”，又属于“创作/散文”），可以这样写：</p>
+<p>yaml</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">categories:</span><br><span class="line">  - [日常, 游记]    # 父级“日常”，子级“游记”</span><br><span class="line">  - [创作, 散文]    # 另一个独立的分类路径</span><br></pre></td></tr></table></figure>
+<p>Hexo 会自动为这两个分类路径分别生成页面，文章会出现在两个分类页面中。</p>
+<p>如果你希望一个分类下有两级（只有一条路径），也可以简写为：</p>
+<p>yaml</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">categories:</span><br><span class="line">  - 技术</span><br><span class="line">  - 后端</span><br></pre></td></tr></table></figure>
+<p>但这会被解析为两个<strong>同级</strong>分类，而不是层级关系。要表示层级，必须用数组嵌套：<code>- [技术, 后端]</code>。</p>
+<h3 id="⚙️-快速生成-Front-matter">⚙️ 快速生成 Front-matter</h3>
+<p>可以使用 <code>hexo new &quot;标题&quot;</code> 命令自动生成带有 <code>title</code> 和 <code>date</code> 的基础 Front-matter；如需更多字段，建议使用 VS Code 的 <strong>Hexo Front-matter</strong> 等插件，或自己复制模板文件到 <code>scaffolds/post.md</code> 中。</p>
+<p>例如，修改 <code>scaffolds/post.md</code> 为你想要的模板：</p>
+<p>yaml</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">updated: </span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">description: </span><br><span class="line">toc: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>这样之后每次 <code>hexo new &quot;标题&quot;</code> 都会生成带有这些字段的文件。</p>
 
       
     </div>
@@ -527,7 +810,7 @@ maven script found</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/tools/windows/outlook/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/tools/hexo/%E8%AF%AD%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -541,7 +824,7 @@ maven script found</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/03/tools/windows/outlook/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/08/07/tools/hexo/%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -551,257 +834,7 @@ maven script found</p>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45524582/article/details/104290786">outlook中，如何将同一回复主题的邮件放在一起</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/tools/windows/useful-tools/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/tools/windows/useful-tools/" class="post-title-link" itemprop="url">有用工具-windows</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/windows-tools/" itemprop="url" rel="index"><span itemprop="name">windows-tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>查看超大文本 2G+</p>
-<p>PilotEdit Lite</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/template/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/template/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/tair/%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/tair/%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">tair使用规范</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tair/" itemprop="url" rel="index"><span itemprop="name">tair</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6417083301c2">缓存Tair高性能使用规范</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/03/tools/Typora/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/03/tools/Typora/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-03 13:25:12" itemprop="dateCreated datePublished" datetime="2026-08-03T13:25:12+00:00">2026-08-03</time>
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
             </span>
 
           
@@ -816,68 +849,242 @@ maven script found</p>
 
       
           <p>[toc]</p>
-<p>文件间跳转</p>
-<p><a href="./markdown.md">Markdown 语法</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/344941041">图片保存</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904120667602958">PicGo config</a></p>
-<p><a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Core-Doc/zh/guide/config.html">PicGo config2</a></p>
-<h2 id="设置">设置</h2>
-<h3 id="配置文件">配置文件</h3>
-<p>通过<code>文件-偏好设置-外观-打开主题文件夹</code>，找到主题配置文件目录。如果没有找到对应的配置文件，可以手动生成。</p>
-<h4 id="配置文件分类">配置文件分类</h4>
-<ol>
-<li>base.user.css 基础的用户自定义配置文件，会全局生效，优先级第二。</li>
-<li>{当前主题}.user.css 主题级的用户自定义配置文件，当前主题生效，优先级最高。</li>
-<li>{当前主题}.css 主题基础配置文件，当前主题生效，优先级最低。</li>
-</ol>
-<p>优先级逻辑：自定义 &gt; 基础；{当前主题} &gt; base</p>
-<p>加载顺序: {当前主题}.css -&gt; base.user.css -&gt; {当前主题}.user.css</p>
-<h3 id="toc展示的目录层级">toc展示的目录层级</h3>
-<p>配置文件中加入如下内容，建议加在base.user.css中</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 隐藏四级、五级、六级标题（只显示 h1, h2, h3） */</span></span><br><span class="line"><span class="selector-class">.md-toc-h4</span>,</span><br><span class="line"><span class="selector-class">.md-toc-h5</span>,</span><br><span class="line"><span class="selector-class">.md-toc-h6</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="格式">格式</h2>
-<h3 id="数学表达式">数学表达式</h3>
-<p>要启用这个功能，首先到Preference-&gt;Editor中启用。然后使用$符号包裹Tex命令，例如：$lim_{x \to \infty} \ exp(-x)=0$将产生如下的数学表达式：</p>
-<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104343.png" alt="img"></p>
-<h3 id="下标">下标</h3>
-<p>下标使用~包裹，例如：H~2~O将产生水的分子式。</p>
-<h3 id="上标">上标</h3>
-<p>上标使用^包裹，例如：y^2^=4将产生表达式</p>
-<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104354.png" alt="img"></p>
-<h3 id="下划线">下划线</h3>
-<p>用HTML的语法Underline将产生下划线Underline.</p>
-<h3 id="删除线">删除线</h3>
-<p>GFM添加了删除文本的语法，这是标准的Markdown语法木有的。使用~~包裹的文本将会具有删除的样式，例如~删除文本~将产生删除文本的样式。</p>
-<h3 id="代码">代码</h3>
-<p>使用`包裹的内容将会以代码样式显示，例如</p>
-<p>使用<code>printf()</code></p>
-<p>则会产生printf()样式。</p>
-<p>输入~~~或者```然后回车，可以输入代码块，并且可以选择代码的语言。例如：public Class HelloWorld{ System.out.println(“Hello World!”); }</p>
-<h3 id="目录列表Table-of-Contents-TOC">目录列表Table of Contents(TOC)</h3>
-<p>输入[toc]然后回车，将会产生一个目录，这个目录抽取了文章的所有标题，自动更新内容。</p>
-<h3 id="水平分割线">水平分割线</h3>
-<p>使用***或者—，然后回车，来产生水平分割线。</p>
-<h3 id="标注">标注</h3>
-<p>我们可以对某一个词语进行标注。例如</p>
-<p>某些人用过了才知道[^注释] [^注释]:Somebody that I used to know.</p>
-<p>将产生：</p>
-<p>把鼠标放在注释上，将会有提示内容。</p>
-<h3 id="强调">强调</h3>
-<p>使用两个*号或者两个_包裹的内容将会被强调。例如</p>
-<p><strong>使用两个*号强调内容</strong> <strong>使用两个下划线强调内容</strong></p>
-<p>将会输出</p>
-<p>使用两个<em>号强调内容 使用两个下划线强调内容 Typroa 推荐使用两个</em>号。</p>
-<h3 id="斜体">斜体</h3>
-<p>在标准的Markdown语法中，*和_包裹的内容会是斜体显示，但是GFM下划线一般用来分隔人名和代码变量名，因此我们推荐是用星号来包裹斜体内容。如果要显示星号，则使用转义：</p>
-<p>*</p>
-<h3 id="插入图片">插入图片</h3>
-<p>我们可以通过拖拉的方式，将本地文件夹中的图片或者网络上的图片插入。</p>
-<h3 id="插入URL连接">插入URL连接</h3>
-<p>使用尖括号包裹的url将产生一个连接，例如：将产生连接:www.baidu.com.</p>
-<p>如果是标准的url，则会自动产生连接，例如:www.baidu.com</p>
-<h3 id="插入表情">插入表情</h3>
-<p>使用:happy:输入高兴的表情，使用:sad:输入悲伤的表情，使用:cry:输入哭的表情等。以此类推!</p>
-<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104355.png" alt="img"></p>
+<h2 id="如何在文中引用生成的其他页面">如何在文中引用生成的其他页面</h2>
+<p>在 Hexo 中引用其他页面，主要有三种方法，你可以根据对<strong>便捷性</strong>、<strong>灵活性</strong>和<strong>可维护性</strong>的需求来选择。</p>
+<h3 id="📝-方法一：标准-Markdown-链接（最基础）">📝 方法一：标准 Markdown 链接（最基础）</h3>
+<p>这是最直接的方法，使用标准的 Markdown 链接语法 <code>[显示文字](链接地址)</code>。</p>
+<ul>
+<li><strong>操作方式</strong>：你需要手动填写目标文章的<strong>相对路径</strong>或<strong>绝对路径</strong>-<a target="_blank" rel="noopener" href="https://blog.gitcode.com/9b3ce2c9fe91ffc54ecc5e3a35f339a0.html">-10</a>。</li>
+<li><strong>优点</strong>：通用性强，不依赖任何 Hexo 特性，在所有主题和编辑器下都能工作。</li>
+<li><strong>缺点</strong>：一旦文章的<strong>URL 结构（Permalink）发生变化</strong>，所有手动书写的链接都会失效，维护成本较高。</li>
+</ul>
+<h3 id="🚀-方法二：Hexo-标签插件（官方推荐）">🚀 方法二：Hexo 标签插件（官方推荐）</h3>
+<p>Hexo 提供了内置的 <code>post_link</code> 标签插件，这是官方推荐的做法-<a target="_blank" rel="noopener" href="https://blog.gitcode.com/9b3ce2c9fe91ffc54ecc5e3a35f339a0.html">-10</a>。</p>
+<ul>
+<li>
+<p><strong>操作方式</strong>：在文章中这样使用：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% post<span class="emphasis">_link 目标文章的文件名（不含.md后缀） &quot;自定义显示文字（可选）&quot; %&#125;</span></span><br></pre></td></tr></table></figure>
+<p>例如，要引用 <code>source/_posts/hello-world.md</code> 这篇文章-<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/48490384">-4</a>：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% post<span class="emphasis">_link hello-world %&#125;</span></span><br><span class="line"><span class="emphasis">&#123;% post_</span>link hello-world 你好，世界！ %&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>优点</strong>：</p>
+<ul>
+<li><strong>智能解析</strong>：Hexo 会自动根据文章文件名找到正确的 URL<a target="_blank" rel="noopener" href="https://blog.gitcode.com/9b3ce2c9fe91ffc54ecc5e3a35f339a0.html">-10</a>。</li>
+<li><strong>高可维护性</strong>：即使你修改了文章的 <code>permalink</code> 配置，链接也依然有效，无需手动更改<a target="_blank" rel="noopener" href="https://blog.gitcode.com/9b3ce2c9fe91ffc54ecc5e3a35f339a0.html">-10</a>。</li>
+<li><strong>多语言友好</strong>：能更好地适应多语言站点<a target="_blank" rel="noopener" href="https://blog.gitcode.com/9b3ce2c9fe91ffc54ecc5e3a35f339a0.html">-10</a>。</li>
+</ul>
+</li>
+<li>
+<p><strong>缺点</strong>：语法不是标准 Markdown，在部分编辑器（如 Typora）中可能无法实时预览。</p>
+</li>
+</ul>
+<h3 id="🔌-方法三：社区插件（功能更强大）">🔌 方法三：社区插件（功能更强大）</h3>
+<p>如果你追求更优雅的语法或更高级的功能，可以安装社区插件。</p>
+<ul>
+<li><strong>1. 回归标准 Markdown 语法：<code>hexo-post-link</code></strong>
+<ul>
+<li>这个插件让你能用<strong>标准的 Markdown 链接语法</strong>来实现 <code>post_link</code> 的效果-<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-post-link">-5</a>。</li>
+<li><strong>操作方式</strong>：安装插件后，链接写法变为 <code>[显示文字](文章文件名)</code><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-post-link">-5</a>。Hexo 在生成时会自动将文件名替换为正确的 URL。</li>
+<li><strong>优点</strong>：兼顾了标准语法和智能解析。</li>
+</ul>
+</li>
+<li><strong>2. 拥抱 Wiki 链接：<code>hexo-filter-titlebased-link</code></strong>
+<ul>
+<li>如果你习惯使用 <code>[[双链]]</code> 语法（尤其在 Obsidian 等笔记软件中），这个插件将非常适合你-<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-filter-titlebased-link">-1</a>。</li>
+<li><strong>操作方式</strong>：安装并配置后，可以直接使用 <code>[[目标文章标题]]</code> 或 <code>[[目标文章标题|自定义别名]]</code> 来创建链接<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-filter-titlebased-link">-1</a>。</li>
+<li><strong>高级功能</strong>：它甚至可以<strong>生成“反向链接”</strong>，让你在主题中展示有哪些文章引用了当前文章，构建知识图谱<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-filter-titlebased-link">-1</a>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="💡-补充：链接到文章的特定章节">💡 补充：链接到文章的特定章节</h3>
+<p>如果你想链接到另一篇文章的某个具体小标题，也是完全可以的。</p>
+<ul>
+<li>
+<p><strong>操作方法</strong>：在链接地址后加上 <code>#</code> 和小标题的 <code>id</code>。</p>
+</li>
+<li>
+<p><strong>Hexo 默认行为</strong>：Hexo 默认的 Markdown 渲染器会自动为每个小标题（<code>##</code>、<code>###</code> 等）生成一个 <code>id</code>，通常就是标题文字本身。</p>
+</li>
+<li>
+<p><strong>示例</strong>：假设你要引用的文章中有个 <code>## 总结</code> 的标题，你可以这样链接：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">跳转到那篇文章的总结部分</span>](<span class="link">&#123;% post_link target-article %&#125;#总结</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>小技巧</strong>：如果不确定某个标题的准确 <code>id</code>，可以在浏览器中打开该文章，按 <code>F12</code> 打开开发者工具，检查（Inspect）那个标题元素，就能看到它的 <code>id</code> 属性值。</p>
+</li>
+</ul>
+<h3 id="💎-总结与建议">💎 总结与建议</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">核心操作</th>
+<th style="text-align:left">优点</th>
+<th style="text-align:left">缺点</th>
+<th style="text-align:left">推荐场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>标准 Markdown 链接</strong></td>
+<td style="text-align:left"><code>[文字](/path/to/page)</code></td>
+<td style="text-align:left">简单直接，通用性强</td>
+<td style="text-align:left">链接硬编码，URL 变更后易失效</td>
+<td style="text-align:left">临时引用，或引用站外链接</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><code>post_link</code> 标签</strong></td>
+<td style="text-align:left"><code>&#123;% post_link 文件名 %&#125;</code></td>
+<td style="text-align:left"><strong>官方支持，稳定可靠</strong>，自动适配 URL 变化<a target="_blank" rel="noopener" href="https://blog.gitcode.com/9b3ce2c9fe91ffc54ecc5e3a35f339a0.html">-10</a></td>
+<td style="text-align:left">语法非标准 Markdown</td>
+<td style="text-align:left"><strong>绝大多数内部引用场景（首选）</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>社区插件</strong></td>
+<td style="text-align:left"><code>[文字](文件名)</code> 或 <code>[[标题]]</code></td>
+<td style="text-align:left">语法优雅，功能强大（如支持反向链接）<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-filter-titlebased-link">-1</a></td>
+<td style="text-align:left">需要额外安装和配置</td>
+<td style="text-align:left">追求极致写作体验，或需要构建知识网络</td>
+</tr>
+</tbody>
+</table>
+<p>对于大多数情况，<strong>直接使用 Hexo 自带的 <code>post_link</code> 标签插件</strong>是兼顾了便捷与可靠的最佳选择。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/tools/hexo/%E8%B5%84%E6%96%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/tools/hexo/%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">hexo资料</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="资源文件夹"><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/asset-folders.html">资源文件夹</a></h4>
+<p>本地添加图片等</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/tools/idea/idea%E8%AE%B2%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/07/tools/idea/idea%E8%AE%B2%E8%A7%A3/" class="post-title-link" itemprop="url">idea软件使用教程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Project-Structure">Project Structure</h3>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/deng-cc/p/6416332.html">理解 IntelliJ IDEA 的项目配置和Web部署</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/267117380">IDEA中每天都在用的Project Structure，你了解多少？</a></p>
 
       
     </div>
