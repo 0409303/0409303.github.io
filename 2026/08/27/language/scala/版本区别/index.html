@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[toc] 2.11与2.12 的区别 123val array &#x3D; Array(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)print(array.mkString)print(array.mkString(&quot;&quot;)) 2.12与2.13的区别 整体区别 Scala 2.13 是一次重要的里程碑式更新，它主要在三个方面与 2.12 版">
+<meta property="og:type" content="article">
+<meta property="og:title" content="版本区别">
+<meta property="og:url" content="http://example.com/2026/08/27/language/scala/%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="[toc] 2.11与2.12 的区别 123val array &#x3D; Array(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)print(array.mkString)print(array.mkString(&quot;&quot;)) 2.12与2.13的区别 整体区别 Scala 2.13 是一次重要的里程碑式更新，它主要在三个方面与 2.12 版">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-08-27T11:42:46.191Z">
+<meta property="article:modified_time" content="2026-08-27T11:42:46.191Z">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="scala">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/08/27/language/scala/%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>版本区别 | 生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/scala/%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          版本区别
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[toc]</p>
+<h1>2.11与2.12 的区别</h1>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> array = <span class="type">Array</span>(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>)</span><br><span class="line">print(array.mkString)</span><br><span class="line">print(array.mkString(<span class="string">&quot;&quot;</span>))</span><br></pre></td></tr></table></figure>
+<h1>2.12与2.13的区别</h1>
+<h2 id="整体区别">整体区别</h2>
+<p>Scala 2.13 是一次<strong>重要的里程碑式更新</strong>，它主要在三个方面与 2.12 版本拉开了距离：<strong>彻底重构了集合框架</strong>、<strong>将标准库模块化</strong>，以及<strong>为 Scala 3 的发布清除了关键的技术障碍</strong>。下表清晰地总结了它们的主要差异：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">对比维度</th>
+<th style="text-align:left">Scala 2.13</th>
+<th style="text-align:left">Scala 2.12</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>集合库 (Collections)</strong></td>
+<td style="text-align:left"><strong>全面改革</strong>：为更简洁、安全、高效的集合层次结构铺平了道路-。<code>Traversable</code> 被移除，<code>Seq</code> 类型得到了精化等-。</td>
+<td style="text-align:left">稳定且成熟的经典集合体系-。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>标准库结构</strong></td>
+<td style="text-align:left"><strong>深度模块化 (Modularized)</strong>：将庞大的标准库拆分为更小、职责单一的模块，减少了核心依赖并提升了可维护性-。</td>
+<td style="text-align:left">庞大的单体库（monolithic）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>二进制兼容性</strong></td>
+<td style="text-align:left"><strong>与 2.12 不兼容</strong>：使用 <code>_2.13</code> 后缀标识，使用 2.13 库的 JAR 文件无法在 2.12 项目中运行-。</td>
+<td style="text-align:left">使用 <code>_2.12</code> 后缀，内部小版本之间（如 2.12.x）保持兼容-。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>性能与优化</strong></td>
+<td style="text-align:left"><strong>编译提速</strong>：编译器本身速度提升了约 <strong>5% 至 10%</strong>-。 <strong>运行时优化</strong>：为 Scala 3 和 Java 未来的新特性做准备。</td>
+<td style="text-align:left">已具备的基础优化功能，如 lambda 的优化-。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>语言演进</strong></td>
+<td style="text-align:left"><strong>弃用并清除“杂质”</strong>：弃用和移除了许多过时或罕见的特性，如 <code>Symbol</code> 字面量和早期初始化器，为 Scala 3 清扫道路-。</td>
+<td style="text-align:left">包含更多历史遗留的语言特性。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>迁移与兼容</strong></td>
+<td style="text-align:left"><strong>编译器帮助迁移</strong>：通过 <code>-Xmigration</code> 标志提供详细的迁移建议，并提供了辅助跨版本构建的工具，帮助开发者平稳过渡-。</td>
+<td style="text-align:left">使用标准的构建工具配置。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>新功能与 API</strong></td>
+<td style="text-align:left"><strong>标准库增强</strong>：集合操作 (如 <code>groupMap</code>)-、<code>StringOps</code> 解析功能-和资源管理尝试，让代码更健壮和现代。</td>
+<td style="text-align:left">无相关新增特性。</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="🚀-核心变化深度解析">🚀 核心变化深度解析</h3>
+<h4 id="1-集合框架-Collections-Framework">1. 集合框架 (Collections Framework)</h4>
+<p>这是 2.13 中最引人注目、影响最广泛的变化。新的集合库更加<strong>一致、安全且高效</strong>-。</p>
+<ul>
+<li><strong>层次结构简化</strong>：去除了冗余的顶层特质 <code>Traversable</code>，使得整个集合体系的继承关系更简单清晰-。</li>
+<li><strong><code>Seq</code> 类型明确</strong>：<code>scala.Seq</code> 在 2.13 中被明确为 <code>scala.collection.immutable.Seq</code> 的别名，避免了与 <code>mutable.Seq</code> 的混淆-。</li>
+<li><strong>新成员加入</strong>：引入了 <code>ArrayDeque</code>，在特定操作上性能优于 <code>ArrayBuffer</code>，为开发者提供了更优的数据结构选择-。</li>
+<li><strong>API 更加直观</strong>：新增了 <code>groupMap</code>、<code>groupMapReduce</code> 等方法，让对集合的分组聚合操作更富表达力-。</li>
+</ul>
+<h4 id="2-标准库模块化-Modularized-Standard-Library">2. 标准库模块化 (Modularized Standard Library)</h4>
+<p>2.13 将原本庞大的标准库拆解为多个小模块，使依赖关系更清晰，并降低了应用启动时的内存占用-。</p>
+<ul>
+<li><code>scala-library</code>: <strong>核心库</strong>。包含最基础的<code>Any</code>、<code>AnyRef</code>、<code>Product</code>等。</li>
+<li><code>scala-reflect</code>: <strong>反射库</strong>。只有在需要显式使用反射 API 时才需引入。</li>
+<li><code>scala-compiler</code>: <strong>编译器库</strong>。仅用于构建编译器插件等开发工具。</li>
+</ul>
+<h4 id="3-为-Scala-3-铺平道路">3. 为 Scala 3 铺平道路</h4>
+<p>2.13 在语言层面移除了大量历史遗留或将来不再支持的旧特性-。</p>
+<ul>
+<li><strong><code>Symbol</code> 字面量</strong>: 语法 <code>'mySymbol</code> 被弃用，推荐使用普通的 <code>String</code> 字面量 <code>&quot;mySymbol&quot;</code> 来代替。</li>
+<li><strong><code>⇒</code> unicode 箭头</strong>: <code>⇒</code> 被弃用，统一使用标准 ASCII 箭头 <code>=&gt;</code>。</li>
+<li><strong>早期初始化器</strong>: 这种不够优雅的特性被弃用，官方推荐使用更为清晰的 <code>trait</code> 参数等新方式。</li>
+<li><strong><code>do-while</code> 循环</strong>: 这种形式的循环被移除。</li>
+</ul>
+<h3 id="📦-项目迁移与兼容性策略">📦 项目迁移与兼容性策略</h3>
+<p>由于 2.13 与 2.12 <strong>二进制不兼容</strong>-，迁移项目时需要分情况处理。</p>
+<p>对于库的作者，需要使用 <strong>交叉编译 (Cross-building)</strong> 来发布同时兼容两个版本的 JAR 包。对于应用开发者，最直接的方式就是在依赖升级前，确保所有第三方库都已提供其 2.13 版本。</p>
+<h3 id="🛠️-官方迁移工具">🛠️ 官方迁移工具</h3>
+<ul>
+<li><strong><code>-Xmigration</code> 标志</strong>: 在 <code>sbt</code> 或 <code>scalac</code> 的选项中设置该标志，编译器会在你使用了新版 Collection 中行为可能发生变化的地方给出详细的警告或建议，帮助你定位问题-。</li>
+<li><strong><code>scala-collection-compat</code> 库</strong>: 这是一个由官方维护的兼容性库，提供了大量 2.13 中的新集合 API 作为“补丁”，让你在 2.12 项目中就能提前用上新语法，有助于平稳过渡-。</li>
+</ul>
+<p>此外，Scala 2.13 对 JDK 的支持也更为出色。2.13.6 及更高版本支持 <strong>JDK 17</strong>-，2.13.11 及以上版本支持 <strong>JDK 21</strong>-。</p>
+<h1>2.13与3.x的区别</h1>
+<h2 id="整体概括">整体概括</h2>
+<p>Scala 3 是一次跨越式的进化，而非在 Scala 2.13 基础上的增量更新。它对语言的核心进行了重新构思和设计，旨在提供更强的表现力、更高的安全性和更流畅的开发体验。</p>
+<p>下面，我将从关键特性、兼容性以及迁移路径等几个方面，为你详细梳理这两个版本之间的核心区别。</p>
+<hr>
+<h3 id="🚀-Scala-3-的关键进化">🚀 Scala 3 的关键进化</h3>
+<p>相比 Scala 2.13，Scala 3 在多个方面进行了重塑，引入了一系列强大的新特性。</p>
+<h4 id="1-清晰的上下文抽象">1. 清晰的上下文抽象</h4>
+<p>Scala 3 将 Scala 2 中功能复杂的 <code>implicit</code> 拆解为几个更专注、语义更清晰的语法结构，降低了学习和使用难度<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">Scala 2.13</th>
+<th style="text-align:left">Scala 3</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">类型类实例</td>
+<td style="text-align:left"><code>implicit val</code></td>
+<td style="text-align:left"><code>given</code></td>
+<td style="text-align:left"><code>given</code> 专门用于定义“给定实例”<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a></td>
+</tr>
+<tr>
+<td style="text-align:left">上下文参数</td>
+<td style="text-align:left"><code>implicit</code> 参数列表</td>
+<td style="text-align:left"><code>using</code> 子句</td>
+<td style="text-align:left"><code>using</code> 专用于声明上下文参数<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a></td>
+</tr>
+<tr>
+<td style="text-align:left">扩展方法</td>
+<td style="text-align:left"><code>implicit class</code></td>
+<td style="text-align:left"><code>extension</code></td>
+<td style="text-align:left">内置的 <code>extension</code> 语法，声明和使用都更清晰<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a></td>
+</tr>
+<tr>
+<td style="text-align:left">隐式转换</td>
+<td style="text-align:left"><code>implicit def</code></td>
+<td style="text-align:left"><code>given Conversion[A, B]</code></td>
+<td style="text-align:left">将隐式转换能力收窄到一个明确的类型 <code>Conversion</code> 中<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-更强大的类型系统">2. 更强大的类型系统</h4>
+<p>Scala 3 引入了众多在类型理论中早已存在但尚未进入主流工业语言的高级特性，让类型系统更加强大和灵活。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">在 Scala 2.13 中的替代方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>交集类型 (<code>A &amp; B</code>)</strong></td>
+<td style="text-align:left">表示既是 <code>A</code> 类型又是 <code>B</code> 类型的值，是类型安全的组合-<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
+<td style="text-align:left"><code>A with B</code> (复合类型)，语义和行为不同</td>
+</tr>
+<tr>
+<td style="text-align:left">**联合类型 (`A</td>
+<td style="text-align:left">B`)**</td>
+<td style="text-align:left">表示是 <code>A</code> 类型或 <code>B</code> 类型的值，极大增强灵活性-<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>不透明类型别名 (<code>opaque type</code>)</strong></td>
+<td style="text-align:left">隐藏具体实现，只提供抽象接口，实现零成本抽象-<a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
+<td style="text-align:left"><code>AnyVal</code> 值类或密封类，但性能或表达力有限</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>枚举 (<code>enum</code>)</strong></td>
+<td style="text-align:left">统一了枚举和代数数据类型，比组合 <code>sealed class</code> + <code>case object</code> 更简洁-<a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a></td>
+<td style="text-align:left">使用 <code>sealed trait/class</code> 和 <code>case object</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>导出子句 (<code>export</code>)</strong></td>
+<td style="text-align:left">避免样板代码，轻松实现聚合或委托模式<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
+<td style="text-align:left">手动编写委托方法</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>依赖函数类型</strong></td>
+<td style="text-align:left">结果类型依赖于参数值，表达能力更强-</td>
+<td style="text-align:left">没有</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>类型 Lambda</strong></td>
+<td style="text-align:left">内联的、类型级别的高阶函数，简洁地操作类型构造器<a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
+<td style="text-align:left">需要额外的辅助 trait，代码冗长</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-现代化的语法">3. 现代化的语法</h4>
+<p>Scala 3 提供了一系列可选的新语法，让代码更简洁。</p>
+<ul>
+<li><strong>可选大括号和缩进语法</strong>：你可以选择用缩进来代替大括号，像 Python 那样组织代码块<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a><a target="_blank" rel="noopener" href="https://www.infoq.com/news/2021/06/scala-3-overhaul/?topicPageSponsorship=8adc4d8b-752a-4082-a21f-e6787339e976">-15</a>。</li>
+<li><strong>显式 <code>new</code> 关键字可选</strong>：创建类的实例时，可以省略 <code>new</code>，使代码更简洁<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a>。</li>
+<li><strong>控制结构的简化</strong>：<code>if</code>, <code>while</code>, <code>for</code> 等控制结构可以省略括号<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a>。</li>
+<li><strong>顶级定义</strong>：可以直接在包内定义方法、字段等，代替 <code>package object</code><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a>。</li>
+</ul>
+<hr>
+<h3 id="🤝-兼容性与迁移">🤝 兼容性与迁移</h3>
+<p>虽然变化巨大，但 Scala 3 的官方文档特别强调了它实现了与 Scala 2.13 在<strong>运行时</strong>的互操作性。</p>
+<h4 id="🔄-运行时兼容：无缝互操作">🔄 运行时兼容：无缝互操作</h4>
+<p>最关键的一点是，Scala 3 和 Scala 2.13 共享<strong>相同的应用程序二进制接口 (ABI)</strong><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a>。这意味着：</p>
+<ul>
+<li><strong>二进制兼容</strong>：用 Scala 2.13 编译的库，可以直接作为依赖用在 Scala 3 项目中，反之亦然<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-source.html">-3</a>。</li>
+<li><strong>一致的运行时</strong>：除少数改进（如 <code>lazy val</code> 的初始化性能）外，编译后的字节码行为高度一致，确保了性能的稳定<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a>。</li>
+</ul>
+<h4 id="🔄-源码兼容：非破坏性升级">🔄 源码兼容：非破坏性升级</h4>
+<p>尽管运行时兼容，但两种语言在<strong>源码层面并不完全兼容</strong><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/3.3.2/docs/docs/reference/language-versions/source-compatibility.html">-2</a><a target="_blank" rel="noopener" href="https://www.infoq.com/news/2021/06/scala-3-overhaul/?topicPageSponsorship=8adc4d8b-752a-4082-a21f-e6787339e976">-15</a>。为了让迁移过程平滑，官方提供了完善的工具链：</p>
+<ul>
+<li><strong>提前探测（<code>-Xsource:3</code>）</strong>：在 Scala 2.13 项目中添加此编译选项，编译器会提前警告不兼容未来的 Scala 3 代码，帮助你早做准备<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/3.3.2/docs/docs/reference/language-versions/source-compatibility.html">-2</a><a target="_blank" rel="noopener" href="https://scalatut.greq.me/lesson/prepare-for-scala-3-while-still-on-213">-30</a>。</li>
+<li><strong>过渡版本（<code>3.0-migration</code>）</strong>：此编译器模式会将破坏性的源码改动降级为警告，并尝试提供自动迁移建议<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/3.3.2/docs/docs/reference/language-versions/source-compatibility.html">-2</a>。</li>
+<li><strong>自动重写与工具</strong>：内置的迁移模式与 <code>scalafix</code> 等工具，可以自动将符合规则的旧代码重写为 Scala 3 风格<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompatibility-table.html">-5</a><a target="_blank" rel="noopener" href="https://scalatut.greq.me/lesson/prepare-for-scala-3-while-still-on-213">-30</a>。</li>
+</ul>
+<blockquote>
+<p>需要注意的是，Scala 2 的<strong>宏（Macro）系统</strong>在 Scala 3 中被全新的编译期编程机制（如 <code>inline</code>）取代。这意味着任何依赖 Scala 2 宏的库都必须升级到 Scala 3 版本才能正常工作<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-metaprogramming.html">-25</a>。官方迁移指南提供了一个检查清单，列出了第三方库的迁移状态<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-metaprogramming.html">-25</a>。</p>
+</blockquote>
+<h4 id="🔄-已移除的语言特性">🔄 已移除的语言特性</h4>
+<p>为了精简语言，Scala 3 移除了一些在 Scala 2.13 中已弃用或使用频率低的特性。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类别</th>
+<th style="text-align:left">移除特性</th>
+<th style="text-align:left">简要说明</th>
+<th style="text-align:left">替代方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>语言构造</strong></td>
+<td style="text-align:left"><code>do-while</code> 循环</td>
+<td style="text-align:left">语法与新的控制结构冲突，被移除<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">使用 <code>while</code> 循环替代<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">过程语法</td>
+<td style="text-align:left">没有等号和返回类型、只有方法体的写法被移除<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/incompat-syntactic.html#open-brace-indentation-for-passing-an-argument">-33</a></td>
+<td style="text-align:left">明确指定 <code>: Unit =</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>类型系统</strong></td>
+<td style="text-align:left">存在类型</td>
+<td style="text-align:left">已被联合类型、交集类型等新概念取代<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">使用 Scala 3 的新类型特性</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>any2stringadd</code> 隐式转换</td>
+<td style="text-align:left">可能导致不易察觉的字符串拼接错误，被移除<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">显式使用 <code>.toString</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>其他语法</strong></td>
+<td style="text-align:left">符号字面量 (<code>'xyz</code>)</td>
+<td style="text-align:left">符号字面量语法被移除<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">使用字符串字面量 <code>&quot;xyz&quot;</code><a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">视图界定 (<code>A &lt;% B</code>)</td>
+<td style="text-align:left">视图界定语法不再支持<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/incompat-contextual-abstractions.html">-19</a></td>
+<td style="text-align:left">使用普通参数或上下文界定</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">早期初始化器</td>
+<td style="text-align:left">这种写法不再被支持<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">使用特质参数-</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">自动应用</td>
+<td style="text-align:left">无参方法 <code>def foo</code> 调用时可省略括号，Scala 3 强制显式写出<code>foo()</code> 以增加代码确定性<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">显式写出括号</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="💎-总结">💎 总结</h3>
+<p>总的来说，从 Scala 2.13 到 Scala 3 的演进，是一场深入内核的重大升级。它以打破非必要的源码兼容性为代价，换来了一个在类型系统、语法一致性和开发体验上更加强大的语言。这一点从官方为现有用户提供了完善的迁移工具链，并为 Scala 2.13 和 3 的代码提供了无缝的运行时互操作性，便可见一斑<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-source.html">-3</a>。</p>
+<p>希望这份详细的对比能帮助你更好地理解 Scala 的演进。如果想了解特定特性（比如枚举或给定实例）的具体用法，我们可以继续深入探讨～</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/scala/" rel="tag"># scala</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/27/language/scala/%E8%AF%AD%E6%B3%95%E8%A7%A3%E6%9E%90/" rel="prev" title="语法解析">
+      <i class="fa fa-chevron-left"></i> 语法解析
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/27/language/scala/%E5%BE%85%E8%A7%A3%E5%86%B3/" rel="next" title="待解决">
+      待解决 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">2.11与2.12 的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">2.12与2.13的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">整体区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9A%80-%E6%A0%B8%E5%BF%83%E5%8F%98%E5%8C%96%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90"><span class="nav-number">2.1.1.</span> <span class="nav-text">🚀 核心变化深度解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%A6-%E9%A1%B9%E7%9B%AE%E8%BF%81%E7%A7%BB%E4%B8%8E%E5%85%BC%E5%AE%B9%E6%80%A7%E7%AD%96%E7%95%A5"><span class="nav-number">2.1.2.</span> <span class="nav-text">📦 项目迁移与兼容性策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E5%AE%98%E6%96%B9%E8%BF%81%E7%A7%BB%E5%B7%A5%E5%85%B7"><span class="nav-number">2.1.3.</span> <span class="nav-text">🛠️ 官方迁移工具</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">2.13与3.x的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%A6%82%E6%8B%AC"><span class="nav-number">3.1.</span> <span class="nav-text">整体概括</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9A%80-Scala-3-%E7%9A%84%E5%85%B3%E9%94%AE%E8%BF%9B%E5%8C%96"><span class="nav-number">3.1.1.</span> <span class="nav-text">🚀 Scala 3 的关键进化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%A4%9D-%E5%85%BC%E5%AE%B9%E6%80%A7%E4%B8%8E%E8%BF%81%E7%A7%BB"><span class="nav-number">3.1.2.</span> <span class="nav-text">🤝 兼容性与迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%8E-%E6%80%BB%E7%BB%93"><span class="nav-number">3.1.3.</span> <span class="nav-text">💎 总结</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">296</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

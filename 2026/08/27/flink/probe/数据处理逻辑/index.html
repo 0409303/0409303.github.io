@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[toc] 问题 在没有缓存操作时， 对同一个数据源进行多次操作，spark和flink的逻辑是怎样的，是不是要读取多次 在没有额外缓存优化的情况下，对同一个数据源进行多次操作，Spark 和 Flink 的处理逻辑和结果是截然不同的：  Spark (包括批处理 RDD 和流处理 Structured Streaming)：默认会重复读取&#x2F;计算。无论是多次 Action 操作同一个 RDD，还是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据处理逻辑">
+<meta property="og:url" content="http://example.com/2026/08/27/flink/probe/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="[toc] 问题 在没有缓存操作时， 对同一个数据源进行多次操作，spark和flink的逻辑是怎样的，是不是要读取多次 在没有额外缓存优化的情况下，对同一个数据源进行多次操作，Spark 和 Flink 的处理逻辑和结果是截然不同的：  Spark (包括批处理 RDD 和流处理 Structured Streaming)：默认会重复读取&#x2F;计算。无论是多次 Action 操作同一个 RDD，还是">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-08-27T11:42:46.179Z">
+<meta property="article:modified_time" content="2026-08-27T11:42:46.179Z">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="flink">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/08/27/flink/probe/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>数据处理逻辑 | 生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/flink/probe/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据处理逻辑
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/probe/" itemprop="url" rel="index"><span itemprop="name">probe</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[toc]</p>
+<h1>问题</h1>
+<h2 id="在没有缓存操作时，-对同一个数据源进行多次操作，spark和flink的逻辑是怎样的，是不是要读取多次">在没有缓存操作时， 对同一个数据源进行多次操作，spark和flink的逻辑是怎样的，是不是要读取多次</h2>
+<p>在没有额外缓存优化的情况下，对同一个数据源进行多次操作，Spark 和 Flink 的处理逻辑和结果是截然不同的：</p>
+<ul>
+<li><strong>Spark (包括批处理 RDD 和流处理 Structured Streaming)</strong>：默认会<strong>重复读取/计算</strong>。无论是多次 Action 操作同一个 RDD，还是在结构化流中向多个 Sink 输出，每个下游任务都会独立读取数据源，导致数据被多次拉取。</li>
+<li><strong>Flink (DataStream API)</strong>：<strong>不会重复读取</strong>。它的执行图（DAG）是一个整体，数据源只被实例化一次，后续的多个操作（如分流、多业务处理）都共享和复用从同一个 Source 读取的同一份数据流。</li>
+</ul>
+<hr>
+<h3 id="⚙️-机制详解：Spark">⚙️ 机制详解：Spark</h3>
+<h4 id="1-Spark-批处理-RDD">1. Spark 批处理 (RDD)</h4>
+<p>在 Spark 的 RDD 中，对同一个 RDD 多次执行 Action 操作，<strong>默认会触发重复计算</strong>，即从源头或依赖链重新计算一次。这是因为 RDD 本身只是计算逻辑的载体，不存储结果数据-。因此，需要手动调用 <code>cache()</code> 或 <code>persist()</code> 来缓存中间结果，才能避免重复读取和计算—。</p>
+<h4 id="2-Spark-Structured-Streaming">2. Spark Structured Streaming</h4>
+<p>当将同一个输入流分流到多个 Sink 时，<strong>会导致数据被重复读取</strong>。这是因为每个分流操作在物理执行计划中，本质上会生成一个独立的 Stream Thread，各自维护自己的进度（Offset），相当于启动了多个互相独立的查询作业，从而独立地从源端拉取数据<a target="_blank" rel="noopener" href="https://blog.devgenius.io/spark-structured-streaming-multiple-sinks-writes-5dea139d4920?gi=2953a7f5ed89&amp;source=---------7-----------------------">-14</a><a target="_blank" rel="noopener" href="https://blog.devgenius.io/spark-structured-streaming-multiple-sinks-writes-5dea139d4920?gi=2953a7f5ed89&amp;source=---------7-----------------------">-14</a><a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/ask/sof/1003314?from=16139">-3</a>。</p>
+<p>可以通过 <code>foreachBatch</code> + <code>persist</code> 的组合方式来缓解这个问题，将输入流的微批 <code>DataFrame</code> 在内存中缓存，从而让多个输出复用同一份数据，避免重复读取源<a target="_blank" rel="noopener" href="https://blog.devgenius.io/spark-structured-streaming-multiple-sinks-writes-5dea139d4920?gi=2953a7f5ed89&amp;source=---------7-----------------------">-14</a><a target="_blank" rel="noopener" href="https://cloud.tencent.cn/developer/ask/sof/1003314?from=16139">-3</a>。</p>
+<h3 id="⚙️-机制详解：Flink">⚙️ 机制详解：Flink</h3>
+<h4 id="1-Flink-DataStream-API">1. Flink DataStream API</h4>
+<p>在 Flink 的 DataStream API 中，同一个 <code>DataStream</code> 对象可以被多个下游算子重复消费，而<strong>不会导致数据源被多次读取</strong>。这是因为 Flink 的算子操作（如 <code>map</code>, <code>filter</code>）都会返回一个新的 <code>DataStream</code> 对象，它们都引用着同一个上游 <code>Source</code> 实例<a target="_blank" rel="noopener" href="https://www.iodraw.com/blog/220276901">-50</a>。数据流如同一根管道，从 Source 流出后，可以分流到多个下游处理分支，但管道本身只有一个入口<a target="_blank" rel="noopener" href="https://www.iodraw.com/blog/220276901">-50</a>。</p>
+<h4 id="2-Flink-Table-SQL">2. Flink Table / SQL</h4>
+<p>在 Flink SQL 中情况更复杂。如果多个查询复用同一个源表，但被独立提交，它们可能会触发 Source 的重复读取<a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/FLINK-32603">-48</a>。不过，Flink 的优化器在执行单个作业时，会尝试合并相同的 Source 节点，实现一定程度的复用<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/434378">-19</a>。</p>
+<h3 id="💎-总结与建议">💎 总结与建议</h3>
+<ul>
+<li><strong>Spark</strong>：需要手动进行缓存优化。在批处理（RDD）中，需使用 <code>cache()</code>/<code>persist()</code> 缓存被多次使用的 RDD-。在流处理（Structured Streaming）中，则推荐使用 <code>foreachBatch</code> + <code>persist</code> 模式来避免数据源的重复拉取<a target="_blank" rel="noopener" href="https://blog.devgenius.io/spark-structured-streaming-multiple-sinks-writes-5dea139d4920?gi=2953a7f5ed89&amp;source=---------7-----------------------">-14</a>。</li>
+<li><strong>Flink</strong>：DataStream API 的设计天然避免了重复读取问题，直接分流即可。若在 SQL 中遇到 Source 重复读取，可检查执行计划，确认 Source 节点是否被合并，并适当优化 SQL 逻辑。</li>
+</ul>
+<h2 id="如果spark使用了缓存策略，在执行效率和资源上与flink进行对比">如果spark使用了缓存策略，在执行效率和资源上与flink进行对比</h2>
+<p>当Spark使用缓存策略后，其执行效率会显著提升，并且能有效降低资源消耗。但与Flink相比，两者在底层设计哲学上仍有本质区别，这决定了它们在不同场景下的表现各有侧重。</p>
+<h3 id="⚖️-核心逻辑对比：缓存-vs-流水线">⚖️ 核心逻辑对比：缓存 vs. 流水线</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">对比维度</th>
+<th style="text-align:left">Spark (使用缓存)</th>
+<th style="text-align:left">Flink (原生设计)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>核心逻辑</strong></td>
+<td style="text-align:left"><strong>计算隔离，缓存复用</strong></td>
+<td style="text-align:left"><strong>数据流水线，流式处理</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>数据复用</strong></td>
+<td style="text-align:left">主动缓存中间结果，避免重复计算<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/416750">-11</a></td>
+<td style="text-align:left">天然数据流，下游算子可自由消费，无需额外缓存<a target="_blank" rel="noopener" href="https://www.automq.com/blog/apache-flink-vs-apache-spark-comprehensive-comparison">-2</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>触发机制</strong></td>
+<td style="text-align:left"><strong>懒执行</strong>，Action触发Job，结果触发时计算并缓存</td>
+<td style="text-align:left">上游处理完即可推送下游，实现<strong>流水线执行</strong><a target="_blank" rel="noopener" href="https://www.automq.com/blog/apache-flink-vs-apache-spark-comprehensive-comparison">-2</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="🚀-执行效率对比">🚀 执行效率对比</h3>
+<h4 id="Spark：批处理性能的王者">Spark：批处理性能的王者</h4>
+<p>Spark在批处理领域具有显著优势，尤其擅长复杂的数据分析任务。</p>
+<ul>
+<li><strong>基准测试表现</strong>：在TPC-DS基准测试中，处理百亿级数据集时，Spark 3.5比Flink 1.18快约<strong>20%</strong>（47.2分钟 vs 58.9分钟）<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.cn/blogs/457128">-4</a>。</li>
+<li><strong>成熟技术栈</strong>：这得益于其Tungsten引擎和Catalyst优化器的深度优化，使其在ETL（数据抽取、转换、加载）、复杂Join和多轮迭代计算等场景下表现卓越<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.cn/blogs/457128">-4</a><a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/17349">-8</a>。</li>
+</ul>
+<h4 id="Flink：低延迟流处理的王者">Flink：低延迟流处理的王者</h4>
+<p>Flink的设计核心是“原生流处理”，因此其优势主要体现在实时性要求极高的流计算场景。</p>
+<ul>
+<li><strong>端到端延迟更低</strong>：实测数据显示，Flink的端到端延迟（P99）可低至<strong>187ms</strong>，远优于Spark Streaming的<strong>321ms</strong><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.cn/blogs/457128">-4</a>。这是由Flink的逐事件处理模式决定的<a target="_blank" rel="noopener" href="https://www.automq.com/blog/apache-flink-vs-apache-spark-comprehensive-comparison">-2</a>。</li>
+<li><strong>延迟敏感场景的首选</strong>：当需要亚秒级响应时，Flink的低延迟特性是决定性优势，而Spark的微批处理模式会引入<strong>秒级</strong>的固有延迟<a target="_blank" rel="noopener" href="https://blog.csdn.net/2501_93893253/article/details/154143745">-35</a><a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/17349">-8</a>。</li>
+</ul>
+<h4 id="吞吐量对比">吞吐量对比</h4>
+<p>在吞吐量方面，两者的差距不如延迟那么悬殊。</p>
+<ul>
+<li>在需要极低延迟（&lt;100ms）的场景下，Flink的吞吐量可以达到Spark的<strong>2-3倍</strong>。</li>
+<li>在可以容忍较高延迟（&gt;1s）的高吞吐场景中，两者的差距会缩小至<strong>10%以内</strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/2501_93893253/article/details/154143745">-35</a>。</li>
+</ul>
+<h3 id="💡-资源利用对比">💡 资源利用对比</h3>
+<h4 id="Spark缓存的资源成本">Spark缓存的资源成本</h4>
+<p>Spark的缓存虽然高效，但伴随着一定的资源开销：</p>
+<ul>
+<li><strong>内存占用与GC压力</strong>：在内存中缓存数据会占用大量JVM堆内存，频繁的垃圾回收（GC）可能导致服务停顿，尤其在处理大规模数据时<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/416750">-11</a><a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/225469">-13</a>。优化GC是Spark调优的重要一环。</li>
+<li><strong>序列化开销</strong>：为了更高效地利用内存，Spark通常需要序列化数据（如使用Kryo），这会引入额外的CPU开销<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/416750">-11</a><a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/225469">-13</a>。</li>
+<li><strong>磁盘溢写风险</strong>：当内存不足时，Spark会将部分缓存数据溢写到磁盘，这会严重拖慢性能<a target="_blank" rel="noopener" href="https://blog.csdn.net/2501_93893253/article/details/154143745">-35</a>。</li>
+</ul>
+<h4 id="Flink的资源利用优势">Flink的资源利用优势</h4>
+<p>Flink在设计上更注重资源的高效利用和精确控制：</p>
+<ul>
+<li><strong>托管内存</strong>：Flink实现了自己的内存管理机制，直接在JVM堆外分配内存（Managed Memory），并将数据以二进制形式存储，避免了大量的Java对象开销和GC压力<a target="_blank" rel="noopener" href="https://www.dtstack.com/bbs/article/327675">-21</a><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=53741525">-22</a>。</li>
+<li><strong>更低的峰值内存</strong>：在上述基准测试中，Flink的峰值内存占用（76.1 GB）比Spark（89.3 GB）低约<strong>15%</strong><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.cn/blogs/457128">-4</a>。</li>
+<li><strong>细粒度资源管理</strong>：Flink的Slot共享机制允许不同任务的子任务共享资源，减少了线程切换和资源碎片，提高了整体利用率<a target="_blank" rel="noopener" href="https://blog.csdn.net/2501_93893253/article/details/154143745">-35</a>。</li>
+<li><strong>内存复用</strong>：Flink支持内存复用，可以在任务执行过程中复用内存，减少内存碎片，进一步提升效率-。</li>
+</ul>
+<h3 id="🏆-场景选择建议">🏆 场景选择建议</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">场景特征</th>
+<th style="text-align:left">推荐引擎</th>
+<th style="text-align:left">理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>大规模离线批处理 (ETL, OLAP)</strong></td>
+<td style="text-align:left"><strong>Spark</strong></td>
+<td style="text-align:left">处理海量静态数据时，<strong>绝对速度更快</strong>，批处理生态更成熟<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.cn/blogs/457128">-4</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>毫秒级实时流处理 (风控, 监控)</strong></td>
+<td style="text-align:left"><strong>Flink</strong></td>
+<td style="text-align:left"><strong>延迟更低</strong>，原生流处理架构优势明显<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.cn/blogs/457128">-4</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>准实时 (秒级) 流处理 (报表, 监控)</strong></td>
+<td style="text-align:left"><strong>Spark</strong></td>
+<td style="text-align:left">如果延迟容忍度较高，Spark Streaming的<strong>吞吐能力</strong>和与批处理统一的技术栈是优势。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>混合负载 (Lambda/Kappa 架构)</strong></td>
+<td style="text-align:left"><strong>Flink (Kappa)</strong></td>
+<td style="text-align:left">可以同时处理实时流和有界数据集，实现架构统一，降低维护成本<a target="_blank" rel="noopener" href="https://blog.csdn.net/2501_93893253/article/details/154143745">-35</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>机器学习 (MLlib)</strong></td>
+<td style="text-align:left"><strong>Spark</strong></td>
+<td style="text-align:left">拥有成熟的MLlib库，生态支持更完善<a target="_blank" rel="noopener" href="https://blog.csdn.net/2501_93893253/article/details/154143745">-35</a>。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="💎-总结">💎 总结</h3>
+<p>Spark使用缓存策略后，其执行效率和资源利用会得到显著优化。这种“主动缓存”模式使其在处理复杂、多阶段的批处理任务时，能以可控的资源开销换取极致的计算性能。相比之下，Flink的“被动流水线”模式则是一种更轻量、更低延迟的架构，天然适合流处理场景。</p>
+<p>所以，两者并非简单的孰优孰劣，而是代表了两种不同的设计哲学：</p>
+<ul>
+<li><strong>Spark</strong> 面向<strong>批处理</strong>优化，通过缓存来加速数据复用，适用于吞吐优先的场景。</li>
+<li><strong>Flink</strong> 面向<strong>流处理</strong>优化，通过流水线来最大化实时性，适用于延迟敏感的场景。</li>
+</ul>
+<p>如果还想了解更具体的选型考量，例如与团队现有技术栈的匹配度，或者特定场景下的部署成本，我们可以继续探讨。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/flink/" rel="tag"># flink</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/27/flink/probe/%E6%B0%B4%E4%BD%8D%E7%BA%BF/" rel="prev" title="水位线">
+      <i class="fa fa-chevron-left"></i> 水位线
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/27/flink/probe/%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/" rel="next" title="处理函数">
+      处理函数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%B2%A1%E6%9C%89%E7%BC%93%E5%AD%98%E6%93%8D%E4%BD%9C%E6%97%B6%EF%BC%8C-%E5%AF%B9%E5%90%8C%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E6%BA%90%E8%BF%9B%E8%A1%8C%E5%A4%9A%E6%AC%A1%E6%93%8D%E4%BD%9C%EF%BC%8Cspark%E5%92%8Cflink%E7%9A%84%E9%80%BB%E8%BE%91%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E8%A6%81%E8%AF%BB%E5%8F%96%E5%A4%9A%E6%AC%A1"><span class="nav-number">1.1.</span> <span class="nav-text">在没有缓存操作时， 对同一个数据源进行多次操作，spark和flink的逻辑是怎样的，是不是要读取多次</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9A%99%EF%B8%8F-%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3%EF%BC%9ASpark"><span class="nav-number">1.1.1.</span> <span class="nav-text">⚙️ 机制详解：Spark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9A%99%EF%B8%8F-%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3%EF%BC%9AFlink"><span class="nav-number">1.1.2.</span> <span class="nav-text">⚙️ 机制详解：Flink</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%8E-%E6%80%BB%E7%BB%93%E4%B8%8E%E5%BB%BA%E8%AE%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">💎 总结与建议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9Cspark%E4%BD%BF%E7%94%A8%E4%BA%86%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5%EF%BC%8C%E5%9C%A8%E6%89%A7%E8%A1%8C%E6%95%88%E7%8E%87%E5%92%8C%E8%B5%84%E6%BA%90%E4%B8%8A%E4%B8%8Eflink%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.</span> <span class="nav-text">如果spark使用了缓存策略，在执行效率和资源上与flink进行对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9A%96%EF%B8%8F-%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%91%E5%AF%B9%E6%AF%94%EF%BC%9A%E7%BC%93%E5%AD%98-vs-%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">1.2.1.</span> <span class="nav-text">⚖️ 核心逻辑对比：缓存 vs. 流水线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9A%80-%E6%89%A7%E8%A1%8C%E6%95%88%E7%8E%87%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.2.</span> <span class="nav-text">🚀 执行效率对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A1-%E8%B5%84%E6%BA%90%E5%88%A9%E7%94%A8%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.3.</span> <span class="nav-text">💡 资源利用对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8F%86-%E5%9C%BA%E6%99%AF%E9%80%89%E6%8B%A9%E5%BB%BA%E8%AE%AE"><span class="nav-number">1.2.4.</span> <span class="nav-text">🏆 场景选择建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%8E-%E6%80%BB%E7%BB%93"><span class="nav-number">1.2.5.</span> <span class="nav-text">💎 总结</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">296</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/language/scala/%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/olap/practice/%E6%B5%81%E9%87%8F%E6%95%B0%E4%BB%93%E6%9E%84%E5%BB%BA%E7%BB%8F%E9%AA%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/07/language/scala/%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">版本区别</a>
+            <a href="/2026/08/27/olap/practice/%E6%B5%81%E9%87%8F%E6%95%B0%E4%BB%93%E6%9E%84%E5%BB%BA%E7%BB%8F%E9%AA%8C/" class="post-title-link" itemprop="url">流量数仓构建经验</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -209,11 +209,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
+                  <a href="/categories/olap-%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">olap-实践</span></a>
                 </span>
             </span>
 
@@ -228,278 +224,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[toc]</p>
-<h1>2.11与2.12 的区别</h1>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> array = <span class="type">Array</span>(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>)</span><br><span class="line">print(array.mkString)</span><br><span class="line">print(array.mkString(<span class="string">&quot;&quot;</span>))</span><br></pre></td></tr></table></figure>
-<h1>2.12与2.13的区别</h1>
-<h2 id="整体区别">整体区别</h2>
-<p>Scala 2.13 是一次<strong>重要的里程碑式更新</strong>，它主要在三个方面与 2.12 版本拉开了距离：<strong>彻底重构了集合框架</strong>、<strong>将标准库模块化</strong>，以及<strong>为 Scala 3 的发布清除了关键的技术障碍</strong>。下表清晰地总结了它们的主要差异：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">对比维度</th>
-<th style="text-align:left">Scala 2.13</th>
-<th style="text-align:left">Scala 2.12</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>集合库 (Collections)</strong></td>
-<td style="text-align:left"><strong>全面改革</strong>：为更简洁、安全、高效的集合层次结构铺平了道路-。<code>Traversable</code> 被移除，<code>Seq</code> 类型得到了精化等-。</td>
-<td style="text-align:left">稳定且成熟的经典集合体系-。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>标准库结构</strong></td>
-<td style="text-align:left"><strong>深度模块化 (Modularized)</strong>：将庞大的标准库拆分为更小、职责单一的模块，减少了核心依赖并提升了可维护性-。</td>
-<td style="text-align:left">庞大的单体库（monolithic）。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>二进制兼容性</strong></td>
-<td style="text-align:left"><strong>与 2.12 不兼容</strong>：使用 <code>_2.13</code> 后缀标识，使用 2.13 库的 JAR 文件无法在 2.12 项目中运行-。</td>
-<td style="text-align:left">使用 <code>_2.12</code> 后缀，内部小版本之间（如 2.12.x）保持兼容-。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>性能与优化</strong></td>
-<td style="text-align:left"><strong>编译提速</strong>：编译器本身速度提升了约 <strong>5% 至 10%</strong>-。 <strong>运行时优化</strong>：为 Scala 3 和 Java 未来的新特性做准备。</td>
-<td style="text-align:left">已具备的基础优化功能，如 lambda 的优化-。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>语言演进</strong></td>
-<td style="text-align:left"><strong>弃用并清除“杂质”</strong>：弃用和移除了许多过时或罕见的特性，如 <code>Symbol</code> 字面量和早期初始化器，为 Scala 3 清扫道路-。</td>
-<td style="text-align:left">包含更多历史遗留的语言特性。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>迁移与兼容</strong></td>
-<td style="text-align:left"><strong>编译器帮助迁移</strong>：通过 <code>-Xmigration</code> 标志提供详细的迁移建议，并提供了辅助跨版本构建的工具，帮助开发者平稳过渡-。</td>
-<td style="text-align:left">使用标准的构建工具配置。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>新功能与 API</strong></td>
-<td style="text-align:left"><strong>标准库增强</strong>：集合操作 (如 <code>groupMap</code>)-、<code>StringOps</code> 解析功能-和资源管理尝试，让代码更健壮和现代。</td>
-<td style="text-align:left">无相关新增特性。</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="🚀-核心变化深度解析">🚀 核心变化深度解析</h3>
-<h4 id="1-集合框架-Collections-Framework">1. 集合框架 (Collections Framework)</h4>
-<p>这是 2.13 中最引人注目、影响最广泛的变化。新的集合库更加<strong>一致、安全且高效</strong>-。</p>
+          <h1>MT外卖流量数仓建设</h1>
+<h2 id="流量数据采集">流量数据采集</h2>
+<h3 id="1-数据采集">1. 数据采集</h3>
+<h4 id="1-1-前端埋点">1.1 前端埋点</h4>
 <ul>
-<li><strong>层次结构简化</strong>：去除了冗余的顶层特质 <code>Traversable</code>，使得整个集合体系的继承关系更简单清晰-。</li>
-<li><strong><code>Seq</code> 类型明确</strong>：<code>scala.Seq</code> 在 2.13 中被明确为 <code>scala.collection.immutable.Seq</code> 的别名，避免了与 <code>mutable.Seq</code> 的混淆-。</li>
-<li><strong>新成员加入</strong>：引入了 <code>ArrayDeque</code>，在特定操作上性能优于 <code>ArrayBuffer</code>，为开发者提供了更优的数据结构选择-。</li>
-<li><strong>API 更加直观</strong>：新增了 <code>groupMap</code>、<code>groupMapReduce</code> 等方法，让对集合的分组聚合操作更富表达力-。</li>
-</ul>
-<h4 id="2-标准库模块化-Modularized-Standard-Library">2. 标准库模块化 (Modularized Standard Library)</h4>
-<p>2.13 将原本庞大的标准库拆解为多个小模块，使依赖关系更清晰，并降低了应用启动时的内存占用-。</p>
+<li>代码埋点（MT）
 <ul>
-<li><code>scala-library</code>: <strong>核心库</strong>。包含最基础的<code>Any</code>、<code>AnyRef</code>、<code>Product</code>等。</li>
-<li><code>scala-reflect</code>: <strong>反射库</strong>。只有在需要显式使用反射 API 时才需引入。</li>
-<li><code>scala-compiler</code>: <strong>编译器库</strong>。仅用于构建编译器插件等开发工具。</li>
+<li>高度定制、控制精准、采集的数据丰富准确</li>
+<li>比较方便、灵活，能方便手机到用户在界面上的行为数据</li>
 </ul>
-<h4 id="3-为-Scala-3-铺平道路">3. 为 Scala 3 铺平道路</h4>
-<p>2.13 在语言层面移除了大量历史遗留或将来不再支持的旧特性-。</p>
+</li>
+<li>可视化埋点
 <ul>
-<li><strong><code>Symbol</code> 字面量</strong>: 语法 <code>'mySymbol</code> 被弃用，推荐使用普通的 <code>String</code> 字面量 <code>&quot;mySymbol&quot;</code> 来代替。</li>
-<li><strong><code>⇒</code> unicode 箭头</strong>: <code>⇒</code> 被弃用，统一使用标准 ASCII 箭头 <code>=&gt;</code>。</li>
-<li><strong>早期初始化器</strong>: 这种不够优雅的特性被弃用，官方推荐使用更为清晰的 <code>trait</code> 参数等新方式。</li>
-<li><strong><code>do-while</code> 循环</strong>: 这种形式的循环被移除。</li>
+<li>埋点成本低，但质量不高</li>
 </ul>
-<h3 id="📦-项目迁移与兼容性策略">📦 项目迁移与兼容性策略</h3>
-<p>由于 2.13 与 2.12 <strong>二进制不兼容</strong>-，迁移项目时需要分情况处理。</p>
-<p>对于库的作者，需要使用 <strong>交叉编译 (Cross-building)</strong> 来发布同时兼容两个版本的 JAR 包。对于应用开发者，最直接的方式就是在依赖升级前，确保所有第三方库都已提供其 2.13 版本。</p>
-<h3 id="🛠️-官方迁移工具">🛠️ 官方迁移工具</h3>
+</li>
+<li>无埋点
 <ul>
-<li><strong><code>-Xmigration</code> 标志</strong>: 在 <code>sbt</code> 或 <code>scalac</code> 的选项中设置该标志，编译器会在你使用了新版 Collection 中行为可能发生变化的地方给出详细的警告或建议，帮助你定位问题-。</li>
-<li><strong><code>scala-collection-compat</code> 库</strong>: 这是一个由官方维护的兼容性库，提供了大量 2.13 中的新集合 API 作为“补丁”，让你在 2.12 项目中就能提前用上新语法，有助于平稳过渡-。</li>
+<li>埋点成本低，但质量不高</li>
 </ul>
-<p>此外，Scala 2.13 对 JDK 的支持也更为出色。2.13.6 及更高版本支持 <strong>JDK 17</strong>-，2.13.11 及以上版本支持 <strong>JDK 21</strong>-。</p>
-<h1>2.13与3.x的区别</h1>
-<h2 id="整体概括">整体概括</h2>
-<p>Scala 3 是一次跨越式的进化，而非在 Scala 2.13 基础上的增量更新。它对语言的核心进行了重新构思和设计，旨在提供更强的表现力、更高的安全性和更流畅的开发体验。</p>
-<p>下面，我将从关键特性、兼容性以及迁移路径等几个方面，为你详细梳理这两个版本之间的核心区别。</p>
-<hr>
-<h3 id="🚀-Scala-3-的关键进化">🚀 Scala 3 的关键进化</h3>
-<p>相比 Scala 2.13，Scala 3 在多个方面进行了重塑，引入了一系列强大的新特性。</p>
-<h4 id="1-清晰的上下文抽象">1. 清晰的上下文抽象</h4>
-<p>Scala 3 将 Scala 2 中功能复杂的 <code>implicit</code> 拆解为几个更专注、语义更清晰的语法结构，降低了学习和使用难度<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a>。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">特性</th>
-<th style="text-align:left">Scala 2.13</th>
-<th style="text-align:left">Scala 3</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">类型类实例</td>
-<td style="text-align:left"><code>implicit val</code></td>
-<td style="text-align:left"><code>given</code></td>
-<td style="text-align:left"><code>given</code> 专门用于定义“给定实例”<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a></td>
-</tr>
-<tr>
-<td style="text-align:left">上下文参数</td>
-<td style="text-align:left"><code>implicit</code> 参数列表</td>
-<td style="text-align:left"><code>using</code> 子句</td>
-<td style="text-align:left"><code>using</code> 专用于声明上下文参数<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a></td>
-</tr>
-<tr>
-<td style="text-align:left">扩展方法</td>
-<td style="text-align:left"><code>implicit class</code></td>
-<td style="text-align:left"><code>extension</code></td>
-<td style="text-align:left">内置的 <code>extension</code> 语法，声明和使用都更清晰<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a></td>
-</tr>
-<tr>
-<td style="text-align:left">隐式转换</td>
-<td style="text-align:left"><code>implicit def</code></td>
-<td style="text-align:left"><code>given Conversion[A, B]</code></td>
-<td style="text-align:left">将隐式转换能力收窄到一个明确的类型 <code>Conversion</code> 中<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a></td>
-</tr>
-</tbody>
-</table>
-<h4 id="2-更强大的类型系统">2. 更强大的类型系统</h4>
-<p>Scala 3 引入了众多在类型理论中早已存在但尚未进入主流工业语言的高级特性，让类型系统更加强大和灵活。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">特性</th>
-<th style="text-align:left">说明</th>
-<th style="text-align:left">在 Scala 2.13 中的替代方案</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>交集类型 (<code>A &amp; B</code>)</strong></td>
-<td style="text-align:left">表示既是 <code>A</code> 类型又是 <code>B</code> 类型的值，是类型安全的组合-<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
-<td style="text-align:left"><code>A with B</code> (复合类型)，语义和行为不同</td>
-</tr>
-<tr>
-<td style="text-align:left">**联合类型 (`A</td>
-<td style="text-align:left">B`)**</td>
-<td style="text-align:left">表示是 <code>A</code> 类型或 <code>B</code> 类型的值，极大增强灵活性-<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>不透明类型别名 (<code>opaque type</code>)</strong></td>
-<td style="text-align:left">隐藏具体实现，只提供抽象接口，实现零成本抽象-<a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
-<td style="text-align:left"><code>AnyVal</code> 值类或密封类，但性能或表达力有限</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>枚举 (<code>enum</code>)</strong></td>
-<td style="text-align:left">统一了枚举和代数数据类型，比组合 <code>sealed class</code> + <code>case object</code> 更简洁-<a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a></td>
-<td style="text-align:left">使用 <code>sealed trait/class</code> 和 <code>case object</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>导出子句 (<code>export</code>)</strong></td>
-<td style="text-align:left">避免样板代码，轻松实现聚合或委托模式<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
-<td style="text-align:left">手动编写委托方法</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>依赖函数类型</strong></td>
-<td style="text-align:left">结果类型依赖于参数值，表达能力更强-</td>
-<td style="text-align:left">没有</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>类型 Lambda</strong></td>
-<td style="text-align:left">内联的、类型级别的高阶函数，简洁地操作类型构造器<a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
-<td style="text-align:left">需要额外的辅助 trait，代码冗长</td>
-</tr>
-</tbody>
-</table>
-<h4 id="3-现代化的语法">3. 现代化的语法</h4>
-<p>Scala 3 提供了一系列可选的新语法，让代码更简洁。</p>
+</li>
+</ul>
+<h4 id="1-2-后端埋点">1.2 后端埋点</h4>
+<p>它的优点是内网传输，即时性强，丢失风险小</p>
+<h3 id="2-埋点类型">2. 埋点类型</h3>
+<p>pv、mv、mc</p>
+<h3 id="3-埋点规范与协作流程">3. 埋点规范与协作流程</h3>
+<p>**协作流程：**我们的流程是这样的，先由需求方提出需求交给业务 PM，业务 PM 在埋点平台做埋点配置，埋点平台根据配置生成代码给到客户端 RD，客户端RD 使用埋点 SDK 做埋点实施，实施之后由客户端 QA 来测试校验然后上线，接着数据组 RD 使用日志数据表加工数据将数据结果交付给数据组 PM，最后将结果交付给需求方。这里简单说下埋点配置环节，在美团外卖是由业务 PM 来统一负责，同时数据团队做规范的指导、定期参加一些埋点评审。</p>
+<p>**埋点规范：**主要是约束一些字段的上报方法，包括字段名称、上报时机等。</p>
+<p>**问题排查：**在问题排查方面，我们有一套比较完整埋点问题追踪流程，也是方便后续做埋点问题的复盘。</p>
+<p>**埋点 SLA：**我们专门制定了一套埋点 SLA ( Service Level Agreement - 服务级别协议 ) 机制，目前这块主要由客户端 RD 和 QA 来保证 SLA，业务 PM 根据埋点重要性提供需要保证的 SLA 列表，数据组提供监控工具。</p>
+<h3 id="4-埋点注意事项">4. 埋点注意事项</h3>
+<p>前面介绍了埋点的基本信息与规范流程，这里给大家介绍一些埋点的注意事项。个人觉得做埋点还是非常需要经验的，甚至是需要更多的试错，这里给大家列了一些注意事项以供参考：</p>
+<p>**同质参数的名称和类型保持一致：**主要就是体现在通用参数、业务参数、行为标识的统一，尽量做到事前治理，给整个的数据加工、数仓建设减轻工作量，当然在数仓加工过程中也一定要做一些容错；</p>
+<p>**通用复用：**尽量少的创建新的事件，而是想办法复用原来的事件，方便后续的埋点管理；比如某弹窗在很多页面都出现过，弹窗模块曝光标识需要是唯一的，当它出现在不同的页面的时候，我们可以通过页面标识 page_id 来区分，而不是每出现一个新的页面就重新定义一个模块标识；</p>
+<p>**最小粒度：**埋点定义到模块内的最小元素，可以避免重复上报；</p>
+<p>**合并上报：**相同模块的 MV 事件可以合并上报；某一页面中一定出现的元素可以不用上报 ( 这里是指 MV 曝光事件 )，或者和 PV 时间合并上报，在 PV 中加一个字段标识即可；</p>
+<p>**历史兼容：**不能改变已有事件标识的含义，不能改变属性标识的含义，不能改变参数值的含义；一般只做新增，不做修改，可以废弃；</p>
+<p>**追踪回溯：**埋点设计文档可以回退到历史版本，便于排查问题。</p>
+<h2 id="流量数据加工">流量数据加工</h2>
+<h3 id="1-流量数仓模型架构">1. 流量数仓模型架构</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gp34jjuunpj30u00gw43k.jpg" alt></p>
+<p>**ODL：**Operational Data Layer，操作型数据层，这一层主要对采集到的数据进行无损着陆、基础字段清洗加工。ODL是原始日志明细宽表，完成了日志数据清洗过滤、归因建设、公共维度建设等。全链路归因建设在这一层实现。公共维度建设比如地理位置维度生成、常用维度代理键生成等，下沉到ODL来进行，降低了运维和下游使用成本，需要依赖于DIM层的环境维度表。</p>
+<p>**IDL：**Integrated Data Layer，集成数据层，这一层在ODL之上，主要完成领域数据建模，描述业务对象属性、业务对象间的关系、业务行为属性、业务行为与业务对象的关系等。IDL层是明细宽表层，根据数据域和业务过程进行主题划分，在主题内描述业务对象和业务行为，特别是对主题内常用的扩展维度字段进行提取，并且进一步使用维度退化手段，提高明细宽表的易用性、降低使用成本。例如搜索主题筛选了用户搜索行为相关的日志，并将描述搜索业务的扩展字段进行提取。</p>
+<p>**CDL：**Component Data Layer，元件数据层，这一层在IDL之上，主要完成分析实体识别，在主题划分基础上，形成分析实体/实体关系特征模型，对模型的指标进行加工，分为明细数据视图和聚合数据表两类。</p>
+<p>**MDL：**Mart Data Layer，集市数据层，这一层在CDL之上，建立在主题划分基础上，通过维度层级汇总形成汇总表，通过维度主键关联形成宽表，给数据应用提供便利应用的半成品数据集，例如，常见的商家流量宽表（商家的点击、曝光、进店统计）。</p>
+<p>**ADL：**App Data Layer，应用数据层，不属于OneData内统一建设，这一层在MDL之上，直接面对数据应用，优先使用MDL的数据，当MDL不满足时，可以向下使用CDL、IDL的数据。ADL作为数据应用的个性化数据一般不对外提供数据服务。</p>
+<p>**DIM：**公共维度层，包括了流量数仓建设过程中使用的流量维表，分成主题维度表和环境维度表。其中主题维度表将埋点标识（用户行为标识）映射成主题维度，是IDL、CDL进行主题划分的核心维度表。环境维度表包括了流量静态属性中常见的维度，例如app名称、启动渠道、设备类型等，主要应用于ODL层的公共维度建设。</p>
+<h3 id="2-流量数仓建设原则">2. 流量数仓建设原则</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gp34iiwagjj30u00gw79l.jpg" alt></p>
+<p>在数仓建设中有很多原则，这里拿出其中三个在流量数仓中比较重要的原则跟大家分享下：</p>
+<p><strong>① 高内聚和低耦合</strong></p>
+<p>将业务相近或相关、粒度相同、高概率同时访问的数据放在一起。具体在流量数仓建设过程中，合理的主题划分其实就是遵循高内聚低耦合的原则。不合理的主题划分会导致数据使用成本、运维成本增大。主题划分是和业务强相关的事情，需要大家定期 review 自己的主题划分是否合理，一定要紧跟业务需求。</p>
+<p><strong>② 公共处理逻辑下沉且单一</strong></p>
+<p>越是底层公用的处理逻辑，越要放在数据底层封装与实现，不要让公共逻辑多处存在且暴露给上层的表。流量底层数据的公共处理逻辑主要是环境维度建设和归因建设。</p>
+<p><strong>③ 成本与性能平衡</strong></p>
+<p>==合理使用视图减少数据存储==</p>
+<p>适当的进行数据冗余来换取查询和刷新性能，但不要过度冗余与数据复制。这是最通俗易懂的原则，但在流量数仓建设过程中，需要综合考虑各种使用场景，实践起来很难。美团外卖每天的数据量几百亿条，这样一份数据，如果在多处出现复制，对存储资源就是很大的浪费。成本与性能平衡确实需要多思考，在做数仓规划时就需要把这个事情考虑到。具体实践如下：</p>
 <ul>
-<li><strong>可选大括号和缩进语法</strong>：你可以选择用缩进来代替大括号，像 Python 那样组织代码块<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a><a target="_blank" rel="noopener" href="https://www.infoq.com/news/2021/06/scala-3-overhaul/?topicPageSponsorship=8adc4d8b-752a-4082-a21f-e6787339e976">-15</a>。</li>
-<li><strong>显式 <code>new</code> 关键字可选</strong>：创建类的实例时，可以省略 <code>new</code>，使代码更简洁<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a>。</li>
-<li><strong>控制结构的简化</strong>：<code>if</code>, <code>while</code>, <code>for</code> 等控制结构可以省略括号<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a>。</li>
-<li><strong>顶级定义</strong>：可以直接在包内定义方法、字段等，代替 <code>package object</code><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a>。</li>
+<li>仅在IDL层保留了明细的日志数据，且通过维度退化手段提高明细宽表表的易用性、降低使用成本。</li>
+<li>IDL层的主题划分过程，如果B主题是A主题的子集，两个主题的区别在于业务描述（业务扩展维度字段）不同，那么A主题使用表来存储逻辑和数据，B主题在A主题表之上使用视图的方式存储数据加工逻辑。举例来说，在美团外卖app首页存在着很多资源位，资源位中有有一部分是营销活动的位置，那么营销活动主题就是B主题，美团外卖app首页资源位主题就是A主题。</li>
+<li>在CDL层对明细数据也使用了视图，不再占用物理存储。</li>
 </ul>
-<hr>
-<h3 id="🤝-兼容性与迁移">🤝 兼容性与迁移</h3>
-<p>虽然变化巨大，但 Scala 3 的官方文档特别强调了它实现了与 Scala 2.13 在<strong>运行时</strong>的互操作性。</p>
-<h4 id="🔄-运行时兼容：无缝互操作">🔄 运行时兼容：无缝互操作</h4>
-<p>最关键的一点是，Scala 3 和 Scala 2.13 共享<strong>相同的应用程序二进制接口 (ABI)</strong><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a>。这意味着：</p>
-<ul>
-<li><strong>二进制兼容</strong>：用 Scala 2.13 编译的库，可以直接作为依赖用在 Scala 3 项目中，反之亦然<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-source.html">-3</a>。</li>
-<li><strong>一致的运行时</strong>：除少数改进（如 <code>lazy val</code> 的初始化性能）外，编译后的字节码行为高度一致，确保了性能的稳定<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a>。</li>
-</ul>
-<h4 id="🔄-源码兼容：非破坏性升级">🔄 源码兼容：非破坏性升级</h4>
-<p>尽管运行时兼容，但两种语言在<strong>源码层面并不完全兼容</strong><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/3.3.2/docs/docs/reference/language-versions/source-compatibility.html">-2</a><a target="_blank" rel="noopener" href="https://www.infoq.com/news/2021/06/scala-3-overhaul/?topicPageSponsorship=8adc4d8b-752a-4082-a21f-e6787339e976">-15</a>。为了让迁移过程平滑，官方提供了完善的工具链：</p>
-<ul>
-<li><strong>提前探测（<code>-Xsource:3</code>）</strong>：在 Scala 2.13 项目中添加此编译选项，编译器会提前警告不兼容未来的 Scala 3 代码，帮助你早做准备<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/3.3.2/docs/docs/reference/language-versions/source-compatibility.html">-2</a><a target="_blank" rel="noopener" href="https://scalatut.greq.me/lesson/prepare-for-scala-3-while-still-on-213">-30</a>。</li>
-<li><strong>过渡版本（<code>3.0-migration</code>）</strong>：此编译器模式会将破坏性的源码改动降级为警告，并尝试提供自动迁移建议<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/3.3.2/docs/docs/reference/language-versions/source-compatibility.html">-2</a>。</li>
-<li><strong>自动重写与工具</strong>：内置的迁移模式与 <code>scalafix</code> 等工具，可以自动将符合规则的旧代码重写为 Scala 3 风格<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompatibility-table.html">-5</a><a target="_blank" rel="noopener" href="https://scalatut.greq.me/lesson/prepare-for-scala-3-while-still-on-213">-30</a>。</li>
-</ul>
-<blockquote>
-<p>需要注意的是，Scala 2 的<strong>宏（Macro）系统</strong>在 Scala 3 中被全新的编译期编程机制（如 <code>inline</code>）取代。这意味着任何依赖 Scala 2 宏的库都必须升级到 Scala 3 版本才能正常工作<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-metaprogramming.html">-25</a>。官方迁移指南提供了一个检查清单，列出了第三方库的迁移状态<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-metaprogramming.html">-25</a>。</p>
-</blockquote>
-<h4 id="🔄-已移除的语言特性">🔄 已移除的语言特性</h4>
-<p>为了精简语言，Scala 3 移除了一些在 Scala 2.13 中已弃用或使用频率低的特性。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">类别</th>
-<th style="text-align:left">移除特性</th>
-<th style="text-align:left">简要说明</th>
-<th style="text-align:left">替代方案</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>语言构造</strong></td>
-<td style="text-align:left"><code>do-while</code> 循环</td>
-<td style="text-align:left">语法与新的控制结构冲突，被移除<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
-<td style="text-align:left">使用 <code>while</code> 循环替代<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">过程语法</td>
-<td style="text-align:left">没有等号和返回类型、只有方法体的写法被移除<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/incompat-syntactic.html#open-brace-indentation-for-passing-an-argument">-33</a></td>
-<td style="text-align:left">明确指定 <code>: Unit =</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>类型系统</strong></td>
-<td style="text-align:left">存在类型</td>
-<td style="text-align:left">已被联合类型、交集类型等新概念取代<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
-<td style="text-align:left">使用 Scala 3 的新类型特性</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left"><code>any2stringadd</code> 隐式转换</td>
-<td style="text-align:left">可能导致不易察觉的字符串拼接错误，被移除<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
-<td style="text-align:left">显式使用 <code>.toString</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>其他语法</strong></td>
-<td style="text-align:left">符号字面量 (<code>'xyz</code>)</td>
-<td style="text-align:left">符号字面量语法被移除<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
-<td style="text-align:left">使用字符串字面量 <code>&quot;xyz&quot;</code><a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">视图界定 (<code>A &lt;% B</code>)</td>
-<td style="text-align:left">视图界定语法不再支持<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/incompat-contextual-abstractions.html">-19</a></td>
-<td style="text-align:left">使用普通参数或上下文界定</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">早期初始化器</td>
-<td style="text-align:left">这种写法不再被支持<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
-<td style="text-align:left">使用特质参数-</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">自动应用</td>
-<td style="text-align:left">无参方法 <code>def foo</code> 调用时可省略括号，Scala 3 强制显式写出<code>foo()</code> 以增加代码确定性<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
-<td style="text-align:left">显式写出括号</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="💎-总结">💎 总结</h3>
-<p>总的来说，从 Scala 2.13 到 Scala 3 的演进，是一场深入内核的重大升级。它以打破非必要的源码兼容性为代价，换来了一个在类型系统、语法一致性和开发体验上更加强大的语言。这一点从官方为现有用户提供了完善的迁移工具链，并为 Scala 2.13 和 3 的代码提供了无缝的运行时互操作性，便可见一斑<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-source.html">-3</a>。</p>
-<p>希望这份详细的对比能帮助你更好地理解 Scala 的演进。如果想了解特定特性（比如枚举或给定实例）的具体用法，我们可以继续深入探讨～</p>
+<h3 id="3-维度建设">3. 维度建设</h3>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gp34tyu3v5j30u00gwadx.jpg" alt></p>
+<p>由于流量数据很多是半结构化的数据，没有分析维度的概念，所以数仓的建设时需要做很多维度建设工作。因此维度建设是整个流量数仓工作中最核心工作，同时也是最大的难点。</p>
+<p>我们维度建设分为两种，环境维度和主题维度。</p>
+<h4 id="3-1-环境维度">3.1 环境维度</h4>
+<h4 id="3-2-主题维度">3.2 主题维度</h4>
+<h1>参考资料</h1>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://jishuin.proginn.com/p/763bfbd31f7c">美团外卖流量数仓建设和分析应用</a></li>
+</ol>
 
       
     </div>
@@ -519,7 +316,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/language/java/problem/%E9%9B%B6%E6%95%A3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/web/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -533,7 +330,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/07/language/java/problem/%E9%9B%B6%E6%95%A3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">java零散问题汇总</a>
+            <a href="/2026/08/27/language/java/web/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">枚举类用法</a>
         </h2>
 
         <div class="post-meta">
@@ -543,7 +340,822 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Connection-reset原因分析和解决方案">Connection reset原因分析和解决方案</h4>
+<p>一般引起这个问题的原因是服务器服务关闭。</p>
+<p>我遇到过一次问题是因为http端口填写错误。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liyantianmin/article/details/82505734">Connection reset原因分析和解决方案</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/scala/%E7%94%A8%E6%B3%95/Collection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/27/language/scala/%E7%94%A8%E6%B3%95/Collection/" class="post-title-link" itemprop="url">Collection</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/scala/%E7%94%A8%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">用法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h1>待整理</h1>
+<h3 id="什么版本的scala-sdk-collection中包含breakOut">什么版本的scala sdk collection中包含breakOut</h3>
+<p><code>breakOut</code> 是 Scala 2.8 标准库 <code>scala.collection</code> 包中的一个方法<a target="_blank" rel="noopener" href="https://stackoverflow.com/posts/1715681/revisions">-3</a>，在 Scala 2.13 中被移除–。</p>
+<p>下面整理了 <code>breakOut</code> 的版本支持情况，并提供了从 2.13 开始的替代方案。</p>
+<hr>
+<h4 id="⏳-breakOut-的版本变迁">⏳ <code>breakOut</code> 的版本变迁</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Scala 版本</th>
+<th style="text-align:left"><code>breakOut</code> 支持状态</th>
+<th style="text-align:left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>2.8 至 2.12</strong></td>
+<td style="text-align:left">✅ <strong>可用</strong></td>
+<td style="text-align:left">核心功能，需要 <code>import scala.collection.breakOut</code><a target="_blank" rel="noopener" href="https://stackoverflow.com/posts/1715681/revisions">-3</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>2.13</strong></td>
+<td style="text-align:left">❌ <strong>已移除</strong></td>
+<td style="text-align:left">官方推荐使用 <code>.view</code> + <code>.to(Collection)</code> 组合替代-<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/68723881/conversion-of-breakout-use-iterator-or-view/68725937#68725937">-14</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>3.x</strong></td>
+<td style="text-align:left">❌ <strong>已移除</strong></td>
+<td style="text-align:left">无此方法，需使用替代方案</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="💡-breakOut-是什么？">💡 <code>breakOut</code> 是什么？</h4>
+<p><code>breakOut</code> 是一个基于 <code>CanBuildFrom</code> 机制的工具，作用是在集合类型转换时<strong>避免创建不必要的中间集合</strong>，从而提升性能并简化代码。</p>
+<p>例如，将 <code>List[String]</code> 直接转为 <code>Map[Int, String]</code>，原本需要生成中间 <code>List[(Int, String)]</code> 再调用 <code>.toMap</code>。使用 <code>breakOut</code> 可以一步完成：</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import scala.collection.breakOut</span><br><span class="line">val m: Map[Int, String] &#x3D; List(&quot;London&quot;, &quot;Paris&quot;).map(x &#x3D;&gt; (x.length, x))(breakOut)</span><br><span class="line">&#x2F;&#x2F; m: Map(6 -&gt; London, 5 -&gt; Paris)</span><br></pre></td></tr></table></figure>
+<p>在 2.8 至 2.12 版本中，这种方式有效避免了中间集合的开销，并让集合类型推断更为灵活<a target="_blank" rel="noopener" href="https://stackoverflow.com/posts/1715681/revisions">-3</a>。</p>
+<hr>
+<h4 id="🔁-从-2-13-开始的替代方案">🔁 从 2.13 开始的替代方案</h4>
+<p>从 2.13 起，<code>CanBuildFrom</code> 被 <code>BuildFrom</code> 替代，标准库推荐以下方式实现类似效果：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">替代方式</th>
+<th style="text-align:left">示例代码</th>
+<th style="text-align:left">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong><code>.view.map(...).to(...)</code></strong></td>
+<td style="text-align:left"><code>List(&quot;London&quot;, &quot;Paris&quot;).view.map(x =&gt; (x.length, x)).to(Map)</code></td>
+<td style="text-align:left"><strong>官方推荐</strong>，懒加载中间步骤，清晰高效</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong><code>.iterator.map(...).to(...)</code></strong></td>
+<td style="text-align:left"><code>List(&quot;London&quot;, &quot;Paris&quot;).iterator.map(x =&gt; (x.length, x)).to(Map)</code></td>
+<td style="text-align:left">与视图类似，但迭代器不可重用</td>
+</tr>
+</tbody>
+</table>
+<p>两种方式都能避免创建中间集合，性能与原先的 <code>breakOut</code> 相当。其中视图可以被多次重用，而迭代器在使用一次后就失效了<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/68723881/conversion-of-breakout-use-iterator-or-view/68725937#68725937">-14</a>。</p>
+<blockquote>
+<p>对于需要一步完成类型转换的场景，优先使用 <strong><code>.view.map(...).to(...)</code></strong> 即可。</p>
+</blockquote>
+<hr>
+<h4 id="💎-总结">💎 总结</h4>
+<ul>
+<li><strong>版本支持</strong>：<code>breakOut</code> 在 <strong>Scala 2.8 ~ 2.12</strong> 中可用，2.13 起被移除。</li>
+<li><strong>替代方案</strong>：升级到 2.13+ 后，改用 <strong><code>.view.map(...).to(Collection)</code></strong>。</li>
+<li><strong>核心目标</strong>：避免中间集合，提升转换性能与代码可读性。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/scala/%E7%94%A8%E6%B3%95/Trait/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/27/language/scala/%E7%94%A8%E6%B3%95/Trait/" class="post-title-link" itemprop="url">Trait</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/scala/%E7%94%A8%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">用法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h1>Solutions</h1>
+<h2 id="如果想在scala里面保存一个类似于模板的类，里面规定了继承某个trait需要实现的方法，但是这个方法的返回值和参数是不定的，有什么方式实现吗">如果想在scala里面保存一个类似于模板的类，里面规定了继承某个trait需要实现的方法，但是这个方法的返回值和参数是不定的，有什么方式实现吗</h2>
+<p>在 Scala 中，你可以利用<strong>泛型（type parameters）</strong> 或<strong>抽象类型成员（abstract type members）</strong> 来定义一个“模板” trait，其中方法的参数类型和返回值类型可以留给子类去具体指定。这两种方式都能实现你的需求，下面分别介绍。</p>
+<hr>
+<h3 id="方案一：泛型-trait（类型参数）">方案一：泛型 trait（类型参数）</h3>
+<p>这是最直接的方式。在 trait 上声明类型参数，然后在抽象方法中使用这些参数。</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 定义一个模板 trait，其中 F 是参数类型，R 是返回值类型</span><br><span class="line">trait Processor[F, R] &#123;</span><br><span class="line">  def process(input: F): R</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 具体实现：处理 String 返回 Int</span><br><span class="line">class StringLengthProcessor extends Processor[String, Int] &#123;</span><br><span class="line">  override def process(input: String): Int &#x3D; input.length</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 具体实现：处理 (Int, Int) 返回 Boolean</span><br><span class="line">class SumEvenProcessor extends Processor[(Int, Int), Boolean] &#123;</span><br><span class="line">  override def process(input: (Int, Int)): Boolean &#x3D; (input._1 + input._2) % 2 &#x3D;&#x3D; 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>优点</strong>：清晰、类型安全，子类只需指定具体类型。<br>
+<strong>缺点</strong>：如果多个方法共享相同的类型参数，所有方法必须统一使用这些参数。如果你希望不同方法有不同的参数/返回类型，可以为每个方法单独定义类型参数。</p>
+<hr>
+<h3 id="方案二：抽象类型成员（Abstract-Type-Members）">方案二：抽象类型成员（Abstract Type Members）</h3>
+<p>将类型参数内化为 trait 的抽象成员，子类通过 <code>type</code> 关键字来具体化。</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">trait Processor &#123;</span><br><span class="line">  type Input</span><br><span class="line">  type Output</span><br><span class="line">  def process(input: Input): Output</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 子类实现</span><br><span class="line">class StringLengthProcessor extends Processor &#123;</span><br><span class="line">  override type Input &#x3D; String</span><br><span class="line">  override type Output &#x3D; Int</span><br><span class="line">  override def process(input: Input): Output &#x3D; input.length</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 另一种实现</span><br><span class="line">class SumEvenProcessor extends Processor &#123;</span><br><span class="line">  override type Input &#x3D; (Int, Int)</span><br><span class="line">  override type Output &#x3D; Boolean</span><br><span class="line">  override def process(input: Input): Output &#x3D; (input._1 + input._2) % 2 &#x3D;&#x3D; 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>优点</strong>：有时更符合直觉，尤其是当类型与类紧密相关时。<br>
+<strong>缺点</strong>：在外部使用抽象类型成员时，类型推断可能不如泛型方便（需要使用 <code>#</code> 投影或路径依赖类型）。</p>
+<hr>
+<h3 id="方案三：高阶类型（Higher-Kinded-Types）——-适用于参数化容器">方案三：高阶类型（Higher-Kinded Types）—— 适用于参数化容器</h3>
+<p>如果你的方法需要接收一个类型构造器（例如 <code>List[_]</code> 或 <code>Future[_]</code>），可以用高阶类型。</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">trait Wrapper[F[_]] &#123;</span><br><span class="line">  def wrap[A](value: A): F[A]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ListWrapper extends Wrapper[List] &#123;</span><br><span class="line">  override def wrap[A](value: A): List[A] &#x3D; List(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="方案四：使用元组或-HList-处理不定数量的参数">方案四：使用元组或 HList 处理不定数量的参数</h3>
+<p>如果“参数是不定的”指的是<strong>参数个数</strong>不定（而非类型不定），可以用元组（固定个数但类型可不同）或 HList（如 Shapeless）。元组是最简单的方案：</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">trait Processor[Args, R] &#123;</span><br><span class="line">  def process(args: Args): R</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 处理两个参数：Int 和 String，返回 Boolean</span><br><span class="line">class Example extends Processor[(Int, String), Boolean] &#123;</span><br><span class="line">  override def process(args: (Int, String)): Boolean &#x3D; args._1 &gt; 0 &amp;&amp; args._2.nonEmpty</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果需要真正的<strong>变长参数</strong>（varargs），可以定义方法参数为 <code>Seq[A]</code>：</p>
+<p>scala</p>
+<p>复制下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">trait SumProcessor[A, R] &#123;</span><br><span class="line">  def process(args: A*): R   &#x2F;&#x2F; 注意：Scala 中的 varargs 实际上是 Seq[A]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但注意：<code>A*</code> 在 trait 中定义时，实现类必须同样使用 <code>A*</code>，这可能会带来一些限制。</p>
+<hr>
+<h3 id="推荐方案总结">推荐方案总结</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">需求</th>
+<th style="text-align:left">推荐方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">单个方法，参数和返回值类型可变</td>
+<td style="text-align:left"><strong>泛型 trait</strong>（方案一）</td>
+</tr>
+<tr>
+<td style="text-align:left">多个方法共享同一组类型</td>
+<td style="text-align:left"><strong>泛型 trait</strong> 或 <strong>抽象类型成员</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">类型与类实例绑定（路径依赖）</td>
+<td style="text-align:left"><strong>抽象类型成员</strong>（方案二）</td>
+</tr>
+<tr>
+<td style="text-align:left">参数个数不定但类型相同</td>
+<td style="text-align:left"><code>Seq[A]</code> 或 <code>A*</code></td>
+</tr>
+<tr>
+<td style="text-align:left">参数个数不定且类型不同</td>
+<td style="text-align:left"><strong>元组</strong>（TupleX）或 <strong>Shapeless HList</strong></td>
+</tr>
+</tbody>
+</table>
+<p>绝大多数场景下，<strong>方案一（泛型 trait）</strong> 足够简洁且强大，建议优先使用。</p>
+<p>如果你需要更具体的代码示例（比如结合隐式参数、上下界等），可以补充说明你的实际应用场景，我会给出更贴合的例子。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/mybatis/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/27/language/java/mybatis/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://baomidou.com/guide/">官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#Parameters">官方文档二</a></p>
+<p><a target="_blank" rel="noopener" href="https://baomidou.com/guide/dynamic-datasource.html">多数据源</a></p>
+<p>数据库</p>
+<ol>
+<li>时区问题</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/mybatis/%E4%B8%8Espring%E6%95%B4%E5%90%88%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/27/language/java/mybatis/%E4%B8%8Espring%E6%95%B4%E5%90%88%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">mybatis与spring整合详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/625188235">mybatis与spring整合</a></p>
+<p>mybatis可以单独使用，也可以与spring进行整合。我们在自己的项目中，需要引入相关依赖，如你的项目管理工具使用的是maven，可以在pom.xml中添加以下配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--spring依赖--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.17.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.17.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--mybatis spring 依赖--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--mybatis依赖--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--数据库连接池依赖--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--数据库驱动依赖--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.39<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在整合之后，框架的之间的依赖关系如下图所示：</p>
+<img src="/.com//../../picture/java-mybatis/spring%E4%B8%ADmybatis%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB.png" alt="依赖关系" style="zoom:33%;">
+<h1>整合一：SqlSessionFactoryBean</h1>
+<p>在单独使用mybatis时，我们通过SqlSessionFactoryBuilder 来创建SqlSessionFactory。当mybatis与spring进行整合时，我们使用mybatis-spring提供的SqlSessionFactoryBean 来替代，SqlSessionFactoryBean实现了 Spring 的 FactoryBean 接口，用于创建 SqlSessionFactory 对象实例。</p>
+<p>SqlSessionFactoryBean的配置有2种风格：</p>
+<ul>
+<li>保留mybatis的核心配置文件</li>
+<li>不保留mybatis的核心配置文件</li>
+</ul>
+<h2 id="保留mybatis的核心配置文件"><strong>保留mybatis的核心配置文件</strong></h2>
+<p>我们将绝大部分关于mybatis的配置依然保留在mybatis的核心配置文件mybatis-config文件中，以下是一个示例：</p>
+<p>mybatis-config.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span>  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;cacheEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;mapUnderscoreToCamelCase&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;defaultExecutorType&quot;</span> <span class="attr">value</span>=<span class="string">&quot;SIMPLE&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;com.tianshouzhi.mybatis.entity&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mybatis/mappers/UserMapper.xml&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>细心的读者注意到，在mybatis-config.xml文件中我们并没有通过<environment>的子元素<dataSource>、<transactionManager>来配置数据源和事务管理器。即使配置了，也会被SqlSessionFactoryBean忽略。我们需要显式的为SqlSessionFactoryBean的dataSource属性引用一个数据源配置，如果不指定，在其初始化时就会抛出异常。</transactionManager></dataSource></environment></p>
+<p>​    此时SqlSessionFactoryBean配置方式如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">!—-SqlSessionFactoryBean-—</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.SqlSessionFactoryBean”&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">     &lt;!--数据源配置--&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">     &lt;property name=&quot;</span><span class="attr">dataSource</span>&quot; <span class="attr">ref</span>=<span class="string">&quot;dataSource”/&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">     &lt;!--通过configLocation属性指定mybatis核心配置文件mybatis-config.xml路径--&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">     &lt;property name=&quot;</span><span class="attr">configLocation</span>&quot; <span class="attr">value</span>=<span class="string">&quot;classpath:mybatis/mybatis-config.xml&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--数据源使用druid--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.alibaba.druid.pool.DruidDataSource&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">“your</span> <span class="attr">password</span>&quot;/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/mybatis&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClassName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver”/&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">        &lt;!--其他配置--&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/bean&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="不保留mybatis的核心配置文件"><strong>不保留mybatis的核心配置文件</strong></h2>
+<p>从mybatis-spring 1.3.0之后，我们可以移除mybatis-config.xml文件，将所有关于myabtis的配置都通过SqlSessionFactoryBean来指定。</p>
+<p>以下配置案例演示了与上述等价的配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;typeAliasesPackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.tianshouzhi.zebracost.entity”/&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">        &lt;!--从类路径下加载在mybatis/mappers包和它的子包中所有的 MyBatis 映射器 XML 文件--&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">        &lt;property name=&quot;</span><span class="attr">mapperLocations</span>&quot; <span class="attr">value</span>=<span class="string">&quot;classpath*:mybatis/mappers/**/*.xml&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;configuration&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.ibatis.session.Configuration&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mapUnderscoreToCamelCase&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cacheEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;defaultExecutorType&quot;</span> <span class="attr">value</span>=<span class="string">&quot;SIMPLE&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在mybatis与spring整合后, 通常我们不会再直接使用SqlSessionFactory。mybatis-spring提供了其他更加易于操作的工具类，如SqlSessionTemplate、SqlSessionDaoSupport，当然还有其他更加高级的使用方式，如：MapperFactoryBean，MapperScannerConfigurer。</p>
+<h1><strong>整合二：使用SqlSessionTemplate</strong></h1>
+<p>SqlSessionTemplate 是 mybatis-spring 的核心，其实现了SqlSession接口。在使用了SqlSessionTemplate之后，我们不再需要通过SqlSessionFactory.openSession()方法来创建SqlSession实例；使用完成之后，也不要调用SqlSession.close()方法进行关闭。另外，对于事务，SqlSessionTemplate 将会保证使用的 SqlSession 是和当前 Spring 的事务相关的。</p>
+<p>SqlSessionTemplate依赖于SqlSessionFactory，其配置方式如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;sqlSessionTemplate&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.SqlSessionTemplate&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">&quot;0&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionFactory&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.tianshouzhi.mybatis.dao.UserDao&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>之后我们可以在UserD类中直接进行注入。SqlSessionTemplate 是线程安全的, 可以被多个 DAO 所共享使用，以下是一个示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDao</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String NAMESPACE = <span class="string">&quot;com.tianshouzhi.zebracost.UserMapper&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    SqlSessionTemplate sqlSession;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">selectById</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        User user = sqlSession.selectOne(NAMESPACE + <span class="string">&quot;.selectById&quot;</span>,id);</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SqlSessionTemplate本质上是一个代理，关于SqlSessionTemplate的源码分析，后期会抽空编写。</p>
+<h1><strong>整合三：继承SqlSessionDaoSupport</strong></h1>
+<p>mybatis提供了抽象类SqlSessionDaoSupport，调用其getSqlSession()方法你会得到一个 SqlSessionTemplate,之后可以用于执行 SQL 方法, 就像下面这样:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDao</span> <span class="keyword">extends</span> <span class="title">SqlSessionDaoSupport</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String NAMESPACE = <span class="string">&quot;com.tianshouzhi.zebracost.UserMapper&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">selectById</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        User user = getSqlSession().selectOne(NAMESPACE + <span class="string">&quot;.selectById&quot;</span>,id);</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SqlSessionDaoSupport 需要一个 sqlSessionFactory 或 sqlSessionTemplate 属性来设置 。如果两者都被设置了 , 那么SqlSessionFactory是被忽略的。由于我们的UserDao类继承了SqlSessionDaoSupport，所以你可以在UserDao类中进行设置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.tianshouzhi.zebracost.dao.UserDao&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionFactory&quot;</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.tianshouzhi.zebracost.dao.UserDao&quot;</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionTemplate&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionTemplate&quot;</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>事实上，如果你提供的是一个SqlSessionFactory，SqlSessionDaoSupport内部也会使用其来构造一个SqlSessionTemplate实例。</p>
+<h1><strong>整合四：MapperFactoryBean</strong></h1>
+<p>无论是使用SqlSessionTemplate，还是继承SqlSessionDaoSupport，我们都需要手工编写DAO类的代码。熟悉mybatis同学知道，SqlSession有一个getMapper()方法，可以让我们通过映射器接口的方式来使用mybatis。</p>
+<p>例如针对有以下UserMapper.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">  <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd”&gt;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&lt;mapper namespace=“com.tianshouzhi.mybatis.mapper.UserMapper”&gt;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string"></span></span></span><br><span class="line"><span class="meta"><span class="meta-string">  &lt;select id=&quot;</span>selectById<span class="meta-string">&quot; resultType=&quot;</span>Blog<span class="meta-string">&quot;&gt;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">    select * from user where id = #&#123;id&#125;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">  &lt;/select&gt;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">  &lt;insert id=&quot;</span>insert<span class="meta-string">&quot; paramterType=&quot;</span>com.tianshouzhi.mybatis.domain.User”&gt;</span></span><br><span class="line">    insert into user(name,age) values(#&#123;name&#125;,#&#123;age&#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们可以定义以下UserMapper接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tianshouzhi.mybatis.mapper;</span><br><span class="line"><span class="keyword">import</span> com.tianshouzhi.mybatis.domain.User;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(User user)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">selectById</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>细心的读者注意到：</p>
+<p>1、映射文件的namespace属性值”com.tianshouzhi.mybatis.mapper.UserMapper&quot;就是UserMapper接口的全路径</p>
+<p>2、映射文件中的<select> 、<insert>元素的id属性值”selectById”、“insert”，对应UserMapper接口中的selectById方法和insert方法。</insert></select></p>
+<p>之后，我们调用UserMapper接口中的方法，就会执行UserMapper.xml中对应的sql。</p>
+<p>你甚至可以通过注解的方式直接将sql写到UserMapper接口的方法上，此时你就不再需要UserMapper.xml，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tianshouzhi.mybatis.mapper;</span><br><span class="line"><span class="keyword">import</span> com.tianshouzhi.mybatis.quickstart.domain.User;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Insert;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Select;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Insert(&quot;insert into user(name,age) values(#&#123;id&#125;,#&#123;name&#125;,#&#123;age&#125;)&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insert</span><span class="params">(User user)</span></span>;</span><br><span class="line">    <span class="meta">@Select(&quot;select * from user where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">selectById</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时我们可以修改mybatis-config.xml中<mapper>元素的resource属性为class属性，指定UserMapper接口的全路径，如下</mapper></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!--&lt;mapper resource=&quot;mappers/UserMapper.xml&quot;/&gt;—&gt;</span></span><br><span class="line"><span class="comment">   &lt;!--使用class属性指定UserMapper接口全路径--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">&quot;com.tianshouzhi.mybatis.mapper.UserMapper&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>之后，我们可以通过以下方式来使用UserMapper接口，更加直观，不容易出错。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SqlSession session = sqlSessionFactory.openSession();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  UserMapper mapper = session.getMapper(UserMapper.class);</span><br><span class="line">  User user = mapper.selectById(<span class="number">1</span>);<span class="comment">//等价于执行UserMapper中id属性值为”selectById”的&lt;select&gt;元素中的sql，或者selectById方法上注解的sql</span></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是在与spring进行整合时，是否有更加简单的使用方法呢？能够在一个业务Bean中注入UserMapper接口，不需要通过SqlSession的getMapper来创建。我们期望的使用方式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;create a new user!&quot;</span>+user);</span><br><span class="line">        userMapper.insert(user);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接这样操作显然是会报错的，因为UserMapper是一个接口，且不是spring管理的bean，因此无法直接注入。</p>
+<p>这个时候，本节的主角MapperFactoryBean登场了，通过如下配置，MapperFactoryBean会针对UserMapper接口创建一个代理，并将其变成spring的一个bean。MapperFactoryBean继承了SqlSessionDaoSupport类，这也是为什么我们先介绍SqlSessionDaoSupport，再介绍MapperFactoryBean的原因。显然的，你可以想到，我们可以为MapperFactoryBean指定一个SqlSessionTemplate或者SqlSessionFactory，如果两个属性都设置了,那么 SqlSessionFactory 就会被忽略。</p>
+<p>通过以下配置，我们就可以在一个业务bean中直接注入UserMapper接口了：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userMapper&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mapperInterface&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.tianshouzhi.mybatis.mapper.UserMapper&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>你可能想知道MapperFactoryBean为什么具有这样的魔力，但是这不是本文的重点，本文讲解的是mybatis是如何spring进行整合的。笔者将其会在其他章节分析MapperFactoryBean的源码。</p>
+<p>上述方式，已经是mybatis与spring进行时理想的方式了。但是如果你的业务很复杂，有许多的XxxMapper接口要配置，针对每个接口都配置一个MapperFactoryBean，会使得我们的配置文件很臃肿。关于这一点，mybatis团队提供了MapperScannerConfigurer来帮助你解决这个问题。</p>
+<h1><strong>整合五：MapperScannerConfigurer</strong></h1>
+<p>通常我们在开发时，会将同一类型的类放于同一个包下，例如现在我们com.tianshouzhi.mybatis.mappers包下，有两个接口：UserMapper、UserAccountMapper。</p>
+<p>MapperScannerConfigurer可以指定扫描某个包，将这个包下的所有接口，自动的为每个映射器接口都注册一个MapperFactoryBean。配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;org.tianshouzhi.mybatis.user.mappers&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中：basePackage 属性是让你为映射器接口的包路径。如果的映射器接口位于不同的包下，可以使用分号”;”或者逗号”,”进行分割。如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">“org.tianshouzhi.mybatis.user.mappers;org.tianshouzhi.mybatis.product.mappers</span>&quot; /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果你指定的还包含子包，子包中的映射器接口递归地被搜索到。因此对于上述配置，我们可以通过公共的包名&quot;org.tianshouzhi.mybatis”进行简化。如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;org.tianshouzhi.mybatis&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>你可能想到了，如果指定的公共的包名下面还包含了一些其他的接口，这些接口是你作为其他用途使用到的，并不能作为mybatis的映射器接口来使用。此时，你可以通过markerInterface属性或者annotationClass属性来进行过滤。</p>
+<p>对于markerInterface，首先，你需要定义一个标记接口，接口名随意，这个接口中不需要定义任何方法，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MybatisMapperInterface</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>接着，你需要将你的映射器接口继承MybatisMapperInterface，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> <span class="keyword">implements</span> <span class="title">MybatisMapperInterface</span></span>&#123;</span><br><span class="line">   <span class="comment">//...映射器方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时你可以指定MapperScannerConfigurer中指定，只有继承了MybatisMapperInterface接口的子接口，才为其自动注册MapperFactoryBean，如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;markerInterface&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.tianshouzhi.mybatis.MybatisMapperInterface&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>对于annotationClass属性，作用是类似的，根据注解进行过滤。一般我们是映射器接口上添加mybatis提供的@Mapper注解进行过滤，你也可以自定义一个注解。配置如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;annotationClass&quot;</span> <span class="attr">value</span>=<span class="string">&quot;org.apache.ibatis.annotations.Mapper&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>​    如果同时指定了markerInterface和annotationClass属性，那么只有同时满足这两个条件的接口才会被注册为MapperFactoryBean。</p>
+<p>细心的读者可能意识到了，到目前，我们还没有为MapperScannerConfigurer指定一个SqlSessionFactory，或者SqlSessionTemplate。前面配置MapperFactoryBean的时候，我们已经看到，我们至少需要为其提供一项。之所以不指定，是因为MapperScannerConfigurer将会spring上下文中自动进行寻找类型为SqlSessionFactory，或者SqlSessionTemplate的bean，然后利用其来创建MapperFactoryBean实例。</p>
+<p>当然你也可以手工的进行指定任意一个，如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">“sqlSessionFactory</span>&quot;/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--&lt;property name=&quot;sqlSessionTemplate&quot; ref=“sqlSessionTemplate&quot;/&gt;--&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然而，sqlSessionFactory和sqlSessionTemplate属性已经不建议使用了。原因在于，这两个属性不支持你使用spring提供的PropertyPlaceholderConfigurer的属性替换。例如你配置了SqlSessionFactoryBean来创建SqlSessionFactory实例，前面已经看到必须为其指定一个dataSource属性。很多用户习惯将数据源的配置放到一个独立的配置文件，如jdbc.properties文件中，之后在spring配置中，通过占位符来替换，如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.alibaba.druid.pool.DruidDataSource&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.username&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.password&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.url&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClassName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.driver&#125;&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--其他配置--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>对于这样的配置，spring在初始化时会报错，因为MapperScannerConfigurer会在PropertyPlaceholderConfigurer初始化之前，就加载dataSource的配置，而此时PropertyPlaceholderConfigurer还未准备好替换的占位符的内容，所以抛出异常。</p>
+<p>当然，这个问题并不是无解，我们可以使用sqlSessionFactoryBeanName、sqlSessionTemplateBeanName属性来替代sqlSessionFactory和sqlSessionTemplate属性。如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactoryBeanName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;sqlSessionFactory&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--&lt;property name=&quot;sqlSessionTemplateBeanName&quot; value=&quot;sqlSessionTemplate”/&gt;--&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此时，你依然可以放心大胆的在你的数据源配置中，使用占位符了。</p>
+<p>事实上，笔者总是建议你，在MapperScannerConfigurer的配置中，显示的指定sqlSessionFactoryBeanName或sqlSessionTemplateBeanName。如果你不指定，MapperScannerConfigurer就会在spring上下文中自动的寻找类型为SqlSessionFactory或者SqlSessionTemplate的bean。如果你的数据源配置中使用了占位符，还是会报错。</p>
+<p>最后，你可能想知道，为什么MapperScannerConfigurer指定一个basePackage属性，就可以为包下的每个接口都注册一个MapperFactoryBean？其内部是如何自动在spring上下文中寻找类型为SqlSessionFactory或者SqlSessionTemplate的bean实例的？以及为什么又做了如此多限制，只有指定sqlSessionFactoryBeanName或sqlSessionTemplateBeanName才能在数据源的配置中使用占位符？</p>
+<p>关于这些问题，笔者将在MapperScannerConfigurer的源码分析中进行解答。</p>
+<h1><strong>整合六：@MapperScan</strong></h1>
+<p>如果读者习惯使用注解，而不是xml文件的方式进行配置，mybatis-spring提供了@MapperScan注解，其用于取代MapperScannerConfigurer。以下演示了如何通过注解的方式来配置mybatis。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@MapperScan(basePackages = &quot;com.tianshouzhi.security.mapper”,//等价于MapperScannerConfigurer的basePackage属性</span></span><br><span class="line"><span class="meta">        markerInterface = MybatisMapperInterface.class,//等价于MapperScannerConfigurer的markerInterface属性, 默认为null</span></span><br><span class="line"><span class="meta">        annotationClass = MybatisMapper.class,//等价于MapperScannerConfigurer的annotationClass属性，默认为null</span></span><br><span class="line"><span class="meta">        sqlSessionFactoryRef = &quot;sqlSessionFactory&quot;)</span><span class="comment">//等价于MapperScannerConfigurer的sqlSessionFactoryBeanName属性</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DatabaseConfig</span> </span>&#123;</span><br><span class="line">    <span class="comment">//定义数据源</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        SimpleDriverDataSource dataSource = <span class="keyword">new</span> SimpleDriverDataSource();</span><br><span class="line">        dataSource.setUsername(“your username<span class="string">&quot;);</span></span><br><span class="line"><span class="string">        dataSource.setPassword(“you password&quot;</span>);</span><br><span class="line">        dataSource.setUrl(<span class="string">&quot;jdbc:mysql://localhost:3306/mybatis?characterEncoding=UTF-8&quot;</span>);</span><br><span class="line">        dataSource.setDriverClass(com.mysql.jdbc.Driver.class);</span><br><span class="line">        <span class="keyword">return</span> dataSource;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//定义SqlSessionFactoryBean</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Bean(&quot;sqlSessionFactory&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactoryBean <span class="title">sqlSessionFactory</span><span class="params">(DataSource dataSource)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SqlSessionFactoryBean ssfb = <span class="keyword">new</span> SqlSessionFactoryBean();</span><br><span class="line">        ssfb.setDataSource(dataSource);</span><br><span class="line">        <span class="keyword">return</span> ssfb;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1><strong>整合七：事务</strong></h1>
+<p>上述所有的配置，还没有涉及到mybatis与spring进行整合另一个核心要点，即事务。整合后，我们需要将事务委派给spring来管理。</p>
+<p>spring使用PlatformTransactionManager接口来表示一个事务管理器。其有2个重要的实现类：</p>
+<p>​    DataSourceTransactionManager：用于支持本地事务，简单理解，你可以认为就是操作单个数据库的事务，其内部也是通过操作java.sql.Connection来开启、提交(commit)和回滚(rollback)事务。</p>
+<p>​    JtaTransactionManager：用于支持分布式事务，其实现了JTA规范，使用XA协议进行两阶段提交。</p>
+<p>在本文中，我们主要介绍的是DataSourceTransactionManager，绝大部分情况下， 我们使用的都是这个事务管理器。其配置方式如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--spring 事务管理器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;transactionManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--默认事务超时时间--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;defaultTimeout&quot;</span> <span class="attr">value</span>=<span class="string">&quot;30000&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--数据源--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span> /&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--提交失败的话，也进行回滚--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;rollbackOnCommitFailure&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>关于事务管理器使用方式有2种：声明式事务管理、编程式事务管理</p>
+<h2 id="声明式事务管理"><strong>声明式事务管理</strong></h2>
+<p><strong>1、基于注解</strong></p>
+<p>首先，你需要配置事务管理是基于注解驱动的，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">tx:annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">&quot;transactionManager&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>之后，在业务bean的方法上添加@Transactional注解，此时这个方法就自动具备了事务的功能，如果出现异常，会自动回滚，没有出现异常则自动交。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(<span class="keyword">final</span> String out,<span class="keyword">final</span> String in,<span class="keyword">final</span> Double money)</span> </span>&#123;  </span><br><span class="line">            accountMapper.outMoney(out, money);  </span><br><span class="line">            <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;  </span><br><span class="line">            accountMapper.inMoney(in, money);  </span><br><span class="line">    &#125;  </span><br></pre></td></tr></table></figure>
+<p>基于注解的形式的声明式事务管理器，是最为简单的，也是建议使用的方式。</p>
+<p><strong>2、基于切面</strong></p>
+<p>如果你有很多方法，都需要有事务管理，你觉得每个方法都添加@Transactional注解比较麻烦，此时你可以使用以下配置取代<a href="tx:annotation-driven">tx:annotation-driven</a>元素。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 1.配置事务通知：（事务的增强） --&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">&quot;txAdvice&quot;</span> <span class="attr">transaction-manager</span>=<span class="string">&quot;transactionManager&quot;</span>&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;transfer&quot;</span>/&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span>  </span><br><span class="line">    </span><br><span class="line"><span class="comment">&lt;!-- 2.配置切面 --&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span>  </span><br><span class="line">   <span class="comment">&lt;!-- 配置切入点 --&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">&quot;tx_pointcut&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;execution(*com.tianshouzhi.mybatis.AccountService+.*(..))&quot;</span>/&gt;</span>  </span><br><span class="line">   <span class="comment">&lt;!-- 配置切面 --&gt;</span>  </span><br><span class="line">   <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">pointcut-ref</span>=<span class="string">&quot;tx_pointcut&quot;</span> <span class="attr">advice-ref</span>=<span class="string">&quot;txAdvice&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span>  </span><br></pre></td></tr></table></figure>
+<p>事实上，基于切面的配置，太麻烦了，即使对于一些老鸟，长时间没有编写过类似的配置，可能也无法立即正确的进行配置，没有@Transactional注解来的直观。</p>
+<h2 id="编程式事务管理"><strong>编程式事务管理</strong></h2>
+<p>如果上述两种声明式事务的配置都不是你要想要，那么你可以采取编程式事务。你可以在业务bean中注入事务管理器，然后进行编程式事务的管理，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountService</span></span>&#123;</span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> DataSourceTransactionManager transactionManager;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> AccountMapper accountMapper;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(<span class="keyword">final</span> String out,<span class="keyword">final</span> String in,<span class="keyword">final</span> Double money)</span></span>&#123;</span><br><span class="line">      DefaultTransactionDefinition def = <span class="keyword">new</span> DefaultTransactionDefinition();</span><br><span class="line">      def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);</span><br><span class="line">    </span><br><span class="line">      TransactionStatus status = transactionManager.getTransaction(def);</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         accountMapper.outMoney(out, money);  </span><br><span class="line">         <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;  </span><br><span class="line">         accountMapper.inMoney(in, money);  </span><br><span class="line">        transactionManager.commit(status);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (MyException ex) &#123;</span><br><span class="line">         transactionManager.rollback(status);</span><br><span class="line">         <span class="keyword">throw</span> ex;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外，Spring还提供了一个TransactionTemplate，用于简化编程式事务代码的编写，配置方式如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;transactionTemplate&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.transaction.support.TransactionTemplate&quot;</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;transactionManager&quot;</span><span class="attr">ref</span>=<span class="string">&quot;transactionManager&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span>   </span><br></pre></td></tr></table></figure>
+<p>使用方式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(<span class="keyword">final</span> String out,<span class="keyword">final</span> String in,<span class="keyword">final</span> Double money)</span> </span>&#123;  </span><br><span class="line">    <span class="comment">//在事务模板中执行操作  </span></span><br><span class="line">    transactionTemplate.execute(<span class="keyword">new</span> TransactionCallbackWithoutResult()&#123;  </span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doInTransactionWithoutResult</span><span class="params">(TransactionStatustransactionstatus)</span></span>&#123;  </span><br><span class="line">        accountMapper.outMoney(out, money);  </span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;  </span><br><span class="line">        accountMapper.inMoney(in, money);  </span><br><span class="line">     &#125;  </span><br><span class="line">    &#125;);  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+<p>总的来说，编程式事务管理还是显得略微麻烦。</p>
+<h1><strong>整合八：springboot</strong></h1>
+<p>mybatis开发团队为Spring Boot 提供了 mybatis-spring-boot-starter。你需要引入如下依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>​    使用了该starter之后，只需要定义一个DataSource即可，它会自动利用该DataSource创建需要使用到的SqlSessionFactoryBean、SqlSessionTemplate、以及ClassPathMapperScanner来自动扫描你的映射器接口，并针对每个接口都创建一个MapperFactoryBean，注册到Spring上下文中。</p>
+<p>​    关于mybatis-spring-boot-starter如何实现自动配置的相关源码，参见：org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration类。</p>
+<p>默认情况下，扫描的basePackage是spring boot的根目录(这里指的是应用启动类Application.java类所在的目录)，且只会对添加了@Mapper注解的映射器接口进行注册。</p>
+<p>因此，最简单的情况下，你只需要在application.yml中进行数据源的相关配置即可，以下配置依赖于spring-boot-starter-jdbc：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">datasource</span>:<span class="string"></span></span><br><span class="line">    <span class="meta">driver-class-name</span>: <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url</span>: <span class="string">jdbc:mysql://localhost:3306/mybatis</span></span><br><span class="line">    <span class="attr">username</span>: <span class="string">root</span></span><br><span class="line">    <span class="attr">password</span>: <span class="string">your password</span></span><br></pre></td></tr></table></figure>
+<p>之后，你就可以直接在你的业务bean中注入映射器接口来使用了。</p>
+<p>需要注意的是，一旦你自己提供了MapperScannerConfigurer，或者配置了MapperFactoryBean，那么mybatis-spring-boot-starter的自动配置功能将会失效。此时所有关于mybatis与spring进行整合的配置，都需要由你自行控制。</p>
+<h1><strong>整合九：多数据源</strong></h1>
+<p>有的时候，应用需要访问多个数据库，假设现在有两个mysql库db_user、db_acount。这个时候我们就需要配置2个数据源，来连接不同的库，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;ds_user&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.alibaba.druid.pool.DruidDataSource&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;shxx12151022&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://192.168.0.1:3306/db_user&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClassName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--其他配置--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;ds_account&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.alibaba.druid.pool.DruidDataSource&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">“your</span> <span class="attr">password</span>&quot;/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://192.168.0.2:3306/db_account&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driverClassName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver”/&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">        &lt;!--其他配置--&gt;</span></span></span><br><span class="line"><span class="tag"><span class="string">&lt;/bean&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>针对上述的数据源ds_user,ds_account，我们需要为每个都配置一个SqlSessionFactoryBean，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;ssf_user&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;ds_user&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mapperLocations&quot;</span> <span class="attr">value</span>=<span class="string">&quot;classpath*:mybatis/mappers/db_user/**/*.xml&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;ssf_account&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;ds_account&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mapperLocations&quot;</span> <span class="attr">value</span>=<span class="string">&quot;classpath*:mybatis/mappers/db_account/**/*.xml&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>细心的读者可能已经注意到，这两个SqlSessionFactoryBean分别操作数据源ds_user、ds_account，且mapperLocations属性值指向的是不同的目录：</p>
+<ul>
+<li>
+<p>在ssf_user中，指定关于ds_user的映射器xml文件都位于类路径的mybatis/mappers/db_user/目录下</p>
+</li>
+<li>
+<p>在ssf_account中，指定关于ds_account的映射器xml文件都位于类路径的mybatis/mappers/db_account/目录下</p>
+<p>如果你是使用映射接口的方式来操作mybatis，那么还应该针对ssf_user和ssf_account两个SqlSessionFactoryBean，各配置一个MapperScannerConfigurer。如下：</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.tianshouzhi.mybatis.mappers.user&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactoryBeanName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;ssf_user&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.tianshouzhi.mybatis.mappers.account&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactoryBeanName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;ssf_account&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，两个MapperScannerConfigurer的basePackage属性是不同的，我们将操作db_user库下的映射器XxxMapper接口都放在com.tianshouzhi.mybatis.mappers.user包中，将我们将操作db_account库下的映射器XxxMapper接口都放在com.tianshouzhi.mybatis.mappers.account包中。</p>
+<p>再次提醒，在使用多数据源时，将操作不同库的xml映射文件、以及对应的映射器接口放到不同的目录下很重要，如果不这样，在使用时你几乎100%会遇到问题。</p>
+<p>最后，由于你现在有2个数据源，因此你应该配置两个事务管理器，如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userTxManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;ds_user&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;accountTxManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;ds_account&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果你是使用@Transactional注解来进行声明式事务管理，应该要指定你使用的是哪一个事务管理器，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(&quot;accountTxManager&quot;)</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(<span class="keyword">final</span> String out,<span class="keyword">final</span> String in,<span class="keyword">final</span> Double money)</span> </span>&#123;  </span><br><span class="line">            accountMapper.outMoney(out, money);  </span><br><span class="line">            <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;  </span><br><span class="line">            accountMapper.inMoney(in, money);  </span><br><span class="line">    &#125;  </span><br></pre></td></tr></table></figure>
+<p>一个事务管理器，只能保证操作单个库的事务，例如在这里，accountTxManager只能保证db_account库的事务，证userTxManager只能保证db_user库的事务。</p>
+<p>如果你在一个方法内，想同时操作两个库，并保证事务，使用普通的DataSourceTransactionManager已经无法满足这种需求，这属于分布式事务的范畴。在笔者的另一篇文章<a target="_blank" rel="noopener" href="http://www.tianshouzhi.com/api/tutorials/distributed_transaction/386">atomikos JTA/XA全局事务</a>演示了如何使用atomikos与mybatis、spring进行整合，来进行分布式事务的管理。</p>
+<h1>整合十：zebra</h1>
+<p>你应该使用：</p>
+<p>1、使用zebra-api中提供了GroupDataSource(读写分离)或者ShardDataSource(分库分表)，而不是直接使用第三方的数据库连接池。</p>
+<p>2、使用zebra-dao提供了ZebraMapperScannerConfigurer替代mybatis-spring原生的MapperScannerConfigurer</p>
+<p>3、此外，你应该使用zebra-ds-monitor-client，只需引入依赖即可，会自动将连接池的监控信息上报到cat中</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/mybatis/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/27/language/java/mybatis/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-title-link" itemprop="url">注意事项</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>写入数据库的po，不要给字段设置默认值，除非能保证在update时，默认值不会覆盖错误。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/mybatis/%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/27/language/java/mybatis/%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">mybatis技巧</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="Mybatis中判断集合的-size-不为空">Mybatis中判断集合的 size 不为空</h5>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;null != staffCodeList and staffCodeList.size &gt; 0&quot;</span>&gt;</span></span><br><span class="line">and gui.USER_CODE not in</span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;staffCodeList&quot;</span> <span class="attr">item</span>=<span class="string">&quot;staffCode&quot;</span> <span class="attr">open</span>=<span class="string">&quot;(&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span>  <span class="attr">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span></span><br><span class="line">    #&#123;staffCode&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="判断参数为空">判断参数为空</h5>
+<p>1.判断Double类型：<if test="probability != null">probability = #{probability},</if>，在实体类中probability字段是Double类型；</p>
+<p>2.判断Integer类型：<if test="faceValue != null">face_value = #{faceValue}, </if>，在实体类中faceValue字段是Integer类型；</p>
+<p>3.判断String类型：<if test="couponName != null and couponName != ''">coupon_name = #{couponName}, </if>，在实体类中couponName是String类型；</p>
+<p>4.判断Date类型：<if test="beginTime != null">begin_time = #{beginTime}, </if>，在实体类中beginTime字段是Date类型；</p>
+<p>因为String类型是符合的，但是如果是Integer类型的话，如果变量的值是0,即 faceValue = 0, mybatis在进行 faceValue != ‘’ 的时候会认为 faceValue 的值是空字符串, 即 faceValue == ‘’ 为true；</p>
+<p>同理，Double，Date也是如此。所以如果是Integer类型，Double类型，Date类型只需要判断 != null 即可。如果String类型需要判断不等于0，则需要写name != ‘0’.toString()，否则会报错。</p>
+<h5 id="mybatis-中-foreach-collection的三种用法">mybatis 中 foreach collection的三种用法</h5>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30684743/article/details/96912611?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control">mybatis 中 foreach collection的三种用法</a></p>
+<h5 id="Mybatis使用IN语句查询">Mybatis使用IN语句查询</h5>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011781521/article/details/79669180">Mybatis使用IN语句查询</a></p>
+<h3 id="返回数据">返回数据</h3>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tygtyg/p/10448515.html">mybatis插入数据后返回对象id</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ws563573095/p/10301809.html">mybatis插入返回id或对象</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/problem/NoSuchMethod/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/27/language/java/problem/NoSuchMethod/" class="post-title-link" itemprop="url">NoSuchMethod错误排查</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -566,376 +1178,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>当输出在sleep之后时，无法打印</p>
-<p>怀疑原因是因为线程被挂起，无法继续执行，但为什么每个线程都无法被唤醒？需要看下唤醒逻辑</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;orderInfo:&quot;</span> + orderInfo);</span><br></pre></td></tr></table></figure>
-<h3 id="502错误">502错误</h3>
-<p>有可能是因为有人在进行远程调试</p>
-<h3 id="空指针可能情况">空指针可能情况</h3>
-<p>基本类型的值为null</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/language/java/rule/%E4%BC%98%E9%9B%85%E7%9A%84%E5%86%99Api%E6%8E%A5%E5%8F%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/07/language/java/rule/%E4%BC%98%E9%9B%85%E7%9A%84%E5%86%99Api%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">如何优雅的写api接口</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fa75acba5b07">看看人家那后端API接口写得，那叫一个优雅！</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/language/java/rule/%E5%AF%B9%E8%B1%A1%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83(%E4%B8%80)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/07/language/java/rule/%E5%AF%B9%E8%B1%A1%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83(%E4%B8%80)/" class="post-title-link" itemprop="url">对象使用规范(一)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Po、Vo、Bo、Dto、、">Po、Vo、Bo、Dto、、</h3>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/uestcyms/article/details/80244407">Java中常见的对象类型简述(DO、BO、DTO、VO、AO、PO)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/language/java/spring/spring%20boot%E9%A1%B9%E7%9B%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/07/language/java/spring/spring%20boot%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">spring注解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-spring/" itemprop="url" rel="index"><span itemprop="name">java-spring</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id></h2>
-<h2 id="启动报错">启动报错</h2>
-<h3 id="Could-not-resolve-placeholder"><a target="_blank" rel="noopener" href="https://blog.csdn.net/tonghuawanli/article/details/76595383">Could not resolve placeholder</a></h3>
-<p>原因：没有指定好配置文件，因为src/main/resources下有多个配置文件，例如application-dev.properties, boss.properties等。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/language/java/spring/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/07/language/java/spring/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>(exclude = DataSourceAutoConfiguration.class)</p>
-<p>DynamicDataSourceAutoConfiguration</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/language/java/spring/%E6%B3%A8%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/07/language/java/spring/%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">spring注解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-spring/" itemprop="url" rel="index"><span itemprop="name">java-spring</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="自动化配置的问题">自动化配置的问题</h2>
-<h5 id="需要排除的配置">需要排除的配置</h5>
-<p>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/javastack/p/12016212.html">Spring Boot 排除自动配置的 4 种方法，关键时刻很有用！</a>]</p>
-<ol>
-<li>@SpringBootApplication</li>
-<li>@EnableAutoConfiguration</li>
-<li>@SpringCloudApplication</li>
-<li>spring.autoconfigure.exclude</li>
+          <ol>
+<li>如果包含了不同版本的包，它的加载顺序是如何的？</li>
+<li>NoSuchMethod的报错是error级别的，exception是catch不住的。</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dyc87112/article/details/73739535">Spring Boot自动化配置的利弊及解决之道</a></p>
-<h6 id="排除的类总结">排除的类总结</h6>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://github.com/SpringBootApplication">@SpringBootApplication</a>(exclude = DruidDataSourceAutoConfigure.class)</li>
-<li></li>
-</ol>
-<h2 id="注解用法">注解用法</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sqlgao22/article/details/100095433">@RequestBody和@RequestParam注解使用</a></p>
-<h3 id="Async">@Async</h3>
-<ol>
-<li>可以指定线程池</li>
-</ol>
-<h4 id="不生效原因：">不生效原因：</h4>
-<ol>
-<li>需要保证调用函数与注解修饰的函数在不同类中，因为不会走代理类。<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_37760377/article/details/103627676">详解</a> <a target="_blank" rel="noopener" href="https://blog.csdn.net/YoungLee16/article/details/88398045">详解2</a></li>
-</ol>
-<h3 id="Value">@Value</h3>
-<h4 id="注入static变量四种方法"><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZYC88888/article/details/87863038">注入static变量四种方法</a></h4>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalValue</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Getter</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String DATABASE;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;mysql.db:test&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDatabase</span><span class="params">(String db)</span> </span>&#123;</span><br><span class="line">        DATABASE = db;</span><br><span class="line">    &#125;</span><br><span class="line">  	<span class="comment">// 这里要特别注意:</span></span><br><span class="line">  	<span class="comment">// 1. @value需要注释set函数上</span></span><br><span class="line">  	<span class="comment">// 2. 自动生成的getter和setter方法，会带有static的限定符，需要去掉，才可以。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>@Value<br>
-static<br>
-<a target="_blank" rel="noopener" href="https://blog.csdn.net/ZYC88888/article/details/87863038">https://blog.csdn.net/ZYC88888/article/details/87863038</a></p>
-<p>org.springframework.beans.factory.BeanCreationException: Error creating bean with name ‘pubApiPush’: Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder ‘group_url’ in value “${group_url}”</p>
-<p>group_url: [[查看结果|<a target="_blank" rel="noopener" href="http://wolf.waimai.dev.sankuai.com/group/hubble/page/dolphinManage">http://wolf.waimai.dev.sankuai.com/group/hubble/page/dolphinManage</a>]]</p>
 
       
     </div>
@@ -955,7 +1201,7 @@ static<br>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/language/java/spring/%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/mybatis/%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -969,7 +1215,7 @@ static<br>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/07/language/java/spring/%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">spring数据源配置</a>
+            <a href="/2026/08/27/language/java/mybatis/%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">mybatis用法总结</a>
         </h2>
 
         <div class="post-meta">
@@ -979,7 +1225,7 @@ static<br>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -987,7 +1233,7 @@ static<br>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-spring/" itemprop="url" rel="index"><span itemprop="name">java-spring</span></a>
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
                 </span>
             </span>
 
@@ -1002,256 +1248,22 @@ static<br>
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="http://www.demodashi.com/demo/14622.html">基于springboot的多数据源配置</a></p>
-<p>使用<code>dynamic-datasource-spring-boot-starter</code>，并用@DS指定数据源</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/superyu1992/article/details/80336928">SpringBoot 配合 druid作为数据库连接池 时需要注意的一点</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/w57685321/article/details/106823660">使用dynamic-datasource-spring-boot-starter做多数据源及源码分析</a></p>
-<p>需要配置master作为默认数据源，否则会报，<code>请检查primary默认数据库设置</code>。</p>
-<p><a target="_blank" rel="noopener" href="https://my.oschina.net/TyTracy/blog/1926571">Spring多数据源、动态数据源源码解析</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/language/java/web/URL%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/07/language/java/web/URL%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <table>
-<thead>
-<tr>
-<th>%20</th>
-<th>空格</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>%21</td>
-<td>!</td>
-</tr>
-<tr>
-<td>%23</td>
-<td>#</td>
-</tr>
-<tr>
-<td>%24</td>
-<td>$</td>
-</tr>
-<tr>
-<td>%25</td>
-<td>%</td>
-</tr>
-<tr>
-<td>%26</td>
-<td>&amp;</td>
-</tr>
-<tr>
-<td>%27</td>
-<td>’</td>
-</tr>
-<tr>
-<td>%28</td>
-<td>(</td>
-</tr>
-<tr>
-<td>%29</td>
-<td>)</td>
-</tr>
-<tr>
-<td>%2A</td>
-<td>*</td>
-</tr>
-<tr>
-<td>%2B</td>
-<td>+</td>
-</tr>
-<tr>
-<td>%2C</td>
-<td>,</td>
-</tr>
-<tr>
-<td>%2E</td>
-<td>.</td>
-</tr>
-<tr>
-<td>%2F</td>
-<td>/</td>
-</tr>
-<tr>
-<td>%3A</td>
-<td>:</td>
-</tr>
-<tr>
-<td>%3B</td>
-<td>;</td>
-</tr>
-<tr>
-<td>%3D</td>
-<td>=</td>
-</tr>
-<tr>
-<td>%3F</td>
-<td>?</td>
-</tr>
-<tr>
-<td>%40</td>
-<td>@</td>
-</tr>
-<tr>
-<td>%5B</td>
-<td>[</td>
-</tr>
-<tr>
-<td>%5C</td>
-<td>/</td>
-</tr>
-<tr>
-<td>%5D</td>
-<td>]</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/07/language/java/web/%E5%B8%B8%E8%A7%81%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/07/language/java/web/%E5%B8%B8%E8%A7%81%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">常见安全漏洞及解决方案</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-07 09:19:18" itemprop="dateCreated datePublished" datetime="2026-08-07T09:19:18+00:00">2026-08-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-web/" itemprop="url" rel="index"><span itemprop="name">java-web</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/57489507">sql注入漏洞</a></p>
-<p>修复方案：<br>
-如果拼接参数是SQL的查询参数都可以通过将mybatis配置文件中的 $ 改为 #，来解决<br>
-替换规则如下：<br>
-1.将 WHERE <code>some_field</code> = ‘${变量}’ 替换为 WHERE <code>some_field</code> = #{param}</p>
-<p>2.将 like ‘%${变量}%’ 替换为 like concat(‘%’, #{变量}, ‘%’)</p>
-<p>3.将 like concat(‘%’, ${变量}, ‘%’) 替换成 like concat(‘%’, #{变量}, ‘%’)</p>
-<p>4.将 WHERE <code>some_field</code> IN (${变量}) 替换为</p>
-<p>WHERE <code>some_field</code> IN</p>
-<p>#{item}</p>
-<p>对于拼接的变量不是SQL参数的，而是字段名、表名的情况，可以使用安全SDK检查输入是否是合法的标识符。<br>
-1.pom 引入安全SDK依赖</p>
-<p>com.sankuai.security<br>
-sec-sdk<br>
-${尽可能最新版本}</p>
-<p>\2. 代码中检查输入的变量的值是否是合法的标识符。<br>
-String sortName = req.getParameter(“sortName”);<br>
-if (sortName != null &amp;&amp; !SecSdk.isValidSqlIdentifier(sortName)) {<br>
-// 危险，可能有SQL注入，<br>
-// return or throw exception<br>
-}</p>
-<p>参考文档：<br>
-SQL注入介绍：<a target="_blank" rel="noopener" href="https://sectraining.sankuai.com/?source=source-scanner/#/document/30001">https://sectraining.sankuai.com/?source=source-scanner/#/document/30001</a><br>
-安全SDK文档：<a target="_blank" rel="noopener" href="https://km.sankuai.com/page/234776924">https://km.sankuai.com/page/234776924</a></p>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/155875683">CORS 安全配置不当</a></p>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/68078369">XSS 跨站脚本攻击</a></p>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/64887091">越权类安全问题</a></p>
+          <h3 id="selectById">selectById</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&#123;</span></span><br><span class="line"><span class="meta">        &quot;select&quot;,</span></span><br><span class="line"><span class="meta">        &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_start_time, build_end_time, import_start_time, import_end_time, front_end, create_time&quot;,</span></span><br><span class="line"><span class="meta">        &quot;from dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">        &quot;where id = #&#123;id,jdbcType=INTEGER&#125;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;id&quot;, property=&quot;id&quot;, jdbcType=JdbcType.INTEGER, id=true),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;source_type&quot;, property=&quot;sourceType&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;source_id&quot;, property=&quot;sourceId&quot;, jdbcType=JdbcType.BIGINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;name&quot;, property=&quot;name&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;creator&quot;, property=&quot;creator&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;user_type&quot;, property=&quot;userType&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;count&quot;, property=&quot;count&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;create_mode&quot;, property=&quot;createMode&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;status&quot;, property=&quot;status&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;detail_status&quot;, property=&quot;detailStatus&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;build_start_time&quot;, property=&quot;buildStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;build_end_time&quot;, property=&quot;buildEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;import_start_time&quot;, property=&quot;importStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;import_end_time&quot;, property=&quot;importEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;front_end&quot;, property=&quot;frontEnd&quot;, jdbcType=JdbcType.LONGVARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;create_time&quot;, property=&quot;createTime&quot;, jdbcType=JdbcType.TIMESTAMP)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">GroupingMsgPo <span class="title">selectById</span><span class="params">(Integer id)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="selectByCondition">selectByCondition</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;select&quot;,</span></span><br><span class="line"><span class="meta">            &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;build_start_time, build_end_time, import_start_time, import_end_time, front_end, create_time&quot;,</span></span><br><span class="line"><span class="meta">            &quot;from dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">            &quot;where status != &#x27;0&#x27; and create_time between #&#123;startDate&#125; and #&#123;endDate&#125;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;id != null&#x27;&gt; and id=#&#123;id&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;name != null&#x27;&gt; and name like concat(&#x27;%&#x27;, #&#123;name&#125;, &#x27;%&#x27;) &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;creator != null&#x27;&gt; and creator like concat(&#x27;%&#x27;, #&#123;creator&#125;, &#x27;%&#x27;) &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;userType != null and userType.size &gt; 0&#x27; &gt;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;and user_type in &quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;foreach collection=&#x27;userType&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; open=&#x27;(&#x27; close=&#x27;)&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">                    &quot;$&#123;item&#125;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createMode != null and createMode.size &gt; 0&#x27; &gt;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;and create_mode in&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;foreach collection=&#x27;createMode&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; open=&#x27;(&#x27; close=&#x27;)&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">                    &quot;#&#123;item&#125;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;order by id desc&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;offset != null and pageSize != null&#x27;&gt; limit $&#123;offset&#125;, $&#123;pageSize&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;id&quot;, property=&quot;id&quot;, jdbcType=JdbcType.INTEGER, id=true),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;source_type&quot;, property=&quot;sourceType&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;source_id&quot;, property=&quot;sourceId&quot;, jdbcType=JdbcType.BIGINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;name&quot;, property=&quot;name&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;creator&quot;, property=&quot;creator&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;user_type&quot;, property=&quot;userType&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;count&quot;, property=&quot;count&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;create_mode&quot;, property=&quot;createMode&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;status&quot;, property=&quot;status&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;detail_status&quot;, property=&quot;detailStatus&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;build_start_time&quot;, property=&quot;buildStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;build_end_time&quot;, property=&quot;buildEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;import_start_time&quot;, property=&quot;importStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;import_end_time&quot;, property=&quot;importEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;front_end&quot;, property=&quot;frontEnd&quot;, jdbcType=JdbcType.LONGVARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;create_time&quot;, property=&quot;createTime&quot;, jdbcType=JdbcType.TIMESTAMP)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">List&lt;GroupingMsgPo&gt; <span class="title">selectByCondition</span><span class="params">(UserGroupingMetaBo userGroupingMetaBo)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>分页查询的两个参数，分别是偏移量和size。偏移量需要通过页数和size计算出来。</p>
+<h3 id="insert">insert</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&#123;</span></span><br><span class="line"><span class="meta">        &quot;insert into dim_wm_grouping_status (source_type, source_id, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;name, creator, user_type, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;count, create_mode, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_start_time, build_end_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;import_start_time, import_end_time, front_end, create_time)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;values (#&#123;sourceType,jdbcType=SMALLINT&#125;, #&#123;sourceId,jdbcType=BIGINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;name,jdbcType=VARCHAR&#125;, #&#123;creator,jdbcType=VARCHAR&#125;, #&#123;userType,jdbcType=INTEGER&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;count,jdbcType=INTEGER&#125;, #&#123;createMode,jdbcType=SMALLINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;status,jdbcType=VARCHAR&#125;, #&#123;detailStatus,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;buildStartTime,jdbcType=TIMESTAMP&#125;, #&#123;buildEndTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;importStartTime,jdbcType=TIMESTAMP&#125;, #&#123;importEndTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;frontEnd,jdbcType=LONGVARCHAR&#125;, #&#123;createTime,jdbcType=TIMESTAMP&#125;)&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@SelectKey(statement=&quot;SELECT LAST_INSERT_ID()&quot;, keyProperty=&quot;id&quot;, before=false, resultType=Integer.class)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(GroupingMsgPo record)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="batchInsert">batchInsert</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;insert into dim_wm_grouping_status (source_type, source_id, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;name, creator, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;user_type, count, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;create_mode, status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;detail_status, build_start_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_end_time, import_start_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;import_end_time, front_end, create_time)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;values&quot;,</span></span><br><span class="line"><span class="meta">        &quot;&lt;foreach collection=&#x27;list&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot; (#&#123;item.sourceType,jdbcType=SMALLINT&#125;, #&#123;item.sourceId,jdbcType=BIGINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.name,jdbcType=VARCHAR&#125;, #&#123;item.creator,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.userType,jdbcType=INTEGER&#125;, #&#123;item.count,jdbcType=INTEGER&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.createMode,jdbcType=SMALLINT&#125;, #&#123;item.status,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.detailStatus,jdbcType=VARCHAR&#125;, #&#123;item.buildStartTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.buildEndTime,jdbcType=TIMESTAMP&#125;, #&#123;item.importStartTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.importEndTime,jdbcType=TIMESTAMP&#125;, #&#123;item.frontEnd,jdbcType=LONGVARCHAR&#125;,&quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.createTime,jdbcType=TIMESTAMP&#125;)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Options(useGeneratedKeys=true,keyProperty=&quot;id&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">batchInsert</span><span class="params">(<span class="meta">@Param(&quot;list&quot;)</span> List&lt;GroupingMsgPo&gt; list)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="update">update</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Update(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;update dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">        &quot;set id = #&#123;id,jdbcType=INTEGER&#125;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;sourceType != null&#x27;&gt; ,source_type = #&#123;sourceType,jdbcType=SMALLINT&#125;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;sourceId != null&#x27;&gt; ,source_id = #&#123;sourceId,jdbcType=BIGINT&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;name != null&#x27;&gt; ,name = #&#123;name,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;creator != null&#x27;&gt; ,creator = #&#123;creator,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;userType != null&#x27;&gt; ,user_type = #&#123;userType,jdbcType=INTEGER&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;count != null&#x27;&gt; ,count = #&#123;count,jdbcType=INTEGER&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createMode != null&#x27;&gt; ,create_mode = #&#123;createMode,jdbcType=SMALLINT&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;status != null&#x27;&gt; ,status = #&#123;status,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;detailStatus != null&#x27;&gt; ,detail_status = #&#123;detailStatus,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;buildStartTime != null&#x27;&gt; ,build_start_time = #&#123;buildStartTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;buildEndTime != null&#x27;&gt; ,build_end_time = #&#123;buildEndTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;importStartTime != null&#x27;&gt; ,import_start_time = #&#123;importStartTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;importEndTime != null&#x27;&gt; ,import_end_time = #&#123;importEndTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;frontEnd != null&#x27;&gt; ,front_end = #&#123;frontEnd,jdbcType=LONGVARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createTime != null&#x27;&gt; ,create_time = #&#123;createTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;where id = #&#123;id,jdbcType=INTEGER&#125;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateById</span><span class="params">(GroupingMsgPo record)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="用法对比">用法对比</h2>
+<h4 id="jdbcType-“DATE”-和-jdbcType-“TIMESTAMP”-两种类型的区别"><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010526028/article/details/74315775">jdbcType=“DATE” 和 jdbcType=“TIMESTAMP” 两种类型的区别</a></h4>
+<ol>
+<li>DATE只有年月日，没有时分秒</li>
+</ol>
 
       
     </div>
@@ -1336,7 +1348,7 @@ SQL注入介绍：<a target="_blank" rel="noopener" href="https://sectraining.sa
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">293</span>
+          <span class="site-state-item-count">296</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[toc] 大数据数仓项目自我介绍模板（可直接背、面试通用） 版本一：标准版（推荐直接用） 我主要负责大数据离线与实时数仓的设计和开发。 整体采用业界标准四层分层架构：ODS、DWD、DWS、ADS。 离线数仓基于 Hive + Spark 搭建，通过 DataX 定时同步 MySQL 业务库数据到 ODS 层，利用 Spark SQL 做分层清洗、维度建模、指标聚合，按小时和 T+1 调度，支撑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试流程模板">
+<meta property="og:url" content="http://example.com/2026/08/27/interview/%E9%9D%A2%E8%AF%95%E6%B5%81%E7%A8%8B%E6%A8%A1%E6%9D%BF/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="[toc] 大数据数仓项目自我介绍模板（可直接背、面试通用） 版本一：标准版（推荐直接用） 我主要负责大数据离线与实时数仓的设计和开发。 整体采用业界标准四层分层架构：ODS、DWD、DWS、ADS。 离线数仓基于 Hive + Spark 搭建，通过 DataX 定时同步 MySQL 业务库数据到 ODS 层，利用 Spark SQL 做分层清洗、维度建模、指标聚合，按小时和 T+1 调度，支撑">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-08-27T11:42:46.188Z">
+<meta property="article:modified_time" content="2026-08-27T11:42:46.188Z">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="interview">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/08/27/interview/%E9%9D%A2%E8%AF%95%E6%B5%81%E7%A8%8B%E6%A8%A1%E6%9D%BF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>面试流程模板 | 生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/interview/%E9%9D%A2%E8%AF%95%E6%B5%81%E7%A8%8B%E6%A8%A1%E6%9D%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面试流程模板
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[toc]</p>
+<h2 id="大数据数仓项目自我介绍模板（可直接背、面试通用）">大数据数仓项目自我介绍模板（可直接背、面试通用）</h2>
+<h3 id="版本一：标准版（推荐直接用）">版本一：标准版（推荐直接用）</h3>
+<p>我主要负责<strong>大数据离线与实时数仓</strong>的设计和开发。</p>
+<p>整体采用业界标准<strong>四层分层架构</strong>：ODS、DWD、DWS、ADS。</p>
+<p><strong>离线数仓</strong>基于 <strong>Hive + Spark</strong> 搭建，通过 DataX 定时同步 MySQL 业务库数据到 ODS 层，利用 Spark SQL 做分层清洗、维度建模、指标聚合，按小时和 T+1 调度，支撑日常<strong>日报、月报、用户画像、业务复盘</strong>等离线报表需求。</p>
+<p><strong>实时数仓</strong>采用 <strong>Flink + Kafka + Flink CDC + Doris</strong> 架构，通过 <strong>Flink CDC</strong> 实时监听 MySQL Binlog，做<strong>增量变更数据捕获</strong>，无需全量拉表，秒级延迟把业务数据实时接入 Kafka 作为 ODS 层；再用 Flink SQL 完成数据清洗、脱敏、维度关联、窗口聚合，分层加工后落地到 <strong>Apache Doris</strong> 做 ADS 应用层，主要支撑<strong>实时大屏、实时订单指标、风控告警、实时推荐</strong>等业务。</p>
+<p>项目中我负责<strong>表结构设计、分层建模、Flink/Spark SQL 开发、任务调优、数据一致性保障</strong>，同时解决过<strong>数据倾斜、Kafka 消息积压、Flink 状态 OOM、小文件过多、CDC 重复消费</strong>等常见问题；整体采用<strong>离在线双仓架构</strong>，实时看业务当下走势，离线做数据复盘与口径校准，保障数据准确稳定产出。</p>
+<h3 id="版本二：精简版（面试简短口述）">版本二：精简版（面试简短口述）</h3>
+<p>我从事大数据数仓开发，负责离线和实时数仓建设。</p>
+<p>离线基于 Hive、Spark 构建四层数仓，定时同步业务库，做分层建模与指标计算，支撑 T+1 和小时级报表、用户画像；</p>
+<p>实时采用 Flink+Kafka+Flink CDC+Doris 架构，通过 CDC 监听 MySQL Binlog 做增量同步，秒级实时入仓，经过 Flink 清洗聚合后落地 Doris，服务实时大屏和实时业务指标。</p>
+<p>日常主要做建模、SQL 开发、任务调优和问题排查，处理过数据倾斜、消息积压、状态溢出、小文件等经典问题，保障双仓数据稳定可靠。</p>
+<h3 id="版本三：突出技术栈（简历-面试拔高版）">版本三：突出技术栈（简历 / 面试拔高版）</h3>
+<p>参与企业级<strong>流批一体、离在线双仓</strong>架构建设，技术栈涵盖 Hive、Spark、Flink、Kafka、Flink CDC、Apache Doris、ClickHouse。</p>
+<p>负责数仓<strong>分层设计、维度建模、ODS-DWD-DWS-ADS 全链路开发</strong>；</p>
+<p>ODS 层采用 <strong>Flink CDC</strong> 实现 MySQL 全量 + 增量无缝同步，替代传统全量抽取，降低业务库压力；</p>
+<p>实时链路基于 Flink 流处理，解决<strong>事件时间乱序、水位线窗口、数据倾斜、状态管理、端到端 Exactly-Once</strong>；</p>
+<p>离线基于 Spark SQL 做批量加工、任务调度与回溯补数；</p>
+<p>最终实时指标落地 Doris 支撑 BI 大屏，离线数仓支撑复盘画像与报表，同时参与集群任务调优、SQL 优化、资源管控与数据质量保障。</p>
+<hr>
+<p>我再给你整理一份<strong>面试常被追问的 10 个配套问题 + 标准答案</strong>，别人顺着你项目自我介绍往下问，你也能接住，要不要？</p>
+<h3 id="配套大数据数仓项目-面试追问-10-题-标准满分答案">配套大数据数仓项目 面试追问 10 题 + 标准满分答案</h3>
+<p>（适配你刚才的项目自我介绍，面试官顺着问，直接背就能答）</p>
+<h4 id="1-你们数仓为什么分四层？每层作用是什么？">1. 你们数仓为什么分四层？每层作用是什么？</h4>
+<p><strong>答</strong></p>
+<p>采用标准四层：ODS、DWD、DWS、ADS。</p>
+<ul>
+<li>ODS：原始数据层，原样接入 MySQL、日志、CDC 增量数据，不清洗、做数据留存。</li>
+<li>DWD：明细宽表层，做清洗、去重、脱敏、维度关联，拼成业务宽表，避免后续重复关联。</li>
+<li>DWS：聚合中间层，按时间、区域、渠道做预聚合，计算 UV、交易额等中间指标。</li>
+<li>ADS：应用指标层，落地 Doris/ClickHouse，直接给大屏、BI、业务接口查询使用。</li>
+</ul>
+<h4 id="2-实时数仓为什么用-Flink-CDC-不用-Canal？">2. 实时数仓为什么用 Flink CDC 不用 Canal？</h4>
+<p><strong>答</strong></p>
+<p>Flink CDC 可以<strong>全量 + 增量一条任务自动切换</strong>，不用分开开发；</p>
+<p>而且原生和 Flink 集成，不需要额外部署 Canal 中间件，架构更轻、运维简单；</p>
+<p>同时支持断点续传、 Exactly-Once 语义，更适合实时数仓 ODS 层接入。</p>
+<h4 id="3-CDC-同步怎么处理更新和删除数据？">3. CDC 同步怎么处理更新和删除数据？</h4>
+<p><strong>答</strong></p>
+<p>CDC 抓取 Binlog 的 insert、update、delete 操作，自带<strong>操作类型标识</strong>；</p>
+<p>Flink 消费后根据类型做对应处理：插入直接写入、更新做主键覆盖、删除做逻辑删除或物理删除，落地 Doris 主键表保证数据最终一致。</p>
+<h4 id="4-实时数仓怎么保证数据不丢不重复？">4. 实时数仓怎么保证数据不丢不重复？</h4>
+<p><strong>答</strong></p>
+<ul>
+<li>源头 Kafka 配置多副本、acks=-1 保证不丢；</li>
+<li>Flink 开启 Checkpoint，偏移量和状态一致性保存；</li>
+<li>下游落地采用<strong>唯一主键幂等写入</strong>，即使重复消费也不会产生重复数据；</li>
+<li>采用 Flink CDC 自带 Exactly-Once 语义，全量增量无缝衔接。</li>
+</ul>
+<h4 id="5-实时任务遇到数据倾斜怎么解决？">5. 实时任务遇到数据倾斜怎么解决？</h4>
+<p><strong>答</strong></p>
+<ul>
+<li>先定位倾斜 Key；</li>
+<li>采用<strong>局部聚合 + 全局聚合</strong>两阶段预聚合；</li>
+<li>对热点 Key 加盐打散；</li>
+<li>维表关联倾斜开启 Runtime Filter、Colocate Join；</li>
+<li>不合理维度提前过滤，减少 shuffle 数据量。</li>
+</ul>
+<h4 id="6-Flink-任务反压怎么排查解决？">6. Flink 任务反压怎么排查解决？</h4>
+<p><strong>答</strong></p>
+<p>先看上下游吞吐对比，定位瓶颈在下游、网络还是计算逻辑；</p>
+<p>优化方式：</p>
+<p>简化算子逻辑、前置过滤、增加并行度、调整缓冲区配置、拆分大任务，避免单点阻塞。</p>
+<h4 id="7-实时和离线数据口径不一致怎么处理？">7. 实时和离线数据口径不一致怎么处理？</h4>
+<p><strong>答</strong></p>
+<ul>
+<li>统一维度、统一时间粒度、统一业务编码口径；</li>
+<li>离线作为基准，定期<strong>回溯校准</strong>实时数据；</li>
+<li>公共指标统一下沉到 DWS 层，实时离线复用同一套逻辑；</li>
+<li>梳理时间窗口、迟到数据处理规则保持一致。</li>
+</ul>
+<h4 id="8-你们为什么选-Doris-不选-ClickHouse？">8. 你们为什么选 Doris 不选 ClickHouse？</h4>
+<p><strong>答</strong></p>
+<p>业务有<strong>多表 Join、实时更新、高并发 BI 查询</strong>需求；</p>
+<p>Doris 有成熟 CBO 优化器，多表关联比 ClickHouse 强；支持实时 UPSERT、兼容 MySQL、运维简单、高并发能力强；</p>
+<p>ClickHouse 更适合单表日志分析，复杂关联和高并发场景偏弱，所以选型 Doris。</p>
+<h4 id="9-实时数仓小文件问题怎么解决？">9. 实时数仓小文件问题怎么解决？</h4>
+<p><strong>答</strong></p>
+<p>Flink 端设置<strong>窗口攒批、分区合并</strong>；</p>
+<p>Doris 端合理设置分区和分桶，自动合并版本；</p>
+<p>控制写入频次，避免小批次频繁落地，减少小文件产生。</p>
+<h4 id="10-你理解的流批一体是什么？">10. 你理解的流批一体是什么？</h4>
+<p><strong>答</strong></p>
+<p>以数据湖 Hudi/Paimon 为存储底座，<strong>一套数据</strong>同时支持：</p>
+<p>Flink 实时流式消费、Spark 离线批量分析；</p>
+<p>实时做当日指标、离线做复盘回溯、口径校准，不用维护两套链路，实现<strong>存储统一、计算统一、口径统一</strong>。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/interview/" rel="tag"># interview</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/27/interview/%E9%A2%98%E7%9B%AE%E9%80%9F%E8%A7%88/" rel="prev" title="题目速览">
+      <i class="fa fa-chevron-left"></i> 题目速览
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/27/interview/%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87/" rel="next" title="面试准备">
+      面试准备 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%95%B0%E4%BB%93%E9%A1%B9%E7%9B%AE%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D%E6%A8%A1%E6%9D%BF%EF%BC%88%E5%8F%AF%E7%9B%B4%E6%8E%A5%E8%83%8C%E3%80%81%E9%9D%A2%E8%AF%95%E9%80%9A%E7%94%A8%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">大数据数仓项目自我介绍模板（可直接背、面试通用）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E4%B8%80%EF%BC%9A%E6%A0%87%E5%87%86%E7%89%88%EF%BC%88%E6%8E%A8%E8%8D%90%E7%9B%B4%E6%8E%A5%E7%94%A8%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">版本一：标准版（推荐直接用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E4%BA%8C%EF%BC%9A%E7%B2%BE%E7%AE%80%E7%89%88%EF%BC%88%E9%9D%A2%E8%AF%95%E7%AE%80%E7%9F%AD%E5%8F%A3%E8%BF%B0%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">版本二：精简版（面试简短口述）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E4%B8%89%EF%BC%9A%E7%AA%81%E5%87%BA%E6%8A%80%E6%9C%AF%E6%A0%88%EF%BC%88%E7%AE%80%E5%8E%86-%E9%9D%A2%E8%AF%95%E6%8B%94%E9%AB%98%E7%89%88%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">版本三：突出技术栈（简历 &#x2F; 面试拔高版）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E5%A5%97%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%95%B0%E4%BB%93%E9%A1%B9%E7%9B%AE-%E9%9D%A2%E8%AF%95%E8%BF%BD%E9%97%AE-10-%E9%A2%98-%E6%A0%87%E5%87%86%E6%BB%A1%E5%88%86%E7%AD%94%E6%A1%88"><span class="nav-number">1.4.</span> <span class="nav-text">配套大数据数仓项目 面试追问 10 题 + 标准满分答案</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">296</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
