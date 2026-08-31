@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/maven/maven%E5%AD%A6%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/git/git%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/tools/maven/maven%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">maven学习</a>
+            <a href="/2026/08/31/tools/git/git%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">git安装</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -224,11 +224,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/EasonJim/p/6845012.html">Maven中plugins和pluginManagement的区别</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shawWey/p/7417335.html">maven依赖顺序原则</a></p>
-<h3 id="dependencyManagement">dependencyManagement</h3>
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@       WARNING: POSSIBLE DNS SPOOFING DETECTED!          @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">The RSA host key for github.com has changed,</span><br><span class="line">and the key for the corresponding IP address 20.205.243.166</span><br><span class="line">is unknown. This could either mean that</span><br><span class="line">DNS SPOOFING is happening or the IP address for the host</span><br><span class="line">and its host key have changed at the same time.</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!</span><br><span class="line">Someone could be eavesdropping on you right now (man-in-the-middle attack)!</span><br><span class="line">It is also possible that a host key has just been changed.</span><br><span class="line">The fingerprint for the RSA key sent by the remote host is</span><br><span class="line">SHA256:uNiVztksCsDhcc0u9e8BujQXVUpKZIDTMczCvj3tD2s.</span><br><span class="line">Please contact your system administrator.</span><br><span class="line">Add correct host key in &#x2F;Users&#x2F;cjq&#x2F;.ssh&#x2F;known_hosts to get rid of this message.</span><br><span class="line">Offending RSA key in &#x2F;Users&#x2F;cjq&#x2F;.ssh&#x2F;known_hosts:10</span><br><span class="line">RSA host key for github.com has changed and you have requested strict checking.</span><br><span class="line">Host key verification failed.</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; ssh-keygen -R github.com			&#x2F;&#x2F;更新know_hosts中的内容</span><br><span class="line">&gt;&gt; 更新publickey（参考）</span><br><span class="line">&gt;&gt; ssh -T git@github.com				&#x2F;&#x2F; 测试是否能正确连接</span><br></pre></td></tr></table></figure>
+<p>Reference:</p>
 <ol>
-<li>这里包名写错不会报错，不会实际尝试去仓库下载，只有在dependencies中定义的才会检查，才会报错</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/helloasimo/article/details/123778112">https://blog.csdn.net/helloasimo/article/details/123778112</a></li>
 </ol>
 
       
@@ -249,7 +249,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/maven/sample/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/git/git%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -263,7 +263,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/tools/maven/sample/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/08/31/tools/git/git%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">git操作</a>
         </h2>
 
         <div class="post-meta">
@@ -273,65 +273,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;transformers&gt;</span><br><span class="line">        &lt;transformer implementation&#x3D;&quot;org.apache.maven.plugins.shade.resource.ServicesResourceTransformer&quot; &#x2F;&gt;</span><br><span class="line">        &lt;transformer implementation&#x3D;&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;</span><br><span class="line">            &lt;mainClass&gt;com.microsoft.sam.SAMJobRunner&lt;&#x2F;mainClass&gt;</span><br><span class="line">            &lt;manifestEntries&gt;</span><br><span class="line">                &lt;Class-Path&gt;..&lt;&#x2F;Class-Path&gt;</span><br><span class="line">            &lt;&#x2F;manifestEntries&gt;</span><br><span class="line">        &lt;&#x2F;transformer&gt;</span><br><span class="line"></span><br><span class="line">        &lt;transformer implementation&#x3D;&quot;org.apache.maven.plugins.shade.resource.AppendingTransformer&quot;&gt;</span><br><span class="line">            &lt;resource&gt;META-INF&#x2F;cxf&#x2F;bus-extensions.txt&lt;&#x2F;resource&gt;</span><br><span class="line">        &lt;&#x2F;transformer&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;transformers&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/maven/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/tools/maven/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -354,15 +296,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id></h3>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/62796806">解决jar包冲突新思路 - maven-shade-plugin</a></p>
-<p>shade relocation 注意事项</p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c41f2b8f1adf">maven-shade-plugin 使用体验</a></p>
-<p><a target="_blank" rel="noopener" href="https://ffpeng90.github.io/2018-10-18/Maven-Shade-Plugin%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/">Maven-Shade-Plugin必知必会</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33037051/article/details/111892927">maven依赖的jar包版本不一样_Maven依赖jar包冲突常见的解决方法</a></p>
-<p>指定了scope是provided 打包时还会包含吗？</p>
-<p>当引入layout非常规的maven proj时<br>
-maven script found</p>
+          <h2 id="编辑">编辑</h2>
+<p>删除工作区某个文件，或某个目录的改动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;file-name&gt;</span><br><span class="line">git checkout &lt;path-name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="查看">查看</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012830148/article/details/77497240">#如何使用git比较两次commit之间的差异文件</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git diff hash1 hash2</span><br><span class="line">hash2是后提交的commit</span><br><span class="line">即hash1是被对比commit，diff结果是hash2在hash1上的改动</span><br></pre></td></tr></table></figure>
+<p>查看本地分支关联的远端分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -vv</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -382,7 +323,7 @@ maven script found</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/maven/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/git/git%E8%AE%BE%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -396,7 +337,7 @@ maven script found</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/tools/maven/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">maven问题解决</a>
+            <a href="/2026/08/31/tools/git/git%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">git设置</a>
         </h2>
 
         <div class="post-meta">
@@ -406,7 +347,208 @@ maven script found</p>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="杂项">杂项</h3>
+<p>关闭difftool的使用询问：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">询问：</span><br><span class="line">Launch &#39;default-difftool&#39; [Y&#x2F;n]</span><br><span class="line"></span><br><span class="line">关闭：</span><br><span class="line">git config --global difftool.prompt false</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/git/init/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/tools/git/init/" class="post-title-link" itemprop="url">git设置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="gitconfig">.gitconfig</h2>
+<p>git 添加别名的方式,打开~/.gitconfig文件在其末尾添加：<br>
+在命令行输入以下命令：<br>
+1、进到根目录<br>
+cd ~/<br>
+2、打开.gitconfig,<br>
+vi ~/.gitconfig</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[alias]</span><br><span class="line">	a = add</span><br><span class="line">	b = branch</span><br><span class="line">	c = commit</span><br><span class="line">	d = diff</span><br><span class="line">	l = log --graph --pretty=format:&#x27;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset | %C(bold)%an&#x27; --abbrev-commit --date=relative</span><br><span class="line">	r = reset</span><br><span class="line">	aa = add .</span><br><span class="line">	ba = branch -a</span><br><span class="line">	ca = commit -a</span><br><span class="line">	cc = commit -a -m</span><br><span class="line">	cl = clone</span><br><span class="line">	cm = commit -m</span><br><span class="line">	co = checkout</span><br><span class="line">	cp = cherry-pick</span><br><span class="line">	nb = checkout -b</span><br><span class="line">	pl = pull</span><br><span class="line">	ps = push origin master</span><br><span class="line">	st = status</span><br><span class="line"></span><br><span class="line">[user]</span><br><span class="line">	name = jingqicao</span><br><span class="line">	email = cjqzhuce@126.com</span><br><span class="line"></span><br><span class="line">[diff]</span><br><span class="line">	tool = default-difftool</span><br><span class="line">[difftool &quot;default-difftool&quot;]</span><br><span class="line">	cmd = code --wait --diff $LOCAL $REMOTE</span><br><span class="line">[difftool]</span><br><span class="line">	prompt = false</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/git/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/tools/git/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%92%A4%E6%B6%88%E6%93%8D%E4%BD%9C">官方文档</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/git/%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/tools/git/%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">git概念</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -429,12 +571,14 @@ maven script found</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="包冲突">包冲突</h3>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/28132001">02_XMDLOG_绑定包冲突排查方法</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33037051/article/details/111892927">maven依赖的jar包版本不一样_Maven依赖jar包冲突常见的解决方法</a></p>
-<h3 id></h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[ERROR] Failed to execute goal on project SAM: Could not resolve dependencies for project com.microsoft:SAM:jar:1.0-SNAPSHOT: The following artifacts could not be resolved: org.scala-lang:scala-reflect:jar:2.12.12, org.scalatest:scalatest_2.12:jar:3.0.8, org.scalactic:scalactic_2.12:jar:3.0.8: Could not transfer artifact org.scala-lang:scala-reflect:jar:2.12.12 from&#x2F;to BingDM (https:&#x2F;&#x2F;msasg.pkgs.visualstudio.com&#x2F;_packaging&#x2F;BingDM&#x2F;maven&#x2F;v1): authentication failed for https:&#x2F;&#x2F;msasg.pkgs.visualstudio.com&#x2F;_packaging&#x2F;BingDM&#x2F;maven&#x2F;v1&#x2F;org&#x2F;scala-lang&#x2F;scala-reflect&#x2F;2.12.12&#x2F;scala-reflect-2.12.12.jar, status: 401 Unauthorized -&gt; [Help 1]</span><br><span class="line">[ERROR] </span><br><span class="line">[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.</span><br><span class="line">[ERROR] Re-run Maven using the -X switch to enable full debug logging.</span><br><span class="line">[ERROR] </span><br><span class="line">[ERROR] For more information about the errors and possible solutions, please read the following articles:</span><br><span class="line">[ERROR] [Help 1] http:&#x2F;&#x2F;cwiki.apache.org&#x2F;confluence&#x2F;display&#x2F;MAVEN&#x2F;DependencyResolutionException</span><br><span class="line">[ERROR] </span><br><span class="line">[ERROR] After correcting the problems, you can resume the build with the command</span><br><span class="line">[ERROR]   mvn &lt;args&gt; -rf :SAM</span><br></pre></td></tr></table></figure>
-<p>setting.xml设置有问题</p>
+          <p>工作区、暂存区、版本库</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/git/git-workspace-index-repo.html">link</a></p>
+<ul>
+<li>**工作区：**就是你在电脑里能看到的目录。</li>
+<li>**暂存区：**英文叫 stage 或 index。一般存放在 <strong>.git</strong> 目录下的 index 文件（.git/index）中，所以我们把暂存区有时也叫作索引（index）。</li>
+<li>**版本库：**工作区有一个隐藏目录 <strong>.git</strong>，这个不算工作区，而是 Git 的版本库。</li>
+</ul>
+<p>正常编写是在工作区，git add 之后提交到暂存区，git commit之后放到版本库</p>
 
       
     </div>
@@ -454,7 +598,7 @@ maven script found</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/office/excel/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/git/%E6%B3%A8%E6%84%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -468,7 +612,7 @@ maven script found</p>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/tools/office/excel/" class="post-title-link" itemprop="url">极客时间下载</a>
+            <a href="/2026/08/31/tools/git/%E6%B3%A8%E6%84%8F/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -478,7 +622,65 @@ maven script found</p>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>每次与origin分支对比前，先执行git pull操作，才能获取到远端的最新代码。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/git/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/tools/git/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -501,383 +703,191 @@ maven script found</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[toc]</p>
-<h2 id="公式">公式</h2>
-<h3 id="时间转换">时间转换</h3>
-<h4 id="ms-unix-timestamp-to-date">ms unix timestamp to date</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;(F2+8*3600)&#x2F;86400000+70*365+19</span><br></pre></td></tr></table></figure>
-<h4 id="second-unix-timestamp-to-date">second unix timestamp to date</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;(F2+8*3600)&#x2F;86400+70*365+19</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/windows/outlook/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/tools/windows/outlook/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45524582/article/details/104290786">outlook中，如何将同一回复主题的邮件放在一起</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/windows/useful-tools/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/tools/windows/useful-tools/" class="post-title-link" itemprop="url">有用工具-windows</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/windows-tools/" itemprop="url" rel="index"><span itemprop="name">windows-tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>查看超大文本 2G+</p>
-<p>PilotEdit Lite</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/template/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/template/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tair/%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/tair/%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">tair使用规范</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tair/" itemprop="url" rel="index"><span itemprop="name">tair</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6417083301c2">缓存Tair高性能使用规范</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/Typora/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/tools/Typora/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[toc]</p>
-<p>文件间跳转</p>
-<p><a href="./markdown.md">Markdown 语法</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/344941041">图片保存</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904120667602958">PicGo config</a></p>
-<p><a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Core-Doc/zh/guide/config.html">PicGo config2</a></p>
-<h2 id="设置">设置</h2>
-<h3 id="配置文件">配置文件</h3>
-<p>通过<code>文件-偏好设置-外观-打开主题文件夹</code>，找到主题配置文件目录。如果没有找到对应的配置文件，可以手动生成。</p>
-<h4 id="配置文件分类">配置文件分类</h4>
+          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/75499871">git merge和git rebase的区别, 切记：永远用rebase</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaomingyang/article/details/80514941">git将一个分支完全覆盖另外一个分支如：paytest分支代码完全覆盖master分支</a></p>
+<p>git remote set-url origin <a href="mailto:msasg@vs-ssh.visualstudio.com">msasg@vs-ssh.visualstudio.com</a>:v3/msasg/Shared%20Data/xxx</p>
+<blockquote>
+<p>git reset --hard origin/users/jingqicao/feature-metadata-output</p>
+</blockquote>
+<p>.gitignore</p>
 <ol>
-<li>base.user.css 基础的用户自定义配置文件，会全局生效，优先级第二。</li>
-<li>{当前主题}.user.css 主题级的用户自定义配置文件，当前主题生效，优先级最高。</li>
-<li>{当前主题}.css 主题基础配置文件，当前主题生效，优先级最低。</li>
+<li>为什么有的repo不会上传这个文件</li>
+<li>当某些文件不想要再次被更改了，就可以在这个文件中排除掉那个文件。</li>
 </ol>
-<p>优先级逻辑：自定义 &gt; 基础；{当前主题} &gt; base</p>
-<p>加载顺序: {当前主题}.css -&gt; base.user.css -&gt; {当前主题}.user.css</p>
-<h3 id="toc展示的目录层级">toc展示的目录层级</h3>
-<p>配置文件中加入如下内容，建议加在base.user.css中</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 隐藏四级、五级、六级标题（只显示 h1, h2, h3） */</span></span><br><span class="line"><span class="selector-class">.md-toc-h4</span>,</span><br><span class="line"><span class="selector-class">.md-toc-h5</span>,</span><br><span class="line"><span class="selector-class">.md-toc-h6</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="格式">格式</h2>
-<h3 id="数学表达式">数学表达式</h3>
-<p>要启用这个功能，首先到Preference-&gt;Editor中启用。然后使用$符号包裹Tex命令，例如：$lim_{x \to \infty} \ exp(-x)=0$将产生如下的数学表达式：</p>
-<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104343.png" alt="img"></p>
-<h3 id="下标">下标</h3>
-<p>下标使用~包裹，例如：H~2~O将产生水的分子式。</p>
-<h3 id="上标">上标</h3>
-<p>上标使用^包裹，例如：y^2^=4将产生表达式</p>
-<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104354.png" alt="img"></p>
-<h3 id="下划线">下划线</h3>
-<p>用HTML的语法Underline将产生下划线Underline.</p>
-<h3 id="删除线">删除线</h3>
-<p>GFM添加了删除文本的语法，这是标准的Markdown语法木有的。使用~~包裹的文本将会具有删除的样式，例如~删除文本~将产生删除文本的样式。</p>
-<h3 id="代码">代码</h3>
-<p>使用`包裹的内容将会以代码样式显示，例如</p>
-<p>使用<code>printf()</code></p>
-<p>则会产生printf()样式。</p>
-<p>输入~~~或者```然后回车，可以输入代码块，并且可以选择代码的语言。例如：public Class HelloWorld{ System.out.println(“Hello World!”); }</p>
-<h3 id="目录列表Table-of-Contents-TOC">目录列表Table of Contents(TOC)</h3>
-<p>输入[toc]然后回车，将会产生一个目录，这个目录抽取了文章的所有标题，自动更新内容。</p>
-<h3 id="水平分割线">水平分割线</h3>
-<p>使用***或者—，然后回车，来产生水平分割线。</p>
-<h3 id="标注">标注</h3>
-<p>我们可以对某一个词语进行标注。例如</p>
-<p>某些人用过了才知道[^注释] [^注释]:Somebody that I used to know.</p>
-<p>将产生：</p>
-<p>把鼠标放在注释上，将会有提示内容。</p>
-<h3 id="强调">强调</h3>
-<p>使用两个*号或者两个_包裹的内容将会被强调。例如</p>
-<p><strong>使用两个*号强调内容</strong> <strong>使用两个下划线强调内容</strong></p>
-<p>将会输出</p>
-<p>使用两个<em>号强调内容 使用两个下划线强调内容 Typroa 推荐使用两个</em>号。</p>
-<h3 id="斜体">斜体</h3>
-<p>在标准的Markdown语法中，*和_包裹的内容会是斜体显示，但是GFM下划线一般用来分隔人名和代码变量名，因此我们推荐是用星号来包裹斜体内容。如果要显示星号，则使用转义：</p>
-<p>*</p>
-<h3 id="插入图片">插入图片</h3>
-<p>我们可以通过拖拉的方式，将本地文件夹中的图片或者网络上的图片插入。</p>
-<h3 id="插入URL连接">插入URL连接</h3>
-<p>使用尖括号包裹的url将产生一个连接，例如：将产生连接:www.baidu.com.</p>
-<p>如果是标准的url，则会自动产生连接，例如:www.baidu.com</p>
-<h3 id="插入表情">插入表情</h3>
-<p>使用:happy:输入高兴的表情，使用:sad:输入悲伤的表情，使用:cry:输入哭的表情等。以此类推!</p>
-<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104355.png" alt="img"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/tools/git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">问题解决</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h2 id="网络问题">网络问题</h2>
+<h3 id="github-网址访问不了">github 网址访问不了</h3>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43804496/article/details/131475204">GitHub打不开的解决方案（超简单）</a></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://sites.ipaddress.com/github.com/">https://sites.ipaddress.com/github.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://sites.ipaddress.com/fastly.net/">https://sites.ipaddress.com/fastly.net/</a></li>
+<li><a target="_blank" rel="noopener" href="https://sites.ipaddress.com/assets-cdn.github.com/">https://sites.ipaddress.com/assets-cdn.github.com/</a></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://www.ipaddress.com/">My IP | IP Address Tools | IP Geolocation | Website Traffic Checker</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">140.82.113.4 github.com</span><br><span class="line">151.101.1.194 github.global.ssl.fastly.net</span><br><span class="line">151.101.65.194 github.global.ssl.fastly.net</span><br><span class="line">151.101.129.194 github.global.ssl.fastly.net</span><br><span class="line">151.101.193.194 github.global.ssl.fastly.net</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">185.199.109.153 assets-cdn.github.com</span><br><span class="line">185.199.110.153 assets-cdn.github.com</span><br><span class="line">185.199.111.153 assets-cdn.github.com</span><br></pre></td></tr></table></figure>
+<p>Mac:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/hosts</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 刷新DNS</span></span><br><span class="line">sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder</span><br></pre></td></tr></table></figure>
+<p>Windows:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> ipconfig /flushdns</span></span><br></pre></td></tr></table></figure>
+<h2 id="问题">问题</h2>
+<h3 id="LF-will-be-replaced-by-CRLF">LF will be replaced by CRLF</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config core.autocrlf false</span><br><span class="line">1. true:</span><br><span class="line">2. false:</span><br><span class="line">3. input:</span><br></pre></td></tr></table></figure>
+<h3 id="切换分支时-如何保证文件完全与线上一致，即其他分支新加的文件被删掉">切换分支时 如何保证文件完全与线上一致，即其他分支新加的文件被删掉</h3>
+<h2 id="命令报错">命令报错</h2>
+<h3 id="Author-identity-unknown">Author identity unknown</h3>
+<p>报错信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Author identity unknown</span><br><span class="line"></span><br><span class="line">*** Please tell me who you are.</span><br><span class="line"></span><br><span class="line">Run</span><br><span class="line"></span><br><span class="line">  git config --global user.email &quot;you@example.com&quot;</span><br><span class="line">  git config --global user.name &quot;Your Name&quot;</span><br><span class="line"></span><br><span class="line">to set your account&#39;s default identity.</span><br><span class="line">Omit --global to set the identity only in this repository.</span><br><span class="line"></span><br><span class="line">fatal: unable to auto-detect email address (got &#39;jingqi@DESKTOP-BKUPVT9.(none)&#39;)</span><br></pre></td></tr></table></figure>
+<p>解决办法</p>
+<ol>
+<li>按照指导重新设置<code>user.email</code>和<code>user.name</code>，注意变量名称不要设置错了</li>
+<li>用<code>git var GIT_AUTHOR_IDENT</code> 验证是否设置成功。</li>
+</ol>
+<p>参考资料：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#Formatting-and-Whitespace">git config doc</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings">Configuring Git to handle line endings</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">hexo常用命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="本地运行">本地运行</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="服务器部署">服务器部署</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo d -g</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="源码提交">源码提交</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b blog-source</span><br><span class="line">git add -A</span><br><span class="line">git commit -m &quot;init blog&quot;</span><br><span class="line">git push origin blog-source</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/111639860">如何用 Github 搭建博客</a></p>
 
       
     </div>

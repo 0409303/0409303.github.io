@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/olap/practice/%E6%B5%81%E9%87%8F%E6%95%B0%E4%BB%93%E6%9E%84%E5%BB%BA%E7%BB%8F%E9%AA%8C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/language/scala/%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/olap/practice/%E6%B5%81%E9%87%8F%E6%95%B0%E4%BB%93%E6%9E%84%E5%BB%BA%E7%BB%8F%E9%AA%8C/" class="post-title-link" itemprop="url">流量数仓构建经验</a>
+            <a href="/2026/08/31/language/scala/%E7%89%88%E6%9C%AC%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">版本区别</a>
         </h2>
 
         <div class="post-meta">
@@ -201,216 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/olap-%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">olap-实践</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>MT外卖流量数仓建设</h1>
-<h2 id="流量数据采集">流量数据采集</h2>
-<h3 id="1-数据采集">1. 数据采集</h3>
-<h4 id="1-1-前端埋点">1.1 前端埋点</h4>
-<ul>
-<li>代码埋点（MT）
-<ul>
-<li>高度定制、控制精准、采集的数据丰富准确</li>
-<li>比较方便、灵活，能方便手机到用户在界面上的行为数据</li>
-</ul>
-</li>
-<li>可视化埋点
-<ul>
-<li>埋点成本低，但质量不高</li>
-</ul>
-</li>
-<li>无埋点
-<ul>
-<li>埋点成本低，但质量不高</li>
-</ul>
-</li>
-</ul>
-<h4 id="1-2-后端埋点">1.2 后端埋点</h4>
-<p>它的优点是内网传输，即时性强，丢失风险小</p>
-<h3 id="2-埋点类型">2. 埋点类型</h3>
-<p>pv、mv、mc</p>
-<h3 id="3-埋点规范与协作流程">3. 埋点规范与协作流程</h3>
-<p>**协作流程：**我们的流程是这样的，先由需求方提出需求交给业务 PM，业务 PM 在埋点平台做埋点配置，埋点平台根据配置生成代码给到客户端 RD，客户端RD 使用埋点 SDK 做埋点实施，实施之后由客户端 QA 来测试校验然后上线，接着数据组 RD 使用日志数据表加工数据将数据结果交付给数据组 PM，最后将结果交付给需求方。这里简单说下埋点配置环节，在美团外卖是由业务 PM 来统一负责，同时数据团队做规范的指导、定期参加一些埋点评审。</p>
-<p>**埋点规范：**主要是约束一些字段的上报方法，包括字段名称、上报时机等。</p>
-<p>**问题排查：**在问题排查方面，我们有一套比较完整埋点问题追踪流程，也是方便后续做埋点问题的复盘。</p>
-<p>**埋点 SLA：**我们专门制定了一套埋点 SLA ( Service Level Agreement - 服务级别协议 ) 机制，目前这块主要由客户端 RD 和 QA 来保证 SLA，业务 PM 根据埋点重要性提供需要保证的 SLA 列表，数据组提供监控工具。</p>
-<h3 id="4-埋点注意事项">4. 埋点注意事项</h3>
-<p>前面介绍了埋点的基本信息与规范流程，这里给大家介绍一些埋点的注意事项。个人觉得做埋点还是非常需要经验的，甚至是需要更多的试错，这里给大家列了一些注意事项以供参考：</p>
-<p>**同质参数的名称和类型保持一致：**主要就是体现在通用参数、业务参数、行为标识的统一，尽量做到事前治理，给整个的数据加工、数仓建设减轻工作量，当然在数仓加工过程中也一定要做一些容错；</p>
-<p>**通用复用：**尽量少的创建新的事件，而是想办法复用原来的事件，方便后续的埋点管理；比如某弹窗在很多页面都出现过，弹窗模块曝光标识需要是唯一的，当它出现在不同的页面的时候，我们可以通过页面标识 page_id 来区分，而不是每出现一个新的页面就重新定义一个模块标识；</p>
-<p>**最小粒度：**埋点定义到模块内的最小元素，可以避免重复上报；</p>
-<p>**合并上报：**相同模块的 MV 事件可以合并上报；某一页面中一定出现的元素可以不用上报 ( 这里是指 MV 曝光事件 )，或者和 PV 时间合并上报，在 PV 中加一个字段标识即可；</p>
-<p>**历史兼容：**不能改变已有事件标识的含义，不能改变属性标识的含义，不能改变参数值的含义；一般只做新增，不做修改，可以废弃；</p>
-<p>**追踪回溯：**埋点设计文档可以回退到历史版本，便于排查问题。</p>
-<h2 id="流量数据加工">流量数据加工</h2>
-<h3 id="1-流量数仓模型架构">1. 流量数仓模型架构</h3>
-<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gp34jjuunpj30u00gw43k.jpg" alt></p>
-<p>**ODL：**Operational Data Layer，操作型数据层，这一层主要对采集到的数据进行无损着陆、基础字段清洗加工。ODL是原始日志明细宽表，完成了日志数据清洗过滤、归因建设、公共维度建设等。全链路归因建设在这一层实现。公共维度建设比如地理位置维度生成、常用维度代理键生成等，下沉到ODL来进行，降低了运维和下游使用成本，需要依赖于DIM层的环境维度表。</p>
-<p>**IDL：**Integrated Data Layer，集成数据层，这一层在ODL之上，主要完成领域数据建模，描述业务对象属性、业务对象间的关系、业务行为属性、业务行为与业务对象的关系等。IDL层是明细宽表层，根据数据域和业务过程进行主题划分，在主题内描述业务对象和业务行为，特别是对主题内常用的扩展维度字段进行提取，并且进一步使用维度退化手段，提高明细宽表的易用性、降低使用成本。例如搜索主题筛选了用户搜索行为相关的日志，并将描述搜索业务的扩展字段进行提取。</p>
-<p>**CDL：**Component Data Layer，元件数据层，这一层在IDL之上，主要完成分析实体识别，在主题划分基础上，形成分析实体/实体关系特征模型，对模型的指标进行加工，分为明细数据视图和聚合数据表两类。</p>
-<p>**MDL：**Mart Data Layer，集市数据层，这一层在CDL之上，建立在主题划分基础上，通过维度层级汇总形成汇总表，通过维度主键关联形成宽表，给数据应用提供便利应用的半成品数据集，例如，常见的商家流量宽表（商家的点击、曝光、进店统计）。</p>
-<p>**ADL：**App Data Layer，应用数据层，不属于OneData内统一建设，这一层在MDL之上，直接面对数据应用，优先使用MDL的数据，当MDL不满足时，可以向下使用CDL、IDL的数据。ADL作为数据应用的个性化数据一般不对外提供数据服务。</p>
-<p>**DIM：**公共维度层，包括了流量数仓建设过程中使用的流量维表，分成主题维度表和环境维度表。其中主题维度表将埋点标识（用户行为标识）映射成主题维度，是IDL、CDL进行主题划分的核心维度表。环境维度表包括了流量静态属性中常见的维度，例如app名称、启动渠道、设备类型等，主要应用于ODL层的公共维度建设。</p>
-<h3 id="2-流量数仓建设原则">2. 流量数仓建设原则</h3>
-<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gp34iiwagjj30u00gw79l.jpg" alt></p>
-<p>在数仓建设中有很多原则，这里拿出其中三个在流量数仓中比较重要的原则跟大家分享下：</p>
-<p><strong>① 高内聚和低耦合</strong></p>
-<p>将业务相近或相关、粒度相同、高概率同时访问的数据放在一起。具体在流量数仓建设过程中，合理的主题划分其实就是遵循高内聚低耦合的原则。不合理的主题划分会导致数据使用成本、运维成本增大。主题划分是和业务强相关的事情，需要大家定期 review 自己的主题划分是否合理，一定要紧跟业务需求。</p>
-<p><strong>② 公共处理逻辑下沉且单一</strong></p>
-<p>越是底层公用的处理逻辑，越要放在数据底层封装与实现，不要让公共逻辑多处存在且暴露给上层的表。流量底层数据的公共处理逻辑主要是环境维度建设和归因建设。</p>
-<p><strong>③ 成本与性能平衡</strong></p>
-<p>==合理使用视图减少数据存储==</p>
-<p>适当的进行数据冗余来换取查询和刷新性能，但不要过度冗余与数据复制。这是最通俗易懂的原则，但在流量数仓建设过程中，需要综合考虑各种使用场景，实践起来很难。美团外卖每天的数据量几百亿条，这样一份数据，如果在多处出现复制，对存储资源就是很大的浪费。成本与性能平衡确实需要多思考，在做数仓规划时就需要把这个事情考虑到。具体实践如下：</p>
-<ul>
-<li>仅在IDL层保留了明细的日志数据，且通过维度退化手段提高明细宽表表的易用性、降低使用成本。</li>
-<li>IDL层的主题划分过程，如果B主题是A主题的子集，两个主题的区别在于业务描述（业务扩展维度字段）不同，那么A主题使用表来存储逻辑和数据，B主题在A主题表之上使用视图的方式存储数据加工逻辑。举例来说，在美团外卖app首页存在着很多资源位，资源位中有有一部分是营销活动的位置，那么营销活动主题就是B主题，美团外卖app首页资源位主题就是A主题。</li>
-<li>在CDL层对明细数据也使用了视图，不再占用物理存储。</li>
-</ul>
-<h3 id="3-维度建设">3. 维度建设</h3>
-<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gp34tyu3v5j30u00gwadx.jpg" alt></p>
-<p>由于流量数据很多是半结构化的数据，没有分析维度的概念，所以数仓的建设时需要做很多维度建设工作。因此维度建设是整个流量数仓工作中最核心工作，同时也是最大的难点。</p>
-<p>我们维度建设分为两种，环境维度和主题维度。</p>
-<h4 id="3-1-环境维度">3.1 环境维度</h4>
-<h4 id="3-2-主题维度">3.2 主题维度</h4>
-<h1>参考资料</h1>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://jishuin.proginn.com/p/763bfbd31f7c">美团外卖流量数仓建设和分析应用</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/web/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/language/java/web/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">枚举类用法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="Connection-reset原因分析和解决方案">Connection reset原因分析和解决方案</h4>
-<p>一般引起这个问题的原因是服务器服务关闭。</p>
-<p>我遇到过一次问题是因为http端口填写错误。</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liyantianmin/article/details/82505734">Connection reset原因分析和解决方案</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/scala/%E7%94%A8%E6%B3%95/Collection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/language/scala/%E7%94%A8%E6%B3%95/Collection/" class="post-title-link" itemprop="url">Collection</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -423,10 +214,6 @@
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/language/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/scala/%E7%94%A8%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">用法</span></a>
                 </span>
             </span>
 
@@ -442,226 +229,277 @@
 
       
           <p>[toc]</p>
-<h1>待整理</h1>
-<h3 id="什么版本的scala-sdk-collection中包含breakOut">什么版本的scala sdk collection中包含breakOut</h3>
-<p><code>breakOut</code> 是 Scala 2.8 标准库 <code>scala.collection</code> 包中的一个方法<a target="_blank" rel="noopener" href="https://stackoverflow.com/posts/1715681/revisions">-3</a>，在 Scala 2.13 中被移除–。</p>
-<p>下面整理了 <code>breakOut</code> 的版本支持情况，并提供了从 2.13 开始的替代方案。</p>
-<hr>
-<h4 id="⏳-breakOut-的版本变迁">⏳ <code>breakOut</code> 的版本变迁</h4>
+<h1>2.11与2.12 的区别</h1>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> array = <span class="type">Array</span>(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>)</span><br><span class="line">print(array.mkString)</span><br><span class="line">print(array.mkString(<span class="string">&quot;&quot;</span>))</span><br></pre></td></tr></table></figure>
+<h1>2.12与2.13的区别</h1>
+<h2 id="整体区别">整体区别</h2>
+<p>Scala 2.13 是一次<strong>重要的里程碑式更新</strong>，它主要在三个方面与 2.12 版本拉开了距离：<strong>彻底重构了集合框架</strong>、<strong>将标准库模块化</strong>，以及<strong>为 Scala 3 的发布清除了关键的技术障碍</strong>。下表清晰地总结了它们的主要差异：</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Scala 版本</th>
-<th style="text-align:left"><code>breakOut</code> 支持状态</th>
-<th style="text-align:left">备注</th>
+<th style="text-align:left">对比维度</th>
+<th style="text-align:left">Scala 2.13</th>
+<th style="text-align:left">Scala 2.12</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><strong>2.8 至 2.12</strong></td>
-<td style="text-align:left">✅ <strong>可用</strong></td>
-<td style="text-align:left">核心功能，需要 <code>import scala.collection.breakOut</code><a target="_blank" rel="noopener" href="https://stackoverflow.com/posts/1715681/revisions">-3</a></td>
+<td style="text-align:left"><strong>集合库 (Collections)</strong></td>
+<td style="text-align:left"><strong>全面改革</strong>：为更简洁、安全、高效的集合层次结构铺平了道路-。<code>Traversable</code> 被移除，<code>Seq</code> 类型得到了精化等-。</td>
+<td style="text-align:left">稳定且成熟的经典集合体系-。</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>2.13</strong></td>
-<td style="text-align:left">❌ <strong>已移除</strong></td>
-<td style="text-align:left">官方推荐使用 <code>.view</code> + <code>.to(Collection)</code> 组合替代-<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/68723881/conversion-of-breakout-use-iterator-or-view/68725937#68725937">-14</a></td>
+<td style="text-align:left"><strong>标准库结构</strong></td>
+<td style="text-align:left"><strong>深度模块化 (Modularized)</strong>：将庞大的标准库拆分为更小、职责单一的模块，减少了核心依赖并提升了可维护性-。</td>
+<td style="text-align:left">庞大的单体库（monolithic）。</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>3.x</strong></td>
-<td style="text-align:left">❌ <strong>已移除</strong></td>
-<td style="text-align:left">无此方法，需使用替代方案</td>
+<td style="text-align:left"><strong>二进制兼容性</strong></td>
+<td style="text-align:left"><strong>与 2.12 不兼容</strong>：使用 <code>_2.13</code> 后缀标识，使用 2.13 库的 JAR 文件无法在 2.12 项目中运行-。</td>
+<td style="text-align:left">使用 <code>_2.12</code> 后缀，内部小版本之间（如 2.12.x）保持兼容-。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>性能与优化</strong></td>
+<td style="text-align:left"><strong>编译提速</strong>：编译器本身速度提升了约 <strong>5% 至 10%</strong>-。 <strong>运行时优化</strong>：为 Scala 3 和 Java 未来的新特性做准备。</td>
+<td style="text-align:left">已具备的基础优化功能，如 lambda 的优化-。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>语言演进</strong></td>
+<td style="text-align:left"><strong>弃用并清除“杂质”</strong>：弃用和移除了许多过时或罕见的特性，如 <code>Symbol</code> 字面量和早期初始化器，为 Scala 3 清扫道路-。</td>
+<td style="text-align:left">包含更多历史遗留的语言特性。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>迁移与兼容</strong></td>
+<td style="text-align:left"><strong>编译器帮助迁移</strong>：通过 <code>-Xmigration</code> 标志提供详细的迁移建议，并提供了辅助跨版本构建的工具，帮助开发者平稳过渡-。</td>
+<td style="text-align:left">使用标准的构建工具配置。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>新功能与 API</strong></td>
+<td style="text-align:left"><strong>标准库增强</strong>：集合操作 (如 <code>groupMap</code>)-、<code>StringOps</code> 解析功能-和资源管理尝试，让代码更健壮和现代。</td>
+<td style="text-align:left">无相关新增特性。</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h4 id="💡-breakOut-是什么？">💡 <code>breakOut</code> 是什么？</h4>
-<p><code>breakOut</code> 是一个基于 <code>CanBuildFrom</code> 机制的工具，作用是在集合类型转换时<strong>避免创建不必要的中间集合</strong>，从而提升性能并简化代码。</p>
-<p>例如，将 <code>List[String]</code> 直接转为 <code>Map[Int, String]</code>，原本需要生成中间 <code>List[(Int, String)]</code> 再调用 <code>.toMap</code>。使用 <code>breakOut</code> 可以一步完成：</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import scala.collection.breakOut</span><br><span class="line">val m: Map[Int, String] &#x3D; List(&quot;London&quot;, &quot;Paris&quot;).map(x &#x3D;&gt; (x.length, x))(breakOut)</span><br><span class="line">&#x2F;&#x2F; m: Map(6 -&gt; London, 5 -&gt; Paris)</span><br></pre></td></tr></table></figure>
-<p>在 2.8 至 2.12 版本中，这种方式有效避免了中间集合的开销，并让集合类型推断更为灵活<a target="_blank" rel="noopener" href="https://stackoverflow.com/posts/1715681/revisions">-3</a>。</p>
+<h3 id="🚀-核心变化深度解析">🚀 核心变化深度解析</h3>
+<h4 id="1-集合框架-Collections-Framework">1. 集合框架 (Collections Framework)</h4>
+<p>这是 2.13 中最引人注目、影响最广泛的变化。新的集合库更加<strong>一致、安全且高效</strong>-。</p>
+<ul>
+<li><strong>层次结构简化</strong>：去除了冗余的顶层特质 <code>Traversable</code>，使得整个集合体系的继承关系更简单清晰-。</li>
+<li><strong><code>Seq</code> 类型明确</strong>：<code>scala.Seq</code> 在 2.13 中被明确为 <code>scala.collection.immutable.Seq</code> 的别名，避免了与 <code>mutable.Seq</code> 的混淆-。</li>
+<li><strong>新成员加入</strong>：引入了 <code>ArrayDeque</code>，在特定操作上性能优于 <code>ArrayBuffer</code>，为开发者提供了更优的数据结构选择-。</li>
+<li><strong>API 更加直观</strong>：新增了 <code>groupMap</code>、<code>groupMapReduce</code> 等方法，让对集合的分组聚合操作更富表达力-。</li>
+</ul>
+<h4 id="2-标准库模块化-Modularized-Standard-Library">2. 标准库模块化 (Modularized Standard Library)</h4>
+<p>2.13 将原本庞大的标准库拆解为多个小模块，使依赖关系更清晰，并降低了应用启动时的内存占用-。</p>
+<ul>
+<li><code>scala-library</code>: <strong>核心库</strong>。包含最基础的<code>Any</code>、<code>AnyRef</code>、<code>Product</code>等。</li>
+<li><code>scala-reflect</code>: <strong>反射库</strong>。只有在需要显式使用反射 API 时才需引入。</li>
+<li><code>scala-compiler</code>: <strong>编译器库</strong>。仅用于构建编译器插件等开发工具。</li>
+</ul>
+<h4 id="3-为-Scala-3-铺平道路">3. 为 Scala 3 铺平道路</h4>
+<p>2.13 在语言层面移除了大量历史遗留或将来不再支持的旧特性-。</p>
+<ul>
+<li><strong><code>Symbol</code> 字面量</strong>: 语法 <code>'mySymbol</code> 被弃用，推荐使用普通的 <code>String</code> 字面量 <code>&quot;mySymbol&quot;</code> 来代替。</li>
+<li><strong><code>⇒</code> unicode 箭头</strong>: <code>⇒</code> 被弃用，统一使用标准 ASCII 箭头 <code>=&gt;</code>。</li>
+<li><strong>早期初始化器</strong>: 这种不够优雅的特性被弃用，官方推荐使用更为清晰的 <code>trait</code> 参数等新方式。</li>
+<li><strong><code>do-while</code> 循环</strong>: 这种形式的循环被移除。</li>
+</ul>
+<h3 id="📦-项目迁移与兼容性策略">📦 项目迁移与兼容性策略</h3>
+<p>由于 2.13 与 2.12 <strong>二进制不兼容</strong>-，迁移项目时需要分情况处理。</p>
+<p>对于库的作者，需要使用 <strong>交叉编译 (Cross-building)</strong> 来发布同时兼容两个版本的 JAR 包。对于应用开发者，最直接的方式就是在依赖升级前，确保所有第三方库都已提供其 2.13 版本。</p>
+<h3 id="🛠️-官方迁移工具">🛠️ 官方迁移工具</h3>
+<ul>
+<li><strong><code>-Xmigration</code> 标志</strong>: 在 <code>sbt</code> 或 <code>scalac</code> 的选项中设置该标志，编译器会在你使用了新版 Collection 中行为可能发生变化的地方给出详细的警告或建议，帮助你定位问题-。</li>
+<li><strong><code>scala-collection-compat</code> 库</strong>: 这是一个由官方维护的兼容性库，提供了大量 2.13 中的新集合 API 作为“补丁”，让你在 2.12 项目中就能提前用上新语法，有助于平稳过渡-。</li>
+</ul>
+<p>此外，Scala 2.13 对 JDK 的支持也更为出色。2.13.6 及更高版本支持 <strong>JDK 17</strong>-，2.13.11 及以上版本支持 <strong>JDK 21</strong>-。</p>
+<h1>2.13与3.x的区别</h1>
+<h2 id="整体概括">整体概括</h2>
+<p>Scala 3 是一次跨越式的进化，而非在 Scala 2.13 基础上的增量更新。它对语言的核心进行了重新构思和设计，旨在提供更强的表现力、更高的安全性和更流畅的开发体验。</p>
+<p>下面，我将从关键特性、兼容性以及迁移路径等几个方面，为你详细梳理这两个版本之间的核心区别。</p>
 <hr>
-<h4 id="🔁-从-2-13-开始的替代方案">🔁 从 2.13 开始的替代方案</h4>
-<p>从 2.13 起，<code>CanBuildFrom</code> 被 <code>BuildFrom</code> 替代，标准库推荐以下方式实现类似效果：</p>
+<h3 id="🚀-Scala-3-的关键进化">🚀 Scala 3 的关键进化</h3>
+<p>相比 Scala 2.13，Scala 3 在多个方面进行了重塑，引入了一系列强大的新特性。</p>
+<h4 id="1-清晰的上下文抽象">1. 清晰的上下文抽象</h4>
+<p>Scala 3 将 Scala 2 中功能复杂的 <code>implicit</code> 拆解为几个更专注、语义更清晰的语法结构，降低了学习和使用难度<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a>。</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">替代方式</th>
-<th style="text-align:left">示例代码</th>
-<th style="text-align:left">特点</th>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">Scala 2.13</th>
+<th style="text-align:left">Scala 3</th>
+<th style="text-align:left">说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><strong><code>.view.map(...).to(...)</code></strong></td>
-<td style="text-align:left"><code>List(&quot;London&quot;, &quot;Paris&quot;).view.map(x =&gt; (x.length, x)).to(Map)</code></td>
-<td style="text-align:left"><strong>官方推荐</strong>，懒加载中间步骤，清晰高效</td>
+<td style="text-align:left">类型类实例</td>
+<td style="text-align:left"><code>implicit val</code></td>
+<td style="text-align:left"><code>given</code></td>
+<td style="text-align:left"><code>given</code> 专门用于定义“给定实例”<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a></td>
 </tr>
 <tr>
-<td style="text-align:left"><strong><code>.iterator.map(...).to(...)</code></strong></td>
-<td style="text-align:left"><code>List(&quot;London&quot;, &quot;Paris&quot;).iterator.map(x =&gt; (x.length, x)).to(Map)</code></td>
-<td style="text-align:left">与视图类似，但迭代器不可重用</td>
+<td style="text-align:left">上下文参数</td>
+<td style="text-align:left"><code>implicit</code> 参数列表</td>
+<td style="text-align:left"><code>using</code> 子句</td>
+<td style="text-align:left"><code>using</code> 专用于声明上下文参数<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a></td>
+</tr>
+<tr>
+<td style="text-align:left">扩展方法</td>
+<td style="text-align:left"><code>implicit class</code></td>
+<td style="text-align:left"><code>extension</code></td>
+<td style="text-align:left">内置的 <code>extension</code> 语法，声明和使用都更清晰<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a></td>
+</tr>
+<tr>
+<td style="text-align:left">隐式转换</td>
+<td style="text-align:left"><code>implicit def</code></td>
+<td style="text-align:left"><code>given Conversion[A, B]</code></td>
+<td style="text-align:left">将隐式转换能力收窄到一个明确的类型 <code>Conversion</code> 中<a target="_blank" rel="noopener" href="https://blog.csdn.net/f9g0h/article/details/151303853">-10</a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a></td>
 </tr>
 </tbody>
 </table>
-<p>两种方式都能避免创建中间集合，性能与原先的 <code>breakOut</code> 相当。其中视图可以被多次重用，而迭代器在使用一次后就失效了<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/68723881/conversion-of-breakout-use-iterator-or-view/68725937#68725937">-14</a>。</p>
+<h4 id="2-更强大的类型系统">2. 更强大的类型系统</h4>
+<p>Scala 3 引入了众多在类型理论中早已存在但尚未进入主流工业语言的高级特性，让类型系统更加强大和灵活。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">在 Scala 2.13 中的替代方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>交集类型 (<code>A &amp; B</code>)</strong></td>
+<td style="text-align:left">表示既是 <code>A</code> 类型又是 <code>B</code> 类型的值，是类型安全的组合-<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
+<td style="text-align:left"><code>A with B</code> (复合类型)，语义和行为不同</td>
+</tr>
+<tr>
+<td style="text-align:left">**联合类型 (`A</td>
+<td style="text-align:left">B`)**</td>
+<td style="text-align:left">表示是 <code>A</code> 类型或 <code>B</code> 类型的值，极大增强灵活性-<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>不透明类型别名 (<code>opaque type</code>)</strong></td>
+<td style="text-align:left">隐藏具体实现，只提供抽象接口，实现零成本抽象-<a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
+<td style="text-align:left"><code>AnyVal</code> 值类或密封类，但性能或表达力有限</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>枚举 (<code>enum</code>)</strong></td>
+<td style="text-align:left">统一了枚举和代数数据类型，比组合 <code>sealed class</code> + <code>case object</code> 更简洁-<a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a></td>
+<td style="text-align:left">使用 <code>sealed trait/class</code> 和 <code>case object</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>导出子句 (<code>export</code>)</strong></td>
+<td style="text-align:left">避免样板代码，轻松实现聚合或委托模式<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
+<td style="text-align:left">手动编写委托方法</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>依赖函数类型</strong></td>
+<td style="text-align:left">结果类型依赖于参数值，表达能力更强-</td>
+<td style="text-align:left">没有</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>类型 Lambda</strong></td>
+<td style="text-align:left">内联的、类型级别的高阶函数，简洁地操作类型构造器<a target="_blank" rel="noopener" href="https://juejin.cn/post/6963883689285517326">-11</a><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a></td>
+<td style="text-align:left">需要额外的辅助 trait，代码冗长</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-现代化的语法">3. 现代化的语法</h4>
+<p>Scala 3 提供了一系列可选的新语法，让代码更简洁。</p>
+<ul>
+<li><strong>可选大括号和缩进语法</strong>：你可以选择用缩进来代替大括号，像 Python 那样组织代码块<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a><a target="_blank" rel="noopener" href="https://www.infoq.com/news/2021/06/scala-3-overhaul/?topicPageSponsorship=8adc4d8b-752a-4082-a21f-e6787339e976">-15</a>。</li>
+<li><strong>显式 <code>new</code> 关键字可选</strong>：创建类的实例时，可以省略 <code>new</code>，使代码更简洁<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a>。</li>
+<li><strong>控制结构的简化</strong>：<code>if</code>, <code>while</code>, <code>for</code> 等控制结构可以省略括号<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/zh-cn/scala3/new-in-scala3.html">-13</a>。</li>
+<li><strong>顶级定义</strong>：可以直接在包内定义方法、字段等，代替 <code>package object</code><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/current/docs/#dropped-constructs">-27</a>。</li>
+</ul>
+<hr>
+<h3 id="🤝-兼容性与迁移">🤝 兼容性与迁移</h3>
+<p>虽然变化巨大，但 Scala 3 的官方文档特别强调了它实现了与 Scala 2.13 在<strong>运行时</strong>的互操作性。</p>
+<h4 id="🔄-运行时兼容：无缝互操作">🔄 运行时兼容：无缝互操作</h4>
+<p>最关键的一点是，Scala 3 和 Scala 2.13 共享<strong>相同的应用程序二进制接口 (ABI)</strong><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a>。这意味着：</p>
+<ul>
+<li><strong>二进制兼容</strong>：用 Scala 2.13 编译的库，可以直接作为依赖用在 Scala 3 项目中，反之亦然<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-source.html">-3</a>。</li>
+<li><strong>一致的运行时</strong>：除少数改进（如 <code>lazy val</code> 的初始化性能）外，编译后的字节码行为高度一致，确保了性能的稳定<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a>。</li>
+</ul>
+<h4 id="🔄-源码兼容：非破坏性升级">🔄 源码兼容：非破坏性升级</h4>
+<p>尽管运行时兼容，但两种语言在<strong>源码层面并不完全兼容</strong><a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/3.3.2/docs/docs/reference/language-versions/source-compatibility.html">-2</a><a target="_blank" rel="noopener" href="https://www.infoq.com/news/2021/06/scala-3-overhaul/?topicPageSponsorship=8adc4d8b-752a-4082-a21f-e6787339e976">-15</a>。为了让迁移过程平滑，官方提供了完善的工具链：</p>
+<ul>
+<li><strong>提前探测（<code>-Xsource:3</code>）</strong>：在 Scala 2.13 项目中添加此编译选项，编译器会提前警告不兼容未来的 Scala 3 代码，帮助你早做准备<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/3.3.2/docs/docs/reference/language-versions/source-compatibility.html">-2</a><a target="_blank" rel="noopener" href="https://scalatut.greq.me/lesson/prepare-for-scala-3-while-still-on-213">-30</a>。</li>
+<li><strong>过渡版本（<code>3.0-migration</code>）</strong>：此编译器模式会将破坏性的源码改动降级为警告，并尝试提供自动迁移建议<a target="_blank" rel="noopener" href="https://www.scala-lang.org/api/3.3.2/docs/docs/reference/language-versions/source-compatibility.html">-2</a>。</li>
+<li><strong>自动重写与工具</strong>：内置的迁移模式与 <code>scalafix</code> 等工具，可以自动将符合规则的旧代码重写为 Scala 3 风格<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompatibility-table.html">-5</a><a target="_blank" rel="noopener" href="https://scalatut.greq.me/lesson/prepare-for-scala-3-while-still-on-213">-30</a>。</li>
+</ul>
 <blockquote>
-<p>对于需要一步完成类型转换的场景，优先使用 <strong><code>.view.map(...).to(...)</code></strong> 即可。</p>
+<p>需要注意的是，Scala 2 的<strong>宏（Macro）系统</strong>在 Scala 3 中被全新的编译期编程机制（如 <code>inline</code>）取代。这意味着任何依赖 Scala 2 宏的库都必须升级到 Scala 3 版本才能正常工作<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-metaprogramming.html">-25</a>。官方迁移指南提供了一个检查清单，列出了第三方库的迁移状态<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-metaprogramming.html">-25</a>。</p>
 </blockquote>
-<hr>
-<h4 id="💎-总结">💎 总结</h4>
-<ul>
-<li><strong>版本支持</strong>：<code>breakOut</code> 在 <strong>Scala 2.8 ~ 2.12</strong> 中可用，2.13 起被移除。</li>
-<li><strong>替代方案</strong>：升级到 2.13+ 后，改用 <strong><code>.view.map(...).to(Collection)</code></strong>。</li>
-<li><strong>核心目标</strong>：避免中间集合，提升转换性能与代码可读性。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/scala/%E7%94%A8%E6%B3%95/Trait/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/language/scala/%E7%94%A8%E6%B3%95/Trait/" class="post-title-link" itemprop="url">Trait</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index"><span itemprop="name">language</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/scala/" itemprop="url" rel="index"><span itemprop="name">scala</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/scala/%E7%94%A8%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">用法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[toc]</p>
-<h1>Solutions</h1>
-<h2 id="如果想在scala里面保存一个类似于模板的类，里面规定了继承某个trait需要实现的方法，但是这个方法的返回值和参数是不定的，有什么方式实现吗">如果想在scala里面保存一个类似于模板的类，里面规定了继承某个trait需要实现的方法，但是这个方法的返回值和参数是不定的，有什么方式实现吗</h2>
-<p>在 Scala 中，你可以利用<strong>泛型（type parameters）</strong> 或<strong>抽象类型成员（abstract type members）</strong> 来定义一个“模板” trait，其中方法的参数类型和返回值类型可以留给子类去具体指定。这两种方式都能实现你的需求，下面分别介绍。</p>
-<hr>
-<h3 id="方案一：泛型-trait（类型参数）">方案一：泛型 trait（类型参数）</h3>
-<p>这是最直接的方式。在 trait 上声明类型参数，然后在抽象方法中使用这些参数。</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 定义一个模板 trait，其中 F 是参数类型，R 是返回值类型</span><br><span class="line">trait Processor[F, R] &#123;</span><br><span class="line">  def process(input: F): R</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 具体实现：处理 String 返回 Int</span><br><span class="line">class StringLengthProcessor extends Processor[String, Int] &#123;</span><br><span class="line">  override def process(input: String): Int &#x3D; input.length</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 具体实现：处理 (Int, Int) 返回 Boolean</span><br><span class="line">class SumEvenProcessor extends Processor[(Int, Int), Boolean] &#123;</span><br><span class="line">  override def process(input: (Int, Int)): Boolean &#x3D; (input._1 + input._2) % 2 &#x3D;&#x3D; 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>优点</strong>：清晰、类型安全，子类只需指定具体类型。<br>
-<strong>缺点</strong>：如果多个方法共享相同的类型参数，所有方法必须统一使用这些参数。如果你希望不同方法有不同的参数/返回类型，可以为每个方法单独定义类型参数。</p>
-<hr>
-<h3 id="方案二：抽象类型成员（Abstract-Type-Members）">方案二：抽象类型成员（Abstract Type Members）</h3>
-<p>将类型参数内化为 trait 的抽象成员，子类通过 <code>type</code> 关键字来具体化。</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">trait Processor &#123;</span><br><span class="line">  type Input</span><br><span class="line">  type Output</span><br><span class="line">  def process(input: Input): Output</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 子类实现</span><br><span class="line">class StringLengthProcessor extends Processor &#123;</span><br><span class="line">  override type Input &#x3D; String</span><br><span class="line">  override type Output &#x3D; Int</span><br><span class="line">  override def process(input: Input): Output &#x3D; input.length</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 另一种实现</span><br><span class="line">class SumEvenProcessor extends Processor &#123;</span><br><span class="line">  override type Input &#x3D; (Int, Int)</span><br><span class="line">  override type Output &#x3D; Boolean</span><br><span class="line">  override def process(input: Input): Output &#x3D; (input._1 + input._2) % 2 &#x3D;&#x3D; 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>优点</strong>：有时更符合直觉，尤其是当类型与类紧密相关时。<br>
-<strong>缺点</strong>：在外部使用抽象类型成员时，类型推断可能不如泛型方便（需要使用 <code>#</code> 投影或路径依赖类型）。</p>
-<hr>
-<h3 id="方案三：高阶类型（Higher-Kinded-Types）——-适用于参数化容器">方案三：高阶类型（Higher-Kinded Types）—— 适用于参数化容器</h3>
-<p>如果你的方法需要接收一个类型构造器（例如 <code>List[_]</code> 或 <code>Future[_]</code>），可以用高阶类型。</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">trait Wrapper[F[_]] &#123;</span><br><span class="line">  def wrap[A](value: A): F[A]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ListWrapper extends Wrapper[List] &#123;</span><br><span class="line">  override def wrap[A](value: A): List[A] &#x3D; List(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="方案四：使用元组或-HList-处理不定数量的参数">方案四：使用元组或 HList 处理不定数量的参数</h3>
-<p>如果“参数是不定的”指的是<strong>参数个数</strong>不定（而非类型不定），可以用元组（固定个数但类型可不同）或 HList（如 Shapeless）。元组是最简单的方案：</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">trait Processor[Args, R] &#123;</span><br><span class="line">  def process(args: Args): R</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 处理两个参数：Int 和 String，返回 Boolean</span><br><span class="line">class Example extends Processor[(Int, String), Boolean] &#123;</span><br><span class="line">  override def process(args: (Int, String)): Boolean &#x3D; args._1 &gt; 0 &amp;&amp; args._2.nonEmpty</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果需要真正的<strong>变长参数</strong>（varargs），可以定义方法参数为 <code>Seq[A]</code>：</p>
-<p>scala</p>
-<p>复制下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">trait SumProcessor[A, R] &#123;</span><br><span class="line">  def process(args: A*): R   &#x2F;&#x2F; 注意：Scala 中的 varargs 实际上是 Seq[A]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但注意：<code>A*</code> 在 trait 中定义时，实现类必须同样使用 <code>A*</code>，这可能会带来一些限制。</p>
-<hr>
-<h3 id="推荐方案总结">推荐方案总结</h3>
+<h4 id="🔄-已移除的语言特性">🔄 已移除的语言特性</h4>
+<p>为了精简语言，Scala 3 移除了一些在 Scala 2.13 中已弃用或使用频率低的特性。</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">需求</th>
-<th style="text-align:left">推荐方案</th>
+<th style="text-align:left">类别</th>
+<th style="text-align:left">移除特性</th>
+<th style="text-align:left">简要说明</th>
+<th style="text-align:left">替代方案</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">单个方法，参数和返回值类型可变</td>
-<td style="text-align:left"><strong>泛型 trait</strong>（方案一）</td>
+<td style="text-align:left"><strong>语言构造</strong></td>
+<td style="text-align:left"><code>do-while</code> 循环</td>
+<td style="text-align:left">语法与新的控制结构冲突，被移除<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">使用 <code>while</code> 循环替代<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
 </tr>
 <tr>
-<td style="text-align:left">多个方法共享同一组类型</td>
-<td style="text-align:left"><strong>泛型 trait</strong> 或 <strong>抽象类型成员</strong></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">过程语法</td>
+<td style="text-align:left">没有等号和返回类型、只有方法体的写法被移除<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/incompat-syntactic.html#open-brace-indentation-for-passing-an-argument">-33</a></td>
+<td style="text-align:left">明确指定 <code>: Unit =</code></td>
 </tr>
 <tr>
-<td style="text-align:left">类型与类实例绑定（路径依赖）</td>
-<td style="text-align:left"><strong>抽象类型成员</strong>（方案二）</td>
+<td style="text-align:left"><strong>类型系统</strong></td>
+<td style="text-align:left">存在类型</td>
+<td style="text-align:left">已被联合类型、交集类型等新概念取代<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">使用 Scala 3 的新类型特性</td>
 </tr>
 <tr>
-<td style="text-align:left">参数个数不定但类型相同</td>
-<td style="text-align:left"><code>Seq[A]</code> 或 <code>A*</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>any2stringadd</code> 隐式转换</td>
+<td style="text-align:left">可能导致不易察觉的字符串拼接错误，被移除<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">显式使用 <code>.toString</code></td>
 </tr>
 <tr>
-<td style="text-align:left">参数个数不定且类型不同</td>
-<td style="text-align:left"><strong>元组</strong>（TupleX）或 <strong>Shapeless HList</strong></td>
+<td style="text-align:left"><strong>其他语法</strong></td>
+<td style="text-align:left">符号字面量 (<code>'xyz</code>)</td>
+<td style="text-align:left">符号字面量语法被移除<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">使用字符串字面量 <code>&quot;xyz&quot;</code><a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">视图界定 (<code>A &lt;% B</code>)</td>
+<td style="text-align:left">视图界定语法不再支持<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/incompat-contextual-abstractions.html">-19</a></td>
+<td style="text-align:left">使用普通参数或上下文界定</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">早期初始化器</td>
+<td style="text-align:left">这种写法不再被支持<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">使用特质参数-</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">自动应用</td>
+<td style="text-align:left">无参方法 <code>def foo</code> 调用时可省略括号，Scala 3 强制显式写出<code>foo()</code> 以增加代码确定性<a target="_blank" rel="noopener" href="https://lampsrv1.epfl.ch/scala3/guides/migration/incompat-dropped-features.html#do-while-construct">-21</a></td>
+<td style="text-align:left">显式写出括号</td>
 </tr>
 </tbody>
 </table>
-<p>绝大多数场景下，<strong>方案一（泛型 trait）</strong> 足够简洁且强大，建议优先使用。</p>
-<p>如果你需要更具体的代码示例（比如结合隐式参数、上下界等），可以补充说明你的实际应用场景，我会给出更贴合的例子。</p>
+<hr>
+<h3 id="💎-总结">💎 总结</h3>
+<p>总的来说，从 Scala 2.13 到 Scala 3 的演进，是一场深入内核的重大升级。它以打破非必要的源码兼容性为代价，换来了一个在类型系统、语法一致性和开发体验上更加强大的语言。这一点从官方为现有用户提供了完善的迁移工具链，并为 Scala 2.13 和 3 的代码提供了无缝的运行时互操作性，便可见一斑<a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html">-1</a><a target="_blank" rel="noopener" href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-source.html">-3</a>。</p>
+<p>希望这份详细的对比能帮助你更好地理解 Scala 的演进。如果想了解特定特性（比如枚举或给定实例）的具体用法，我们可以继续深入探讨～</p>
 
       
     </div>
@@ -681,7 +519,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/mybatis/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/language/java/mybatis/%E4%B8%8Espring%E6%95%B4%E5%90%88%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -695,7 +533,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/language/java/mybatis/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
+            <a href="/2026/08/31/language/java/mybatis/%E4%B8%8Espring%E6%95%B4%E5%90%88%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">mybatis与spring整合详解</a>
         </h2>
 
         <div class="post-meta">
@@ -705,80 +543,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://baomidou.com/guide/">官方文档</a></p>
-<p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#Parameters">官方文档二</a></p>
-<p><a target="_blank" rel="noopener" href="https://baomidou.com/guide/dynamic-datasource.html">多数据源</a></p>
-<p>数据库</p>
-<ol>
-<li>时区问题</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/mybatis/%E4%B8%8Espring%E6%95%B4%E5%90%88%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/language/java/mybatis/%E4%B8%8Espring%E6%95%B4%E5%90%88%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">mybatis与spring整合详解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -982,7 +747,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/mybatis/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/language/java/mybatis/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -996,7 +761,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/language/java/mybatis/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-title-link" itemprop="url">注意事项</a>
+            <a href="/2026/08/31/language/java/mybatis/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
         </h2>
 
         <div class="post-meta">
@@ -1006,7 +771,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1029,7 +794,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>写入数据库的po，不要给字段设置默认值，除非能保证在update时，默认值不会覆盖错误。</p>
+          <p><a target="_blank" rel="noopener" href="https://baomidou.com/guide/">官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html#Parameters">官方文档二</a></p>
+<p><a target="_blank" rel="noopener" href="https://baomidou.com/guide/dynamic-datasource.html">多数据源</a></p>
+<p>数据库</p>
+<ol>
+<li>时区问题</li>
+</ol>
 
       
     </div>
@@ -1049,7 +820,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/mybatis/%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/language/java/mybatis/%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1063,7 +834,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/language/java/mybatis/%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">mybatis技巧</a>
+            <a href="/2026/08/31/language/java/mybatis/%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">mybatis技巧</a>
         </h2>
 
         <div class="post-meta">
@@ -1073,7 +844,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1131,7 +902,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/problem/NoSuchMethod/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/language/java/mybatis/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1145,7 +916,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/language/java/problem/NoSuchMethod/" class="post-title-link" itemprop="url">NoSuchMethod错误排查</a>
+            <a href="/2026/08/31/language/java/mybatis/%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-title-link" itemprop="url">注意事项</a>
         </h2>
 
         <div class="post-meta">
@@ -1155,7 +926,156 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>写入数据库的po，不要给字段设置默认值，除非能保证在update时，默认值不会覆盖错误。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/language/java/mybatis/%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/language/java/mybatis/%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">mybatis用法总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="selectById">selectById</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&#123;</span></span><br><span class="line"><span class="meta">        &quot;select&quot;,</span></span><br><span class="line"><span class="meta">        &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_start_time, build_end_time, import_start_time, import_end_time, front_end, create_time&quot;,</span></span><br><span class="line"><span class="meta">        &quot;from dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">        &quot;where id = #&#123;id,jdbcType=INTEGER&#125;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;id&quot;, property=&quot;id&quot;, jdbcType=JdbcType.INTEGER, id=true),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;source_type&quot;, property=&quot;sourceType&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;source_id&quot;, property=&quot;sourceId&quot;, jdbcType=JdbcType.BIGINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;name&quot;, property=&quot;name&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;creator&quot;, property=&quot;creator&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;user_type&quot;, property=&quot;userType&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;count&quot;, property=&quot;count&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;create_mode&quot;, property=&quot;createMode&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;status&quot;, property=&quot;status&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;detail_status&quot;, property=&quot;detailStatus&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;build_start_time&quot;, property=&quot;buildStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;build_end_time&quot;, property=&quot;buildEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;import_start_time&quot;, property=&quot;importStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;import_end_time&quot;, property=&quot;importEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;front_end&quot;, property=&quot;frontEnd&quot;, jdbcType=JdbcType.LONGVARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;create_time&quot;, property=&quot;createTime&quot;, jdbcType=JdbcType.TIMESTAMP)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">GroupingMsgPo <span class="title">selectById</span><span class="params">(Integer id)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="selectByCondition">selectByCondition</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;select&quot;,</span></span><br><span class="line"><span class="meta">            &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;build_start_time, build_end_time, import_start_time, import_end_time, front_end, create_time&quot;,</span></span><br><span class="line"><span class="meta">            &quot;from dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">            &quot;where status != &#x27;0&#x27; and create_time between #&#123;startDate&#125; and #&#123;endDate&#125;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;id != null&#x27;&gt; and id=#&#123;id&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;name != null&#x27;&gt; and name like concat(&#x27;%&#x27;, #&#123;name&#125;, &#x27;%&#x27;) &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;creator != null&#x27;&gt; and creator like concat(&#x27;%&#x27;, #&#123;creator&#125;, &#x27;%&#x27;) &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;userType != null and userType.size &gt; 0&#x27; &gt;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;and user_type in &quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;foreach collection=&#x27;userType&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; open=&#x27;(&#x27; close=&#x27;)&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">                    &quot;$&#123;item&#125;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createMode != null and createMode.size &gt; 0&#x27; &gt;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;and create_mode in&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;foreach collection=&#x27;createMode&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; open=&#x27;(&#x27; close=&#x27;)&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">                    &quot;#&#123;item&#125;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;order by id desc&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;offset != null and pageSize != null&#x27;&gt; limit $&#123;offset&#125;, $&#123;pageSize&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;id&quot;, property=&quot;id&quot;, jdbcType=JdbcType.INTEGER, id=true),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;source_type&quot;, property=&quot;sourceType&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;source_id&quot;, property=&quot;sourceId&quot;, jdbcType=JdbcType.BIGINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;name&quot;, property=&quot;name&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;creator&quot;, property=&quot;creator&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;user_type&quot;, property=&quot;userType&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;count&quot;, property=&quot;count&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;create_mode&quot;, property=&quot;createMode&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;status&quot;, property=&quot;status&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;detail_status&quot;, property=&quot;detailStatus&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;build_start_time&quot;, property=&quot;buildStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;build_end_time&quot;, property=&quot;buildEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;import_start_time&quot;, property=&quot;importStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;import_end_time&quot;, property=&quot;importEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;front_end&quot;, property=&quot;frontEnd&quot;, jdbcType=JdbcType.LONGVARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;create_time&quot;, property=&quot;createTime&quot;, jdbcType=JdbcType.TIMESTAMP)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">List&lt;GroupingMsgPo&gt; <span class="title">selectByCondition</span><span class="params">(UserGroupingMetaBo userGroupingMetaBo)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>分页查询的两个参数，分别是偏移量和size。偏移量需要通过页数和size计算出来。</p>
+<h3 id="insert">insert</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&#123;</span></span><br><span class="line"><span class="meta">        &quot;insert into dim_wm_grouping_status (source_type, source_id, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;name, creator, user_type, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;count, create_mode, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_start_time, build_end_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;import_start_time, import_end_time, front_end, create_time)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;values (#&#123;sourceType,jdbcType=SMALLINT&#125;, #&#123;sourceId,jdbcType=BIGINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;name,jdbcType=VARCHAR&#125;, #&#123;creator,jdbcType=VARCHAR&#125;, #&#123;userType,jdbcType=INTEGER&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;count,jdbcType=INTEGER&#125;, #&#123;createMode,jdbcType=SMALLINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;status,jdbcType=VARCHAR&#125;, #&#123;detailStatus,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;buildStartTime,jdbcType=TIMESTAMP&#125;, #&#123;buildEndTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;importStartTime,jdbcType=TIMESTAMP&#125;, #&#123;importEndTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;frontEnd,jdbcType=LONGVARCHAR&#125;, #&#123;createTime,jdbcType=TIMESTAMP&#125;)&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@SelectKey(statement=&quot;SELECT LAST_INSERT_ID()&quot;, keyProperty=&quot;id&quot;, before=false, resultType=Integer.class)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(GroupingMsgPo record)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="batchInsert">batchInsert</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;insert into dim_wm_grouping_status (source_type, source_id, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;name, creator, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;user_type, count, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;create_mode, status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;detail_status, build_start_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_end_time, import_start_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;import_end_time, front_end, create_time)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;values&quot;,</span></span><br><span class="line"><span class="meta">        &quot;&lt;foreach collection=&#x27;list&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot; (#&#123;item.sourceType,jdbcType=SMALLINT&#125;, #&#123;item.sourceId,jdbcType=BIGINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.name,jdbcType=VARCHAR&#125;, #&#123;item.creator,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.userType,jdbcType=INTEGER&#125;, #&#123;item.count,jdbcType=INTEGER&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.createMode,jdbcType=SMALLINT&#125;, #&#123;item.status,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.detailStatus,jdbcType=VARCHAR&#125;, #&#123;item.buildStartTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.buildEndTime,jdbcType=TIMESTAMP&#125;, #&#123;item.importStartTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.importEndTime,jdbcType=TIMESTAMP&#125;, #&#123;item.frontEnd,jdbcType=LONGVARCHAR&#125;,&quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.createTime,jdbcType=TIMESTAMP&#125;)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Options(useGeneratedKeys=true,keyProperty=&quot;id&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">batchInsert</span><span class="params">(<span class="meta">@Param(&quot;list&quot;)</span> List&lt;GroupingMsgPo&gt; list)</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="update">update</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Update(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;update dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">        &quot;set id = #&#123;id,jdbcType=INTEGER&#125;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;sourceType != null&#x27;&gt; ,source_type = #&#123;sourceType,jdbcType=SMALLINT&#125;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;sourceId != null&#x27;&gt; ,source_id = #&#123;sourceId,jdbcType=BIGINT&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;name != null&#x27;&gt; ,name = #&#123;name,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;creator != null&#x27;&gt; ,creator = #&#123;creator,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;userType != null&#x27;&gt; ,user_type = #&#123;userType,jdbcType=INTEGER&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;count != null&#x27;&gt; ,count = #&#123;count,jdbcType=INTEGER&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createMode != null&#x27;&gt; ,create_mode = #&#123;createMode,jdbcType=SMALLINT&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;status != null&#x27;&gt; ,status = #&#123;status,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;detailStatus != null&#x27;&gt; ,detail_status = #&#123;detailStatus,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;buildStartTime != null&#x27;&gt; ,build_start_time = #&#123;buildStartTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;buildEndTime != null&#x27;&gt; ,build_end_time = #&#123;buildEndTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;importStartTime != null&#x27;&gt; ,import_start_time = #&#123;importStartTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;importEndTime != null&#x27;&gt; ,import_end_time = #&#123;importEndTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;frontEnd != null&#x27;&gt; ,front_end = #&#123;frontEnd,jdbcType=LONGVARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createTime != null&#x27;&gt; ,create_time = #&#123;createTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;where id = #&#123;id,jdbcType=INTEGER&#125;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateById</span><span class="params">(GroupingMsgPo record)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="用法对比">用法对比</h2>
+<h4 id="jdbcType-“DATE”-和-jdbcType-“TIMESTAMP”-两种类型的区别"><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010526028/article/details/74315775">jdbcType=“DATE” 和 jdbcType=“TIMESTAMP” 两种类型的区别</a></h4>
+<ol>
+<li>DATE只有年月日，没有时分秒</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/language/java/problem/NoSuchMethod/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/language/java/problem/NoSuchMethod/" class="post-title-link" itemprop="url">NoSuchMethod错误排查</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1201,7 +1121,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/language/java/mybatis/%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/language/java/problem/%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1215,7 +1135,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/language/java/mybatis/%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">mybatis用法总结</a>
+            <a href="/2026/08/31/language/java/problem/%E5%B7%A5%E7%A8%8B%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">工程问题</a>
         </h2>
 
         <div class="post-meta">
@@ -1225,7 +1145,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1233,7 +1153,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-mybatis/" itemprop="url" rel="index"><span itemprop="name">java-mybatis</span></a>
+                  <a href="/categories/java-problem/" itemprop="url" rel="index"><span itemprop="name">java-problem</span></a>
                 </span>
             </span>
 
@@ -1248,22 +1168,150 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="selectById">selectById</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&#123;</span></span><br><span class="line"><span class="meta">        &quot;select&quot;,</span></span><br><span class="line"><span class="meta">        &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_start_time, build_end_time, import_start_time, import_end_time, front_end, create_time&quot;,</span></span><br><span class="line"><span class="meta">        &quot;from dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">        &quot;where id = #&#123;id,jdbcType=INTEGER&#125;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;id&quot;, property=&quot;id&quot;, jdbcType=JdbcType.INTEGER, id=true),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;source_type&quot;, property=&quot;sourceType&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;source_id&quot;, property=&quot;sourceId&quot;, jdbcType=JdbcType.BIGINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;name&quot;, property=&quot;name&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;creator&quot;, property=&quot;creator&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;user_type&quot;, property=&quot;userType&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;count&quot;, property=&quot;count&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;create_mode&quot;, property=&quot;createMode&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;status&quot;, property=&quot;status&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;detail_status&quot;, property=&quot;detailStatus&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;build_start_time&quot;, property=&quot;buildStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;build_end_time&quot;, property=&quot;buildEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;import_start_time&quot;, property=&quot;importStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;import_end_time&quot;, property=&quot;importEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;front_end&quot;, property=&quot;frontEnd&quot;, jdbcType=JdbcType.LONGVARCHAR),</span></span><br><span class="line"><span class="meta">        @Result(column=&quot;create_time&quot;, property=&quot;createTime&quot;, jdbcType=JdbcType.TIMESTAMP)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">GroupingMsgPo <span class="title">selectById</span><span class="params">(Integer id)</span></span>;</span><br></pre></td></tr></table></figure>
-<h3 id="selectByCondition">selectByCondition</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;select&quot;,</span></span><br><span class="line"><span class="meta">            &quot;id, source_type, source_id, name, creator, user_type, count, create_mode, status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;build_start_time, build_end_time, import_start_time, import_end_time, front_end, create_time&quot;,</span></span><br><span class="line"><span class="meta">            &quot;from dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">            &quot;where status != &#x27;0&#x27; and create_time between #&#123;startDate&#125; and #&#123;endDate&#125;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;id != null&#x27;&gt; and id=#&#123;id&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;name != null&#x27;&gt; and name like concat(&#x27;%&#x27;, #&#123;name&#125;, &#x27;%&#x27;) &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;creator != null&#x27;&gt; and creator like concat(&#x27;%&#x27;, #&#123;creator&#125;, &#x27;%&#x27;) &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;userType != null and userType.size &gt; 0&#x27; &gt;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;and user_type in &quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;foreach collection=&#x27;userType&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; open=&#x27;(&#x27; close=&#x27;)&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">                    &quot;$&#123;item&#125;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createMode != null and createMode.size &gt; 0&#x27; &gt;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;and create_mode in&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;foreach collection=&#x27;createMode&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; open=&#x27;(&#x27; close=&#x27;)&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">                    &quot;#&#123;item&#125;&quot;,</span></span><br><span class="line"><span class="meta">                &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;order by id desc&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;offset != null and pageSize != null&#x27;&gt; limit $&#123;offset&#125;, $&#123;pageSize&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;id&quot;, property=&quot;id&quot;, jdbcType=JdbcType.INTEGER, id=true),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;source_type&quot;, property=&quot;sourceType&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;source_id&quot;, property=&quot;sourceId&quot;, jdbcType=JdbcType.BIGINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;name&quot;, property=&quot;name&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;creator&quot;, property=&quot;creator&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;user_type&quot;, property=&quot;userType&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;count&quot;, property=&quot;count&quot;, jdbcType=JdbcType.INTEGER),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;create_mode&quot;, property=&quot;createMode&quot;, jdbcType=JdbcType.SMALLINT),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;status&quot;, property=&quot;status&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;detail_status&quot;, property=&quot;detailStatus&quot;, jdbcType=JdbcType.VARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;build_start_time&quot;, property=&quot;buildStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;build_end_time&quot;, property=&quot;buildEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;import_start_time&quot;, property=&quot;importStartTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;import_end_time&quot;, property=&quot;importEndTime&quot;, jdbcType=JdbcType.TIMESTAMP),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;front_end&quot;, property=&quot;frontEnd&quot;, jdbcType=JdbcType.LONGVARCHAR),</span></span><br><span class="line"><span class="meta">            @Result(column=&quot;create_time&quot;, property=&quot;createTime&quot;, jdbcType=JdbcType.TIMESTAMP)</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function">List&lt;GroupingMsgPo&gt; <span class="title">selectByCondition</span><span class="params">(UserGroupingMetaBo userGroupingMetaBo)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>分页查询的两个参数，分别是偏移量和size。偏移量需要通过页数和size计算出来。</p>
-<h3 id="insert">insert</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&#123;</span></span><br><span class="line"><span class="meta">        &quot;insert into dim_wm_grouping_status (source_type, source_id, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;name, creator, user_type, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;count, create_mode, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;status, detail_status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_start_time, build_end_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;import_start_time, import_end_time, front_end, create_time)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;values (#&#123;sourceType,jdbcType=SMALLINT&#125;, #&#123;sourceId,jdbcType=BIGINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;name,jdbcType=VARCHAR&#125;, #&#123;creator,jdbcType=VARCHAR&#125;, #&#123;userType,jdbcType=INTEGER&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;count,jdbcType=INTEGER&#125;, #&#123;createMode,jdbcType=SMALLINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;status,jdbcType=VARCHAR&#125;, #&#123;detailStatus,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;buildStartTime,jdbcType=TIMESTAMP&#125;, #&#123;buildEndTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;importStartTime,jdbcType=TIMESTAMP&#125;, #&#123;importEndTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;#&#123;frontEnd,jdbcType=LONGVARCHAR&#125;, #&#123;createTime,jdbcType=TIMESTAMP&#125;)&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@SelectKey(statement=&quot;SELECT LAST_INSERT_ID()&quot;, keyProperty=&quot;id&quot;, before=false, resultType=Integer.class)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(GroupingMsgPo record)</span></span>;</span><br></pre></td></tr></table></figure>
-<h3 id="batchInsert">batchInsert</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;insert into dim_wm_grouping_status (source_type, source_id, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;name, creator, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;user_type, count, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;create_mode, status, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;detail_status, build_start_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;build_end_time, import_start_time, &quot;,</span></span><br><span class="line"><span class="meta">        &quot;import_end_time, front_end, create_time)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;values&quot;,</span></span><br><span class="line"><span class="meta">        &quot;&lt;foreach collection=&#x27;list&#x27; item=&#x27;item&#x27; index=&#x27;index&#x27; separator=&#x27;,&#x27;&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot; (#&#123;item.sourceType,jdbcType=SMALLINT&#125;, #&#123;item.sourceId,jdbcType=BIGINT&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.name,jdbcType=VARCHAR&#125;, #&#123;item.creator,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.userType,jdbcType=INTEGER&#125;, #&#123;item.count,jdbcType=INTEGER&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.createMode,jdbcType=SMALLINT&#125;, #&#123;item.status,jdbcType=VARCHAR&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.detailStatus,jdbcType=VARCHAR&#125;, #&#123;item.buildStartTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.buildEndTime,jdbcType=TIMESTAMP&#125;, #&#123;item.importStartTime,jdbcType=TIMESTAMP&#125;, &quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.importEndTime,jdbcType=TIMESTAMP&#125;, #&#123;item.frontEnd,jdbcType=LONGVARCHAR&#125;,&quot;,</span></span><br><span class="line"><span class="meta">            &quot;#&#123;item.createTime,jdbcType=TIMESTAMP&#125;)&quot;,</span></span><br><span class="line"><span class="meta">        &quot;&lt;/foreach&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;,</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="meta">@Options(useGeneratedKeys=true,keyProperty=&quot;id&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">batchInsert</span><span class="params">(<span class="meta">@Param(&quot;list&quot;)</span> List&lt;GroupingMsgPo&gt; list)</span></span>;</span><br></pre></td></tr></table></figure>
-<h3 id="update">update</h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Update(&#123;</span></span><br><span class="line"><span class="meta">    &quot;&lt;script&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;update dim_wm_grouping_status&quot;,</span></span><br><span class="line"><span class="meta">        &quot;set id = #&#123;id,jdbcType=INTEGER&#125;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;sourceType != null&#x27;&gt; ,source_type = #&#123;sourceType,jdbcType=SMALLINT&#125;&lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;sourceId != null&#x27;&gt; ,source_id = #&#123;sourceId,jdbcType=BIGINT&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;name != null&#x27;&gt; ,name = #&#123;name,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;creator != null&#x27;&gt; ,creator = #&#123;creator,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;userType != null&#x27;&gt; ,user_type = #&#123;userType,jdbcType=INTEGER&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;count != null&#x27;&gt; ,count = #&#123;count,jdbcType=INTEGER&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createMode != null&#x27;&gt; ,create_mode = #&#123;createMode,jdbcType=SMALLINT&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;status != null&#x27;&gt; ,status = #&#123;status,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;detailStatus != null&#x27;&gt; ,detail_status = #&#123;detailStatus,jdbcType=VARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;buildStartTime != null&#x27;&gt; ,build_start_time = #&#123;buildStartTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;buildEndTime != null&#x27;&gt; ,build_end_time = #&#123;buildEndTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;importStartTime != null&#x27;&gt; ,import_start_time = #&#123;importStartTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;importEndTime != null&#x27;&gt; ,import_end_time = #&#123;importEndTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;frontEnd != null&#x27;&gt; ,front_end = #&#123;frontEnd,jdbcType=LONGVARCHAR&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">            &quot;&lt;if test=&#x27;createTime != null&#x27;&gt; ,create_time = #&#123;createTime,jdbcType=TIMESTAMP&#125; &lt;/if&gt;&quot;,</span></span><br><span class="line"><span class="meta">        &quot;where id = #&#123;id,jdbcType=INTEGER&#125;&quot;,</span></span><br><span class="line"><span class="meta">    &quot;&lt;/script&gt;&quot;</span></span><br><span class="line"><span class="meta">    &#125;)</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">updateById</span><span class="params">(GroupingMsgPo record)</span></span>;</span><br></pre></td></tr></table></figure>
-<h2 id="用法对比">用法对比</h2>
-<h4 id="jdbcType-“DATE”-和-jdbcType-“TIMESTAMP”-两种类型的区别"><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010526028/article/details/74315775">jdbcType=“DATE” 和 jdbcType=“TIMESTAMP” 两种类型的区别</a></h4>
-<ol>
-<li>DATE只有年月日，没有时分秒</li>
-</ol>
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/jbgtwang/article/details/90443069?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control">intellij idea载入java工程报程序包不存在问题</a></p>
+<p>没有或无法加载主类<br>
+Java:程序包xxxx不存在</p>
+<p>mvn idea:module 命令执行重新生成iml文件</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/language/java/problem/%E9%9B%B6%E6%95%A3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/language/java/problem/%E9%9B%B6%E6%95%A3%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">java零散问题汇总</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-problem/" itemprop="url" rel="index"><span itemprop="name">java-problem</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>当输出在sleep之后时，无法打印</p>
+<p>怀疑原因是因为线程被挂起，无法继续执行，但为什么每个线程都无法被唤醒？需要看下唤醒逻辑</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;orderInfo:&quot;</span> + orderInfo);</span><br></pre></td></tr></table></figure>
+<h3 id="502错误">502错误</h3>
+<p>有可能是因为有人在进行远程调试</p>
+<h3 id="空指针可能情况">空指针可能情况</h3>
+<p>基本类型的值为null</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/language/java/rule/%E4%BC%98%E9%9B%85%E7%9A%84%E5%86%99Api%E6%8E%A5%E5%8F%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/language/java/rule/%E4%BC%98%E9%9B%85%E7%9A%84%E5%86%99Api%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">如何优雅的写api接口</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fa75acba5b07">看看人家那后端API接口写得，那叫一个优雅！</a></p>
 
       
     </div>

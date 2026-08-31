@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/git/%E6%B3%A8%E6%84%8F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/hive/join/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/tools/git/%E6%B3%A8%E6%84%8F/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/08/31/sql/hive/join/" class="post-title-link" itemprop="url">hive-join</a>
         </h2>
 
         <div class="post-meta">
@@ -201,557 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>每次与origin分支对比前，先执行git pull操作，才能获取到远端的最新代码。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/tools/git/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">问题解决</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[toc]</p>
-<h2 id="网络问题">网络问题</h2>
-<h3 id="github-网址访问不了">github 网址访问不了</h3>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43804496/article/details/131475204">GitHub打不开的解决方案（超简单）</a></p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://sites.ipaddress.com/github.com/">https://sites.ipaddress.com/github.com/</a></li>
-<li><a target="_blank" rel="noopener" href="https://sites.ipaddress.com/fastly.net/">https://sites.ipaddress.com/fastly.net/</a></li>
-<li><a target="_blank" rel="noopener" href="https://sites.ipaddress.com/assets-cdn.github.com/">https://sites.ipaddress.com/assets-cdn.github.com/</a></li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://www.ipaddress.com/">My IP | IP Address Tools | IP Geolocation | Website Traffic Checker</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">140.82.113.4 github.com</span><br><span class="line">151.101.1.194 github.global.ssl.fastly.net</span><br><span class="line">151.101.65.194 github.global.ssl.fastly.net</span><br><span class="line">151.101.129.194 github.global.ssl.fastly.net</span><br><span class="line">151.101.193.194 github.global.ssl.fastly.net</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">185.199.109.153 assets-cdn.github.com</span><br><span class="line">185.199.110.153 assets-cdn.github.com</span><br><span class="line">185.199.111.153 assets-cdn.github.com</span><br></pre></td></tr></table></figure>
-<p>Mac:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/hosts</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 刷新DNS</span></span><br><span class="line">sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder</span><br></pre></td></tr></table></figure>
-<p>Windows:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> ipconfig /flushdns</span></span><br></pre></td></tr></table></figure>
-<h2 id="问题">问题</h2>
-<h3 id="LF-will-be-replaced-by-CRLF">LF will be replaced by CRLF</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config core.autocrlf false</span><br><span class="line">1. true:</span><br><span class="line">2. false:</span><br><span class="line">3. input:</span><br></pre></td></tr></table></figure>
-<h3 id="切换分支时-如何保证文件完全与线上一致，即其他分支新加的文件被删掉">切换分支时 如何保证文件完全与线上一致，即其他分支新加的文件被删掉</h3>
-<h2 id="命令报错">命令报错</h2>
-<h3 id="Author-identity-unknown">Author identity unknown</h3>
-<p>报错信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Author identity unknown</span><br><span class="line"></span><br><span class="line">*** Please tell me who you are.</span><br><span class="line"></span><br><span class="line">Run</span><br><span class="line"></span><br><span class="line">  git config --global user.email &quot;you@example.com&quot;</span><br><span class="line">  git config --global user.name &quot;Your Name&quot;</span><br><span class="line"></span><br><span class="line">to set your account&#39;s default identity.</span><br><span class="line">Omit --global to set the identity only in this repository.</span><br><span class="line"></span><br><span class="line">fatal: unable to auto-detect email address (got &#39;jingqi@DESKTOP-BKUPVT9.(none)&#39;)</span><br></pre></td></tr></table></figure>
-<p>解决办法</p>
-<ol>
-<li>按照指导重新设置<code>user.email</code>和<code>user.name</code>，注意变量名称不要设置错了</li>
-<li>用<code>git var GIT_AUTHOR_IDENT</code> 验证是否设置成功。</li>
-</ol>
-<p>参考资料：</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#Formatting-and-Whitespace">git config doc</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings">Configuring Git to handle line endings</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/tools/hexo/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">hexo常用命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="本地运行">本地运行</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<h2 id="服务器部署">服务器部署</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo d -g</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<h2 id="源码提交">源码提交</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b blog-source</span><br><span class="line">git add -A</span><br><span class="line">git commit -m &quot;init blog&quot;</span><br><span class="line">git push origin blog-source</span><br></pre></td></tr></table></figure>
-<h2 id="参考资料">参考资料</h2>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/111639860">如何用 Github 搭建博客</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/hexo/hexo%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/tools/hexo/hexo%E5%B8%B8%E8%A7%81%E6%8A%A5%E9%94%99/" class="post-title-link" itemprop="url">hexo常见报错</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="bad-indentation-of-a-mapping-entry">bad indentation of a mapping entry</h3>
-<ol>
-<li>title中缩进不正常，均要用tab缩进</li>
-</ol>
-<h3 id="warning-adding-embedded-git-repository-themes-next">warning: adding embedded git repository: themes/next</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">warning: adding embedded git repository: themes&#x2F;next</span><br><span class="line">hint: You&#39;ve added another git repository inside your current repository.</span><br><span class="line">hint: Clones of the outer repository will not contain the contents of</span><br><span class="line">hint: the embedded repository and will not know how to obtain it.</span><br><span class="line">hint: If you meant to add a submodule, use:</span><br><span class="line">hint:</span><br><span class="line">hint: 	git submodule add &lt;url&gt; themes&#x2F;next</span><br><span class="line">hint:</span><br><span class="line">hint: If you added this path by mistake, you can remove it from the</span><br><span class="line">hint: index with:</span><br><span class="line">hint:</span><br><span class="line">hint: 	git rm --cached themes&#x2F;next</span><br><span class="line">hint:</span><br><span class="line">hint: See &quot;git help submodule&quot; for more information.</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1583762">git仓库包含子仓库时，add报错的解决办法</a></p>
-<h2 id="参考资料">参考资料</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tappat/article/details/103299038">hexo部署成功仍未更新或无法打开的情况</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next/issues/1050">修改scheme后发布不起作用</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.tuziang.com/combat/904.html">Hexo博客 Next更换修改主题样式 不生效的解决</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/tools/component/protobuf/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/tools/component/protobuf/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">Microsoft Windows [Version 10.0.19044.2006]</span><br><span class="line">(c) Microsoft Corporation. All rights reserved.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo PATH</span><br><span class="line">PATH</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo $PATH</span><br><span class="line">$PATH</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo %PATH</span><br><span class="line">%PATH</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo %PATH%</span><br><span class="line">C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files\Common Files\Microsoft Shared\Microsoft Online Services;C:\Program Files (x86)\Common Files\Microsoft Shared\Microsoft Online Services;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;D:\Support\gawk-3.1.6-1-bin\bin;D:\Support\Nuget;C:\Program Files\dotnet\;C:\Users\jingqicao\AppData\Local\CloudBuild;C:\Users\jingqicao\AppData\Local\CloudBuild;C:\Users\jingqicao\AppData\Local\Microsoft\WindowsApps;C:\Users\jingqicao\.dotnet\tools;C:\Users\jingqicao\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\jingqicao\Program Files\protoc-3.13.0-win64\bin;D:\Support\spark-3.0.1-bin-hadoop2.7\bin;D:\Support\spark-3.0.1-bin-hadoop2.7\sbin;C:\Program Files\Java\jdk1.8.0_291\bin;D:\Support\hadoop-2.7.7\bin;D:\Support\hadoop-2.7.7\sbin;D:\Support\apache-maven-3.8.1\bin;C:\Users\jingqicao\AppData\Local\Programs\Python\Python39\Scripts;C:\Users\jingqicao\AppData\Local\atom\bin;C:\Users\jingqicao\.dotnet\tools;D:\Support\Go\bin;</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ --go_opt&#x3D;file_extension&#x3D;.pd.go D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: no such flag -file_extension</span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ --go_opt&#x3D;.pd.go D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: no such flag -.pd.go</span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ --go_opt&#x3D;. D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: no such flag -.</span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: unable to determine Go import path for &quot;Events&#x2F;App.proto&quot;</span><br><span class="line"></span><br><span class="line">Please specify either:</span><br><span class="line">        • a &quot;go_package&quot; option in the .proto source file, or</span><br><span class="line">        • a &quot;M&quot; argument on the command line.</span><br><span class="line"></span><br><span class="line">See https:&#x2F;&#x2F;developers.google.com&#x2F;protocol-buffers&#x2F;docs&#x2F;reference&#x2F;go-generated#package for more information.</span><br><span class="line"></span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Auction.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\AuctionFacts.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Bid.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ClickEvent.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\CommonTypes.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Device.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ExternalUser.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\L1ClassifierScore.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Location.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationConfigParams.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationServingLogRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\OperatingSystem.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\PiiRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Revenue.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Site.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\User.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ViewabilityEvent.proto</span><br><span class="line">google&#x2F;protobuf&#x2F;timestamp.proto: File not found.</span><br><span class="line">Events&#x2F;ViewabilityEvent.proto:4:1: Import &quot;google&#x2F;protobuf&#x2F;timestamp.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;ViewabilityEvent.proto:21:5: &quot;google.protobuf.Timestamp&quot; is not defined.</span><br><span class="line">Events&#x2F;ClickEvent.proto:4:1: Import &quot;google&#x2F;protobuf&#x2F;timestamp.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;ClickEvent.proto:18:9: &quot;google.protobuf.Timestamp&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:3:1: Import &quot;google&#x2F;protobuf&#x2F;timestamp.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:10:1: Import &quot;Events&#x2F;ViewabilityEvent.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:11:1: Import &quot;Events&#x2F;ClickEvent.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:23:9: &quot;google.protobuf.Timestamp&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:45:9: &quot;ViewabilityEvent&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:46:9: &quot;ViewabilityEvent&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:47:9: &quot;ClickEvent&quot; is not defined.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: unable to determine Go import path for &quot;Events&#x2F;App.proto&quot;</span><br><span class="line"></span><br><span class="line">Please specify either:</span><br><span class="line">        • a &quot;go_package&quot; option in the .proto source file, or</span><br><span class="line">        • a &quot;M&quot; argument on the command line.</span><br><span class="line"></span><br><span class="line">See https:&#x2F;&#x2F;developers.google.com&#x2F;protocol-buffers&#x2F;docs&#x2F;reference&#x2F;go-generated#package for more information.</span><br><span class="line"></span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: unable to determine Go import path for &quot;Events&#x2F;App.proto&quot;</span><br><span class="line"></span><br><span class="line">Please specify either:</span><br><span class="line">        • a &quot;go_package&quot; option in the .proto source file, or</span><br><span class="line">        • a &quot;M&quot; argument on the command line.</span><br><span class="line"></span><br><span class="line">See https:&#x2F;&#x2F;developers.google.com&#x2F;protocol-buffers&#x2F;docs&#x2F;reference&#x2F;go-generated#package for more information.</span><br><span class="line"></span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_package&#x3D;Microsoft.BI.Mediation.Schemas.Go --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Unknown flag: --go_package</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_package&#x3D;Microsoft.BI.Mediation.Schemas.Go --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Unknown flag: --go_package</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:31: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:48: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:56: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:64: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:6:1: Expected &quot;;&quot;.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:31: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:48: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:56: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:64: Invalid escape sequence in string literal.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:31: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:48: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:56: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:64: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:98: Invalid escape sequence in string literal.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:26: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:60: Invalid escape sequence in string literal.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Auction.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\AuctionFacts.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Bid.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ClickEvent.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\CommonTypes.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Device.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ExternalUser.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\L1ClassifierScore.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Location.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationConfigParams.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationServingLogRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\OperatingSystem.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\PiiRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Revenue.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Site.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\User.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ViewabilityEvent.proto</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/spark/%E9%85%8D%E7%BD%AE%E9%A1%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/spark/%E9%85%8D%E7%BD%AE%E9%A1%B9/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spark.sessionState.conf.setConfString(&quot;spark.sql.streaming.minBatchesToRetain&quot;, &quot;5&quot;)</span><br><span class="line">logger.info(&quot;spark.sql.streaming.minBatchesToRetain:&quot; + spark.sessionState.conf.minBatchesToRetain)</span><br><span class="line">logger.info(&quot;spark.sql.shuffle.partitions:&quot; + spark.sparkContext.getConf.get(&quot;spark.sql.shuffle.partitions&quot;))</span><br><span class="line">logger.info(&quot;spark.sql.streaming.multipleWatermarkPolicy:&quot; + spark.sparkContext.getConf.get(&quot;spark.sql.streaming.multipleWatermarkPolicy&quot;))</span><br><span class="line">val logSparkConf &#x3D; config.getConfig(&quot;logSparkConf&quot;)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/sql/%E5%AF%B9%E6%AF%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/sql/%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/sql/hive/group%E7%94%A8%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/sql/hive/group%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">hive-官网索引</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>grouping sets 要保证sets中每个组合中缺失的维度，不能包含null值</p>
-<p>group语法增强，可以使用维度下标表示，但如果grouping sets不支持，只能写字段名</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/sql/hive/join/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/27/sql/hive/join/" class="post-title-link" itemprop="url">hive-join</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -807,7 +257,7 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/27/sql/hive/%E5%AE%98%E7%BD%91%E7%B4%A2%E5%BC%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/hive/%E5%AE%98%E7%BD%91%E7%B4%A2%E5%BC%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -821,7 +271,7 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/27/sql/hive/%E5%AE%98%E7%BD%91%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">hive-官网索引</a>
+            <a href="/2026/08/31/sql/hive/%E5%AE%98%E7%BD%91%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">hive-官网索引</a>
         </h2>
 
         <div class="post-meta">
@@ -831,7 +281,7 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-27 11:42:46" itemprop="dateCreated datePublished" datetime="2026-08-27T11:42:46+00:00">2026-08-27</time>
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -886,6 +336,563 @@ left semi join 中最后 select 的结果只许出现左表，因为右表只有
 <li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+WindowingAndAnalytics">Windowing, OVER, and Analytics</a></li>
 <li><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/Common+Table+Expression">Common Table Expressions</a> 临时表语法</li>
 </ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/hive/%E5%BE%85%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/sql/hive/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/helloxiaozhe/article/details/80363893">Hive下查看表占用空间大小的方法</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/hive/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/sql/hive/%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">hive常用函数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="常用">常用</h2>
+<h5 id="8位dt转10位">8位dt转10位</h5>
+<p><code>from_unixtime(unix_timestamp(t.dt,'yyyymmdd'),'yyyy-mm-dd')</code></p>
+<h5 id="8位减1小时">8位减1小时</h5>
+<p>dt格式2019120100<br>
+<code>from_unixtime(unix_timestamp(dt,'yyyyMMddHH') - 60*60, 'yyyy-MM-dd')</code></p>
+<h5 id="8位日期计算">8位日期计算</h5>
+<p><code>regexp_replace(date_sub(from_unixtime(unix_timestamp(t.dt,'yyyymmdd'),'yyyy-mm-dd'), 10), '-', '')</code></p>
+<h5 id="当前日期前一天">当前日期前一天</h5>
+<h5 id="保留2位小数">保留2位小数</h5>
+<p><code>round(123.4567, 2)</code></p>
+<h5 id="时间戳转换">时间戳转换</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">hour</span>(from_unixtime(event_timestamp/<span class="number">1000</span>,<span class="string">&#x27;yyyy-MM-dd HH:mm:ss&#x27;</span>)) hour_time, <span class="keyword">count</span>(<span class="keyword">distinct</span> session_id)</span><br><span class="line"><span class="keyword">from</span> mart_eif_flow.bas_log_sdk_waimai_c <span class="keyword">where</span> dt=<span class="string">&#x27;20201217&#x27;</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">hour</span>(from_unixtime(event_timestamp/<span class="number">1000</span>,<span class="string">&#x27;yyyy-MM-dd HH:mm:ss&#x27;</span>)) <span class="keyword">order</span> <span class="keyword">by</span> hour_time</span><br></pre></td></tr></table></figure>
+<h3 id="计算">计算</h3>
+<h5 id="保留小数">保留小数</h5>
+<h2 id="字符串">字符串</h2>
+<h3 id="替换">替换</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">regexp_replace(&#x27;abc/d&#x27;, &#x27;/&#x27;, &#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+<h3 id="json">json</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get_json_object(json_str, &#x27;$.csu_id&#x27;)</span><br><span class="line">// json_str可以标准的json字符串，也可以是包含转译符的字符串</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/hive/%E6%95%B0%E6%8D%AE%E6%8E%A2%E6%9F%A5%E9%80%BB%E8%BE%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/sql/hive/%E6%95%B0%E6%8D%AE%E6%8E%A2%E6%9F%A5%E9%80%BB%E8%BE%91/" class="post-title-link" itemprop="url">数据探查逻辑</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">distinct</span> seller_bu_id) <span class="keyword">as</span> ct1, </span><br><span class="line">			 <span class="keyword">count</span>(<span class="keyword">distinct</span> seller_bu_id, management_city_id) <span class="keyword">as</span> ct2</span><br><span class="line"><span class="keyword">from</span> mart_caterb2b.dim_seller_management_city_info</span><br></pre></td></tr></table></figure>
+<ol>
+<li>如果 ct1 = ct2，说明seller_bu_id:management_city_id是n:1的关系，n是1还是多，需要继续探查</li>
+<li>如果 ct1 &lt; ct2, 说明seller_bu_id:management_city_id是1:n的关系，n是多</li>
+<li>如果 ct1 &gt; ct2, 说明management_city_id中有null值，比例关系需要去掉这些null值重新计算。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/hive/%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/sql/hive/%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA/" class="post-title-link" itemprop="url">hive常用函数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> temp_table <span class="keyword">as</span> (</span><br><span class="line">  <span class="keyword">select</span> <span class="string">&#x27;1&#x27;</span> <span class="keyword">as</span> f1, <span class="literal">null</span> <span class="keyword">as</span> f2</span><br><span class="line">  <span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line">  <span class="keyword">select</span> <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;3&#x27;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="count-distinct-结果是字段均不为null的去重值">count distinct 结果是字段均不为null的去重值</h3>
+<p>所以在通过count distinct判断字段的重复情况时，注意把相关字段的null附上值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(*)</span><br><span class="line"><span class="keyword">from</span> temp_table</span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="string">`count`</span>(*)</span><br><span class="line"><span class="number">2</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(<span class="keyword">distinct</span> f1, f2)</span><br><span class="line"><span class="keyword">from</span> temp_table</span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="string">`count`</span>(<span class="keyword">DISTINCT</span> <span class="string">`f1`</span>, <span class="string">`f2`</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">count</span>(f1, f2)</span><br><span class="line"><span class="keyword">from</span> temp_table</span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="string">`count`</span>(<span class="string">`f1`</span>, <span class="string">`f2`</span>)</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="关联字段中有null时是关联不上的，即使左右都是null">关联字段中有null时是关联不上的，即使左右都是null</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a.f1, a.f2, b.f1, b.f2</span><br><span class="line"><span class="keyword">from</span> temp_table a</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> temp_table b</span><br><span class="line"><span class="keyword">on</span> a.f1 = b.f1</span><br><span class="line"><span class="keyword">and</span> a.f2 = b.f2</span><br><span class="line"><span class="comment">--</span></span><br><span class="line">f1	f2	f1	f2</span><br><span class="line"><span class="number">1</span>	<span class="literal">NULL</span>	<span class="literal">NULL</span>	<span class="literal">NULL</span></span><br><span class="line"><span class="number">1</span>	<span class="number">3</span>	<span class="number">1</span>	<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h3 id="sum中包含null，不会影响sum的值">sum中包含null，不会影响sum的值</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">sum</span>(ct)</span><br><span class="line"><span class="keyword">from</span>(<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">as</span> ct</span><br><span class="line"><span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line"><span class="keyword">select</span> <span class="literal">null</span>)a</span><br><span class="line"></span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="string">`sum`</span>(<span class="string">`ct`</span>)</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/hive/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/sql/hive/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/mysql/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/sql/mysql/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">基础语法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Update">Update</h2>
+<h3 id="1-单条更新">1. 单条更新</h3>
+<h3 id="2-批量更新">2. 批量更新</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mytable </span><br><span class="line">SET myfield &#x3D; CASE other_field </span><br><span class="line">WHEN 1 THEN &#39;value&#39; </span><br><span class="line">WHEN 2 THEN &#39;value&#39; </span><br><span class="line">WHEN 3 THEN &#39;value&#39; </span><br><span class="line">END </span><br><span class="line">WHERE id IN (1,2,3) </span><br></pre></td></tr></table></figure>
+<h2 id="Select">Select</h2>
+<h3 id="1-limit">1. limit</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语句1：<span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">limit</span> <span class="number">9</span>,<span class="number">4</span> //第一个参数表示从该参数的下一条数据开始，第二个参数表示每次返回的数据条数。</span><br><span class="line">语句<span class="number">2</span>：slect * <span class="keyword">from</span> student <span class="keyword">limit</span> <span class="number">4</span> <span class="keyword">offset</span> <span class="number">9</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ahang/p/5644535.html">mysql limit分页</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/mysql/%E6%9F%A5%E8%AF%A2%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/sql/mysql/%E6%9F%A5%E8%AF%A2%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">mysql查询原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id></h5>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/minikobe/p/12359828.html">子查询与关联查询区别</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/08/31/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">特殊语法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="MYSQL中的COLLATE是什么？"><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1366841">MYSQL中的COLLATE是什么？</a></h5>
+<p>指定排序规则</p>
 
       
     </div>

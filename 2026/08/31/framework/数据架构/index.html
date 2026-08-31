@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[toc] 待整理 Kappa 架构是什么样的，运用在实际业务上是否合理，还有什么其他架构的选择，以及哪些公司采用了这些架构 ⚙️ Kappa架构是什么样的？ Kappa架构的核心思想可以概括为一句话：一切皆为流，用一套流处理引擎处理所有数据--1。 它由Apache Kafka的创始人Jay Kreps提出，旨在解决早期Lambda架构的复杂性-1-4。  Lambda架构的痛点：Lambda架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据架构">
+<meta property="og:url" content="http://example.com/2026/08/31/framework/%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84/index.html">
+<meta property="og:site_name" content="生而为人">
+<meta property="og:description" content="[toc] 待整理 Kappa 架构是什么样的，运用在实际业务上是否合理，还有什么其他架构的选择，以及哪些公司采用了这些架构 ⚙️ Kappa架构是什么样的？ Kappa架构的核心思想可以概括为一句话：一切皆为流，用一套流处理引擎处理所有数据--1。 它由Apache Kafka的创始人Jay Kreps提出，旨在解决早期Lambda架构的复杂性-1-4。  Lambda架构的痛点：Lambda架">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-08-31T04:04:11.552Z">
+<meta property="article:modified_time" content="2026-08-31T04:04:11.553Z">
+<meta property="article:author" content="hash007">
+<meta property="article:tag" content="framework">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/08/31/framework/%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>数据架构 | 生而为人</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">生而为人</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">程序员的自我修养</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/framework/%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据架构
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/framework/" itemprop="url" rel="index"><span itemprop="name">framework</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[toc]</p>
+<h1>待整理</h1>
+<h2 id="Kappa-架构是什么样的，运用在实际业务上是否合理，还有什么其他架构的选择，以及哪些公司采用了这些架构">Kappa 架构是什么样的，运用在实际业务上是否合理，还有什么其他架构的选择，以及哪些公司采用了这些架构</h2>
+<h3 id="⚙️-Kappa架构是什么样的？">⚙️ Kappa架构是什么样的？</h3>
+<p>Kappa架构的核心思想可以概括为一句话：<strong>一切皆为流，用一套流处理引擎处理所有数据</strong>-<a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/692d51adaa20654bee7a75d8">-1</a>。</p>
+<p>它由Apache Kafka的创始人Jay Kreps提出，旨在解决早期Lambda架构的复杂性<a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/692d51adaa20654bee7a75d8">-1</a><a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/kappa-architecture-guide">-4</a>。</p>
+<ul>
+<li><strong>Lambda架构的痛点</strong>：Lambda架构为了兼顾“实时”与“准确”，维护着<strong>两套独立的处理逻辑</strong>：一套是低延迟的<strong>流处理层</strong>，产出近实时的近似结果；另一套是高准确度的<strong>批处理层</strong>，定期（如每天）重算全量数据以修正结果<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a><a target="_blank" rel="noopener" href="https://risingwave.com/blog/lambda-to-kappa-stream-processing-architecture/">-5</a>。这导致系统复杂、维护成本高，且实时与离线结果常对不上<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。</li>
+<li><strong>Kappa的解决思路</strong>：它砍掉了独立的批处理层，<strong>只保留一个流处理层</strong>-<a target="_blank" rel="noopener" href="https://cloud.tencent.com.cn/developer/article/2607231?policyId=1003">-17</a>。其核心是依赖一个<strong>可重放的事件日志</strong>（如Kafka）<a target="_blank" rel="noopener" href="https://streamkap.com/resources-and-guides/kappa-architecture-guide">-4</a>。所有新数据源源不断地流入这个日志，流处理引擎实时消费并计算结果。当业务逻辑变更或需要修正历史数据时，<strong>只需将日志从头开始“重放”（Replay）一遍</strong>，通过同一个流处理任务就能得到修正后的结果-<a target="_blank" rel="noopener" href="https://www.finedatalink.com/blog/article/692d51adaa20654bee7a75d8">-1</a>。</li>
+</ul>
+<blockquote>
+<p><strong>形象理解</strong>：Lambda像两条生产线（一条快但不精细，一条慢但精准），最后再合并产品；Kappa则是一条高度自动化的柔性生产线，需要返工时，就把原材料（日志）从头再走一遍流程<a target="_blank" rel="noopener" href="https://risingwave.com/blog/lambda-to-kappa-stream-processing-architecture/">-5</a>。</p>
+</blockquote>
+<hr>
+<h3 id="🎯-运用于实际业务是否合理？">🎯 运用于实际业务是否合理？</h3>
+<p><strong>合理，但并非“银弹”</strong>。它在特定场景下优势巨大，但也有明显的局限。</p>
+<h4 id="✅-优势与适用场景">✅ 优势与适用场景</h4>
+<p>Kappa架构最适合<strong>数据源是事件流（如日志、埋点、IoT数据）、对实时性要求极高，且希望简化系统</strong>的场景-<a target="_blank" rel="noopener" href="https://cloud.tencent.com.cn/developer/article/2607231?policyId=1003">-17</a>。</p>
+<ul>
+<li><strong>架构极简</strong>：只需维护<strong>一套代码、一条链路</strong>，大大降低了开发和运维的复杂度和心智负担-<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。</li>
+<li><strong>逻辑一致</strong>：彻底消除了实时与离线结果对不上的“数据对账”难题<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。</li>
+<li><strong>典型行业</strong>：
+<ul>
+<li><strong>金融</strong>：实时交易监控、欺诈检测-<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1640896">-2</a></li>
+<li><strong>电商/零售</strong>：实时推荐、库存管理、销售大屏-<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1640896">-2</a></li>
+<li><strong>物联网(IoT)</strong>：设备实时监控、预测性维护<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1640896">-2</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="⚠️-挑战与局限">⚠️ 挑战与局限</h4>
+<ul>
+<li><strong>历史数据重放成本高昂</strong>：Kafka并非无限存储<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。如需重放数月甚至一年的数据，<strong>存储成本巨大，且重放过程会大量消耗计算资源</strong>，可能导致集群不稳定<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。</li>
+<li><strong>复杂状态计算困难</strong>：实时计算去重、多流JOIN等复杂指标时，流处理引擎需要维护庞大的状态（State）<a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/472640">-10</a>。这可能导致<strong>状态爆炸、内存溢出</strong>，且故障恢复极其复杂<a target="_blank" rel="noopener" href="https://risingwave.com/blog/lambda-to-kappa-stream-processing-architecture/">-5</a>。</li>
+<li><strong>对技术人员要求高</strong>：设计和实现高效的流处理逻辑，比传统的批处理SQL难度更高<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1640896">-2</a>。</li>
+</ul>
+<blockquote>
+<p><strong>现实是</strong>：完全的Kappa架构在大型企业里并不常见。更普遍的做法是**“Kappa + 数据湖”的混合模式**，即用Kappa处理实时数据，同时将数据沉淀到数据湖中，用批处理引擎（如Spark）进行低成本的历史数据分析<a target="_blank" rel="noopener" href="https://risingwave.com/blog/lambda-vs-kappa-architecture-2026/">-21</a>。</p>
+</blockquote>
+<hr>
+<h3 id="🏗️-还有哪些其他架构选择？">🏗️ 还有哪些其他架构选择？</h3>
+<p>除了Kappa，目前业界主流的大数据架构还有以下几种：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">架构</th>
+<th style="text-align:left">核心思想</th>
+<th style="text-align:left">优点</th>
+<th style="text-align:left">缺点</th>
+<th style="text-align:left">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Lambda架构</strong></td>
+<td style="text-align:left"><strong>批流协同</strong>：维护批处理和流处理两套系统，兼顾准确与实时<a target="_blank" rel="noopener" href="https://cloud.tencent.com.cn/developer/article/2607231?policyId=1003">-17</a>。</td>
+<td style="text-align:left">成熟稳定，能同时保证历史数据的准确性和实时数据的低延迟-<a target="_blank" rel="noopener" href="https://cloud.tencent.com.cn/developer/article/2607231?policyId=1003">-17</a>。</td>
+<td style="text-align:left">架构复杂，维护两套代码，数据一致性难保证<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1640896">-2</a>。</td>
+<td style="text-align:left">对数据准确性要求极高，且需要实时与历史分析兼顾的场景<a target="_blank" rel="noopener" href="https://cloud.tencent.com.cn/developer/article/2607231?policyId=1003">-17</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Lakehouse (湖仓一体)</strong></td>
+<td style="text-align:left"><strong>统一存储</strong>：基于数据湖（如Iceberg, Hudi）构建，同时支持高效的BI分析和AI/机器学习-。</td>
+<td style="text-align:left">存储成本低（使用廉价存储），支持多种数据类型（结构化、非结构化），并能提供数据仓库的ACID事务能力-。</td>
+<td style="text-align:left">技术相对较新，数据治理和元数据管理是挑战。</td>
+<td style="text-align:left">希望用一个平台同时支撑BI报表、数据科学和AI分析的企业-。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Data Mesh (数据网格)</strong></td>
+<td style="text-align:left"><strong>去中心化</strong>：将数据所有权和责任分散到各个业务域团队，每个团队负责输出自己的“数据产品”-。</td>
+<td style="text-align:left">解决了超大型组织中数据团队成为瓶颈的问题，提升了数据交付的敏捷性-。</td>
+<td style="text-align:left">对组织文化、数据治理和基础设施要求极高，实施难度大-。</td>
+<td style="text-align:left">业务线众多、组织架构复杂的大型或超大型企业-。</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="🏢-哪些公司采用了这些架构？">🏢 哪些公司采用了这些架构？</h3>
+<ul>
+<li><strong>Kappa架构</strong>：
+<ul>
+<li><strong>海通证券</strong>：上线了基于Kappa架构的实时日志分析平台-。</li>
+<li><strong>某大型零售企业</strong>：利用Kafka打通ERP、CRM、POS等系统，构建实时销售分析-。</li>
+<li><strong>某跨境电商平台</strong>：基于Kafka+ElasticSearch搭建轻量级Kappa架构，处理日均百万级数据-。</li>
+<li>此外，不少公司将原有Lambda改造为Kappa后，实现了<strong>服务器成本降低30%</strong> 等显著收益–。</li>
+</ul>
+</li>
+<li><strong>Lambda架构</strong>：
+<ul>
+<li><strong>Yahoo、Netflix</strong>：是大数据领域早期Lambda架构的知名实践者-。</li>
+<li><strong>腾讯云</strong>：在其方案中，用Lambda架构处理电商用户行为分析等场景-。</li>
+<li>注意：这里的“Lambda”指大数据处理架构，与AWS的Serverless计算服务“AWS Lambda”是不同概念-。</li>
+</ul>
+</li>
+<li><strong>Lakehouse (湖仓一体) 架构</strong>：
+<ul>
+<li><strong>中国移动</strong>：在其集团大数据平台进行了湖仓一体架构的升级和落地-。</li>
+<li><strong>京东</strong>：为解决Lambda架构痛点，在流量资产场景中引入了湖仓一体架构-。</li>
+<li><strong>中信建投、齐鲁银行</strong>等金融机构，也纷纷建设湖仓一体数据平台-。</li>
+</ul>
+</li>
+<li><strong>Data Mesh (数据网格) 架构</strong>：
+<ul>
+<li><strong>宝马集团</strong>：与AWS合作，深化其云数据中心的建设，是数据网格理念的实践者之一-。</li>
+<li><strong>诺基亚</strong>：采用去中心化的数据网格架构，称其将机器学习运营效率提升了70%-。</li>
+</ul>
+</li>
+</ul>
+<h2 id="字节，百度，阿里分别使用的什么架构">字节，百度，阿里分别使用的什么架构</h2>
+<p>这三家公司的数据架构演进，清晰地勾勒出了一幅从经典的 Lambda 架构向<strong>湖仓一体</strong>架构转型的图谱。</p>
+<p>简单来说，它们的共同趋势是：为了追求<strong>更低的数据延迟</strong>、<strong>更统一的存储</strong>和<strong>更简化的开发运维</strong>，正逐步摒弃传统的 Lambda 或 Kappa 架构，全面拥抱“湖仓一体”-<a target="_blank" rel="noopener" href="https://hub.baai.ac.cn/view/43582">-20</a>。</p>
+<p>下面是这三家公司各自的具体实践：</p>
+<h3 id="🏢-字节跳动：从-Lambda-迈向自研湖仓一体">🏢 字节跳动：从 Lambda 迈向自研湖仓一体</h3>
+<p>字节跳动早期为了快速支持业务，采用了经典的 <strong>Lambda 架构</strong>-。但随着业务（尤其是电商、抖音等）的精细化发展，Lambda 架构的弊端（如数据口径对齐难、维护双套代码成本高）日益凸显。</p>
+<p>因此，字节跳动正积极向<strong>湖仓一体</strong>架构演进，其核心特点是<strong>存储层的统一</strong>：</p>
+<ul>
+<li><strong>核心思路</strong>：通过引入数据湖技术（如 <strong>Apache Hudi</strong>）-，实现实时数据和离线数据的<strong>一份存储</strong>，从而解决存储翻倍和口径不一致的问题。</li>
+<li><strong>技术方案</strong>：字节内部基于 <strong>Hudi</strong> 等开源技术，自研了高吞吐、高并发、秒级延迟可见的实时数据湖方案，并在上层构建了名为 <strong>LAS</strong> 的服务-<a target="_blank" rel="noopener" href="https://developer.volcengine.com/articles/7265258672085794879">-5</a>。</li>
+<li><strong>应用场景</strong>：该方案已在<strong>电商流量数据</strong>-等对实时性要求极高的核心业务场景中落地。</li>
+</ul>
+<h3 id="🏢-百度：Lambda-与-Kappa-的混合实践">🏢 百度：Lambda 与 Kappa 的混合实践</h3>
+<p>与字节跳动激进的转型不同，百度采用了一种更为折中的 <strong>Lambda 和 Kappa 的混合架构</strong>-。</p>
+<ul>
+<li><strong>核心思路</strong>：在数据清洗和数仓构建等关键环节，百度尝试融合两种架构的优势。一方面，通过<strong>流批一体</strong>的技术方案，让实时和离线任务<strong>共用一套代码</strong>，以解决 Lambda 的双代码问题<a target="_blank" rel="noopener" href="https://blog.itpub.net/70024420/viewspace-2931888/">-8</a><a target="_blank" rel="noopener" href="https://www.e-com-net.com/article/1666994308026294272.htm">-9</a>；另一方面，并未完全放弃批处理层，而是让<strong>离线链路作为数据准确性的最终保障</strong><a target="_blank" rel="noopener" href="https://blog.itpub.net/70024420/viewspace-2931888/">-8</a>。</li>
+<li><strong>技术方案</strong>：百度在技术栈上同时兼容传统（如 Hive, Spark<a target="_blank" rel="noopener" href="https://blog.itpub.net/70024420/viewspace-2931888/">-8</a>）和现代（如 Flink<a target="_blank" rel="noopener" href="https://blog.itpub.net/70024420/viewspace-2931888/">-8</a>）计算框架，并积极构建自己的<strong>云原生湖仓一体架构</strong>-。</li>
+<li><strong>应用场景</strong>：这种架构被应用于其<strong>用户产品</strong>等业务的<strong>实时数仓</strong>建设中-<a target="_blank" rel="noopener" href="https://www.e-com-net.com/article/1666994308026294272.htm">-9</a>。</li>
+</ul>
+<h3 id="🏢-阿里巴巴：力推“Flink-Paimon-Hologres”实时湖仓">🏢 阿里巴巴：力推“Flink + Paimon + Hologres”实时湖仓</h3>
+<p>阿里巴巴因其电商业务对实时性的极致追求，在数据架构的演进上最为激进，大力推动以 <strong>Flink + Paimon + Hologres</strong> 为核心的实时湖仓一体方案-。</p>
+<ul>
+<li><strong>核心思路</strong>：阿里巴巴的目标是打造<strong>一体化实时湖仓</strong>-。其演进路径清晰展示了从 Lambda 到 Kafka 分层，再到 Hologres 统一存储的历程<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1651957?spm=a2c6h.13046898.publish-article.61.68276ffan6aa4T">-16</a>。</li>
+<li><strong>技术方案</strong>：
+<ol>
+<li><strong>湖存储层</strong>：主推自研的 <strong>Paimon</strong> 数据湖格式<a target="_blank" rel="noopener" href="https://hub.baai.ac.cn/view/43582">-20</a>。</li>
+<li><strong>计算引擎层</strong>：基于 <strong>Flink</strong> 实现流批一体计算-。</li>
+<li><strong>服务引擎层</strong>：由 <strong>Hologres</strong> 统一提供高性能的实时查询与分析服务-<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1651957?spm=a2c6h.13046898.publish-article.61.68276ffan6aa4T">-16</a>。</li>
+</ol>
+</li>
+<li><strong>应用场景</strong>：这套方案已在<strong>阿里妈妈</strong>等核心业务中落地，实现了<strong>流批一体的开发模式</strong>，显著节省了人力和计算存储成本<a target="_blank" rel="noopener" href="https://hub.baai.ac.cn/view/43582">-20</a>。</li>
+</ul>
+<hr>
+<h3 id="📈-总结：架构演进趋势">📈 总结：架构演进趋势</h3>
+<p>从这三家巨头的实践中，可以总结出大数据架构演进的清晰脉络：</p>
+<ul>
+<li><strong>从 Lambda 到湖仓一体</strong>：为解决 Lambda 架构的双代码、双存储和口径不一致等核心痛点<a target="_blank" rel="noopener" href="https://blog.itpub.net/70024420/viewspace-2931888/">-8</a>。</li>
+<li><strong>计算层：从“批流分离”到“流批一体”</strong>：使用 Flink 等引擎，用<strong>一套代码</strong>同时处理实时和离线任务，降低开发和维护成本<a target="_blank" rel="noopener" href="https://hub.baai.ac.cn/view/43582">-20</a>。</li>
+<li><strong>存储层：从“双存储”到“湖仓一体”</strong>：基于数据湖技术（如 Hudi, Paimon），实现实时和离线数据的<strong>统一存储</strong>，从根本上解决数据一致性问题。</li>
+</ul>
+<p>总的来说，虽然这三家公司的技术选型和演进路径各有侧重，但最终都指向了“<strong>湖仓一体</strong>”这个共同的未来方向。</p>
+<h2 id="湖仓一体是什么架构-请详细描述一下，包括对哪些业务场景支持比较好，解决了哪些痛点，用到的技术都有哪些，分别使用在哪些业务场景中">湖仓一体是什么架构 请详细描述一下，包括对哪些业务场景支持比较好，解决了哪些痛点，用到的技术都有哪些，分别使用在哪些业务场景中</h2>
+<p>这些资料提供了关于湖仓一体架构的详细信息。我需要组织一个全面的回答，涵盖定义、优势、业务场景、技术组件和实际案例。回答将采用标题和段落的形式，并引用这些来源。</p>
+<p>湖仓一体（Lakehouse）可以理解为一种<strong>数据平台新架构</strong>，它尝试融合数据湖和数据仓库的优势，旨在提供一个更统一、高效的数据底座-<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。</p>
+<p>简单来说，它希望解决一个核心问题：企业数据越来越多，格式越来越杂，传统的单一数据湖或数据仓库架构都有些力不从心了<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1674499">-10</a>。</p>
+<h3 id="🤔-它解决了什么核心痛点？">🤔 它解决了什么核心痛点？</h3>
+<p>在湖仓一体出现之前，很多公司采用的是“数据湖+数据仓库”两套并行的架构（Lambda架构），这带来了不少麻烦。湖仓一体正是为了解决这些痛点而生：</p>
+<ul>
+<li><strong>存储与计算成本高昂</strong>：Lambda架构需要维护离线和实时两条独立链路，导致计算和存储资源<strong>双倍消耗</strong>。湖仓一体通过<strong>存算分离</strong>-和<strong>统一存储</strong>，一份数据只存一次，显著降低成本-。</li>
+<li><strong>数据口径不一致</strong>：两套链路处理逻辑不同，导致离线报表和实时看板的数据经常对不上，业务人员需要花大量时间排查。湖仓一体通过<strong>流批一体</strong>，用一套代码处理所有数据，从根源上保证了数据一致性<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1664847">-4</a>。</li>
+<li><strong>数据时效性不足</strong>：传统数仓通常是T+1的批处理，无法满足实时或近实时分析需求。湖仓一体支持<strong>分钟级甚至秒级的数据延迟</strong><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>。</li>
+<li><strong>数据治理困难</strong>：缺乏管理的数据湖容易变成“数据沼泽”，难以被有效利用<a target="_blank" rel="noopener" href="https://www.ibm.com/cn-zh/think/architectures/patterns/data-lakehouse">-9</a>。湖仓一体在湖上构建了<strong>元数据管理、事务、索引</strong>等能力，让数据变得可查、可信-<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。</li>
+<li><strong>无法处理多样化数据</strong>：传统数仓难以处理日志、图片等非结构化数据-。湖仓一体原生支持<strong>结构化、半结构化和非结构化</strong>数据的存储与分析-<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。</li>
+</ul>
+<h3 id="🧱-湖仓一体的核心架构与关键技术">🧱 湖仓一体的核心架构与关键技术</h3>
+<p>湖仓一体并不是一个单一的产品，而是一套技术组合，其架构大致可以分为以下几个层面：</p>
+<ol>
+<li><strong>统一的存储层 (Storage Layer)</strong>：这是湖仓一体的基石，通常基于<strong>对象存储</strong>（如AWS S3、阿里云OSS）或<strong>分布式文件系统</strong>（如HDFS）构建<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。关键在于使用了<strong>开放的表格式（Open Table Formats）</strong>，如 <strong>Apache Iceberg</strong><a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>、<strong>Apache Hudi</strong>、<strong>Delta Lake</strong>-和 <strong>Apache Paimon</strong><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>。它们为数据湖带来了数据仓库才有的ACID事务、时间旅行（Time Travel）和高效更新删除等能力-。</li>
+<li><strong>强大的计算层 (Compute Layer)</strong>：在统一存储之上，湖仓一体支持多种计算引擎，让不同的工具做最擅长的事<a target="_blank" rel="noopener" href="https://www.ibm.com/cn-zh/think/architectures/patterns/data-lakehouse">-9</a>。
+<ul>
+<li><strong>批处理</strong>：如 <strong>Apache Spark</strong>，用于处理大规模历史数据的ETL<a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>。</li>
+<li><strong>流处理</strong>：如 <strong>Apache Flink</strong>，用于处理实时数据，实现“流批一体”<a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>。</li>
+<li><strong>交互式查询</strong>：如 <strong>StarRocks</strong><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>、<strong>Apache Doris</strong>-、<strong>Hologres</strong><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1664847">-4</a>，用于提供高性能的BI报表和Ad-hoc查询。</li>
+</ul>
+</li>
+<li><strong>统一的元数据层 (Metadata Layer)</strong>：这是“一体”的关键。通过统一的数据目录（如<strong>Hive Metastore</strong>或<strong>AWS Glue</strong>），让所有计算引擎都能访问到相同的数据集，避免了数据孤岛<a target="_blank" rel="noopener" href="https://www.ibm.com/cn-zh/think/architectures/patterns/data-lakehouse">-9</a>。</li>
+<li><strong>完善的数据治理层 (Governance Layer)</strong>：提供数据血缘、数据质量、权限管理等能力，确保数据的安全与合规-<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。例如，<strong>Microsoft Purview</strong>-就是这方面的工具。</li>
+</ol>
+<h3 id="💡-哪些业务场景支持比较好？">💡 哪些业务场景支持比较好？</h3>
+<p>湖仓一体的架构特性使其在以下场景中表现突出：</p>
+<ul>
+<li><strong>实时/准实时BI与决策</strong>：这是最典型的场景。例如<strong>京东</strong>将流量数据接入湖仓，将数据时效从T+1提升到<strong>分钟级</strong>，支撑了搜索推荐等核心业务。<strong>vivo</strong>也利用此架构将数据处理从小时级缩短到<strong>十分钟以内</strong><a target="_blank" rel="noopener" href="https://flink-learning.org.cn/article/detail/c722c5b79859126bd1038e894ea0615d?name=article&amp;page=1">-1</a>。</li>
+<li><strong>AI与机器学习</strong>：AI模型训练需要海量且多样的数据（文本、图片、日志）。湖仓一体能作为统一的“数据食堂”，高效地为模型提供特征数据，并支持特征工程的反复迭代-<a target="_blank" rel="noopener" href="https://www.yhresearch.cn/news/18058/lakehouse">-5</a>。</li>
+<li><strong>数据中台与统一数据服务</strong>：湖仓一体非常适合作为企业的数据中台底座<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1674499">-10</a>。<strong>云南红塔银行</strong>-和<strong>长城人寿</strong>-等机构，都基于湖仓一体构建了新一代数据中台，以统一对外提供服务。</li>
+<li><strong>日志与物联网（IoT）数据分析</strong>：面对IoT设备或服务器产生的海量、格式不一的日志数据，湖仓一体的存储和分析能力是天然的优势<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1674499">-10</a>。</li>
+<li><strong>金融行业实时风控与监管</strong>：金融行业对数据时效性和一致性要求极高。<strong>农业银行</strong>用其弥补了传统数仓实时处理能力的不足-，<strong>齐鲁银行</strong>则通过湖仓一体使<strong>存储成本直降50%，计算速度提升70%</strong>-，中信建投也以此为基础推动数字化转型-。</li>
+</ul>
+<h3 id="🏢-哪些公司在使用？">🏢 哪些公司在使用？</h3>
+<p>湖仓一体已成为各行业头部企业的共同选择：</p>
+<ul>
+<li><strong>互联网巨头</strong>：<strong>字节、百度、阿里、京东、快手、vivo、淘天集团</strong>都在积极实践湖仓一体架构-。</li>
+<li><strong>金融机构</strong>：<strong>农业银行、交通银行、中信建投、齐鲁银行、长城人寿、云南红塔银行</strong>等，都在利用湖仓一体构建新一代数据底座-。</li>
+<li><strong>其他行业</strong>：<strong>中国电财</strong>等大型集团也在采用“流批湖仓”的融合架构-。</li>
+</ul>
+<h3 id="💎-总结">💎 总结</h3>
+<p>湖仓一体并非凭空创造的新概念，而是为了解决大数据领域长期存在的“数据孤岛”和“架构复杂”等问题，将<strong>数据湖的灵活性、低成本</strong>与<strong>数据仓库的性能、规范性</strong>相结合的必然产物-。它通过<strong>开放的表格式</strong>和<strong>存算分离</strong>等核心技术，为企业提供了一个能同时支撑BI、AI和实时分析等多种负载的统一数据平台<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1674499">-10</a>。</p>
+<p>当然，湖仓一体也并非“银弹”，其技术栈相对较新，对团队的技术能力要求较高，且在数据治理和元数据管理方面仍有挑战-。但不可否认的是，它代表了数据平台架构演进的一个重要方向-。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/framework/" rel="tag"># framework</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/31/flink/class/createTypeInformation/" rel="prev" title="createTypeInfomation">
+      <i class="fa fa-chevron-left"></i> createTypeInfomation
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/08/31/flink/%E7%96%91%E9%97%AE/" rel="next" title="疑问">
+      疑问 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">待整理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kappa-%E6%9E%B6%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%8C%E8%BF%90%E7%94%A8%E5%9C%A8%E5%AE%9E%E9%99%85%E4%B8%9A%E5%8A%A1%E4%B8%8A%E6%98%AF%E5%90%A6%E5%90%88%E7%90%86%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BB%80%E4%B9%88%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E7%9A%84%E9%80%89%E6%8B%A9%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%93%AA%E4%BA%9B%E5%85%AC%E5%8F%B8%E9%87%87%E7%94%A8%E4%BA%86%E8%BF%99%E4%BA%9B%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">Kappa 架构是什么样的，运用在实际业务上是否合理，还有什么其他架构的选择，以及哪些公司采用了这些架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9A%99%EF%B8%8F-Kappa%E6%9E%B6%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-number">1.1.1.</span> <span class="nav-text">⚙️ Kappa架构是什么样的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8E%AF-%E8%BF%90%E7%94%A8%E4%BA%8E%E5%AE%9E%E9%99%85%E4%B8%9A%E5%8A%A1%E6%98%AF%E5%90%A6%E5%90%88%E7%90%86%EF%BC%9F"><span class="nav-number">1.1.2.</span> <span class="nav-text">🎯 运用于实际业务是否合理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8F%97%EF%B8%8F-%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%E5%85%B6%E4%BB%96%E6%9E%B6%E6%9E%84%E9%80%89%E6%8B%A9%EF%BC%9F"><span class="nav-number">1.1.3.</span> <span class="nav-text">🏗️ 还有哪些其他架构选择？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8F%A2-%E5%93%AA%E4%BA%9B%E5%85%AC%E5%8F%B8%E9%87%87%E7%94%A8%E4%BA%86%E8%BF%99%E4%BA%9B%E6%9E%B6%E6%9E%84%EF%BC%9F"><span class="nav-number">1.1.4.</span> <span class="nav-text">🏢 哪些公司采用了这些架构？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%EF%BC%8C%E7%99%BE%E5%BA%A6%EF%BC%8C%E9%98%BF%E9%87%8C%E5%88%86%E5%88%AB%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BB%80%E4%B9%88%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">字节，百度，阿里分别使用的什么架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8F%A2-%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%EF%BC%9A%E4%BB%8E-Lambda-%E8%BF%88%E5%90%91%E8%87%AA%E7%A0%94%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93"><span class="nav-number">1.2.1.</span> <span class="nav-text">🏢 字节跳动：从 Lambda 迈向自研湖仓一体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8F%A2-%E7%99%BE%E5%BA%A6%EF%BC%9ALambda-%E4%B8%8E-Kappa-%E7%9A%84%E6%B7%B7%E5%90%88%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.2.2.</span> <span class="nav-text">🏢 百度：Lambda 与 Kappa 的混合实践</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8F%A2-%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%EF%BC%9A%E5%8A%9B%E6%8E%A8%E2%80%9CFlink-Paimon-Hologres%E2%80%9D%E5%AE%9E%E6%97%B6%E6%B9%96%E4%BB%93"><span class="nav-number">1.2.3.</span> <span class="nav-text">🏢 阿里巴巴：力推“Flink + Paimon + Hologres”实时湖仓</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%88-%E6%80%BB%E7%BB%93%EF%BC%9A%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B%E8%B6%8B%E5%8A%BF"><span class="nav-number">1.2.4.</span> <span class="nav-text">📈 总结：架构演进趋势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93%E6%98%AF%E4%BB%80%E4%B9%88%E6%9E%B6%E6%9E%84-%E8%AF%B7%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0%E4%B8%80%E4%B8%8B%EF%BC%8C%E5%8C%85%E6%8B%AC%E5%AF%B9%E5%93%AA%E4%BA%9B%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF%E6%94%AF%E6%8C%81%E6%AF%94%E8%BE%83%E5%A5%BD%EF%BC%8C%E8%A7%A3%E5%86%B3%E4%BA%86%E5%93%AA%E4%BA%9B%E7%97%9B%E7%82%B9%EF%BC%8C%E7%94%A8%E5%88%B0%E7%9A%84%E6%8A%80%E6%9C%AF%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E5%88%86%E5%88%AB%E4%BD%BF%E7%94%A8%E5%9C%A8%E5%93%AA%E4%BA%9B%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF%E4%B8%AD"><span class="nav-number">1.3.</span> <span class="nav-text">湖仓一体是什么架构 请详细描述一下，包括对哪些业务场景支持比较好，解决了哪些痛点，用到的技术都有哪些，分别使用在哪些业务场景中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%A4%94-%E5%AE%83%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E6%A0%B8%E5%BF%83%E7%97%9B%E7%82%B9%EF%BC%9F"><span class="nav-number">1.3.1.</span> <span class="nav-text">🤔 它解决了什么核心痛点？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%A7%B1-%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93%E7%9A%84%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF"><span class="nav-number">1.3.2.</span> <span class="nav-text">🧱 湖仓一体的核心架构与关键技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A1-%E5%93%AA%E4%BA%9B%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF%E6%94%AF%E6%8C%81%E6%AF%94%E8%BE%83%E5%A5%BD%EF%BC%9F"><span class="nav-number">1.3.3.</span> <span class="nav-text">💡 哪些业务场景支持比较好？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8F%A2-%E5%93%AA%E4%BA%9B%E5%85%AC%E5%8F%B8%E5%9C%A8%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="nav-number">1.3.4.</span> <span class="nav-text">🏢 哪些公司在使用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%8E-%E6%80%BB%E7%BB%93"><span class="nav-number">1.3.5.</span> <span class="nav-text">💎 总结</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">hash007</p>
+  <div class="site-description" itemprop="description">为了以后好好偷懒，现在必须加倍努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">296</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hash007</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
