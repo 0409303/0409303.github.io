@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/mac/%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/sql/mysql/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/tools/mac/%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">快捷键</a>
+            <a href="/2026/09/23/sql/mysql/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">基础语法</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -209,7 +209,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mac/" itemprop="url" rel="index"><span itemprop="name">Mac</span></a>
+                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
                 </span>
             </span>
 
@@ -224,10 +224,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="chrome">chrome</h2>
-<p>刷新 <code>command ＋r</code></p>
-<p>强制刷新 <code>command＋shift＋r</code></p>
-<p>删除cookie<code>command＋shift＋del</code>点击 清除数据 注意勾选的选项（不要把保存的密码也删除）</p>
+          <h2 id="Update">Update</h2>
+<h3 id="1-单条更新">1. 单条更新</h3>
+<h3 id="2-批量更新">2. 批量更新</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mytable </span><br><span class="line">SET myfield &#x3D; CASE other_field </span><br><span class="line">WHEN 1 THEN &#39;value&#39; </span><br><span class="line">WHEN 2 THEN &#39;value&#39; </span><br><span class="line">WHEN 3 THEN &#39;value&#39; </span><br><span class="line">END </span><br><span class="line">WHERE id IN (1,2,3) </span><br></pre></td></tr></table></figure>
+<h2 id="Select">Select</h2>
+<h3 id="1-limit">1. limit</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语句1：<span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">limit</span> <span class="number">9</span>,<span class="number">4</span> //第一个参数表示从该参数的下一条数据开始，第二个参数表示每次返回的数据条数。</span><br><span class="line">语句<span class="number">2</span>：slect * <span class="keyword">from</span> student <span class="keyword">limit</span> <span class="number">4</span> <span class="keyword">offset</span> <span class="number">9</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ahang/p/5644535.html">mysql limit分页</a></p>
 
       
     </div>
@@ -247,7 +251,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/maven/maven%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/sql/mysql/%E6%9F%A5%E8%AF%A2%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -261,7 +265,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/tools/maven/maven%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">maven命令</a>
+            <a href="/2026/09/23/sql/mysql/%E6%9F%A5%E8%AF%A2%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">mysql查询原理</a>
         </h2>
 
         <div class="post-meta">
@@ -271,7 +275,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,7 +283,277 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id></h5>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/minikobe/p/12359828.html">子查询与关联查询区别</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/09/23/sql/mysql/%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">特殊语法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h5 id="MYSQL中的COLLATE是什么？"><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1366841">MYSQL中的COLLATE是什么？</a></h5>
+<p>指定排序规则</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/sql/mysql/%E9%94%81%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/09/23/sql/mysql/%E9%94%81%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/sql/mysql/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/09/23/sql/mysql/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">问题汇总</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sql-mysql/" itemprop="url" rel="index"><span itemprop="name">sql-mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1-时间类型字段问题">1. 时间类型字段问题</h3>
+<h4 id="1-1-时区问题">1.1 时区问题</h4>
+<p>现象一：写入时间在mysql中查看，与实际时间相差几个小时，程序读出来又是正常的</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/PrayzzZ/p/10183470.html">关于MySQL存入的时间和取出时间不一致的解决</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/iris_xuting/article/details/84886483">MySQL数据时区问题，及datetime和timestamp类型存储的差异</a></p>
+<p><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_a72ec20c0101jgxd.html">Time Zone:GMT，UTC，DST，CST</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gaogao67/p/10686515.html">MySQL Config–参数system_time_zone和参数time_zone</a></p>
+<p>查询系统分区：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">global</span> <span class="keyword">variables</span> <span class="keyword">like</span><span class="string">&#x27;%time_zone%&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdbc:mysql:&#x2F;&#x2F;10.48.204.231:5002&#x2F;waimai_hubble_analysis_test?useUnicode&#x3D;true&amp;useSSL&#x3D;false&amp;serverTimezone&#x3D;GMT%2B8</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/system/linux/%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/09/23/system/linux/%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/system-linux/" itemprop="url" rel="index"><span itemprop="name">system-linux</span></a>
                 </span>
             </span>
 
@@ -295,91 +569,24 @@
 
       
           <p>[toc]</p>
-<h2 id="常用命令">常用命令</h2>
-<h3 id="查看依赖jar包">查看依赖jar包</h3>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># maven版本 &gt;= 3.0 -Dverbose参数可能失效</span></span><br><span class="line">mvn dependency:tree -Dverbose</span><br><span class="line"></span><br><span class="line">mvn dependency:tree -Dverbose -Dincludes=org.apache.logging.log4j:log4j-api </span><br><span class="line"></span><br><span class="line"><span class="comment"># 建议直接使用 -Dscope=test 查看完整树</span></span><br></pre></td></tr></table></figure>
-<h3 id="打包">打包</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean -U package -pl analysis-tool -am -P dev -Dmaven.source.skip=true -Dmaven.test.skip=true</span><br></pre></td></tr></table></figure>
-<p>要注意的是-P 对大小写敏感</p>
-<h3 id="重新生成iml文件">重新生成iml文件</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn idea:module</span><br></pre></td></tr></table></figure>
-<h3 id="参数">参数</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-e 详细错误描述</span><br><span class="line">-X</span><br></pre></td></tr></table></figure>
-<h1>问题汇总</h1>
-<h4 id="the-output-path-is-not-specified-for-module-‘xxx’">the output path is not specified for module ‘xxx’</h4>
-<p>Specify the output path in the Project Structure dalog</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/maven/maven%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/31/tools/maven/maven%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">maven学习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/EasonJim/p/6845012.html">Maven中plugins和pluginManagement的区别</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shawWey/p/7417335.html">maven依赖顺序原则</a></p>
-<h3 id="dependencyManagement">dependencyManagement</h3>
+<h2 id="find">find</h2>
+<h2 id="grep">grep</h2>
+<p><a target="_blank" rel="noopener" href="https://www.huaweicloud.com/articles/ea6b3b0030ff441a87033810832c4440.html">linux使用find命令和grep命令查找文件和文件内容</a></p>
+<h2 id="awk">awk</h2>
+<h2 id="curl">curl</h2>
+<p>如果有特殊字符，导致解析失败</p>
 <ol>
-<li>这里包名写错不会报错，不会实际尝试去仓库下载，只有在dependencies中定义的才会检查，才会报错</li>
+<li>
+<p>用单引号引起来，这样会原封不动的使用，而不会尝试去解析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -k -v -X POST &quot;https:&#x2F;&#x2F;xxx.net&#x2F;livy&#x2F;batches&quot; -u &#39;admin:xxx!QAZ&#39; -H &quot;Content-Type: application&#x2F;json&quot; -H &quot;X-Requested-By: admin&quot; -d &#39;&#123;&quot;file&quot;:&quot;&#x2F;users&#x2F;jingqicao&#x2F;sparkSubmission&#x2F;SAMStreaming&#x2F;ver-01&#x2F;bin&#x2F;SAM-1.0-SNAPSHOT.jar&quot;, &quot;driverMemory&quot;: &quot;30G&quot;, &quot;driverCores&quot;: 4, &quot;executorCores&quot;: 14, &quot;executorMemory&quot;: &quot;98G&quot;, &quot;numExecutors&quot;: 256, &quot;name&quot;: &quot;SAMStreaming-ver01-1020-02&quot;, &quot;className&quot;:&quot;com.microsoft.sam.SAMJobRunner&quot;, &quot;args&quot;:[&quot;ver-01-1020-02&quot;,&quot;&#x2F;users&#x2F;jingqicao&#x2F;sparkSubmission&#x2F;SAMStreaming&#x2F;ver-01&#x2F;bin&#x2F;SAMJob_4HD.conf&quot;]&#125;&#39;</span><br></pre></td></tr></table></figure>
+<p>nautilus</p>
+</li>
 </ol>
+<h2 id="ps">ps</h2>
+<h3 id="查看当前进程">查看当前进程</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps aux</span><br><span class="line">ps -ef</span><br></pre></td></tr></table></figure>
+<h3 id="查看进程父子关系">查看进程父子关系</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1. </span></span><br><span class="line">ps -o pid,ppid,cmd | grep xxx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. </span></span><br><span class="line">ps l | grep xxx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3. 保底方式</span></span><br><span class="line">for pid in $(ps w | grep network_monitor.sh | grep -v grep | awk &#x27;&#123;print $1&#125;&#x27;); do</span><br><span class="line">    ppid=$(awk &#x27;/PPid/ &#123;print $2&#125;&#x27; /proc/$pid/status 2&gt;/dev/null)</span><br><span class="line">    echo &quot;PID $pid, PPID $ppid&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -399,7 +606,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/component/protobuf/%E5%BE%85%E6%95%B4%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/system/mac/terminal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -413,7 +620,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/tools/component/protobuf/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/09/23/system/mac/terminal/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -423,7 +630,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
             </span>
 
           
@@ -437,7 +644,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">Microsoft Windows [Version 10.0.19044.2006]</span><br><span class="line">(c) Microsoft Corporation. All rights reserved.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo PATH</span><br><span class="line">PATH</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo $PATH</span><br><span class="line">$PATH</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo %PATH</span><br><span class="line">%PATH</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;echo %PATH%</span><br><span class="line">C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files\Common Files\Microsoft Shared\Microsoft Online Services;C:\Program Files (x86)\Common Files\Microsoft Shared\Microsoft Online Services;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\Go\bin;D:\Support\gawk-3.1.6-1-bin\bin;D:\Support\Nuget;C:\Program Files\dotnet\;C:\Users\jingqicao\AppData\Local\CloudBuild;C:\Users\jingqicao\AppData\Local\CloudBuild;C:\Users\jingqicao\AppData\Local\Microsoft\WindowsApps;C:\Users\jingqicao\.dotnet\tools;C:\Users\jingqicao\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\jingqicao\Program Files\protoc-3.13.0-win64\bin;D:\Support\spark-3.0.1-bin-hadoop2.7\bin;D:\Support\spark-3.0.1-bin-hadoop2.7\sbin;C:\Program Files\Java\jdk1.8.0_291\bin;D:\Support\hadoop-2.7.7\bin;D:\Support\hadoop-2.7.7\sbin;D:\Support\apache-maven-3.8.1\bin;C:\Users\jingqicao\AppData\Local\Programs\Python\Python39\Scripts;C:\Users\jingqicao\AppData\Local\atom\bin;C:\Users\jingqicao\.dotnet\tools;D:\Support\Go\bin;</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ --go_opt&#x3D;file_extension&#x3D;.pd.go D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: no such flag -file_extension</span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ --go_opt&#x3D;.pd.go D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: no such flag -.pd.go</span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ --go_opt&#x3D;. D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: no such flag -.</span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: unable to determine Go import path for &quot;Events&#x2F;App.proto&quot;</span><br><span class="line"></span><br><span class="line">Please specify either:</span><br><span class="line">        • a &quot;go_package&quot; option in the .proto source file, or</span><br><span class="line">        • a &quot;M&quot; argument on the command line.</span><br><span class="line"></span><br><span class="line">See https:&#x2F;&#x2F;developers.google.com&#x2F;protocol-buffers&#x2F;docs&#x2F;reference&#x2F;go-generated#package for more information.</span><br><span class="line"></span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Auction.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\AuctionFacts.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Bid.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ClickEvent.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\CommonTypes.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Device.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ExternalUser.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\L1ClassifierScore.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Location.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationConfigParams.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationServingLogRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\OperatingSystem.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\PiiRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Revenue.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Site.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\User.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ViewabilityEvent.proto</span><br><span class="line">google&#x2F;protobuf&#x2F;timestamp.proto: File not found.</span><br><span class="line">Events&#x2F;ViewabilityEvent.proto:4:1: Import &quot;google&#x2F;protobuf&#x2F;timestamp.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;ViewabilityEvent.proto:21:5: &quot;google.protobuf.Timestamp&quot; is not defined.</span><br><span class="line">Events&#x2F;ClickEvent.proto:4:1: Import &quot;google&#x2F;protobuf&#x2F;timestamp.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;ClickEvent.proto:18:9: &quot;google.protobuf.Timestamp&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:3:1: Import &quot;google&#x2F;protobuf&#x2F;timestamp.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:10:1: Import &quot;Events&#x2F;ViewabilityEvent.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:11:1: Import &quot;Events&#x2F;ClickEvent.proto&quot; was not found or had errors.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:23:9: &quot;google.protobuf.Timestamp&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:45:9: &quot;ViewabilityEvent&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:46:9: &quot;ViewabilityEvent&quot; is not defined.</span><br><span class="line">Events&#x2F;AuctionFacts.proto:47:9: &quot;ClickEvent&quot; is not defined.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: unable to determine Go import path for &quot;Events&#x2F;App.proto&quot;</span><br><span class="line"></span><br><span class="line">Please specify either:</span><br><span class="line">        • a &quot;go_package&quot; option in the .proto source file, or</span><br><span class="line">        • a &quot;M&quot; argument on the command line.</span><br><span class="line"></span><br><span class="line">See https:&#x2F;&#x2F;developers.google.com&#x2F;protocol-buffers&#x2F;docs&#x2F;reference&#x2F;go-generated#package for more information.</span><br><span class="line"></span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">protoc-gen-go: unable to determine Go import path for &quot;Events&#x2F;App.proto&quot;</span><br><span class="line"></span><br><span class="line">Please specify either:</span><br><span class="line">        • a &quot;go_package&quot; option in the .proto source file, or</span><br><span class="line">        • a &quot;M&quot; argument on the command line.</span><br><span class="line"></span><br><span class="line">See https:&#x2F;&#x2F;developers.google.com&#x2F;protocol-buffers&#x2F;docs&#x2F;reference&#x2F;go-generated#package for more information.</span><br><span class="line"></span><br><span class="line">--go_out: protoc-gen-go: Plugin failed with status code 1.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_package&#x3D;Microsoft.BI.Mediation.Schemas.Go --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Unknown flag: --go_package</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_package&#x3D;Microsoft.BI.Mediation.Schemas.Go --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Unknown flag: --go_package</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:31: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:48: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:56: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:64: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:6:1: Expected &quot;;&quot;.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:31: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:48: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:56: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:64: Invalid escape sequence in string literal.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:31: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:48: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:56: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:64: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:98: Invalid escape sequence in string literal.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line">Events&#x2F;App.proto:4:23: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:26: Invalid escape sequence in string literal.</span><br><span class="line">Events&#x2F;App.proto:4:60: Invalid escape sequence in string literal.</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto</span><br><span class="line"></span><br><span class="line">C:\Users\jingqicao&gt;protoc.exe -I&#x3D;C:\Users\jingqicao\.nuget\packages\google.protobuf.tools\3.6.1\tools -I&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\ --go_out&#x3D;D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas.Go\Events\ D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\App.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Auction.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\AuctionFacts.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Bid.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ClickEvent.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\CommonTypes.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Device.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ExternalUser.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\L1ClassifierScore.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Location.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationConfigParams.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\MediationServingLogRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\OperatingSystem.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\PiiRecord.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Revenue.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\Site.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\User.proto D:\project\Ads.BI.Mediation\private\Schemas\Microsoft.BI.Mediation.Schemas\PROTO\Events\ViewabilityEvent.proto</span><br></pre></td></tr></table></figure>
+          <h1>基础</h1>
+<h2 id="确认">确认</h2>
+<h3 id="使用的shell类型">使用的shell类型</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $SHELL</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>登陆时读取的配置文件</th>
+<th>未登录时读取的配置文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zsh</td>
+<td>~/.zprofile<code>或</code>~/.zlogin</td>
+<td>~/.zshrc</td>
+</tr>
+<tr>
+<td>Bash</td>
+<td><code>~/.bash_profile</code>、<code>~/.bash_login</code>、<code>~/.profile</code>（按顺序查找第一个）</td>
+<td>~/.bashrc</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -457,7 +688,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/template/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/system/mac/%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -471,7 +702,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/template/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/09/23/system/mac/%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">命令</a>
         </h2>
 
         <div class="post-meta">
@@ -481,179 +712,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/spark/%E9%85%8D%E7%BD%AE%E9%A1%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/31/spark/%E9%85%8D%E7%BD%AE%E9%A1%B9/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spark.sessionState.conf.setConfString(&quot;spark.sql.streaming.minBatchesToRetain&quot;, &quot;5&quot;)</span><br><span class="line">logger.info(&quot;spark.sql.streaming.minBatchesToRetain:&quot; + spark.sessionState.conf.minBatchesToRetain)</span><br><span class="line">logger.info(&quot;spark.sql.shuffle.partitions:&quot; + spark.sparkContext.getConf.get(&quot;spark.sql.shuffle.partitions&quot;))</span><br><span class="line">logger.info(&quot;spark.sql.streaming.multipleWatermarkPolicy:&quot; + spark.sparkContext.getConf.get(&quot;spark.sql.streaming.multipleWatermarkPolicy&quot;))</span><br><span class="line">val logSparkConf &#x3D; config.getConfig(&quot;logSparkConf&quot;)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/%E5%AF%B9%E6%AF%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/31/sql/%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tair/%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/31/tair/%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">tair使用规范</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -661,7 +720,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tair/" itemprop="url" rel="index"><span itemprop="name">tair</span></a>
+                  <a href="/categories/system-mac/" itemprop="url" rel="index"><span itemprop="name">system-mac</span></a>
                 </span>
             </span>
 
@@ -676,7 +735,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6417083301c2">缓存Tair高性能使用规范</a></p>
+          <h3 id="查看系统信息">查看系统信息</h3>
+<h5 id="架构">架构</h5>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -696,7 +757,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/tools/Typora/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/system/windows/%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -710,7 +771,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/tools/Typora/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/09/23/system/windows/%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -720,7 +781,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
             </span>
 
           
@@ -734,70 +795,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[toc]</p>
-<p>文件间跳转</p>
-<p><a href="./markdown.md">Markdown 语法</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/344941041">图片保存</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904120667602958">PicGo config</a></p>
-<p><a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Core-Doc/zh/guide/config.html">PicGo config2</a></p>
-<h2 id="设置">设置</h2>
-<h3 id="配置文件">配置文件</h3>
-<p>通过<code>文件-偏好设置-外观-打开主题文件夹</code>，找到主题配置文件目录。如果没有找到对应的配置文件，可以手动生成。</p>
-<h4 id="配置文件分类">配置文件分类</h4>
-<ol>
-<li>base.user.css 基础的用户自定义配置文件，会全局生效，优先级第二。</li>
-<li>{当前主题}.user.css 主题级的用户自定义配置文件，当前主题生效，优先级最高。</li>
-<li>{当前主题}.css 主题基础配置文件，当前主题生效，优先级最低。</li>
-</ol>
-<p>优先级逻辑：自定义 &gt; 基础；{当前主题} &gt; base</p>
-<p>加载顺序: {当前主题}.css -&gt; base.user.css -&gt; {当前主题}.user.css</p>
-<h3 id="toc展示的目录层级">toc展示的目录层级</h3>
-<p>配置文件中加入如下内容，建议加在base.user.css中</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 隐藏四级、五级、六级标题（只显示 h1, h2, h3） */</span></span><br><span class="line"><span class="selector-class">.md-toc-h4</span>,</span><br><span class="line"><span class="selector-class">.md-toc-h5</span>,</span><br><span class="line"><span class="selector-class">.md-toc-h6</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="格式">格式</h2>
-<h3 id="数学表达式">数学表达式</h3>
-<p>要启用这个功能，首先到Preference-&gt;Editor中启用。然后使用$符号包裹Tex命令，例如：$lim_{x \to \infty} \ exp(-x)=0$将产生如下的数学表达式：</p>
-<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104343.png" alt="img"></p>
-<h3 id="下标">下标</h3>
-<p>下标使用~包裹，例如：H~2~O将产生水的分子式。</p>
-<h3 id="上标">上标</h3>
-<p>上标使用^包裹，例如：y^2^=4将产生表达式</p>
-<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104354.png" alt="img"></p>
-<h3 id="下划线">下划线</h3>
-<p>用HTML的语法Underline将产生下划线Underline.</p>
-<h3 id="删除线">删除线</h3>
-<p>GFM添加了删除文本的语法，这是标准的Markdown语法木有的。使用~~包裹的文本将会具有删除的样式，例如~删除文本~将产生删除文本的样式。</p>
-<h3 id="代码">代码</h3>
-<p>使用`包裹的内容将会以代码样式显示，例如</p>
-<p>使用<code>printf()</code></p>
-<p>则会产生printf()样式。</p>
-<p>输入~~~或者```然后回车，可以输入代码块，并且可以选择代码的语言。例如：public Class HelloWorld{ System.out.println(“Hello World!”); }</p>
-<h3 id="目录列表Table-of-Contents-TOC">目录列表Table of Contents(TOC)</h3>
-<p>输入[toc]然后回车，将会产生一个目录，这个目录抽取了文章的所有标题，自动更新内容。</p>
-<h3 id="水平分割线">水平分割线</h3>
-<p>使用***或者—，然后回车，来产生水平分割线。</p>
-<h3 id="标注">标注</h3>
-<p>我们可以对某一个词语进行标注。例如</p>
-<p>某些人用过了才知道[^注释] [^注释]:Somebody that I used to know.</p>
-<p>将产生：</p>
-<p>把鼠标放在注释上，将会有提示内容。</p>
-<h3 id="强调">强调</h3>
-<p>使用两个*号或者两个_包裹的内容将会被强调。例如</p>
-<p><strong>使用两个*号强调内容</strong> <strong>使用两个下划线强调内容</strong></p>
-<p>将会输出</p>
-<p>使用两个<em>号强调内容 使用两个下划线强调内容 Typroa 推荐使用两个</em>号。</p>
-<h3 id="斜体">斜体</h3>
-<p>在标准的Markdown语法中，*和_包裹的内容会是斜体显示，但是GFM下划线一般用来分隔人名和代码变量名，因此我们推荐是用星号来包裹斜体内容。如果要显示星号，则使用转义：</p>
-<p>*</p>
-<h3 id="插入图片">插入图片</h3>
-<p>我们可以通过拖拉的方式，将本地文件夹中的图片或者网络上的图片插入。</p>
-<h3 id="插入URL连接">插入URL连接</h3>
-<p>使用尖括号包裹的url将产生一个连接，例如：将产生连接:www.baidu.com.</p>
-<p>如果是标准的url，则会自动产生连接，例如:www.baidu.com</p>
-<h3 id="插入表情">插入表情</h3>
-<p>使用:happy:输入高兴的表情，使用:sad:输入悲伤的表情，使用:cry:输入哭的表情等。以此类推!</p>
-<p><img src="https://img.jbzj.com/file_images/article/201912/201912031104355.png" alt="img"></p>
-
+          
       
     </div>
 
@@ -816,7 +814,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/sql/hive/group%E7%94%A8%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/system/windows/%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -830,7 +828,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/sql/hive/group%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">hive-官网索引</a>
+            <a href="/2026/09/23/system/windows/%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -840,16 +838,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hive/" itemprop="url" rel="index"><span itemprop="name">hive</span></a>
-                </span>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
             </span>
 
           
@@ -863,9 +852,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>grouping sets 要保证sets中每个组合中缺失的维度，不能包含null值</p>
-<p>group语法增强，可以使用维度下标表示，但如果grouping sets不支持，只能写字段名</p>
-
+          
       
     </div>
 

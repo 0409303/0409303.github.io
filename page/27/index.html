@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/concept/%E6%9C%AF%E8%AF%AD/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/AI/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/concept/%E6%9C%AF%E8%AF%AD/" class="post-title-link" itemprop="url">术语</a>
+            <a href="/2026/09/23/AI/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,124 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h1>原理</h1>
+<h2 id="为什么当前的AI大模型可以在很快的时间内根据你的问题知道该参考哪些文章，并进行总结，这里面都包含哪些步骤或者哪些功能模块的参与">为什么当前的AI大模型可以在很快的时间内根据你的问题知道该参考哪些文章，并进行总结，这里面都包含哪些步骤或者哪些功能模块的参与</h2>
+<p>这是一个很专业的问题。你观察到的这种“快速定位并总结参考文献”的能力，并非单个模型的魔法，而是一套精密系统协同工作的结果。这套系统通常被称为 <strong>RAG（检索增强生成）</strong>。</p>
+<p>简单来说，整个过程可以分解为三个核心阶段，每个阶段都有专门的功能模块参与。</p>
+<h3 id="阶段一：理解你的问题（查询处理）">阶段一：理解你的问题（查询处理）</h3>
+<p>这个阶段的目标是把你的口语化问题，变成系统能精准检索的“钥匙”。</p>
+<ul>
+<li><strong>模块1：查询理解</strong>：系统会先分析你的问题，进行同义词替换（比如把“怎么减肥”理解为“减脂方法”）、识别专有名词，甚至把“苹果最新款手机”这种模糊指代明确为“iPhone 15 Pro Max”。</li>
+<li><strong>模块2：查询改写与扩展</strong>：为了增加命中率，系统可能会用大模型把你的问题改写成几个不同角度的搜索语句，或者拆成几个子问题（如“苹果公司财报”、“iPhone销量”）。</li>
+<li><strong>模块3：意图识别</strong>：快速判断你是想了解最新新闻（需要实时信息）、学术研究（需要论文库），还是常识问答（需要百科知识），以便后续去不同的知识库搜索。</li>
+</ul>
+<h3 id="阶段二：快速找到相关文章（检索）">阶段二：快速找到相关文章（检索）</h3>
+<p>这是实现“快速”的关键。系统不会去一篇篇阅读原始文档，而是通过“语义指纹”来匹配。</p>
+<ul>
+<li><strong>核心模块：向量数据库与嵌入模型</strong>：
+<ol>
+<li><strong>预处理</strong>：系统事先把所有知识库里的文章，都通过一个<strong>嵌入模型</strong>转换成一串由数字组成的“向量”。这个向量就像文章的语义指纹，意思相近的文章，指纹在空间里的位置也相近。</li>
+<li><strong>实时转换</strong>：收到你的问题时，系统用<strong>同一个嵌入模型</strong>，也把你的问题转换成一个向量。</li>
+<li><strong>相似度搜索</strong>：系统立刻在你问题的向量和数据库里海量的文章向量之间，进行一种数学运算（如余弦相似度），快速找出距离最近的N篇文章。这个过程借助了高效的索引算法（如HNSW），速度极快，哪怕在百万级文档里也只需毫秒级。</li>
+</ol>
+</li>
+<li><strong>补充模块：混合检索与重排序</strong>：为了更精准，系统还会结合传统的关键词搜索（比如匹配你问题里的专有名词），并用一个轻量级的<strong>重排序模型</strong>，把初步找出的文章按最相关顺序排好。</li>
+</ul>
+<h3 id="阶段三：进行总结与回答（生成）">阶段三：进行总结与回答（生成）</h3>
+<p>系统不是简单地把文章拼起来，而是让大模型扮演一个“擅长总结的编辑”。</p>
+<ul>
+<li>
+<p><strong>核心模块：大语言模型</strong></p>
+<ol>
+<li>
+<p><strong>构建上下文</strong>：系统会把你原始的问题，和阶段二找到的最相关的几篇文章（或段落），一起打包放进一个精心设计的提示模板里。比如：</p>
+<blockquote>
+<p>“根据以下参考资料，用中文简洁、准确地回答用户的问题。如果资料里没有答案，就说不知道。\n参考资料：\n[文章1内容]\n[文章2内容]\n…\n用户问题：[你的问题]”</p>
+</blockquote>
+</li>
+<li>
+<p><strong>生成回答</strong>：大模型看到这个提示后，会“根据”提供的资料来生成答案。它会提取关键信息、理顺逻辑、用自己的话进行总结，并在结尾附上参考来源。</p>
+</li>
+<li>
+<p><strong>流式输出</strong>：生成答案的同时，系统以“打字机效果”逐字返回，让你感觉响应极快。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="一个简单的流程示例">一个简单的流程示例</h3>
+<p>假设你问：“2024年诺贝尔物理学奖得主是谁？”</p>
+<ol>
+<li><strong>查询处理</strong>：系统识别出关键词“2024年”、“诺贝尔物理学奖”、“得主”。</li>
+<li><strong>检索</strong>：系统将这几个词转换成向量，去维基百科、新闻库等向量数据库里搜索。瞬间定位到一篇名为“2024年诺贝尔物理学奖”的新闻文章。</li>
+<li><strong>生成</strong>：系统把问题和这篇文章的内容发给大模型。大模型读完文章，提炼出“约翰·J·霍普菲尔德和杰弗里·E·辛顿”，然后组织成一句通顺的回答：“2024年诺贝尔物理学奖授予了…”。同时附上参考文章链接。</li>
+</ol>
+<h3 id="总结：为什么这么快？">总结：为什么这么快？</h3>
+<ul>
+<li><strong>预处理</strong>：文章的向量指纹是事先算好的，不占用你提问时的时间。</li>
+<li><strong>向量检索</strong>：本质是数学计算，比人眼扫读文档快上亿倍。</li>
+<li><strong>并行计算</strong>：现代GPU（图形处理器）/TPU（张量处理器）硬件可以同时进行大量计算。</li>
+<li><strong>流式输出</strong>：模型算出第一个字就显示给你，减少等待的焦虑感。</li>
+</ul>
+<p>这套RAG架构，就像给大模型外挂了一个可以无限扩展的、能极速检索的“图书馆”，让它既能博闻强识（访问最新外部知识），又能避免胡编乱造（回答基于事实资料）。这已经成为目前解决大模型知识更新和幻觉问题的主流工业方案。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/arithmetic/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/09/23/arithmetic/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" class="post-title-link" itemprop="url">一致性哈希</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -209,7 +326,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -224,12 +341,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>SOP(Standard Operating Procedure) 标准作业程序</p>
-<p>Feed流</p>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/67740541">https://km.sankuai.com/page/67740541</a></p>
-<h4 id="开箱即用">开箱即用</h4>
-<p>开箱即用功能（out-of-the-box feature，也称OOTB或off the shelf）在软件上指产品在安装后，无需配置或修改，即可使用的功能或特性。也指默认即对所有用户可用，不需支付额外费用或进行另外的配置。<br>
-我们常说的spring-boot或者vue组件等可以开箱即用，就是可以无需配置就可以实现大部分功能，但是他们依旧是可以配置的。（强调约定优于配置）</p>
+          <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/89605547">一致性哈希算法–&gt; 解决memecache 服务器扩容后的数据丢失</a></p>
 
       
     </div>
@@ -249,7 +361,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/concept/%E7%BC%A9%E5%86%99/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/arithmetic/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -263,7 +375,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/concept/%E7%BC%A9%E5%86%99/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/09/23/arithmetic/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">动态规划</a>
         </h2>
 
         <div class="post-meta">
@@ -273,123 +385,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>time to live (TTL)</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/dataQuality/%E8%B5%84%E6%96%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/31/dataQuality/%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fseast/article/details/116522172#comments_17892022">Griffin 系列（一）——Griffin的搭建</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/deep/%E5%BE%85%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/31/deep/%E5%BE%85%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">待整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -397,7 +393,220 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%8E%A2%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">技术探索</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="解题思路模板：">解题思路模板：</h4>
+<p>这是经典的动态编程问题。这是一个可以使用的模板：</p>
+<ul>
+<li>定义答案显而易见的基本情况。</li>
+<li>制定根据简单的情况计算复杂情况的策略。</li>
+<li>将此策略链接到基本情况。</li>
+</ul>
+<h4 id="如何定义状态：">如何定义状态：</h4>
+<p>尝试题目问啥，就把啥定义成状态。</p>
+<h4 id="常见问题汇总">常见问题汇总</h4>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/">leetcode-518.零钱兑换2</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ones-and-zeroes/solution/dong-tai-gui-hua-zhuan-huan-wei-0-1-bei-bao-wen-ti/">leetcode-474.一和零</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/arithmetic/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/09/23/arithmetic/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" class="post-title-link" itemprop="url">布隆过滤器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liyulong1982/p/6013002.html">布隆过滤器(Bloom Filter)详解</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/arithmetic/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/09/23/arithmetic/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">排序算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="堆排序">堆排序</h2>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chengxiao/p/6129630.html">https://www.cnblogs.com/chengxiao/p/6129630.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/arithmetic/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/09/23/arithmetic/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">数据结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -413,19 +622,14 @@
 
       
           <p>[toc]</p>
-<h4 id="bitMap">bitMap</h4>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&amp;mid=2247492204&amp;idx=1&amp;sn=269493abe2acc61d06321e6aa5c6dbe5&amp;chksm=fbd75000cca0d91668829252016209ff50a69b810bc5f98635f43324d8eb3ba4cec7e8105673&amp;scene=21#wechat_redirect">快手 HBase 在千亿级用户特征数据分析中的应用与实践</a></p>
-<p>基于bitmap开发的bitbase，与成都开发的bitcube类似</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013516966/article/details/103917880">不得不掌握的三种BitMap</a></p>
-<ol>
-<li>BitMap</li>
-<li>RoaringBitmap</li>
-<li>Roaring64NavigableMap</li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/818ac4e90daf">高效压缩位图RoaringBitmap的原理与应用</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903769201704973">漫画：什么是Bitmap算法？</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lucky52529/article/details/90172264">[数据结构]——位图原理及实现</a></p>
-<p><a target="_blank" rel="noopener" href="https://km.sankuai.com/page/454073303">概要设计-全局字典</a></p>
+<h2 id="链表类">链表类</h2>
+<h3 id="LinkedHashSet">LinkedHashSet</h3>
+<p>java</p>
+<h3 id="LinkedHashMap">LinkedHashMap</h3>
+<p>java</p>
+<h2 id="数组类">数组类</h2>
+<h3 id="Stack">Stack</h3>
+<h3 id="Queue">Queue</h3>
 
       
     </div>
@@ -445,7 +649,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/deep/%E6%96%B9%E6%B3%95%E8%AE%BA/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/arithmetic/%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -459,7 +663,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/deep/%E6%96%B9%E6%B3%95%E8%AE%BA/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/09/23/arithmetic/%E6%A0%91/" class="post-title-link" itemprop="url">树</a>
         </h2>
 
         <div class="post-meta">
@@ -469,65 +673,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在函数层面 尽量保证什么类型进什么类型出，除非本函数有转换类型的作用</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/doris/Colocate%20Join/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/31/doris/Colocate%20Join/" class="post-title-link" itemprop="url">Colocate join</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -535,77 +681,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="参考资料">参考资料</h3>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://blog.bcmeng.com/post/doris-colocate-join.html">Apache Doris Colocate Join 原理与实践</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/doris/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/08/31/doris/%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/" class="post-title-link" itemprop="url">参考资料</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/doris/" itemprop="url" rel="index"><span itemprop="name">doris</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -621,14 +697,10 @@
 
       
           <p>[toc]</p>
-<h3 id="实践">实践</h3>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://www.sohu.com/a/390678890_505779">Apache Doris在美团外卖数仓中的应用实践</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huzechen/article/details/109376514">Doris在用户画像人群业务的应用</a></li>
-<li></li>
-</ol>
-<h3 id="原理">原理</h3>
-<h4 id="bitmap">bitmap</h4>
+<h1>二叉树</h1>
+<h2 id="普通二叉树">普通二叉树</h2>
+<h2 id="二叉搜索树">二叉搜索树</h2>
+<h1>N叉树</h1>
 
       
     </div>
@@ -648,7 +720,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/company/microsoft/HDInsight/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/arithmetic/%E7%BA%A2%E9%BB%91%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -662,7 +734,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/company/microsoft/HDInsight/" class="post-title-link" itemprop="url">HDInsight</a>
+            <a href="/2026/09/23/arithmetic/%E7%BA%A2%E9%BB%91%E6%A0%91/" class="post-title-link" itemprop="url">红黑树</a>
         </h2>
 
         <div class="post-meta">
@@ -672,7 +744,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -680,7 +752,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -695,13 +767,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="guide-line"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/hdinsight/">guide line</a></h4>
-<h2 id="best-practise">best practise</h2>
-<h4 id="新建cluster注意事项：">新建cluster注意事项：</h4>
-<ol>
-<li>指定独立的VNet，保证可以做灵活的网络管控</li>
-<li>对于节点多的cluster，为了保证Ambari监控性能，最好申请独立的DB，并且提高其等级，机器越多建议提高的等级越多。</li>
-</ol>
+          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/minikobe/p/12105991.html">红黑树详解，红黑树与AVL树区别</a></p>
 
       
     </div>
@@ -721,7 +787,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/company/microsoft/NuGet/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/arithmetic/%E9%87%8D%E7%82%B9%E6%B1%87%E6%80%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -735,7 +801,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/company/microsoft/NuGet/" class="post-title-link" itemprop="url">NuGet</a>
+            <a href="/2026/09/23/arithmetic/%E9%87%8D%E7%82%B9%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">重点汇总</a>
         </h2>
 
         <div class="post-meta">
@@ -745,7 +811,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -753,7 +819,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/microsoft/" itemprop="url" rel="index"><span itemprop="name">microsoft</span></a>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
             </span>
 
@@ -768,22 +834,65 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="guide-line"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/what-is-nuget">guide line</a></h4>
-<h3 id="Restore-packages"><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore">Restore packages</a></h3>
-<h3 id="Package-Manager-Console">Package Manager Console</h3>
-<p>参考资料：</p>
+          <h3 id="数据结构">数据结构</h3>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-powershell">Package Manager Console (PowerShell)</a>
-<ol>
-<li>如何使用PMC</li>
-<li>命令list</li>
+<li>数组</li>
+<li>链表</li>
+<li>栈</li>
+<li>队列</li>
+<li>散列表</li>
+<li>二叉树</li>
+<li>堆</li>
+<li>跳表</li>
+<li>图</li>
+<li>Trie数</li>
 </ol>
-</li>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/nuget/reference/powershell-reference">PowerShell reference</a>
+<h3 id="算法">算法</h3>
 <ol>
-<li>命令明细</li>
+<li>递归</li>
+<li>排序</li>
+<li>二分查找</li>
+<li>搜索</li>
+<li>哈希算法</li>
+<li>贪心算法</li>
+<li>分治算法</li>
+<li>回溯算法</li>
+<li>动态规划</li>
+<li>字符串匹配算法</li>
 </ol>
-</li>
+<h3 id="算法题分类">算法题分类</h3>
+<h4 id="链表">链表</h4>
+<ol>
+<li>翻转</li>
+<li>两两翻转</li>
+<li>有序链表合并</li>
+<li>链表加法</li>
+<li>链表减法</li>
+</ol>
+<h4 id="字符串">字符串</h4>
+<ol>
+<li>加法</li>
+<li>减法</li>
+<li>字符串转double</li>
+</ol>
+<h4 id="二叉树">二叉树</h4>
+<ol>
+<li>先、中、后序遍历，递归非递归</li>
+<li>层次遍历</li>
+<li>蛇形层次遍历，两个栈实现</li>
+</ol>
+<h4 id="栈">栈</h4>
+<ol>
+<li>队列实现栈</li>
+</ol>
+<h4 id="队列">队列</h4>
+<ol>
+<li>栈实现队列</li>
+</ol>
+<h4 id="动态规划">动态规划</h4>
+<ol>
+<li>股票买入时机</li>
+<li>硬币拿取方式数量</li>
 </ol>
 
       
@@ -804,7 +913,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/31/company/microsoft/apgold/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/booknote/10x%E7%A8%8B%E5%BA%8F%E5%91%98%E5%B7%A5%E4%BD%9C%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -818,7 +927,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/08/31/company/microsoft/apgold/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/09/23/booknote/10x%E7%A8%8B%E5%BA%8F%E5%91%98%E5%B7%A5%E4%BD%9C%E6%B3%95/" class="post-title-link" itemprop="url">10x程序员工作法</a>
         </h2>
 
         <div class="post-meta">
@@ -828,7 +937,16 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-08-31 04:04:11" itemprop="dateCreated datePublished" datetime="2026-08-31T04:04:11+00:00">2026-08-31</time>
+              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a>
+                </span>
             </span>
 
           
@@ -842,29 +960,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>d:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Test-MW1-MSNMediation&gt;sd edit deployment.int<br>
-deployment.int - file(s) not on client.</p>
-<p>直接编辑</p>
-<ol>
-<li>add/edit</li>
-<li>安装codeflow 提交pr<br>
-\codeflow.redmond.corp.microsoft.com\public\cf2Launcher.cmd</li>
-</ol>
-<p>codeflow作用</p>
-<p>ve作用：<br>
-pe作用：</p>
-<p>之前</p>
-<p>D:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Test-MW1-MSNMediation</p>
-<p>D:\project\APGold\autopilotservice\MW1\AdsMz-Prod-MW1</p>
-<p>A ServiceGroup is mandatory for every machine function</p>
-<p>VE中存储的可以理解为某个项目的global config，所有的PE公用这部分config<br>
-设计目的是在同一项目部署多个PE时，避免多次发布，只需要更新VE，相关PE就会生效</p>
-<p><a target="_blank" rel="noopener" href="https://msazure.visualstudio.com">https://msazure.visualstudio.com</a></p>
-<p>D:\project\APGold\autopilotservice\Global\VirtualEnvironments\AdsBI\AdsMz-Prod-MW1-MSNMediation</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">07&#x2F;26&#x2F;21 16:54:01.841,error processing AdsMz-Test-MW1: Rollout &#39;AdsBI-AdsMz-Test-MW1-MzOrchestration-VE.6799404_17553440741849145769_0.Rollout_AdsBI_Streaming_CFR&#39; cannot be kicked due to status: InRollout - Rollout in progress..Rollout &#39;AdsBI-AdsMz-Test-MW1-MSNMediation-VE.6827694_4064931696698155710_0.Rollout_AdsBI_Streaming_CFR&#39; cannot be kicked due to status: OtherRollout - Waiting on other rollout on MF AdsBI_Streaming_CFR in progress: AdsBI_Streaming_CFR.AdvertiserAggs_94d0ef91_90546_1_15-0-897+94d0ef91_CL6670088_5920165827906938206_0.AdsBI-AdsMz-Test-MW1-AdvertiserAggs-VE.csv:AdsBI_Streaming_CFR.AgoraAggs_76700988_85934_1_16-0-173+76700988_CL6670088_4056715873563314682_0.AdsBI-AdsMz-Test-MW1-AgoraAggs-VE.csv:AdsBI_Streaming_CFR.CACFR_9a63868e_90143_2_1-0-2408+9a63868e_CL6670088_11167218336511992544_0.AdsBI-AdsMz-Test-MW1-CACFR-VE.csv:AdsBI_Streaming_CFR.CFR_2d2cea68_91067_1_17-0-6662+2d2cea68_CL6670088_18415503406869780426_0.AdsBI-AdsMz-Test-MW1-CFR-VE.csv:AdsBI_Streaming_CFR.KpiAggs_fdd5f92d_90180_1_17-0-433+fdd5f92d_CL6670088_6626197140932378707_0.AdsBI-AdsMz-Test-MW1-KPIAggs-VE.csv:AdsBI_Streaming_CFR.Monetization_de0db608_91071_1_1-0-2808+de0db608_CL6670088_351842135959690630_0.AdsBI-AdsMz-Test-MW1-Monetization-VE.csv:AdsBI_Streaming_CFR.Orchestration_93eb645e_91078_1_16-0-557+93eb645e_CL6799404_17553440741849145769_0.AdsBI-AdsMz-Test-MW1-MzOrchestration-VE.csv:AdsBI_Streaming_CFR.PublisherAggs_55bd6dd9_90534_1_17-0-474+55bd6dd9_CL6670088_15361642287162420254_0.AdsBI-AdsMz-Test-MW1-PublisherAggs-VE.csv:AdsBI_Streaming_CFR.Mediation_865d3b39_90170_1_merge_20210629_-1_CL6670088_3189803787641037971_0.AdsBI-AdsMz-Test-MW1-Mediation-VE.csv:AdsBI_Streaming_CFR.MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33_CL6827694_4798040603905411799_0.AdsBI-AdsMz-Test-MW1-MSNMediation-VE.csv:.OM.Autopilot-AutopilotClient-VE.csv..; .. Some rollouts not triggered.</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Deployment: 6827694_4798040603905411799 (this is NOT the latest deployment.ini change number)</span><br><span class="line">Downloaded 89 files, 21510455 bytes, compressed size: 8267353 bytes.</span><br><span class="line">Failed to build services: Failed to build service &#39;SAMHourlyS2B.MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33&#39;: Proxy error: not all data was received (DP: 25.68.114.53; by MW01NAP0000036C); ;  ;Log:e:GetStreamChunkMapWithRetry:stream does not exist [response from server] : GetStreamChunkMap(&#39;stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;ServiceMaps&#x2F;MSNMediationServiceMap.ini&#39;; &#39;MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33&#39;) failed ;Log:w:ApDynamicStorage::StorageConnectionEx::DownloadBufferFromStreamWithRetry:Stream (stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;ServiceMaps&#x2F;MSNMediationServiceMap.ini _ MSNMediation_4a63e32e_91077_2_0-1-28+4a63e32e33) not found in storage ;</span><br><span class="line">Majority of the building errors are temporary and will be fixed automatically. </span><br><span class="line">If there is no change or progress in the app deployment log after 15 minutes, contact apswat for production environments and aptalk for non-production environment.</span><br><span class="line">Look in App Deployment log for more info</span><br><span class="line"></span><br><span class="line">Here are common error messages and possible fixes:</span><br><span class="line">     Msg: Error 53: The network path was not found.: ac: 0</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Msg: EDP010385: APSEQREAD::GetDataPointer error 2</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Proxy reported error: EDP010196: ApckBuilder Error 3: The system cannot find the path specified.</span><br><span class="line">     Fix: Look for missing directories under your build drop.</span><br><span class="line"></span><br><span class="line">For more troubleshooting info, please refer to App Deployment Troubleshooting</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Deployment: 6827694_9979618793807238839_0 (this is NOT the latest deployment.ini change number)</span><br><span class="line">Downloaded [unknown] files, [unknown] bytes.</span><br><span class="line">Failed to import version &#39;6827694_9979618793807238839&#39; of image for environment &#39;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#39;: Error downloading image from remote storage (stream &#39;stream:&#x2F;&#x2F;AdsBI-AdsMz-Test-MW1-MSNMediation-VE&#x2F;app&#x2F;image.ini@6827694_9979618793807238839&#39;)</span><br><span class="line">Majority of the building errors are temporary and will be fixed automatically. </span><br><span class="line">If there is no change or progress in the app deployment log after 15 minutes, contact apswat for production environments and aptalk for non-production environment.</span><br><span class="line">Look in App Deployment log for more info</span><br><span class="line"></span><br><span class="line">Here are common error messages and possible fixes:</span><br><span class="line">     Msg: Error 53: The network path was not found.: ac: 0</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Msg: EDP010385: APSEQREAD::GetDataPointer error 2</span><br><span class="line">     Fix: Try adding REDMOND@ to the build path.</span><br><span class="line"></span><br><span class="line">     Msg: Proxy reported error: EDP010196: ApckBuilder Error 3: The system cannot find the path specified.</span><br><span class="line">     Fix: Look for missing directories under your build drop.</span><br><span class="line"></span><br><span class="line">For more troubleshooting info, please refer to App Deployment Troubleshooting</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+          
       
     </div>
 
