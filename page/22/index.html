@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/interview/component/Flink/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/10/06/interview/component/DataX/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/09/23/interview/component/Flink/" class="post-title-link" itemprop="url">Flink</a>
+            <a href="/2026/10/06/interview/component/DataX/" class="post-title-link" itemprop="url">DataX</a>
         </h2>
 
         <div class="post-meta">
@@ -201,7 +201,77 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+              <time title="Created: 2026-10-06 00:46:52" itemprop="dateCreated datePublished" datetime="2026-10-06T00:46:52+00:00">2026-10-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/interview/component/" itemprop="url" rel="index"><span itemprop="name">component</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/10/06/interview/component/Flink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/10/06/interview/component/Flink/" class="post-title-link" itemprop="url">Flink</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-10-06 00:46:52" itemprop="dateCreated datePublished" datetime="2026-10-06T00:46:52+00:00">2026-10-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1443,7 +1513,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/interview/component/Kafka/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/10/06/interview/component/HBase/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1457,7 +1527,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/09/23/interview/component/Kafka/" class="post-title-link" itemprop="url">Kafka</a>
+            <a href="/2026/10/06/interview/component/HBase/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -1467,7 +1537,147 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+              <time title="Created: 2026-10-06 00:46:52" itemprop="dateCreated datePublished" datetime="2026-10-06T00:46:52+00:00">2026-10-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h1>待整理</h1>
+<h2 id="疑问">疑问</h2>
+<h3 id="hbase-作为状态存储有什么优势">hbase 作为状态存储有什么优势</h3>
+<p>在 Flink 实时计算与实时数仓体系中，HBase 通常不作为 Flink 官方内置的本地状态后端（原生主流为内存、RocksDB 本地状态），更多以<strong>外部分布式状态存储</strong>、自定义扩展状态后端的形式使用，核心解决本地状态在超大容量、存算分离、多任务共享等场景下的刚性痛点，也是大厂实时数仓维度状态、大粒度聚合状态的主流选型。</p>
+<h4 id="一、作为状态存储的核心优势">一、作为状态存储的核心优势</h4>
+<h5 id="1-容量无限水平扩展，突破单节点硬件瓶颈">1. 容量无限水平扩展，突破单节点硬件瓶颈</h5>
+<p>本地状态（如 RocksDB）依赖 TaskManager 本地磁盘 / 内存，单节点容量上限明确，TB 级以上的超大规模状态（如 30 天全量用户行为聚合、亿级用户标签状态）会受限于单节点存储容量，扩容需要拆分任务、重分配状态，开销极大。 HBase 基于 HDFS 构建分布式存储，容量可随 RegionServer 节点横向扩容无限扩展，状态大小不受单节点硬件约束，天然适配千亿级数据量、长周期的大状态场景。</p>
+<h5 id="2-存算彻底分离，弹性伸缩与故障恢复效率极高">2. 存算彻底分离，弹性伸缩与故障恢复效率极高</h5>
+<p>本地状态与计算节点强绑定：任务扩缩容、节点故障时，需要从 Checkpoint 全量拉取状态数据到本地，TB 级状态的恢复时间可达数小时，弹性能力差。 HBase 状态与计算节点完全解耦：计算节点仅做计算，状态全部落在外部存储。扩缩容、故障重启时无需迁移状态数据，新节点直接连接 HBase 即可读写，故障恢复时间从小时级压缩到分钟 / 秒级，非常适合云原生弹性调度、高可用要求高的核心业务。</p>
+<h5 id="3-状态多作业共享，避免冗余计算与存储">3. 状态多作业共享，避免冗余计算与存储</h5>
+<p>本地状态是作业级独占的，不同 Flink 任务无法复用同一份状态数据。例如多个业务线任务都需要关联全量商家维度，每个任务都要独立维护一份维表状态，存储和计算成本翻倍。 HBase 作为共享存储，同一份维度状态、用户标签、公共聚合结果可以被多个实时作业、甚至离线任务同时访问复用，大幅降低冗余存储和重复计算开销，这也是实时数仓公共维度层的核心诉求。</p>
+<h5 id="4-主键随机读写性能优异，天然适配实时维表关联">4. 主键随机读写性能优异，天然适配实时维表关联</h5>
+<p>HBase 基于 LSM 树存储架构，主键点查、单行更新的性能在毫秒级，支持高并发读写，完美匹配实时数仓中流维 Join 的访问模式（每条流数据按维度主键查询一次维表）。 相比 Redis 全内存存储，HBase 的存储成本仅为内存的 1/10 甚至更低，适合亿级以上的大容量维度表；相比 MySQL 等关系型数据库，它的并发能力和扩展性更强，能承接实时计算的高吞吐查询压力。</p>
+<h5 id="5-状态生命周期管理灵活，支持长期留存与回溯">5. 状态生命周期管理灵活，支持长期留存与回溯</h5>
+<p>本地状态生命周期与作业绑定，作业下线、重建后状态无法直接复用，且状态 TTL 管理能力有限，难以做精细化的历史状态归档。 HBase 支持多版本数据留存、行级 TTL、分区生命周期管理，状态数据可独立于计算作业长期保存，支持按时间回溯历史状态，非常适合需要状态审计、历史回算的业务场景。</p>
+<h5 id="6-读写幂等性强，配合主键-Upsert-兜底一致性">6. 读写幂等性强，配合主键 Upsert 兜底一致性</h5>
+<p>基于主键的行级 Upsert 机制，重复写入同主键数据只会覆盖更新，不会产生重复数据，天然具备幂等性。在实时计算故障重试、数据重复投递的场景下，无需额外做去重逻辑，即可保障状态最终一致性。</p>
+<h4 id="二、面试延伸：选型权衡与局限性">二、面试延伸：选型权衡与局限性</h4>
+<p>这部分是资深岗面试的加分项，体现你不是只懂优点，而是能结合场景做技术选型：</p>
+<ul>
+<li><strong>不适合极致低延迟场景</strong>：读写存在网络 IO 开销，单条访问延迟在毫秒级，高于本地 RocksDB 的亚毫秒级性能，不适合对延迟极度敏感的实时计算场景。</li>
+<li><strong>运维成本更高</strong>：需要独立维护 HBase 集群，涉及 Region 拆分、Compaction 调优、集群扩容等运维工作，复杂度远高于本地状态。</li>
+<li><strong>原生不支持端到端 Exactly-Once 事务</strong>：无法像 Flink 本地状态一样，和 Checkpoint、两阶段提交深度绑定实现严格的精确一次语义，需要配合幂等写入、业务校验来兜底一致性。</li>
+</ul>
+<p>核心适用场景集中在：超大规模长周期聚合状态、实时数仓 DIM 层大容量维表、跨作业共享的公共状态、对故障恢复和弹性伸缩要求高的核心业务。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/10/06/interview/component/LangChain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/10/06/interview/component/LangChain/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-10-06 00:46:52" itemprop="dateCreated datePublished" datetime="2026-10-06T00:46:52+00:00">2026-10-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/10/06/interview/component/Kafka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/10/06/interview/component/Kafka/" class="post-title-link" itemprop="url">Kafka</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-10-06 00:46:52" itemprop="dateCreated datePublished" datetime="2026-10-06T00:46:52+00:00">2026-10-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1832,7 +2042,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/interview/component/LangChain/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/10/06/interview/component/LangGraph/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1846,7 +2056,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/09/23/interview/component/LangChain/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/10/06/interview/component/LangGraph/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -1856,7 +2066,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+              <time title="Created: 2026-10-06 00:46:52" itemprop="dateCreated datePublished" datetime="2026-10-06T00:46:52+00:00">2026-10-06</time>
             </span>
 
           
@@ -1889,7 +2099,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/interview/component/LangGraph/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/10/06/interview/component/PyTorch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1903,7 +2113,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/09/23/interview/component/LangGraph/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/10/06/interview/component/PyTorch/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -1913,7 +2123,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+              <time title="Created: 2026-10-06 00:46:52" itemprop="dateCreated datePublished" datetime="2026-10-06T00:46:52+00:00">2026-10-06</time>
             </span>
 
           
@@ -1946,7 +2156,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/interview/component/PyTorch/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/10/06/interview/component/TensorFlow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1960,7 +2170,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/09/23/interview/component/PyTorch/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2026/10/06/interview/component/TensorFlow/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -1970,7 +2180,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+              <time title="Created: 2026-10-06 00:46:52" itemprop="dateCreated datePublished" datetime="2026-10-06T00:46:52+00:00">2026-10-06</time>
             </span>
 
           
@@ -2003,7 +2213,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/interview/component/Spark/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/10/06/interview/component/%E6%9E%B6%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -2017,7 +2227,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/09/23/interview/component/Spark/" class="post-title-link" itemprop="url">Spark</a>
+            <a href="/2026/10/06/interview/component/%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -2027,7 +2237,64 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
+              <time title="Created: 2026-10-06 00:46:52" itemprop="dateCreated datePublished" datetime="2026-10-06T00:46:52+00:00">2026-10-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/10/06/interview/component/Spark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hash007">
+      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="生而为人">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/10/06/interview/component/Spark/" class="post-title-link" itemprop="url">Spark</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2026-10-06 00:46:52" itemprop="dateCreated datePublished" datetime="2026-10-06T00:46:52+00:00">2026-10-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2419,477 +2686,6 @@
 <li>处理的数据量太大：单个分区的数据量超过了 executor 的内存。解决方法是增加分区数，或者使用堆外内存</li>
 </ul>
 </li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/interview/component/TensorFlow/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/09/23/interview/component/TensorFlow/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/interview/component/%E6%9E%B6%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/09/23/interview/component/%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/interview/component/%E7%AA%81%E5%87%BB%E6%B1%87%E6%80%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/09/23/interview/component/%E7%AA%81%E5%87%BB%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">突击汇总</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/interview/" itemprop="url" rel="index"><span itemprop="name">interview</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/interview/component/" itemprop="url" rel="index"><span itemprop="name">component</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[toc]</p>
-<h1>大数据面试终极突击一页纸（全栈合集）</h1>
-<p>直接背这一张，面试 80% 知识点全覆盖，全程精简无废话。</p>
-<h2 id="一、Kafka-核心">一、Kafka 核心</h2>
-<h3 id="核心组件">核心组件</h3>
-<p>生产者、Broker、Topic、Partition 分区、副本、消费者组、Offset。</p>
-<h3 id="核心原理">核心原理</h3>
-<ul>
-<li>单分区<strong>有序</strong>，全局无序；分区决定并行度。</li>
-<li>Leader 负责读写，Follower 同步做高可用。</li>
-<li>acks：0 最快易丢；1 落 Leader；-1/all 最安全。</li>
-<li><strong>削峰填谷</strong>：磁盘可堆积，高峰缓存、低峰匀速消费，解耦护下游。</li>
-</ul>
-<h3 id="常见问题-解决">常见问题 &amp; 解决</h3>
-<ul>
-<li>消息丢失：acks=-1 + 多副本 + 先消费后提交 offset。</li>
-<li>重复消费：业务唯一主键<strong>幂等</strong>、手动提交 offset。</li>
-<li>重平衡频繁：调大会话超时、稳定消费者数量。</li>
-<li>消息积压：加分区、扩消费并行度、优化消费逻辑。</li>
-</ul>
-<h3 id="调优">调优</h3>
-<p>生产者：批量 + 压缩 + acks=-1；</p>
-<p>消费者：关闭自动提交、手动批量提交；</p>
-<p>分区数和 Flink/Spark 并行度对齐，生产 3 副本。</p>
-<h2 id="二、Flink-核心">二、Flink 核心</h2>
-<h3 id="核心特性">核心特性</h3>
-<p>原生事件驱动流式、<strong>EventTime+Watermark 水位线</strong>、窗口、Checkpoint、状态管理、Exactly-Once。</p>
-<h3 id="关键概念">关键概念</h3>
-<ul>
-<li>时间语义：事件时间、处理时间、摄入时间。</li>
-<li>水位线：解决<strong>乱序 / 迟到数据</strong>，触发窗口计算。</li>
-<li>Checkpoint：保存 offset 和算子状态，故障自动恢复。</li>
-<li>状态后端：生产用<strong>RocksDB</strong>，配 TTL 防状态膨胀 OOM。</li>
-</ul>
-<h3 id="项目难点-解法">项目难点 &amp; 解法</h3>
-<ul>
-<li>数据倾斜：局部 + 全局聚合、热点 key 加盐打散、Runtime Filter。</li>
-<li>反压：定位瓶颈算子、增加并行度、简化计算逻辑。</li>
-<li>迟到数据：水位线 + 允许迟到 + 侧输出兜底。</li>
-<li>小文件：窗口攒批、分区合并、控制写入频次。</li>
-</ul>
-<h2 id="三、Spark-核心">三、Spark 核心</h2>
-<h3 id="原理">原理</h3>
-<p>RDD 惰性求值、DAG 宽窄依赖、遇到 Shuffle 切分 Stage、Task 按分区执行。</p>
-<h3 id="版本区别">版本区别</h3>
-<ul>
-<li>Spark Streaming：固定微批，老旧已淘汰。</li>
-<li>Spark Structured Streaming：<strong>默认底层仍是微批轮询</strong>，非事件驱动，只适合准实时。</li>
-</ul>
-<h3 id="常见问题">常见问题</h3>
-<ul>
-<li>数据倾斜：空值过滤、加盐打散、两阶段聚合。</li>
-<li>OOM：Driver 不做 Collect、合理分区、加大内存。</li>
-<li>小文件：repartition/coalesce 合并、离线定时清理。</li>
-</ul>
-<h3 id="优化口诀">优化口诀</h3>
-<p>尽早过滤、谓词下推、广播小表、少 Shuffle、合理缓存。</p>
-<h2 id="四、Spark-vs-Flink-选型">四、Spark vs Flink 选型</h2>
-<ul>
-<li>离线数仓、批量 ETL、报表画像 → <strong>Spark</strong></li>
-<li>实时大屏、秒级低延迟、乱序严重、窗口精准、强一致性 → <strong>Flink</strong></li>
-<li>流批一体：全站 Flink，离线保留 Spark 做复盘。</li>
-</ul>
-<h2 id="五、CDC-增量同步">五、CDC 增量同步</h2>
-<h3 id="定义">定义</h3>
-<p>CDC 变更数据捕获，监听 MySQL Binlog，实时抓取<strong>Insert/Update/Delete</strong>增量，不用全量拉表，秒级延迟、业务无侵入。</p>
-<h3 id="三种实现">三种实现</h3>
-<p>定时轮询、数据库触发器（不用）、<strong>Binlog 监听（Flink CDC/Canal/Debezium）</strong>。</p>
-<h3 id="Flink-CDC-优势">Flink CDC 优势</h3>
-<p>一条任务自动<strong>全量快照 + 增量无缝切换</strong>，无需中间件，和 Flink 原生集成，支持 Exactly-Once。</p>
-<h3 id="实时数仓标准链路">实时数仓标准链路</h3>
-<p>MySQL → Flink CDC → Kafka → Flink 清洗加工 → Doris/ClickHouse 落地。</p>
-<h2 id="六、实时数仓-离线数仓">六、实时数仓 &amp; 离线数仓</h2>
-<h3 id="四层架构通用">四层架构通用</h3>
-<p>ODS 原始层、DWD 明细宽表层、DWS 聚合层、ADS 应用指标层。</p>
-<h3 id="离线数仓">离线数仓</h3>
-<p>Hive+Spark、T+1 / 小时级、定时全量 / 增量调度、用于日报月报、用户画像、业务复盘，可反复重跑数据精准。</p>
-<h3 id="实时数仓">实时数仓</h3>
-<p>Flink+Kafka+CDC+Doris、秒级延迟、流式增量加工、用于实时大屏、风控告警、订单指标。</p>
-<h3 id="双仓价值">双仓价值</h3>
-<p>实时看当下业务、离线做复盘口径校准；湖仓一体 Hudi/Paimon 实现<strong>一套数据、流批共用</strong>。</p>
-<h2 id="七、Doris-vs-ClickHouse">七、Doris vs ClickHouse</h2>
-<h3 id="ClickHouse">ClickHouse</h3>
-<p>单表查询性能极强、压缩率高；<strong>Join 弱、更新差、并发低、运维重</strong>；适合日志、时序、离线大宽表。</p>
-<h3 id="Apache-Doris">Apache Doris</h3>
-<p>全能 OLAP、CBO 优化器多表 Join 强、支持实时 UPSERT/DELETE、兼容 MySQL、运维简单、高并发 BI、湖仓一体友好。</p>
-<h3 id="选型">选型</h3>
-<p>复杂关联 / 实时更新 / 高并发 BI / 低运维 → <strong>Doris</strong></p>
-<p>纯日志时序、无复杂 Join、几乎不更新 → <strong>ClickHouse</strong></p>
-<h2 id="八、大数据主流-SQL-分清">八、大数据主流 SQL 分清</h2>
-<ol>
-<li>Hive SQL：离线数仓标配</li>
-<li>Spark SQL：高性能通用大数据 SQL</li>
-<li>Flink SQL：实时流处理专用</li>
-<li>Presto/Trino：跨数据源统一查询</li>
-<li>T-SQL：SQL Server、Azure Synapse</li>
-<li>Cosmos DB SQL：微软 Cosmos 自研类 SQL，<strong>不是 T-SQL</strong></li>
-</ol>
-<h2 id="九、面试必背-SQL-模板">九、面试必背 SQL 模板</h2>
-<h3 id="分组取-Top1">分组取 Top1</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM (</span><br><span class="line">  SELECT *,ROW_NUMBER() OVER(PARTITION BY id ORDER BY time DESC) rn</span><br><span class="line">) t WHERE rn&#x3D;1;</span><br></pre></td></tr></table></figure>
-<h3 id="行转列">行转列</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONCAT_WS(&#39;,&#39;,COLLECT_LIST(field))</span><br></pre></td></tr></table></figure>
-<h3 id="列转行">列转行</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LATERAL VIEW EXPLODE(SPLIT(str,&#39;,&#39;)) tmp AS field</span><br></pre></td></tr></table></figure>
-<h3 id="广播-Join">广播 Join</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &#x2F;*+ BROADCAST(b) *&#x2F; a.* FROM 大表a JOIN 小表b</span><br></pre></td></tr></table></figure>
-<h2 id="十、项目自我介绍通用话术">十、项目自我介绍通用话术</h2>
-<p>我负责大数据离线与实时数仓开发，采用标准四层 ODS/DWD/DWS/ADS 架构。</p>
-<p>离线基于 Hive+Spark，定时同步业务库，做分层建模、指标计算，支撑 T+1 报表和用户画像；</p>
-<p>实时采用 Flink+Kafka+Flink CDC+Doris，通过 CDC 监听 MySQL Binlog 做增量同步，秒级入仓，Flink 完成清洗、维度关联、窗口聚合，落地 Doris 支撑实时大屏和风控指标。</p>
-<p>项目解决过<strong>数据倾斜、Kafka 积压、Flink 反压、状态 OOM、小文件、CDC 重复消费</strong>等问题，采用离在线双仓架构，实时看业务、离线做复盘校准。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/23/interview/guide/%E8%AE%A1%E5%88%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="hash007">
-      <meta itemprop="description" content="为了以后好好偷懒，现在必须加倍努力">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="生而为人">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/09/23/interview/guide/%E8%AE%A1%E5%88%92/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2026-09-23 06:26:49" itemprop="dateCreated datePublished" datetime="2026-09-23T06:26:49+00:00">2026-09-23</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="2-周-P7-面试冲刺计划">2 周 P7 面试冲刺计划</h2>
-<h3 id="第一周：基础夯实与项目梳理（核心目标：消灭基础概念错误，每个项目准备-3-5-个深度问题">第一周：基础夯实与项目梳理（核心目标：消灭基础概念错误，每个项目准备 3-5 个深度问题</h3>
-<table>
-<thead>
-<tr>
-<th>时间</th>
-<th>上午任务（3 小时）</th>
-<th>下午任务（3 小时）</th>
-<th>晚上任务（2 小时）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>第 1 天</td>
-<td>复习 Spark 3.x 统一内存管理机制，重点掌握存储内存和执行内存的动态调整规则</td>
-<td>梳理美团外卖数仓重构项目，准备 “指标口径统一” 和 “性能优化” 两个核心问题的详细答案</td>
-<td>背诵 Spark 核心参数及调优方法，重点掌握 shuffle 相关参数</td>
-</tr>
-<tr>
-<td>第 2 天</td>
-<td>复习 Spark shuffle 机制，掌握 shuffle 的流程和常见优化方法</td>
-<td>继续梳理美团项目，准备 “数据倾斜治理” 和 “实时数仓早期建设” 两个问题的详细答案</td>
-<td>做 3 道 Spark SQL 性能优化的练习题</td>
-</tr>
-<tr>
-<td>第 3 天</td>
-<td>复习 Flink Checkpoint 机制，掌握 barrier 对齐和状态持久化的原理</td>
-<td>梳理微软 Bing 日志处理项目，准备 “压缩算法选型” 和 “细粒度分区设计” 两个问题的详细答案</td>
-<td>背诵 Flink 核心概念，重点掌握状态管理和 Checkpoint</td>
-</tr>
-<tr>
-<td>第 4 天</td>
-<td>复习 Flink 两阶段提交机制，掌握端到端 Exactly-Once 的实现原理</td>
-<td>继续梳理微软项目，准备 “Spark 参数调优” 和 “多语言多地区数据处理” 两个问题的详细答案</td>
-<td>做 2 道 Flink 实时计算的练习题</td>
-</tr>
-<tr>
-<td>第 5 天</td>
-<td>复习数据倾斜的解决方法，掌握 group by 和 join 倾斜的所有解决方案及适用场景</td>
-<td>梳理去哪儿网机票数仓项目，准备 “数据质量体系建设” 和 “ETL 开发” 两个问题的详细答案</td>
-<td>背诵 Hive 核心概念，重点掌握数据建模和分区分桶</td>
-</tr>
-<tr>
-<td>第 6 天</td>
-<td>复习数仓建模理论，掌握星型模型和雪花模型的区别及适用场景</td>
-<td>整合三个项目的所有问题，形成自己的项目故事线</td>
-<td>模拟自我介绍，控制在 2 分 30 秒以内</td>
-</tr>
-<tr>
-<td>第 7 天</td>
-<td>复习离线数仓和实时数仓的架构设计，掌握 Lambda 和 Kappa 架构的区别</td>
-<td>准备 3 个常见的场景设计题：电商订单数仓、用户行为分析系统、广告效果分析系统</td>
-<td>进行第一次自我模拟面试，录制视频并复盘</td>
-</tr>
-</tbody>
-</table>
-<h3 id="第二周：表达练习与模拟面试（核心目标：提升表达逻辑，形成自己的答题风格）">第二周：表达练习与模拟面试（核心目标：提升表达逻辑，形成自己的答题风格）</h3>
-<table>
-<thead>
-<tr>
-<th>时间</th>
-<th>上午任务（3 小时）</th>
-<th>下午任务（3 小时）</th>
-<th>晚上任务（2 小时）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>第 8 天</td>
-<td>练习项目问题的表达，每个问题都要分点回答，控制在 3 分钟以内</td>
-<td>练习核心技术问题的表达，重点讲清楚原理和解决思路</td>
-<td>进行第二次自我模拟面试，重点关注表达逻辑</td>
-</tr>
-<tr>
-<td>第 9 天</td>
-<td>练习场景设计题的表达，按照 “架构设计→分层设计→技术选型→关键技术点” 的结构回答</td>
-<td>准备面试官可能会问的软技能问题：职业规划、离职原因、团队协作等</td>
-<td>进行第三次自我模拟面试，重点关注时间控制</td>
-</tr>
-<tr>
-<td>第 10 天</td>
-<td>复盘之前模拟面试中出现的问题，针对性地进行改进</td>
-<td>找一个朋友或者同事进行第一次真人模拟面试</td>
-<td>复盘真人模拟面试，记录所有的问题和不足</td>
-</tr>
-<tr>
-<td>第 11 天</td>
-<td>针对真人模拟面试中暴露的问题，进行专项练习</td>
-<td>继续完善项目和技术问题的答案</td>
-<td>进行第四次自我模拟面试，重点改进之前的问题</td>
-</tr>
-<tr>
-<td>第 12 天</td>
-<td>复习所有的核心技术点，重点关注之前容易出错的地方</td>
-<td>准备 3-5 个你要问面试官的问题</td>
-<td>进行第五次自我模拟面试，完全按照真实面试的流程进行</td>
-</tr>
-<tr>
-<td>第 13 天</td>
-<td>放松心态，快速浏览一遍所有的复习资料</td>
-<td>调整作息，保证充足的睡眠</td>
-<td>准备好面试需要的资料和设备</td>
-</tr>
-<tr>
-<td>第 14 天</td>
-<td>面试前 1 小时，快速浏览一遍自我介绍和核心项目的答案</td>
-<td>参加面试</td>
-<td>面试结束后立即复盘，记录所有的问题和回答</td>
-</tr>
-</tbody>
-</table>
-<h3 id="冲刺计划核心要求">冲刺计划核心要求</h3>
-<ol>
-<li><strong>所有答案必须量化</strong>：每个项目成果和优化效果都要有具体的数字，不能用 “很多”、“大幅提升” 等模糊的表述</li>
-<li><strong>所有技术点必须理解原理</strong>：不能只背概念，要能讲清楚 “为什么这么做” 和 “这么做有什么好处”</li>
-<li><strong>所有回答必须分点</strong>：采用 “总 - 分 - 总” 的结构，先给出结论，再分点说明，最后总结</li>
-<li><strong>每天必须进行模拟练习</strong>：只有通过不断的练习，才能提升表达能力和应变能力</li>
 </ol>
 
       
