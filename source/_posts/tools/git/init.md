@@ -8,6 +8,31 @@
 
 ---
 
+[toc]
+
+
+
+## 安装步骤
+
+```
+1. 生成 SSH 密钥，一路回车即可，默认保存在 ~/.ssh/id_ed25519
+ssh-keygen -t ed25519 -C "你的邮箱@example.com"
+
+2. 查看公钥并复制
+cat ~/.ssh/id_ed25519.pub
+
+3. 添加到 GitHub：
+进入 GitHub → Settings → SSH and GPG keys → New SSH key，粘贴公钥内容保存。
+
+4. 测试连接
+ssh -T git@github.com
+
+5. 拉取某个分支
+git clone -b 分支名 https://github.com/用户名/仓库名.git
+```
+
+
+
 
 
 ## .gitconfig

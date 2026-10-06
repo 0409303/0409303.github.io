@@ -17,6 +17,13 @@ pip install 库名 -i https://pypi.tuna.tsinghua.edu.cn/simple
 # 如果不想每次都加 -i，可以永久设置（一行命令搞定）
 # 设置后，以后直接输入 pip install 库名 就会自动走国内源，网速飞起
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+清华大学：https://pypi.tuna.tsinghua.edu.cn/simple
+阿里云：https://mirrors.aliyun.com/pypi/simple
+腾讯云：https://mirrors.cloud.tencent.com/pypi/simple
+
+# 查看pip配置列表
+pip config list
 ```
 
 
@@ -70,3 +77,27 @@ git+https://github.com/zixing131/pyncm.git
 pip show python-dotenv
 ```
 
+
+
+## 版本问题
+
+### win7环境
+
+1. python <= 3.8
+2. pycharm <= 2019.3
+
+pycharm内置的pip版本过低，会导致安装时出现尝试从**源码编译**依赖包的问题
+
+而且自带的pip 19.0.3 有一个已知问题，它会阻止你通过常规命令升级 pip 本身
+
+所以需要通过以下命令升级pip，再来安装依赖
+
+```shell
+# 强制把 pip 升级到最新版
+easy_install -U pip
+
+# 更新其他构建工具
+python -m pip install --upgrade setuptools wheel 
+```
+
+升级完 pip 后，如果安装其他包时再次遇到“Installing build dependencies”卡住或报错，记得用 `--no-build-isolation` 参数，让 pip 直接使用你刚刚升级好的 setuptools，而不是再去临时下载构建依赖。

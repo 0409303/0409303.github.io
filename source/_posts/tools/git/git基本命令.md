@@ -17,11 +17,11 @@
 
 
 
-## 分支
+## 克隆
 
-### 克隆
+### 新仓库
 
-```
+```shell
 git checkout -b dev(本地分支名称) origin/develop(远程分支名称)
 
 error log:
@@ -29,9 +29,75 @@ fatal: 'origin/MTSparkMSNv2' is not a commit and a branch 'users/jingqicao/M2B_V
 need run git pull to update.
 ```
 
+### 克隆过仓库，拉取新分支
+
+```shell
+# 先获取远程最新信息
+git fetch origin
+
+# 基于远程 dev 分支，在本地创建并切换到 dev
+git checkout -b dev origin/dev
+
+# 更简洁的写法（Git 2.23+）
+git switch dev
+```
+
+
+
+### 本地已有分支
+
+```shell
+1. 如果本地已经克隆过，只是想获取远程最新改动：
+
+# 进入仓库目录
+git checkout targetBranch
+# 拉取并合并到当前分支
+git pull
+
+2. 如果想拉取但不自动合并（先查看再决定）：
+
+git fetch
+git log HEAD..origin/main --oneline   # 查看差异
+git merge origin/main                 # 确认后再合并
+```
+
+
+
+
+
+## 分支
+
+### 查看
+
+```shell
+1. 查看所有远程分支
+git branch -r			# 显示的是本地缓存的远程分支列表
+git branch -r -v		# 远程分支详细信息（含最新提交）
+
+2. 查看所有最新的远程分支
+git fetch --all
+# 或者
+git fetch origin
+# 然后再执行
+git branch -r
+
+3. 查看所有分支（含本地和远程）
+git branch -a
+
+4. 查看远程分支的 URL 和跟踪关系
+git remote show origin
+```
+
 
 
 ### 删除
+
+```shell
+1. 清理掉本地已失效的远程分支引用
+git fetch --prune
+```
+
+
 
 [Git 操作——如何删除本地分支和远程分支](https://chinese.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/)
 
@@ -43,6 +109,23 @@ need run git pull to update.
 git push --set-upstream origin users/jingqicao/performance-optimize
 // 需要保证本地分支名称与指定的remote分支名称完全相同，否则
 error: src refspec users/jingqicao/performance-optimize does not match any
+```
+
+
+
+### 拉取远程分支
+
+```shell
+1. 拉取远程所有分支的最新信息（但不合并）
+git fetch --all
+
+2. 拉取远程分支但不想自动合并（先看看再决定）
+git fetch origin dev
+git log HEAD..origin/dev --oneline   # 查看差异
+git merge origin/dev                 # 确认后再合并
+
+3. 拉取远程分支但不切换过去，当前分支不变
+git fetch origin dev:dev
 ```
 
 
@@ -65,7 +148,7 @@ git reset --hard origin/feature/login
 
 
 
-### 本地切换远程已有分支
+### 本地切换远程分支
 
 ```shell
 1. git 2.23+
